@@ -11,6 +11,7 @@ for research, development, education, and exploration in the realm of electrical
 - Jeremy Perhac | Student - University of Idaho
 - Daniel Allen | Student - Universtiy of Idaho
 - Dr. Dennis Sullivan | Proffessor - University of Idaho
+- Dr. Brian Johnson | Proffessor - University of Idaho
 - StackOverflow user gg349
 - Paul Ortman | Power Quality Engineer - Idaho Power | Instructor - University of Idaho
 
