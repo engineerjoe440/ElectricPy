@@ -10,6 +10,8 @@
 #   Paul Ortmann - Idaho Power
 #
 #   Included Constants:
+#   - Pico Multiple:                            p
+#   - Nano Multiple:                            n
 #   - Micro (mu) Multiple:                      u
 #   - Mili Multiple:                            m
 #   - Kilo Multiple:                            k
