@@ -40,3 +40,16 @@ for research, development, education, and exploration in the realm of electrical
    electricpy._version_
    ```
 
+## To Do List:
+- Port Remaining Functions from ELECTRICALPYTHON
+    - Per Unit Functions
+    - FFT Functions
+    - Add Heat Sink Solver
+    - DC/DC Converters
+    - DC/AC Converters
+    - Harmonic System Copmoser (to generate a function or array with the terms)
+    - Stationary and Synchronous Reference Frame conversion Matricies/Constants
+    - Symmetrical Component to ABC domain and vice versa functions
+    - sine to cosine function equivalent
+    - Sampled values to fundamental sine/cosine waveform
+    - kWh to BTU (and vice-versa) function
