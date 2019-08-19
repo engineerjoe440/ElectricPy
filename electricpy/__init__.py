@@ -76,6 +76,8 @@
 #   - String to Bit-String Converter:       string_to_bits
 #   - CRC Message Generator:                crcsender
 #   - CRC Remainder Calculator:             crcremainder
+#   - kWh to BTU:                           kwhtobtu
+#   - BTU to kWh:                           btutokwh
 #
 #   Additional functions available in sub-modules:
 #   - fault.py
@@ -2587,5 +2589,43 @@ def string_to_bits(str):
     """
     data = (''.join(format(ord(x), 'b') for x in str))
     return(data)
+    
+# Define kWh to BTU function and vice-versa
+def kwhtobtu(kWh):
+    """
+    kwhtobtu Function:
+    
+    Converts kWh (killo-Watt-hours) to BTU
+    (British Thermal Units).
+    
+    Parameters
+    ----------
+    kWh:        float
+                The number of killo-Watt-hours
+    
+    Returns
+    -------
+    BTU:        float
+                The number of British Thermal Units
+    """
+    return(kWh*3412.14)
+def btutokwh(BTU):
+    """
+    btutokwh Function:
+    
+    Converts BTU (British Thermal Units) to
+    kWh (killo-Watt-hours).
+    
+    Parameters
+    ----------
+    BTU:        float
+                The number of British Thermal Units
+    
+    Returns
+    -------
+    kWh:        float
+                The number of killo-Watt-hours
+    """
+    return(BTU/3412.14)
     
 # END OF FILE

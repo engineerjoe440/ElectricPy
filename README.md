@@ -52,4 +52,9 @@ for research, development, education, and exploration in the realm of electrical
     - Symmetrical Component to ABC domain and vice versa functions
     - sine to cosine function equivalent
     - Sampled values to fundamental sine/cosine waveform
-    - kWh to BTU (and vice-versa) function
+
+
+## Contact:
+For more information regarding this resource, please contact Joe Stanley
+- <stan3926@vandals.uidaho.edu>
+- <joe_stanley@selinc.com>
