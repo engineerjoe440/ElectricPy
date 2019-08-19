@@ -83,6 +83,7 @@
 #   - Per-Unit Change of Base Formula:      puchgbase
 #   - Per-Unit to Ohmic Impedance:          zrecompose
 #   - X over R to Ohmic Impedance:          rxrecompose
+#   - Generator Internal Voltage Calc:      geninternalv
 #
 #   Additional functions available in sub-modules:
 #   - fault.py
@@ -97,6 +98,8 @@ _version_ = "0.0.1"
 # Version Breakdown:
 # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
 
+# Import Submodules
+from . import fault
 
 # Import Supporting Modules
 import numpy as np
@@ -2785,7 +2788,51 @@ def rxrecompose(x_pu,XR,S3phs,VLL=None,VLN=None):
     # Recompose
     z = zrecompose(z_pu,S3phs,VLL,VLN)
     return(z)
+
+# Define Generator Internal Voltage Calculator
+def geninternalv(I,Zs,Vt,Vgn=None,Zm=None,Ip=None,Ipp=None):
+    """
+    geninternalv Function
     
+    Evaluates the internal voltage for a generator given the
+    generator's internal impedance and internal mutual coupling
+    impedance values.
+    
+    Parameters
+    ----------
+    I:          complex
+                The current on the phase of interest.
+    Zs:         complex
+                The internal impedance of the phase of
+                interest in ohms.
+    Vt:         complex
+                The generator's terminal voltage.
+    Vgn:        complex, optional
+                The ground-to-neutral connection voltage.
+    Zm:         complex, optional
+                The mutual coupling impedance in ohms.
+    Ip:         complex, optional
+                The first mutual phase current in amps.
+    Ipp:        complex, optional
+                The second mutual phase current in amps.
+    
+    Returns
+    -------
+    Ea:         complex
+                The internal voltage of the generator.
+    """
+    # All Parameters Provided
+    if Vgn == Zm == Ip == Ipp != None :
+        Ea = Zs*I + Zm*Ip + Zm*Ipp + Vt + Vgn
+    # Select Parameters Provided
+    elif Vgn == Zm == Ip == Ipp == None :
+        Ea = Zs*I + Vt
+    # Invalid Parameter Set
+    else:
+        raise ValueError("Invalid Parameter Set")
+    return(Ea)
+
+
 
     
 # END OF FILE

@@ -83,6 +83,7 @@
 #   - Per-Unit Change of Base Formula:      puchgbase
 #   - Per-Unit to Ohmic Impedance:          zrecompose
 #   - X over R to Ohmic Impedance:          rxrecompose
+#   - Generator Internal Voltage Calc:      geninternalv
 #
 #   Additional functions available in sub-modules:
 #   - fault.py
@@ -97,6 +98,8 @@ _version_ = "0.0.1"
 # Version Breakdown:
 # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
 
+# Import Submodules
+from . import fault
 
 # Import Supporting Modules
 import numpy as np
@@ -2806,8 +2809,12 @@ def geninternalv(I,Zs,Vt,Vgn=None,Zm=None,Ip=None,Ipp=None):
                 The generator's terminal voltage.
     Vgn:        complex, optional
                 The ground-to-neutral connection voltage.
-    Zm:         complex, optional
-                The mutual coupling impedance in ohms.
+    Zmp:        complex, optional
+                The mutual coupling with the first additional
+                phase impedance in ohms.
+    Zmpp:       complex, optional
+                The mutual coupling with the second additional
+                phase impedance in ohms.
     Ip:         complex, optional
                 The first mutual phase current in amps.
     Ipp:        complex, optional
@@ -2819,8 +2826,10 @@ def geninternalv(I,Zs,Vt,Vgn=None,Zm=None,Ip=None,Ipp=None):
                 The internal voltage of the generator.
     """
     # All Parameters Provided
-    if Vgn == Zm == Ip == Ipp != None :
-        Ea = Zs*I + Zm*Ip + Zm*Ipp + Vt + Vgn
+    if Zmp == Zmpp == Ip == Ipp != None :
+        if Vgn == None:
+            Vgn = 0
+        Ea = Zs*I + Zmp*Ip + Zmpp*Ipp + Vt + Vgn
     # Select Parameters Provided
     elif Vgn == Zm == Ip == Ipp == None :
         Ea = Zs*I + Vt
@@ -2828,6 +2837,8 @@ def geninternalv(I,Zs,Vt,Vgn=None,Zm=None,Ip=None,Ipp=None):
     else:
         raise ValueError("Invalid Parameter Set")
     return(Ea)
+
+
 
     
 # END OF FILE
