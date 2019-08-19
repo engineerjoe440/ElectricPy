@@ -76,6 +76,13 @@
 #   - String to Bit-String Converter:       string_to_bits
 #   - CRC Message Generator:                crcsender
 #   - CRC Remainder Calculator:             crcremainder
+#   - kWh to BTU:                           kwhtobtu
+#   - BTU to kWh:                           btutokwh
+#   - Per-Unit Impedance Calculator:        zpu
+#   - Per-Unit Current Calculator:          ipu
+#   - Per-Unit Change of Base Formula:      puchgbase
+#   - Per-Unit to Ohmic Impedance:          zrecompose
+#   - X over R to Ohmic Impedance:          rxrecompose
 #
 #   Additional functions available in sub-modules:
 #   - fault.py
@@ -2587,5 +2594,198 @@ def string_to_bits(str):
     """
     data = (''.join(format(ord(x), 'b') for x in str))
     return(data)
+    
+# Define kWh to BTU function and vice-versa
+def kwhtobtu(kWh):
+    """
+    kwhtobtu Function:
+    
+    Converts kWh (killo-Watt-hours) to BTU
+    (British Thermal Units).
+    
+    Parameters
+    ----------
+    kWh:        float
+                The number of killo-Watt-hours
+    
+    Returns
+    -------
+    BTU:        float
+                The number of British Thermal Units
+    """
+    return(kWh*3412.14)
+def btutokwh(BTU):
+    """
+    btutokwh Function:
+    
+    Converts BTU (British Thermal Units) to
+    kWh (killo-Watt-hours).
+    
+    Parameters
+    ----------
+    BTU:        float
+                The number of British Thermal Units
+    
+    Returns
+    -------
+    kWh:        float
+                The number of killo-Watt-hours
+    """
+    return(BTU/3412.14)
+
+# Define Per-Unit Impedance Formula
+def zpu(S,VLL=None,VLN=None):
+    """
+    zpu Function
+    
+    Evaluates the per-unit impedance value given the per-unit
+    power and voltage bases.
+    
+    Parameters
+    ----------
+    S:          float
+                The per-unit power base.
+    VLL:        float, optional
+                The Line-to-Line Voltage; default=None
+    VLN:        float, optional
+                The Line-to-Neutral Voltage; default=None
+    
+    Returns
+    -------
+    Zbase:      float
+                The per-unit impedance base.
+    """
+    if(VLL==None and VLN==None):
+        raise ValueError("ERROR: One voltage must be provided.")
+    if VLL!=None:
+        return(VLL**2/S)
+    else:
+        return((np.sqrt(3)*VLN)**2/S)
+
+# Define Per-Unit Current Formula
+def ipu(S,VLL=None,VLN=None,V1phs=None):
+    """
+    zpu Function
+    
+    Evaluates the per-unit current value given the per-unit
+    power and voltage bases.
+    
+    Parameters
+    ----------
+    S:          float
+                The per-unit power base.
+    VLL:        float, optional
+                The Line-to-Line Voltage; default=None
+    VLN:        float, optional
+                The Line-to-Neutral Voltage; default=None
+    V1phs:      float, optional
+                The voltage base of the single phase system.
+    
+    Returns
+    -------
+    Ibase:      float
+                The per-unit current base.
+    """
+    if(VLL==None and VLN==None):
+        raise ValueError("ERROR: One voltage must be provided.")
+    if VLL!=None:
+        return(S/(np.sqrt(3)*VLL))
+    elif VLN != None:
+        return(S/(3*VLN))
+    else:
+        return(S/V1phs)
+
+# Define Per-Unit Change of Base Function
+def puchgbase(quantity, puB_old, puB_new):
+    """
+    puchgbase Function
+    
+    Performs a per-unit change of base operation for the given
+    value constrained by the old base and new base.
+    
+    Parameters
+    ----------
+    quantity:   complex
+                Current per-unit value in old base.
+    puB_old:    float
+                Old per-unit base.
+    puB_new:    float
+                New per-unit base.
+    
+    Returns
+    -------
+    pu_new:     complex
+                New per-unit value.
+    """
+    pu_new = quantity*puB_old/puB_new
+    return(pu_new)
+
+# Define Recomposition Function
+def zrecompose(z_pu,S3phs,VLL=None,VLN=None):
+    """
+    zrecompose Function
+    
+    Function to reverse per-unit conversion and return the ohmic value
+    of an impedance given its per-unit parameters of R and X (as Z).
+    
+    Parameters
+    ----------
+    z_pu:       complex
+                The per-unit, complex value corresponding to the
+                impedance
+    S3phs:      float
+                The total three-phase power rating of the system.
+    VLL:        float, optional
+                The Line-to-Line Voltage; default=None
+    VLN:        float, optional
+                The Line-to-Neutral Voltage; default=None
+    
+    Returns
+    -------
+    z:          complex
+                The ohmic impedance evaluated from the per-unit base.
+    """
+    # Evaluate the per-unit impedance
+    zbase = zpu(S3phs,VLL,VLN)
+    # Evaluate the impedance
+    z = z_pu * zbase
+    return(z)
+
+# Define X/R Recomposition Function
+def rxrecompose(x_pu,XR,S3phs,VLL=None,VLN=None):
+    """
+    rxrecompose Function
+    
+    Function to reverse per-unit conversion and return the ohmic value
+    of an impedance given its per-unit parameters of X.
+    
+    Parameters
+    ----------
+    x_pu:       float
+                The per-unit, complex value corresponding to the
+                impedance
+    S3phs:      float
+                The total three-phase power rating of the system.
+    VLL:        float, optional
+                The Line-to-Line Voltage; default=None
+    VLN:        float, optional
+                The Line-to-Neutral Voltage; default=None
+    
+    Returns
+    -------
+    z:          complex
+                The ohmic impedance evaluated from the per-unit base.
+    """
+    # Ensure Absolute Value
+    x_pu = abs(x_pu)
+    # Find R from X/R
+    r_pu = x_pu/XR
+    # Compose into z
+    z_pu = r_pu + 1j*x_pu
+    # Recompose
+    z = zrecompose(z_pu,S3phs,VLL,VLN)
+    return(z)
+    
+
     
 # END OF FILE
