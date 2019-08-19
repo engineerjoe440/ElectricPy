@@ -95,7 +95,6 @@ _version_ = "0.0.1"
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
-import cmath as c
 
 # Define Electrical Engineering Constants
 a = c.rect(1,np.radians(120)) # A Operator for Sym. Components
