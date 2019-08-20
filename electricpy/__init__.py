@@ -84,6 +84,10 @@
 #   - Per-Unit to Ohmic Impedance:          zrecompose
 #   - X over R to Ohmic Impedance:          rxrecompose
 #   - Generator Internal Voltage Calc:      geninternalv
+#   - Phase to Sequence Conversion:         sequence
+#   - Sequence to Phase Conversion:         phases
+#   - Function Harmonic (FFT) Evaluation:   funcfft
+#   - Dataset Harmonic (FFT) Evaluation:    datafft
 #
 #   Additional functions available in sub-modules:
 #   - fault.py
@@ -2877,6 +2881,54 @@ def phases(M012):
                 Phase-based values.
     """
     return(A012.dot(M012))
+
+# FFT Coefficient Calculator Function
+def funcfft(func, minfreq=60, mxharmonic=15, complex=False):
+    """
+    funcfft Function
+    
+    Given the callable function handle for a periodic function,
+    evaluates the harmonic components of the function.
+    
+    Parameters
+    ----------
+    func:       function
+                Callable function from which to evaluate values.
+    minfreq:    float, optional
+                Minimum frequency at which to evaluate FFT.
+                default=60
+    mxharmonic: int, optional
+                Maximum harmonic (multiple of minfreq) which to
+                evaluate. default=15
+    complex:    bool, optional
+                Control argument to force returned values into
+                complex format.
+    
+    Returns
+    -------
+    DC:         float
+                The DC offset of the FFT result.
+    A:          list of float
+                The real components from the FFT.
+    B:          list of float
+                The imaginary components from the FFT.
+    """
+    # Apply Nyquist scaling
+    fs = 2 * maxharmonic
+    # Determine Time from Fundamental Frequency
+    T = 1/minfreq
+    # Generate time range to apply for FFT
+    t, dt = np.linspace(0, T, fs + 2, endpoint=False, retstep=True)
+    # Evaluate FFT
+    y = np.fft.rfft(func(t)) / t.size
+    # Return Complex Values
+    if complex:
+       return(y)
+    # Split out useful values
+    else:
+       y *= 2
+       return(y[0].real, y[1:-1].real, -y[1:-1].imag)
+
 
     
 # END OF FILE
