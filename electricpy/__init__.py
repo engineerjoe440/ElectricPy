@@ -2838,7 +2838,45 @@ def geninternalv(I,Zs,Vt,Vgn=None,Zm=None,Ip=None,Ipp=None):
         raise ValueError("Invalid Parameter Set")
     return(Ea)
 
+# Define Sequence Component Conversion Function
+def sequence(Mabc):
+    """
+    sequence Function
+    
+    Converts phase-based values to sequence
+    components.
+    
+    Parameters
+    ----------
+    Mabc:       list of complex
+                Phase-based values to be converted.
+    
+    Returns
+    -------
+    M012:       numpy.ndarray
+                Sequence-based values.
+    """
+    return(Aabc.dot(Mabc))
 
+# Define Phase Component Conversion Function
+def phases(M012):
+    """
+    phases Function
+    
+    Converts sequence-based values to phase
+    components.
+    
+    Parameters
+    ----------
+    M012:       list of complex
+                Sequence-based values to convert.
+    
+    Returns
+    -------
+    Mabc:       numpy.ndarray
+                Phase-based values.
+    """
+    return(A012.dot(M012))
 
     
 # END OF FILE

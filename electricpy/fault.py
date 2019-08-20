@@ -66,17 +66,13 @@ def phs1g(Vsrc,Xseq,Rf=0,sequence=True):
     """
     # Decompose Reactance Tuple
     X0, X1, X2 = Xseq
-    # Load Condition
-    if(load!=None):
-        print("nothing yet")
-    else:
-        # Ensure that X-components are imaginary
-        if(not isinstance(X0, complex)): X0 *= 1j
-        if(not isinstance(X1, complex)): X1 *= 1j
-        if(not isinstance(X2, complex)): X2 *= 1j
-        # Calculate Fault Current
-        Ifault = Vsrc / (X0 + X1 + X2 + 3*Rf)
-        Ifault = np.array([ Ifault, Ifault, Ifault ])
+    # Ensure that X-components are imaginary
+    if(not isinstance(X0, complex)): X0 *= 1j
+    if(not isinstance(X1, complex)): X1 *= 1j
+    if(not isinstance(X2, complex)): X2 *= 1j
+    # Calculate Fault Current
+    Ifault = Vsrc / (X0 + X1 + X2 + 3*Rf)
+    Ifault = np.array([ Ifault, Ifault, Ifault ])
     # Prepare Value for return
     if not sequence:
         Ifault = A012.dot( Ifault ) # Convert to ABC-Domain
@@ -111,19 +107,15 @@ def phs2g(Vsrc,Xseq,Rf=0,sequence=True):
     """
     # Decompose Reactance Tuple
     X0, X1, X2 = Xseq
-    # Load Condition
-    if(load!=None):
-        print("nothing yet")
-    else:
-        # Ensure that X-components are imaginary
-        if(not isinstance(X0, complex)): X0 *= 1j
-        if(not isinstance(X1, complex)): X1 *= 1j
-        if(not isinstance(X2, complex)): X2 *= 1j
-        # Calculate Fault Currents
-        If1 = Vsrc / (X1 + (X2*(X0+3*Rf))/(X0+X2+3*Rf))
-        If2 = -(Vsrc - X1*If1)/X2
-        If0 = -(Vsrc - X1*If1)/(X0+3*Rf)
-        faults = np.array([If0, If1, If2])
+    # Ensure that X-components are imaginary
+    if(not isinstance(X0, complex)): X0 *= 1j
+    if(not isinstance(X1, complex)): X1 *= 1j
+    if(not isinstance(X2, complex)): X2 *= 1j
+    # Calculate Fault Currents
+    If1 = Vsrc / (X1 + (X2*(X0+3*Rf))/(X0+X2+3*Rf))
+    If2 = -(Vsrc - X1*If1)/X2
+    If0 = -(Vsrc - X1*If1)/(X0+3*Rf)
+    faults = np.array([If0, If1, If2])
     # Return Currents
     if not sequence:
         faults = A012.dot(faults.T)
@@ -157,19 +149,15 @@ def phs2(Vsrc,Xseq,Rf=0,sequence=True):
     """
     # Decompose Reactance Tuple
     X0, X1, X2 = Xseq
-    # Load Condition
-    if(load!=None):
-        print("nothing yet")
-    else:
-        # Ensure that X-components are imaginary
-        if(not isinstance(X0, complex)): X0 *= 1j
-        if(not isinstance(X1, complex)): X1 *= 1j
-        if(not isinstance(X2, complex)): X2 *= 1j
-        # Calculate Fault Currents
-        If0 = 0
-        If1 = Vsrc / (X1 + X2 + Rf)
-        If2 = -If1
-        faults = np.array([If0, If1, If2])
+    # Ensure that X-components are imaginary
+    if(not isinstance(X0, complex)): X0 *= 1j
+    if(not isinstance(X1, complex)): X1 *= 1j
+    if(not isinstance(X2, complex)): X2 *= 1j
+    # Calculate Fault Currents
+    If0 = 0
+    If1 = Vsrc / (X1 + X2 + Rf)
+    If2 = -If1
+    faults = np.array([If0, If1, If2])
     # Return Currents
     if not sequence:
         faults = A012.dot(faults.T)
@@ -203,15 +191,11 @@ def phs3(Vsrc,Xseq,Rf=0,sequence=True):
     """
     # Decompose Reactance Tuple
     X0, X1, X2 = Xseq
-    # Load Condition
-    if(load!=None):
-        print("nothing yet")
-    else:
-        # Ensure that X-components are imaginary
-        if(not isinstance(X1, complex)): X1 *= 1j
-        # Calculate Fault Currents
-        Ifault = Vsrc/(X1 + Rf)
-        Ifault = np.array([ 0, Ifault, 0 ])
+    # Ensure that X-components are imaginary
+    if(not isinstance(X1, complex)): X1 *= 1j
+    # Calculate Fault Currents
+    Ifault = Vsrc/(X1 + Rf)
+    Ifault = np.array([ 0, Ifault, 0 ])
     # Prepare to Return Value
     if not sequence:
         Ifault = A012.dot( Ifault ) # Convert to ABC-Domain
