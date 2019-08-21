@@ -23,6 +23,7 @@
 #   - Transformer Current Correction        correctedcurrents
 #   - Operate/Restraint Current Calc.       iopirt
 #   - Symmetrical/RMS Fault Current Calc:   symrmsfaultcur
+#   - TOC Fault Current Ratio:              faultratio
 ####################################################################
 
 # Import Necessary Libraries
@@ -30,13 +31,7 @@ import numpy as np
 from scipy.optimize import fsolve
 
 # Import Local Dependencies
-from .__init__ import Aabc, A012
-
-# Define Transformer Shift Correction Matricies
-XFMY0 = np.array([[1,0,0],[0,1,0],[0,0,1]])
-XFMD1 = 1/np.sqrt(3) * np.array([[1,-1,0],[0,1,-1],[-1,0,1]])
-XFMD11 = 1/np.sqrt(3) * np.array([[1,0,-1],[-1,1,0],[0,-1,1]])
-XFM12 = 1/3 * np.array([[2,-1,-1],[-1,2,-1],[-1,-1,2]])
+from .constants import *
 
 # Define Single Line to Ground Fault Function
 def phs1g(Vsrc,Xseq,Rf=0,sequence=True):
@@ -1054,9 +1049,9 @@ def symrmsfaultcur(V,R,X,t=1/60,freq=60):
     return(tau,Isym,Irms)
 
 # Define Relay M Formula
-def tocrelaym(I,Ipickup,CTR=1):
+def faultratio(I,Ipickup,CTR=1):
     """
-    tocrelaym Function
+    faultratio Function
     
     Evaluates the CTR-scaled pickup measured to
     pickup current ratio.

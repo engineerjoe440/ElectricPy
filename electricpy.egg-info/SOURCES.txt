@@ -1,6 +1,7 @@
 README.md
 setup.py
 electricpy/__init__.py
+electricpy/constants.py
 electricpy/fault.py
 electricpy.egg-info/PKG-INFO
 electricpy.egg-info/SOURCES.txt

@@ -87,16 +87,41 @@
 #   - Phase to Sequence Conversion:         sequence
 #   - Sequence to Phase Conversion:         phases
 #   - Function Harmonic (FFT) Evaluation:   funcfft
-#   - Dataset Harmonic (FFT) Evaluation:    datafft
+#   - Dataset Harmonic (FFT) Evaluation:    sampfft
+#   - Harmonic (FFT) Component Plotter:     fftplot
+#   - Harmonic (FFT) Summation Plotter:     fftsumplot    
 #   - Motor Startup Capacitor Formula:      motorstartcap
 #   - Power Factor Correction Formula:      pfcorrection
 #   - AC Power/Voltage/Current Relation:    acpiv
+#   - Transformer Primary Conversion:       primary
+#   - Transformer Secondary Conversion:     secondary
 #
 #   Additional functions available in sub-modules:
 #   - fault.py
-#   - electronics.py
-#   - perunit.py
-#   - systemsolution.py
+#
+#   Functions Available in FAULT.py
+#   - Single Line to Ground                 phs1g
+#   - Double Line to Ground                 phs2g
+#   - Line to Line                          phs2
+#   - Three-Phase Fault                     phs3
+#   - Faulted Bus Voltage                   busvolt
+#   - CT Saturation Function                ct_saturation
+#   - CT C-Class Calculator                 ct_cclass
+#   - CT Sat. V at rated Burden             ct_satratburden
+#   - CT Voltage Peak Formula               ct_vpeak
+#   - CT Time to Saturation                 ct_timetosat
+#   - Transient Recovery Voltage Calc.      pktransrecvolt
+#   - TRV Reduction Resistor                trvresistor
+#   - Natural Frequency Calculator          natfreq
+#   - TOC Trip Time                         toctriptime
+#   - TOC Reset Time                        tocreset
+#   - Pickup Setting Assistant              pickup
+#   - Radial TOC Coordination Tool          tdradial
+#   - TAP Setting Calculator                protectiontap
+#   - Transformer Current Correction        correctedcurrents
+#   - Operate/Restraint Current Calc.       iopirt
+#   - Symmetrical/RMS Fault Current Calc:   symrmsfaultcur
+#   - TOC Fault Current Ratio:              faultratio
 ###################################################################
 
 # Define Module Specific Variables
@@ -106,6 +131,7 @@ _version_ = "0.0.1"
 # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
 
 # Import Submodules
+from .constants import *
 from . import fault
 
 # Import Supporting Modules
@@ -113,26 +139,6 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 import cmath as c
-
-# Define Electrical Engineering Constants
-a = c.rect(1,np.radians(120)) # A Operator for Sym. Components
-p = 1e-12 # Pico Multiple
-n = 1e-9 # Nano Multiple
-u = 1e-6 # Micro (mu) Multiple
-m = 1e-3 # Mili Multiple
-k = 1e+3 # Kili Multiple
-M = 1e+6 # Mega Multiple
-NAN = float('nan')
-VLLcVLN = c.rect(np.sqrt(3),np.radians(30)) # Conversion Operator
-ILcIP = c.rect(np.sqrt(3),np.radians(-30)) # Conversion Operator
-
-# Define Electrical Engineering Matricies
-Aabc = 1/3 * np.array([[ 1, 1, 1    ],  # Convert ABC to 012
-                       [ 1, a, a**2 ],  # (i.e. phase to sequence)
-                       [ 1, a**2, a ]])
-A012 = np.array([[ 1, 1, 1    ],        # Convert 012 to ABC
-                 [ 1, a**2, a ],        # (i.e. sequence to phase)
-                 [ 1, a, a**2 ]])
 
                  
 # Define Phasor Generator
@@ -2886,7 +2892,7 @@ def phases(M012):
     return(A012.dot(M012))
 
 # FFT Coefficient Calculator Function
-def funcfft(func, minfreq=60, mxharmonic=15, complex=False):
+def funcfft(func, minfreq=60, maxmult=15, complex=False):
     """
     funcfft Function
     
@@ -2898,9 +2904,9 @@ def funcfft(func, minfreq=60, mxharmonic=15, complex=False):
     func:       function
                 Callable function from which to evaluate values.
     minfreq:    float, optional
-                Minimum frequency at which to evaluate FFT.
+                Minimum frequency (in Hz) at which to evaluate FFT.
                 default=60
-    mxharmonic: int, optional
+    maxmult:    int, optional
                 Maximum harmonic (multiple of minfreq) which to
                 evaluate. default=15
     complex:    bool, optional
@@ -2917,11 +2923,11 @@ def funcfft(func, minfreq=60, mxharmonic=15, complex=False):
                 The imaginary components from the FFT.
     """
     # Apply Nyquist scaling
-    fs = 2 * maxharmonic
+    NN = 2 * maxmult + 2
     # Determine Time from Fundamental Frequency
     T = 1/minfreq
     # Generate time range to apply for FFT
-    t, dt = np.linspace(0, T, fs + 2, endpoint=False, retstep=True)
+    t, dt = np.linspace(0, T, NN, endpoint=False, retstep=True)
     # Evaluate FFT
     y = np.fft.rfft(func(t)) / t.size
     # Return Complex Values
@@ -2931,6 +2937,212 @@ def funcfft(func, minfreq=60, mxharmonic=15, complex=False):
     else:
        y *= 2
        return(y[0].real, y[1:-1].real, -y[1:-1].imag)
+
+def sampfft(data,dt,minfreq=60.0,complex=False):
+    """
+    sampfft Function
+    
+    Given a data array and the delta-t for the data array, evaluates
+    the harmonic composition of the data.
+    
+    Parameters
+    ----------
+    data:       numpy.ndarray
+                Numpy data array containing 1-D values.
+    dt:         float
+                Time-difference (delta-t) between data samples.
+    minfreq:    float, optional
+                Minimum frequency (in Hz) at which to evaluate FFT.
+                default=60
+    complex:    bool, optional
+                Control argument to force returned values into
+                complex format.
+    
+    Returns
+    -------
+    DC:         float
+                The DC offset of the FFT result.
+    A:          list of float
+                The real components from the FFT.
+    B:          list of float
+                The imaginary components from the FFT.
+    """
+    # Calculate Terms
+    FR = 1/(dt*len(data))
+    NN = 1//(dt*minfreq)
+    # Test for Invalid System
+    if FR > minfreq:
+        raise ValueError("Too few data samples to evaluate FFT at specified minimum frequency.")
+    elif FR == minfreq:
+        # Evaluate FFT
+        y = np.fft.rfft(data) / len(data)
+    else:
+        # Slice data array to appropriate fundamental frequency
+        cut_data = data[:int(NN)]
+        # Evaluate FFT
+        y = np.fft.rfft(cut_data) / len(cut_data)
+    # Return Complex Values
+    if complex:
+       return(y)
+    # Split out useful values
+    else:
+       y *= 2
+       return(y[0].real, y[1:-1].real, -y[1:-1].imag)
+
+# Define FFT Plotting Function
+def fftplot(dc, real, imag=None, title="Fourier Coefficients"):
+    """
+    fftplot Function
+    
+    Plotting function for FFT (harmonic) values,
+    plots the DC, Real, and Imaginary components.
+    
+    Parameters
+    ----------
+    dc:         float
+                The DC offset term
+    real:       list of float
+                Real terms of FFT (cosine terms)
+    imag:       list of float, optional
+                Imaginary terms of FFT (sine terms)
+    title:      str, optional
+                String appended to plot title,
+                default="Fourier Coefficients"
+    """
+    # Define Range values for plots
+    rng = range(1,len(real)+1,1)
+    xtic = range(0,len(real)+1,1)
+    # Set up Arguments
+    a0x = [0,0]
+    a0y = [0,dc/2]
+    # Plot
+    plt.title(title)
+    plt.plot(a0x,a0y,'g',label="DC-Term")
+    plt.stem(rng,real,'r','ro',label="Real-Terms",use_line_collection=True)
+    if imag != None:
+        plt.stem(rng,imag,'b','bo',label="Imaginary-Terms",use_line_collection=True)
+    plt.xlabel("Harmonics (Multiple of Fundamental)")
+    plt.ylabel("Harmonic Magnitude")
+    plt.axhline(0.0,color='k')
+    plt.legend()
+    if(len(xtic) < 50):
+        plt.xticks(xtic)
+    plt.show()
+
+# Define FFT Composition Plotting Function
+def fftsumplot(dc,real,imag=None,freq=60,xrange=None,npts=1000,
+               plotall=False,title="Fourier Series Summation"):
+    """
+    fftsumplot Function
+    
+    Function to generate the plot of the sumed FFT results.
+    
+    Parameters
+    ----------
+    dc:         float
+                The DC offset term
+    real:       list of float
+                Real terms of FFT (cosine terms)
+    imag:       list of float
+                Imaginary terms of FFT (sine terms)
+    freq:       float, optional
+                Fundamental (minimum nonzero) frequency in Hz,
+                default=60
+    xrange:     list of float, optional
+                List of two floats containing the minimum
+                time and the maximum time.
+    npts:       int, optional
+                Number of time step points, default=1000
+    title:      str, optional
+                String appended to plot title,
+                default="Fourier Series Summation"
+    """
+    # Determine the number (N) of terms
+    N = len(real)
+    # Determine the system period (T)
+    T = 1/freq
+    # Generate Domain Array
+    if xrange == None:
+        x = np.linspace(0,T,npts)
+    else:
+        x = np.linspace(xrange[0],xrange[1],npts)
+    # Initialize output with DC term
+    yout = np.ones(len(x))*dc
+    # Plot each iteration of the Fourier Series
+    for k in range(1,N):
+        if plotall:
+            plt.plot(x,yout)
+        yout += real[k-1]*np.cos(k*2*np.pi*x/T)
+        if imag != None:
+            yout += imag[k-1]*np.sin(k*2*np.pi*x/T)
+    plt.plot(x,yout)
+    plt.title(title)
+    plt.xlabel("Time (seconds)")
+    plt.ylabel("Magnitude")
+    plt.show()
+
+# Define harmonic system generation function
+def harmonics(real,imag=None,dc=0,freq=60,domain=None):
+    """
+    harmonics Function
+    
+    Generate a function or dataset for a harmonic system
+    given the real (cosine), imaginary (sine), and DC
+    components of the system.
+    
+    Parameters
+    ----------
+    real:       list of float
+                The real (cosine) component coefficients
+                for the harmonic system.
+    imag:       list of float, optional
+                The imaginary (sine) component coefficients
+                for the harmonic system.
+    dc:         float, optional
+                The DC offset for the harmonic system,
+                default=0
+    freq:       float, optional
+                The fundamental frequency of the system in
+                Hz, default=60
+    domain:     list of float, optional
+                Domain of time samples at which to calculate
+                the harmonic system, must be array-like, will
+                cause function to return numpy array instead
+                of function object.
+    
+    Returns
+    -------
+    system:     function
+                Function object handle which can be used to
+                call the function to evaluate the harmonic
+                system at specified times.
+    """
+    # Validate Inputs
+    if not isinstance(real,(list,np.ndarray)):
+        raise ValueError("Argument *real* must be array-like.")
+    if imag != None and not isinstance(imag,(list,np.ndarray)):
+        raise ValueError("Argument *imag* must be array-like.")
+    # Calculate Omega
+    w = 2*np.pi*freq
+    def _harmonic_(t):
+        out = dc
+        for k in range(len(real)):
+            # Evaluate Current Coefficient
+            A = real[k]
+            if imag != None:
+                B = imag[k]
+            else:
+                B = 0
+            m = k + 1
+            # Calculate Output
+            out += A*np.cos(m*w*t) + B*np.sin(m*w*t)
+        # Return Value
+        return(out)
+    if domain is None:
+        system = _harmonic_
+    else:
+        system = _harmonic_(domain)
+    return(system)
 
 # Define Single Phase Motor Startup Capacitor Formula
 def motorstartcap(V,I,freq=60):

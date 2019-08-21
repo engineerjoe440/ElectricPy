@@ -42,13 +42,10 @@ for research, development, education, and exploration in the realm of electrical
 
 ## To Do List:
 - Port Remaining Functions from ELECTRICALPYTHON
-    - FFT Functions
     - Add Heat Sink Solver
     - DC/DC Converters
     - DC/AC Converters
-    - Harmonic System Copmoser (to generate a function or array with the terms)
     - Stationary and Synchronous Reference Frame conversion Matricies/Constants
-    - sine to cosine function equivalent
     - Sampled values to fundamental sine/cosine waveform
 
 

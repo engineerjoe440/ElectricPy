@@ -52,7 +52,6 @@ Description: # ELECTRICPY
         
         ## To Do List:
         - Port Remaining Functions from ELECTRICALPYTHON
-            - FFT Functions
             - Add Heat Sink Solver
             - DC/DC Converters
             - DC/AC Converters
