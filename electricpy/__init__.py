@@ -3096,6 +3096,71 @@ def acpiv(S=None,I=None,VLL=None,VLN=None,V=None):
         VLN = S/(3 * np.conj( I ))
         return(VLL,VLN,V)
 
+# Define Primary Ratio Function
+def primary(val, Np, Ns=1, invert=False):
+    """
+    primary Function
+    
+    Returns a current or voltage value reflected across
+    a transformer with a specified turns ratio Np/Ns.
+    Converts to the primary side.
+    
+    Parameters
+    ----------
+    val:        complex
+                Value to be reflected across transformer.
+    Np:         float
+                Number of turns on primary side.
+    Ns:         float, optional
+                Number of turns on secondary side.
+    invert:     bool, optional
+                Control argument to invert the turns ratio,
+                used when reflecting current across a
+                voltage transformer, or voltage across a
+                current transformer.
+    
+    Returns
+    -------
+    reflection: complex
+                The reflected value referred to the primary
+                side according to Np and Ns.
+    """
+    if invert:
+        return( val * Ns/Np )
+    return( val * Np/Ns )
+
+# Define Secondary Ratio Function
+def secondary(val, Np, Ns=1,invert=False):
+    """
+    secondary Function
+    
+    Returns a current or voltage value reflected across
+    a transformer with a specified turns ratio Np/Ns.
+    Converts to the secondary side.
+    
+    Parameters
+    ----------
+    val:        complex
+                Value to be reflected across transformer.
+    Np:         float
+                Number of turns on primary side.
+    Ns:         float, optional
+                Number of turns on secondary side.
+    invert:     bool, optional
+                Control argument to invert the turns ratio,
+                used when reflecting current across a
+                voltage transformer, or voltage across a
+                current transformer.
+    
+    Returns
+    -------
+    reflection: complex
+                The reflected value referred to the secondary
+                side according to Np and Ns.
+    """
+    if invert:
+        return( val * Np/Ns )
+    return( val * Ns/Np )
 
 
 # END OF FILE

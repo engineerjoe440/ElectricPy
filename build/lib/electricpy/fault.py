@@ -18,7 +18,7 @@
 #   - TOC Trip Time                         toctriptime
 #   - TOC Reset Time                        tocreset
 #   - Pickup Setting Assistant              pickup
-#   - Radial TOC Coordination Tool          tdcoordradial
+#   - Radial TOC Coordination Tool          tdradial
 #   - TAP Setting Calculator                protectiontap
 #   - Transformer Current Correction        correctedcurrents
 #   - Operate/Restraint Current Calc.       iopirt
@@ -634,7 +634,7 @@ def natfreq(C,L,Hz=True):
     return(freq)
 
 # Define Time-Overcurrent Trip Time Function
-def toctriptime(I,Ipickup,TD,curve="U1"):
+def toctriptime(I,Ipickup,TD,curve="U1",CTR=1):
     """
     toctriptime Function
     
@@ -653,6 +653,8 @@ def toctriptime(I,Ipickup,TD,curve="U1"):
     curve:      string, optional
                 Name of specified TOC curve, may be entry from set:
                 {U1,U2,U3,U4,U5,C1,C2,C3,C4,C5}, default=U1
+    CTR:        float, optional
+                Current Transformer Ratio, default=1
     
     Returns
     -------
@@ -677,13 +679,13 @@ def toctriptime(I,Ipickup,TD,curve="U1"):
     B = const[curve]["B"]
     P = const[curve]["P"]
     # Evaluate M
-    M = I / Ipickup
+    M = I / (CTR * Ipickup)
     # Evaluate Trip Time
     tt = TD * (A/(M**P-1)+B)
     return(tt)
 
 # Define Time Overcurrent Reset Time Function
-def tocreset(I,Ipickup,TD,curve="U1"):
+def tocreset(I,Ipickup,TD,curve="U1",CTR=1):
     """
     tocreset Function
     
@@ -701,6 +703,8 @@ def tocreset(I,Ipickup,TD,curve="U1"):
     curve:      string, optional
                 Name of specified TOC curve, may be entry from set:
                 {U1,U2,U3,U4,U5,C1,C2,C3,C4,C5}, default=U1
+    CTR:        float, optional
+                Current Transformer Ratio, default=1
     
     Returns
     -------
@@ -715,7 +719,7 @@ def tocreset(I,Ipickup,TD,curve="U1"):
             "C2" : 47.3,"C3" : 80.0,"C4" : 120.0,
             "C5" : 4.85}
     # Evaluate M
-    M = I / Ipickup
+    M = I / (CTR * Ipickup)
     # Evaluate Reset Time
     tr = TD * (C[curve]/(1-M**2))
     return(tr)
@@ -766,7 +770,8 @@ def pickup(Iloadmax,Ifaultmin,scale=0,printout=False,units="A"):
     return(setpoint)
 
 # Define Time-Dial Coordination Function
-def tdcoordradial(I,CTI,Ipu_up,Ipu_dn,TDdn,curve="U1",scale=1,freq=60):
+def tdradial(I,CTI,Ipu_up,Ipu_dn=0,TDdn=0,curve="U1",scale=2,freq=60,
+                  CTR_up=1,CTR_dn=1,tfixed=None):
     """
     tdcoordradial Function
     
@@ -785,20 +790,32 @@ def tdcoordradial(I,CTI,Ipu_up,Ipu_dn,TDdn,curve="U1",scale=1,freq=60):
     Ipu_up:     float
                 Pickup setting for upstream protection,
                 specified in amps
-    Ipu_dn:     float
+    Ipu_dn:     float, optional
                 Pickup setting for downstream protection,
-                specified in amps
-    TDdn:       float
+                specified in amps, default=0
+    TDdn:       float, optional
                 Time-Dial setting for downstream protection,
-                specified in seconds
+                specified in seconds, default=0
     curve:      string, optional
                 Name of specified TOC curve, may be entry from set:
                 {U1,U2,U3,U4,U5,C1,C2,C3,C4,C5}, default=U1
     scale:      int, optional
                 Scaling value used to evaluate a practical TD
-                setting, default=1
+                setting, default=2
     freq:       float, optional
                 System operating frequency, default=60
+    CTR_up:     float, optional
+                Current Transformer Ratio for upstream relay.
+                default=1
+    CTR_dn:     float, optional
+                Current Transformer Ratio for downstream relay.
+                default=1
+    tfixed:     float, optional
+                Used to specify a fixed time delay for coordinated
+                protection elements, primarily used for coordinating
+                TOC elements (51) with OC elements (50) with a fixed
+                tripping time. Overrides downstream TOC arguments
+                including *Ipu_dn* and *TDdn*.
     
     Returns
     -------
@@ -808,7 +825,6 @@ def tdcoordradial(I,CTI,Ipu_up,Ipu_dn,TDdn,curve="U1",scale=1,freq=60):
     """
     # Condition Inputs
     curve = curve.upper()
-    CTI = CTI/freq # Evaluate in seconds from cycles
     # Define Dictionary of Constants
     const = {   "U1" : {"A": 0.0104, "B": 0.2256, "P": 0.02},
                 "U2" : {"A": 5.95, "B": 0.180, "P": 2.00},
@@ -824,16 +840,21 @@ def tdcoordradial(I,CTI,Ipu_up,Ipu_dn,TDdn,curve="U1",scale=1,freq=60):
     A = const[curve]["A"]
     B = const[curve]["B"]
     P = const[curve]["P"]
-    # Evaluate M
-    M = I / Ipu_dn
-    # Evaluate Trip Time
-    tpu_desired = TDdn * (A/(M**P-1)+B) + CTI
+    if tfixed == None:
+        # Evaluate in seconds from cycles
+        CTI = CTI/freq
+        # Evaluate M
+        M = I / (CTR_dn * Ipu_dn)
+        # Evaluate Trip Time
+        tpu_desired = TDdn * (A/(M**P-1)+B) + CTI
+    else:
+        tpu_desired = tfixed + CTI
     # Re-Evaluate M
-    M = I / Ipu_up
+    M = I / (CTR_up * Ipu_up)
     # Calculate TD setting
     TD = tpu_desired / (A/(M**2-1)+B)
     # Scale and Round
-    TD = np.ceil(TD*10**scale)/10**scale
+    TD = np.floor(TD*10**scale)/10**scale
     return(TD)
 
 # Define TAP Calculator
@@ -1032,6 +1053,33 @@ def symrmsfaultcur(V,R,X,t=1/60,freq=60):
     Irms = np.sqrt(1+2*np.exp(-2*t/tau))*Isym
     return(tau,Isym,Irms)
 
+# Define Relay M Formula
+def tocrelaym(I,Ipickup,CTR=1):
+    """
+    tocrelaym Function
+    
+    Evaluates the CTR-scaled pickup measured to
+    pickup current ratio.
+    
+    M = meas / pickup
+    
+    Parameters
+    ----------
+    I:          float
+                Measured Current in Amps
+    Ipickup:    float
+                Fault Current Pickup Setting (in Amps)
+    CTR:        float, optional
+                Current Transformer Ratio for relay,
+                default=1
+    
+    Returns
+    -------
+    M:          float
+                The measured-to-pickup ratio
+    """
+    M = I/(CTR * Ipickup)
+    return(M)
 
 
 # END OF FILE

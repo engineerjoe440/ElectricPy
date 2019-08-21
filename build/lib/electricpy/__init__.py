@@ -3020,12 +3020,147 @@ def pfcorrection(S,PFold,PFnew,VLL=None,VLN=None,V=None,freq=60):
     return(C,Qc)
 
 # Define Apparent Power / Voltage / Current Relation Function
-def acpiv(S=None,I=None,VLL=None,VLN=None,V=None,threephase=False):
+def acpiv(S=None,I=None,VLL=None,VLN=None,V=None):
     """
+    acpiv Function
     
+    Relationship function to return apparent power, voltage, or
+    current in one of various forms.
+    
+    Parameters
+    ----------
+    S:          complex, optional
+                Apparent power, may be single or three-phase,
+                specified in volt-amps (VAs)
+    I:          complex, optional
+                Phase current in amps
+    VLL:        complex, optional
+                Line-to-Line voltage in volts
+    VLN:        complex, optional
+                Line-to-Neutral voltage in volts
+    V:          complex, optional
+                Single-phase voltage in volts
+    
+    Returns
+    -------
+    S:          complex
+                Apparent power, returned only if one voltage
+                and current is specified
+    I:          complex
+                Phase current, returned only if one voltage
+                and apparent power is specified
+    VLL:        complex
+                Line-to-Line voltage, returned only if current
+                and apparent power specified, returned as set
+                with other voltages in form: (VLL, VLN, V)
+    VLN:        complex
+                Line-to-Neutral voltage, returned only if
+                current and apparent power specified, returned
+                as set with other voltages in form: (VLL, VLN, V)
+    V:          complex
+                Single-phase voltage, returned only if current
+                and apparent power specified, returned as set
+                with other voltages in form: (VLL, VLN, V)
     """
-    
+    # Validate Inputs
+    if S == I == None:
+        raise ValueError("To few arguments.")
+    # Solve Single-Phase
+    if V != None:
+        if S == None:   # Solve for Apparent Power
+            S = V * np.conj( I )
+            return(S)
+        else:           # Solve for Current
+            I = np.conj( S/V )
+            return(I)
+    # Solve Line-to-Line
+    elif VLL != None:
+        if S == None:   # Solve for Apparent Power
+            S = np.sqrt(3) * VLL * np.conj( I )
+            return(S)
+        else:           # Solve for Current
+            I = np.conj( S/(np.sqrt(3) * VLL) )
+            return(I)
+    # Solve Line-to-Neutral
+    elif VLN != None:
+        if S == None:   # Solve for Apparent Power
+            S = 3 * VLN * np.conj( I )
+            return(S)
+        else:           # Solve for Current
+            I = np.conj( S/(3*VLN) )
+            return(I)
+    # Solve for Voltages
+    else:
+        V = S/np.conj( I )
+        VLL = S/(np.sqrt(3) * np.conj( I ))
+        VLN = S/(3 * np.conj( I ))
+        return(VLL,VLN,V)
 
+# Define Primary Ratio Function
+def primary(val, Np, Ns=1, invert=False):
+    """
+    primary Function
+    
+    Returns a current or voltage value reflected across
+    a transformer with a specified turns ratio Np/Ns.
+    Converts to the primary side.
+    
+    Parameters
+    ----------
+    val:        complex
+                Value to be reflected across transformer.
+    Np:         float
+                Number of turns on primary side.
+    Ns:         float, optional
+                Number of turns on secondary side.
+    invert:     bool, optional
+                Control argument to invert the turns ratio,
+                used when reflecting current across a
+                voltage transformer, or voltage across a
+                current transformer.
+    
+    Returns
+    -------
+    reflection: complex
+                The reflected value referred to the primary
+                side according to Np and Ns.
+    """
+    if invert:
+        return( val * Ns/Np )
+    return( val * Np/Ns )
+
+# Define Secondary Ratio Function
+def secondary(val, Np, Ns=1,invert=False):
+    """
+    secondary Function
+    
+    Returns a current or voltage value reflected across
+    a transformer with a specified turns ratio Np/Ns.
+    Converts to the secondary side.
+    
+    Parameters
+    ----------
+    val:        complex
+                Value to be reflected across transformer.
+    Np:         float
+                Number of turns on primary side.
+    Ns:         float, optional
+                Number of turns on secondary side.
+    invert:     bool, optional
+                Control argument to invert the turns ratio,
+                used when reflecting current across a
+                voltage transformer, or voltage across a
+                current transformer.
+    
+    Returns
+    -------
+    reflection: complex
+                The reflected value referred to the secondary
+                side according to Np and Ns.
+    """
+    if invert:
+        return( val * Np/Ns )
+    return( val * Ns/Np )
 
 
 # END OF FILE
