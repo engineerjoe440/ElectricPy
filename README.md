@@ -30,7 +30,7 @@ for research, development, education, and exploration in the realm of electrical
     - `pip install matplotlib`
     - `pip install sympy`
   
- 2. Install *electricalpython*
+ 2. Install *electricpy*
     - `pip install electricpy`
   
  3. Check installation success in Python environment
