@@ -84,6 +84,13 @@
 #   - Per-Unit to Ohmic Impedance:          zrecompose
 #   - X over R to Ohmic Impedance:          rxrecompose
 #   - Generator Internal Voltage Calc:      geninternalv
+#   - Phase to Sequence Conversion:         sequence
+#   - Sequence to Phase Conversion:         phases
+#   - Function Harmonic (FFT) Evaluation:   funcfft
+#   - Dataset Harmonic (FFT) Evaluation:    datafft
+#   - Motor Startup Capacitor Formula:      motorstartcap
+#   - Power Factor Correction Formula:      pfcorrection
+#   - AC Power/Voltage/Current Relation:    acpiv
 #
 #   Additional functions available in sub-modules:
 #   - fault.py
@@ -2809,8 +2816,12 @@ def geninternalv(I,Zs,Vt,Vgn=None,Zm=None,Ip=None,Ipp=None):
                 The generator's terminal voltage.
     Vgn:        complex, optional
                 The ground-to-neutral connection voltage.
-    Zm:         complex, optional
-                The mutual coupling impedance in ohms.
+    Zmp:        complex, optional
+                The mutual coupling with the first additional
+                phase impedance in ohms.
+    Zmpp:       complex, optional
+                The mutual coupling with the second additional
+                phase impedance in ohms.
     Ip:         complex, optional
                 The first mutual phase current in amps.
     Ipp:        complex, optional
@@ -2822,8 +2833,10 @@ def geninternalv(I,Zs,Vt,Vgn=None,Zm=None,Ip=None,Ipp=None):
                 The internal voltage of the generator.
     """
     # All Parameters Provided
-    if Vgn == Zm == Ip == Ipp != None :
-        Ea = Zs*I + Zm*Ip + Zm*Ipp + Vt + Vgn
+    if Zmp == Zmpp == Ip == Ipp != None :
+        if Vgn == None:
+            Vgn = 0
+        Ea = Zs*I + Zmp*Ip + Zmpp*Ipp + Vt + Vgn
     # Select Parameters Provided
     elif Vgn == Zm == Ip == Ipp == None :
         Ea = Zs*I + Vt
@@ -2832,7 +2845,187 @@ def geninternalv(I,Zs,Vt,Vgn=None,Zm=None,Ip=None,Ipp=None):
         raise ValueError("Invalid Parameter Set")
     return(Ea)
 
-
-
+# Define Sequence Component Conversion Function
+def sequence(Mabc):
+    """
+    sequence Function
     
+    Converts phase-based values to sequence
+    components.
+    
+    Parameters
+    ----------
+    Mabc:       list of complex
+                Phase-based values to be converted.
+    
+    Returns
+    -------
+    M012:       numpy.ndarray
+                Sequence-based values.
+    """
+    return(Aabc.dot(Mabc))
+
+# Define Phase Component Conversion Function
+def phases(M012):
+    """
+    phases Function
+    
+    Converts sequence-based values to phase
+    components.
+    
+    Parameters
+    ----------
+    M012:       list of complex
+                Sequence-based values to convert.
+    
+    Returns
+    -------
+    Mabc:       numpy.ndarray
+                Phase-based values.
+    """
+    return(A012.dot(M012))
+
+# FFT Coefficient Calculator Function
+def funcfft(func, minfreq=60, mxharmonic=15, complex=False):
+    """
+    funcfft Function
+    
+    Given the callable function handle for a periodic function,
+    evaluates the harmonic components of the function.
+    
+    Parameters
+    ----------
+    func:       function
+                Callable function from which to evaluate values.
+    minfreq:    float, optional
+                Minimum frequency at which to evaluate FFT.
+                default=60
+    mxharmonic: int, optional
+                Maximum harmonic (multiple of minfreq) which to
+                evaluate. default=15
+    complex:    bool, optional
+                Control argument to force returned values into
+                complex format.
+    
+    Returns
+    -------
+    DC:         float
+                The DC offset of the FFT result.
+    A:          list of float
+                The real components from the FFT.
+    B:          list of float
+                The imaginary components from the FFT.
+    """
+    # Apply Nyquist scaling
+    fs = 2 * maxharmonic
+    # Determine Time from Fundamental Frequency
+    T = 1/minfreq
+    # Generate time range to apply for FFT
+    t, dt = np.linspace(0, T, fs + 2, endpoint=False, retstep=True)
+    # Evaluate FFT
+    y = np.fft.rfft(func(t)) / t.size
+    # Return Complex Values
+    if complex:
+       return(y)
+    # Split out useful values
+    else:
+       y *= 2
+       return(y[0].real, y[1:-1].real, -y[1:-1].imag)
+
+# Define Single Phase Motor Startup Capacitor Formula
+def motorstartcap(V,I,freq=60):
+    """
+    motorstartcap Function
+    
+    Function to evaluate a reccomended value for the
+    startup capacitor associated with a single phase
+    motor.
+    
+    Parameters
+    ----------
+    V:          float
+                Magnitude of motor terminal voltage in volts.
+    I:          float
+                Magnitude of motor no-load current in amps.
+    freq:       float, optional
+                Motor/System frequency, default=60.
+                
+    Returns
+    -------
+    C:          float
+                Suggested capacitance in Farads.
+    """
+    # Condition Inputs
+    I = abs(I)
+    V = abs(V)
+    # Calculate Capacitance
+    C = I / (2*np.pi*freq*V)
+    return(C)
+
+# Define Power Factor Correction Function
+def pfcorrection(S,PFold,PFnew,VLL=None,VLN=None,V=None,freq=60):
+    """
+    pfcorrection Function
+    
+    Function to evaluate the additional reactive power and
+    capacitance required to achieve the desired power factor
+    given the old power factor and new power factor.
+    
+    Parameters
+    ----------
+    S:          float
+                Apparent power consumed by the load.
+    PFold:      float
+                The current (old) power factor, should be a decimal
+                value.
+    PFnew:      float
+                The desired (new) power factor, should be a decimal
+                value.
+    VLL:        float, optional
+                The Line-to-Line Voltage; default=None
+    VLN:        float, optional
+                The Line-to-Neutral Voltage; default=None
+    V:          float, optional
+                Voltage across the capacitor, ignores line-to-line
+                or line-to-neutral constraints. default=None
+    freq:       float, optional
+                System frequency, default=60
+    
+    Returns
+    -------
+    C:          float
+                Required capacitance in Farads.
+    Qc:         float
+                Difference of reactive power, (Qc = Qnew - Qold)
+    """
+    # Condition Inputs
+    S = abs(S)
+    # Calculate Initial Terms
+    Pold = S*PFold
+    Qold = np.sqrt(S**2 - Pold**2)
+    # Evaluate Reactive Power Requirements
+    Scorrected = Pold/PFnew
+    Qcorrected = np.sqrt(Scorrected**2 - Pold**2)
+    Qc = Qold - Qcorrected
+    # Evaluate Capacitance Based on Voltage Input
+    if VLL == VLN == V == None:
+        raise ValueError("One voltage must be specified.")
+    elif VLN != None:
+        C = Qc / (2*np.pi*freq*3*VLN**2)
+    else:
+        if VLL != None:
+            V = VLL
+        C = Qc / (2*np.pi*freq*V**2)
+    # Return Value
+    return(C,Qc)
+
+# Define Apparent Power / Voltage / Current Relation Function
+def acpiv(S=None,I=None,VLL=None,VLN=None,V=None,threephase=False):
+    """
+    
+    """
+    
+
+
+
 # END OF FILE
