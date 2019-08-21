@@ -89,7 +89,8 @@
 #   - Function Harmonic (FFT) Evaluation:   funcfft
 #   - Dataset Harmonic (FFT) Evaluation:    sampfft
 #   - Harmonic (FFT) Component Plotter:     fftplot
-#   - Harmonic (FFT) Summation Plotter:     fftsumplot    
+#   - Harmonic (FFT) Summation Plotter:     fftsumplot 
+#   - Harmonic System Generator:            harmonics   
 #   - Motor Startup Capacitor Formula:      motorstartcap
 #   - Power Factor Correction Formula:      pfcorrection
 #   - AC Power/Voltage/Current Relation:    acpiv
