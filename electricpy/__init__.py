@@ -88,6 +88,9 @@
 #   - Sequence to Phase Conversion:         phases
 #   - Function Harmonic (FFT) Evaluation:   funcfft
 #   - Dataset Harmonic (FFT) Evaluation:    datafft
+#   - Motor Startup Capacitor Formula:      motorstartcap
+#   - Power Factor Correction Formula:      pfcorrection
+#   - AC Power/Voltage/Current Relation:    acpiv
 #
 #   Additional functions available in sub-modules:
 #   - fault.py
@@ -2929,6 +2932,100 @@ def funcfft(func, minfreq=60, mxharmonic=15, complex=False):
        y *= 2
        return(y[0].real, y[1:-1].real, -y[1:-1].imag)
 
-
+# Define Single Phase Motor Startup Capacitor Formula
+def motorstartcap(V,I,freq=60):
+    """
+    motorstartcap Function
     
+    Function to evaluate a reccomended value for the
+    startup capacitor associated with a single phase
+    motor.
+    
+    Parameters
+    ----------
+    V:          float
+                Magnitude of motor terminal voltage in volts.
+    I:          float
+                Magnitude of motor no-load current in amps.
+    freq:       float, optional
+                Motor/System frequency, default=60.
+                
+    Returns
+    -------
+    C:          float
+                Suggested capacitance in Farads.
+    """
+    # Condition Inputs
+    I = abs(I)
+    V = abs(V)
+    # Calculate Capacitance
+    C = I / (2*np.pi*freq*V)
+    return(C)
+
+# Define Power Factor Correction Function
+def pfcorrection(S,PFold,PFnew,VLL=None,VLN=None,V=None,freq=60):
+    """
+    pfcorrection Function
+    
+    Function to evaluate the additional reactive power and
+    capacitance required to achieve the desired power factor
+    given the old power factor and new power factor.
+    
+    Parameters
+    ----------
+    S:          float
+                Apparent power consumed by the load.
+    PFold:      float
+                The current (old) power factor, should be a decimal
+                value.
+    PFnew:      float
+                The desired (new) power factor, should be a decimal
+                value.
+    VLL:        float, optional
+                The Line-to-Line Voltage; default=None
+    VLN:        float, optional
+                The Line-to-Neutral Voltage; default=None
+    V:          float, optional
+                Voltage across the capacitor, ignores line-to-line
+                or line-to-neutral constraints. default=None
+    freq:       float, optional
+                System frequency, default=60
+    
+    Returns
+    -------
+    C:          float
+                Required capacitance in Farads.
+    Qc:         float
+                Difference of reactive power, (Qc = Qnew - Qold)
+    """
+    # Condition Inputs
+    S = abs(S)
+    # Calculate Initial Terms
+    Pold = S*PFold
+    Qold = np.sqrt(S**2 - Pold**2)
+    # Evaluate Reactive Power Requirements
+    Scorrected = Pold/PFnew
+    Qcorrected = np.sqrt(Scorrected**2 - Pold**2)
+    Qc = Qold - Qcorrected
+    # Evaluate Capacitance Based on Voltage Input
+    if VLL == VLN == V == None:
+        raise ValueError("One voltage must be specified.")
+    elif VLN != None:
+        C = Qc / (2*np.pi*freq*3*VLN**2)
+    else:
+        if VLL != None:
+            V = VLL
+        C = Qc / (2*np.pi*freq*V**2)
+    # Return Value
+    return(C,Qc)
+
+# Define Apparent Power / Voltage / Current Relation Function
+def acpiv(S=None,I=None,VLL=None,VLN=None,V=None,threephase=False):
+    """
+    
+    """
+    
+
+
+
 # END OF FILE
