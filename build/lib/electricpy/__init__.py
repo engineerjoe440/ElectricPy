@@ -124,6 +124,8 @@
 #   - Operate/Restraint Current Calc.       iopirt
 #   - Symmetrical/RMS Fault Current Calc:   symrmsfaultcur
 #   - TOC Fault Current Ratio:              faultratio
+#   - Residual Compensation Factor Calc:    residcomp
+#   - Distance Elem. Impedance Calc:        distmeasz
 #
 #   Functions Available in BODE.py:
 #   - Transfer Function Bode Plot Generator         bode

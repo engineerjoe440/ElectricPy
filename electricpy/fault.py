@@ -26,6 +26,8 @@
 #   - TOC Fault Current Ratio:              faultratio
 #   - Residual Compensation Factor Calc:    residcomp
 #   - Distance Elem. Impedance Calc:        distmeasz
+#   - Transformer Mismatch Calculator:      transmismatch
+#   - 
 ####################################################################
 
 # Import Necessary Libraries
@@ -1179,6 +1181,77 @@ def distmeasz(VLNmeas,If,Ip,Ipp,CTR=1,VTR=1,k0=None,z1=None,z0=None,linelength=1
     # Calculate Measured Impedance
     Zmeas = V / (I+k0*Ir)
     return(Zmeas)
+
+# Define Transformer Tap Mismatch Function
+def transmismatch(I1,I2,tap1,tap2):
+    """
+    transmismatch Function
+    
+    Function to evaluate the transformer ratio mismatch
+    for protection.
+    
+    Parameters
+    ----------
+    I1:         complex
+                Current (in amps) on transformer primary side.
+    I2:         complex
+                Current (in amps) on transformer secondary.
+    tap1:       float
+                Relay TAP setting on the primary side.
+    tap2:       float
+                Relay TAP setting on the secondary side.
+    
+    Returns
+    -------
+    mismatch:   float
+                Transformer CT mismatch value associated with
+                relay.
+    """
+    # Evaluate MR
+    MR = min( abs(I1/I2), abs(tap1/tap2) )
+    # Calculate Mismatch
+    mismatch = (abs(I1/I2) - abs(tap1/tap2))*100/MR
+    return(mismatch)
+
+# Define Current Scaling Function for Relay TAP Calculation
+def relaytap(Smax,CN,VLL=None,VLN=None,CTR=1):
+    """
+    relaytap Function
+    
+    Function to evaluate the compensation TAP setting
+    for digtal protective relays.
+    
+    Parameters
+    ----------
+    Smax:       float
+                Maximum apparent power for transformer
+                being protected.
+    CN:         float
+                [something]
+    VLL:        float, optional
+                Line-to-Line Voltage of transformer
+                being protected.
+    VLN:        float, optional
+                Line-to-Neutral Voltage of transformer
+                being protected.
+    CTR:        float, optional
+                Current Transformer Ratio.
+    
+    Returns
+    -------
+    TAPn:       float
+                Digital relay compensation TAP setting.
+    """
+    # Validate Input Voltages
+    if VLL == VLN == None:
+        raise ValueError("One or more voltages required.")
+    if VLN != None:
+        # Evaluate the TAP setting
+        TAPn = (1000*Smax*CN)/(np.sqrt(3)*V*CTR)
+    else:
+        # Evaluate the TAP setting
+        TAPn = (1000*Smax*CN)/(V*CTR)
+    return(TAPn)
 
 
 # END OF FILE
