@@ -24,6 +24,8 @@
 #   - Operate/Restraint Current Calc.       iopirt
 #   - Symmetrical/RMS Fault Current Calc:   symrmsfaultcur
 #   - TOC Fault Current Ratio:              faultratio
+#   - Residual Compensation Factor Calc:    residcomp
+#   - Distance Elem. Impedance Calc:        distmeasz
 ####################################################################
 
 # Import Necessary Libraries
@@ -1075,6 +1077,108 @@ def faultratio(I,Ipickup,CTR=1):
     """
     M = I/(CTR * Ipickup)
     return(M)
+
+# Define Residual Compensation Factor Function
+def residcomp(z1,z0,linelength=1):
+    """
+    residcomp Function
+    
+    Evaluates the residual compensation factor based on
+    the line's positive and zero sequence impedance
+    characteristics.
+    
+    Parameters
+    ----------
+    z1:         complex
+                The positive-sequence impedance
+                characteristic of the line, specified in 
+                ohms-per-unit where the total line length
+                (of same unit) is specified in
+                *linelength* argument.
+    z0:         complex
+                The zero-sequence impedance characteristic
+                of the line, specified in ohms-per-unit
+                where the total line length (of same unit)
+                is specified in *linelength* argument.
+    linelength: float, optional
+                The length (in same base unit as impedance
+                characteristics) of the line. default=1
+    
+    Returns
+    -------
+    k0:         complex
+                The residual compensation factor.
+    """
+    # Evaluate Z1L and Z0L
+    Z1L = z1*linelength
+    Z0L = z0*linelength
+    # Calculate Residual Compensation Factor (k0)
+    k0 = (Z0L - Z1L)/(3*Z1L)
+    return(k0)
+
+# Define Relay Measured Impedance Functon for Distance Elements
+def distmeasz(VLNmeas,If,Ip,Ipp,CTR=1,VTR=1,k0=None,z1=None,z0=None,linelength=1):
+    """
+    distmeasz Function
+    
+    Function to evaluate the Relay-Measured-Impedance as calculated from
+    the measured voltage, current, and line parameters.
+    
+    Parameters
+    ----------
+    VLNmeas:    complex
+                Measured Line-to-Neutral voltage for the
+                faulted phase in primary volts.
+    If:         complex
+                Faulted phase current measured in primary
+                amps.
+    Ip:         complex
+                Secondary phase current measured in primary
+                amps.
+    Ipp:        complex
+                Terchiary phase current measured in primary
+                amps.
+    CTR:        float, optional
+                Current transformer ratio, default=1
+    VTR:        float, optional
+                Voltage transformer ratio, default=1
+    k0:         complex, optional
+                Residual Compensation Factor
+    z1:         complex, optional
+                The positive-sequence impedance
+                characteristic of the line, specified in 
+                ohms-per-unit where the total line length
+                (of same unit) is specified in
+                *linelength* argument.
+    z0:         complex, optional
+                The zero-sequence impedance characteristic
+                of the line, specified in ohms-per-unit
+                where the total line length (of same unit)
+                is specified in *linelength* argument.
+    linelength: float, optional
+                The length (in same base unit as impedance
+                characteristics) of the line. default=1
+    
+    Returns
+    -------
+    Zmeas:      complex
+                The "measured" impedance as calculated by the relay.
+    """
+    # Validate Residual Compensation Inputs
+    if k0 == z1 == z0 == None:
+        raise ValueError("Residual compensation arguments must be set.")
+    if k0 == None and (z1==None or z0==None):
+        raise ValueError("Both *z1* and *z0* must be specified.")
+    # Calculate Residual Compensation if Necessary
+    if k0 == None:
+        k0 = residcomp(z1,z0,linelength)
+    # Convert Primary Units to Secondary
+    V = VLNmeas/VTR
+    Ir = (If + Ip + Ipp)/CTR
+    I = If/CTR
+    # Calculate Measured Impedance
+    Zmeas = V / (I+k0*Ir)
+    return(Zmeas)
 
 
 # END OF FILE

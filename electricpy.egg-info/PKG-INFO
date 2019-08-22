@@ -40,7 +40,7 @@ Description: # ELECTRICPY
             - `pip install matplotlib`
             - `pip install sympy`
           
-         2. Install *electricalpython*
+         2. Install *electricpy*
             - `pip install electricpy`
           
          3. Check installation success in Python environment
@@ -55,9 +55,7 @@ Description: # ELECTRICPY
             - Add Heat Sink Solver
             - DC/DC Converters
             - DC/AC Converters
-            - Harmonic System Copmoser (to generate a function or array with the terms)
             - Stationary and Synchronous Reference Frame conversion Matricies/Constants
-            - sine to cosine function equivalent
             - Sampled values to fundamental sine/cosine waveform
         
         

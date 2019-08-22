@@ -89,7 +89,8 @@
 #   - Function Harmonic (FFT) Evaluation:   funcfft
 #   - Dataset Harmonic (FFT) Evaluation:    sampfft
 #   - Harmonic (FFT) Component Plotter:     fftplot
-#   - Harmonic (FFT) Summation Plotter:     fftsumplot    
+#   - Harmonic (FFT) Summation Plotter:     fftsumplot 
+#   - Harmonic System Generator:            harmonics   
 #   - Motor Startup Capacitor Formula:      motorstartcap
 #   - Power Factor Correction Formula:      pfcorrection
 #   - AC Power/Voltage/Current Relation:    acpiv
@@ -98,6 +99,7 @@
 #
 #   Additional functions available in sub-modules:
 #   - fault.py
+#   - bode.py
 #
 #   Functions Available in FAULT.py
 #   - Single Line to Ground                 phs1g
@@ -122,6 +124,11 @@
 #   - Operate/Restraint Current Calc.       iopirt
 #   - Symmetrical/RMS Fault Current Calc:   symrmsfaultcur
 #   - TOC Fault Current Ratio:              faultratio
+#
+#   Functions Available in BODE.py:
+#   - Transfer Function Bode Plot Generator         bode
+#   - S-Domain Bode Plot Generator                  sbode
+#   - Z-Domain Bode Plot Generator                  zbode
 ###################################################################
 
 # Define Module Specific Variables
@@ -133,6 +140,7 @@ _version_ = "0.0.1"
 # Import Submodules
 from .constants import *
 from . import fault
+from . import bode
 
 # Import Supporting Modules
 import numpy as np

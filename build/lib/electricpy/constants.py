@@ -1,7 +1,8 @@
 ###################################################################
 #   CONSTANTS.PY
 #
-#
+#   Defenition of all required constants and matricies for
+#   *electricpy* module.
 ###################################################################
 
 # Import Supporting Libraries
