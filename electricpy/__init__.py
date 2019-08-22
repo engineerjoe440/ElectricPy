@@ -126,6 +126,8 @@
 #   - TOC Fault Current Ratio:              faultratio
 #   - Residual Compensation Factor Calc:    residcomp
 #   - Distance Elem. Impedance Calc:        distmeasz
+#   - Transformer Mismatch Calculator:      transmismatch
+#   - Transformer Protection TAP Calc:      relaytap
 #
 #   Functions Available in BODE.py:
 #   - Transfer Function Bode Plot Generator         bode

@@ -27,7 +27,7 @@
 #   - Residual Compensation Factor Calc:    residcomp
 #   - Distance Elem. Impedance Calc:        distmeasz
 #   - Transformer Mismatch Calculator:      transmismatch
-#   - 
+#   - Transformer Protection TAP Calc:      relaytap
 ####################################################################
 
 # Import Necessary Libraries
@@ -1214,7 +1214,7 @@ def transmismatch(I1,I2,tap1,tap2):
     return(mismatch)
 
 # Define Current Scaling Function for Relay TAP Calculation
-def relaytap(Smax,CN,VLL=None,VLN=None,CTR=1):
+def relaytap(Smax,CTconn="wye",VLL=None,VLN=None,CTR=1):
     """
     relaytap Function
     
@@ -1226,8 +1226,11 @@ def relaytap(Smax,CN,VLL=None,VLN=None,CTR=1):
     Smax:       float
                 Maximum apparent power for transformer
                 being protected.
-    CN:         float
-                [something]
+    CTconn:     string, optional
+                Connection scaling factor. Used primarily
+                when configuring TAP for
+                electro-mechanical relays. default="wye"
+                wye=1, delta=sqrt(3)
     VLL:        float, optional
                 Line-to-Line Voltage of transformer
                 being protected.
@@ -1242,15 +1245,17 @@ def relaytap(Smax,CN,VLL=None,VLN=None,CTR=1):
     TAPn:       float
                 Digital relay compensation TAP setting.
     """
+    # Confirm CN
+    CN = {"wye": 1, "delta":np.sqrt(3)}[CTconn]
     # Validate Input Voltages
     if VLL == VLN == None:
         raise ValueError("One or more voltages required.")
     if VLN != None:
         # Evaluate the TAP setting
-        TAPn = (1000*Smax*CN)/(np.sqrt(3)*V*CTR)
+        TAPn = (Smax*CN)/(np.sqrt(3)*VLN*CTR)
     else:
         # Evaluate the TAP setting
-        TAPn = (1000*Smax*CN)/(V*CTR)
+        TAPn = (Smax*CN)/(VLL*CTR)
     return(TAPn)
 
 

@@ -14,8 +14,34 @@ import scipy.signal as sig
 from numpy import pi
 from cmath import exp
 
-# Import Local Dependencies
-from .filter import sys_condition
+# Define System Conditioning Function
+def sys_condition(system,feedback):
+    if ( len(system) == 2 ):        # System found to be num and den
+        num = system[0]
+        den = system[1]
+        # Convolve numerator or denominator as needed
+        if (str(type(num)) == tuple):
+            num = convolve(num)        # Convolve terms in numerator
+        if (str(type(den)) == tuple):
+            den = convolve(den)        # Convolve terms in denominator
+        if feedback: # If asked to add the numerator to the denominator
+            ld = len(den) # Length of denominator
+            ln = len(num) # Length of numerator
+            if(ld > ln):
+                num = np.append(np.zeros(ld-ln),num) # Pad beginning with zeros
+            if(ld < ln):
+                den = np.append(np.zeros(ln-ld),den) # Pad beginning with zeros
+            den = den + num # Add numerator and denominator
+        for i in range( len( num ) ):
+            if (num[i] != 0):
+                num = num[i:]        # Slice zeros off the front of the numerator
+                break                 # Break out of for loop
+        for i in range( len( den ) ):
+            if (den[i] != 0):
+                den = den[i:]        # Slice zeros off the front of the denominator
+                break                 # Break out of for loop
+        system = (num,den)  # Repack system
+    return(system) # Return the conditioned system
 
 # Define System Bode Plotting Function
 def bode(system,mn=0.001,mx=1000,npts=100,title="",xlim=False,ylim=False,sv=False,
