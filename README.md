@@ -46,7 +46,6 @@ for research, development, education, and exploration in the realm of electrical
     - DC/DC Converters
     - DC/AC Converters
     - Stationary and Synchronous Reference Frame conversion Matricies/Constants
-    - Sampled values to fundamental sine/cosine waveform
 
 
 ## Contact:

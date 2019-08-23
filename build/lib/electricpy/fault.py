@@ -27,7 +27,9 @@
 #   - Residual Compensation Factor Calc:    residcomp
 #   - Distance Elem. Impedance Calc:        distmeasz
 #   - Transformer Mismatch Calculator:      transmismatch
-#   - Transformer Protection TAP Calc:      relaytap
+#   - High-Impedance Voltage Pickup:        highzvpickup
+#   - High-Impedance Minimum Current PU:    highzmini
+#   - Instantaneous Overcurrent PU:         instoveri
 ####################################################################
 
 # Import Necessary Libraries
@@ -857,7 +859,7 @@ def tdradial(I,CTI,Ipu_up,Ipu_dn=0,TDdn=0,curve="U1",scale=2,freq=60,
     return(TD)
 
 # Define TAP Calculator
-def protectiontap(CTR,S,VLN=None,VLL=None):
+def protectiontap(S,CTR=1,VLN=None,VLL=None):
     """
     protectiontap Function
     
@@ -1213,50 +1215,123 @@ def transmismatch(I1,I2,tap1,tap2):
     mismatch = (abs(I1/I2) - abs(tap1/tap2))*100/MR
     return(mismatch)
 
-# Define Current Scaling Function for Relay TAP Calculation
-def relaytap(Smax,CTconn="wye",VLL=None,VLN=None,CTR=1):
+# Define High-Impedance Bus Protection Pickup Function
+def highzvpickup(I,RL,Rct,CTR=1,threephase=False,Ks=1.5,
+                 Vstd=400,Kd=0.5):
     """
-    relaytap Function
+    highzvpickup Function
     
-    Function to evaluate the compensation TAP setting
-    for digtal protective relays.
+    Evaluates the voltage pickup setting for a high
+    impedance bus protection system.
     
     Parameters
     ----------
-    Smax:       float
-                Maximum apparent power for transformer
-                being protected.
-    CTconn:     string, optional
-                Connection scaling factor. Used primarily
-                when configuring TAP for
-                electro-mechanical relays. default="wye"
-                wye=1, delta=sqrt(3)
-    VLL:        float, optional
-                Line-to-Line Voltage of transformer
-                being protected.
-    VLN:        float, optional
-                Line-to-Neutral Voltage of transformer
-                being protected.
+    I:          float
+                Fault current on primary side (in amps)
+    RL:         float
+                One-way line resistance in ohms
+    Rct:        float
+                Current Transformer Resistance in ohms
     CTR:        float, optional
-                Current Transformer Ratio.
+                Current Transformer Ratio, default=1
+    threephase: bool, optional
+                Control argument to set the function to
+                evaluate the result for a three-phase 
+                fault or unbalanced fault. default=False
+    Ks:         float, optional
+                Security Factor for secure voltage pickup
+                setting, default=1.5
+    Vstd:       float, optional
+                C-Class Voltage rating (i.e. C-400),
+                default=400
+    Kd:         float, optional
+                The dependability factor for dependable
+                voltage pickup setting, default=0.5
     
     Returns
     -------
-    TAPn:       float
-                Digital relay compensation TAP setting.
+    Vsens:      float
+                The calculated sensetive voltage-pickup.
+    Vdep:       float
+                The calculated dependable voltage-pickup.
     """
-    # Confirm CN
-    CN = {"wye": 1, "delta":np.sqrt(3)}[CTconn]
-    # Validate Input Voltages
-    if VLL == VLN == None:
-        raise ValueError("One or more voltages required.")
-    if VLN != None:
-        # Evaluate the TAP setting
-        TAPn = (Smax*CN)/(np.sqrt(3)*VLN*CTR)
-    else:
-        # Evaluate the TAP setting
-        TAPn = (Smax*CN)/(VLL*CTR)
-    return(TAPn)
+    # Condition Based on threephase Argument
+    n = 2
+    if threephase: n = 1
+    # Evaluate Secure Voltage Pickup
+    Vsens = Ks*(n*RL+Rct)*I/CTR
+    # Evaluate Dependible Voltage Pickup
+    Vdep = Kd*Vstd
+    return(Vsens,Vdep)
+
+# Define Minimum Current Pickup for High-Impedance Bus Protection
+def highzmini(N,Ie,Irly=None,Vset=None,Rrly=2000,Imov=0,CTR=1):
+    """
+    highzmini Function
+    
+    Evaluates the minimum pickup current required to cause
+    high-impedance bus protection element pickup.
+    
+    Parameters
+    ----------
+    N:          int
+                Number of Current Transformers included in scheme
+    Ie:         float
+                The excitation current at the voltage setting
+    Irly:       float, optional
+                The relay current at voltage setting
+    Vset:       float, optional
+                The relay's voltage pickup setting in volts.
+    Rrly:       float, optional
+                The relay's internal resistance in ohms, default=2000
+    Imov:       float, optional
+                The overvoltage protection current at the
+                voltage setting. default=0.0
+    CTR:        float, optional
+                Current Transformer Ratio, default=1
+    
+    Returns
+    -------
+    Imin:       float
+                Minimum current required to cause high-impedance
+                bus protection element pickup.
+    """
+    # Validate Inputs
+    if Irly == Vset == None:
+        raise ValueError("Relay Current Required.")
+    if Irly == None:
+        Irly = Vset / Rrly
+    # Evaluate Minimum Current Pickup
+    Imin = (N*Ie+Irly+Imov)*CTR
+    return(Imin)
+
+# Define Instantaneous Overcurrent Pickup Formula
+def instoveri(Imin,CTR=1,Ki=0.5):
+    """
+    instoveri Function
+    
+    Using a sensetivity factor and the CTR, evaluates
+    the secondary-level pickup setting for an
+    instantaneous overcurrent element.
+    
+    Parameters
+    ----------
+    Imin:       float
+                The minimum fault current in primary amps.
+    CTR:        float, optional
+                Current Transformer Ratio, default=1
+    Ki:         Sensetivity factor, default=0.5
+    
+    Returns
+    -------
+    Ipu:        float
+                The pickup setting for the instantaneous
+                overcurrent element as referred to the
+                secondary side.
+    """
+    # Evaluate Overcurrent Pickup Setting
+    Ipu = Ki * Imin/CTR
+    return(Ipu)
 
 
 # END OF FILE

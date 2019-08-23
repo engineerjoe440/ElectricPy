@@ -25,6 +25,8 @@
 #
 #   Included Functions
 #   - Phasor V/I Generator:                 phasor
+#   - Phasor Data Genorator:                phasordata
+#   - Time of Number of Cycles:             tcycle        
 #   - Phasor Impedance Generator:           phasorz
 #   - Complex Display Function:             cprint
 #   - Parallel Impedance Adder:             parallelz
@@ -127,12 +129,14 @@
 #   - Residual Compensation Factor Calc:    residcomp
 #   - Distance Elem. Impedance Calc:        distmeasz
 #   - Transformer Mismatch Calculator:      transmismatch
-#   - Transformer Protection TAP Calc:      relaytap
+#   - High-Impedance Voltage Pickup:        highzvpickup
+#   - High-Impedance Minimum Current PU:    highzmini
+#   - Instantaneous Overcurrent PU:         instoc
 #
 #   Functions Available in BODE.py:
-#   - Transfer Function Bode Plot Generator         bode
-#   - S-Domain Bode Plot Generator                  sbode
-#   - Z-Domain Bode Plot Generator                  zbode
+#   - Transfer Function Bode Plotter:       bode
+#   - S-Domain Bode Plotter:                sbode
+#   - Z-Domain Bode Plotter:                zbode
 ###################################################################
 
 # Define Module Specific Variables
@@ -176,6 +180,90 @@ def phasor( mag, ang ):
                 the specified voltage or current.
     """
     return( c.rect( mag, np.radians( ang ) ) )
+
+# Define Phasor Data Generator
+def phasordata(mn,mx=None,npts=1000,mag=1,ang=0,freq=60,
+               retstep=False,rettime=False,sine=False):
+    """
+    phasordata Function
+    
+    Generates a sinusoidal data set with minimum, maximum,
+    frequency, magnitude, and phase angle arguments.
+    
+    Parameters
+    ----------
+    mn:         float, optional
+                Minimum time (in seconds) to generate data for.
+                default=0
+    mx:         float
+                Maximum time (in seconds) to generate data for.
+    npts:       float, optional
+                Number of data samples. default=1000
+    mag:        float, optional
+                Sinusoid magnitude, default=1
+    ang:        float, optional
+                Sinusoid angle in degrees, default=0
+    freq:       float, optional
+                Sinusoid frequency in Hz
+    retstep:    bool, optional
+                Control argument to request return of time
+                step size (dt) in seconds.
+    sine:       bool, optional
+                Control argument to require data be generated
+                with a sinusoidal function instead of cosine.
+                
+    Returns
+    -------
+    data:       numpy.ndarray
+                The resultant data array.
+    """
+    # Test Inputs for Min/Max
+    if mx == None:
+        # No Minimum provided, use Value as Maximum
+        mx = mn
+        mn = 0
+    # Generate Omega
+    w = 2*np.pi*freq
+    # Generate Time Array
+    t,dt = np.linspace(mn,mx,npts,retstep=True)
+    # Generate Data Array
+    if not sine:
+        data = mag * np.cos(w*t + np.radians(ang))
+    else:
+        data = mag * np.sin(w*t + np.radians(ang))
+    # Generate Return Data Set
+    dataset = [data]
+    if retstep:
+        dataset.append(dt)
+    if rettime:
+        dataset.append(t)
+    # Return Dataset
+    if len(dataset) == 1:
+        return(dataset[0])
+    return(dataset)
+
+# Define Cycle Time Function
+def tcycle(ncycles=1,freq=60):
+    """
+    tcycle Function
+    
+    Evaluates the time for a number of n
+    cycles given the system frequency.
+    
+    Parameters
+    ----------
+    ncycles:    float, optional    
+                Number (n) of cycles to evaluate, default=1
+    freq:       float, optional
+                System frequency in Hz, default=60
+    
+    Returns
+    -------
+    t:          float
+                Total time for *ncycles*
+    """
+    # Evaluate the time for ncycles
+    return(ncycles/freq)
 
 # Define Reactance Calculator
 def reactance(z,f=60,sensetivity=1e-12):
