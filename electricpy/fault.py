@@ -14,7 +14,6 @@
 #   - CT Time to Saturation                 ct_timetosat
 #   - Transient Recovery Voltage Calc.      pktransrecvolt
 #   - TRV Reduction Resistor                trvresistor
-#   - Natural Frequency Calculator          natfreq
 #   - TOC Trip Time                         toctriptime
 #   - TOC Reset Time                        tocreset
 #   - Pickup Setting Assistant              pickup
@@ -601,39 +600,6 @@ def trvresistor(C,L,reduction,Rd0=500,wd0=260e3,tpk0=10e-6):
         return(X,Y,Z)
     Rd, wd, tpk = fsolve(equations, (Rd0,wd0,tpk0))
     return(Rd, wd, tpk)
-
-# Define Natural Frequency/Resonant Frequency Calculator
-def natfreq(C,L,Hz=True):
-    """
-    natfreq Function
-    
-    Evaluates the natural frequency (resonant frequency)
-    of a circuit given the circuit's C and L values. Defaults
-    to returning values in Hz, but may also return in rad/sec.
-    
-    Parameters
-    ----------
-    C:          float
-                Capacitance Value in Farads.
-    L:          float
-                Inductance in Henries.
-    Hz:         bool, optional
-                Control argument to set return value in either
-                Hz or rad/sec; default=True.
-    
-    Returns
-    -------
-    freq:       float
-                Natural (Resonant) frequency, will be in Hz if
-                argument *Hz* is set True (default), or rad/sec
-                if argument is set False.
-    """
-    # Evaluate Natural Frequency in rad/sec
-    freq = 1/np.sqrt(L*C)
-    # Convert to Hz as requested
-    if Hz:
-        freq = freq / (2*np.pi)
-    return(freq)
 
 # Define Time-Overcurrent Trip Time Function
 def toctriptime(I,Ipickup,TD,curve="U1",CTR=1):
@@ -1300,8 +1266,14 @@ def highzmini(N,Ie,Irly=None,Vset=None,Rrly=2000,Imov=0,CTR=1):
     # Validate Inputs
     if Irly == Vset == None:
         raise ValueError("Relay Current Required.")
+    # Condition Inputs
+    Ie = abs(Ie)
+    Imov = abs(Imov)
     if Irly == None:
+        Vset = abs(Vset)
         Irly = Vset / Rrly
+    else:
+        Irly = abs(Irly)
     # Evaluate Minimum Current Pickup
     Imin = (N*Ie+Irly+Imov)*CTR
     return(Imin)
@@ -1331,7 +1303,7 @@ def instoc(Imin,CTR=1,Ki=0.5):
                 secondary side.
     """
     # Evaluate Overcurrent Pickup Setting
-    Ipu = Ki * Imin/CTR
+    Ipu = Ki * abs(Imin)/CTR
     return(Ipu)
 
 # Define Generator Loss of Field Element Function
@@ -1370,6 +1342,10 @@ def genlossfield(Xd,Xpd,Zbase=1,CTR=1,VTR=1):
     Z2dia:      float
                 Zone 2 diameter in ohms.
     """
+    # Condition Inputs
+    Xd = abs(Xd)
+    Xpd = abs(Xpd)
+    Zbase = abs(Zbase)
     # Evaluate Xd_sec and Xpd_sec
     Xd_sec = Xd*Zbase*(CTR/VTR)
     Xpd_sec = Xd*Zbase*(CTR/VTR)
