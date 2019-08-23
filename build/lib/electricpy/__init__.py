@@ -98,6 +98,8 @@
 #   - AC Power/Voltage/Current Relation:    acpiv
 #   - Transformer Primary Conversion:       primary
 #   - Transformer Secondary Conversion:     secondary
+#   - Natural Frequency Calculator          natfreq
+#   - 3-Phase Voltage/Current Unbalance:    unbalance
 #
 #   Additional functions available in sub-modules:
 #   - fault.py
@@ -116,7 +118,6 @@
 #   - CT Time to Saturation                 ct_timetosat
 #   - Transient Recovery Voltage Calc.      pktransrecvolt
 #   - TRV Reduction Resistor                trvresistor
-#   - Natural Frequency Calculator          natfreq
 #   - TOC Trip Time                         toctriptime
 #   - TOC Reset Time                        tocreset
 #   - Pickup Setting Assistant              pickup
@@ -131,7 +132,8 @@
 #   - Transformer Mismatch Calculator:      transmismatch
 #   - High-Impedance Voltage Pickup:        highzvpickup
 #   - High-Impedance Minimum Current PU:    highzmini
-#   - Instantaneous Overcurrent PU:         instoveri
+#   - Instantaneous Overcurrent PU:         instoc
+#   - Generator Loss of Field Settings:     genlossfield
 #
 #   Functions Available in BODE.py:
 #   - Transfer Function Bode Plotter:       bode
@@ -3473,6 +3475,86 @@ def secondary(val, Np, Ns=1,invert=False):
     if invert:
         return( val * Np/Ns )
     return( val * Ns/Np )
+
+# Define Natural Frequency/Resonant Frequency Calculator
+def natfreq(C,L,Hz=True):
+    """
+    natfreq Function
+    
+    Evaluates the natural frequency (resonant frequency)
+    of a circuit given the circuit's C and L values. Defaults
+    to returning values in Hz, but may also return in rad/sec.
+    
+    Parameters
+    ----------
+    C:          float
+                Capacitance Value in Farads.
+    L:          float
+                Inductance in Henries.
+    Hz:         bool, optional
+                Control argument to set return value in either
+                Hz or rad/sec; default=True.
+    
+    Returns
+    -------
+    freq:       float
+                Natural (Resonant) frequency, will be in Hz if
+                argument *Hz* is set True (default), or rad/sec
+                if argument is set False.
+    """
+    # Evaluate Natural Frequency in rad/sec
+    freq = 1/np.sqrt(L*C)
+    # Convert to Hz as requested
+    if Hz:
+        freq = freq / (2*np.pi)
+    return(freq)
+
+# Define Voltage/Current Unbalance Equation
+def unbalance(A,B,C,all=False):
+    """
+    unbalance Function
+    
+    Performs a voltage/current unbalance calculation
+    to determine the maximum current/voltage
+    unbalance. Returns result as a decimal percentage.
+    
+    Parameters
+    ----------
+    A:          float
+                Phase-A value
+    B:          float
+                Phase-B value
+    C:          float
+                Phase-C value
+    all:        bool, optional
+                Control argument to require function
+                to return all voltage/current unbalances.
+    
+    Returns
+    -------
+    unbalance:  float
+                The unbalance as a percentage of the
+                average. (i.e. 80% = 0.8)
+    """
+    # Condition Inputs
+    A = abs(A)
+    B = abs(B)
+    C = abs(C)
+    # Gather Average
+    avg = (A + B + C)/3
+    # Determine Variance
+    dA = abs(A-avg)
+    dB = abs(B-avg)
+    dC = abs(C-avg)
+    # Gather Maximum Variation
+    mx = max(dA,dB,dC)
+    # Calculate Maximum Variation
+    unbalance = mx/avg
+    # Return Results
+    if all:
+        return(dA/avg,dB/avg,dC/avg)
+    else:
+        return(unbalance)
 
 
 # END OF FILE

@@ -14,7 +14,6 @@
 #   - CT Time to Saturation                 ct_timetosat
 #   - Transient Recovery Voltage Calc.      pktransrecvolt
 #   - TRV Reduction Resistor                trvresistor
-#   - Natural Frequency Calculator          natfreq
 #   - TOC Trip Time                         toctriptime
 #   - TOC Reset Time                        tocreset
 #   - Pickup Setting Assistant              pickup
@@ -29,7 +28,8 @@
 #   - Transformer Mismatch Calculator:      transmismatch
 #   - High-Impedance Voltage Pickup:        highzvpickup
 #   - High-Impedance Minimum Current PU:    highzmini
-#   - Instantaneous Overcurrent PU:         instoveri
+#   - Instantaneous Overcurrent PU:         instoc
+#   - Generator Loss of Field Settings:     genlossfield
 ####################################################################
 
 # Import Necessary Libraries
@@ -600,39 +600,6 @@ def trvresistor(C,L,reduction,Rd0=500,wd0=260e3,tpk0=10e-6):
         return(X,Y,Z)
     Rd, wd, tpk = fsolve(equations, (Rd0,wd0,tpk0))
     return(Rd, wd, tpk)
-
-# Define Natural Frequency/Resonant Frequency Calculator
-def natfreq(C,L,Hz=True):
-    """
-    natfreq Function
-    
-    Evaluates the natural frequency (resonant frequency)
-    of a circuit given the circuit's C and L values. Defaults
-    to returning values in Hz, but may also return in rad/sec.
-    
-    Parameters
-    ----------
-    C:          float
-                Capacitance Value in Farads.
-    L:          float
-                Inductance in Henries.
-    Hz:         bool, optional
-                Control argument to set return value in either
-                Hz or rad/sec; default=True.
-    
-    Returns
-    -------
-    freq:       float
-                Natural (Resonant) frequency, will be in Hz if
-                argument *Hz* is set True (default), or rad/sec
-                if argument is set False.
-    """
-    # Evaluate Natural Frequency in rad/sec
-    freq = 1/np.sqrt(L*C)
-    # Convert to Hz as requested
-    if Hz:
-        freq = freq / (2*np.pi)
-    return(freq)
 
 # Define Time-Overcurrent Trip Time Function
 def toctriptime(I,Ipickup,TD,curve="U1",CTR=1):
@@ -1299,14 +1266,20 @@ def highzmini(N,Ie,Irly=None,Vset=None,Rrly=2000,Imov=0,CTR=1):
     # Validate Inputs
     if Irly == Vset == None:
         raise ValueError("Relay Current Required.")
+    # Condition Inputs
+    Ie = abs(Ie)
+    Imov = abs(Imov)
     if Irly == None:
+        Vset = abs(Vset)
         Irly = Vset / Rrly
+    else:
+        Irly = abs(Irly)
     # Evaluate Minimum Current Pickup
     Imin = (N*Ie+Irly+Imov)*CTR
     return(Imin)
 
 # Define Instantaneous Overcurrent Pickup Formula
-def instoveri(Imin,CTR=1,Ki=0.5):
+def instoc(Imin,CTR=1,Ki=0.5):
     """
     instoveri Function
     
@@ -1330,8 +1303,59 @@ def instoveri(Imin,CTR=1,Ki=0.5):
                 secondary side.
     """
     # Evaluate Overcurrent Pickup Setting
-    Ipu = Ki * Imin/CTR
+    Ipu = Ki * abs(Imin)/CTR
     return(Ipu)
+
+# Define Generator Loss of Field Element Function
+def genlossfield(Xd,Xpd,Zbase=1,CTR=1,VTR=1):
+    """
+    genlossfield Function
+    
+    Generates the Loss-of-Field Element settings
+    for a generator using the Xd value and
+    per-unit base information.
+    
+    Parameters
+    ----------
+    Xd:         float
+                The Transient Reactance (Xd) term. May be
+                specified in ohms or Per-Unit ohms if
+                *Zbase* is set.
+    Xpd:        float
+                The Sub-Transient Reactance (X'd) term. May
+                be specified in ohms or Per-Unit ohms if
+                *Zbase* is set.
+    Zbase:      float, optional
+                Base impedance, used to convert per-unit
+                Xd and Xpd to secondary values. default=1
+    CTR:        float, optional
+                Current Transformer Ratio, default=1
+    VTR:        float, optional
+                Voltage Transformer Ratio, default=1
+    
+    Returns
+    -------
+    ZoneOff:    float
+                Zone Offset in ohms.
+    Z1dia:      float
+                Zone 1 diameter in ohms.
+    Z2dia:      float
+                Zone 2 diameter in ohms.
+    """
+    # Condition Inputs
+    Xd = abs(Xd)
+    Xpd = abs(Xpd)
+    Zbase = abs(Zbase)
+    # Evaluate Xd_sec and Xpd_sec
+    Xd_sec = Xd*Zbase*(CTR/VTR)
+    Xpd_sec = Xd*Zbase*(CTR/VTR)
+    # Determine Zone Offset
+    ZoneOff = Xpd_sec/2
+    # Evaluate Z1 Diameter and Z2 Diameter
+    Z1dia = Zbase*CTR/VTR
+    Z2dia = Xd_sec
+    # Return
+    return(ZoneOff,Z1dia,Z2dia)
 
 
 # END OF FILE
