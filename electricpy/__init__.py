@@ -99,6 +99,7 @@
 #   - Transformer Primary Conversion:       primary
 #   - Transformer Secondary Conversion:     secondary
 #   - Natural Frequency Calculator          natfreq
+#   - 3-Phase Voltage/Current Unbalance:    unbalance
 #
 #   Additional functions available in sub-modules:
 #   - fault.py
