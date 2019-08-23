@@ -30,6 +30,7 @@
 #   - High-Impedance Voltage Pickup:        highzvpickup
 #   - High-Impedance Minimum Current PU:    highzmini
 #   - Instantaneous Overcurrent PU:         instoc
+#   - Generator Loss of Field Settings:     genlossfield
 ####################################################################
 
 # Import Necessary Libraries
@@ -1333,7 +1334,52 @@ def instoc(Imin,CTR=1,Ki=0.5):
     Ipu = Ki * Imin/CTR
     return(Ipu)
 
-
+# Define Generator Loss of Field Element Function
+def genlossfield(Xd,Xpd,Zbase=1,CTR=1,VTR=1):
+    """
+    genlossfield Function
+    
+    Generates the Loss-of-Field Element settings
+    for a generator using the Xd value and
+    per-unit base information.
+    
+    Parameters
+    ----------
+    Xd:         float
+                The Transient Reactance (Xd) term. May be
+                specified in ohms or Per-Unit ohms if
+                *Zbase* is set.
+    Xpd:        float
+                The Sub-Transient Reactance (X'd) term. May
+                be specified in ohms or Per-Unit ohms if
+                *Zbase* is set.
+    Zbase:      float, optional
+                Base impedance, used to convert per-unit
+                Xd and Xpd to secondary values. default=1
+    CTR:        float, optional
+                Current Transformer Ratio, default=1
+    VTR:        float, optional
+                Voltage Transformer Ratio, default=1
+    
+    Returns
+    -------
+    ZoneOff:    float
+                Zone Offset in ohms.
+    Z1dia:      float
+                Zone 1 diameter in ohms.
+    Z2dia:      float
+                Zone 2 diameter in ohms.
+    """
+    # Evaluate Xd_sec and Xpd_sec
+    Xd_sec = Xd*Zbase*(CTR/VTR)
+    Xpd_sec = Xd*Zbase*(CTR/VTR)
+    # Determine Zone Offset
+    ZoneOff = Xpd_sec/2
+    # Evaluate Z1 Diameter and Z2 Diameter
+    Z1dia = Zbase*CTR/VTR
+    Z2dia = Xd_sec
+    # Return
+    return(ZoneOff,Z1dia,Z2dia)
 
 
 # END OF FILE

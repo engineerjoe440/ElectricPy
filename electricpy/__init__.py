@@ -132,6 +132,7 @@
 #   - High-Impedance Voltage Pickup:        highzvpickup
 #   - High-Impedance Minimum Current PU:    highzmini
 #   - Instantaneous Overcurrent PU:         instoc
+#   - Generator Loss of Field Settings:     genlossfield
 #
 #   Functions Available in BODE.py:
 #   - Transfer Function Bode Plotter:       bode
