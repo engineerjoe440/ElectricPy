@@ -3556,5 +3556,47 @@ def unbalance(A,B,C,all=False):
     else:
         return(unbalance)
 
+# Define Cosine Filter Function
+def cosfilt(arr,Srate):
+    """
+    
+    """
+    # Evaluate index set
+    ind = range(Srate-1, len(arr)-1)
+    # Define Cosine Coefficient Function
+    def cos(k,Srate):
+        return(np.cos(2*np.pi*k/Srate))
+    # Calculate Constant
+    const = 2/Srate
+    # Iteratively Calculate
+    cosf = 0
+    for k in range(0,Srate-1):
+        cosf += cos(k,Srate) * arr[(ind-(Srate-1))+k]
+    # Scale
+    cosf = const * cosf
+    # Return Cosine-Filtered Array
+    return(cosf)
+
+# Define Sine Filter Function
+def sinfilt(arr,Srate):
+    """
+    
+    """
+    # Evaluate index set
+    ind = range(Srate-1, len(arr)-1)
+    # Define Cosine Coefficient Function
+    def sin(k,Srate):
+        return(np.sin(2*np.pi*k/Srate))
+    # Calculate Constant
+    const = 2/Srate
+    # Iteratively Calculate
+    sinf = 0
+    for k in range(0,Srate-1):
+        sinf += sin(k,Srate) * arr[(ind-(Srate-1))+k]
+    # Scale
+    sinf = const * sinf
+    # Return Cosine-Filtered Array
+    return(sinf)
+
 
 # END OF FILE
