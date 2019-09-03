@@ -3557,12 +3557,34 @@ def unbalance(A,B,C,all=False):
         return(unbalance)
 
 # Define Cosine Filter Function
-def cosfilt(arr,Srate):
+def cosfilt(arr,Srate,domain=False):
     """
+    cosfilt Function
     
+    Cosine Filter function for filtering a dataset
+    representing a sinusoidal function with or without
+    harmonics to evaluate the fundamental value.
+    
+    Parameters
+    ----------
+    arr:        numpy.ndarray
+                The input data array.
+    Srate:      int
+                Sampling rate for dataset, specified in
+                number of values per fundamental cycle.
+    domain:     bool, optional
+                Control argument to force return of
+                x-axis array for the filtered data.
+    
+    Returns
+    -------
+    cosf:       numpy.ndarray
+                Cosine-filtered data
+    xarray:     numpy.ndarray
+                X-axis array for the filtered data.
     """
     # Evaluate index set
-    ind = range(Srate-1, len(arr)-1)
+    ind = np.arange(Srate-1, len(arr)-1)
     # Define Cosine Coefficient Function
     def cos(k,Srate):
         return(np.cos(2*np.pi*k/Srate))
@@ -3571,19 +3593,46 @@ def cosfilt(arr,Srate):
     # Iteratively Calculate
     cosf = 0
     for k in range(0,Srate-1):
-        cosf += cos(k,Srate) * arr[(ind-(Srate-1))+k]
+        slc = (ind-(Srate-1))+k
+        cosf += cos(k,Srate) * arr[slc]
     # Scale
     cosf = const * cosf
     # Return Cosine-Filtered Array
+    if domain:
+        xarray = np.linspace(Srate+Srate/4-1,len(arr)-1,len(cosf))
+        xarray = xarray / Srate
+        return(cosf,xarray)
     return(cosf)
 
 # Define Sine Filter Function
-def sinfilt(arr,Srate):
+def sinfilt(arr,Srate,domain=False):
     """
+    sinfilt Function
     
+    Sine Filter function for filtering a dataset
+    representing a sinusoidal function with or without
+    harmonics to evaluate the fundamental value.
+    
+    Parameters
+    ----------
+    arr:        numpy.ndarray
+                The input data array.
+    Srate:      int
+                Sampling rate for dataset, specified in
+                number of values per fundamental cycle.
+    domain:     bool, optional
+                Control argument to force return of
+                x-axis array for the filtered data.
+    
+    Returns
+    -------
+    sinf:       numpy.ndarray
+                Sine-filtered data
+    xarray:     numpy.ndarray
+                X-axis array for the filtered data.
     """
     # Evaluate index set
-    ind = range(Srate-1, len(arr)-1)
+    ind = np.arange(Srate-1, len(arr)-1)
     # Define Cosine Coefficient Function
     def sin(k,Srate):
         return(np.sin(2*np.pi*k/Srate))
@@ -3592,10 +3641,15 @@ def sinfilt(arr,Srate):
     # Iteratively Calculate
     sinf = 0
     for k in range(0,Srate-1):
-        sinf += sin(k,Srate) * arr[(ind-(Srate-1))+k]
+        slc = (ind-(Srate-1))+k
+        sinf += sin(k,Srate) * arr[slc]
     # Scale
     sinf = const * sinf
     # Return Cosine-Filtered Array
+    if domain:
+        xarray = np.linspace(Srate+Srate/4-1,len(arr)-1,len(sinf))
+        xarray = xarray / Srate
+        return(sinf,xarray)
     return(sinf)
 
 
