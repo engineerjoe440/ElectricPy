@@ -54,8 +54,8 @@ Included Functions
  - Thermocouple Temperature:             thermocouple
  - Cold Junction Voltage:                coldjunction
  - RTD Temperature Calculator:           rtdtemp
- - Horsepower to Watts:                  hptowatts
- - Watts to Horsepower:                  wattstohp
+ - Horsepower to Watts:                  hp_to_watts
+ - Watts to Horsepower:                  watts_to_hp
  - Inductor Charge:                      inductorcharge
  - Inductor Discharge:                   inductordischarge
  - Inductor Stored Energy:               inductorenergy      
@@ -64,7 +64,7 @@ Included Functions
  - Cap. Voltage after Time:              VafterT
  - Cap. Voltage Discharge:               vcapdischarge
  - Cap. Voltage Charge:                  vcapcharge
- - Rectifier Cap. Calculation:           rectifier
+ - Rectifier Cap. Calculation:           rectifiercap
  - Cap. VAR to FARAD Conversion:         farads
  - VSC DC Bus Voltage Calculator:        vscdcbus
  - PLL-VSC Gains Calculator:             vscgains
@@ -82,8 +82,8 @@ Included Functions
  - String to Bit-String Converter:       string_to_bits
  - CRC Message Generator:                crcsender
  - CRC Remainder Calculator:             crcremainder
- - kWh to BTU:                           kwhtobtu
- - BTU to kWh:                           btutokwh
+ - kWh to BTU:                           kwh_to_btu
+ - BTU to kWh:                           btu_to_kwh
  - Per-Unit Impedance Calculator:        zpu
  - Per-Unit Current Calculator:          ipu
  - Per-Unit Change of Base Formula:      puchgbase
@@ -170,7 +170,7 @@ import cmath as c
 # Define Phasor Generator
 def phasor( mag, ang ):
     """
-    phasor Function:
+    Complex Phasor Generator
     
     Generates the standard Pythonic complex representation
     of a phasor voltage or current when given the magnitude
@@ -195,7 +195,7 @@ def phasor( mag, ang ):
 def phasordata(mn,mx=None,npts=1000,mag=1,ang=0,freq=60,
                retstep=False,rettime=False,sine=False):
     """
-    phasordata Function
+    Complex Phasor Data Generator
     
     Generates a sinusoidal data set with minimum, maximum,
     frequency, magnitude, and phase angle arguments.
@@ -255,7 +255,7 @@ def phasordata(mn,mx=None,npts=1000,mag=1,ang=0,freq=60,
 # Define Cycle Time Function
 def tcycle(ncycles=1,freq=60):
     """
-    tcycle Function
+    Time of Electrical Cycles
     
     Evaluates the time for a number of n
     cycles given the system frequency.
@@ -278,7 +278,7 @@ def tcycle(ncycles=1,freq=60):
 # Define Reactance Calculator
 def reactance(z,f=60,sensetivity=1e-12):
     """
-    reactance Function:
+    Capacitance/Inductance from Impedance
     
     Calculates the Capacitance or Inductance in Farads or Henreys
     (respectively) provided the impedance of an element.
@@ -329,7 +329,7 @@ def reactance(z,f=60,sensetivity=1e-12):
 # Define display function
 def cprint(val,unit="",label="",printval=True,ret=False,round=3):
     """
-    cprint Function
+    Phasor (Complex) Printing Function
     
     This function is designed to accept a complex value (val) and print
     the value in the standard electrical engineering notation:
@@ -443,7 +443,7 @@ def cprint(val,unit="",label="",printval=True,ret=False,round=3):
 # Define Impedance Conversion function
 def phasorz(C=None,L=None,f=60,complex=True):
     """
-    phasorz Function:
+    Phasor Impedance Generator
     
     This function's purpose is to generate the phasor-based
     impedance of the specified input given as either the
@@ -485,7 +485,7 @@ def phasorz(C=None,L=None,f=60,complex=True):
 # Define Parallel Impedance Adder
 def parallelz(*args):
     """
-    parallelz Function:
+    Parallel Impedance Calculator
     
     This function is designed to generate the total parallel
     impedance of a set (tuple) of impedances specified as real
@@ -533,7 +533,7 @@ def parallelz(*args):
 # Define Phase/Line Converter
 def phaseline(VLL=None,VLN=None,Iline=None,Iphase=None,complex=False):
     """
-    phaseline Function
+    Line-Line to Line-Neutral Converter
     
     This function is designed to return the phase- or line-equivalent
     of the voltage/current provided. It is designed to be used when
@@ -594,7 +594,7 @@ def phaseline(VLL=None,VLN=None,Iline=None,Iphase=None,complex=False):
 # Define Power Set Function
 def powerset(P=None,Q=None,S=None,PF=None):
     """
-    powerset Function
+    Power Triangle Conversion Function
     
     This function is designed to calculate all values
     in the set { P, Q, S, PF } when two (2) of the
@@ -656,7 +656,7 @@ def powerset(P=None,Q=None,S=None,PF=None):
 def powertriangle(P=None,Q=None,S=None,PF=None,color="red",
                   text="Power Triangle",printval=False):
     """
-    powertriangle Function
+    Power Triangle Plotting Function
     
     This function is designed to draw a power triangle given
     values for the complex power system.
@@ -736,7 +736,7 @@ def powertriangle(P=None,Q=None,S=None,PF=None,color="red",
 def transformertest(Poc=False,Voc=False,Ioc=False,Psc=False,Vsc=False,
                Isc=False):
     """
-    transformertest Function
+    Transformer Rated Test Evaluator
     
     This function will determine the non-ideal circuit components of
     a transformer (Req and Xeq, or Rc and Xm) given the test-case
@@ -803,7 +803,7 @@ def phasorplot(phasor,title="Phasor Diagram",legend=False,bg="#d5de9c",radius=1.
                colors = ["#FF0000","#800000","#FFFF00","#808000","#00ff00","#008000",
                          "#00ffff","#008080","#0000ff","#000080","#ff00ff","#800080"]):
     """
-    phasorplot Function
+    Phasor Plotting Function
     
     This function is designed to plot a phasor-diagram with angles in degrees
     for up to 12 phasor sets. Phasors must be passed as a complex number set,
@@ -855,7 +855,7 @@ def phasorplot(phasor,title="Phasor Diagram",legend=False,bg="#d5de9c",radius=1.
 # Define Non-Linear Power Factor Calculator
 def nlinpf(PFtrue=False,PFdist=False,PFdisp=False):
     """
-    nlinpf Function
+    Non-Linear Power Factor Evaluator
     
     This function is designed to evaluate one of three unknowns
     given the other two. These particular unknowns are the arguments
@@ -890,7 +890,7 @@ def nlinpf(PFtrue=False,PFdist=False,PFdisp=False):
 # Define Short-Circuit RL Current Calculator
 def iscrl(V,Z,t=None,f=None,mxcurrent=True,alpha=None):
     """
-    iscrl Function
+    Short-Circuit-Current (ISC) Calculator
     
     The Isc-RL function (Short Circuit Current for RL Circuit)
     is designed to calculate the short-circuit current for an
@@ -975,7 +975,7 @@ def iscrl(V,Z,t=None,f=None,mxcurrent=True,alpha=None):
 # Define Voltage Divider Calculator
 def voltdiv(Vin,R1,R2,Rload=None):
     """
-    voltdiv Function
+    Voltage Divider Function
     
     This function is designed to calculate the output
     voltage of a voltage divider given the input voltage,
@@ -1011,7 +1011,7 @@ def voltdiv(Vin,R1,R2,Rload=None):
 # Define Current Divider Calculator
 def curdiv(Ri,Rset,Vin=None,Iin=None,Vout=False):
     """
-    curdiv Function
+    Current Divider Function
     
     This function is disigned to accept the input current, or input
     voltage to a resistor (or impedance) network of parallel resistors
@@ -1060,7 +1060,7 @@ def curdiv(Ri,Rset,Vin=None,Iin=None,Vout=False):
 # Define Instantaneous Power Calculator
 def instpower(P,Q,t,f=60):
     """
-    instpower Function
+    Instantaneous Power Function
     
     This function is designed to calculate the instantaneous power at a
     specified time t given the magnitudes of P and Q.
@@ -1090,7 +1090,7 @@ def instpower(P,Q,t,f=60):
 # Define Delta-Wye Impedance Network Calculator
 def dynetz(delta=None,wye=None,round=None):
     """
-    dynetz Function
+    Delta-Wye Impedance Converter
     
     This function is designed to act as the conversion utility
     to transform delta-connected impedance values to wye-
@@ -1138,7 +1138,7 @@ def dynetz(delta=None,wye=None,round=None):
 # Define Single Line Power Flow Calculator
 def powerflow( Vsend, Vrec, Zline ):
     """
-    powerflow Function:
+    Simple Power-Flow Calculator
     
     This function is designed to calculate the ammount of real
     power transferred from the sending end to the recieving end
@@ -1174,7 +1174,7 @@ def powerflow( Vsend, Vrec, Zline ):
 # Define Impedance From Power and X/R
 def zsource(S,V,XoverR,Sbase=None,Vbase=None,perunit=True):
     """
-    zsource Function
+    Source Impedance Calculator
     
     Used to calculate the source impedance given the apparent power
     magnitude and the X/R ratio.
@@ -1235,7 +1235,7 @@ def zsource(S,V,XoverR,Sbase=None,Vbase=None,perunit=True):
 # Define Impedance Decomposer
 def zdecompose(Zmag,XoverR):
     """
-    zdecompose Function
+    Impedance Decomposition Function
     
     A function to decompose the impedance magnitude into its
     corresponding resistance and reactance using the X/R ratio.
@@ -1266,9 +1266,9 @@ def zdecompose(Zmag,XoverR):
     return(R,X)
 
 # Define HP to Watts Calculation
-def wattstohp(hp):
+def hp_to_watts(hp):
     """
-    watts Formula
+    Horsepower to Watts Formula
     
     Calculates the power (in watts) given the
     horsepower.
@@ -1286,9 +1286,9 @@ def wattstohp(hp):
     return(hp * 745.699872)
 
 # Define Watts to HP Calculation
-def hptowatts(watts):
+def watts_to_hp(watts):
     """
-    horsepower Function
+    Watts to Horsepower Function
     
     Calculates the power (in horsepower) given
     the power in watts.
@@ -1308,7 +1308,7 @@ def hptowatts(watts):
 # Define Power Reactance Calculator
 def powerimpedance(S,V,PF=None,parallel=False):
     """
-    powerimpedance Function
+    Impedance from Apparent Power Formula
     
     Function to determine the ohmic resistance/reactance
     (impedance) represented by the apparent power (S).
@@ -1376,7 +1376,7 @@ def powerimpedance(S,V,PF=None,parallel=False):
 def coldjunction(Tcj,coupletype="K",To=None,Vo=None,P1=None,P2=None,
                  P3=None,P4=None,Q1=None,Q2=None,round=None):
     """
-    coldjunction Function
+    Thermocouple Cold-Junction Formula
     
     Function to calculate the expected cold-junction-voltage given
     the temperature at the cold-junction.
@@ -1471,7 +1471,7 @@ def coldjunction(Tcj,coupletype="K",To=None,Vo=None,P1=None,P2=None,
 def thermocouple(V,coupletype="K",fahrenheit=False,cjt=None,To=None,Vo=None,P1=None,
                  P2=None,P3=None,P4=None,Q1=None,Q2=None,Q3=None,round=1):
     """
-    thermocouple Function
+    Thermocouple Temperature Calculator
     
     Utilizes polynomial formula to calculate the temperature being monitored
     by a thermocouple. Allows for various thermocouple types (B,E,J,K,N,R,S,T)
@@ -1659,6 +1659,40 @@ def thermocouple(V,coupletype="K",fahrenheit=False,cjt=None,To=None,Vo=None,P1=N
 # Define RTD Calculator
 def rtdtemp(RT,rtdtype="PT100",fahrenheit=False,Rref=None,Tref=None,
             a=None,round=1):
+    """
+    RTD Temperature Calculator
+    
+    Evaluates the measured temperature based on the measured resistance
+    and the RTD type.
+    
+    Parameters
+    ----------
+    RT:         float
+                The measured resistance (in ohms).
+    rtdtype:    string
+                RTD Type string, may be one of: (PT100, PT1000,
+                CU100, NI100, NI120, NIFE), default=PT100
+    fahrenheit: bool, optional
+                Control parameter to force return into degrees
+                fahrenheit, default=False
+    Rref:       float, optional
+                Resistance reference, commonly used if non-standard
+                RTD type being used. Specified in ohms.
+    Tref:       float, optional
+                Temperature reference, commonly used if non-standard
+                RTD type being used. Specified in degrees Celsius.
+    a:          float, optional
+                Scaling value, commonly used if non-standard
+                RTD type being used.
+    round:      int, optional
+                Control argument to specify number of decimal points
+                in returned value.
+    
+    Returns
+    -------
+    temp:       float
+                Calculated temperature, defaults to degrees Celsius.
+    """
     # Define list of available builtin RTD Types
     types = {   "PT100" : [100,0.00385],
                 "PT1000": [1000,0.00385],
@@ -1687,7 +1721,7 @@ def rtdtemp(RT,rtdtype="PT100",fahrenheit=False,Rref=None,Tref=None,
 # Define Capacitor Voltage Discharge Function
 def vcapdischarge(t,Vs,R,C):
     """
-    vcapdischarge Function
+    Discharging Capacitor Function
     
     Function to calculate the voltage of a
     capacitor that is discharging given the time.
@@ -1715,7 +1749,7 @@ def vcapdischarge(t,Vs,R,C):
 # Define Capacitor Voltage Charge Function
 def vcapcharge(t,Vs,R,C):
     """
-    vcapcharge Function
+    Charging Capacitor Voltage
     
     Function to calculate the voltage of a
     capacitor that is charging given the time.
@@ -1743,7 +1777,7 @@ def vcapcharge(t,Vs,R,C):
 # Define Capacitive Energy Transfer Function
 def captransfer(t,Vs,R,Cs,Cd):
     """
-    captransfer Function
+    Capacitor Energy Transfer Function
     
     Calculate the voltage across a joining
     resistor (R) that connects Cs and Cd, the
@@ -1779,7 +1813,7 @@ def captransfer(t,Vs,R,Cs,Cd):
 # Define Inductor Energy Formula
 def inductorenergy(L,I):
     """
-    inductorenergy Function
+    Energy Stored in Inductor Formula
     
     Function to calculate the energy stored in an inductor
     given the inductance (in Henries) and the current.
@@ -1801,7 +1835,7 @@ def inductorenergy(L,I):
 # Define Inductor Charge Function
 def inductorcharge(t,Vs,R,L):
     """
-    inductorcharge Function
+    Charging Inductor Formula
     
     Calculates the Voltage and Current of an inductor
     that is charging/storing energy.
@@ -1831,14 +1865,14 @@ def inductorcharge(t,Vs,R,L):
 # Define Capacitive Back-to-Back Switching Formula
 def capbacktoback(C1,C2,Lm,VLN=None,VLL=None):
     """
-    capbacktoback Function
+    Back to Back Capacitor Transient Current Calculator
     
     Function to calculate the maximum current and the 
     frequency of the inrush current of two capacitors
     connected in parallel when one (energized) capacitor
     is switched into another (non-engergized) capacitor.
     
-    Note: This formula is only valid for three-phase systems.
+    .. note:: This formula is only valid for three-phase systems.
     
     Parameters
     ----------
@@ -1851,6 +1885,13 @@ def capbacktoback(C1,C2,Lm,VLN=None,VLL=None):
     VLL:        float, exclusive
                 The line-to-line voltage experienced by the
                 three-phase capacitor bank.
+    
+    Returns
+    -------
+    imax:       float
+                Maximum Current Magnitude during Transient
+    ifreq:      float
+                Transient current frequency
     """
     # Evaluate Max Current
     imax = np.sqrt(2/3)*VLL*np.sqrt((C1*C2)/((C1+C2)*Lm))
@@ -1861,7 +1902,7 @@ def capbacktoback(C1,C2,Lm,VLN=None,VLL=None):
 # Define Inductor Discharge Function
 def inductordischarge(t,Io,R,L):
     """
-    inductordischarge Function
+    Discharging Inductor Formula
     
     Calculates the Voltage and Current of an inductor
     that is discharging its stored energy.
@@ -1891,7 +1932,7 @@ def inductordischarge(t,Io,R,L):
 # Define Apparent Power to Farad Conversion
 def farads(VAR,V,freq=60):
     """
-    farads Formula
+    Capacitance from Apparent Power Formula
     
     Function to calculate the required capacitance
     in Farads to provide the desired power rating
@@ -1918,7 +1959,7 @@ def farads(VAR,V,freq=60):
 # Define Capacitor Energy Calculation
 def capenergy(C,v):
     """
-    capenergy Function
+    Capacitor Energy Formula
     
     A simple function to calculate the stored voltage (in Joules)
     in a capacitor with a charged voltage.
@@ -1941,7 +1982,7 @@ def capenergy(C,v):
 # Define Capacitor Voltage Discharge Function
 def loadedvcapdischarge(t,vo,C,P):
     """
-    loadedvcapdischarge Function
+    Loaded Capacitor Discharge Formula
     
     Returns the voltage of a discharging capacitor after time (t - 
     seconds) given initial voltage (vo - volts), capacitor size
@@ -1969,7 +2010,7 @@ def loadedvcapdischarge(t,vo,C,P):
 # Define Capacitor Discharge Function
 def timedischarge(Vinit,Vmin,C,P,dt=1e-3,RMS=True,Eremain=False):
     """
-    timedischarge Function
+    Capacitor Discharge Time Formula
     
     Returns the time to discharge a capacitor to a specified
     voltage given set of inputs.
@@ -2014,9 +2055,9 @@ def timedischarge(Vinit,Vmin,C,P,dt=1e-3,RMS=True,Eremain=False):
 
 
 # Define Rectifier Capacitor Calculator
-def rectifier(Iload, fswitch, dVout):
+def rectifiercap(Iload, fswitch, dVout):
     """
-    rectifier Function
+    Rectifier Capacitor Formula
     
     Returns the capacitance (in Farads) for a needed capacitor in
     a rectifier configuration given the system frequency (in Hz),
@@ -2042,32 +2083,35 @@ def rectifier(Iload, fswitch, dVout):
 # Define function to find VDC setpoint
 def vscdcbus(VLL,Zs,P,Q=0,mmax=0.8,debug=False):
     """
-    VSCDCBUS Function:
+    Voltage Sourced Converter DC Bus Voltage Function
     
-    Purpose:
-    --------
     The purpose of this function is to calculate the
     required DC-bus voltage for a Voltage-Sourced-
     Converter (VSC) given the desired P/Q parameters
     and the known source impedance (Vs) of the VSC.
     
-    Required Arguments:
-    -------------------
-    VLL:    Line-to-Line voltage on the line-side of
+    Parameters
+    ----------
+    VLL:    complex
+            Line-to-Line voltage on the line-side of
             the source impedance.
-    Zs:     The source impedance of the VSC
-    P:      The desired real-power output
-    
-    Optional Arguments:
-    Q:      The desired reactive-power output, default=0
-    mmax:   The maximum of the m value for the converter
+    Zs:     complex
+            The source impedance of the VSC
+    P:      float
+            The desired real-power output
+    Q:      float, optional
+            The desired reactive-power output, default=0
+    mmax:   float, optional
+            The maximum of the m value for the converter
             default=0.8
-    debug:  Control value to enable printing stages of
+    debug:  bool, optional
+            Control value to enable printing stages of
             the calculation, default=False
             
-    Return:
-    -------
-    VDC:    The DC bus voltage.
+    Return
+    ------
+    VDC:    float
+            The DC bus voltage.
     """
     # Determine the Load Current
     Iload = np.conj((P+1j*Q) / (VLL*np.sqrt(3)))
@@ -2087,28 +2131,30 @@ def vscdcbus(VLL,Zs,P,Q=0,mmax=0.8,debug=False):
 # Define kp/ki/w0L calculating function
 def vscgains(Rs,Ls,tau=0.005,f=60):
     """
-    VSCGAINS Function:
+    Voltage Sourced Converter Gains Calculator
     
-    Purpose:
-    --------
     This function is designed to calculate the kp, ki,
     and omega-not-L values for a Phase-Lock-Loop based VSC.
     
-    Required Arguments:
-    -------------------
-    Rs:      The equiv-resistance (in ohms) of the VSC
-    Ls:      The equiv-inductance (in Henrys) of the VSC
+    Parameters
+    ----------
+    Rs:     float
+            The equiv-resistance (in ohms) of the VSC
+    Ls:     float
+            The equiv-inductance (in Henrys) of the VSC
+    tau:    float, optional
+            The desired time-constant, default=0.005
+    f:      float, optional
+            The system frequency (in Hz), default=60
     
-    Optional Arguments:
-    -------------------
-    tau:     The desired time-constant, default=0.005
-    f:       The system frequency (in Hz), default=60
-    
-    Returns:
-    --------
-    kp:      The Kp-Gain Value
-    ki:      The Ki-Gain Value
-    w0L:     The omega-not-L gain value
+    Returns
+    -------
+    kp:     float
+            The Kp-Gain Value
+    ki:     float
+            The Ki-Gain Value
+    w0L:    float
+            The omega-not-L gain value
     """
     # Calculate kp
     kp = Ls / tau
@@ -2121,7 +2167,7 @@ def vscgains(Rs,Ls,tau=0.005,f=60):
 # Define Convolution Bar-Graph Function:
 def convbar(h, x, outline=True):
     """
-    convbar Function:
+    Convolution Bar-Graph Plotter Function
     
     Generates plots of each of two input arrays as bar-graphs, then
     generates a convolved bar-graph of the two inputs to demonstrate
@@ -2175,7 +2221,7 @@ def convbar(h, x, outline=True):
 # Define convolution function
 def convolve(tuple):
     """
-    convolve Function
+    Filter Convolution Function
     
     Given a tuple of terms, convolves all terms in tuple to
     return one tuple as a numpy array.
@@ -2200,7 +2246,7 @@ def convolve(tuple):
 # Define Step function
 def step(t):
     """
-    step Function
+    Step Function [ u(t) ]
     
     Simple implimentation of numpy.heaviside function
     to provide standard step-function as specified to
@@ -2211,7 +2257,7 @@ def step(t):
 # RMS Calculating Function
 def rms(f, T):
     """
-    rms Function
+    Function Root-Mean-Square (RMS) Evaluator
     
     Integral-based RMS calculator, evaluates the RMS value
     of a repetative signal (f) given the signal's specific
@@ -2237,7 +2283,7 @@ def rms(f, T):
 # Define Gaussian Function
 def gaussian(x,mu=0,sigma=1):
     """
-    gaussian Function:
+    Gaussian Function:
     
     This function is designed to generate the gaussian
     distribution curve with configuration mu and sigma.
@@ -2251,8 +2297,8 @@ def gaussian(x,mu=0,sigma=1):
     sigma:  float, optional
             Optional control argument, default=1
     
-    Returns:
-    --------
+    Returns
+    -------
     Computed gaussian (numpy.ndarray) of the input x
     """
     return( 1/(sigma * np.sqrt(2 * np.pi)) *
@@ -2261,7 +2307,7 @@ def gaussian(x,mu=0,sigma=1):
 # Define Gaussian Distribution Function
 def gausdist(x,mu=0,sigma=1):
     """
-    gausdist Function:
+    Gaussian Distribution Function:
     
     This function is designed to calculate the generic
     distribution of a gaussian function with controls
@@ -2276,10 +2322,11 @@ def gausdist(x,mu=0,sigma=1):
     sigma:  float, optional
             Optional control argument, default=1
     
-    Returns:
-    --------
-    Computed distribution of the gausian function at the
-    points specified by (array) x
+    Returns
+    -------
+    F:      numpy.ndarray
+            Computed distribution of the gausian function at the
+            points specified by (array) x
     """
     F = np.array([])
     try:
@@ -2305,30 +2352,30 @@ def gausdist(x,mu=0,sigma=1):
 # Define Probability Density Function
 def probdensity(func,x,x0=0,scale=True):
     """
-    PROBDENSITY Function:
+    Probability Density Function:
     
-    Purpose:
-    --------
     This function uses an integral to compute the probability
     density of a given function.
     
-    Required Arguments:
-    -------------------
-    func:    The function for which to calculate the PDF
-    x:       The (array of) value(s) at which to calculate
-             the PDF
+    Parameters
+    ----------
+    func:   function
+            The function for which to calculate the PDF
+    x:      numpy.ndarray
+            The (array of) value(s) at which to calculate
+            the PDF
+    x0:     float, optional
+            The lower-bound of the integral, starting point
+            for the PDF to be calculated over, default=0
+    scale:  bool, optional
+            The scaling to be applied to the output,
+            default=True
     
-    Optional Arguments:
-    -------------------
-    x0:      The lower-bound of the integral, starting point
-             for the PDF to be calculated over, default=0
-    scale:   The scaling to be applied to the output,
-             default=True
-    
-    Returns:
-    --------
-    sumx:    The (array of) value(s) computed as the PDF at
-             point(s) x
+    Returns
+    -------
+    sumx:   numpy.ndarray
+            The (array of) value(s) computed as the PDF at
+            point(s) x
     """
     sumx = np.array([])
     try:
@@ -2355,28 +2402,27 @@ def rfft(arr,dt=0.01,absolute=True,resample=True):
     """
     RFFT Function
     
-    Purpose:
-    --------
     This function is designed to evaluat the real FFT
     of a input signal in the form of an array or list.
     
-    Required Arguments:
-    -------------------
-    arr:        The input array representing the signal
-    
-    Optional Arguments:
-    -------------------
-    dt:         The time-step used for the array,
+    Parameters
+    ----------
+    arr:        numpy.ndarray
+                The input array representing the signal
+    dt:         float, optional
+                The time-step used for the array,
                 default=0.01
-    absolute:   Control argument to force absolute
+    absolute:   bool, optional
+                Control argument to force absolute
                 values, default=True
-    resample:   Control argument specifying whether
+    resample:   bool, optional
+                Control argument specifying whether
                 the FFT output should be resampled,
                 or if it should have a specific
                 resampling rate, default=True
     
-    Returns:
-    --------
+    Returns
+    -------
     FFT Array
     """
     # Calculate with Absolute Values
@@ -2405,30 +2451,33 @@ def wrms(func,dw=0.1,NN=100,quad=False,plot=True,
     """
     WRMS Function:
     
-    Purpose:
-    --------
     This function is designed to calculate the RMS
     bandwidth (Wrms) using a numerical process.
     
-    Required Arguments:
-    -------------------
-    func:      The callable function to use for evaluation
+    Parameters
+    ----------
+    func:       function
+                The callable function to use for evaluation
+    dw:         float, optional
+                The delta-omega to be used, default=0.1
+    NN:         int, optional
+                The total number of points, default=100
+    quad:       bool, optional
+                Control value to enable use of integrals
+                default=False
+    plot:       bool, optional
+                Control to enable plotting, default=True
+    title:      string, optional
+                Title displayed with plot,
+                default="Power Density Spectrum"
+    round:      int, optional
+                Control to round the Wrms on plot,
+                default=3
     
-    Optional Arguments:
-    -------------------
-    dw:        The delta-omega to be used, default=0.1
-    NN:        The total number of points, default=100
-    quad:      Control value to enable use of integrals
-               default=False
-    plot:      Control to enable plotting, default=True
-    title:     Title displayed with plot,
-               default="Power Density Spectrum"
-    round:     Control to round the Wrms on plot,
-               default=3
-    
-    Returns:
-    --------
-    W:         Calculated RMS Bandwidth (rad/sec)
+    Returns
+    -------
+    W:          float
+                Calculated RMS Bandwidth (rad/sec)
     """
     # Define omega
     omega = np.linspace(0,(NN-1)*del_w,NN)
@@ -2467,7 +2516,7 @@ def wrms(func,dw=0.1,NN=100,quad=False,plot=True,
 # Define Hartley's Equation for Data Capacity
 def hartleydata(BW,M):
     """
-    hartleydata Function
+    Hartley Data Function
     
     Function to calculate Hartley's Law,
     the maximum data rate achievable for
@@ -2491,7 +2540,7 @@ def hartleydata(BW,M):
 # Define Shannon's Equation For Data Capacity
 def shannondata(BW,S,N):
     """
-    shannondata Function
+    Shannon Data Function
     
     Function to calculate the maximum data
     rate that may be achieved given a data
@@ -2518,7 +2567,7 @@ def shannondata(BW,S,N):
 # Define CRC Generator (Sender Side)
 def crcsender(data, key):
     """
-    crcsender Function
+    CRC Sender Function
     
     Function to generate a CRC-embedded
     message ready for transmission.
@@ -2611,7 +2660,7 @@ def crcsender(data, key):
 # Define CRC Generator (Sender Side)
 def crcremainder(data, key):
     """
-    crcremainder Function
+    CRC Remainder Function
     
     Function to calculate the CRC
     remainder of a CRC message.
@@ -2702,7 +2751,7 @@ def crcremainder(data, key):
 # Define String to Bits Function
 def string_to_bits(str):
     """
-    string_to_bits Function
+    String to Bits Converter
     
     Converts a Pythonic string to the string's
     binary representation.
@@ -2722,9 +2771,9 @@ def string_to_bits(str):
     return(data)
     
 # Define kWh to BTU function and vice-versa
-def kwhtobtu(kWh):
+def kwh_to_btu(kWh):
     """
-    kwhtobtu Function:
+    Killo-Watt-Hours to BTU Function:
     
     Converts kWh (killo-Watt-hours) to BTU
     (British Thermal Units).
@@ -2740,9 +2789,9 @@ def kwhtobtu(kWh):
                 The number of British Thermal Units
     """
     return(kWh*3412.14)
-def btutokwh(BTU):
+def btu_to_kwh(BTU):
     """
-    btutokwh Function:
+    BTU to Killo-Watt-Hours Function:
     
     Converts BTU (British Thermal Units) to
     kWh (killo-Watt-hours).
@@ -2762,7 +2811,7 @@ def btutokwh(BTU):
 # Define Per-Unit Impedance Formula
 def zpu(S,VLL=None,VLN=None):
     """
-    zpu Function
+    Per-Unit Impedance Evaluator
     
     Evaluates the per-unit impedance value given the per-unit
     power and voltage bases.
@@ -2791,7 +2840,7 @@ def zpu(S,VLL=None,VLN=None):
 # Define Per-Unit Current Formula
 def ipu(S,VLL=None,VLN=None,V1phs=None):
     """
-    zpu Function
+    Per-Unit Current Evaluator
     
     Evaluates the per-unit current value given the per-unit
     power and voltage bases.
@@ -2824,7 +2873,7 @@ def ipu(S,VLL=None,VLN=None,V1phs=None):
 # Define Per-Unit Change of Base Function
 def puchgbase(quantity, puB_old, puB_new):
     """
-    puchgbase Function
+    Per-Unit Change of Base Function
     
     Performs a per-unit change of base operation for the given
     value constrained by the old base and new base.
@@ -2849,7 +2898,7 @@ def puchgbase(quantity, puB_old, puB_new):
 # Define Recomposition Function
 def zrecompose(z_pu,S3phs,VLL=None,VLN=None):
     """
-    zrecompose Function
+    Impedance from Per-Unit System Evaluator
     
     Function to reverse per-unit conversion and return the ohmic value
     of an impedance given its per-unit parameters of R and X (as Z).
@@ -2880,7 +2929,7 @@ def zrecompose(z_pu,S3phs,VLL=None,VLN=None):
 # Define X/R Recomposition Function
 def rxrecompose(x_pu,XR,S3phs,VLL=None,VLN=None):
     """
-    rxrecompose Function
+    Resistance/Reactance from Per-Unit System Evaluator
     
     Function to reverse per-unit conversion and return the ohmic value
     of an impedance given its per-unit parameters of X.
@@ -2915,7 +2964,7 @@ def rxrecompose(x_pu,XR,S3phs,VLL=None,VLN=None):
 # Define Generator Internal Voltage Calculator
 def geninternalv(I,Zs,Vt,Vgn=None,Zm=None,Ip=None,Ipp=None):
     """
-    geninternalv Function
+    Generator Internal Voltage Evaluator
     
     Evaluates the internal voltage for a generator given the
     generator's internal impedance and internal mutual coupling
@@ -2964,7 +3013,7 @@ def geninternalv(I,Zs,Vt,Vgn=None,Zm=None,Ip=None,Ipp=None):
 # Define Sequence Component Conversion Function
 def sequence(Mabc):
     """
-    sequence Function
+    Phase-System to Sequence-System Conversion
     
     Converts phase-based values to sequence
     components.
@@ -2984,7 +3033,7 @@ def sequence(Mabc):
 # Define Phase Component Conversion Function
 def phases(M012):
     """
-    phases Function
+    Sequence-System to Phase-System Conversion
     
     Converts sequence-based values to phase
     components.
@@ -3004,7 +3053,7 @@ def phases(M012):
 # FFT Coefficient Calculator Function
 def funcfft(func, minfreq=60, maxmult=15, complex=False):
     """
-    funcfft Function
+    Function FFT Evaluator
     
     Given the callable function handle for a periodic function,
     evaluates the harmonic components of the function.
@@ -3050,7 +3099,7 @@ def funcfft(func, minfreq=60, maxmult=15, complex=False):
 
 def sampfft(data,dt,minfreq=60.0,complex=False):
     """
-    sampfft Function
+    Sampled Dataset FFT Evaluator
     
     Given a data array and the delta-t for the data array, evaluates
     the harmonic composition of the data.
@@ -3102,7 +3151,7 @@ def sampfft(data,dt,minfreq=60.0,complex=False):
 # Define FFT Plotting Function
 def fftplot(dc, real, imag=None, title="Fourier Coefficients"):
     """
-    fftplot Function
+    FFT System Plotter
     
     Plotting function for FFT (harmonic) values,
     plots the DC, Real, and Imaginary components.
@@ -3143,7 +3192,7 @@ def fftplot(dc, real, imag=None, title="Fourier Coefficients"):
 def fftsumplot(dc,real,imag=None,freq=60,xrange=None,npts=1000,
                plotall=False,title="Fourier Series Summation"):
     """
-    fftsumplot Function
+    FFT Summation Plotter
     
     Function to generate the plot of the sumed FFT results.
     
@@ -3194,7 +3243,7 @@ def fftsumplot(dc,real,imag=None,freq=60,xrange=None,npts=1000,
 # Define harmonic system generation function
 def harmonics(real,imag=None,dc=0,freq=60,domain=None):
     """
-    harmonics Function
+    Harmonic Function Generator
     
     Generate a function or dataset for a harmonic system
     given the real (cosine), imaginary (sine), and DC
@@ -3257,7 +3306,7 @@ def harmonics(real,imag=None,dc=0,freq=60,domain=None):
 # Define Single Phase Motor Startup Capacitor Formula
 def motorstartcap(V,I,freq=60):
     """
-    motorstartcap Function
+    Single Phase Motor Starting Capacitor Function
     
     Function to evaluate a reccomended value for the
     startup capacitor associated with a single phase
@@ -3287,7 +3336,7 @@ def motorstartcap(V,I,freq=60):
 # Define Power Factor Correction Function
 def pfcorrection(S,PFold,PFnew,VLL=None,VLN=None,V=None,freq=60):
     """
-    pfcorrection Function
+    Power Factor Correction Function
     
     Function to evaluate the additional reactive power and
     capacitance required to achieve the desired power factor
@@ -3344,7 +3393,7 @@ def pfcorrection(S,PFold,PFnew,VLL=None,VLN=None,V=None,freq=60):
 # Define Apparent Power / Voltage / Current Relation Function
 def acpiv(S=None,I=None,VLL=None,VLN=None,V=None):
     """
-    acpiv Function
+    AC Power-Voltage-Current Relation Function
     
     Relationship function to return apparent power, voltage, or
     current in one of various forms.
@@ -3421,7 +3470,7 @@ def acpiv(S=None,I=None,VLL=None,VLN=None,V=None):
 # Define Primary Ratio Function
 def primary(val, Np, Ns=1, invert=False):
     """
-    primary Function
+    Transformer Primary Evaluator
     
     Returns a current or voltage value reflected across
     a transformer with a specified turns ratio Np/Ns.
@@ -3454,7 +3503,7 @@ def primary(val, Np, Ns=1, invert=False):
 # Define Secondary Ratio Function
 def secondary(val, Np, Ns=1,invert=False):
     """
-    secondary Function
+    Transformer Secondary Evaluator
     
     Returns a current or voltage value reflected across
     a transformer with a specified turns ratio Np/Ns.
@@ -3487,7 +3536,7 @@ def secondary(val, Np, Ns=1,invert=False):
 # Define Natural Frequency/Resonant Frequency Calculator
 def natfreq(C,L,Hz=True):
     """
-    natfreq Function
+    Natural Frequency Evaluator
     
     Evaluates the natural frequency (resonant frequency)
     of a circuit given the circuit's C and L values. Defaults
@@ -3520,7 +3569,7 @@ def natfreq(C,L,Hz=True):
 # Define Voltage/Current Unbalance Equation
 def unbalance(A,B,C,all=False):
     """
-    unbalance Function
+    Voltage/Current Unbalance Function
     
     Performs a voltage/current unbalance calculation
     to determine the maximum current/voltage
@@ -3567,7 +3616,7 @@ def unbalance(A,B,C,all=False):
 # Define Cosine Filter Function
 def cosfilt(arr,Srate,domain=False):
     """
-    cosfilt Function
+    Cosine Filter Function
     
     Cosine Filter function for filtering a dataset
     representing a sinusoidal function with or without
@@ -3615,7 +3664,7 @@ def cosfilt(arr,Srate,domain=False):
 # Define Sine Filter Function
 def sinfilt(arr,Srate,domain=False):
     """
-    sinfilt Function
+    Sine Filter Function
     
     Sine Filter function for filtering a dataset
     representing a sinusoidal function with or without
