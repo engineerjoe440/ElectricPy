@@ -13,6 +13,7 @@ for research, development, education, and exploration in the realm of electrical
 - Dr. Dennis Sullivan | Proffessor - University of Idaho
 - Dr. Brian Johnson | Proffessor - University of Idaho
 - StackOverflow user gg349
+- Shaurya Uppal | Online Code Contributor
 - Paul Ortman | Power Quality Engineer - Idaho Power | Instructor - University of Idaho
 
 
