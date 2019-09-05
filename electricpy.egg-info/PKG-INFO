@@ -1,0 +1,70 @@
+Metadata-Version: 2.1
+Name: electricpy
+Version: 0.0.2
+Summary: Electrical Engineering Functions in Python
+Home-page: https://github.com/engineerjoe440/electricpy
+Author: Joe Stanley
+Author-email: stan3926@vandals.uidaho.edu
+License: UNKNOWN
+Project-URL: Source Repository, https://github.com/engineerjoe440/electricpy
+Project-URL: Bug Tracker, https://github.com/engineerjoe440/electricpy/issues
+Project-URL: Documentation, https://engineerjoe440.github.io/electricpy/
+Description: # ELECTRICPY
+        *Electrical-Engineering-for-Python*
+        
+        Python Libraries with functions and constants related to electrical engineering.
+        
+        The functions and constants that make up these modules represent a library of material compiled with the intent of being used primarily
+        for research, development, education, and exploration in the realm of electrical engineering.
+        
+        ### Special thanks to:
+        - Stephen Weeks | Student - University of Idaho
+        - Jeremy Perhac | Student - University of Idaho
+        - Daniel Allen | Student - Universtiy of Idaho
+        - Dr. Dennis Sullivan | Proffessor - University of Idaho
+        - Dr. Brian Johnson | Proffessor - University of Idaho
+        - StackOverflow user gg349
+        - Paul Ortman | Power Quality Engineer - Idaho Power | Instructor - University of Idaho
+        
+        
+        ### Dependencies:
+        - NUMPY
+        - MATPLOTLIB
+        - SCIPY
+        - SYMPY
+        
+        
+        ## INSTALLATION:
+         1. Install required dependencies (NUMPY, SCIPY, and MATPLOTLIB)
+            - `pip install numpy`
+            - `pip install scipy`
+            - `pip install matplotlib`
+            - `pip install sympy`
+          
+         2. Install *electricpy*
+            - `pip install electricpy`
+          
+         3. Check installation success in Python environment
+        
+           ```python
+           import electricpy
+           electricpy._version_
+           ```
+        
+        ## To Do List:
+        - Port Remaining Functions from ELECTRICALPYTHON
+            - Add Heat Sink Solver
+            - DC/DC Converters
+            - DC/AC Converters
+            - Stationary and Synchronous Reference Frame conversion Matricies/Constants
+        
+        
+        ## Contact:
+        For more information regarding this resource, please contact Joe Stanley
+        - <stan3926@vandals.uidaho.edu>
+        - <joe_stanley@selinc.com>
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown

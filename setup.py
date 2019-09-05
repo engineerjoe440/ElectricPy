@@ -32,7 +32,8 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     project_urls={
+        "Source Repository": "https://github.com/engineerjoe440/electricpy",
         "Bug Tracker": "https://github.com/engineerjoe440/electricpy/issues",
-        "Documentation": "https://github.com/engineerjoe440/electricpy",
+        "Documentation": "https://engineerjoe440.github.io/electricpy/",
         }
 )

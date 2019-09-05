@@ -151,7 +151,7 @@ Functions Available in `bode.py`
 
 # Define Module Specific Variables
 _name_ = "electricpy"
-_version_ = "0.0.1"
+_version_ = "0.0.2"
 # Version Breakdown:
 # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
 
