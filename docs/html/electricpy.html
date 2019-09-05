@@ -48,6 +48,175 @@
 <h1>ELECTRICPY Module<a class="headerlink" href="#electricpy-module" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-electricpy">
 <span id="electricpy-package"></span><h2>electricpy Package<a class="headerlink" href="#module-electricpy" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="electricpy-py">
+<h3><cite>electricpy.py</cite><a class="headerlink" href="#electricpy-py" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><cite>A library of functions, constants and more
+that are related to Power in Electrical Engineering.</cite></p>
+<p>Written by Joe Stanley</p>
+</div></blockquote>
+<div class="section" id="included-constants">
+<h4>Included Constants<a class="headerlink" href="#included-constants" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><ul class="simple">
+<li><p>Pico Multiple:                            p</p></li>
+<li><p>Nano Multiple:                            n</p></li>
+<li><p>Micro (mu) Multiple:                      u</p></li>
+<li><p>Mili Multiple:                            m</p></li>
+<li><p>Kilo Multiple:                            k</p></li>
+<li><p>Mega Multiple:                            M</p></li>
+<li><p>‘A’ Operator for Symmetrical Components:  a</p></li>
+<li><p>Not a Number value (NaN):                 NAN</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="symmetrical-components-matricies">
+<h4>Symmetrical Components Matricies<a class="headerlink" href="#symmetrical-components-matricies" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><ul class="simple">
+<li><p>ABC to 012 Conversion:        Aabc</p></li>
+<li><p>012 to ABC Conversion:        A012</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="included-functions">
+<h4>Included Functions<a class="headerlink" href="#included-functions" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><ul class="simple">
+<li><p>Phasor V/I Generator:                 phasor</p></li>
+<li><p>Phasor Data Genorator:                phasordata</p></li>
+<li><p>Time of Number of Cycles:             tcycle</p></li>
+<li><p>Phasor Impedance Generator:           phasorz</p></li>
+<li><p>Complex Display Function:             cprint</p></li>
+<li><p>Parallel Impedance Adder:             parallelz</p></li>
+<li><p>V/I Line/Phase Converter:             phaseline</p></li>
+<li><p>Power Set Values:                     powerset</p></li>
+<li><p>Power Triangle Function:              powertriangle</p></li>
+<li><p>Transformer SC OC Tests:              transformertest</p></li>
+<li><p>Phasor Plot Generator:                phasorplot</p></li>
+<li><p>Total Harmonic Distortion:            thd</p></li>
+<li><p>Total Demand Distortion:              tdd</p></li>
+<li><p>Reactance Calculator:                 reactance</p></li>
+<li><p>Non-Linear PF Calc:                   nlinpf</p></li>
+<li><p>Harmonic Limit Calculator:            harmoniclimit</p></li>
+<li><p>Power Factor Distiortion:             pfdist</p></li>
+<li><p>Short-Circuit RL Current:             iscrl</p></li>
+<li><p>Voltage Divider:                      voltdiv</p></li>
+<li><p>Current Divider:                      curdiv</p></li>
+<li><p>Instantaneous Power Calc.:            instpower</p></li>
+<li><p>Delta-Wye Network Converter:          dynetz</p></li>
+<li><p>Single Line Power Flow:               powerflow</p></li>
+<li><p>Thermocouple Temperature:             thermocouple</p></li>
+<li><p>Cold Junction Voltage:                coldjunction</p></li>
+<li><p>RTD Temperature Calculator:           rtdtemp</p></li>
+<li><p>Horsepower to Watts:                  hptowatts</p></li>
+<li><p>Watts to Horsepower:                  wattstohp</p></li>
+<li><p>Inductor Charge:                      inductorcharge</p></li>
+<li><p>Inductor Discharge:                   inductordischarge</p></li>
+<li><p>Inductor Stored Energy:               inductorenergy</p></li>
+<li><p>Back-to-Back Cap. Surge:              capbacktoback</p></li>
+<li><p>Capacitor Stored Energy:              energy</p></li>
+<li><p>Cap. Voltage after Time:              VafterT</p></li>
+<li><p>Cap. Voltage Discharge:               vcapdischarge</p></li>
+<li><p>Cap. Voltage Charge:                  vcapcharge</p></li>
+<li><p>Rectifier Cap. Calculation:           rectifier</p></li>
+<li><p>Cap. VAR to FARAD Conversion:         farads</p></li>
+<li><p>VSC DC Bus Voltage Calculator:        vscdcbus</p></li>
+<li><p>PLL-VSC Gains Calculator:             vscgains</p></li>
+<li><p>RMS Calculator:                       rms</p></li>
+<li><p>Step Function:                        step</p></li>
+<li><p>Multi-Argument Convolution:           convolve</p></li>
+<li><p>Convolution Bar Graph Visualizer:     convbar</p></li>
+<li><p>Gaussian Function:                    gaussian</p></li>
+<li><p>Gaussian Distribution Calculator:     gausdist</p></li>
+<li><p>Probability Density Calculator:       probdensity</p></li>
+<li><p>Real FFT Evaluator:                   rfft</p></li>
+<li><p>Normalized Power Spectrum:            wrms</p></li>
+<li><p>Hartley’s Data Capacity Equation:     hartleydata</p></li>
+<li><p>Shannon’s Data Capacity Equation:     shannondata</p></li>
+<li><p>String to Bit-String Converter:       string_to_bits</p></li>
+<li><p>CRC Message Generator:                crcsender</p></li>
+<li><p>CRC Remainder Calculator:             crcremainder</p></li>
+<li><p>kWh to BTU:                           kwhtobtu</p></li>
+<li><p>BTU to kWh:                           btutokwh</p></li>
+<li><p>Per-Unit Impedance Calculator:        zpu</p></li>
+<li><p>Per-Unit Current Calculator:          ipu</p></li>
+<li><p>Per-Unit Change of Base Formula:      puchgbase</p></li>
+<li><p>Per-Unit to Ohmic Impedance:          zrecompose</p></li>
+<li><p>X over R to Ohmic Impedance:          rxrecompose</p></li>
+<li><p>Generator Internal Voltage Calc:      geninternalv</p></li>
+<li><p>Phase to Sequence Conversion:         sequence</p></li>
+<li><p>Sequence to Phase Conversion:         phases</p></li>
+<li><p>Function Harmonic (FFT) Evaluation:   funcfft</p></li>
+<li><p>Dataset Harmonic (FFT) Evaluation:    sampfft</p></li>
+<li><p>Harmonic (FFT) Component Plotter:     fftplot</p></li>
+<li><p>Harmonic (FFT) Summation Plotter:     fftsumplot</p></li>
+<li><p>Harmonic System Generator:            harmonics</p></li>
+<li><p>Motor Startup Capacitor Formula:      motorstartcap</p></li>
+<li><p>Power Factor Correction Formula:      pfcorrection</p></li>
+<li><p>AC Power/Voltage/Current Relation:    acpiv</p></li>
+<li><p>Transformer Primary Conversion:       primary</p></li>
+<li><p>Transformer Secondary Conversion:     secondary</p></li>
+<li><p>Natural Frequency Calculator          natfreq</p></li>
+<li><p>3-Phase Voltage/Current Unbalance:    unbalance</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="additional-functions-available-in-sub-modules">
+<h4>Additional functions available in sub-modules<a class="headerlink" href="#additional-functions-available-in-sub-modules" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><ul class="simple">
+<li><p>fault.py</p></li>
+<li><p>bode.py</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="functions-available-in-fault-py">
+<h4>Functions Available in <cite>fault.py</cite><a class="headerlink" href="#functions-available-in-fault-py" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><ul class="simple">
+<li><p>Single Line to Ground                 phs1g</p></li>
+<li><p>Double Line to Ground                 phs2g</p></li>
+<li><p>Line to Line                          phs2</p></li>
+<li><p>Three-Phase Fault                     phs3</p></li>
+<li><p>Faulted Bus Voltage                   busvolt</p></li>
+<li><p>CT Saturation Function                ct_saturation</p></li>
+<li><p>CT C-Class Calculator                 ct_cclass</p></li>
+<li><p>CT Sat. V at rated Burden             ct_satratburden</p></li>
+<li><p>CT Voltage Peak Formula               ct_vpeak</p></li>
+<li><p>CT Time to Saturation                 ct_timetosat</p></li>
+<li><p>Transient Recovery Voltage Calc.      pktransrecvolt</p></li>
+<li><p>TRV Reduction Resistor                trvresistor</p></li>
+<li><p>TOC Trip Time                         toctriptime</p></li>
+<li><p>TOC Reset Time                        tocreset</p></li>
+<li><p>Pickup Setting Assistant              pickup</p></li>
+<li><p>Radial TOC Coordination Tool          tdradial</p></li>
+<li><p>TAP Setting Calculator                protectiontap</p></li>
+<li><p>Transformer Current Correction        correctedcurrents</p></li>
+<li><p>Operate/Restraint Current Calc.       iopirt</p></li>
+<li><p>Symmetrical/RMS Fault Current Calc:   symrmsfaultcur</p></li>
+<li><p>TOC Fault Current Ratio:              faultratio</p></li>
+<li><p>Residual Compensation Factor Calc:    residcomp</p></li>
+<li><p>Distance Elem. Impedance Calc:        distmeasz</p></li>
+<li><p>Transformer Mismatch Calculator:      transmismatch</p></li>
+<li><p>High-Impedance Voltage Pickup:        highzvpickup</p></li>
+<li><p>High-Impedance Minimum Current PU:    highzmini</p></li>
+<li><p>Instantaneous Overcurrent PU:         instoc</p></li>
+<li><p>Generator Loss of Field Settings:     genlossfield</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="functions-available-in-bode-py">
+<h4>Functions Available in <cite>bode.py</cite><a class="headerlink" href="#functions-available-in-bode-py" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><ul class="simple">
+<li><p>Transfer Function Bode Plotter:       bode</p></li>
+<li><p>S-Domain Bode Plotter:                sbode</p></li>
+<li><p>Z-Domain Bode Plotter:                zbode</p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
 <div class="section" id="functions">
 <h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
 <table class="longtable docutils align-default">
@@ -309,6 +478,15 @@
   <ul>
 <li><a class="reference internal" href="#">ELECTRICPY Module</a><ul>
 <li><a class="reference internal" href="#module-electricpy">electricpy Package</a><ul>
+<li><a class="reference internal" href="#electricpy-py"><cite>electricpy.py</cite></a><ul>
+<li><a class="reference internal" href="#included-constants">Included Constants</a></li>
+<li><a class="reference internal" href="#symmetrical-components-matricies">Symmetrical Components Matricies</a></li>
+<li><a class="reference internal" href="#included-functions">Included Functions</a></li>
+<li><a class="reference internal" href="#additional-functions-available-in-sub-modules">Additional functions available in sub-modules</a></li>
+<li><a class="reference internal" href="#functions-available-in-fault-py">Functions Available in <cite>fault.py</cite></a></li>
+<li><a class="reference internal" href="#functions-available-in-bode-py">Functions Available in <cite>bode.py</cite></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#functions">Functions</a></li>
 </ul>
 </li>
