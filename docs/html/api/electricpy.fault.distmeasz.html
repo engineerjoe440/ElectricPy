@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>distmeasz &#8212; electricpy 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="faultratio" href="electricpy.fault.faultratio.html" />
+    <link rel="prev" title="ct_vpeak" href="electricpy.fault.ct_vpeak.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.faultratio.html" title="faultratio"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.ct_vpeak.html" title="ct_vpeak"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../fault.html" accesskey="U">FAULT Sub-Module</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="distmeasz">
+<h1>distmeasz<a class="headerlink" href="#distmeasz" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="electricpy.fault.distmeasz">
+<code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">distmeasz</code><span class="sig-paren">(</span><em class="sig-param">VLNmeas</em>, <em class="sig-param">If</em>, <em class="sig-param">Ip</em>, <em class="sig-param">Ipp</em>, <em class="sig-param">CTR=1</em>, <em class="sig-param">VTR=1</em>, <em class="sig-param">k0=None</em>, <em class="sig-param">z1=None</em>, <em class="sig-param">z0=None</em>, <em class="sig-param">linelength=1</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.distmeasz" title="Permalink to this definition">¶</a></dt>
+<dd><p>distmeasz Function</p>
+<p>Function to evaluate the Relay-Measured-Impedance as calculated from
+the measured voltage, current, and line parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>VLNmeas</strong> (<em>complex</em>) – Measured Line-to-Neutral voltage for the
+faulted phase in primary volts.</p></li>
+<li><p><strong>If</strong> (<em>complex</em>) – Faulted phase current measured in primary
+amps.</p></li>
+<li><p><strong>Ip</strong> (<em>complex</em>) – Secondary phase current measured in primary
+amps.</p></li>
+<li><p><strong>Ipp</strong> (<em>complex</em>) – Terchiary phase current measured in primary
+amps.</p></li>
+<li><p><strong>CTR</strong> (<em>float</em><em>, </em><em>optional</em>) – Current transformer ratio, default=1</p></li>
+<li><p><strong>VTR</strong> (<em>float</em><em>, </em><em>optional</em>) – Voltage transformer ratio, default=1</p></li>
+<li><p><strong>k0</strong> (<em>complex</em><em>, </em><em>optional</em>) – Residual Compensation Factor</p></li>
+<li><p><strong>z1</strong> (<em>complex</em><em>, </em><em>optional</em>) – The positive-sequence impedance
+characteristic of the line, specified in
+ohms-per-unit where the total line length
+(of same unit) is specified in
+<em>linelength</em> argument.</p></li>
+<li><p><strong>z0</strong> (<em>complex</em><em>, </em><em>optional</em>) – The zero-sequence impedance characteristic
+of the line, specified in ohms-per-unit
+where the total line length (of same unit)
+is specified in <em>linelength</em> argument.</p></li>
+<li><p><strong>linelength</strong> (<em>float</em><em>, </em><em>optional</em>) – The length (in same base unit as impedance
+characteristics) of the line. default=1</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Zmeas</strong> – The “measured” impedance as calculated by the relay.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>complex</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.fault.ct_vpeak.html"
+                        title="previous chapter">ct_vpeak</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.fault.faultratio.html"
+                        title="next chapter">faultratio</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/electricpy.fault.distmeasz.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.faultratio.html" title="faultratio"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.ct_vpeak.html" title="ct_vpeak"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../fault.html" >FAULT Sub-Module</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Joe Stanley.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>
