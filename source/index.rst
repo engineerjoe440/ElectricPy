@@ -91,4 +91,4 @@ For more information regarding this resource, please contact Joe Stanley
 General Information
 -------------------
 
-.. automodule:: electricpy
+.. automodsumm:: electricpy
