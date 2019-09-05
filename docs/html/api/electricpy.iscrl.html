@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>iscrl &#8212; electricpy 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="kwhtobtu" href="electricpy.kwhtobtu.html" />
+    <link rel="prev" title="ipu" href="electricpy.ipu.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.kwhtobtu.html" title="kwhtobtu"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.ipu.html" title="ipu"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="iscrl">
+<h1>iscrl<a class="headerlink" href="#iscrl" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="electricpy.iscrl">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">iscrl</code><span class="sig-paren">(</span><em class="sig-param">V</em>, <em class="sig-param">Z</em>, <em class="sig-param">t=None</em>, <em class="sig-param">f=None</em>, <em class="sig-param">mxcurrent=True</em>, <em class="sig-param">alpha=None</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.iscrl" title="Permalink to this definition">¶</a></dt>
+<dd><p>iscrl Function</p>
+<p>The Isc-RL function (Short Circuit Current for RL Circuit)
+is designed to calculate the short-circuit current for an
+RL circuit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V</strong> (<em>float</em>) – The absolute magnitude of the voltage.</p></li>
+<li><p><strong>Z</strong> (<em>float</em>) – The complex value of the impedance. (R + jX)</p></li>
+<li><p><strong>t</strong> (<em>float</em><em>, </em><em>optional</em>) – The time at which the value should be calculated,
+should be specified in seconds, default=None</p></li>
+<li><p><strong>f</strong> (<em>float</em><em>, </em><em>optional</em>) – The system frequency, specified in Hz, default=None</p></li>
+<li><p><strong>mxcurrent</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control variable to enable calculating the value at
+maximum current, default=True</p></li>
+<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – Angle specification, default=None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>Opt 1 - (Irms, IAC, K)</strong> (<em>The RMS current with maximum DC</em>) – offset, the AC current magnitude,
+and the asymmetry factor.</p></li>
+<li><p><strong>Opt 2 - (i, iAC, iDC, T)</strong> (<em>The Instantaneous current with</em>) – maximum DC offset, the instantaneous
+AC current, the instantaneous DC
+current, and the time-constant T.</p></li>
+<li><p><strong>Opt 3 - (Iac)</strong> (<em>The RMS current without DC offset.</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.ipu.html"
+                        title="previous chapter">ipu</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.kwhtobtu.html"
+                        title="next chapter">kwhtobtu</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/electricpy.iscrl.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.kwhtobtu.html" title="kwhtobtu"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.ipu.html" title="ipu"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Joe Stanley.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>
