@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>geninternalv &#8212; electricpy 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="harmonics" href="electricpy.harmonics.html" />
+    <link rel="prev" title="gaussian" href="electricpy.gaussian.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.harmonics.html" title="harmonics"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.gaussian.html" title="gaussian"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docs/electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="geninternalv">
+<h1>geninternalv<a class="headerlink" href="#geninternalv" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="electricpy.geninternalv">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">geninternalv</code><span class="sig-paren">(</span><em class="sig-param">I</em>, <em class="sig-param">Zs</em>, <em class="sig-param">Vt</em>, <em class="sig-param">Vgn=None</em>, <em class="sig-param">Zm=None</em>, <em class="sig-param">Ip=None</em>, <em class="sig-param">Ipp=None</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.geninternalv" title="Permalink to this definition">¶</a></dt>
+<dd><p>geninternalv Function</p>
+<p>Evaluates the internal voltage for a generator given the
+generator’s internal impedance and internal mutual coupling
+impedance values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>I</strong> (<em>complex</em>) – The current on the phase of interest.</p></li>
+<li><p><strong>Zs</strong> (<em>complex</em>) – The internal impedance of the phase of
+interest in ohms.</p></li>
+<li><p><strong>Vt</strong> (<em>complex</em>) – The generator’s terminal voltage.</p></li>
+<li><p><strong>Vgn</strong> (<em>complex</em><em>, </em><em>optional</em>) – The ground-to-neutral connection voltage.</p></li>
+<li><p><strong>Zmp</strong> (<em>complex</em><em>, </em><em>optional</em>) – The mutual coupling with the first additional
+phase impedance in ohms.</p></li>
+<li><p><strong>Zmpp</strong> (<em>complex</em><em>, </em><em>optional</em>) – The mutual coupling with the second additional
+phase impedance in ohms.</p></li>
+<li><p><strong>Ip</strong> (<em>complex</em><em>, </em><em>optional</em>) – The first mutual phase current in amps.</p></li>
+<li><p><strong>Ipp</strong> (<em>complex</em><em>, </em><em>optional</em>) – The second mutual phase current in amps.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Ea</strong> – The internal voltage of the generator.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>complex</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.gaussian.html"
+                        title="previous chapter">gaussian</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.harmonics.html"
+                        title="next chapter">harmonics</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/electricpy.geninternalv.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.harmonics.html" title="harmonics"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.gaussian.html" title="gaussian"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../docs/electricpy.html" >ELECTRICPY Module</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Joe Stanley.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>

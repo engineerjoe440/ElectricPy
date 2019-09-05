@@ -1,0 +1,25 @@
+SEL acrtac Submodule
+====================
+
+
+General Module Information
+--------------------------
+
+This module (rather a submodule of `rtac`) is intended to be utilized
+as an Application Programming Interface (API) to work in conjunction
+with AcSELerator RTAC software. The module grants programmatic access
+to the Command Line Interface Tool, and provides additional
+functionality to aid users in developing practical and useful scripts.
+
+
+Public Functions
+----------------
+
+The public functions in the `acrtac` sub-module are available outside
+of the AcRTAC class specifically because they are not dependent upon
+the class attributes or methods.
+
+.. automodule:: electricpy
+   :members:
+   
+ 
