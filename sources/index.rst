@@ -25,7 +25,7 @@ for research, development, education, and exploration in the realm of electrical
 .. toctree::
    :maxdepth: 3
    
-   docs/electricpy
+   electricpy
 
 
 Dependencies:
