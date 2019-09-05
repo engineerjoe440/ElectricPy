@@ -46,7 +46,7 @@ Dependencies:
 INSTALLATION:
 -------------
 
-#. Install required dependencies (NUMPY, SCIPY, and MATPLOTLIB)
+#. Install required dependencies (NUMPY, SCIPY, SYMPY, and MATPLOTLIB)
 
    .. code-block:: bash
    
