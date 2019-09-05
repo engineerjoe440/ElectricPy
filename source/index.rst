@@ -22,14 +22,20 @@ for research, development, education, and exploration in the realm of electrical
    * Paul Ortman | Power Quality Engineer | Idaho Power | Instructor | University of Idaho
 
 
+---------
+CONTENTS:
+---------
+
 .. toctree::
    :maxdepth: 3
    
+   fault
+   bode
    electricpy
 
-
+-------------
 Dependencies:
-
+-------------
 * NUMPY
 * MATPLOTLIB
 * SCIPY

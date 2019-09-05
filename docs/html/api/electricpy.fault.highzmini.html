@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>highzmini &#8212; electricpy 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="highzvpickup" href="electricpy.fault.highzvpickup.html" />
+    <link rel="prev" title="genlossfield" href="electricpy.fault.genlossfield.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.highzvpickup.html" title="highzvpickup"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.genlossfield.html" title="genlossfield"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../fault.html" accesskey="U">FAULT Sub-Module</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="highzmini">
+<h1>highzmini<a class="headerlink" href="#highzmini" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="electricpy.fault.highzmini">
+<code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">highzmini</code><span class="sig-paren">(</span><em class="sig-param">N</em>, <em class="sig-param">Ie</em>, <em class="sig-param">Irly=None</em>, <em class="sig-param">Vset=None</em>, <em class="sig-param">Rrly=2000</em>, <em class="sig-param">Imov=0</em>, <em class="sig-param">CTR=1</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.highzmini" title="Permalink to this definition">¶</a></dt>
+<dd><p>highzmini Function</p>
+<p>Evaluates the minimum pickup current required to cause
+high-impedance bus protection element pickup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N</strong> (<em>int</em>) – Number of Current Transformers included in scheme</p></li>
+<li><p><strong>Ie</strong> (<em>float</em>) – The excitation current at the voltage setting</p></li>
+<li><p><strong>Irly</strong> (<em>float</em><em>, </em><em>optional</em>) – The relay current at voltage setting</p></li>
+<li><p><strong>Vset</strong> (<em>float</em><em>, </em><em>optional</em>) – The relay’s voltage pickup setting in volts.</p></li>
+<li><p><strong>Rrly</strong> (<em>float</em><em>, </em><em>optional</em>) – The relay’s internal resistance in ohms, default=2000</p></li>
+<li><p><strong>Imov</strong> (<em>float</em><em>, </em><em>optional</em>) – The overvoltage protection current at the
+voltage setting. default=0.0</p></li>
+<li><p><strong>CTR</strong> (<em>float</em><em>, </em><em>optional</em>) – Current Transformer Ratio, default=1</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Imin</strong> – Minimum current required to cause high-impedance
+bus protection element pickup.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.fault.genlossfield.html"
+                        title="previous chapter">genlossfield</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.fault.highzvpickup.html"
+                        title="next chapter">highzvpickup</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/electricpy.fault.highzmini.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.highzvpickup.html" title="highzvpickup"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.genlossfield.html" title="genlossfield"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../fault.html" >FAULT Sub-Module</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Joe Stanley.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>
