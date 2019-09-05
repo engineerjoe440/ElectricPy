@@ -1,144 +1,152 @@
 ###################################################################
-#   ELECTRICPY.PY
-#
-#   A library of functions, constants and more
-#   that are related to Power in Electrical Engineering.
-#
-#   Written by Joe Stanley
-#
-#   Special Thanks To:
-#   Paul Ortmann - Idaho Power
-#
-#   Included Constants:
-#   - Pico Multiple:                            p
-#   - Nano Multiple:                            n
-#   - Micro (mu) Multiple:                      u
-#   - Mili Multiple:                            m
-#   - Kilo Multiple:                            k
-#   - Mega Multiple:                            M
-#   - 'A' Operator for Symmetrical Components:  a
-#   - Not a Number value (NaN):                 NAN
-#
-#   Symmetrical Components Matricies:
-#   - ABC to 012 Conversion:        Aabc
-#   - 012 to ABC Conversion:        A012
-#
-#   Included Functions
-#   - Phasor V/I Generator:                 phasor
-#   - Phasor Data Genorator:                phasordata
-#   - Time of Number of Cycles:             tcycle        
-#   - Phasor Impedance Generator:           phasorz
-#   - Complex Display Function:             cprint
-#   - Parallel Impedance Adder:             parallelz
-#   - V/I Line/Phase Converter:             phaseline
-#   - Power Set Values:                     powerset
-#   - Power Triangle Function:              powertriangle
-#   - Transformer SC OC Tests:              transformertest
-#   - Phasor Plot Generator:                phasorplot
-#   - Total Harmonic Distortion:            thd
-#   - Total Demand Distortion:              tdd
-#   - Reactance Calculator:                 reactance
-#   - Non-Linear PF Calc:                   nlinpf
-#   - Harmonic Limit Calculator:            harmoniclimit
-#   - Power Factor Distiortion:             pfdist
-#   - Short-Circuit RL Current:             iscrl
-#   - Voltage Divider:                      voltdiv
-#   - Current Divider:                      curdiv
-#   - Instantaneous Power Calc.:            instpower
-#   - Delta-Wye Network Converter:          dynetz
-#   - Single Line Power Flow:               powerflow
-#   - Thermocouple Temperature:             thermocouple
-#   - Cold Junction Voltage:                coldjunction
-#   - RTD Temperature Calculator:           rtdtemp
-#   - Horsepower to Watts:                  hptowatts
-#   - Watts to Horsepower:                  wattstohp
-#   - Inductor Charge:                      inductorcharge
-#   - Inductor Discharge:                   inductordischarge
-#   - Inductor Stored Energy:               inductorenergy      
-#   - Back-to-Back Cap. Surge:              capbacktoback  
-#   - Capacitor Stored Energy:              energy
-#   - Cap. Voltage after Time:              VafterT
-#   - Cap. Voltage Discharge:               vcapdischarge
-#   - Cap. Voltage Charge:                  vcapcharge
-#   - Rectifier Cap. Calculation:           rectifier
-#   - Cap. VAR to FARAD Conversion:         farads
-#   - VSC DC Bus Voltage Calculator:        vscdcbus
-#   - PLL-VSC Gains Calculator:             vscgains
-#   - RMS Calculator:                       rms
-#   - Step Function:                        step
-#   - Multi-Argument Convolution:           convolve
-#   - Convolution Bar Graph Visualizer:     convbar
-#   - Gaussian Function:                    gaussian
-#   - Gaussian Distribution Calculator:     gausdist
-#   - Probability Density Calculator:       probdensity
-#   - Real FFT Evaluator:                   rfft
-#   - Normalized Power Spectrum:            wrms
-#   - Hartley's Data Capacity Equation:     hartleydata
-#   - Shannon's Data Capacity Equation:     shannondata
-#   - String to Bit-String Converter:       string_to_bits
-#   - CRC Message Generator:                crcsender
-#   - CRC Remainder Calculator:             crcremainder
-#   - kWh to BTU:                           kwhtobtu
-#   - BTU to kWh:                           btutokwh
-#   - Per-Unit Impedance Calculator:        zpu
-#   - Per-Unit Current Calculator:          ipu
-#   - Per-Unit Change of Base Formula:      puchgbase
-#   - Per-Unit to Ohmic Impedance:          zrecompose
-#   - X over R to Ohmic Impedance:          rxrecompose
-#   - Generator Internal Voltage Calc:      geninternalv
-#   - Phase to Sequence Conversion:         sequence
-#   - Sequence to Phase Conversion:         phases
-#   - Function Harmonic (FFT) Evaluation:   funcfft
-#   - Dataset Harmonic (FFT) Evaluation:    sampfft
-#   - Harmonic (FFT) Component Plotter:     fftplot
-#   - Harmonic (FFT) Summation Plotter:     fftsumplot 
-#   - Harmonic System Generator:            harmonics   
-#   - Motor Startup Capacitor Formula:      motorstartcap
-#   - Power Factor Correction Formula:      pfcorrection
-#   - AC Power/Voltage/Current Relation:    acpiv
-#   - Transformer Primary Conversion:       primary
-#   - Transformer Secondary Conversion:     secondary
-#   - Natural Frequency Calculator          natfreq
-#   - 3-Phase Voltage/Current Unbalance:    unbalance
-#
-#   Additional functions available in sub-modules:
-#   - fault.py
-#   - bode.py
-#
-#   Functions Available in FAULT.py
-#   - Single Line to Ground                 phs1g
-#   - Double Line to Ground                 phs2g
-#   - Line to Line                          phs2
-#   - Three-Phase Fault                     phs3
-#   - Faulted Bus Voltage                   busvolt
-#   - CT Saturation Function                ct_saturation
-#   - CT C-Class Calculator                 ct_cclass
-#   - CT Sat. V at rated Burden             ct_satratburden
-#   - CT Voltage Peak Formula               ct_vpeak
-#   - CT Time to Saturation                 ct_timetosat
-#   - Transient Recovery Voltage Calc.      pktransrecvolt
-#   - TRV Reduction Resistor                trvresistor
-#   - TOC Trip Time                         toctriptime
-#   - TOC Reset Time                        tocreset
-#   - Pickup Setting Assistant              pickup
-#   - Radial TOC Coordination Tool          tdradial
-#   - TAP Setting Calculator                protectiontap
-#   - Transformer Current Correction        correctedcurrents
-#   - Operate/Restraint Current Calc.       iopirt
-#   - Symmetrical/RMS Fault Current Calc:   symrmsfaultcur
-#   - TOC Fault Current Ratio:              faultratio
-#   - Residual Compensation Factor Calc:    residcomp
-#   - Distance Elem. Impedance Calc:        distmeasz
-#   - Transformer Mismatch Calculator:      transmismatch
-#   - High-Impedance Voltage Pickup:        highzvpickup
-#   - High-Impedance Minimum Current PU:    highzmini
-#   - Instantaneous Overcurrent PU:         instoc
-#   - Generator Loss of Field Settings:     genlossfield
-#
-#   Functions Available in BODE.py:
-#   - Transfer Function Bode Plotter:       bode
-#   - S-Domain Bode Plotter:                sbode
-#   - Z-Domain Bode Plotter:                zbode
+"""
+---------------
+`electricpy.py`
+---------------
+
+ `A library of functions, constants and more
+ that are related to Power in Electrical Engineering.`
+
+ Written by Joe Stanley
+
+
+Included Constants
+------------------
+ - Pico Multiple:                            p
+ - Nano Multiple:                            n
+ - Micro (mu) Multiple:                      u
+ - Mili Multiple:                            m
+ - Kilo Multiple:                            k
+ - Mega Multiple:                            M
+ - 'A' Operator for Symmetrical Components:  a
+ - Not a Number value (NaN):                 NAN
+
+Symmetrical Components Matricies
+--------------------------------
+ - ABC to 012 Conversion:        Aabc
+ - 012 to ABC Conversion:        A012
+
+Included Functions
+------------------
+ - Phasor V/I Generator:                 phasor
+ - Phasor Data Genorator:                phasordata
+ - Time of Number of Cycles:             tcycle        
+ - Phasor Impedance Generator:           phasorz
+ - Complex Display Function:             cprint
+ - Parallel Impedance Adder:             parallelz
+ - V/I Line/Phase Converter:             phaseline
+ - Power Set Values:                     powerset
+ - Power Triangle Function:              powertriangle
+ - Transformer SC OC Tests:              transformertest
+ - Phasor Plot Generator:                phasorplot
+ - Total Harmonic Distortion:            thd
+ - Total Demand Distortion:              tdd
+ - Reactance Calculator:                 reactance
+ - Non-Linear PF Calc:                   nlinpf
+ - Harmonic Limit Calculator:            harmoniclimit
+ - Power Factor Distiortion:             pfdist
+ - Short-Circuit RL Current:             iscrl
+ - Voltage Divider:                      voltdiv
+ - Current Divider:                      curdiv
+ - Instantaneous Power Calc.:            instpower
+ - Delta-Wye Network Converter:          dynetz
+ - Single Line Power Flow:               powerflow
+ - Thermocouple Temperature:             thermocouple
+ - Cold Junction Voltage:                coldjunction
+ - RTD Temperature Calculator:           rtdtemp
+ - Horsepower to Watts:                  hptowatts
+ - Watts to Horsepower:                  wattstohp
+ - Inductor Charge:                      inductorcharge
+ - Inductor Discharge:                   inductordischarge
+ - Inductor Stored Energy:               inductorenergy      
+ - Back-to-Back Cap. Surge:              capbacktoback  
+ - Capacitor Stored Energy:              energy
+ - Cap. Voltage after Time:              VafterT
+ - Cap. Voltage Discharge:               vcapdischarge
+ - Cap. Voltage Charge:                  vcapcharge
+ - Rectifier Cap. Calculation:           rectifier
+ - Cap. VAR to FARAD Conversion:         farads
+ - VSC DC Bus Voltage Calculator:        vscdcbus
+ - PLL-VSC Gains Calculator:             vscgains
+ - RMS Calculator:                       rms
+ - Step Function:                        step
+ - Multi-Argument Convolution:           convolve
+ - Convolution Bar Graph Visualizer:     convbar
+ - Gaussian Function:                    gaussian
+ - Gaussian Distribution Calculator:     gausdist
+ - Probability Density Calculator:       probdensity
+ - Real FFT Evaluator:                   rfft
+ - Normalized Power Spectrum:            wrms
+ - Hartley's Data Capacity Equation:     hartleydata
+ - Shannon's Data Capacity Equation:     shannondata
+ - String to Bit-String Converter:       string_to_bits
+ - CRC Message Generator:                crcsender
+ - CRC Remainder Calculator:             crcremainder
+ - kWh to BTU:                           kwhtobtu
+ - BTU to kWh:                           btutokwh
+ - Per-Unit Impedance Calculator:        zpu
+ - Per-Unit Current Calculator:          ipu
+ - Per-Unit Change of Base Formula:      puchgbase
+ - Per-Unit to Ohmic Impedance:          zrecompose
+ - X over R to Ohmic Impedance:          rxrecompose
+ - Generator Internal Voltage Calc:      geninternalv
+ - Phase to Sequence Conversion:         sequence
+ - Sequence to Phase Conversion:         phases
+ - Function Harmonic (FFT) Evaluation:   funcfft
+ - Dataset Harmonic (FFT) Evaluation:    sampfft
+ - Harmonic (FFT) Component Plotter:     fftplot
+ - Harmonic (FFT) Summation Plotter:     fftsumplot 
+ - Harmonic System Generator:            harmonics   
+ - Motor Startup Capacitor Formula:      motorstartcap
+ - Power Factor Correction Formula:      pfcorrection
+ - AC Power/Voltage/Current Relation:    acpiv
+ - Transformer Primary Conversion:       primary
+ - Transformer Secondary Conversion:     secondary
+ - Natural Frequency Calculator          natfreq
+ - 3-Phase Voltage/Current Unbalance:    unbalance
+
+Additional Available Sub-Modules
+--------------------------------
+ - fault.py
+ - bode.py
+
+Functions Available in `fault.py`
+---------------------------------
+ - Single Line to Ground                 phs1g
+ - Double Line to Ground                 phs2g
+ - Line to Line                          phs2
+ - Three-Phase Fault                     phs3
+ - Faulted Bus Voltage                   busvolt
+ - CT Saturation Function                ct_saturation
+ - CT C-Class Calculator                 ct_cclass
+ - CT Sat. V at rated Burden             ct_satratburden
+ - CT Voltage Peak Formula               ct_vpeak
+ - CT Time to Saturation                 ct_timetosat
+ - Transient Recovery Voltage Calc.      pktransrecvolt
+ - TRV Reduction Resistor                trvresistor
+ - TOC Trip Time                         toctriptime
+ - TOC Reset Time                        tocreset
+ - Pickup Setting Assistant              pickup
+ - Radial TOC Coordination Tool          tdradial
+ - TAP Setting Calculator                protectiontap
+ - Transformer Current Correction        correctedcurrents
+ - Operate/Restraint Current Calc.       iopirt
+ - Symmetrical/RMS Fault Current Calc:   symrmsfaultcur
+ - TOC Fault Current Ratio:              faultratio
+ - Residual Compensation Factor Calc:    residcomp
+ - Distance Elem. Impedance Calc:        distmeasz
+ - Transformer Mismatch Calculator:      transmismatch
+ - High-Impedance Voltage Pickup:        highzvpickup
+ - High-Impedance Minimum Current PU:    highzmini
+ - Instantaneous Overcurrent PU:         instoc
+ - Generator Loss of Field Settings:     genlossfield
+
+Functions Available in `bode.py`
+--------------------------------
+ - Transfer Function Bode Plotter:       bode
+ - S-Domain Bode Plotter:                sbode
+ - Z-Domain Bode Plotter:                zbode
+"""
 ###################################################################
 
 # Define Module Specific Variables

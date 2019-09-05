@@ -87,8 +87,5 @@ For more information regarding this resource, please contact Joe Stanley
 
 * <joe_stanley@selinc.com>
 
--------------------
-General Information
--------------------
 
 .. automodule:: electricpy
