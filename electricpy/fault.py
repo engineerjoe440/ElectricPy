@@ -1,8 +1,11 @@
 ###################################################################
 """
-FAULT.PY
+---------------------
+`electricpy.fault.py`
+---------------------
 
-Included Functions:
+Included Functions
+------------------
 - Single Line to Ground                 phs1g
 - Double Line to Ground                 phs2g
 - Line to Line                          phs2
@@ -44,7 +47,7 @@ from .constants import *
 # Define Single Line to Ground Fault Function
 def phs1g(Vsrc,Xseq,Rf=0,sequence=True):
     """
-    phs1g Function
+    Single-Phase-to-Ground Fault Calculator
     
     This function will evaluate the 0, Positive, and Negative
     sequence currents for a single-line-to-ground fault with the
@@ -85,7 +88,7 @@ def phs1g(Vsrc,Xseq,Rf=0,sequence=True):
 # Define Double Line to Ground Fault Current Calculator
 def phs2g(Vsrc,Xseq,Rf=0,sequence=True):
     """
-    phs2g Function
+    Double-Line-to-Ground Fault Calculator
     
     This function will evaluate the 0, Positive, and Negative
     sequence currents for a double-line-to-ground fault with the
@@ -127,7 +130,7 @@ def phs2g(Vsrc,Xseq,Rf=0,sequence=True):
 # Define Phase-to-Phase Fault Current Calculator
 def phs2(Vsrc,Xseq,Rf=0,sequence=True):
     """
-    phs2 Function
+    Line-to-Line Fault Calculator
     
     This function will evaluate the 0, Positive, and Negative
     sequence currents for a phase-to-phase fault with the
@@ -169,7 +172,7 @@ def phs2(Vsrc,Xseq,Rf=0,sequence=True):
 # Define Three-Phase Fault Current Calculator
 def phs3(Vsrc,Xseq,Rf=0,sequence=True):
     """
-    phs3 Function
+    Three-Phase Fault Calculator
     
     This function will evaluate the 0, Positive, and Negative
     sequence currents for a three-phase fault with the
@@ -208,7 +211,7 @@ def phs3(Vsrc,Xseq,Rf=0,sequence=True):
 # Define Faulted Bus Voltage Calculator
 def busvolt(k,n,Vpf,Z0,Z1,Z2,If,sequence=True):
     """
-    busvolt Function
+    Faulted Bus Voltage Calculator
     
     This function is designed to calculate the bus voltage(s)
     given a specific set of fault characteristics.
@@ -261,7 +264,7 @@ def busvolt(k,n,Vpf,Z0,Z1,Z2,If,sequence=True):
 # Define CT Saturation Function
 def ct_saturation(XR,Imag,Vrated,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
     """
-    ct_saturation Function
+    Current Transformer Saturation Calculator
     
     A function to determine the saturation value and a boolean indicator
     showing whether or not CT is -in fact- saturated.
@@ -320,7 +323,7 @@ def ct_saturation(XR,Imag,Vrated,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
 # Define C-Class Calculator
 def ct_cclass(XR,Imag,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
     """
-    ct_cclass Function
+    Current Transformer (CT) C-Class Function
     
     A function to determine the C-Class rated voltage for a CT.
     
@@ -370,7 +373,7 @@ def ct_cclass(XR,Imag,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
 # Define Saturation Voltage at Rated Burden
 def ct_satratburden(Inom,VArat=None,ANSIv=None,ALF=20,):
     """
-    ct_satratburden Function
+    Current Transformer (CT) Saturation at Rated Burden Calculator
     
     A function to determine the Saturation at rated burden.
     
@@ -405,7 +408,7 @@ def ct_satratburden(Inom,VArat=None,ANSIv=None,ALF=20,):
 # Define CT Vpeak Formula
 def ct_vpeak(Zb,Ip,N):
     """
-    ct_vpeak Function
+    Current Transformer (CT) Peak Voltage Calculator
     
     Simple formula to calculate the Peak Voltage of a CT.
     
@@ -429,7 +432,7 @@ def ct_vpeak(Zb,Ip,N):
 # Define Saturation Time Calculator
 def ct_timetosat(Vknee,XR,Rb,CTR,Imax,ts=None,npts=100,freq=60,plot=False):
     """
-    ct_timetosat Function
+    Current Transformer (CT) Time to Saturation Function
     
     Function to determine the "time to saturate" for an underrated C-Class
     CT using three standard curves described by Juergen Holbach.
@@ -502,7 +505,7 @@ def ct_timetosat(Vknee,XR,Rb,CTR,Imax,ts=None,npts=100,freq=60,plot=False):
 # Define Function to Calculate TRV
 def pktransrecvolt(C,L,R=0,VLL=None,VLN=None,freq=60):
     """
-    pktransrecvolt Function
+    Peak Transient Recovery Function
     
     Peak Transient Recovery Voltage calculation
     function, evaluates the peak transient
@@ -556,7 +559,7 @@ def pktransrecvolt(C,L,R=0,VLL=None,VLN=None,freq=60):
 # Define TRV Reduction Resistor Function
 def trvresistor(C,L,reduction,Rd0=500,wd0=260e3,tpk0=10e-6):
     """
-    trvresistor Function
+    Transient Recovery Voltage (TRV) Reduction Resistor Function
     
     Function to find the resistor value that
     will reduce the TRV by a specified
@@ -606,7 +609,7 @@ def trvresistor(C,L,reduction,Rd0=500,wd0=260e3,tpk0=10e-6):
 # Define Time-Overcurrent Trip Time Function
 def toctriptime(I,Ipickup,TD,curve="U1",CTR=1):
     """
-    toctriptime Function
+    Time OverCurrent Trip Time Function
     
     Time-OverCurrent Trip Time Calculator, evaluates the time
     to trip for a specific TOC (51) element given the curve
@@ -657,7 +660,7 @@ def toctriptime(I,Ipickup,TD,curve="U1",CTR=1):
 # Define Time Overcurrent Reset Time Function
 def tocreset(I,Ipickup,TD,curve="U1",CTR=1):
     """
-    tocreset Function
+    Time OverCurrent Reset Time Function
     
     Function to calculate the time to reset for a TOC
     (Time-OverCurrent, 51) element.
@@ -697,7 +700,7 @@ def tocreset(I,Ipickup,TD,curve="U1",CTR=1):
 # Define Pickup Current Calculation
 def pickup(Iloadmax,Ifaultmin,scale=0,printout=False,units="A"):
     """
-    pickup Function
+    Current Pickup Selection Assistant
     
     Used to assist in evaluating an optimal phase-over-current pickup
     setting. Uses maximum load and minimum fault current to provide
@@ -743,7 +746,7 @@ def pickup(Iloadmax,Ifaultmin,scale=0,printout=False,units="A"):
 def tdradial(I,CTI,Ipu_up,Ipu_dn=0,TDdn=0,curve="U1",scale=2,freq=60,
                   CTR_up=1,CTR_dn=1,tfixed=None):
     """
-    tdcoordradial Function
+    Radial Time Dial Coordination Function
     
     Function to evaluate the Time-Dial (TD) setting in radial schemes
     where the Coordinating Time Interval (CTI) and the up/downstream
@@ -830,7 +833,7 @@ def tdradial(I,CTI,Ipu_up,Ipu_dn=0,TDdn=0,curve="U1",scale=2,freq=60,
 # Define TAP Calculator
 def protectiontap(S,CTR=1,VLN=None,VLL=None):
     """
-    protectiontap Function
+    Protection TAP Setting Calculator
     
     Evaluates the required TAP setting based on the rated power of
     a transformer (the object being protected) and the voltage
@@ -870,7 +873,7 @@ def protectiontap(S,CTR=1,VLN=None,VLL=None):
 # Define Current Correction Calculator
 def correctedcurrents(Ipri,TAP,correction="Y",CTR=1):
     """
-    correctedcurrents Function:
+    Transformer Current Correction Function
     
     Function to evaluate the currents as corrected for microprocessor-
     based relay protection schemes.
@@ -922,7 +925,7 @@ def correctedcurrents(Ipri,TAP,correction="Y",CTR=1):
 # Define Iop/Irt Calculator
 def iopirt(IpriHV,IpriLV,TAPHV,TAPLV,corrHV="Y",corrLV="Y",CTRHV=1,CTRLV=1):
     """
-    iopirt Function:
+    Operate/Restraint Current Calculator
     
     Calculates the operating current (Iop) and the restraint
     current (Irt) as well as the slope.
@@ -984,7 +987,7 @@ def iopirt(IpriHV,IpriLV,TAPHV,TAPLV,corrHV="Y",corrLV="Y",CTRHV=1,CTRLV=1):
 # Define Symmetrical/RMS Current Calculation
 def symrmsfaultcur(V,R,X,t=1/60,freq=60):
     """
-    symrmsfaultcur Function
+    Symmetrical/RMS Current Calculator
     
     Function to evaluate the time-constant tau,
     the symmetrical fault current, and the RMS
@@ -1026,7 +1029,7 @@ def symrmsfaultcur(V,R,X,t=1/60,freq=60):
 # Define Relay M Formula
 def faultratio(I,Ipickup,CTR=1):
     """
-    faultratio Function
+    Fault Multiple of Pickup (Ratio) Calculator
     
     Evaluates the CTR-scaled pickup measured to
     pickup current ratio.
@@ -1054,7 +1057,7 @@ def faultratio(I,Ipickup,CTR=1):
 # Define Residual Compensation Factor Function
 def residcomp(z1,z0,linelength=1):
     """
-    residcomp Function
+    Residual Compensation Factor Function
     
     Evaluates the residual compensation factor based on
     the line's positive and zero sequence impedance
@@ -1092,7 +1095,7 @@ def residcomp(z1,z0,linelength=1):
 # Define Relay Measured Impedance Functon for Distance Elements
 def distmeasz(VLNmeas,If,Ip,Ipp,CTR=1,VTR=1,k0=None,z1=None,z0=None,linelength=1):
     """
-    distmeasz Function
+    Distance Element Measured Impedance Function
     
     Function to evaluate the Relay-Measured-Impedance as calculated from
     the measured voltage, current, and line parameters.
@@ -1156,7 +1159,7 @@ def distmeasz(VLNmeas,If,Ip,Ipp,CTR=1,VTR=1,k0=None,z1=None,z0=None,linelength=1
 # Define Transformer Tap Mismatch Function
 def transmismatch(I1,I2,tap1,tap2):
     """
-    transmismatch Function
+    Transformer TAP Mismatch Function
     
     Function to evaluate the transformer ratio mismatch
     for protection.
@@ -1188,7 +1191,7 @@ def transmismatch(I1,I2,tap1,tap2):
 def highzvpickup(I,RL,Rct,CTR=1,threephase=False,Ks=1.5,
                  Vstd=400,Kd=0.5):
     """
-    highzvpickup Function
+    High Impedance Pickup Setting Function
     
     Evaluates the voltage pickup setting for a high
     impedance bus protection system.
@@ -1236,7 +1239,7 @@ def highzvpickup(I,RL,Rct,CTR=1,threephase=False,Ks=1.5,
 # Define Minimum Current Pickup for High-Impedance Bus Protection
 def highzmini(N,Ie,Irly=None,Vset=None,Rrly=2000,Imov=0,CTR=1):
     """
-    highzmini Function
+    Minimum Current for High Impedance Protection Calculator
     
     Evaluates the minimum pickup current required to cause
     high-impedance bus protection element pickup.
@@ -1283,7 +1286,7 @@ def highzmini(N,Ie,Irly=None,Vset=None,Rrly=2000,Imov=0,CTR=1):
 # Define Instantaneous Overcurrent Pickup Formula
 def instoc(Imin,CTR=1,Ki=0.5):
     """
-    instoveri Function
+    Instantaneous OverCurrent Pickup Calculator
     
     Using a sensetivity factor and the CTR, evaluates
     the secondary-level pickup setting for an
@@ -1311,7 +1314,7 @@ def instoc(Imin,CTR=1,Ki=0.5):
 # Define Generator Loss of Field Element Function
 def genlossfield(Xd,Xpd,Zbase=1,CTR=1,VTR=1):
     """
-    genlossfield Function
+    Generator Loss of Field Function
     
     Generates the Loss-of-Field Element settings
     for a generator using the Xd value and

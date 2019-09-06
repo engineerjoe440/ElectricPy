@@ -1,8 +1,11 @@
 #################################################################################
 """
-BODE.PY
+--------------------
+`electricpy.bode.py`
+--------------------
 
-Included Functions:
+Included Functions
+------------------
 - Transfer Function Bode Plot Generator     bode
 - S-Domain Bode Plot Generator              sbode
 - Z-Domain Bode Plot Generator              zbode
@@ -17,7 +20,7 @@ from numpy import pi
 from cmath import exp
 
 # Define System Conditioning Function
-def sys_condition(system,feedback):
+def _sys_condition(system,feedback):
     if ( len(system) == 2 ):        # System found to be num and den
         num = system[0]
         den = system[1]
@@ -49,8 +52,6 @@ def sys_condition(system,feedback):
 def bode(system,mn=0.001,mx=1000,npts=100,title="",xlim=False,ylim=False,sv=False,
          disp3db=False,lowcut=None,magnitude=True,angle=True,freqaxis="rad"):
     """
-    bode Function
-    
     System Bode Plotting Function
     
     A simple function to generate the Bode Plot for magnitude
@@ -96,7 +97,7 @@ def bode(system,mn=0.001,mx=1000,npts=100,title="",xlim=False,ylim=False,sv=Fals
                     radians, default is radians (rad)
     """
     # Condition system input to ensure proper execution
-    system = sys_condition(system,False)
+    system = _sys_condition(system,False)
     
     # Condition min and max freq terms
     degrees = False
@@ -163,7 +164,7 @@ def bode(system,mn=0.001,mx=1000,npts=100,title="",xlim=False,ylim=False,sv=Fals
 def sbode(f,NN=1000,title="",xlim=False,ylim=False,mn=0,mx=1000,
           disp3db=False,lowcut=None,magnitude=True,angle=True):
     """
-    SBODE Function
+    S-Domain Bode Plotting Function
     
     Parameters
     ----------
@@ -243,7 +244,7 @@ def sbode(f,NN=1000,title="",xlim=False,ylim=False,mn=0,mx=1000,
 def zbode(f,dt=0.01,NN=1000,title="",mn=0,mx=2*pi,xlim=False,ylim=False,
           approx=False,disp3db=False,lowcut=None,magnitude=True,angle=True):
     """
-    ZBODE Function
+    Z-Domain Bode Plotting Function
     
     Parameters
     ----------

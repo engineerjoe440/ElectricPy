@@ -110,8 +110,8 @@ Additional Available Sub-Modules
  - fault.py
  - bode.py
 
-Functions Available in `fault.py`
----------------------------------
+Functions Available in `electricpy.fault.py`
+--------------------------------------------
  - Single Line to Ground                 phs1g
  - Double Line to Ground                 phs2g
  - Line to Line                          phs2
@@ -141,8 +141,8 @@ Functions Available in `fault.py`
  - Instantaneous Overcurrent PU:         instoc
  - Generator Loss of Field Settings:     genlossfield
 
-Functions Available in `bode.py`
---------------------------------
+Functions Available in `electricpy.bode.py`
+-------------------------------------------
  - Transfer Function Bode Plotter:       bode
  - S-Domain Bode Plotter:                sbode
  - Z-Domain Bode Plotter:                zbode
