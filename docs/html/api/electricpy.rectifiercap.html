@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>btutokwh &#8212; electricpy 0.1 documentation</title>
+    <title>rectifiercap &#8212; electricpy 0.0.2 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -18,8 +18,8 @@
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="capbacktoback" href="electricpy.capbacktoback.html" />
-    <link rel="prev" title="acpiv" href="electricpy.acpiv.html" /> 
+    <link rel="next" title="rfft" href="electricpy.rfft.html" />
+    <link rel="prev" title="reactance" href="electricpy.reactance.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -31,12 +31,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.capbacktoback.html" title="capbacktoback"
+          <a href="electricpy.rfft.html" title="rfft"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="electricpy.acpiv.html" title="acpiv"
+          <a href="electricpy.reactance.html" title="reactance"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>  
@@ -46,20 +46,25 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="btutokwh">
-<h1>btutokwh<a class="headerlink" href="#btutokwh" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="rectifiercap">
+<h1>rectifiercap<a class="headerlink" href="#rectifiercap" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
-<dt id="electricpy.btutokwh">
-<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">btutokwh</code><span class="sig-paren">(</span><em class="sig-param">BTU</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.btutokwh" title="Permalink to this definition">¶</a></dt>
-<dd><p>btutokwh Function:</p>
-<p>Converts BTU (British Thermal Units) to
-kWh (killo-Watt-hours).</p>
+<dt id="electricpy.rectifiercap">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">rectifiercap</code><span class="sig-paren">(</span><em class="sig-param">Iload</em>, <em class="sig-param">fswitch</em>, <em class="sig-param">dVout</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.rectifiercap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rectifier Capacitor Formula</p>
+<p>Returns the capacitance (in Farads) for a needed capacitor in
+a rectifier configuration given the system frequency (in Hz),
+the load (in amps) and the desired voltage ripple.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>BTU</strong> (<em>float</em>) – The number of British Thermal Units</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Iload</strong> (<em>float</em>) – The load current that must be met.</p></li>
+<li><p><strong>fswitch</strong> (<em>float</em>) – The switching frequency of the system.</p></li>
+<li><p><strong>dVout</strong> (<em>float</em>) – Desired delta-V on the output.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>kWh</strong> – The number of killo-Watt-hours</p>
+<dd class="field-even"><p><strong>C</strong> – Required capacitance (in Farads) to meet arguments.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
@@ -79,15 +84,15 @@ kWh (killo-Watt-hours).</p>
               <img class="logo" src="../_static/ElectricpyLogo.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="electricpy.acpiv.html"
-                        title="previous chapter">acpiv</a></p>
+  <p class="topless"><a href="electricpy.reactance.html"
+                        title="previous chapter">reactance</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="electricpy.capbacktoback.html"
-                        title="next chapter">capbacktoback</a></p>
+  <p class="topless"><a href="electricpy.rfft.html"
+                        title="next chapter">rfft</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/electricpy.btutokwh.rst.txt"
+      <li><a href="../_sources/api/electricpy.rectifiercap.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -115,12 +120,12 @@ kWh (killo-Watt-hours).</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.capbacktoback.html" title="capbacktoback"
+          <a href="electricpy.rfft.html" title="rfft"
              >next</a> |</li>
         <li class="right" >
-          <a href="electricpy.acpiv.html" title="acpiv"
+          <a href="electricpy.reactance.html" title="reactance"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>probdensity &#8212; electricpy 0.1 documentation</title>
+    <title>probdensity &#8212; electricpy 0.0.2 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="electricpy.primary.html" title="primary"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>  
@@ -51,7 +51,29 @@
 <dl class="function">
 <dt id="electricpy.probdensity">
 <code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">probdensity</code><span class="sig-paren">(</span><em class="sig-param">func</em>, <em class="sig-param">x</em>, <em class="sig-param">x0=0</em>, <em class="sig-param">scale=True</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.probdensity" title="Permalink to this definition">¶</a></dt>
-<dd><p>PROBDENSITY Function:</p>
+<dd><p>Probability Density Function:</p>
+<p>This function uses an integral to compute the probability
+density of a given function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> (<em>function</em>) – The function for which to calculate the PDF</p></li>
+<li><p><strong>x</strong> (<em>numpy.ndarray</em>) – The (array of) value(s) at which to calculate
+the PDF</p></li>
+<li><p><strong>x0</strong> (<em>float</em><em>, </em><em>optional</em>) – The lower-bound of the integral, starting point
+for the PDF to be calculated over, default=0</p></li>
+<li><p><strong>scale</strong> (<em>bool</em><em>, </em><em>optional</em>) – The scaling to be applied to the output,
+default=True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>sumx</strong> – The (array of) value(s) computed as the PDF at
+point(s) x</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -107,7 +129,7 @@
         <li class="right" >
           <a href="electricpy.primary.html" title="primary"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>

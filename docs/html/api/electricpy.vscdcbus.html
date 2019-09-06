@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>vscdcbus &#8212; electricpy 0.1 documentation</title>
+    <title>vscdcbus &#8212; electricpy 0.0.2 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="electricpy.voltdiv.html" title="voltdiv"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>  
@@ -51,7 +51,32 @@
 <dl class="function">
 <dt id="electricpy.vscdcbus">
 <code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">vscdcbus</code><span class="sig-paren">(</span><em class="sig-param">VLL</em>, <em class="sig-param">Zs</em>, <em class="sig-param">P</em>, <em class="sig-param">Q=0</em>, <em class="sig-param">mmax=0.8</em>, <em class="sig-param">debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.vscdcbus" title="Permalink to this definition">¶</a></dt>
-<dd><p>VSCDCBUS Function:</p>
+<dd><p>Voltage Sourced Converter DC Bus Voltage Function</p>
+<p>The purpose of this function is to calculate the
+required DC-bus voltage for a Voltage-Sourced-
+Converter (VSC) given the desired P/Q parameters
+and the known source impedance (Vs) of the VSC.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>VLL</strong> (<em>complex</em>) – Line-to-Line voltage on the line-side of
+the source impedance.</p></li>
+<li><p><strong>Zs</strong> (<em>complex</em>) – The source impedance of the VSC</p></li>
+<li><p><strong>P</strong> (<em>float</em>) – The desired real-power output</p></li>
+<li><p><strong>Q</strong> (<em>float</em><em>, </em><em>optional</em>) – The desired reactive-power output, default=0</p></li>
+<li><p><strong>mmax</strong> (<em>float</em><em>, </em><em>optional</em>) – The maximum of the m value for the converter
+default=0.8</p></li>
+<li><p><strong>debug</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control value to enable printing stages of
+the calculation, default=False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>VDC</strong> – The DC bus voltage.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -107,7 +132,7 @@
         <li class="right" >
           <a href="electricpy.voltdiv.html" title="voltdiv"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>

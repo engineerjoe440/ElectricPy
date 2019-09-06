@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>wrms &#8212; electricpy 0.1 documentation</title>
+    <title>wrms &#8212; electricpy 0.0.2 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -19,7 +19,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="zdecompose" href="electricpy.zdecompose.html" />
-    <link rel="prev" title="wattstohp" href="electricpy.wattstohp.html" /> 
+    <link rel="prev" title="watts_to_hp" href="electricpy.watts_to_hp.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -34,9 +34,9 @@
           <a href="electricpy.zdecompose.html" title="zdecompose"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="electricpy.wattstohp.html" title="wattstohp"
+          <a href="electricpy.watts_to_hp.html" title="watts_to_hp"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>  
@@ -52,6 +52,30 @@
 <dt id="electricpy.wrms">
 <code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">wrms</code><span class="sig-paren">(</span><em class="sig-param">func</em>, <em class="sig-param">dw=0.1</em>, <em class="sig-param">NN=100</em>, <em class="sig-param">quad=False</em>, <em class="sig-param">plot=True</em>, <em class="sig-param">title='Power Density Spectrum'</em>, <em class="sig-param">round=3</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.wrms" title="Permalink to this definition">¶</a></dt>
 <dd><p>WRMS Function:</p>
+<p>This function is designed to calculate the RMS
+bandwidth (Wrms) using a numerical process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> (<em>function</em>) – The callable function to use for evaluation</p></li>
+<li><p><strong>dw</strong> (<em>float</em><em>, </em><em>optional</em>) – The delta-omega to be used, default=0.1</p></li>
+<li><p><strong>NN</strong> (<em>int</em><em>, </em><em>optional</em>) – The total number of points, default=100</p></li>
+<li><p><strong>quad</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control value to enable use of integrals
+default=False</p></li>
+<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control to enable plotting, default=True</p></li>
+<li><p><strong>title</strong> (<em>string</em><em>, </em><em>optional</em>) – Title displayed with plot,
+default=”Power Density Spectrum”</p></li>
+<li><p><strong>round</strong> (<em>int</em><em>, </em><em>optional</em>) – Control to round the Wrms on plot,
+default=3</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>W</strong> – Calculated RMS Bandwidth (rad/sec)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -66,8 +90,8 @@
               <img class="logo" src="../_static/ElectricpyLogo.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="electricpy.wattstohp.html"
-                        title="previous chapter">wattstohp</a></p>
+  <p class="topless"><a href="electricpy.watts_to_hp.html"
+                        title="previous chapter">watts_to_hp</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="electricpy.zdecompose.html"
                         title="next chapter">zdecompose</a></p>
@@ -105,9 +129,9 @@
           <a href="electricpy.zdecompose.html" title="zdecompose"
              >next</a> |</li>
         <li class="right" >
-          <a href="electricpy.wattstohp.html" title="wattstohp"
+          <a href="electricpy.watts_to_hp.html" title="watts_to_hp"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>

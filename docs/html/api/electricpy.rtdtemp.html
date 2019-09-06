@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>rtdtemp &#8212; electricpy 0.1 documentation</title>
+    <title>rtdtemp &#8212; electricpy 0.0.2 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="electricpy.rms.html" title="rms"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>  
@@ -51,7 +51,35 @@
 <dl class="function">
 <dt id="electricpy.rtdtemp">
 <code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">rtdtemp</code><span class="sig-paren">(</span><em class="sig-param">RT</em>, <em class="sig-param">rtdtype='PT100'</em>, <em class="sig-param">fahrenheit=False</em>, <em class="sig-param">Rref=None</em>, <em class="sig-param">Tref=None</em>, <em class="sig-param">a=None</em>, <em class="sig-param">round=1</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.rtdtemp" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>RTD Temperature Calculator</p>
+<p>Evaluates the measured temperature based on the measured resistance
+and the RTD type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>RT</strong> (<em>float</em>) – The measured resistance (in ohms).</p></li>
+<li><p><strong>rtdtype</strong> (<em>string</em>) – RTD Type string, may be one of: (PT100, PT1000,
+CU100, NI100, NI120, NIFE), default=PT100</p></li>
+<li><p><strong>fahrenheit</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control parameter to force return into degrees
+fahrenheit, default=False</p></li>
+<li><p><strong>Rref</strong> (<em>float</em><em>, </em><em>optional</em>) – Resistance reference, commonly used if non-standard
+RTD type being used. Specified in ohms.</p></li>
+<li><p><strong>Tref</strong> (<em>float</em><em>, </em><em>optional</em>) – Temperature reference, commonly used if non-standard
+RTD type being used. Specified in degrees Celsius.</p></li>
+<li><p><strong>a</strong> (<em>float</em><em>, </em><em>optional</em>) – Scaling value, commonly used if non-standard
+RTD type being used.</p></li>
+<li><p><strong>round</strong> (<em>int</em><em>, </em><em>optional</em>) – Control argument to specify number of decimal points
+in returned value.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>temp</strong> – Calculated temperature, defaults to degrees Celsius.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 
@@ -106,7 +134,7 @@
         <li class="right" >
           <a href="electricpy.rms.html" title="rms"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>
