@@ -1,3 +1,5 @@
+.. _electricpy.py:
+
 =================
 ELECTRICPY Module
 =================

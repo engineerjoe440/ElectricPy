@@ -1,3 +1,5 @@
+.. _electricpy_home:
+
 ==========
 ELECTRICPY
 ==========
@@ -29,9 +31,16 @@ CONTENTS:
 .. toctree::
    :maxdepth: 3
    
+   electricpy
    fault
    bode
-   electricpy
+
+---------------------
+ADDITIONAL RESOURCES:
+---------------------
+PyPI: https://pypi.org/project/electricpy/
+
+GitHub: https://github.com/engineerjoe440/electricpy
 
 -------------
 Dependencies:

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>capbacktoback &#8212; electricpy 0.1 documentation</title>
+    <title>capbacktoback &#8212; electricpy 0.0.2 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -19,7 +19,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="capenergy" href="electricpy.capenergy.html" />
-    <link rel="prev" title="btutokwh" href="electricpy.btutokwh.html" /> 
+    <link rel="prev" title="btu_to_kwh" href="electricpy.btu_to_kwh.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -34,9 +34,9 @@
           <a href="electricpy.capenergy.html" title="capenergy"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="electricpy.btutokwh.html" title="btutokwh"
+          <a href="electricpy.btu_to_kwh.html" title="btu_to_kwh"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>  
@@ -51,12 +51,15 @@
 <dl class="function">
 <dt id="electricpy.capbacktoback">
 <code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">capbacktoback</code><span class="sig-paren">(</span><em class="sig-param">C1</em>, <em class="sig-param">C2</em>, <em class="sig-param">Lm</em>, <em class="sig-param">VLN=None</em>, <em class="sig-param">VLL=None</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.capbacktoback" title="Permalink to this definition">¶</a></dt>
-<dd><p>capbacktoback Function</p>
+<dd><p>Back to Back Capacitor Transient Current Calculator</p>
 <p>Function to calculate the maximum current and the
 frequency of the inrush current of two capacitors
 connected in parallel when one (energized) capacitor
 is switched into another (non-engergized) capacitor.</p>
-<p>Note: This formula is only valid for three-phase systems.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This formula is only valid for three-phase systems.</p>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -67,6 +70,13 @@ three-phase capacitor bank.</p></li>
 <li><p><strong>VLL</strong> (<em>float</em><em>, </em><em>exclusive</em>) – The line-to-line voltage experienced by the
 three-phase capacitor bank.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>imax</strong> (<em>float</em>) – Maximum Current Magnitude during Transient</p></li>
+<li><p><strong>ifreq</strong> (<em>float</em>) – Transient current frequency</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -83,8 +93,8 @@ three-phase capacitor bank.</p></li>
               <img class="logo" src="../_static/ElectricpyLogo.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="electricpy.btutokwh.html"
-                        title="previous chapter">btutokwh</a></p>
+  <p class="topless"><a href="electricpy.btu_to_kwh.html"
+                        title="previous chapter">btu_to_kwh</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="electricpy.capenergy.html"
                         title="next chapter">capenergy</a></p>
@@ -122,9 +132,9 @@ three-phase capacitor bank.</p></li>
           <a href="electricpy.capenergy.html" title="capenergy"
              >next</a> |</li>
         <li class="right" >
-          <a href="electricpy.btutokwh.html" title="btutokwh"
+          <a href="electricpy.btu_to_kwh.html" title="btu_to_kwh"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>

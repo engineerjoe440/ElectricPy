@@ -10,9 +10,19 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import re
+cwd = os.getcwd()
+nwd = cwd.replace("\\source","\\electricpy")
+# Gather Version Information from Python File
+with open(nwd+"\\__init__.py") as fh:
+    file_str = fh.read()
+    name = re.search('_name_ = \"(.*)\"', file_str).group(1)
+    ver = re.search('_version_ = \"(.*)\"', file_str).group(1)
+    # Version Breakdown:
+    # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
+    print("Sphinx HTML Build For:",name,"   Version:",ver)
+
 
 
 # -- Project information -----------------------------------------------------
@@ -22,7 +32,7 @@ copyright = '2019, Joe Stanley'
 author = 'Joe Stanley'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1'
+release = ver
 
 
 # -- General configuration ---------------------------------------------------
@@ -59,3 +69,7 @@ html_theme = 'classic'
 html_static_path = ['_static']
 html_logo="_static/ElectricpyLogo.png"
 html_favicon="_static/ElectricpyLogo.png"
+
+github_repo = "electricpy"
+github_user = "engineerjoe440"
+github_button = True

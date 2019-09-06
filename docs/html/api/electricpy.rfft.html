@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>rfft &#8212; electricpy 0.1 documentation</title>
+    <title>rfft &#8212; electricpy 0.0.2 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -19,7 +19,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="rms" href="electricpy.rms.html" />
-    <link rel="prev" title="rectifier" href="electricpy.rectifier.html" /> 
+    <link rel="prev" title="rectifiercap" href="electricpy.rectifiercap.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -34,9 +34,9 @@
           <a href="electricpy.rms.html" title="rms"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="electricpy.rectifier.html" title="rectifier"
+          <a href="electricpy.rectifiercap.html" title="rectifiercap"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>  
@@ -52,6 +52,29 @@
 <dt id="electricpy.rfft">
 <code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">rfft</code><span class="sig-paren">(</span><em class="sig-param">arr</em>, <em class="sig-param">dt=0.01</em>, <em class="sig-param">absolute=True</em>, <em class="sig-param">resample=True</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.rfft" title="Permalink to this definition">¶</a></dt>
 <dd><p>RFFT Function</p>
+<p>This function is designed to evaluat the real FFT
+of a input signal in the form of an array or list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arr</strong> (<em>numpy.ndarray</em>) – The input array representing the signal</p></li>
+<li><p><strong>dt</strong> (<em>float</em><em>, </em><em>optional</em>) – The time-step used for the array,
+default=0.01</p></li>
+<li><p><strong>absolute</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force absolute
+values, default=True</p></li>
+<li><p><strong>resample</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument specifying whether
+the FFT output should be resampled,
+or if it should have a specific
+resampling rate, default=True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FFT Array</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -66,8 +89,8 @@
               <img class="logo" src="../_static/ElectricpyLogo.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="electricpy.rectifier.html"
-                        title="previous chapter">rectifier</a></p>
+  <p class="topless"><a href="electricpy.rectifiercap.html"
+                        title="previous chapter">rectifiercap</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="electricpy.rms.html"
                         title="next chapter">rms</a></p>
@@ -105,9 +128,9 @@
           <a href="electricpy.rms.html" title="rms"
              >next</a> |</li>
         <li class="right" >
-          <a href="electricpy.rectifier.html" title="rectifier"
+          <a href="electricpy.rectifiercap.html" title="rectifiercap"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>ELECTRICPY &#8212; electricpy 0.1 documentation</title>
+    <title>ELECTRICPY &#8212; electricpy 0.0.2 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
@@ -18,7 +18,7 @@
     <link rel="shortcut icon" href="_static/ElectricpyLogo.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="FAULT Sub-Module" href="fault.html" /> 
+    <link rel="next" title="ELECTRICPY Module" href="electricpy.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -30,9 +30,9 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="fault.html" title="FAULT Sub-Module"
+          <a href="electricpy.html" title="ELECTRICPY Module"
              accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">electricpy 0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">electricpy 0.0.2 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -42,7 +42,7 @@
           <div class="body" role="main">
             
   <div class="section" id="electricpy">
-<h1>ELECTRICPY<a class="headerlink" href="#electricpy" title="Permalink to this headline">¶</a></h1>
+<span id="electricpy-home"></span><h1>ELECTRICPY<a class="headerlink" href="#electricpy" title="Permalink to this headline">¶</a></h1>
 <p><em>Electrical-Engineering-for-Python</em></p>
 <p>Python Libraries with functions and constants related to electrical engineering.</p>
 <p>The functions and constants that make up these modules represent a library of material compiled with the intent of being used primarily
@@ -64,6 +64,14 @@ for research, development, education, and exploration in the realm of electrical
 <h2>CONTENTS:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="electricpy.html">ELECTRICPY Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="electricpy.html#module-electricpy">electricpy Package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="electricpy.html#id1"><cite>electricpy.py</cite></a></li>
+<li class="toctree-l3"><a class="reference internal" href="electricpy.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="fault.html">FAULT Sub-Module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="fault.html#module-electricpy.fault">electricpy.fault Module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="fault.html#functions">Functions</a></li>
@@ -78,16 +86,13 @@ for research, development, education, and exploration in the realm of electrical
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="electricpy.html">ELECTRICPY Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="electricpy.html#module-electricpy">electricpy Package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="electricpy.html#electricpy-py"><cite>electricpy.py</cite></a></li>
-<li class="toctree-l3"><a class="reference internal" href="electricpy.html#functions">Functions</a></li>
-</ul>
-</li>
-</ul>
-</li>
 </ul>
 </div>
+</div>
+<div class="section" id="additional-resources">
+<h2>ADDITIONAL RESOURCES:<a class="headerlink" href="#additional-resources" title="Permalink to this headline">¶</a></h2>
+<p>PyPI: <a class="reference external" href="https://pypi.org/project/electricpy/">https://pypi.org/project/electricpy/</a></p>
+<p>GitHub: <a class="reference external" href="https://github.com/engineerjoe440/electricpy">https://github.com/engineerjoe440/electricpy</a></p>
 </div>
 <div class="section" id="dependencies">
 <h2>Dependencies:<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
@@ -200,8 +205,8 @@ that are related to Power in Electrical Engineering.</cite></p>
 <li><p>Thermocouple Temperature:             thermocouple</p></li>
 <li><p>Cold Junction Voltage:                coldjunction</p></li>
 <li><p>RTD Temperature Calculator:           rtdtemp</p></li>
-<li><p>Horsepower to Watts:                  hptowatts</p></li>
-<li><p>Watts to Horsepower:                  wattstohp</p></li>
+<li><p>Horsepower to Watts:                  hp_to_watts</p></li>
+<li><p>Watts to Horsepower:                  watts_to_hp</p></li>
 <li><p>Inductor Charge:                      inductorcharge</p></li>
 <li><p>Inductor Discharge:                   inductordischarge</p></li>
 <li><p>Inductor Stored Energy:               inductorenergy</p></li>
@@ -210,7 +215,7 @@ that are related to Power in Electrical Engineering.</cite></p>
 <li><p>Cap. Voltage after Time:              VafterT</p></li>
 <li><p>Cap. Voltage Discharge:               vcapdischarge</p></li>
 <li><p>Cap. Voltage Charge:                  vcapcharge</p></li>
-<li><p>Rectifier Cap. Calculation:           rectifier</p></li>
+<li><p>Rectifier Cap. Calculation:           rectifiercap</p></li>
 <li><p>Cap. VAR to FARAD Conversion:         farads</p></li>
 <li><p>VSC DC Bus Voltage Calculator:        vscdcbus</p></li>
 <li><p>PLL-VSC Gains Calculator:             vscgains</p></li>
@@ -228,8 +233,8 @@ that are related to Power in Electrical Engineering.</cite></p>
 <li><p>String to Bit-String Converter:       string_to_bits</p></li>
 <li><p>CRC Message Generator:                crcsender</p></li>
 <li><p>CRC Remainder Calculator:             crcremainder</p></li>
-<li><p>kWh to BTU:                           kwhtobtu</p></li>
-<li><p>BTU to kWh:                           btutokwh</p></li>
+<li><p>kWh to BTU:                           kwh_to_btu</p></li>
+<li><p>BTU to kWh:                           btu_to_kwh</p></li>
 <li><p>Per-Unit Impedance Calculator:        zpu</p></li>
 <li><p>Per-Unit Current Calculator:          ipu</p></li>
 <li><p>Per-Unit Change of Base Formula:      puchgbase</p></li>
@@ -324,6 +329,7 @@ that are related to Power in Electrical Engineering.</cite></p>
   <ul>
 <li><a class="reference internal" href="#">ELECTRICPY</a><ul>
 <li><a class="reference internal" href="#contents">CONTENTS:</a></li>
+<li><a class="reference internal" href="#additional-resources">ADDITIONAL RESOURCES:</a></li>
 <li><a class="reference internal" href="#dependencies">Dependencies:</a></li>
 <li><a class="reference internal" href="#installation">INSTALLATION:</a></li>
 <li><a class="reference internal" href="#to-do-list">To Do List</a></li>
@@ -344,8 +350,8 @@ that are related to Power in Electrical Engineering.</cite></p>
 </ul>
 
   <h4>Next topic</h4>
-  <p class="topless"><a href="fault.html"
-                        title="next chapter">FAULT Sub-Module</a></p>
+  <p class="topless"><a href="electricpy.html"
+                        title="next chapter">ELECTRICPY Module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -377,9 +383,9 @@ that are related to Power in Electrical Engineering.</cite></p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="fault.html" title="FAULT Sub-Module"
+          <a href="electricpy.html" title="ELECTRICPY Module"
              >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">electricpy 0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">electricpy 0.0.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
