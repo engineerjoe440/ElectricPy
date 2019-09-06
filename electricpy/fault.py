@@ -6,25 +6,25 @@
 
 Included Functions
 ------------------
-- Single Line to Ground                 phs1g
-- Double Line to Ground                 phs2g
-- Line to Line                          phs2
-- Three-Phase Fault                     phs3
-- Faulted Bus Voltage                   busvolt
-- CT Saturation Function                ct_saturation
-- CT C-Class Calculator                 ct_cclass
-- CT Sat. V at rated Burden             ct_satratburden
-- CT Voltage Peak Formula               ct_vpeak
-- CT Time to Saturation                 ct_timetosat
-- Transient Recovery Voltage Calc.      pktransrecvolt
-- TRV Reduction Resistor                trvresistor
-- TOC Trip Time                         toctriptime
-- TOC Reset Time                        tocreset
-- Pickup Setting Assistant              pickup
-- Radial TOC Coordination Tool          tdradial
-- TAP Setting Calculator                protectiontap
-- Transformer Current Correction        correctedcurrents
-- Operate/Restraint Current Calc.       iopirt
+- Single Line to Ground:                phs1g
+- Double Line to Ground:                phs2g
+- Line to Line:                         phs2
+- Three-Phase Fault:                    phs3
+- Faulted Bus Voltage:                  busvolt
+- CT Saturation Function:               ct_saturation
+- CT C-Class Calculator:                ct_cclass
+- CT Sat. V at rated Burden:            ct_satratburden
+- CT Voltage Peak Formula:              ct_vpeak
+- CT Time to Saturation:                ct_timetosat
+- Transient Recovery Voltage Calc.:     pktransrecvolt
+- TRV Reduction Resistor:               trvresistor
+- TOC Trip Time:                        toctriptime
+- TOC Reset Time:                       tocreset
+- Pickup Setting Assistant:             pickup
+- Radial TOC Coordination Tool:         tdradial
+- TAP Setting Calculator:               protectiontap
+- Transformer Current Correction:       correctedcurrents
+- Operate/Restraint Current Calc.:      iopirt
 - Symmetrical/RMS Fault Current Calc:   symrmsfaultcur
 - TOC Fault Current Ratio:              faultratio
 - Residual Compensation Factor Calc:    residcomp
