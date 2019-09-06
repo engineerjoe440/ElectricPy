@@ -1,10 +1,12 @@
 #################################################################################
-#   BODE.PY
-#
-#   Included Functions:
-#   - Transfer Function Bode Plot Generator     bode
-#   - S-Domain Bode Plot Generator              sbode
-#   - Z-Domain Bode Plot Generator              zbode
+"""
+BODE.PY
+
+Included Functions:
+- Transfer Function Bode Plot Generator     bode
+- S-Domain Bode Plot Generator              sbode
+- Z-Domain Bode Plot Generator              zbode
+"""
 #################################################################################
 
 # Import External Dependencies
