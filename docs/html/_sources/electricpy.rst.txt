@@ -4,10 +4,30 @@
 ELECTRICPY Module
 =================
 
+The base module for the `electricpy` package, electricpy.py may be leveraged
+in any Python script or program by using the *import* command similar to that
+shown below.
 
+>>> import electricpy as ep
+
+Filled with calculators, evaluators, and plotting functions, this package will
+provide a wide array of capabilities to any electrical engineer.
+
+Built to support operations similar to Numpy and Scipy, this package is designed
+to aid in scientific calculations.
 
 .. automodapi:: electricpy
+   :no-heading:
+   :no-main-docstr:
 
+-----------
+SUB-MODULES
+-----------
 
-   
+.. toctree::
+   :maxdepth: 1
+
+   constants
+   fault
+   bode
  
