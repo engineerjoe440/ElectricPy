@@ -188,6 +188,17 @@ def phasor( mag, ang ):
     phasor:     complex
                 Standard Pythonic Complex Representation of
                 the specified voltage or current.
+    
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> ep.phasor(67, 120) # 67 volts at angle 120 degrees
+    (-33.499999999999986+58.02370205355739j)
+    
+    See Also
+    --------
+    cprint:     Complex Variable Printing Function
+    phasorz:    Impedance Phasor Generator    
     """
     return( c.rect( mag, np.radians( ang ) ) )
 
@@ -368,6 +379,17 @@ def cprint(val,unit="",label="",printval=True,ret=False,round=3):
                 The array of values corresponding to the magnitude and angle,
                 values are returned in the form: [[ mag, ang ],...,[ mag, ang ]]
                 where the angles are evaluated in degrees.
+    
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> v = ep.phasor(67, 120)
+    >>> ep.cprint(v)
+    67.0 ∠ 120.0°
+    
+    See Also
+    --------
+    phasor:     Phasor Generating Function
     """
     printarr = np.array([]) # Empty array
     numarr = np.array([]) # Empty array
