@@ -14,6 +14,7 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -54,10 +55,13 @@
 <dd><p>Impedance from Apparent Power Formula</p>
 <p>Function to determine the ohmic resistance/reactance
 (impedance) represented by the apparent power (S).</p>
-<dl class="simple">
-<dt>Formula:    Z = V^2 / S           (series components)</dt><dd><p>Z = V^2 / (3*S)       (parallel components)</p>
-</dd>
-</dl>
+<div class="math notranslate nohighlight" id="equation-series">
+<span class="eqno">(1)<a class="headerlink" href="#equation-series" title="Permalink to this equation">¶</a></span>\[Z = \frac{V^2}{S}\]</div>
+<div class="math notranslate nohighlight" id="equation-parallel">
+<span class="eqno">(2)<a class="headerlink" href="#equation-parallel" title="Permalink to this equation">¶</a></span>\[Z = \frac{V^2}{(3*S)}\]</div>
+<p>This function can evaluate the component values for
+both series <a class="reference internal" href="#equation-series">(1)</a> and parallel <a class="reference internal" href="#equation-parallel">(2)</a>
+connected circuits.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">

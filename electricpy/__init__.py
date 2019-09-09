@@ -1335,8 +1335,15 @@ def powerimpedance(S,V,PF=None,parallel=False):
     Function to determine the ohmic resistance/reactance
     (impedance) represented by the apparent power (S).
     
-    Formula:    Z = V^2 / S           (series components)
-                Z = V^2 / (3*S)       (parallel components)
+    .. math:: Z = \\frac{V^2}{S}
+       :label: series
+    
+    .. math:: Z = \\frac{V^2}{(3*S)}
+       :label: parallel
+    
+    This function can evaluate the component values for
+    both series :eq:`series` and parallel :eq:`parallel`
+    connected circuits.
     
     Parameters
     ----------
