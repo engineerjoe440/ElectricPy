@@ -104,6 +104,7 @@ Included Functions
  - Transformer Secondary Conversion:     secondary
  - Natural Frequency Calculator          natfreq
  - 3-Phase Voltage/Current Unbalance:    unbalance
+ - Characteristic Impedance Calculator:  characterz
 
 Additional Available Sub-Modules
 --------------------------------
@@ -151,7 +152,7 @@ Functions Available in `electricpy.bode.py`
 
 # Define Module Specific Variables
 _name_ = "electricpy"
-_version_ = "0.0.2"
+_version_ = "0.0.3"
 # Version Breakdown:
 # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
 
@@ -3738,5 +3739,43 @@ def sinfilt(arr,Srate,domain=False):
         return(sinf,xarray)
     return(sinf)
 
+
+# Define Characteristic Impedance Calculator
+def characterz(R,G,L,C,freq=60):
+    """
+    Characteristic Impedance Calculator
+    
+    Function to evaluate the characteristic 
+    impedance of a system with specefied
+    line parameters as defined. System uses
+    the standard characteristic impedance
+    equation :eq:`Zc`.
+    
+    .. math:: Z_c = \\sqrt{\\frac{R+j\\omega L}{G+j\\omega C}}
+       :label: Zc
+    
+    Parameters
+    ----------
+    R:          float
+                Resistance in ohms.
+    G:          float
+                Conductance in mhos (siemens).
+    L:          float
+                Inductance in Henries.
+    C:          float
+                Capacitance in Farads.
+    freq:       float, optional
+                System frequency in Hz, default=60
+    
+    Returns
+    -------
+    Zc:         complex
+                Charcteristic Impedance of specified line.
+    """
+    # Evaluate omega
+    w = 2*np.pi*freq
+    # Evaluate Zc
+    Zc = np.sqrt((R+1j*w*L)/(G+1j*w*C))
+    return(Zc)
 
 # END OF FILE
