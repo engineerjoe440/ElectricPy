@@ -22,11 +22,11 @@ VLLcVLN = c.rect(np.sqrt(3),np.radians(30)) # Conversion Operator
 ILcIP = c.rect(np.sqrt(3),np.radians(-30)) # Conversion Operator
 
 # Define Electrical Engineering Matricies
-Aabc = 1/3 * np.array([[ 1, 1, 1    ],  # Convert ABC to 012
-                       [ 1, a, a**2 ],  # (i.e. phase to sequence)
+Aabc = 1/3 * np.array([[ 1, 1, 1    ],  # Convert 012 to ABC
+                       [ 1, a, a**2 ],  # (i.e. sequence to phase)
                        [ 1, a**2, a ]])
-A012 = np.array([[ 1, 1, 1    ],        # Convert 012 to ABC
-                 [ 1, a**2, a ],        # (i.e. sequence to phase)
+A012 = np.array([[ 1, 1, 1    ],        # Convert ABC to 012
+                 [ 1, a**2, a ],        # (i.e. phase to sequence)
                  [ 1, a, a**2 ]])
                  
 # Define Transformer Shift Correction Matricies
