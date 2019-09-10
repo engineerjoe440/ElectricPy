@@ -90,8 +90,8 @@ Included Functions
  - Per-Unit to Ohmic Impedance:          zrecompose
  - X over R to Ohmic Impedance:          rxrecompose
  - Generator Internal Voltage Calc:      geninternalv
- - Phase to Sequence Conversion:         sequence
- - Sequence to Phase Conversion:         phases
+ - Phase to Sequence Conversion:         abc_to_seq
+ - Sequence to Phase Conversion:         seq_to_abc
  - Function Harmonic (FFT) Evaluation:   funcfft
  - Dataset Harmonic (FFT) Evaluation:    sampfft
  - Harmonic (FFT) Component Plotter:     fftplot
@@ -3041,7 +3041,7 @@ def geninternalv(I,Zs,Vt,Vgn=None,Zm=None,Ip=None,Ipp=None):
     return(Ea)
 
 # Define Sequence Component Conversion Function
-def sequence(Mabc):
+def abc_to_seq(Mabc):
     """
     Phase-System to Sequence-System Conversion
     
@@ -3061,7 +3061,7 @@ def sequence(Mabc):
     return(Aabc.dot(Mabc))
 
 # Define Phase Component Conversion Function
-def phases(M012):
+def seq_to_abc(M012):
     """
     Sequence-System to Phase-System Conversion
     
