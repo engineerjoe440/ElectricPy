@@ -3041,7 +3041,7 @@ def geninternalv(I,Zs,Vt,Vgn=None,Zm=None,Ip=None,Ipp=None):
     return(Ea)
 
 # Define Sequence Component Conversion Function
-def abc_to_seq(Mabc):
+def abc_to_seq(Mabc,reference='A'):
     """
     Phase-System to Sequence-System Conversion
     
@@ -3052,16 +3052,27 @@ def abc_to_seq(Mabc):
     ----------
     Mabc:       list of complex
                 Phase-based values to be converted.
+    reference:  string
+                Single character denoting the reference,
+                default='A'
     
     Returns
     -------
     M012:       numpy.ndarray
                 Sequence-based values.
     """
-    return(Aabc.dot(Mabc))
+    if reference == 'A':
+        M = Aabc
+    elif reference == 'B':
+        M = np.roll(Aabc, 1, 0)
+    elif reference == 'C':
+        M = np.roll(Aabc, 2, 0)
+    else:
+        raise ValueError("Invalid Phase Reference.")
+    return(M.dot(Mabc))
 
 # Define Phase Component Conversion Function
-def seq_to_abc(M012):
+def seq_to_abc(M012,reference='A'):
     """
     Sequence-System to Phase-System Conversion
     
@@ -3072,13 +3083,24 @@ def seq_to_abc(M012):
     ----------
     M012:       list of complex
                 Sequence-based values to convert.
+    reference:  string
+                Single character denoting the reference,
+                default='A'
     
     Returns
     -------
     Mabc:       numpy.ndarray
                 Phase-based values.
     """
-    return(A012.dot(M012))
+    if reference == 'A':
+        M = A012
+    elif reference == 'B':
+        M = np.roll(A012, 1, 1)
+    elif reference == 'C':
+        M = np.roll(A012, 2, 1)
+    else:
+        raise ValueError("Invalid Phase Reference.")
+    return(M.dot(M012))
 
 # FFT Coefficient Calculator Function
 def funcfft(func, minfreq=60, maxmult=15, complex=False):
