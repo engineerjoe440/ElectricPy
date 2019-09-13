@@ -10,23 +10,23 @@ import numpy as np
 import cmath as c
 
 # Define Electrical Engineering Constants
-a = c.rect(1,np.radians(120)) # A Operator for Sym. Components
-p = 1e-12 # Pico Multiple
-n = 1e-9 # Nano Multiple
-u = 1e-6 # Micro (mu) Multiple
-m = 1e-3 # Mili Multiple
-k = 1e+3 # Kili Multiple
-M = 1e+6 # Mega Multiple
+a = c.rect(1,np.radians(120)) #: 'A' Operator for Symmetrical Components
+p = 1e-12 #: Pico Multiple      (10^-12)
+n = 1e-9 #: Nano Multiple       (10^-9)
+u = 1e-6 #: Micro (mu) Multiple (10^-6)
+m = 1e-3 #: Mili Multiple       (10^-3)
+k = 1e+3 #: Kili Multiple       (10^3)
+M = 1e+6 #: Mega Multiple       (10^6)
 NAN = float('nan')
 VLLcVLN = c.rect(np.sqrt(3),np.radians(30)) # Conversion Operator
 ILcIP = c.rect(np.sqrt(3),np.radians(-30)) # Conversion Operator
 
 # Define Electrical Engineering Matricies
-Aabc = 1/3 * np.array([[ 1, 1, 1    ],  # Convert ABC to 012
-                       [ 1, a, a**2 ],  # (i.e. phase to sequence)
+Aabc = 1/3 * np.array([[ 1, 1, 1    ],  # Convert 012 to ABC
+                       [ 1, a, a**2 ],  # (i.e. sequence to phase)
                        [ 1, a**2, a ]])
-A012 = np.array([[ 1, 1, 1    ],        # Convert 012 to ABC
-                 [ 1, a**2, a ],        # (i.e. sequence to phase)
+A012 = np.array([[ 1, 1, 1    ],        # Convert ABC to 012
+                 [ 1, a**2, a ],        # (i.e. phase to sequence)
                  [ 1, a, a**2 ]])
                  
 # Define Transformer Shift Correction Matricies

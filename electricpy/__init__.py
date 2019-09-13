@@ -29,6 +29,7 @@ Symmetrical Components Matricies
 Included Functions
 ------------------
  - Phasor V/I Generator:                 phasor
+ - Phasor Array V/I Generator:           phasorlist
  - Phasor Data Genorator:                phasordata
  - Time of Number of Cycles:             tcycle        
  - Phasor Impedance Generator:           phasorz
@@ -169,7 +170,7 @@ import cmath as c
 
                  
 # Define Phasor Generator
-def phasor( mag, ang ):
+def phasor( mag, ang=None ):
     """
     Complex Phasor Generator
     
@@ -198,10 +199,61 @@ def phasor( mag, ang ):
     
     See Also
     --------
+    phasorlist: Phasor Generator for List or Array
     cprint:     Complex Variable Printing Function
     phasorz:    Impedance Phasor Generator    
     """
+    # Test for Tuple/List Arg
+    if isinstance(mag, (tuple,list,np.ndarray)):
+        ang = mag[1]
+        mag = mag[0]
     return( c.rect( mag, np.radians( ang ) ) )
+
+# Define Phasor Array Generator
+def phasorlist( arr ):
+    """
+    Complex Phasor Generator for 2-D Array or 2-D List
+    
+    Generates the standard Pythonic complex representation
+    of a phasor voltage or current when given the magnitude
+    and angle of the specific voltage or current for a list
+    or array of values.
+    
+    Parameters
+    ----------
+    arr:        numpy.ndarray
+                2-D array or list of magnitudes and angles.
+                Each item must be set of magnitude and angle
+                in form of: [mag, ang].
+    
+    Returns
+    -------
+    phasor:     complex
+                Standard Pythonic Complex Representation of
+                the specified voltage or current.
+    
+    Examples
+    --------
+    >>> import numpy as np
+    >>> import electricpy as ep
+    >>> voltages = np.array([[67,0],
+                             [67,-120],
+                             [67,120]])
+    >>> Vset = ep.phasorlist( voltages )
+    >>> print(Vset)
+    
+    See Also
+    --------
+    phasor:     Phasor Generating Function
+    cprint:     Complex Variable Printing Function
+    phasorz:    Impedance Phasor Generator
+    """
+    # Iteratively Process
+    outarr = np.array([])
+    for i in arr:
+        outarr = np.append(outarr, phasor( i ))
+    # Return Array
+    return(outarr)
 
 # Define Phasor Data Generator
 def phasordata(mn,mx=None,npts=1000,mag=1,ang=0,freq=60,
@@ -263,6 +315,36 @@ def phasordata(mn,mx=None,npts=1000,mag=1,ang=0,freq=60,
     if len(dataset) == 1:
         return(dataset[0])
     return(dataset)
+
+# Define Complex LaTeX Generator
+def clatex(val,round=3,polar=True,predollar=True,postdollar=True,double=False):
+    """
+    Complex Value Latex Generator
+    """
+    # Treat as Polar When Directed
+    if polar:
+        mag, ang_r = c.polar(val) #Convert to polar form
+        ang = np.degrees(ang_r) #Convert to degrees
+        mag = np.around( mag, round ) #Round
+        ang = np.around( ang, round ) #Round
+        latex = str(mag) + '∠' + str(ang) + '°'
+    else:
+        real = np.around( val.real, round ) #Round
+        imag = np.around( val.imag, round ) #Round
+        if imag > 0:
+            latex = str(real) + "+j" + str(imag)
+        else:
+            latex = str(real) + "-j" + str(abs(imag))
+    # Add Dollar Sign pre-post
+    if double:
+        dollar = r'$$'
+    else:
+        dollar = r'$'
+    if predollar:
+        latex = dollar + latex
+    if postdollar:
+        latex = latex + dollar
+    return( latex )
 
 # Define Cycle Time Function
 def tcycle(ncycles=1,freq=60):
@@ -339,7 +421,7 @@ def reactance(z,f=60,sensetivity=1e-12):
     return(out)
 
 # Define display function
-def cprint(val,unit="",label="",printval=True,ret=False,round=3):
+def cprint(val,unit=None,label=None,printval=True,ret=False,round=3):
     """
     Phasor (Complex) Printing Function
     
@@ -358,10 +440,8 @@ def cprint(val,unit="",label="",printval=True,ret=False,round=3):
                 tuple of values, or list/array.
     unit:       string, optional
                 The string to be printed corresponding to the unit mark.
-                default=""
     label:      string, optional
                 The pre-pended string used as a descriptive labeling string.
-                default=""
     printval:   bool, optional
                 Control argument enabling/disabling printing of the string.
                 default=True
@@ -387,81 +467,127 @@ def cprint(val,unit="",label="",printval=True,ret=False,round=3):
     >>> v = ep.phasor(67, 120)
     >>> ep.cprint(v)
     67.0 ∠ 120.0°
+    >>> voltages = np.array([[67,0],
+                             [67,-120],
+                             [67,120]])
+    >>> Vset = ep.phasorlist( voltages )
+    >>> ep.cprint(Vset)
+    [['67.0 ∠ 0.0°']
+    ['67.0 ∠ -120.0°']
+    ['67.0 ∠ 120.0°']]
+
     
     See Also
     --------
     phasor:     Phasor Generating Function
+    phasorlist: Phasor Generating Function for Lists or Arrays
+    phasorz:    Impedance Phasor Generator
     """
-    printarr = np.array([]) # Empty array
-    numarr = np.array([]) # Empty array
     # Find length of the input array
-    try:
-        len(val) # Test Case, For more than one Input
+    if isinstance(val,(list,np.ndarray)):
         val = np.asarray(val) # Ensure that input is array
         shp = val.shape
-        if(len(shp) > 1):
-            row, col = shp
-        else:
-            col = shp[0]
-            row = 1
-            val = val.reshape((col,row))
-            col = row
+        try:
+            row, col = shp # Interpret Shape of Object
+        except:
             row = shp[0]
+            col = 1
         sz = val.size
-        mult = True
-        # Handle Label for Each Element
-        if label=="":
-            label = np.array([])
-            for _ in range(sz):
-                label = np.append(label,[""])
-        elif len(label)==1 or isinstance(label, str):
+        # Handle Label as a List or Array
+        if isinstance(label, (list,np.ndarray)):
+            if len(label)==1:
+                tmp = label
+                for _ in range(sz):
+                    label = np.append(label,[tmp])
+            elif sz != len(label):
+                raise ValueError("Too Few Label Arguments")
+        # Handle Label as String
+        elif isinstance(label, str):
             tmp = label
             for _ in range(sz):
                 label = np.append(label,[tmp])
-        # Handle Unit for Each Element
-        if unit=="":
-            unit = np.array([])
+        # Handle Lack of Label
+        elif label == None:
+            label = np.array([])
             for _ in range(sz):
-                unit = np.append(unit,[""])
-        elif len(unit)==1 or str(type(unit))==tstr:
+                label = np.append(label,None)
+        # Handle all Other Cases
+        else:
+            raise ValueError("Invalid Label")
+        # Handle Unit as a List or Array
+        if isinstance(unit, (list,np.ndarray)):
+            if len(unit)==1:
+                tmp = unit
+                for _ in range(sz):
+                    unit = np.append(unit,[tmp])
+            elif sz != len(unit):
+                raise ValueError("Too Few Unit Arguments")
+        # Handle Unit as String
+        elif isinstance(unit, str):
             tmp = unit
             for _ in range(sz):
                 unit = np.append(unit,[tmp])
-    except:
-        row = 1
-        col = 1
-        sz = 1
-        mult = False
-        _label = label
-        _unit = unit
-    # For each value in the input (array)
-    for i in range(row):
-        if mult:
+        # Handle Lack of Unit
+        elif unit == None:
+            unit = np.array([])
+            for _ in range(sz):
+                unit = np.append(unit,None)
+        # Handle all Other Cases
+        else:
+            raise ValueError("Invalid Unit")
+        # Generate Default Arrays
+        printarr = np.array([]) # Empty array
+        numarr = np.array([]) # Empty array
+        # Operate on List/Array
+        for i in range(row):
             _val = val[i]
             _label = label[i]
             _unit = unit[i]
-        else:
-            _val = val
-            _label = label
-            _unit = unit
+            mag, ang_r = c.polar(_val) #Convert to polar form
+            ang = np.degrees(ang_r) #Convert to degrees
+            mag = np.around( mag, round ) #Round
+            ang = np.around( ang, round ) #Round
+            strg = ""
+            if _label != None:
+                strg += _label + " "
+            strg += str(mag)+" ∠ "+str(ang)+"°"
+            if _unit != None:
+                strg += " " + _unit
+            printarr = np.append(printarr, strg)
+            numarr = np.append(numarr, [mag, ang])
+        # Reshape Arrays
+        printarr = np.reshape(printarr, (row,col))
+        numarr = np.reshape(numarr, (sz, 2))
+        # Print
+        if printval and row==1:
+            print(strg)
+        elif printval:
+            print(printarr)
+        # Return if Necessary
+        if ret:
+            return(numarr)
+    else:
+        # Handle Invalid Unit/Label
+        if unit != None and not isinstance(unit, str):
+            raise ValueError("Invalid Unit Type for Value")
+        if label != None and not isinstance(unit, str):
+            raise ValueError("Invalid Label Type for Value")
         mag, ang_r = c.polar(_val) #Convert to polar form
         ang = np.degrees(ang_r) #Convert to degrees
         mag = np.around( mag, round ) #Round
         ang = np.around( ang, round ) #Round
-        strg = _label+" "+str(mag)+" ∠ "+str(ang)+"° "+_unit
-        printarr = np.append(printarr, strg)
-        numarr = np.append(numarr, [mag, ang])
-    # Reshape the array to match input
-    printarr = np.reshape(printarr, (row,col))
-    numarr = np.reshape(numarr, (sz, 2))
-    # Print values (by default)
-    if printval and row==1:
-        print(strg)
-    elif printval:
-        print(printarr)
-    # Return values when requested
-    if ret:
-        return(numarr)
+        strg = ""
+        if label != None:
+            strg += label + " "
+        strg += +str(mag)+" ∠ "+str(ang)+"°"
+        if unit != None:
+            strg += " " + unit
+        # Print values (by default)
+        if printval:
+            print(strg)
+        # Return values when requested
+        if ret:
+            return(numarr)
 
 # Define Impedance Conversion function
 def phasorz(C=None,L=None,f=60,complex=True):

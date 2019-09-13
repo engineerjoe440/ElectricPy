@@ -58,6 +58,7 @@ Description: # ELECTRICPY
             - DC/DC Converters
             - DC/AC Converters
             - Stationary and Synchronous Reference Frame conversion Matricies/Constants
+            - Add Phase Reference (A/B/C) to fault equations (np.roll)
         
         
         ## Contact:
