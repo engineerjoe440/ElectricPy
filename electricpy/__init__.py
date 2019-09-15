@@ -3194,14 +3194,14 @@ def abc_to_seq(Mabc,reference='A'):
     Returns
     -------
     M012:       numpy.ndarray
-                Sequence-based values.
+                Sequence-based values in order of 0-1-2
     """
     if reference == 'A':
-        M = A012
+        M = Aabc
     elif reference == 'B':
-        M = np.roll(A012, 1, 0)
+        M = np.roll(Aabc, 1, 0)
     elif reference == 'C':
-        M = np.roll(A012, 2, 0)
+        M = np.roll(Aabc, 2, 0)
     else:
         raise ValueError("Invalid Phase Reference.")
     return(M.dot(Mabc))
@@ -3225,17 +3225,19 @@ def seq_to_abc(M012,reference='A'):
     Returns
     -------
     Mabc:       numpy.ndarray
-                Phase-based values.
+                Phase-based values in order of A-B-C
     """
+    # Compute
+    M = A012.dot(M012)
     if reference == 'A':
-        M = Aabc
+        pass
     elif reference == 'B':
-        M = np.roll(Aabc, 1, 1)
+        M = np.roll(M, 1, 0)
     elif reference == 'C':
-        M = np.roll(Aabc, 2, 1)
+        M = np.roll(M, 2, 0)
     else:
         raise ValueError("Invalid Phase Reference.")
-    return(M.dot(M012))
+    return(M)
 
 # FFT Coefficient Calculator Function
 def funcfft(func, minfreq=60, maxmult=15, complex=False):
