@@ -337,9 +337,9 @@ def clatex(val,round=3,polar=True,predollar=True,postdollar=True,double=False):
             latex = str(real) + "-j" + str(abs(imag))
     # Add Dollar Sign pre-post
     if double:
-        dollar = r'$'
-    else:
         dollar = r'$$'
+    else:
+        dollar = r'$'
     if predollar:
         latex = dollar + latex
     if postdollar:
@@ -572,14 +572,14 @@ def cprint(val,unit=None,label=None,printval=True,ret=False,round=3):
             raise ValueError("Invalid Unit Type for Value")
         if label != None and not isinstance(unit, str):
             raise ValueError("Invalid Label Type for Value")
-        mag, ang_r = c.polar(_val) #Convert to polar form
+        mag, ang_r = c.polar(val) #Convert to polar form
         ang = np.degrees(ang_r) #Convert to degrees
         mag = np.around( mag, round ) #Round
         ang = np.around( ang, round ) #Round
         strg = ""
         if label != None:
             strg += label + " "
-        strg += +str(mag)+" ∠ "+str(ang)+"°"
+        strg += str(mag)+" ∠ "+str(ang)+"°"
         if unit != None:
             strg += " " + unit
         # Print values (by default)
@@ -948,9 +948,8 @@ def transformertest(Poc=False,Voc=False,Ioc=False,Psc=False,Vsc=False,
                 "Not enough arguments were provided.")
 
 # Define Phasor Plot Generator
-def phasorplot(phasor,title="Phasor Diagram",legend=False,bg="#d5de9c",radius=1.2,
-               colors = ["#FF0000","#800000","#FFFF00","#808000","#00ff00","#008000",
-                         "#00ffff","#008080","#0000ff","#000080","#ff00ff","#800080"]):
+def phasorplot(phasor,title="Phasor Diagram",legend=False,bg=None,
+               radius=None,colors=None):
     """
     Phasor Plotting Function
     
@@ -970,10 +969,20 @@ def phasorplot(phasor,title="Phasor Diagram",legend=False,bg="#d5de9c",radius=1.
     bg:         string, optional
                 Background-Color control, default="#d5de9c"
     radius:     float, optional
-                The diagram radius, default=1.2
+                The diagram radius, unless specified, automatically scales
     colors:     list of str, optional
                 List of hexidecimal color strings denoting the line colors to use.
     """
+    # Manage Colors
+    if colors==None:
+        colors = ["#FF0000","#800000","#FFFF00","#808000","#00ff00","#008000",
+                  "#00ffff","#008080","#0000ff","#000080","#ff00ff","#800080"]
+    # Scale Radius
+    if radius==None:
+        radius = np.abs(phasor).max()
+    # Set Background Color
+    if bg==None:
+        bg = "#FFFFFF"
     # Check for more phasors than colors
     numphs = len(phasor)
     numclr = len(colors)
@@ -3188,11 +3197,11 @@ def abc_to_seq(Mabc,reference='A'):
                 Sequence-based values.
     """
     if reference == 'A':
-        M = Aabc
+        M = A012
     elif reference == 'B':
-        M = np.roll(Aabc, 1, 0)
+        M = np.roll(A012, 1, 0)
     elif reference == 'C':
-        M = np.roll(Aabc, 2, 0)
+        M = np.roll(A012, 2, 0)
     else:
         raise ValueError("Invalid Phase Reference.")
     return(M.dot(Mabc))
@@ -3219,11 +3228,11 @@ def seq_to_abc(M012,reference='A'):
                 Phase-based values.
     """
     if reference == 'A':
-        M = A012
+        M = Aabc
     elif reference == 'B':
-        M = np.roll(A012, 1, 1)
+        M = np.roll(Aabc, 1, 1)
     elif reference == 'C':
-        M = np.roll(A012, 2, 1)
+        M = np.roll(Aabc, 2, 1)
     else:
         raise ValueError("Invalid Phase Reference.")
     return(M.dot(M012))
