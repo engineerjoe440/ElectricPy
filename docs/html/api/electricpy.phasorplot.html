@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>phasorplot &#8212; electricpy 0.0.3 documentation</title>
+    <title>phasorplot &#8212; electricpy 0.0.4 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="phasorz" href="electricpy.phasorz.html" />
-    <link rel="prev" title="phasordata" href="electricpy.phasordata.html" /> 
+    <link rel="prev" title="phasorlist" href="electricpy.phasorlist.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -35,9 +35,9 @@
           <a href="electricpy.phasorz.html" title="phasorz"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="electricpy.phasordata.html" title="phasordata"
+          <a href="electricpy.phasorlist.html" title="phasorlist"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>  
@@ -51,7 +51,7 @@
 <h1>phasorplot<a class="headerlink" href="#phasorplot" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="electricpy.phasorplot">
-<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">phasorplot</code><span class="sig-paren">(</span><em class="sig-param">phasor, title='Phasor Diagram', legend=False, bg='#d5de9c', radius=1.2, colors=['#FF0000', '#800000', '#FFFF00', '#808000', '#00ff00', '#008000', '#00ffff', '#008080', '#0000ff', '#000080', '#ff00ff', '#800080']</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.phasorplot" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">phasorplot</code><span class="sig-paren">(</span><em class="sig-param">phasor</em>, <em class="sig-param">title='Phasor Diagram'</em>, <em class="sig-param">legend=False</em>, <em class="sig-param">bg=None</em>, <em class="sig-param">radius=None</em>, <em class="sig-param">colors=None</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.phasorplot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Phasor Plotting Function</p>
 <p>This function is designed to plot a phasor-diagram with angles in degrees
 for up to 12 phasor sets. Phasors must be passed as a complex number set,
@@ -64,7 +64,7 @@ for up to 12 phasor sets. Phasors must be passed as a complex number set,
 <li><p><strong>legend</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to enable displaying the legend, must be passed
 as an array or list of strings, default=False</p></li>
 <li><p><strong>bg</strong> (<em>string</em><em>, </em><em>optional</em>) – Background-Color control, default=”#d5de9c”</p></li>
-<li><p><strong>radius</strong> (<em>float</em><em>, </em><em>optional</em>) – The diagram radius, default=1.2</p></li>
+<li><p><strong>radius</strong> (<em>float</em><em>, </em><em>optional</em>) – The diagram radius, unless specified, automatically scales</p></li>
 <li><p><strong>colors</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of hexidecimal color strings denoting the line colors to use.</p></li>
 </ul>
 </dd>
@@ -83,8 +83,8 @@ as an array or list of strings, default=False</p></li>
               <img class="logo" src="../_static/ElectricpyLogo.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="electricpy.phasordata.html"
-                        title="previous chapter">phasordata</a></p>
+  <p class="topless"><a href="electricpy.phasorlist.html"
+                        title="previous chapter">phasorlist</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="electricpy.phasorz.html"
                         title="next chapter">phasorz</a></p>
@@ -122,9 +122,9 @@ as an array or list of strings, default=False</p></li>
           <a href="electricpy.phasorz.html" title="phasorz"
              >next</a> |</li>
         <li class="right" >
-          <a href="electricpy.phasordata.html" title="phasordata"
+          <a href="electricpy.phasorlist.html" title="phasorlist"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.3 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>
