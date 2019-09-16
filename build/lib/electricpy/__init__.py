@@ -570,7 +570,7 @@ def cprint(val,unit=None,label=None,printval=True,ret=False,round=3):
         # Handle Invalid Unit/Label
         if unit != None and not isinstance(unit, str):
             raise ValueError("Invalid Unit Type for Value")
-        if label != None and not isinstance(unit, str):
+        if label != None and not isinstance(label, str):
             raise ValueError("Invalid Label Type for Value")
         mag, ang_r = c.polar(val) #Convert to polar form
         ang = np.degrees(ang_r) #Convert to degrees
@@ -714,19 +714,19 @@ def phaseline(VLL=None,VLN=None,Iline=None,Iphase=None,complex=False):
     """
     output = 0
     #Given VLL, convert to VLN
-    if (VLL!=None):
+    if VLL is not None:
         VLN = VLL/(VLLcVLN)
         output = VLN
     #Given VLN, convert to VLL
-    elif (VLN!=None):
+    elif VLN is not None:
         VLL = VLN*VLLcVLN
         output = VLL
     #Given Iphase, convert to Iline
-    elif (Iphase!=None):
+    elif Iphase is not None:
         Iline = Iphase*ILcIP
         output = Iline
     #Given Iline, convert to Iphase
-    elif (Iline!=None):
+    elif Iline is not None:
         Iphase = Iline/ILcIP
         output = Iphase
     #None given, error encountered
