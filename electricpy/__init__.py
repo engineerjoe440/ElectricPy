@@ -153,7 +153,7 @@ Functions Available in `electricpy.bode.py`
 
 # Define Module Specific Variables
 _name_ = "electricpy"
-_version_ = "0.0.3"
+_version_ = "0.0.4"
 # Version Breakdown:
 # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
 
@@ -690,6 +690,22 @@ def phaseline(VLL=None,VLN=None,Iline=None,Iphase=None,complex=False):
     Given a voltage of one type, this function will return the
     voltage of the opposite type. The same is true for current.
     
+    .. math:: V_{LL} = \\sqrt{3}∠30° * V_{LN}
+       :label: voltages
+    
+    Typical American (United States) standard is to note voltages in
+    Line-to-Line values (VLL), and often, the Line-to-Neutral voltage
+    is of value, this function uses the voltage :eq:`voltages` relation
+    to evaluate either voltage given the other.
+    
+    .. math:: I_{Φ} = \\frac{I_{line}}{\\sqrt{3}∠-30°}
+       :label: currents
+    
+    Often, the phase current in a delta-connected device is of
+    particular interest, and the line-current is provided. This
+    function uses the current :eq:`currents` formula to evaluate
+    phase- and line-current given the opposing term.
+    
     Parameters
     ----------
     VLL:        float, optional
@@ -702,15 +718,6 @@ def phaseline(VLL=None,VLN=None,Iline=None,Iphase=None,complex=False):
                 The Phase-Current; default=None
     complex:    bool, optional
                 Control to return value in complex form; default=False
-    
-    ======  =======
-    Inputs  Outputs
-    ======  =======
-    VLL     VLN
-    VLN     VLL
-    Iline   Iphase
-    Iphase  Iline
-    ======  =======
     """
     output = 0
     #Given VLL, convert to VLN

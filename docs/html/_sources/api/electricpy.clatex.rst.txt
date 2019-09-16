@@ -1,6 +1,6 @@
-phases
+clatex
 ======
 
 .. currentmodule:: electricpy
 
-.. autofunction:: phases
+.. autofunction:: clatex

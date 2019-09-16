@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>ELECTRICPY Module &#8212; electricpy 0.0.3 documentation</title>
+    <title>ELECTRICPY Module &#8212; electricpy 0.0.4 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
@@ -19,7 +19,7 @@
     <link rel="shortcut icon" href="_static/ElectricpyLogo.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="acpiv" href="api/electricpy.acpiv.html" />
+    <link rel="next" title="abc_to_seq" href="api/electricpy.abc_to_seq.html" />
     <link rel="prev" title="ELECTRICPY" href="index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -32,12 +32,12 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="api/electricpy.acpiv.html" title="acpiv"
+          <a href="api/electricpy.abc_to_seq.html" title="abc_to_seq"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="ELECTRICPY"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">electricpy 0.0.3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">electricpy 0.0.4 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -66,23 +66,29 @@ to aid in scientific calculations.</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/electricpy.acpiv.html#electricpy.acpiv" title="electricpy.acpiv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">acpiv</span></code></a>([S, I, VLL, VLN, V])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/electricpy.abc_to_seq.html#electricpy.abc_to_seq" title="electricpy.abc_to_seq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">abc_to_seq</span></code></a>(Mabc[, reference])</p></td>
+<td><p>Phase-System to Sequence-System Conversion</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/electricpy.acpiv.html#electricpy.acpiv" title="electricpy.acpiv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">acpiv</span></code></a>([S, I, VLL, VLN, V])</p></td>
 <td><p>AC Power-Voltage-Current Relation Function</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/electricpy.btu_to_kwh.html#electricpy.btu_to_kwh" title="electricpy.btu_to_kwh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">btu_to_kwh</span></code></a>(BTU)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/electricpy.btu_to_kwh.html#electricpy.btu_to_kwh" title="electricpy.btu_to_kwh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">btu_to_kwh</span></code></a>(BTU)</p></td>
 <td><p>BTU to Killo-Watt-Hours Function:</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/electricpy.capbacktoback.html#electricpy.capbacktoback" title="electricpy.capbacktoback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">capbacktoback</span></code></a>(C1, C2, Lm[, VLN, VLL])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/electricpy.capbacktoback.html#electricpy.capbacktoback" title="electricpy.capbacktoback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">capbacktoback</span></code></a>(C1, C2, Lm[, VLN, VLL])</p></td>
 <td><p>Back to Back Capacitor Transient Current Calculator</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/electricpy.capenergy.html#electricpy.capenergy" title="electricpy.capenergy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">capenergy</span></code></a>(C, v)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/electricpy.capenergy.html#electricpy.capenergy" title="electricpy.capenergy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">capenergy</span></code></a>(C, v)</p></td>
 <td><p>Capacitor Energy Formula</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/electricpy.captransfer.html#electricpy.captransfer" title="electricpy.captransfer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">captransfer</span></code></a>(t, Vs, R, Cs, Cd)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/electricpy.captransfer.html#electricpy.captransfer" title="electricpy.captransfer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">captransfer</span></code></a>(t, Vs, R, Cs, Cd)</p></td>
 <td><p>Capacitor Energy Transfer Function</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/electricpy.characterz.html#electricpy.characterz" title="electricpy.characterz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">characterz</span></code></a>(R, G, L, C[, freq])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/electricpy.characterz.html#electricpy.characterz" title="electricpy.characterz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">characterz</span></code></a>(R, G, L, C[, freq])</p></td>
 <td><p>Characteristic Impedance Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/electricpy.clatex.html#electricpy.clatex" title="electricpy.clatex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clatex</span></code></a>(val[, round, polar, predollar, …])</p></td>
+<td><p>Complex Value Latex Generator</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/electricpy.coldjunction.html#electricpy.coldjunction" title="electricpy.coldjunction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coldjunction</span></code></a>(Tcj[, coupletype, To, Vo, P1, …])</p></td>
 <td><p>Thermocouple Cold-Junction Formula</p></td>
@@ -183,14 +189,14 @@ to aid in scientific calculations.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/electricpy.phaseline.html#electricpy.phaseline" title="electricpy.phaseline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phaseline</span></code></a>([VLL, VLN, Iline, Iphase, complex])</p></td>
 <td><p>Line-Line to Line-Neutral Converter</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/electricpy.phases.html#electricpy.phases" title="electricpy.phases"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phases</span></code></a>(M012)</p></td>
-<td><p>Sequence-System to Phase-System Conversion</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/electricpy.phasor.html#electricpy.phasor" title="electricpy.phasor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasor</span></code></a>(mag, ang)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/electricpy.phasor.html#electricpy.phasor" title="electricpy.phasor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasor</span></code></a>(mag[, ang])</p></td>
 <td><p>Complex Phasor Generator</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/electricpy.phasordata.html#electricpy.phasordata" title="electricpy.phasordata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasordata</span></code></a>(mn[, mx, npts, mag, ang, freq, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/electricpy.phasordata.html#electricpy.phasordata" title="electricpy.phasordata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasordata</span></code></a>(mn[, mx, npts, mag, ang, freq, …])</p></td>
 <td><p>Complex Phasor Data Generator</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/electricpy.phasorlist.html#electricpy.phasorlist" title="electricpy.phasorlist"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasorlist</span></code></a>(arr)</p></td>
+<td><p>Complex Phasor Generator for 2-D Array or 2-D List</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/electricpy.phasorplot.html#electricpy.phasorplot" title="electricpy.phasorplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasorplot</span></code></a>(phasor[, title, legend, bg, …])</p></td>
 <td><p>Phasor Plotting Function</p></td>
@@ -243,8 +249,8 @@ to aid in scientific calculations.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/electricpy.secondary.html#electricpy.secondary" title="electricpy.secondary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">secondary</span></code></a>(val, Np[, Ns, invert])</p></td>
 <td><p>Transformer Secondary Evaluator</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/electricpy.sequence.html#electricpy.sequence" title="electricpy.sequence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sequence</span></code></a>(Mabc)</p></td>
-<td><p>Phase-System to Sequence-System Conversion</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/electricpy.seq_to_abc.html#electricpy.seq_to_abc" title="electricpy.seq_to_abc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seq_to_abc</span></code></a>(M012[, reference])</p></td>
+<td><p>Sequence-System to Phase-System Conversion</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="api/electricpy.shannondata.html#electricpy.shannondata" title="electricpy.shannondata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shannondata</span></code></a>(BW, S, N)</p></td>
 <td><p>Shannon Data Function</p></td>
@@ -345,8 +351,8 @@ to aid in scientific calculations.</p>
   <p class="topless"><a href="index.html"
                         title="previous chapter">ELECTRICPY</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="api/electricpy.acpiv.html"
-                        title="next chapter">acpiv</a></p>
+  <p class="topless"><a href="api/electricpy.abc_to_seq.html"
+                        title="next chapter">abc_to_seq</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -378,12 +384,12 @@ to aid in scientific calculations.</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="api/electricpy.acpiv.html" title="acpiv"
+          <a href="api/electricpy.abc_to_seq.html" title="abc_to_seq"
              >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="ELECTRICPY"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">electricpy 0.0.3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">electricpy 0.0.4 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
