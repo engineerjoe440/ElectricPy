@@ -421,7 +421,7 @@ def reactance(z,f=60,sensetivity=1e-12):
     return(out)
 
 # Define display function
-def cprint(val,unit=None,label=None,printval=True,ret=False,round=3):
+def cprint(val,unit=None,label=None,pretty=False,printval=True,ret=False,round=3):
     """
     Phasor (Complex) Printing Function
     
@@ -440,8 +440,11 @@ def cprint(val,unit=None,label=None,printval=True,ret=False,round=3):
                 tuple of values, or list/array.
     unit:       string, optional
                 The string to be printed corresponding to the unit mark.
-    label:      string, optional
+    label:      str, optional
                 The pre-pended string used as a descriptive labeling string.
+    pretty:     bool, optional
+                Control argument to force printed result to a *pretty*
+                format without array braces. default=False
     printval:   bool, optional
                 Control argument enabling/disabling printing of the string.
                 default=True
@@ -561,6 +564,11 @@ def cprint(val,unit=None,label=None,printval=True,ret=False,round=3):
         # Print
         if printval and row==1:
             print(strg)
+        elif printval and pretty:
+            strg = ''
+            for i in printarr:
+                strg += str(i[0]) + '\n'
+            print(strg)
         elif printval:
             print(printarr)
         # Return if Necessary
@@ -587,7 +595,7 @@ def cprint(val,unit=None,label=None,printval=True,ret=False,round=3):
             print(strg)
         # Return values when requested
         if ret:
-            return(numarr)
+            return([mag, ang])
 
 # Define Impedance Conversion function
 def phasorz(C=None,L=None,f=60,complex=True):
@@ -3194,7 +3202,7 @@ def abc_to_seq(Mabc,reference='A'):
     ----------
     Mabc:       list of complex
                 Phase-based values to be converted.
-    reference:  string
+    reference:  str, optional
                 Single character denoting the reference,
                 default='A'
     
@@ -3203,6 +3211,8 @@ def abc_to_seq(Mabc,reference='A'):
     M012:       numpy.ndarray
                 Sequence-based values in order of 0-1-2
     """
+    # Condition Reference:
+    reference = reference.upper()
     if reference == 'A':
         M = Aabc
     elif reference == 'B':
@@ -3225,7 +3235,7 @@ def seq_to_abc(M012,reference='A'):
     ----------
     M012:       list of complex
                 Sequence-based values to convert.
-    reference:  string
+    reference:  str, optional
                 Single character denoting the reference,
                 default='A'
     
@@ -3234,8 +3244,10 @@ def seq_to_abc(M012,reference='A'):
     Mabc:       numpy.ndarray
                 Phase-based values in order of A-B-C
     """
-    # Compute
+    # Compute Dot Product
     M = A012.dot(M012)
+    # Condition Reference:
+    reference = reference.upper()
     if reference == 'A':
         pass
     elif reference == 'B':
@@ -3245,6 +3257,51 @@ def seq_to_abc(M012,reference='A'):
     else:
         raise ValueError("Invalid Phase Reference.")
     return(M)
+
+# Define Sequence Impedance Calculator
+def sequencez(Zabc,reference='A',round=3):
+    """
+    Sequence Impedance Calculator
+    
+    Accepts the phase (ABC-domain) impedances for a
+    system and calculates the sequence (012-domain)
+    impedances for the same system.
+    
+    Parameters
+    ----------
+    Zabc:       numpy.ndarray of complex
+                2-D (3x3) matrix of complex values
+                representing the phasor impedances
+                in the ABC-domain.
+    reference:  str, optional
+                Single character denoting the reference,
+                default='A'
+    round:      int, optional
+                Integer denoting number of decimal places
+                resulting matrix should be rounded to.
+                default=3
+    
+    Returns
+    -------
+    Z012:       numpy.ndarray of complex
+                2-D (3x3) matrix of complex values
+                representing the sequence impedances
+                in the 012-domain
+    """
+    # Condition Reference
+    reference = reference.upper()
+    rollrate = {'A':0,'B':1,'C':2}
+    # Test Validity
+    if reference not in rollrate:
+        raise ValueError("Invalad Phase Reference")
+    # Determine Roll Factor
+    roll = rollrate[ reference ]
+    # Evaluate Matricies
+    M012 = np.roll(A012,roll,0)
+    Minv = np.linalg.inv(M012)
+    # Compute Sequence Impedances
+    Z012 = Minv.dot( Zabc.dot(M012) )
+    return(np.around(Z012,round))
 
 # FFT Coefficient Calculator Function
 def funcfft(func, minfreq=60, maxmult=15, complex=False):
