@@ -321,20 +321,61 @@ def clatex(val,round=3,polar=True,predollar=True,postdollar=True,double=False):
     """
     Complex Value Latex Generator
     """
-    # Treat as Polar When Directed
-    if polar:
+    # Define Interpretation Functions
+    def polarstring( val, round ):
         mag, ang_r = c.polar(val) #Convert to polar form
         ang = np.degrees(ang_r) #Convert to degrees
         mag = np.around( mag, round ) #Round
         ang = np.around( ang, round ) #Round
         latex = str(mag) + '∠' + str(ang) + '°'
-    else:
+        return(latex)
+    def rectstring( val, round ):
         real = np.around( val.real, round ) #Round
         imag = np.around( val.imag, round ) #Round
         if imag > 0:
             latex = str(real) + "+j" + str(imag)
         else:
             latex = str(real) + "-j" + str(abs(imag))
+        return(latex)
+    # Interpret as numpy array if simple list
+    if isinstance(val, list):
+        val = np.asarray(val) # Ensure that input is array
+    # Find length of the input array
+    if isinstance(val,np.ndarray):
+        shp = val.shape
+        try:
+            row, col = shp # Interpret Shape of Object
+        except:
+            row = shp[0]
+            col = 1
+        sz = val.size
+        # Open Matrix
+        latex = r'\begin{bmatrix}'
+        # Iteratively Process Each Item in Array
+        for ri in range(row):
+            if ri != 0: # Insert Row Separator
+                latex += r'\\'
+            if col > 1:
+                for ci in range(col):
+                    if ci != 0: # Insert Column Separator
+                        latex += r' & '
+                    # Add Complex Represetation of Value
+                    if polar: latex += polarstring( val[ri][ci], round )
+                    else: latex += rectstring( val[ri][ci], round )
+            else:
+                # Add Complex Represetation of Value
+                if polar: latex += polarstring( val[ri], round )
+                else: latex += rectstring( val[ri], round )
+        # Close Matrix
+        latex += r'\end{bmatrix}'
+    elif isinstance(val, complex):
+        # Treat as Polar When Directed
+        if polar:
+            latex = polarstring( val, round )
+        else:
+            latex = rectstring( val, round )
+    else:
+        raise ValueError("Invalid Input Type")
     # Add Dollar Sign pre-post
     if double:
         dollar = r'$$'
@@ -486,9 +527,11 @@ def cprint(val,unit=None,label=None,pretty=False,printval=True,ret=False,round=3
     phasorlist: Phasor Generating Function for Lists or Arrays
     phasorz:    Impedance Phasor Generator
     """
-    # Find length of the input array
-    if isinstance(val,(list,np.ndarray)):
+    # Interpret as numpy array if simple list
+    if isinstance(val, list):
         val = np.asarray(val) # Ensure that input is array
+    # Find length of the input array
+    if isinstance(val,np.ndarray):
         shp = val.shape
         try:
             row, col = shp # Interpret Shape of Object
@@ -574,7 +617,7 @@ def cprint(val,unit=None,label=None,pretty=False,printval=True,ret=False,round=3
         # Return if Necessary
         if ret:
             return(numarr)
-    else:
+    elif isinstance(val, (int,float,complex)):
         # Handle Invalid Unit/Label
         if unit != None and not isinstance(unit, str):
             raise ValueError("Invalid Unit Type for Value")
@@ -596,6 +639,8 @@ def cprint(val,unit=None,label=None,pretty=False,printval=True,ret=False,round=3
         # Return values when requested
         if ret:
             return([mag, ang])
+    else:
+        raise ValueError("Invalid Input Type")
 
 # Define Impedance Conversion function
 def phasorz(C=None,L=None,f=60,complex=True):
