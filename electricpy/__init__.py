@@ -320,6 +320,38 @@ def phasordata(mn,mx=None,npts=1000,mag=1,ang=0,freq=60,
 def clatex(val,round=3,polar=True,predollar=True,postdollar=True,double=False):
     """
     Complex Value Latex Generator
+    
+    Function to generate a LaTeX string of complex value(s)
+    in either polar or rectangular form. May generate both dollar
+    signs.
+    
+    Parameters
+    ----------
+    val:        complex
+                The complex value to be printed, if value
+                is a list or numpy array, the result will be
+                demonstrated as a matrix.
+    round:      int, optional
+                Control to specify number of decimal places
+                that should displayed. default=True
+    polar:      bool, optional
+                Control argument to force result into polar
+                coordinates instead of rectangular. default=True
+    predollar:  bool, optional
+                Control argument to enable/disable the dollar
+                sign before the string. default=True
+    postdollar: bool, optional
+                Control argument to enable/disable the dollar
+                sign after the string. default=True
+    double:     bool, optional
+                Control argument to specify whether or not
+                LaTeX dollar signs should be double or single,
+                default=False
+    
+    Returns
+    -------
+    latex:      str
+                LaTeX string for the complex value.
     """
     # Define Interpretation Functions
     def polarstring( val, round ):
