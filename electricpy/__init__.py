@@ -28,84 +28,87 @@ Symmetrical Components Matricies
 
 Included Functions
 ------------------
- - Phasor V/I Generator:                 phasor
- - Phasor Array V/I Generator:           phasorlist
- - Phasor Data Genorator:                phasordata
- - Time of Number of Cycles:             tcycle        
- - Phasor Impedance Generator:           phasorz
- - Complex Display Function:             cprint
- - Parallel Impedance Adder:             parallelz
- - V/I Line/Phase Converter:             phaseline
- - Power Set Values:                     powerset
- - Power Triangle Function:              powertriangle
- - Transformer SC OC Tests:              transformertest
- - Phasor Plot Generator:                phasorplot
- - Total Harmonic Distortion:            thd
- - Total Demand Distortion:              tdd
- - Reactance Calculator:                 reactance
- - Non-Linear PF Calc:                   nlinpf
- - Harmonic Limit Calculator:            harmoniclimit
- - Power Factor Distiortion:             pfdist
- - Short-Circuit RL Current:             iscrl
- - Voltage Divider:                      voltdiv
- - Current Divider:                      curdiv
- - Instantaneous Power Calc.:            instpower
- - Delta-Wye Network Converter:          dynetz
- - Single Line Power Flow:               powerflow
- - Thermocouple Temperature:             thermocouple
- - Cold Junction Voltage:                coldjunction
- - RTD Temperature Calculator:           rtdtemp
- - Horsepower to Watts:                  hp_to_watts
- - Watts to Horsepower:                  watts_to_hp
- - Inductor Charge:                      inductorcharge
- - Inductor Discharge:                   inductordischarge
- - Inductor Stored Energy:               inductorenergy      
- - Back-to-Back Cap. Surge:              capbacktoback  
- - Capacitor Stored Energy:              energy
- - Cap. Voltage after Time:              VafterT
- - Cap. Voltage Discharge:               vcapdischarge
- - Cap. Voltage Charge:                  vcapcharge
- - Rectifier Cap. Calculation:           rectifiercap
- - Cap. VAR to FARAD Conversion:         farads
- - VSC DC Bus Voltage Calculator:        vscdcbus
- - PLL-VSC Gains Calculator:             vscgains
- - RMS Calculator:                       rms
- - Step Function:                        step
- - Multi-Argument Convolution:           convolve
- - Convolution Bar Graph Visualizer:     convbar
- - Gaussian Function:                    gaussian
- - Gaussian Distribution Calculator:     gausdist
- - Probability Density Calculator:       probdensity
- - Real FFT Evaluator:                   rfft
- - Normalized Power Spectrum:            wrms
- - Hartley's Data Capacity Equation:     hartleydata
- - Shannon's Data Capacity Equation:     shannondata
- - String to Bit-String Converter:       string_to_bits
- - CRC Message Generator:                crcsender
- - CRC Remainder Calculator:             crcremainder
- - kWh to BTU:                           kwh_to_btu
- - BTU to kWh:                           btu_to_kwh
- - Per-Unit Impedance Calculator:        zpu
- - Per-Unit Current Calculator:          ipu
- - Per-Unit Change of Base Formula:      puchgbase
- - Per-Unit to Ohmic Impedance:          zrecompose
- - X over R to Ohmic Impedance:          rxrecompose
- - Generator Internal Voltage Calc:      geninternalv
- - Phase to Sequence Conversion:         abc_to_seq
- - Sequence to Phase Conversion:         seq_to_abc
- - Function Harmonic (FFT) Evaluation:   funcfft
- - Dataset Harmonic (FFT) Evaluation:    sampfft
- - Harmonic (FFT) Component Plotter:     fftplot
- - Harmonic (FFT) Summation Plotter:     fftsumplot 
- - Harmonic System Generator:            harmonics   
- - Motor Startup Capacitor Formula:      motorstartcap
- - Power Factor Correction Formula:      pfcorrection
- - AC Power/Voltage/Current Relation:    acpiv
- - Transformer Primary Conversion:       primary
- - Transformer Secondary Conversion:     secondary
- - Natural Frequency Calculator          natfreq
- - 3-Phase Voltage/Current Unbalance:    unbalance
- - Characteristic Impedance Calculator:  characterz
+ - Phasor V/I Generator:                    phasor
+ - Phasor Array V/I Generator:              phasorlist
+ - Phasor Data Genorator:                   phasordata
+ - Time of Number of Cycles:                tcycle        
+ - Phasor Impedance Generator:              phasorz
+ - Complex Display Function:                cprint
+ - Complex LaTeX Display Function:          clatex
+ - Transfer Function LaTeX Generator:       tflatex
+ - Parallel Impedance Adder:                parallelz
+ - V/I Line/Phase Converter:                phaseline
+ - Power Set Values:                        powerset
+ - Power Triangle Function:                 powertriangle
+ - Transformer SC OC Tests:                 transformertest
+ - Phasor Plot Generator:                   phasorplot
+ - Total Harmonic Distortion:               thd
+ - Total Demand Distortion:                 tdd
+ - Reactance Calculator:                    reactance
+ - Non-Linear PF Calc:                      nlinpf
+ - Harmonic Limit Calculator:               harmoniclimit
+ - Power Factor Distiortion:                pfdist
+ - Short-Circuit RL Current:                iscrl
+ - Voltage Divider:                         voltdiv
+ - Current Divider:                         curdiv
+ - Instantaneous Power Calc.:               instpower
+ - Delta-Wye Network Converter:             dynetz
+ - Single Line Power Flow:                  powerflow
+ - Thermocouple Temperature:                thermocouple
+ - Cold Junction Voltage:                   coldjunction
+ - RTD Temperature Calculator:              rtdtemp
+ - Horsepower to Watts:                     hp_to_watts
+ - Watts to Horsepower:                     watts_to_hp
+ - Inductor Charge:                         inductorcharge
+ - Inductor Discharge:                      inductordischarge
+ - Inductor Stored Energy:                  inductorenergy      
+ - Back-to-Back Cap. Surge:                 capbacktoback  
+ - Capacitor Stored Energy:                 energy
+ - Cap. Voltage after Time:                 VafterT
+ - Cap. Voltage Discharge:                  vcapdischarge
+ - Cap. Voltage Charge:                     vcapcharge
+ - Rectifier Cap. Calculation:              rectifiercap
+ - Cap. VAR to FARAD Conversion:            farads
+ - VSC DC Bus Voltage Calculator:           vscdcbus
+ - PLL-VSC Gains Calculator:                vscgains
+ - RMS Calculator:                          rms
+ - Step Function:                           step
+ - Multi-Argument Convolution:              convolve
+ - Convolution Bar Graph Visualizer:        convbar
+ - Gaussian Function:                       gaussian
+ - Gaussian Distribution Calculator:        gausdist
+ - Probability Density Calculator:          probdensity
+ - Real FFT Evaluator:                      rfft
+ - Normalized Power Spectrum:               wrms
+ - Hartley's Data Capacity Equation:        hartleydata
+ - Shannon's Data Capacity Equation:        shannondata
+ - String to Bit-String Converter:          string_to_bits
+ - CRC Message Generator:                   crcsender
+ - CRC Remainder Calculator:                crcremainder
+ - kWh to BTU:                              kwh_to_btu
+ - BTU to kWh:                              btu_to_kwh
+ - Per-Unit Impedance Calculator:           zpu
+ - Per-Unit Current Calculator:             ipu
+ - Per-Unit Change of Base Formula:         puchgbase
+ - Per-Unit to Ohmic Impedance:             zrecompose
+ - X over R to Ohmic Impedance:             rxrecompose
+ - Generator Internal Voltage Calc:         geninternalv
+ - Phase to Sequence Conversion:            abc_to_seq
+ - Sequence to Phase Conversion:            seq_to_abc
+ - Sequence Impedance Calculator:           sequencez
+ - Function Harmonic (FFT) Evaluation:      funcfft
+ - Dataset Harmonic (FFT) Evaluation:       sampfft
+ - Harmonic (FFT) Component Plotter:        fftplot
+ - Harmonic (FFT) Summation Plotter:        fftsumplot 
+ - Harmonic System Generator:               harmonics   
+ - Motor Startup Capacitor Formula:         motorstartcap
+ - Power Factor Correction Formula:         pfcorrection
+ - AC Power/Voltage/Current Relation:       acpiv
+ - Transformer Primary Conversion:          primary
+ - Transformer Secondary Conversion:        secondary
+ - Natural Frequency Calculator             natfreq
+ - 3-Phase Voltage/Current Unbalance:       unbalance
+ - Characteristic Impedance Calculator:     characterz
 
 Additional Available Sub-Modules
 --------------------------------
@@ -408,6 +411,93 @@ def clatex(val,round=3,polar=True,predollar=True,postdollar=True,double=False):
             latex = rectstring( val, round )
     else:
         raise ValueError("Invalid Input Type")
+    # Add Dollar Sign pre-post
+    if double:
+        dollar = r'$$'
+    else:
+        dollar = r'$'
+    if predollar:
+        latex = dollar + latex
+    if postdollar:
+        latex = latex + dollar
+    return( latex )
+
+# Define Transfer Function LaTeX Generator
+def tflatex(sys,sysp=None,var='s',predollar=True,
+            postdollar=True,double=False,tolerance=1e-8):
+    """
+    Transfer Function LaTeX String Generator
+    
+    LaTeX string generating function to create a transfer
+    function string in LaTeX. Particularly useful for
+    demonstrating systems in Interactive Python Notebooks.
+    
+    Parameters
+    ----------
+    sys:        list
+                If provided in conjunction with optional
+                parameter `sysp`, the parameter `sys` will
+                act as the numerator set. Otherwise, can be
+                passed as a list containing two sublists,
+                the first being the numerator set, and the
+                second being the denominator set.
+    sysp:       list, optional
+                If provided, this input will act as the
+                denominator of the transfer function.
+    var:        str, optional
+                The variable that should be printed for each
+                term (i.e. 's' or 'j\\omega'). default='s'
+    predollar:  bool, optional
+                Control argument to enable/disable the dollar
+                sign before the string. default=True
+    postdollar: bool, optional
+                Control argument to enable/disable the dollar
+                sign after the string. default=True
+    double:     bool, optional
+                Control argument to specify whether or not
+                LaTeX dollar signs should be double or single,
+                default=False
+    tolerance:  float, optional
+                The floating point tolerance cutoff to evaluate
+                each term against. If the absolute value of the
+                particular term is greater than the tolerance,
+                the value will be printed, if not, it will not
+                be printed. default=1e-8
+    
+    Returns
+    -------
+    latex:      str
+                LaTeX string for the transfer function.
+    """
+    # Collect Numerator and Denominator Terms
+    if isinstance(sysp, (list,tuple,np.ndarray)):
+        num = sys
+        den = sysp
+    else:
+        num, den = sys
+    # Generate String Function
+    def genstring( val ):
+        length = len(val)
+        strg = ''
+        for i,v in enumerate(val):
+            # Add Each Term to String
+            if abs(v) > tolerance:
+                # Add '+' Symbol After Each Term
+                if i != 0:
+                    strg += r'+'
+                strg += str(v)
+                # Determine Exponent
+                xpnt = length-i-1
+                if xpnt == 1:
+                    strg += var
+                elif xpnt == 0:
+                    pass # Don't Do Anything
+                else:
+                    strg += var+r'^{'+str(xpnt)+r'}'
+        return( strg )
+    # Generate Total TF String
+    latex = r'\frac{' + genstring( num ) + r'}{'
+    latex += genstring( den ) + r'}'
     # Add Dollar Sign pre-post
     if double:
         dollar = r'$$'
