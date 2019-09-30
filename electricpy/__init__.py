@@ -1529,7 +1529,8 @@ def zsource(S,V,XoverR,Sbase=None,Vbase=None,perunit=True):
                 specifically identified as either Line-to-Line or Line-to-
                 Neutral.
     XoverR:     float
-                The X/R ratio rated for the source.
+                The X/R ratio rated for the source, may optionally be a list
+                of floats to accomidate sequence impedances or otherwise.
     Sbase:      float, optional
                 The per-unit base for the apparent power. If set to
                 None, will automatically force Sbase to equal S.
@@ -1566,7 +1567,13 @@ def zsource(S,V,XoverR,Sbase=None,Vbase=None,perunit=True):
     Zsource_pu = Vpu**2/Spu
     # Evaluate the angle
     nu = np.degrees(np.arctan(XoverR))
-    Zsource_pu = phasor(Zsource_pu, nu)
+    # Conditionally Evaluate Phasor Impedance
+    if isinstance(nu, (list,np.ndarray)):
+        Zsource_pu = []
+        for angle in nu:
+            Zsource_pu.append(phasor(Zsource_pu, angle))
+    else:
+        Zsource_pu = phasor(Zsource_pu, nu)
     if not perunit:
         Zsource = Zsource_pu * Vbase**2/Sbase
         return(Zsource)
