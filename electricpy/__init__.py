@@ -171,7 +171,25 @@ import matplotlib
 import matplotlib.pyplot as plt
 import cmath as c
 
-                 
+
+# Define Phase Angle Generator
+def phs( ang ):
+    """
+    Complex Phase Angle Generator
+    
+    Generate a complex value given the phase angle
+    for the complex value.
+    
+    Parameters
+    ----------
+    ang:        float
+                The angle (in degrees) for which
+                the value should be calculated.
+    """
+    # Return the Complex Angle Modulator
+    return(np.exp(1j*np.radians( ang )))
+    
+
 # Define Phasor Generator
 def phasor( mag, ang=None ):
     """
