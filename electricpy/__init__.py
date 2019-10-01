@@ -3313,7 +3313,7 @@ def rxrecompose(x_pu,XoR,S3phs=None,VLL=None,VLN=None):
                 impedance
     XoR:        float
                 The X/R ratio (reactance over impedance).
-    S3phs:      float
+    S3phs:      float, optional
                 The total three-phase power rating of the system.
                 If left as None, the per-unit values will be set
                 to 1, resulting in an unscaled impedance
