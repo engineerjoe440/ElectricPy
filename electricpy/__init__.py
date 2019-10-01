@@ -3330,7 +3330,7 @@ def rxrecompose(x_pu,XoR,S3phs=None,VLL=None,VLN=None):
     # Ensure Absolute Value
     x_pu = abs(x_pu)
     # Find R from X/R
-    r_pu = x_pu/XR
+    r_pu = x_pu/XoR
     # Compose into z
     z_pu = r_pu + 1j*x_pu
     # Recompose

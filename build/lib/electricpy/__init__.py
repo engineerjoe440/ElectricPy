@@ -1530,7 +1530,7 @@ def powerflow( Vsend, Vrec, Zline ):
     return( pflow )
 
 # Define Impedance From Power and X/R
-def zsource(S,V,XoverR,Sbase=None,Vbase=None,perunit=True):
+def zsource(S,V,XoR,Sbase=None,Vbase=None,perunit=True):
     """
     Source Impedance Calculator
     
@@ -1546,7 +1546,7 @@ def zsource(S,V,XoverR,Sbase=None,Vbase=None,perunit=True):
                 The (rated) voltage of the source terminals, not
                 specifically identified as either Line-to-Line or Line-to-
                 Neutral.
-    XoverR:     float
+    XoR:        float
                 The X/R ratio rated for the source, may optionally be a list
                 of floats to accomidate sequence impedances or otherwise.
     Sbase:      float, optional
@@ -1584,7 +1584,7 @@ def zsource(S,V,XoverR,Sbase=None,Vbase=None,perunit=True):
     # Evaluate Zsource Magnitude
     Zsource_pu = Vpu**2/Spu
     # Evaluate the angle
-    nu = np.degrees(np.arctan(XoverR))
+    nu = np.degrees(np.arctan(XoR))
     # Conditionally Evaluate Phasor Impedance
     if isinstance(nu, (list,np.ndarray)):
         Zsource_pu = []
@@ -1598,7 +1598,7 @@ def zsource(S,V,XoverR,Sbase=None,Vbase=None,perunit=True):
     return(Zsource_pu)
 
 # Define Impedance Decomposer
-def zdecompose(Zmag,XoverR):
+def zdecompose(Zmag,XoR):
     """
     Impedance Decomposition Function
     
@@ -1613,8 +1613,8 @@ def zdecompose(Zmag,XoverR):
     ----------
     Zmag:       float
                 The magnitude of the impedance.
-    XoverR:     float
-                The X/R ratio.
+    XoR:        float
+                The X/R ratio (reactance over impedance).
     
     Returns
     -------
@@ -1624,9 +1624,9 @@ def zdecompose(Zmag,XoverR):
                 The reactance (in ohms)
     """
     # Evaluate Resistance
-    R = Zmag/np.sqrt(XoverR**2+1)
+    R = Zmag/np.sqrt(XoR**2+1)
     # Evaluate Reactance
-    X = R * XoverR
+    X = R * XoR
     # Return
     return(R,X)
 
@@ -3299,7 +3299,7 @@ def zrecompose(z_pu,S3phs,VLL=None,VLN=None):
     return(z)
 
 # Define X/R Recomposition Function
-def rxrecompose(x_pu,XR,S3phs,VLL=None,VLN=None):
+def rxrecompose(x_pu,XoR,S3phs=None,VLL=None,VLN=None):
     """
     Resistance/Reactance from Per-Unit System Evaluator
     
@@ -3311,8 +3311,12 @@ def rxrecompose(x_pu,XR,S3phs,VLL=None,VLN=None):
     x_pu:       float
                 The per-unit, complex value corresponding to the
                 impedance
-    S3phs:      float
+    XoR:        float
+                The X/R ratio (reactance over impedance).
+    S3phs:      float, optional
                 The total three-phase power rating of the system.
+                If left as None, the per-unit values will be set
+                to 1, resulting in an unscaled impedance
     VLL:        float, optional
                 The Line-to-Line Voltage; default=None
     VLN:        float, optional
@@ -3326,12 +3330,15 @@ def rxrecompose(x_pu,XR,S3phs,VLL=None,VLN=None):
     # Ensure Absolute Value
     x_pu = abs(x_pu)
     # Find R from X/R
-    r_pu = x_pu/XR
+    r_pu = x_pu/XoR
     # Compose into z
     z_pu = r_pu + 1j*x_pu
     # Recompose
-    z = zrecompose(z_pu,S3phs,VLL,VLN)
-    return(z)
+    if S3phs == None:
+        return(z_pu)
+    else:
+        z = zrecompose(z_pu,S3phs,VLL,VLN)
+        return(z)
 
 # Define Generator Internal Voltage Calculator
 def geninternalv(I,Zs,Vt,Vgn=None,Zm=None,Ip=None,Ipp=None):
