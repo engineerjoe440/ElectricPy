@@ -45,7 +45,7 @@ from scipy.optimize import fsolve
 from .constants import *
 
 # Define Single Line to Ground Fault Function
-def phs1g(Vsrc,Xseq,Rf=0,sequence=True):
+def phs1g(Vsrc,Zseq,Rf=0,sequence=True):
     """
     Single-Phase-to-Ground Fault Calculator
     
@@ -57,8 +57,8 @@ def phs1g(Vsrc,Xseq,Rf=0,sequence=True):
     ----------
     Vsrc:       complex
                 The Source Voltage
-    Xseq:       list of complex
-                Tupple of sequence reactances as (X0, X1, X2)
+    Zseq:       list of complex
+                Tupple of sequence reactances as (Z0, Z1, Z2)
     Rf:         complex, optional
                 The fault resistance, default=0
     sequence:   bool, optional
@@ -71,7 +71,7 @@ def phs1g(Vsrc,Xseq,Rf=0,sequence=True):
                 The Array of Fault Currents as (If0, If1, If2)
     """
     # Decompose Reactance Tuple
-    X0, X1, X2 = Xseq
+    X0, X1, X2 = Zseq
     # Ensure that X-components are imaginary
     if(not isinstance(X0, complex)): X0 *= 1j
     if(not isinstance(X1, complex)): X1 *= 1j
@@ -86,7 +86,7 @@ def phs1g(Vsrc,Xseq,Rf=0,sequence=True):
     return(Ifault)
     
 # Define Double Line to Ground Fault Current Calculator
-def phs2g(Vsrc,Xseq,Rf=0,sequence=True):
+def phs2g(Vsrc,Zseq,Rf=0,sequence=True):
     """
     Double-Line-to-Ground Fault Calculator
     
@@ -98,8 +98,8 @@ def phs2g(Vsrc,Xseq,Rf=0,sequence=True):
     ----------
     Vsrc:       complex
                 The Source Voltage
-    Xseq:       list of complex
-                Tupple of sequence reactances as (X0, X1, X2)
+    Zseq:       list of complex
+                Tupple of sequence reactances as (Z0, Z1, Z2)
     Rf:         complex, optional
                 The fault resistance, default=0
     sequence:   bool, optional
@@ -112,7 +112,7 @@ def phs2g(Vsrc,Xseq,Rf=0,sequence=True):
                 The Array of Fault Currents as (If0, If1, If2)
     """
     # Decompose Reactance Tuple
-    X0, X1, X2 = Xseq
+    X0, X1, X2 = Zseq
     # Ensure that X-components are imaginary
     if(not isinstance(X0, complex)): X0 *= 1j
     if(not isinstance(X1, complex)): X1 *= 1j
@@ -128,7 +128,7 @@ def phs2g(Vsrc,Xseq,Rf=0,sequence=True):
     return(faults)
 
 # Define Phase-to-Phase Fault Current Calculator
-def phs2(Vsrc,Xseq,Rf=0,sequence=True):
+def phs2(Vsrc,Zseq,Rf=0,sequence=True):
     """
     Line-to-Line Fault Calculator
     
@@ -140,8 +140,8 @@ def phs2(Vsrc,Xseq,Rf=0,sequence=True):
     ----------
     Vsrc:       complex
                 The Source Voltage
-    Xseq:       list of complex
-                Tupple of sequence reactances as (X0, X1, X2)
+    Zseq:       list of complex
+                Tupple of sequence reactances as (Z0, Z1, Z2)
     Rf:         complex, optional
                 The fault resistance, default=0
     sequence:   bool, optional
@@ -154,7 +154,7 @@ def phs2(Vsrc,Xseq,Rf=0,sequence=True):
                 The Array of Fault Currents as (If0, If1, If2)
     """
     # Decompose Reactance Tuple
-    X0, X1, X2 = Xseq
+    X0, X1, X2 = Zseq
     # Ensure that X-components are imaginary
     if(not isinstance(X0, complex)): X0 *= 1j
     if(not isinstance(X1, complex)): X1 *= 1j
@@ -170,7 +170,7 @@ def phs2(Vsrc,Xseq,Rf=0,sequence=True):
     return(faults)
 
 # Define Three-Phase Fault Current Calculator
-def phs3(Vsrc,Xseq,Rf=0,sequence=True):
+def phs3(Vsrc,Zseq,Rf=0,sequence=True):
     """
     Three-Phase Fault Calculator
     
@@ -182,8 +182,8 @@ def phs3(Vsrc,Xseq,Rf=0,sequence=True):
     ----------
     Vsrc:       complex
                 The Source Voltage
-    Xseq:       list of complex
-                Tupple of sequence reactances as (X0, X1, X2)
+    Zseq:       list of complex
+                Tupple of sequence reactances as (Z0, Z1, Z2)
     Rf:         complex, optional
                 The fault resistance, default=0
     sequence:   bool, optional
@@ -196,7 +196,7 @@ def phs3(Vsrc,Xseq,Rf=0,sequence=True):
                 The Fault Current, equal for 0, pos., and neg. seq.
     """
     # Decompose Reactance Tuple
-    X0, X1, X2 = Xseq
+    X0, X1, X2 = Zseq
     # Ensure that X-components are imaginary
     if(not isinstance(X1, complex)): X1 *= 1j
     # Calculate Fault Currents
