@@ -3403,6 +3403,8 @@ def abc_to_seq(Mabc,reference='A'):
     Converts phase-based values to sequence
     components.
     
+    Same as phs_to_seq.
+    
     Parameters
     ----------
     Mabc:       list of complex
@@ -3427,6 +3429,8 @@ def abc_to_seq(Mabc,reference='A'):
     else:
         raise ValueError("Invalid Phase Reference.")
     return(M.dot(Mabc))
+# Define Second Name for abc_to_seq
+phs_to_seq = abc_to_seq
 
 # Define Phase Component Conversion Function
 def seq_to_abc(M012,reference='A'):
@@ -3435,6 +3439,8 @@ def seq_to_abc(M012,reference='A'):
     
     Converts sequence-based values to phase
     components.
+    
+    Same as seq_to_phs.
     
     Parameters
     ----------
@@ -3462,6 +3468,8 @@ def seq_to_abc(M012,reference='A'):
     else:
         raise ValueError("Invalid Phase Reference.")
     return(M)
+# Define Second Name for seq_to_abc
+seq_to_phs = seq_to_abc
 
 # Define Sequence Impedance Calculator
 def sequencez(Zabc,reference='A',round=3):
