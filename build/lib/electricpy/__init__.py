@@ -1671,7 +1671,7 @@ def watts_to_hp(watts):
     return(watts / 745.699872)
     
 # Define Power Reactance Calculator
-def powerimpedance(S,V,PF=None,parallel=False):
+def powerimpedance(S,V,PF=None,parallel=False,terms=False):
     """
     Impedance from Apparent Power Formula
     
@@ -1695,6 +1695,9 @@ def powerimpedance(S,V,PF=None,parallel=False):
                 may be purely resistive or purely reactive.
     V:          float
                 The operating voltage of the passive element.
+                Note that this is specifically not Line-Line or
+                Line-Neutral voltage, rather the voltage of the
+                element.
     PF:         float, optional
                 The operating Power-Factor, should be specified
                 if S is given as a float (not complex). Positive
@@ -1704,6 +1707,12 @@ def powerimpedance(S,V,PF=None,parallel=False):
                 Control point to specify whether the ohmic
                 impedance should be returned as series components
                 (False opt.) or parallel components (True opt.).
+    terms:      bool, optional
+                Control point to specify whether return should
+                be made as resistance and reactance, or simply
+                the complex impedance. Setting of False will
+                return complex impedance, setting of True will
+                return individual components (R, X).
     
     Returns
     -------
@@ -1719,19 +1728,13 @@ def powerimpedance(S,V,PF=None,parallel=False):
     # Condition Inputs
     V = abs(V)
     # Test for Parallel Component Option and Evaluate
-    if isinstance(S,complex):
-        # Complex Power (both R and X)
-        if parallel:
-            R = V**2 / (3*S.real)
-            X = V**2 / (3*S.imag)
+    if isinstance(S,complex) or PF != None:
+        if PF != None:
+            # Evaluate Elements
+            P,Q,S,PF = powerset(S=S,PF=PF)
         else:
-            R = V**2 / (S.real)
-            X = V**2 / (S.imag)
-        return( R, X )
-    # Power Factor Provided
-    if PF != None:
-        # Evaluate Elements
-        P,Q,S,PF = powerset(S=S,PF=PF)
+            P = S.real
+            Q = S.imag
         # Compute Elements
         if parallel:
             R = V**2 / (3*P)
@@ -1739,7 +1742,10 @@ def powerimpedance(S,V,PF=None,parallel=False):
         else:
             R = V**2 / (P)
             X = V**2 / (Q)
-        return( R, X )
+        # Conditionally Return as Impedance
+        if terms:
+            return( R, X )
+        return( R + 1j*X )
     # Not Complex (just R)
     R = V**2 / S
     return( R )
