@@ -44,8 +44,23 @@ from scipy.optimize import fsolve
 # Import Local Dependencies
 from .constants import *
 
+def _phaseroll(M012,reference):
+    # Compute Dot Product
+    M = A012.dot(M012)
+    # Condition Reference:
+    reference = reference.upper()
+    if reference == 'A':
+        pass
+    elif reference == 'B':
+        M = np.roll(M, 1, 0)
+    elif reference == 'C':
+        M = np.roll(M, 2, 0)
+    else:
+        raise ValueError("Invalid Phase Reference.")
+    return(M)
+
 # Define Single Line to Ground Fault Function
-def phs1g(Vsrc,Zseq,Rf=0,sequence=True):
+def phs1g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     """
     Single-Phase-to-Ground Fault Calculator
     
@@ -64,6 +79,9 @@ def phs1g(Vsrc,Zseq,Rf=0,sequence=True):
     sequence:   bool, optional
                 Control argument to force return into symmetrical-
                 or phase-domain values.
+    reference:  str, optional
+                Single character denoting the reference,
+                default='A'
     
     Returns
     -------
@@ -81,12 +99,12 @@ def phs1g(Vsrc,Zseq,Rf=0,sequence=True):
     Ifault = np.array([ Ifault, Ifault, Ifault ])
     # Prepare Value for return
     if not sequence:
-        Ifault = A012.dot( Ifault ) # Convert to ABC-Domain
+        Ifault = _phaseroll( Ifault, reference ) # Convert to ABC-Domain
     # Return Value
     return(Ifault)
     
 # Define Double Line to Ground Fault Current Calculator
-def phs2g(Vsrc,Zseq,Rf=0,sequence=True):
+def phs2g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     """
     Double-Line-to-Ground Fault Calculator
     
@@ -105,6 +123,9 @@ def phs2g(Vsrc,Zseq,Rf=0,sequence=True):
     sequence:   bool, optional
                 Control argument to force return into symmetrical-
                 or phase-domain values.
+    reference:  str, optional
+                Single character denoting the reference,
+                default='A'
     
     Returns
     -------
@@ -121,14 +142,14 @@ def phs2g(Vsrc,Zseq,Rf=0,sequence=True):
     If1 = Vsrc / (X1 + (X2*(X0+3*Rf))/(X0+X2+3*Rf))
     If2 = -(Vsrc - X1*If1)/X2
     If0 = -(Vsrc - X1*If1)/(X0+3*Rf)
-    faults = np.array([If0, If1, If2])
+    Ifault = np.array([If0, If1, If2])
     # Return Currents
     if not sequence:
-        faults = A012.dot(faults.T)
-    return(faults)
+        Ifault = _phaseroll( Ifault, reference ) # Convert to ABC-Domain
+    return(Ifault)
 
 # Define Phase-to-Phase Fault Current Calculator
-def phs2(Vsrc,Zseq,Rf=0,sequence=True):
+def phs2(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     """
     Line-to-Line Fault Calculator
     
@@ -147,6 +168,9 @@ def phs2(Vsrc,Zseq,Rf=0,sequence=True):
     sequence:   bool, optional
                 Control argument to force return into symmetrical-
                 or phase-domain values.
+    reference:  str, optional
+                Single character denoting the reference,
+                default='A'
     
     Returns
     -------
@@ -163,14 +187,14 @@ def phs2(Vsrc,Zseq,Rf=0,sequence=True):
     If0 = 0
     If1 = Vsrc / (X1 + X2 + Rf)
     If2 = -If1
-    faults = np.array([If0, If1, If2])
+    Ifault = np.array([If0, If1, If2])
     # Return Currents
     if not sequence:
-        faults = A012.dot(faults.T)
-    return(faults)
+        Ifault = _phaseroll( Ifault, reference ) # Convert to ABC-Domain
+    return(Ifault)
 
 # Define Three-Phase Fault Current Calculator
-def phs3(Vsrc,Zseq,Rf=0,sequence=True):
+def phs3(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     """
     Three-Phase Fault Calculator
     
@@ -189,6 +213,9 @@ def phs3(Vsrc,Zseq,Rf=0,sequence=True):
     sequence:   bool, optional
                 Control argument to force return into symmetrical-
                 or phase-domain values.
+    reference:  str, optional
+                Single character denoting the reference,
+                default='A'
     
     Returns
     -------
@@ -204,12 +231,12 @@ def phs3(Vsrc,Zseq,Rf=0,sequence=True):
     Ifault = np.array([ 0, Ifault, 0 ])
     # Prepare to Return Value
     if not sequence:
-        Ifault = A012.dot( Ifault ) # Convert to ABC-Domain
+        Ifault = _phaseroll( Ifault, reference ) # Convert to ABC-Domain
     return(Ifault)
 
 
 # Define Faulted Bus Voltage Calculator
-def busvolt(k,n,Vpf,Z0,Z1,Z2,If,sequence=True):
+def busvolt(k,n,Vpf,Z0,Z1,Z2,If,sequence=True,reference='A'):
     """
     Faulted Bus Voltage Calculator
     
@@ -235,6 +262,9 @@ def busvolt(k,n,Vpf,Z0,Z1,Z2,If,sequence=True):
     sequence:   bool, optional
                 Control argument to force return into symmetrical-
                 or phase-domain values.
+    reference:  str, optional
+                Single character denoting the reference,
+                default='A'
     
     Returns
     -------
@@ -257,7 +287,7 @@ def busvolt(k,n,Vpf,Z0,Z1,Z2,If,sequence=True):
     # Perform Calculation
     Vf = Vfmat - Zmat.dot(If)
     if not sequence:
-        Vf = A012.dot( Vf ) # Convert to ABC-Domain
+        Vf = _phaseroll( Vf, reference ) # Convert to ABC-Domain
     return(Vf)
 
 
