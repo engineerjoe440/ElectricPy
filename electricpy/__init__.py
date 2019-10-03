@@ -114,6 +114,7 @@ Additional Available Sub-Modules
 --------------------------------
  - fault.py
  - bode.py
+ - sim.py
 
 Functions Available in `electricpy.fault.py`
 --------------------------------------------
@@ -151,6 +152,14 @@ Functions Available in `electricpy.bode.py`
  - Transfer Function Bode Plotter:       bode
  - S-Domain Bode Plotter:                sbode
  - Z-Domain Bode Plotter:                zbode
+
+Functions Available in `electricpy.sim.py`
+------------------------------------------
+ - Digital Filter Simulator:             digifiltersim
+ - Step Response Filter Simulator:       step_response
+ - Ramp Response Filter Simulator:       ramp_response
+ - Parabolic Response Filter Simulator:  parabolic_response
+ - State-Space System Simulator:         statespace
 """
 ###################################################################
 
@@ -164,6 +173,7 @@ _version_ = "0.0.4"
 from .constants import *
 from . import fault
 from . import bode
+#from . import sim
 
 # Import Supporting Modules
 import numpy as np

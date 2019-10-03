@@ -1,4 +1,23 @@
+###################################################################
+"""
+---------------------
+`electricpy.fault.py`
+---------------------
 
+Included Functions
+------------------
+- Digital Filter Simulator:             digifiltersim
+- Step Response Filter Simulator:       step_response
+- Ramp Response Filter Simulator:       ramp_response
+- Parabolic Response Filter Simulator:  parabolic_response
+- State-Space System Simulator:         statespace
+"""
+###################################################################
+
+# Import Required Libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from warnings import warn
 
 
 # Define Digital Filter Simulator Function
