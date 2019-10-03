@@ -79,7 +79,7 @@ def phs1g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     sequence:   bool, optional
                 Control argument to force return into symmetrical-
                 or phase-domain values.
-    reference:  str, optional
+    reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
     
@@ -123,7 +123,7 @@ def phs2g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     sequence:   bool, optional
                 Control argument to force return into symmetrical-
                 or phase-domain values.
-    reference:  str, optional
+    reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
     
@@ -168,7 +168,7 @@ def phs2(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     sequence:   bool, optional
                 Control argument to force return into symmetrical-
                 or phase-domain values.
-    reference:  str, optional
+    reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
     
@@ -213,7 +213,7 @@ def phs3(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     sequence:   bool, optional
                 Control argument to force return into symmetrical-
                 or phase-domain values.
-    reference:  str, optional
+    reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
     
@@ -262,7 +262,7 @@ def busvolt(k,n,Vpf,Z0,Z1,Z2,If,sequence=True,reference='A'):
     sequence:   bool, optional
                 Control argument to force return into symmetrical-
                 or phase-domain values.
-    reference:  str, optional
+    reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
     
