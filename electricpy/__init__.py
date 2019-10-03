@@ -3409,7 +3409,7 @@ def abc_to_seq(Mabc,reference='A'):
     ----------
     Mabc:       list of complex
                 Phase-based values to be converted.
-    reference:  str, optional
+    reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
     
@@ -3446,7 +3446,7 @@ def seq_to_abc(M012,reference='A'):
     ----------
     M012:       list of complex
                 Sequence-based values to convert.
-    reference:  str, optional
+    reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
     
@@ -3486,7 +3486,7 @@ def sequencez(Zabc,reference='A',round=3):
                 2-D (3x3) matrix of complex values
                 representing the phasor impedances
                 in the ABC-domain.
-    reference:  str, optional
+    reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
     round:      int, optional
@@ -4213,5 +4213,7 @@ def characterz(R,G,L,C,freq=60):
     # Evaluate Zc
     Zc = np.sqrt((R+1j*w*L)/(G+1j*w*C))
     return(Zc)
+
+
 
 # END OF FILE
