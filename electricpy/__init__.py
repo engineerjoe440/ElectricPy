@@ -31,6 +31,7 @@ Included Functions
  - Phasor V/I Generator:                    phasor
  - Phasor Array V/I Generator:              phasorlist
  - Phasor Data Genorator:                   phasordata
+ - Phase Angle Generator:                   phs
  - Time of Number of Cycles:                tcycle        
  - Phasor Impedance Generator:              phasorz
  - Complex Display Function:                cprint
@@ -545,6 +546,8 @@ def tcycle(ncycles=1,freq=60):
     Evaluates the time for a number of n
     cycles given the system frequency.
     
+    .. math:: t = \\frac{n_{cycles}}{freq}
+    
     Parameters
     ----------
     ncycles:    float, optional    
@@ -561,21 +564,41 @@ def tcycle(ncycles=1,freq=60):
     return(ncycles/freq)
 
 # Define Reactance Calculator
-def reactance(z,f=60,sensetivity=1e-12):
+def reactance(z,freq=60,sensetivity=1e-12):
     """
     Capacitance/Inductance from Impedance
     
     Calculates the Capacitance or Inductance in Farads or Henreys
     (respectively) provided the impedance of an element.
     Will return capacitance (in Farads) if ohmic impedance is
-    negative, or inductance (in Henrys) if ohmic impedance is
-    positive. If imaginary: calculate with j factor (imaginary number).
+    negative :eq:`cap`, or inductance (in Henrys) if ohmic impedance is
+    positive :eq:`ind`. If imaginary: calculate with j factor
+    (imaginary number).
+    
+    .. math:: C = \\frac{1}{\\omega*Z}
+       :label: cap
+    
+    .. math:: L = \\frac{Z}{\\omega}
+       :label: ind
+    
+    This requires that the radian frequency is found as follows:
+    
+    .. math:: \\omega = 2*\\pi*freq
+    
+    where `freq` is the frequency in Hertz.
+    
+    .. note::
+       It's worth noting here, that the resistance will be found by
+       extracting the real part of a complex value. That is:
+       
+       .. math:: R = Real( R + jX )
+       
     
     Parameters
     ----------
     z:              complex
                     The Impedance Provided, may be complex (R+jI)
-    f:              float, optional
+    freq:           float, optional
                     The Frequency Base for Provided Impedance, default=60
     sensetivity:    float, optional
                     The sensetivity used to check if a resistance was
@@ -587,7 +610,7 @@ def reactance(z,f=60,sensetivity=1e-12):
                     Capacitance or Inductance of Impedance
     """
     # Evaluate Omega
-    w = 2*np.pi*f
+    w = 2*np.pi*freq
     # Input is Complex
     if isinstance(z, complex):
         # Test for Resistance
@@ -802,6 +825,14 @@ def phasorz(C=None,L=None,f=60,complex=True):
     capacitance (in Farads) or the inductance (in Henreys).
     The function will return the phasor value (in Ohms).
     
+    .. math:: Z = \\frac{-j}{\\omega*C}
+    
+    .. math:: Z = j*\\omega*L
+    
+    where:
+    
+    .. math:: \\omega = 2*\\pi*freq
+    
     Parameters
     ----------
     C:          float, optional
@@ -842,6 +873,9 @@ def parallelz(*args):
     This function is designed to generate the total parallel
     impedance of a set (tuple) of impedances specified as real
     or complex values.
+    
+    .. math::
+       Z_{eq}=(\\frac{1}{Z_1}+\\frac{1}{Z_2}+\\dots+\\frac{1}{Z_n})^{-1}
     
     Parameters
     ----------
@@ -1350,6 +1384,10 @@ def voltdiv(Vin,R1,R2,Rload=None):
     the resistances (or impedances) and the load resistance
     (or impedance) if present.
     
+    .. math:: V_{out} = V_{in} * \\frac{R_2}{R_1+R+2}
+    
+    .. math:: V_{out}=V_{in}*\\frac{R_2||R_{load}}{R_1+(R_2||R_{load})}
+    
     Parameters
     ----------
     Vin:    float
@@ -1433,6 +1471,8 @@ def instpower(P,Q,t,f=60):
     This function is designed to calculate the instantaneous power at a
     specified time t given the magnitudes of P and Q.
     
+    .. math:: P_{inst} = P+P*cos(2*\\omega*t)-Q*sin(2*\\omega*t)
+    
     Parameters
     ----------
     P:  float
@@ -1463,6 +1503,18 @@ def dynetz(delta=None,wye=None,round=None):
     This function is designed to act as the conversion utility
     to transform delta-connected impedance values to wye-
     connected and vice-versa.
+    
+    .. math:: 
+       Z_{sum} = Z_{1/2} + Z_{2/3} + Z_{3/1}//
+       Z_1 = \\frac{Z_{1/2}*Z_{3/1}}{Z_{sum}}//
+       Z_2 = \\frac{Z_{1/2}*Z_{2/3}}{Z_{sum}}//
+       Z_3 = \\frac{Z_{2/3}*Z_{3/1}}{Z_{sum}}
+    
+    .. math::
+       Z_{ms} = Z_1*Z_2 + Z_2*Z_3 + Z_3*Z_1//
+       Z_{2/3} = \\frac{Z_{ms}}{Z_1}//
+       Z_{3/1} = \\frac{Z_{ms}}{Z_2}//
+       Z_{1/2} = \\frac{Z_{ms}}{Z_3}
     
     Parameters
     ----------
@@ -1512,6 +1564,10 @@ def powerflow( Vsend, Vrec, Zline ):
     power transferred from the sending end to the recieving end
     of an electrical line given the sending voltage (complex),
     the receiving voltage (complex) and the line impedance.
+    
+    .. math::
+       P_{flow}=\\frac{V_{send}*V_{rec}}{Z_{line}}*sin(\\theta_{send}
+       -\\theta_{rec})
     
     Parameters
     ----------
@@ -2114,6 +2170,8 @@ def vcapdischarge(t,Vs,R,C):
     Function to calculate the voltage of a
     capacitor that is discharging given the time.
     
+    .. math:: V_c=V_s*e^{\\frac{-t}{R*C}}
+    
     Parameters
     ----------
     t:          float
@@ -2141,6 +2199,8 @@ def vcapcharge(t,Vs,R,C):
     
     Function to calculate the voltage of a
     capacitor that is charging given the time.
+    
+    .. math:: V_c=V_s*(1-e^{\\frac{-t}{R*C}})
     
     Parameters
     ----------
@@ -2206,6 +2266,8 @@ def inductorenergy(L,I):
     Function to calculate the energy stored in an inductor
     given the inductance (in Henries) and the current.
     
+    .. math:: E=\\frac{1}{2}*L*I^2
+    
     Parameters
     ----------
     L:          float
@@ -2228,6 +2290,10 @@ def inductorcharge(t,Vs,R,L):
     Calculates the Voltage and Current of an inductor
     that is charging/storing energy.
     
+    .. math::
+       V_L = V_s*e^{\\frac{-R*t}{L}}//
+       I_L = \\frac{V_s}{R}*(1-e^{\\frac{-R*t}{L}})
+    
     Parameters
     ----------
     t:          float
@@ -2241,9 +2307,9 @@ def inductorcharge(t,Vs,R,L):
     
     Returns
     -------
-    V1:         float
+    Vl:         float
                 Voltage across inductor at time t.
-    I1:         float
+    Il:         float
                 Current through inductor at time t.
     """
     Vl = Vs*np.exp(-R*t/L)
@@ -2295,6 +2361,10 @@ def inductordischarge(t,Io,R,L):
     Calculates the Voltage and Current of an inductor
     that is discharging its stored energy.
     
+    .. math::
+       I_L=I_0*e^{\\frac{-R*t}{L}}//
+       V_L=I_0*R*(1-e^{\\frac{-R*t}{L}})
+    
     Parameters
     ----------
     t:          float
@@ -2308,9 +2378,9 @@ def inductordischarge(t,Io,R,L):
     
     Returns
     -------
-    V1:         float
+    Vl:         float
                 Voltage across inductor at time t.
-    I1:         float
+    Il:         float
                 Current through inductor at time t.
     """
     Il = Io*np.exp(-R*t/L)
@@ -2325,6 +2395,8 @@ def farads(VAR,V,freq=60):
     Function to calculate the required capacitance
     in Farads to provide the desired power rating
     (VARs).
+    
+    .. math:: C = \\frac{VAR}{2*\\pi*freq*V^2}
     
     Parameters
     ----------
@@ -2352,11 +2424,13 @@ def capenergy(C,v):
     A simple function to calculate the stored voltage (in Joules)
     in a capacitor with a charged voltage.
     
+    .. math:: E=\\frac{1}{2}*C*V^2
+    
     Parameters
     ----------
     C:          float
                 Capacitance in Farads.
-    v:          float
+    V:          float
                 Voltage across capacitor.
     
     Returns
@@ -2364,7 +2438,7 @@ def capenergy(C,v):
     energy:     float
                 Energy stored in capacitor (Joules).
     """
-    energy = 1/2 * C * v**2
+    energy = 1/2 * C * V**2
     return(energy)
 
 # Define Capacitor Voltage Discharge Function
@@ -2375,6 +2449,8 @@ def loadedvcapdischarge(t,vo,C,P):
     Returns the voltage of a discharging capacitor after time (t - 
     seconds) given initial voltage (vo - volts), capacitor size
     (cap - Farads), and load (P - Watts).
+    
+    .. math:: V_t=\\sqrt{v_0^2-2*P*\\frac{t}{C}}
     
     Parameters
     ----------
@@ -2450,6 +2526,8 @@ def rectifiercap(Iload, fswitch, dVout):
     Returns the capacitance (in Farads) for a needed capacitor in
     a rectifier configuration given the system frequency (in Hz),
     the load (in amps) and the desired voltage ripple.
+    
+    .. math:: C=\\frac{I_{load}}{f_{switch}*\\Delta V_{out}}
     
     Parameters
     ----------
@@ -3204,6 +3282,10 @@ def zpu(S,VLL=None,VLN=None):
     Evaluates the per-unit impedance value given the per-unit
     power and voltage bases.
     
+    .. math:: Z_{pu}=\\frac{V_{LL}^2}{S}
+    
+    .. math:: Z_{pu}=\\frac{(\\sqrt{3}*V_{LN})^2}{S}
+    
     Parameters
     ----------
     S:          float
@@ -3232,6 +3314,10 @@ def ipu(S,VLL=None,VLN=None,V1phs=None):
     
     Evaluates the per-unit current value given the per-unit
     power and voltage bases.
+    
+    .. math:: I_{pu}=\\frac{S}{\\sqrt{3}*V_{LL}}
+    
+    .. math:: I_{pu}=\\frac{S}{3*V_{LN}}
     
     Parameters
     ----------
@@ -3265,6 +3351,8 @@ def puchgbase(quantity, puB_old, puB_new):
     
     Performs a per-unit change of base operation for the given
     value constrained by the old base and new base.
+    
+    .. math:: Z_{pu-new}=Z_{pu-old}*\\frac{BASE_{OLD}}{BASE_{NEW}}
     
     Parameters
     ----------
@@ -4017,6 +4105,8 @@ def natfreq(C,L,Hz=True):
     Evaluates the natural frequency (resonant frequency)
     of a circuit given the circuit's C and L values. Defaults
     to returning values in Hz, but may also return in rad/sec.
+    
+    .. math:: freq=\\frac{1}{\\sqrt{L*C}*(2*\\pi)}
     
     Parameters
     ----------
