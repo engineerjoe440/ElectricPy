@@ -15,9 +15,9 @@ Included Functions
 ###################################################################
 
 # Import Required Libraries
-import numpy as np
-import matplotlib.pyplot as plt
-from warnings import warn
+import numpy as _np
+import matplotlib.pyplot as _plt
+from warnings import warn as _warn
 
 
 # Define Digital Filter Simulator Function
@@ -75,15 +75,15 @@ def digifiltersim(fin,filter,freqs,NN=1000,dt=0.01,title="",
     figsize:    tuple, optional
                 The figure dimensions for each subplot, default=None
     """
-    if(figsize!=None): plt.figure(figsize=figsize)
+    if(figsize!=None): _plt.figure(figsize=figsize)
     flen = len(freqs)
     for i in range(flen):
         # Gather frequency
         freq = freqs[i]
         
         # Start with arrays set to zero
-        x = np.zeros(NN)
-        y = np.zeros(NN)
+        x = _np.zeros(NN)
+        y = _np.zeros(NN)
         
         # ----- The input  -----
         for k in range(NN):
@@ -99,7 +99,7 @@ def digifiltersim(fin,filter,freqs,NN=1000,dt=0.01,title="",
         else:
             rows, cols = filter.shape
         # Operate with each individual filter set
-        x_tmp = np.copy( x )
+        x_tmp = _np.copy( x )
         nsteps = NN - 4
         for row_n in range(rows):
             row = filter[row_n] # Capture individual row
@@ -115,22 +115,22 @@ def digifiltersim(fin,filter,freqs,NN=1000,dt=0.01,title="",
                 y[T] = (A1*y[T-1] + A2*y[T-2] +
                         B0*x_tmp[T] + B1*x_tmp[T-1] +  B2*x_tmp[T-2])
             # Copy New output into temporary input
-            x_tmp = np.copy( y )
+            x_tmp = _np.copy( y )
         # Copy finalized output into *ytime* for plotting
-        ytime = np.copy( x_tmp )
+        ytime = _np.copy( x_tmp )
         # Plot Filtered Output
-        if(flen%2==0): plt.subplot(flen,2,i+1)
-        else: plt.subplot(flen,1,i+1)
-        plt.plot(x,'k--',label="Input")
-        plt.plot(ytime,'k',label="Output")
-        plt.title(title)
-        plt.grid(which='both')
-        if legend: plt.legend(title="Frequency = "+str(freq)+"Hz")
-        if xlim!=False: plt.xlim(xlim)
-        elif xmxscale!=None: plt.xlim((0,xmxscale/(freq*dt)))
+        if(flen%2==0): _plt.subplot(flen,2,i+1)
+        else: _plt.subplot(flen,1,i+1)
+        _plt.plot(x,'k--',label="Input")
+        _plt.plot(ytime,'k',label="Output")
+        _plt.title(title)
+        _plt.grid(which='both')
+        if legend: _plt.legend(title="Frequency = "+str(freq)+"Hz")
+        if xlim!=False: _plt.xlim(xlim)
+        elif xmxscale!=None: _plt.xlim((0,xmxscale/(freq*dt)))
         
-    plt.tight_layout()
-    plt.show()
+    _plt.tight_layout()
+    _plt.show()
 
 # Define Step Response Simulator Function
 def step_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
@@ -171,14 +171,14 @@ def step_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
                 figures should be saved. default=False
     """
     # Define Time Axis
-    TT = np.arange(0,npts*dt,dt)
+    TT = _np.arange(0,npts*dt,dt)
     
     # Condition system input to ensure proper execution
     system = _sys_condition(system,combine)    
     
     # Allocate space for all outputs
-    step = np.zeros(npts)
-    errS = np.zeros(npts)
+    step = _np.zeros(npts)
+    errS = _np.zeros(npts)
     
     # Generate Inputs
     for i in range(npts):
@@ -193,28 +193,28 @@ def step_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
         errS[k] = step[k] - y1[k]
     
     # Plot Step Response
-    plt.figure()
-    plt.subplot(121)
-    plt.title(title)
-    plt.plot(TT,y1,'k--', label=resplabel)
-    plt.plot(TT,step,'k', label=funclabel)
-    plt.grid()
-    plt.legend()
-    plt.xlabel("Time (seconds)")
+    _plt.figure()
+    _plt.subplot(121)
+    _plt.title(title)
+    _plt.plot(TT,y1,'k--', label=resplabel)
+    _plt.plot(TT,step,'k', label=funclabel)
+    _plt.grid()
+    _plt.legend()
+    _plt.xlabel("Time (seconds)")
     if xlim != False:
-        plt.xlim(xlim)
-    plt.subplot(122)
-    plt.title(errtitle)
-    plt.plot(TT,errS,'k', label=errlabel)
-    plt.grid()
-    plt.legend()
-    plt.xlabel("Time (seconds)")
+        _plt.xlim(xlim)
+    _plt.subplot(122)
+    _plt.title(errtitle)
+    _plt.plot(TT,errS,'k', label=errlabel)
+    _plt.grid()
+    _plt.legend()
+    _plt.xlabel("Time (seconds)")
     if xlim != False:
-        plt.xlim(xlim)
-    plt.subplots_adjust(wspace=0.3)
+        _plt.xlim(xlim)
+    _plt.subplots_adjust(wspace=0.3)
     if filename!=None:
-        plt.savefig(filename)
-    plt.show()
+        _plt.savefig(filename)
+    _plt.show()
 
 # Define Ramp Response Simulator Function
 def ramp_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
@@ -255,14 +255,14 @@ def ramp_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
                 should be saved. default=None
     """
     # Define Time Axis
-    TT = np.arange(0,npts*dt,dt)
+    TT = _np.arange(0,npts*dt,dt)
     
     # Condition system input to ensure proper execution
     system = _sys_condition(system,combine)
     
     # Allocate space for all outputs
-    ramp = np.zeros(npts)
-    errR = np.zeros(npts)
+    ramp = _np.zeros(npts)
+    errR = _np.zeros(npts)
     
     # Generate Inputs
     for i in range(npts):
@@ -277,28 +277,28 @@ def ramp_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
         errR[k] = ramp[k] - y2[k]
     
     # Plot Ramp Response
-    plt.figure()
-    plt.subplot(121)
-    plt.title(title)
-    plt.plot(TT,y2,'k--', label=resplabel)
-    plt.plot(TT,ramp,'k', label=funclabel)
-    plt.grid()
-    plt.legend()
-    plt.xlabel("Time (seconds)")
+    _plt.figure()
+    _plt.subplot(121)
+    _plt.title(title)
+    _plt.plot(TT,y2,'k--', label=resplabel)
+    _plt.plot(TT,ramp,'k', label=funclabel)
+    _plt.grid()
+    _plt.legend()
+    _plt.xlabel("Time (seconds)")
     if xlim != False:
-        plt.xlim(xlim)
-    plt.subplot(122)
-    plt.title(errtitle)
-    plt.plot(TT,errR,'k', label=errlabel)
-    plt.grid()
-    plt.legend()
-    plt.xlabel("Time (seconds)")
+        _plt.xlim(xlim)
+    _plt.subplot(122)
+    _plt.title(errtitle)
+    _plt.plot(TT,errR,'k', label=errlabel)
+    _plt.grid()
+    _plt.legend()
+    _plt.xlabel("Time (seconds)")
     if xlim != False:
-        plt.xlim(xlim)
-    plt.subplots_adjust(wspace=0.3)
+        _plt.xlim(xlim)
+    _plt.subplots_adjust(wspace=0.3)
     if filename!=None:
-        plt.savefig(filename)
-    plt.show()
+        _plt.savefig(filename)
+    _plt.show()
     
 # Define Parabolic Response Simulator Function
 def parabolic_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
@@ -339,14 +339,14 @@ def parabolic_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
                 figures should be saved. default=False
     """
     # Define Time Axis
-    TT = np.arange(0,npts*dt,dt)
+    TT = _np.arange(0,npts*dt,dt)
     
     # Condition system input to ensure proper execution
     system = _sys_condition(system,combine)
     
     # Allocate space for all outputs
-    parabola = np.zeros(npts)
-    errP = np.zeros(npts)
+    parabola = _np.zeros(npts)
+    errP = _np.zeros(npts)
     
     # Generate Inputs
     for i in range(npts):
@@ -361,28 +361,28 @@ def parabolic_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
         errP[k] = parabola[k] - y3[k]
     
     # Plot Parabolic Response
-    plt.figure()
-    plt.subplot(121)
-    plt.title(title)
-    plt.plot(TT,y3,'k--', label=resplabel)
-    plt.plot(TT,parabola,'k', label=funclabel)
-    plt.grid()
-    plt.legend()
-    plt.xlabel("Time (seconds)")
+    _plt.figure()
+    _plt.subplot(121)
+    _plt.title(title)
+    _plt.plot(TT,y3,'k--', label=resplabel)
+    _plt.plot(TT,parabola,'k', label=funclabel)
+    _plt.grid()
+    _plt.legend()
+    _plt.xlabel("Time (seconds)")
     if xlim != False:
-        plt.xlim(xlim)
-    plt.subplot(122)
-    plt.title(errtitle)
-    plt.plot(TT,errP,'k', label=errlabel)
-    plt.grid()
-    plt.legend()
-    plt.xlabel("Time (seconds)")
+        _plt.xlim(xlim)
+    _plt.subplot(122)
+    _plt.title(errtitle)
+    _plt.plot(TT,errP,'k', label=errlabel)
+    _plt.grid()
+    _plt.legend()
+    _plt.xlabel("Time (seconds)")
     if xlim != False:
-        plt.xlim(xlim)
-    plt.subplots_adjust(wspace=0.3)
+        _plt.xlim(xlim)
+    _plt.subplots_adjust(wspace=0.3)
     if filename!=None:
-        plt.savefig(filename)
-    plt.show()
+        _plt.savefig(filename)
+    _plt.show()
 
 # Define State Space Simulator
 def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
@@ -446,16 +446,16 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
     # Tuple to Matrix Converter
     def tuple_to_matrix(x,yx):
         n = yx(x) # Evaluate function at specified point
-        n = np.asmatrix(n) # Convert tuple output to matrix
+        n = _np.asmatrix(n) # Convert tuple output to matrix
         n = n.T # Transpose matrix
         return(n)
 
     # Numpy Array to Matrix Converter
     def nparr_to_matrix(x,yx):
         n = yx(x) # Evaluate function at specified point
-        n = np.asmatrix(n) # Convert np.arr output to matrix
+        n = _np.asmatrix(n) # Convert _np.arr output to matrix
         if n.shape[1] != 1: # If there is more than 1 column
-            n = np.matrix.reshape(n,(n.size,1)) # Reshape
+            n = _np.matrix.reshape(n,(n.size,1)) # Reshape
         return(n)
     
     # Define Function Concatinator Class
@@ -467,23 +467,23 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
                 self.func_reg[key] = funcs[key] # Fill keyed list with functions
 
         def func_c(self,x): # Concatenated Function
-            rets = np.array([]) # Create blank numpy array to store function outputs
+            rets = _np.array([]) # Create blank numpy array to store function outputs
             for i in range(self.nfuncs):
                 y = self.func_reg[i](x) # Calculate each function at value x
-                rets = np.append(rets, y) # Add value to return array
-            rets = np.asmatrix(rets).T # Convert array to matrix, then transpose
+                rets = _np.append(rets, y) # Add value to return array
+            rets = _np.asmatrix(rets).T # Convert array to matrix, then transpose
         return(rets)
     
     # Condition Inputs
-    A = np.asmatrix(A)
-    B = np.asmatrix(B)
+    A = _np.asmatrix(A)
+    B = _np.asmatrix(B)
     
     # Define Tuple of Types For Testing
-    typetest = (np.matrixlib.defmatrix.matrix,np.ndarray,tuple,list)
+    typetest = (_np.matrixlib.defmatrix.matrix,_np.ndarray,tuple,list)
     
     # Test for NN and simpts
     if (simpts >= NN):
-        warn("WARNING: NN must be greater than simpts; NN="+str(NN)+
+        _warn("WARNING: NN must be greater than simpts; NN="+str(NN)+
              "simpts="+str(simpts)," Autocorrecting simpts to be NN-1.")
         simpts = NN-1
 
@@ -492,22 +492,22 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
         solution = 3 # Set to solve and plot complete output
     elif isinstance(C,typetest) and not isinstance(D,typetest):
         if (D==None):
-            warn("WARNING: D matrix not provided; D now assumed to be 0.")
-            D = np.matrix('0')
+            _warn("WARNING: D matrix not provided; D now assumed to be 0.")
+            D = _np.matrix('0')
             solution = 3 # Set to solve and plot complete output
     else:
-        C = np.matrix('0')
-        D = np.matrix('0')
+        C = _np.matrix('0')
+        D = _np.matrix('0')
         solution = 2
     
     # Condition C/D Matrices
-    C = np.asmatrix(C)
-    D = np.asmatrix(D)
+    C = _np.asmatrix(C)
+    D = _np.asmatrix(D)
 
 
     # Create values for input testing
     if isinstance(func,function): # if f is a function, test as one
-        mF = f(1) # f should return: int, float, tuple, np.arr, np.matrix
+        mF = f(1) # f should return: int, float, tuple, _np.arr, _np.matrix
     elif isinstance(func,(tuple,list)): # if f is tupple of arguments
         if isinstance(func[0], function): #if first argument is a function
             c_funcs = c_func_concat(func) # concatinate functions into one
@@ -521,9 +521,9 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
     if not isinstance(x,typetest):
         if x==None: # No specified initial conditions
             rA = A.shape[0]
-            x = np.asmatrix(np.zeros(rA)).T
+            x = _np.asmatrix(_np.zeros(rA)).T
     # Condition x
-    x = np.asmatrix(x)
+    x = _np.asmatrix(x)
 
     # Gather dimensions of inputs
     rA, cA = A.shape
@@ -536,12 +536,12 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
     if isinstance(mF,tuple): # If function returns tuple
         fn = lambda x: tuple_to_matrix(x, func) # Use conversion function
         rF, cF = fn(1).shape # Prepare for further testing
-    elif isinstance(mF,np.ndarray): # If function returns numpy array
+    elif isinstance(mF,_np.ndarray): # If function returns numpy array
         fn = lambda x: nparr_to_matrix(x, func) # Use conversion function
         rF, cF = fn(1).shape # Prepare for further testing
-    elif isinstance(mF,(int,float,np.float64)): # If function returns int or float or numpy float
+    elif isinstance(mF,(int,float,_np.float64)): # If function returns int or float or numpy float
         fn = f # Pass function handle
-    elif isinstance(mF,np.matrixlib.defmatrix.matrix): # If function returns matrix
+    elif isinstance(mF,_np.matrixlib.defmatrix.matrix): # If function returns matrix
         fn = f # Pass function handle
         rF, cF = fn(1).shape # Prepare for further testing
     elif (mF=="MultiFunctions"): # There are multiple functions in one argument
@@ -558,14 +558,14 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
         raise ValueError("Matrix 'A' is not NxN matrix.")
     elif (rA != rB): # A and B matricies don't have same number of rows
         if (B.size % rA) == 0: # Elements in B divisible by rows in A
-            warn("WARNING: Reshaping 'B' matrix to match 'A' matrix.")
-            B = np.matrix.reshape(B,(rA,int(B.size/rA))) # Reshape Matrix
+            _warn("WARNING: Reshaping 'B' matrix to match 'A' matrix.")
+            B = _np.matrix.reshape(B,(rA,int(B.size/rA))) # Reshape Matrix
         else:
             raise ValueError("'A' matrix dimensions don't match 'B' matrix dimensions.")
     elif (rA != rx): # A and x matricies don't have same number of rows
         if (x.size % rA) == 0: # Elements in x divisible by rows in A
-            warn("WARNING: Reshaping 'x' matrix to match 'A' matrix.")
-            x = np.matrix.reshape(x,(rA,1)) # Reshape Matrix
+            _warn("WARNING: Reshaping 'x' matrix to match 'A' matrix.")
+            x = _np.matrix.reshape(x,(rA,1)) # Reshape Matrix
         else:
             raise ValueError("'A' matrix dimensions don't match 'B' matrix dimensions.")
     elif (cB != rF) or (cF != 1): # Forcing Function matrix doesn't match B matrix
@@ -574,8 +574,8 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
         raise ValueError("'C' matrix dimensions don't match state-space variable dimensions.")
     elif (solution==3) and ((cD != rF) or (rD != 1)): # Number of elements in D don't meet requirements
         if (cD == rD) and (cD == 1) and (D[0] == 0): # D matrix is set to [0]
-            D = np.asmatrix(np.zeros(rF)) # Re-create D to meet requirements
-            warn("WARNING: Autogenerating 'D' matrix of zeros to match forcing functions.")
+            D = _np.asmatrix(_np.zeros(rF)) # Re-create D to meet requirements
+            _warn("WARNING: Autogenerating 'D' matrix of zeros to match forcing functions.")
         else:
             raise ValueError("'D' matrix dimensions don't match forcing function dimensions.")
 
@@ -585,7 +585,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
 
     # Start by defining Constants
     T = 0
-    TT = np.arange(0,(dt*(NN)),dt)
+    TT = _np.arange(0,(dt*(NN)),dt)
     yout = 0
 
     # Define list of strings for plot output
@@ -596,7 +596,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
     xtim_len = rA # Number of Rows in A matrix
     for n in range(xtim_len):
         key = n #Each key should be the iterative variable
-        xtim_init = np.zeros(NN) #Define the initial array
+        xtim_init = _np.zeros(NN) #Define the initial array
         xtim[key] = xtim_init #Create each xtim
 
     # Create a dictionary of function outputs
@@ -604,11 +604,11 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
         fn_arr = {}
         for n in range(rF):
             key = n #Each key should be the iterative variable
-            fn_init = np.zeros(NN) #Define the initial array
+            fn_init = _np.zeros(NN) #Define the initial array
             fn_arr[key] = fn_init #Create each fn_arr
             fnc = rF
     else:
-        fn_arr = np.zeros(NN) #Create the fn_arr
+        fn_arr = _np.zeros(NN) #Create the fn_arr
         fnc = 1
 
     # When asked to find zero-state, set all ICs to zero
@@ -624,7 +624,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
 
         if fnc > 1: # More than one forcing function
             for n in range(fnc):
-                fn_arr[n][i] = np.asarray(fn(T))[n][0]
+                fn_arr[n][i] = _np.asarray(fn(T))[n][0]
         else: # only one forcing function
             fn_arr[i] = fn(T)
 
@@ -639,61 +639,61 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
 
     # Plot Forcing Functions
     if (plotforcing):
-        fffig = plt.figure("Forcing Functions")
+        fffig = _plt.figure("Forcing Functions")
         if fnc > 1:
             for x in range(fnc):
-                plt.plot(TT,fn_arr[x],label="f"+str(x+1))
+                _plt.plot(TT,fn_arr[x],label="f"+str(x+1))
         else:
-            plt.plot(TT,fn_arr,label="f1")
+            _plt.plot(TT,fn_arr,label="f1")
         if xlim!=False:
-            plt.xlim(xlim)
+            _plt.xlim(xlim)
         if ylim!=False:
-            plt.ylim(ylim)
-        plt.title("Forcing Functions "+title)
-        plt.xlabel("Time (seconds)")
-        plt.legend(title="Forcing Functions")
-        plt.grid()
+            _plt.ylim(ylim)
+        _plt.title("Forcing Functions "+title)
+        _plt.xlabel("Time (seconds)")
+        _plt.legend(title="Forcing Functions")
+        _plt.grid()
         if filename!=None:
-            plt.savefig('Simulation Forcing Functions.png')
+            _plt.savefig('Simulation Forcing Functions.png')
         if plot:
-            plt.show()
+            _plt.show()
 
     # Plot each state-variable over time
-    stvfig = plt.figure("State Variables")
+    stvfig = _plt.figure("State Variables")
     for x in range(xtim_len):
-        plt.plot(TT,xtim[x],label="x"+str(x+1))
+        _plt.plot(TT,xtim[x],label="x"+str(x+1))
     if xlim!=False:
-            plt.xlim(xlim)
+            _plt.xlim(xlim)
     if ylim!=False:
-        plt.ylim(ylim)
-    plt.title("Simulated Output Terms "+soltype[solution]+title)
-    plt.xlabel("Time (seconds)")
-    plt.legend(title="State Variable")
-    plt.grid()
+        _plt.ylim(ylim)
+    _plt.title("Simulated Output Terms "+soltype[solution]+title)
+    _plt.xlabel("Time (seconds)")
+    _plt.legend(title="State Variable")
+    _plt.grid()
     if filename!=None:
-        plt.savefig('Simulation Terms.png')
+        _plt.savefig('Simulation Terms.png')
     if plot:
-        plt.show()
+        _plt.show()
 
     # Plot combined output
     if (plotresult and solution==3):
-        cofig = plt.figure("Combined Output")
-        C = np.asarray(C) # convert back to array for operation
+        cofig = _plt.figure("Combined Output")
+        C = _np.asarray(C) # convert back to array for operation
         for i in range(cC):
             yout = yout + xtim[i]*C[0][i] # Sum all st-space var mult. by their coeff
-        yout = np.asarray(yout) # convert output to array for plotting purposes
-        plt.plot(TT,yout[0])
+        yout = _np.asarray(yout) # convert output to array for plotting purposes
+        _plt.plot(TT,yout[0])
         if xlim!=False:
-            plt.xlim(xlim)
+            _plt.xlim(xlim)
         if ylim!=False:
-            plt.ylim(ylim)
-        plt.title("Combined Output "+title)
-        plt.xlabel("Time (seconds)")
-        plt.grid()
+            _plt.ylim(ylim)
+        _plt.title("Combined Output "+title)
+        _plt.xlabel("Time (seconds)")
+        _plt.grid()
         if filename!=None:
-            plt.savefig('Simulation Combined Output.png')
+            _plt.savefig('Simulation Combined Output.png')
         if plot:
-            plt.show()
+            _plt.show()
 
     # Return Variables if asked to
     if ret:
