@@ -17,6 +17,7 @@ u = 1e-6 #: Micro (mu) Multiple (10^-6)
 m = 1e-3 #: Mili Multiple       (10^-3)
 k = 1e+3 #: Kili Multiple       (10^3)
 M = 1e+6 #: Mega Multiple       (10^6)
+G = 1e+9 #: Giga Multiple       (10^9)
 NAN = float('nan')
 VLLcVLN = c.rect(np.sqrt(3),np.radians(30)) # Conversion Operator
 ILcIP = c.rect(np.sqrt(3),np.radians(-30)) # Conversion Operator
