@@ -177,10 +177,10 @@ from . import bode
 #from . import sim
 
 # Import Supporting Modules
-import numpy as np
-import matplotlib
-import matplotlib.pyplot as plt
-import cmath as c
+import numpy as _np
+import matplotlib as _matplotlib
+import matplotlib.pyplot as _plt
+import cmath as _c
 
 
 # Define Phase Angle Generator
@@ -198,7 +198,7 @@ def phs( ang ):
                 the value should be calculated.
     """
     # Return the Complex Angle Modulator
-    return(np.exp(1j*np.radians( ang )))
+    return(_np.exp(1j*_np.radians( ang )))
     
 
 # Define Phasor Generator
@@ -236,10 +236,10 @@ def phasor( mag, ang=None ):
     phasorz:    Impedance Phasor Generator    
     """
     # Test for Tuple/List Arg
-    if isinstance(mag, (tuple,list,np.ndarray)):
+    if isinstance(mag, (tuple,list,_np.ndarray)):
         ang = mag[1]
         mag = mag[0]
-    return( c.rect( mag, np.radians( ang ) ) )
+    return( _c.rect( mag, _np.radians( ang ) ) )
 
 # Define Phasor Array Generator
 def phasorlist( arr ):
@@ -268,7 +268,7 @@ def phasorlist( arr ):
     --------
     >>> import numpy as np
     >>> import electricpy as ep
-    >>> voltages = np.array([[67,0],
+    >>> voltages = _np.array([[67,0],
                              [67,-120],
                              [67,120]])
     >>> Vset = ep.phasorlist( voltages )
@@ -281,9 +281,9 @@ def phasorlist( arr ):
     phasorz:    Impedance Phasor Generator
     """
     # Iteratively Process
-    outarr = np.array([])
+    outarr = _np.array([])
     for i in arr:
-        outarr = np.append(outarr, phasor( i ))
+        outarr = _np.append(outarr, phasor( i ))
     # Return Array
     return(outarr)
 
@@ -329,14 +329,14 @@ def phasordata(mn,mx=None,npts=1000,mag=1,ang=0,freq=60,
         mx = mn
         mn = 0
     # Generate Omega
-    w = 2*np.pi*freq
+    w = 2*_np.pi*freq
     # Generate Time Array
-    t,dt = np.linspace(mn,mx,npts,retstep=True)
+    t,dt = _np.linspace(mn,mx,npts,retstep=True)
     # Generate Data Array
     if not sine:
-        data = mag * np.cos(w*t + np.radians(ang))
+        data = mag * _np.cos(w*t + _np.radians(ang))
     else:
-        data = mag * np.sin(w*t + np.radians(ang))
+        data = mag * _np.sin(w*t + _np.radians(ang))
     # Generate Return Data Set
     dataset = [data]
     if retstep:
@@ -387,15 +387,15 @@ def clatex(val,round=3,polar=True,predollar=True,postdollar=True,double=False):
     """
     # Define Interpretation Functions
     def polarstring( val, round ):
-        mag, ang_r = c.polar(val) #Convert to polar form
-        ang = np.degrees(ang_r) #Convert to degrees
-        mag = np.around( mag, round ) #Round
-        ang = np.around( ang, round ) #Round
+        mag, ang_r = _c.polar(val) #Convert to polar form
+        ang = _np.degrees(ang_r) #Convert to degrees
+        mag = _np.around( mag, round ) #Round
+        ang = _np.around( ang, round ) #Round
         latex = str(mag) + '∠' + str(ang) + '°'
         return(latex)
     def rectstring( val, round ):
-        real = np.around( val.real, round ) #Round
-        imag = np.around( val.imag, round ) #Round
+        real = _np.around( val.real, round ) #Round
+        imag = _np.around( val.imag, round ) #Round
         if imag > 0:
             latex = str(real) + "+j" + str(imag)
         else:
@@ -403,9 +403,9 @@ def clatex(val,round=3,polar=True,predollar=True,postdollar=True,double=False):
         return(latex)
     # Interpret as numpy array if simple list
     if isinstance(val, list):
-        val = np.asarray(val) # Ensure that input is array
+        val = _np.asarray(val) # Ensure that input is array
     # Find length of the input array
-    if isinstance(val,np.ndarray):
+    if isinstance(val,_np.ndarray):
         shp = val.shape
         try:
             row, col = shp # Interpret Shape of Object
@@ -499,7 +499,7 @@ def tflatex(sys,sysp=None,var='s',predollar=True,
                 LaTeX string for the transfer function.
     """
     # Collect Numerator and Denominator Terms
-    if isinstance(sysp, (list,tuple,np.ndarray)):
+    if isinstance(sysp, (list,tuple,_np.ndarray)):
         num = sys
         den = sysp
     else:
@@ -610,7 +610,7 @@ def reactance(z,freq=60,sensetivity=1e-12):
                     Capacitance or Inductance of Impedance
     """
     # Evaluate Omega
-    w = 2*np.pi*freq
+    w = 2*_np.pi*freq
     # Input is Complex
     if isinstance(z, complex):
         # Test for Resistance
@@ -684,7 +684,7 @@ def cprint(val,unit=None,label=None,pretty=False,printval=True,ret=False,round=3
     >>> v = ep.phasor(67, 120)
     >>> ep.cprint(v)
     67.0 ∠ 120.0°
-    >>> voltages = np.array([[67,0],
+    >>> voltages = _np.array([[67,0],
                              [67,-120],
                              [67,120]])
     >>> Vset = ep.phasorlist( voltages )
@@ -702,9 +702,9 @@ def cprint(val,unit=None,label=None,pretty=False,printval=True,ret=False,round=3
     """
     # Interpret as numpy array if simple list
     if isinstance(val, list):
-        val = np.asarray(val) # Ensure that input is array
+        val = _np.asarray(val) # Ensure that input is array
     # Find length of the input array
-    if isinstance(val,np.ndarray):
+    if isinstance(val,_np.ndarray):
         shp = val.shape
         try:
             row, col = shp # Interpret Shape of Object
@@ -713,70 +713,70 @@ def cprint(val,unit=None,label=None,pretty=False,printval=True,ret=False,round=3
             col = 1
         sz = val.size
         # Handle Label as a List or Array
-        if isinstance(label, (list,np.ndarray)):
+        if isinstance(label, (list,_np.ndarray)):
             if len(label)==1:
                 tmp = label
                 for _ in range(sz):
-                    label = np.append(label,[tmp])
+                    label = _np.append(label,[tmp])
             elif sz != len(label):
                 raise ValueError("Too Few Label Arguments")
         # Handle Label as String
         elif isinstance(label, str):
             tmp = label
             for _ in range(sz):
-                label = np.append(label,[tmp])
+                label = _np.append(label,[tmp])
         # Handle Lack of Label
         elif label == None:
-            label = np.array([])
+            label = _np.array([])
             for _ in range(sz):
-                label = np.append(label,None)
+                label = _np.append(label,None)
         # Handle all Other Cases
         else:
             raise ValueError("Invalid Label")
         # Handle Unit as a List or Array
-        if isinstance(unit, (list,np.ndarray)):
+        if isinstance(unit, (list,_np.ndarray)):
             if len(unit)==1:
                 tmp = unit
                 for _ in range(sz):
-                    unit = np.append(unit,[tmp])
+                    unit = _np.append(unit,[tmp])
             elif sz != len(unit):
                 raise ValueError("Too Few Unit Arguments")
         # Handle Unit as String
         elif isinstance(unit, str):
             tmp = unit
             for _ in range(sz):
-                unit = np.append(unit,[tmp])
+                unit = _np.append(unit,[tmp])
         # Handle Lack of Unit
         elif unit == None:
-            unit = np.array([])
+            unit = _np.array([])
             for _ in range(sz):
-                unit = np.append(unit,None)
+                unit = _np.append(unit,None)
         # Handle all Other Cases
         else:
             raise ValueError("Invalid Unit")
         # Generate Default Arrays
-        printarr = np.array([]) # Empty array
-        numarr = np.array([]) # Empty array
+        printarr = _np.array([]) # Empty array
+        numarr = _np.array([]) # Empty array
         # Operate on List/Array
         for i in range(row):
             _val = val[i]
             _label = label[i]
             _unit = unit[i]
-            mag, ang_r = c.polar(_val) #Convert to polar form
-            ang = np.degrees(ang_r) #Convert to degrees
-            mag = np.around( mag, round ) #Round
-            ang = np.around( ang, round ) #Round
+            mag, ang_r = _c.polar(_val) #Convert to polar form
+            ang = _np.degrees(ang_r) #Convert to degrees
+            mag = _np.around( mag, round ) #Round
+            ang = _np.around( ang, round ) #Round
             strg = ""
             if _label != None:
                 strg += _label + " "
             strg += str(mag)+" ∠ "+str(ang)+"°"
             if _unit != None:
                 strg += " " + _unit
-            printarr = np.append(printarr, strg)
-            numarr = np.append(numarr, [mag, ang])
+            printarr = _np.append(printarr, strg)
+            numarr = _np.append(numarr, [mag, ang])
         # Reshape Arrays
-        printarr = np.reshape(printarr, (row,col))
-        numarr = np.reshape(numarr, (sz, 2))
+        printarr = _np.reshape(printarr, (row,col))
+        numarr = _np.reshape(numarr, (sz, 2))
         # Print
         if printval and row==1:
             print(strg)
@@ -796,10 +796,10 @@ def cprint(val,unit=None,label=None,pretty=False,printval=True,ret=False,round=3
             raise ValueError("Invalid Unit Type for Value")
         if label != None and not isinstance(label, str):
             raise ValueError("Invalid Label Type for Value")
-        mag, ang_r = c.polar(val) #Convert to polar form
-        ang = np.degrees(ang_r) #Convert to degrees
-        mag = np.around( mag, round ) #Round
-        ang = np.around( ang, round ) #Round
+        mag, ang_r = _c.polar(val) #Convert to polar form
+        ang = _np.degrees(ang_r) #Convert to degrees
+        mag = _np.around( mag, round ) #Round
+        ang = _np.around( ang, round ) #Round
         strg = ""
         if label != None:
             strg += label + " "
@@ -853,7 +853,7 @@ def phasorz(C=None,L=None,f=60,complex=True):
     Z:      complex
             The ohmic impedance of either C or L (respectively).
     """
-    w = 2*np.pi*f
+    w = 2*_np.pi*f
     #C Given in ohms, return as Z
     if (C!=None):
         Z = -1/(w*C)
@@ -1022,20 +1022,20 @@ def powerset(P=None,Q=None,S=None,PF=None):
     """
     #Given P and Q
     if (P!=None) and (Q!=None):
-        S = np.sqrt(P**2+Q**2)
+        S = _np.sqrt(P**2+Q**2)
         PF = P/S
         if Q<0:
             PF=-PF
     #Given S and PF
     elif (S!=None) and (PF!=None):
         P = abs(S*PF)
-        Q = np.sqrt(S**2-P**2)
+        Q = _np.sqrt(S**2-P**2)
         if PF<0:
             Q=-Q
     #Given P and PF
     elif (P!=None) and (PF!=None):
         S = P/PF
-        Q = Q = np.sqrt(S**2-P**2)
+        Q = Q = _np.sqrt(S**2-P**2)
         if PF<0:
             Q=-Q
     else:
@@ -1090,26 +1090,26 @@ def powertriangle(P=None,Q=None,S=None,PF=None,color="red",
     Slny = [0,Q]
 
     # Plot Power Triangle
-    plt.figure(1)
-    plt.title(text)
-    plt.plot(Plnx,Plny,color=color)
-    plt.plot(Qlnx,Qlny,color=color)
-    plt.plot(Slnx,Slny,color=color)
-    plt.xlabel("Real Power (W)")
-    plt.ylabel("Reactive Power (VAR)")
+    _plt.figure(1)
+    _plt.title(text)
+    _plt.plot(Plnx,Plny,color=color)
+    _plt.plot(Qlnx,Qlny,color=color)
+    _plt.plot(Slnx,Slny,color=color)
+    _plt.xlabel("Real Power (W)")
+    _plt.ylabel("Reactive Power (VAR)")
     mx = max(abs(P),abs(Q))
 
     if P>0:
-        plt.xlim(0,mx*1.1)
+        _plt.xlim(0,mx*1.1)
         x=mx
     else:
-        plt.xlim(-mx*1.1,0)
+        _plt.xlim(-mx*1.1,0)
         x=-mx
     if Q>0:
-        plt.ylim(0,mx*1.1)
+        _plt.ylim(0,mx*1.1)
         y=mx
     else:
-        plt.ylim(-mx*1.1,0)
+        _plt.ylim(-mx*1.1,0)
         y=-mx
     if PF > 0:
         PFtext = " Lagging"
@@ -1119,11 +1119,11 @@ def powertriangle(P=None,Q=None,S=None,PF=None,color="red",
     text = text+"Q:   "+str(Q)+" VAR\n"
     text = text+"S:   "+str(S)+" VA\n"
     text = text+"PF:  "+str(abs(PF))+PFtext+"\n"
-    text = text+"ΘPF: "+str(np.degrees(np.arccos(PF)))+"°"+PFtext
+    text = text+"ΘPF: "+str(_np.degrees(_np.arccos(PF)))+"°"+PFtext
     # Print all values if asked to
     if printval:
-         plt.text(x/20,y*4/5,text,color=color)
-    plt.show()
+         _plt.text(x/20,y*4/5,text,color=color)
+    _plt.show()
 
 # Define Transformer Short-Circuit/Open-Circuit Function
 def transformertest(Poc=False,Voc=False,Ioc=False,Psc=False,Vsc=False,
@@ -1169,14 +1169,14 @@ def transformertest(Poc=False,Voc=False,Ioc=False,Psc=False,Vsc=False,
     # Given Open-Circuit Values
     if (Poc!=None) and (Voc!=None) and (Ioc!=None):
         PF = Poc/(Voc*Ioc)
-        Y = c.rect(Ioc/Voc,-np.arccos(PF))
+        Y = _c.rect(Ioc/Voc,-_np.arccos(PF))
         Rc = 1/Y.real
         Xm = -1/Y.imag
         OC = True
     # Given Short-Circuit Values
     if (Psc!=None) and (Vsc!=None) and (Isc!=None):
         PF = Psc/(Vsc*Isc)
-        Zeq = c.rect(Vsc/Isc,np.arccos(PF))
+        Zeq = _c.rect(Vsc/Isc,_np.arccos(PF))
         Req = Zeq.real
         Xeq = Zeq.imag
         SC = True
@@ -1223,7 +1223,7 @@ def phasorplot(phasor,title="Phasor Diagram",legend=False,bg=None,
                   "#00ffff","#008080","#0000ff","#000080","#ff00ff","#800080"]
     # Scale Radius
     if radius==None:
-        radius = np.abs(phasor).max()
+        radius = _np.abs(phasor).max()
     # Set Background Color
     if bg==None:
         bg = "#FFFFFF"
@@ -1234,25 +1234,25 @@ def phasorplot(phasor,title="Phasor Diagram",legend=False,bg=None,
         raise ValueError("ERROR: Too many phasors provided. Specify more line colors.")
     
     # Force square figure and square axes looks better for polar, IMO
-    width, height = matplotlib.rcParams['figure.figsize']
+    width, height = _matplotlib.rcParams['figure.figsize']
     size = min(width, height)
     # Make a square figure
-    fig = plt.figure(figsize=(size, size))
+    fig = _plt.figure(figsize=(size, size))
     ax = fig.add_axes([0.1, 0.1, 0.8, 0.8], polar=True, facecolor=bg)
     ax.set_rmax(radius)
-    plt.grid(True)
+    _plt.grid(True)
     
     # Plot the diagram
-    plt.title(title+"\n")
-    handles=np.array([]) # Empty array for plot handles
+    _plt.title(title+"\n")
+    handles=_np.array([]) # Empty array for plot handles
     for i in range(numphs):
-        mag, ang_r = c.polar(phasor[i])
+        mag, ang_r = _c.polar(phasor[i])
         if legend!=False:
-            hand = plt.arrow(0,0,ang_r,mag,color=colors[i],label=legend[i])
-            handles = np.append(handles,[hand])
-        else: plt.arrow(0,0,ang_r,mag,color=colors[i])
-    if legend!=False: plt.legend((handles),legend)
-    plt.show()
+            hand = _plt.arrow(0,0,ang_r,mag,color=colors[i],label=legend[i])
+            handles = _np.append(handles,[hand])
+        else: _plt.arrow(0,0,ang_r,mag,color=colors[i])
+    if legend!=False: _plt.legend((handles),legend)
+    _plt.show()
 
 # Define Non-Linear Power Factor Calculator
 def nlinpf(PFtrue=False,PFdist=False,PFdisp=False):
@@ -1327,15 +1327,15 @@ def iscrl(V,Z,t=None,f=None,mxcurrent=True,alpha=None):
     Opt 3 - (Iac):              The RMS current without DC offset.
     """
     # Calculate omega, theta, R, and X
-    if(f!=None): omega = 2*np.pi*f
+    if(f!=None): omega = 2*_np.pi*f
     else: omega = None
     R = abs(Z.real)
     X = abs(Z.imag)
-    theta = np.arctan( X/R )
+    theta = _np.arctan( X/R )
     
     # If Maximum Current is Desired and No alpha provided
     if(mxcurrent and alpha==None):
-        alpha = theta - np.pi/2
+        alpha = theta - _np.pi/2
     elif(mxcurrent and alpha!=None):
         raise ValueError("ERROR: Inappropriate Arguments Provided.\n"+
                          "Not both mxcurrent and alpha can be provided.")
@@ -1346,7 +1346,7 @@ def iscrl(V,Z,t=None,f=None,mxcurrent=True,alpha=None):
         if(alpha==None and omega==None):
             # Calculate tau
             tau = t/(1/60)
-            K = np.sqrt(1 + 2*np.exp(-4*np.pi*tau/(X/R)) )
+            K = _np.sqrt(1 + 2*_np.exp(-4*_np.pi*tau/(X/R)) )
             IAC = abs(V/Z)
             Irms = K*IAC
             # Return Values
@@ -1356,14 +1356,14 @@ def iscrl(V,Z,t=None,f=None,mxcurrent=True,alpha=None):
         # Calculate Instantaneous if all angular values provided
         else:
             # Convert Degrees to Radians
-            omega = np.radians(omega)
-            alpha = np.radians(alpha)
-            theta = np.radians(theta)
+            omega = _np.radians(omega)
+            alpha = _np.radians(alpha)
+            theta = _np.radians(theta)
             # Calculate T
-            T = X/(2*np.pi*f*R) # seconds
+            T = X/(2*_np.pi*f*R) # seconds
             # Calculate iAC and iDC
-            iAC = np.sqrt(2)*V/Z*np.sin(omega*t+alpha-theta)
-            iDC = -np.sqrt(2)*V/Z*np.sin(alpha-theta)*np.exp(-t/T)
+            iAC = _np.sqrt(2)*V/Z*_np.sin(omega*t+alpha-theta)
+            iDC = -_np.sqrt(2)*V/Z*_np.sin(alpha-theta)*_np.exp(-t/T)
             i = iAC + iDC
             # Return Values
             return(i,iAC,iDC,T)
@@ -1490,9 +1490,9 @@ def instpower(P,Q,t,f=60):
             Instantaneous Power at time t
     """
     # Evaluate omega
-    w = 2*np.pi*f
+    w = 2*_np.pi*f
     # Calculate
-    Pinst = P + P*np.cos(2*w*t) - Q*np.sin(2*w*t)
+    Pinst = P + P*_np.cos(2*w*t) - Q*_np.sin(2*w*t)
     return(Pinst)
 
 # Define Delta-Wye Impedance Network Calculator
@@ -1541,7 +1541,7 @@ def dynetz(delta=None,wye=None,round=None):
         Z2 = Z12*Z23 / Zsum
         Z3 = Z23*Z31 / Zsum
         Zset = ( Z1, Z2, Z3 )
-        if round!=None: Zset = np.around(Zset,round)
+        if round!=None: Zset = _np.around(Zset,round)
         return(Zset) # Return Wye Impedances
     elif(delta==None and wye!=None):
         Z1, Z2, Z3 = wye # Gather particular impedances
@@ -1550,7 +1550,7 @@ def dynetz(delta=None,wye=None,round=None):
         Z31 = Zmultsum / Z2
         Z12 = Zmultsum / Z3
         Zset = ( Z12, Z23, Z31 )
-        if round!=None: Zset = np.around(Zset,round)
+        if round!=None: Zset = _np.around(Zset,round)
         return(Zset) # Return Delta Impedances
     else:
         raise ValueError("ERROR: Either delta or wye impedances must be specified.")
@@ -1588,11 +1588,11 @@ def powerflow( Vsend, Vrec, Zline ):
     """
     # Evaluate the Input Terms
     Vs = abs( Vsend )
-    ds = c.phase( Vsend )
+    ds = _c.phase( Vsend )
     Vr = abs( Vrec )
-    dr = c.phase( Vrec )
+    dr = _c.phase( Vrec )
     # Calculate Power Flow
-    pflow = (Vs * Vr)/(Zline) * np.sin( ds-dr )
+    pflow = (Vs * Vr)/(Zline) * _np.sin( ds-dr )
     return( pflow )
 
 # Define Impedance From Power and X/R
@@ -1650,9 +1650,9 @@ def zsource(S,V,XoR,Sbase=None,Vbase=None,perunit=True):
     # Evaluate Zsource Magnitude
     Zsource_pu = Vpu**2/Spu
     # Evaluate the angle
-    nu = np.degrees(np.arctan(XoR))
+    nu = _np.degrees(_np.arctan(XoR))
     # Conditionally Evaluate Phasor Impedance
-    if isinstance(nu, (list,np.ndarray)):
+    if isinstance(nu, (list,_np.ndarray)):
         Zsource_pu = []
         for angle in nu:
             Zsource_pu.append(phasor(Zsource_pu, angle))
@@ -1690,7 +1690,7 @@ def zdecompose(Zmag,XoR):
                 The reactance (in ohms)
     """
     # Evaluate Resistance
-    R = Zmag/np.sqrt(XoR**2+1)
+    R = Zmag/_np.sqrt(XoR**2+1)
     # Evaluate Reactance
     X = R * XoR
     # Return
@@ -1907,7 +1907,7 @@ def coldjunction(Tcj,coupletype="K",To=None,Vo=None,P1=None,P2=None,
     Vcj = Vo + num/den
     # Round Value if Allowed
     if round != None:
-        Vcj = np.around(Vcj, round)
+        Vcj = _np.around(Vcj, round)
     # Return in milivolts
     return(Vcj*m)
     
@@ -2097,7 +2097,7 @@ def thermocouple(V,coupletype="K",fahrenheit=False,cjt=None,To=None,Vo=None,P1=N
     # Return Temperature
     if fahrenheit:
         temp = (temp*9/5)+32
-    temp = np.around(temp,round)
+    temp = _np.around(temp,round)
     return(temp)
 
 # Define RTD Calculator
@@ -2159,7 +2159,7 @@ def rtdtemp(RT,rtdtype="PT100",fahrenheit=False,Rref=None,Tref=None,
     # Return Temperature
     if fahrenheit:
         temp = (temp*9/5)+32
-    temp = np.around(temp,round)
+    temp = _np.around(temp,round)
     return(temp)
     
 # Define Capacitor Voltage Discharge Function
@@ -2189,7 +2189,7 @@ def vcapdischarge(t,Vs,R,C):
     Vc:         float
                 The calculated voltage of the capacitor.
     """
-    Vc = Vs*(np.exp(-t/(R*C)))
+    Vc = Vs*(_np.exp(-t/(R*C)))
     return(Vc)
 
 # Define Capacitor Voltage Charge Function
@@ -2219,7 +2219,7 @@ def vcapcharge(t,Vs,R,C):
     Vc:         float
                 The calculated voltage of the capacitor.
     """
-    Vc = Vs*(1-np.exp(-t/(R*C)))
+    Vc = Vs*(1-_np.exp(-t/(R*C)))
     return(Vc)
     
 # Define Capacitive Energy Transfer Function
@@ -2254,7 +2254,7 @@ def captransfer(t,Vs,R,Cs,Cd):
                 Final voltage that both capacitors settle to.
     """
     tau = (R*Cs*Cd) / (Cs+Cd)
-    rvolt = Vs*np.exp(-t/tau)
+    rvolt = Vs*_np.exp(-t/tau)
     vfinal = Vs*Cs/(Cs+Cd)
     return(rvolt,vfinal)
     
@@ -2312,8 +2312,8 @@ def inductorcharge(t,Vs,R,L):
     Il:         float
                 Current through inductor at time t.
     """
-    Vl = Vs*np.exp(-R*t/L)
-    Il = Vs/R*(1-np.exp(-R*t/L))
+    Vl = Vs*_np.exp(-R*t/L)
+    Il = Vs/R*(1-_np.exp(-R*t/L))
     return(Vl,Il)
 
 # Define Capacitive Back-to-Back Switching Formula
@@ -2348,9 +2348,9 @@ def capbacktoback(C1,C2,Lm,VLN=None,VLL=None):
                 Transient current frequency
     """
     # Evaluate Max Current
-    imax = np.sqrt(2/3)*VLL*np.sqrt((C1*C2)/((C1+C2)*Lm))
+    imax = _np.sqrt(2/3)*VLL*_np.sqrt((C1*C2)/((C1+C2)*Lm))
     # Evaluate Inrush Current Frequency
-    ifreq = 1/(2*np.pi*np.sqrt(Lm*(C1*C2)/(C1+C2)))
+    ifreq = 1/(2*_np.pi*_np.sqrt(Lm*(C1*C2)/(C1+C2)))
     return(imax,ifreq)
 
 # Define Inductor Discharge Function
@@ -2383,8 +2383,8 @@ def inductordischarge(t,Io,R,L):
     Il:         float
                 Current through inductor at time t.
     """
-    Il = Io*np.exp(-R*t/L)
-    Vl = Io*R*(1-np.exp(-R*t/L))
+    Il = Io*_np.exp(-R*t/L)
+    Vl = Io*R*(1-_np.exp(-R*t/L))
     return(Vl,Il)
     
 # Define Apparent Power to Farad Conversion
@@ -2414,7 +2414,7 @@ def farads(VAR,V,freq=60):
     C:          float
                 The evaluated capacitance (in Farads).
     """
-    return(VAR / (2*np.pi*freq*V**2))
+    return(VAR / (2*_np.pi*freq*V**2))
 
 # Define Capacitor Energy Calculation
 def capenergy(C,v):
@@ -2468,7 +2468,7 @@ def loadedvcapdischarge(t,vo,C,P):
     Vt:         float
                 Voltage of capacitor at time t.
     """
-    Vt = np.sqrt(vo**2 - 2*P*t/C)
+    Vt = _np.sqrt(vo**2 - 2*P*t/C)
     return(Vt)
     
 # Define Capacitor Discharge Function
@@ -2503,7 +2503,7 @@ def timedischarge(Vinit,Vmin,C,P,dt=1e-3,RMS=True,Eremain=False):
     """
     t = 0 # start at time t=0
     if RMS:
-        vo = Vinit*np.sqrt(2) # convert RMS to peak
+        vo = Vinit*_np.sqrt(2) # convert RMS to peak
     else:
         vo = Vinit
     vc = loadedvcapdischarge(t,vo,C,P) # set initial cap voltage
@@ -2580,11 +2580,11 @@ def vscdcbus(VLL,Zs,P,Q=0,mmax=0.8,debug=False):
             The DC bus voltage.
     """
     # Determine the Load Current
-    Iload = np.conj((P+1j*Q) / (VLL*np.sqrt(3)))
+    Iload = _np.conj((P+1j*Q) / (VLL*_np.sqrt(3)))
     # Evaluate the Terminal Voltage
-    Vtln = abs(VLL/np.sqrt(3) + Iload*Zs)
+    Vtln = abs(VLL/_np.sqrt(3) + Iload*Zs)
     # Find the Peak Terminal Voltage
-    Vtpk = np.sqrt(2)*Vtln
+    Vtpk = _np.sqrt(2)*Vtln
     # Calculate the VDC value
     VDC = 2*Vtpk / mmax
     if debug:
@@ -2627,7 +2627,7 @@ def vscgains(Rs,Ls,tau=0.005,f=60):
     # Calculate ki
     ki = kp*Rs/Ls
     # Calculate w0L
-    w0L = 2*np.pi*f*Ls
+    w0L = 2*_np.pi*f*Ls
     return(kp,ki,w0L)
 
 # Define Convolution Bar-Graph Function:
@@ -2649,39 +2649,39 @@ def convbar(h, x, outline=True):
     
     # The impulse response
     M = len(h)
-    t = np.arange(M)
+    t = _np.arange(M)
     # Plot
-    plt.subplot(121)
-    if(outline): plt.plot(t,h,color='red')
-    plt.bar(t,h,color='black')
-    plt.xticks([0,5,9])
-    plt.ylabel('h')
-    plt.title('Impulse Response')
-    plt.grid()
+    _plt.subplot(121)
+    if(outline): _plt.plot(t,h,color='red')
+    _plt.bar(t,h,color='black')
+    _plt.xticks([0,5,9])
+    _plt.ylabel('h')
+    _plt.title('Impulse Response')
+    _plt.grid()
 
     # The input function
     N = len(x)
-    s = np.arange(N)
+    s = _np.arange(N)
     # Plot
-    plt.subplot(122)
-    if(outline): plt.plot(s,x,color='red')
-    plt.bar(s,x,color='black')
-    plt.xticks([0,10,19])
-    plt.title('Input Function')
-    plt.grid()
-    plt.ylabel('x')
+    _plt.subplot(122)
+    if(outline): _plt.plot(s,x,color='red')
+    _plt.bar(s,x,color='black')
+    _plt.xticks([0,10,19])
+    _plt.title('Input Function')
+    _plt.grid()
+    _plt.ylabel('x')
 
     # The output
     L = M+N-1
-    w = np.arange(L)
-    plt.figure(3)
-    y = np.convolve(h,x)
-    if(outline): plt.plot(w,y,color='red')
-    plt.bar(w,y,color='black')
-    plt.ylabel('y')
-    plt.grid()
-    plt.title('Convolved Output')
-    plt.show()
+    w = _np.arange(L)
+    _plt.figure(3)
+    y = _np.convolve(h,x)
+    if(outline): _plt.plot(w,y,color='red')
+    _plt.bar(w,y,color='black')
+    _plt.ylabel('y')
+    _plt.grid()
+    _plt.title('Convolved Output')
+    _plt.show()
 
 
 # Define convolution function
@@ -2718,7 +2718,7 @@ def step(t):
     to provide standard step-function as specified to
     be zero at x<0, and one at x>=0.
     """
-    return( np.heaviside( t, 1) )
+    return( _np.heaviside( t, 1) )
 
 # RMS Calculating Function
 def rms(f, T):
@@ -2743,7 +2743,7 @@ def rms(f, T):
     """
     fn = lambda x: f(x)**2
     integral = integrate(fn,0,T)
-    RMS = np.sqrt(1/T*integral)
+    RMS = _np.sqrt(1/T*integral)
     return(RMS)
 
 # Define Gaussian Function
@@ -2767,8 +2767,8 @@ def gaussian(x,mu=0,sigma=1):
     -------
     Computed gaussian (numpy.ndarray) of the input x
     """
-    return( 1/(sigma * np.sqrt(2 * np.pi)) *
-            np.exp(-(x - mu)**2 / (2 * sigma**2)) )
+    return( 1/(sigma * _np.sqrt(2 * _np.pi)) *
+            _np.exp(-(x - mu)**2 / (2 * sigma**2)) )
 
 # Define Gaussian Distribution Function
 def gausdist(x,mu=0,sigma=1):
@@ -2794,7 +2794,7 @@ def gausdist(x,mu=0,sigma=1):
             Computed distribution of the gausian function at the
             points specified by (array) x
     """
-    F = np.array([])
+    F = _np.array([])
     try:
         lx = len(x) # Find length of Input
     except:
@@ -2806,10 +2806,10 @@ def gausdist(x,mu=0,sigma=1):
         X = (x_tmp-mu) / sigma
         # Define Integrand
         def integrand(sq):
-            return( np.exp(-sq**2/2) )
-        integral = integrate(integrand,np.NINF,X) # Integrate
-        result = 1/np.sqrt(2*np.pi) * integral[0] # Evaluate Result
-        F = np.append(F, result) # Append to output list
+            return( _np.exp(-sq**2/2) )
+        integral = integrate(integrand,_np.NINF,X) # Integrate
+        result = 1/_np.sqrt(2*_np.pi) * integral[0] # Evaluate Result
+        F = _np.append(F, result) # Append to output list
     # Return only the 0-th value if there's only 1 value available
     if(len(F)==1):
         F = F[0]
@@ -2843,7 +2843,7 @@ def probdensity(func,x,x0=0,scale=True):
             The (array of) value(s) computed as the PDF at
             point(s) x
     """
-    sumx = np.array([])
+    sumx = _np.array([])
     try:
         lx = len(x) # Find length of Input
     except:
@@ -2851,7 +2851,7 @@ def probdensity(func,x,x0=0,scale=True):
         x = [x] # Pack into list
     # Recursively Find Probability Density
     for i in range(lx):
-        sumx = np.append(sumx,integrate(func,x0,x[i])[0])
+        sumx = _np.append(sumx,integrate(func,x0,x[i])[0])
     # Return only the 0-th value if there's only 1 value available
     if(len(sumx)==1):
         sumx = sumx[0]
@@ -2893,9 +2893,9 @@ def rfft(arr,dt=0.01,absolute=True,resample=True):
     """
     # Calculate with Absolute Values
     if absolute:
-        fourier = abs(np.fft.rfft(arr))
+        fourier = abs(_np.fft.rfft(arr))
     else:
-        foruier = np.fft.rfft(arr)
+        foruier = _np.fft.rfft(arr)
     if resample==True:
         # Evaluate the Downsampling Ratio
         dn = int(dt*len(arr))
@@ -2946,36 +2946,36 @@ def wrms(func,dw=0.1,NN=100,quad=False,plot=True,
                 Calculated RMS Bandwidth (rad/sec)
     """
     # Define omega
-    omega = np.linspace(0,(NN-1)*del_w,NN)
+    omega = _np.linspace(0,(NN-1)*del_w,NN)
     # Initialize Fraction Terms
     Stot = Sw2 = 0
     # Power Density Spectrum
-    Sxx = np.array([])
+    Sxx = _np.array([])
     for n in range(NN):
         # Calculate Power Density Spectrum
-        Sxx = np.append(Sxx,func(omega[n]))
+        Sxx = _np.append(Sxx,func(omega[n]))
         Stot = Stot + Sxx[n]
         Sw2 = Sw2 + (omega[n]**2)*Sxx[n]
     if(quad):
         def intf(w):
             return(w**2*func(w))
-        num = integrate(intf,0,np.inf)[0]
-        den = integrate(func,0,np.inf)[0]
+        num = integrate(intf,0,_np.inf)[0]
+        den = integrate(func,0,_np.inf)[0]
         # Calculate W
-        W = np.sqrt(num/den)
+        W = _np.sqrt(num/den)
     else:
         # Calculate W
-        W = np.sqrt(Sw2/Stot)
-    Wr = np.around(W,round)
+        W = _np.sqrt(Sw2/Stot)
+    Wr = _np.around(W,round)
     # Plot Upon Request
     if(plot):
-        plt.plot(omega,Sxx)
-        plt.title(title)
+        _plt.plot(omega,Sxx)
+        _plt.title(title)
         # Evaluate Text Location
         x = 0.65*max(omega)
         y = 0.80*max(Sxx)
-        plt.text(x,y,"Wrms: "+str(Wr))
-        plt.show()
+        _plt.text(x,y,"Wrms: "+str(Wr))
+        _plt.show()
     # Return Calculated RMS Bandwidth
     return(W)
         
@@ -3000,7 +3000,7 @@ def hartleydata(BW,M):
     C:          float
                 Capacity of channel (in bits per second)
     """
-    C = 2*BW*np.log2(M)
+    C = 2*BW*_np.log2(M)
     return(C)
 
 # Define Shannon's Equation For Data Capacity
@@ -3027,7 +3027,7 @@ def shannondata(BW,S,N):
     C:          float
                 Capacity of channel (in bits per second)
     """
-    C = BW*np.log2(1+S/N)
+    C = BW*_np.log2(1+S/N)
     return(C)
 
 # Define CRC Generator (Sender Side)
@@ -3305,7 +3305,7 @@ def zpu(S,VLL=None,VLN=None):
     if VLL!=None:
         return(VLL**2/S)
     else:
-        return((np.sqrt(3)*VLN)**2/S)
+        return((_np.sqrt(3)*VLN)**2/S)
 
 # Define Per-Unit Current Formula
 def ipu(S,VLL=None,VLN=None,V1phs=None):
@@ -3338,7 +3338,7 @@ def ipu(S,VLL=None,VLN=None,V1phs=None):
     if(VLL==None and VLN==None):
         raise ValueError("ERROR: One voltage must be provided.")
     if VLL!=None:
-        return(S/(np.sqrt(3)*VLL))
+        return(S/(_np.sqrt(3)*VLL))
     elif VLN != None:
         return(S/(3*VLN))
     else:
@@ -3521,9 +3521,9 @@ def abc_to_seq(Mabc,reference='A'):
     if reference == 'A':
         M = Aabc
     elif reference == 'B':
-        M = np.roll(Aabc, 1, 0)
+        M = _np.roll(Aabc, 1, 0)
     elif reference == 'C':
-        M = np.roll(Aabc, 2, 0)
+        M = _np.roll(Aabc, 2, 0)
     else:
         raise ValueError("Invalid Phase Reference.")
     return(M.dot(Mabc))
@@ -3560,9 +3560,9 @@ def seq_to_abc(M012,reference='A'):
     if reference == 'A':
         pass
     elif reference == 'B':
-        M = np.roll(M, 1, 0)
+        M = _np.roll(M, 1, 0)
     elif reference == 'C':
-        M = np.roll(M, 2, 0)
+        M = _np.roll(M, 2, 0)
     else:
         raise ValueError("Invalid Phase Reference.")
     return(M)
@@ -3608,11 +3608,11 @@ def sequencez(Zabc,reference='A',round=3):
     # Determine Roll Factor
     roll = rollrate[ reference ]
     # Evaluate Matricies
-    M012 = np.roll(A012,roll,0)
-    Minv = np.linalg.inv(M012)
+    M012 = _np.roll(A012,roll,0)
+    Minv = _np.linalg.inv(M012)
     # Compute Sequence Impedances
     Z012 = Minv.dot( Zabc.dot(M012) )
-    return(np.around(Z012,round))
+    return(_np.around(Z012,round))
 
 # FFT Coefficient Calculator Function
 def funcfft(func, minfreq=60, maxmult=15, complex=False):
@@ -3650,9 +3650,9 @@ def funcfft(func, minfreq=60, maxmult=15, complex=False):
     # Determine Time from Fundamental Frequency
     T = 1/minfreq
     # Generate time range to apply for FFT
-    t, dt = np.linspace(0, T, NN, endpoint=False, retstep=True)
+    t, dt = _np.linspace(0, T, NN, endpoint=False, retstep=True)
     # Evaluate FFT
-    y = np.fft.rfft(func(t)) / t.size
+    y = _np.fft.rfft(func(t)) / t.size
     # Return Complex Values
     if complex:
        return(y)
@@ -3698,12 +3698,12 @@ def sampfft(data,dt,minfreq=60.0,complex=False):
         raise ValueError("Too few data samples to evaluate FFT at specified minimum frequency.")
     elif FR == minfreq:
         # Evaluate FFT
-        y = np.fft.rfft(data) / len(data)
+        y = _np.fft.rfft(data) / len(data)
     else:
         # Slice data array to appropriate fundamental frequency
         cut_data = data[:int(NN)]
         # Evaluate FFT
-        y = np.fft.rfft(cut_data) / len(cut_data)
+        y = _np.fft.rfft(cut_data) / len(cut_data)
     # Return Complex Values
     if complex:
        return(y)
@@ -3739,18 +3739,18 @@ def fftplot(dc, real, imag=None, title="Fourier Coefficients"):
     a0x = [0,0]
     a0y = [0,dc/2]
     # Plot
-    plt.title(title)
-    plt.plot(a0x,a0y,'g',label="DC-Term")
-    plt.stem(rng,real,'r','ro',label="Real-Terms",use_line_collection=True)
+    _plt.title(title)
+    _plt.plot(a0x,a0y,'g',label="DC-Term")
+    _plt.stem(rng,real,'r','ro',label="Real-Terms",use_line_collection=True)
     if imag != None:
-        plt.stem(rng,imag,'b','bo',label="Imaginary-Terms",use_line_collection=True)
-    plt.xlabel("Harmonics (Multiple of Fundamental)")
-    plt.ylabel("Harmonic Magnitude")
-    plt.axhline(0.0,color='k')
-    plt.legend()
+        _plt.stem(rng,imag,'b','bo',label="Imaginary-Terms",use_line_collection=True)
+    _plt.xlabel("Harmonics (Multiple of Fundamental)")
+    _plt.ylabel("Harmonic Magnitude")
+    _plt.axhline(0.0,color='k')
+    _plt.legend()
     if(len(xtic) < 50):
-        plt.xticks(xtic)
-    plt.show()
+        _plt.xticks(xtic)
+    _plt.show()
 
 # Define FFT Composition Plotting Function
 def fftsumplot(dc,real,imag=None,freq=60,xrange=None,npts=1000,
@@ -3786,23 +3786,23 @@ def fftsumplot(dc,real,imag=None,freq=60,xrange=None,npts=1000,
     T = 1/freq
     # Generate Domain Array
     if xrange == None:
-        x = np.linspace(0,T,npts)
+        x = _np.linspace(0,T,npts)
     else:
-        x = np.linspace(xrange[0],xrange[1],npts)
+        x = _np.linspace(xrange[0],xrange[1],npts)
     # Initialize output with DC term
-    yout = np.ones(len(x))*dc
+    yout = _np.ones(len(x))*dc
     # Plot each iteration of the Fourier Series
     for k in range(1,N):
         if plotall:
-            plt.plot(x,yout)
-        yout += real[k-1]*np.cos(k*2*np.pi*x/T)
+            _plt.plot(x,yout)
+        yout += real[k-1]*_np.cos(k*2*_np.pi*x/T)
         if imag != None:
-            yout += imag[k-1]*np.sin(k*2*np.pi*x/T)
-    plt.plot(x,yout)
-    plt.title(title)
-    plt.xlabel("Time (seconds)")
-    plt.ylabel("Magnitude")
-    plt.show()
+            yout += imag[k-1]*_np.sin(k*2*_np.pi*x/T)
+    _plt.plot(x,yout)
+    _plt.title(title)
+    _plt.xlabel("Time (seconds)")
+    _plt.ylabel("Magnitude")
+    _plt.show()
 
 # Define harmonic system generation function
 def harmonics(real,imag=None,dc=0,freq=60,domain=None):
@@ -3841,12 +3841,12 @@ def harmonics(real,imag=None,dc=0,freq=60,domain=None):
                 system at specified times.
     """
     # Validate Inputs
-    if not isinstance(real,(list,np.ndarray)):
+    if not isinstance(real,(list,_np.ndarray)):
         raise ValueError("Argument *real* must be array-like.")
-    if imag != None and not isinstance(imag,(list,np.ndarray)):
+    if imag != None and not isinstance(imag,(list,_np.ndarray)):
         raise ValueError("Argument *imag* must be array-like.")
     # Calculate Omega
-    w = 2*np.pi*freq
+    w = 2*_np.pi*freq
     def _harmonic_(t):
         out = dc
         for k in range(len(real)):
@@ -3858,7 +3858,7 @@ def harmonics(real,imag=None,dc=0,freq=60,domain=None):
                 B = 0
             m = k + 1
             # Calculate Output
-            out += A*np.cos(m*w*t) + B*np.sin(m*w*t)
+            out += A*_np.cos(m*w*t) + B*_np.sin(m*w*t)
         # Return Value
         return(out)
     if domain is None:
@@ -3894,7 +3894,7 @@ def motorstartcap(V,I,freq=60):
     I = abs(I)
     V = abs(V)
     # Calculate Capacitance
-    C = I / (2*np.pi*freq*V)
+    C = I / (2*_np.pi*freq*V)
     return(C)
 
 # Define Power Factor Correction Function
@@ -3937,20 +3937,20 @@ def pfcorrection(S,PFold,PFnew,VLL=None,VLN=None,V=None,freq=60):
     S = abs(S)
     # Calculate Initial Terms
     Pold = S*PFold
-    Qold = np.sqrt(S**2 - Pold**2)
+    Qold = _np.sqrt(S**2 - Pold**2)
     # Evaluate Reactive Power Requirements
     Scorrected = Pold/PFnew
-    Qcorrected = np.sqrt(Scorrected**2 - Pold**2)
+    Qcorrected = _np.sqrt(Scorrected**2 - Pold**2)
     Qc = Qold - Qcorrected
     # Evaluate Capacitance Based on Voltage Input
     if VLL == VLN == V == None:
         raise ValueError("One voltage must be specified.")
     elif VLN != None:
-        C = Qc / (2*np.pi*freq*3*VLN**2)
+        C = Qc / (2*_np.pi*freq*3*VLN**2)
     else:
         if VLL != None:
             V = VLL
-        C = Qc / (2*np.pi*freq*V**2)
+        C = Qc / (2*_np.pi*freq*V**2)
     # Return Value
     return(C,Qc)
 
@@ -4003,32 +4003,32 @@ def acpiv(S=None,I=None,VLL=None,VLN=None,V=None):
     # Solve Single-Phase
     if V != None:
         if S == None:   # Solve for Apparent Power
-            S = V * np.conj( I )
+            S = V * _np.conj( I )
             return(S)
         else:           # Solve for Current
-            I = np.conj( S/V )
+            I = _np.conj( S/V )
             return(I)
     # Solve Line-to-Line
     elif VLL != None:
         if S == None:   # Solve for Apparent Power
-            S = np.sqrt(3) * VLL * np.conj( I )
+            S = _np.sqrt(3) * VLL * _np.conj( I )
             return(S)
         else:           # Solve for Current
-            I = np.conj( S/(np.sqrt(3) * VLL) )
+            I = _np.conj( S/(_np.sqrt(3) * VLL) )
             return(I)
     # Solve Line-to-Neutral
     elif VLN != None:
         if S == None:   # Solve for Apparent Power
-            S = 3 * VLN * np.conj( I )
+            S = 3 * VLN * _np.conj( I )
             return(S)
         else:           # Solve for Current
-            I = np.conj( S/(3*VLN) )
+            I = _np.conj( S/(3*VLN) )
             return(I)
     # Solve for Voltages
     else:
-        V = S/np.conj( I )
-        VLL = S/(np.sqrt(3) * np.conj( I ))
-        VLN = S/(3 * np.conj( I ))
+        V = S/_np.conj( I )
+        VLL = S/(_np.sqrt(3) * _np.conj( I ))
+        VLN = S/(3 * _np.conj( I ))
         return(VLL,VLN,V)
 
 # Define Primary Ratio Function
@@ -4126,10 +4126,10 @@ def natfreq(C,L,Hz=True):
                 if argument is set False.
     """
     # Evaluate Natural Frequency in rad/sec
-    freq = 1/np.sqrt(L*C)
+    freq = 1/_np.sqrt(L*C)
     # Convert to Hz as requested
     if Hz:
-        freq = freq / (2*np.pi)
+        freq = freq / (2*_np.pi)
     return(freq)
 
 # Define Voltage/Current Unbalance Equation
@@ -4207,10 +4207,10 @@ def cosfilt(arr,Srate,domain=False):
                 X-axis array for the filtered data.
     """
     # Evaluate index set
-    ind = np.arange(Srate-1, len(arr)-1)
+    ind = _np.arange(Srate-1, len(arr)-1)
     # Define Cosine Coefficient Function
     def cos(k,Srate):
-        return(np.cos(2*np.pi*k/Srate))
+        return(_np.cos(2*_np.pi*k/Srate))
     # Calculate Constant
     const = 2/Srate
     # Iteratively Calculate
@@ -4222,7 +4222,7 @@ def cosfilt(arr,Srate,domain=False):
     cosf = const * cosf
     # Return Cosine-Filtered Array
     if domain:
-        xarray = np.linspace(Srate+Srate/4-1,len(arr)-1,len(cosf))
+        xarray = _np.linspace(Srate+Srate/4-1,len(arr)-1,len(cosf))
         xarray = xarray / Srate
         return(cosf,xarray)
     return(cosf)
@@ -4255,10 +4255,10 @@ def sinfilt(arr,Srate,domain=False):
                 X-axis array for the filtered data.
     """
     # Evaluate index set
-    ind = np.arange(Srate-1, len(arr)-1)
+    ind = _np.arange(Srate-1, len(arr)-1)
     # Define Cosine Coefficient Function
     def sin(k,Srate):
-        return(np.sin(2*np.pi*k/Srate))
+        return(_np.sin(2*_np.pi*k/Srate))
     # Calculate Constant
     const = 2/Srate
     # Iteratively Calculate
@@ -4270,7 +4270,7 @@ def sinfilt(arr,Srate,domain=False):
     sinf = const * sinf
     # Return Cosine-Filtered Array
     if domain:
-        xarray = np.linspace(Srate+Srate/4-1,len(arr)-1,len(sinf))
+        xarray = _np.linspace(Srate+Srate/4-1,len(arr)-1,len(sinf))
         xarray = xarray / Srate
         return(sinf,xarray)
     return(sinf)
@@ -4309,9 +4309,9 @@ def characterz(R,G,L,C,freq=60):
                 Charcteristic Impedance of specified line.
     """
     # Evaluate omega
-    w = 2*np.pi*freq
+    w = 2*_np.pi*freq
     # Evaluate Zc
-    Zc = np.sqrt((R+1j*w*L)/(G+1j*w*C))
+    Zc = _np.sqrt((R+1j*w*L)/(G+1j*w*C))
     return(Zc)
 
 
