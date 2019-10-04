@@ -17,7 +17,7 @@ import matplotlib.pyplot as _plt
 import numpy as _np
 import scipy.signal as _sig
 from numpy import pi as _pi
-from cmath import _exp as _exp
+from cmath import exp as _exp
 
 # Define System Conditioning Function
 def _sys_condition(system,feedback):
