@@ -219,7 +219,7 @@ def phs3(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     
     .. math::
        I_1 = \\frac{V_{src}}{Z_1+R_1}//
-       I_2 = 0
+       I_2 = 0//
        I_0 = 0
     
     Parameters
@@ -312,16 +312,23 @@ def busvolt(k,n,Vpf,Z0,Z1,Z2,If,sequence=True,reference='A'):
 
 
 # Define CT Saturation Function
-def ct_saturation(XR,Imag,Vrated,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
+def ct_saturation(XoR,Imag,Vrated,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
     """
     Current Transformer Saturation Calculator
     
     A function to determine the saturation value and a boolean indicator
     showing whether or not CT is -in fact- saturated.
     
+    To perform this evaluation, we must satisfy the equation:
+    
+    .. math::
+       20\\geq(1+\\frac{X}{R})*\\frac{|I_{mag}|}{I_{rated}*CTR}
+       *\\frac{\\left|R_{burden}+j*\\omega*\\frac{X_{burden}}
+       {\\omega}\\right|*100}{V_{rated}*(1-remnanc)}
+    
     Parameters
     ----------
-    XR:         float
+    XoR:        float
                 The X-over-R ratio of the system.
     Imag:       float
                 The (maximum) current magnitude to use for calculation,
@@ -359,7 +366,7 @@ def ct_saturation(XR,Imag,Vrated,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
     # Re-evaluate Vrated
     Vrated = Vrated*(1-remnance)
     # Calculate each "term" (multiple)
-    t1 = (1+XR)
+    t1 = (1+XoR)
     t2 = (Imag/(Irated*CTR))
     t3 = abs(Rb+1j*w*Lb)*100/Vrated
     # Evaluate
@@ -371,15 +378,22 @@ def ct_saturation(XR,Imag,Vrated,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
 
 
 # Define C-Class Calculator
-def ct_cclass(XR,Imag,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
+def ct_cclass(XoR,Imag,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
     """
     Current Transformer (CT) C-Class Function
     
     A function to determine the C-Class rated voltage for a CT.
+    The formula shown below is used.
+    
+    .. math::
+       C_{class}=\\frac{(1+\\frac{X}{R})*\\frac{|I_{mag}|}
+       {I_{rated}*CTR}*\\frac{\\left|R_{burden}+j*\\omega*
+       \\frac{X_{burden}}{\\omega}\\right|*100}{V_{rated}}}
+       {1-remnance}
     
     Parameters
     ----------
-    XR:         float
+    XoR:        float
                 The X-over-R ratio of the system.
     Imag:       float
                 The (maximum) current magnitude to use for calculation,
@@ -410,7 +424,7 @@ def ct_cclass(XR,Imag,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
     # Find Lb
     Lb = Xb/w
     # Calculate each "term" (multiple)
-    t1 = (1+XR)
+    t1 = (1+XoR)
     t2 = (Imag/(Irated*CTR))
     t3 = abs(Rb+1j*w*Lb)*100/ALF
     # Evaluate
@@ -426,6 +440,12 @@ def ct_satratburden(Inom,VArat=None,ANSIv=None,ALF=20,):
     Current Transformer (CT) Saturation at Rated Burden Calculator
     
     A function to determine the Saturation at rated burden.
+    
+    .. math:: V_{saturated}=ALF*\\frac{VA_{rated}}{I_{nominal}}
+    
+    where:
+    
+    .. math:: VA_{rated}=I_{nominal}*\\frac{ANSI_{voltage}}{20}
     
     Parameters
     ----------
@@ -448,19 +468,20 @@ def ct_satratburden(Inom,VArat=None,ANSIv=None,ALF=20,):
         raise ValueError("VArat or ANSIv must be specified.")
     elif VArat==None:
         # Calculate VArat from ANSIv
-        Zrat = ANSIv/(20*Inom)
-        VArat = Inom**2 * Zrat
+        VArat = Inom*ANSIv/(20)
     # Determine Vsaturation
     Vsat = ALF * VArat/Inom
     return(Vsat)
 
 
 # Define CT Vpeak Formula
-def ct_vpeak(Zb,Ip,N):
+def ct_vpeak(Zb,Ip,CTR):
     """
     Current Transformer (CT) Peak Voltage Calculator
     
     Simple formula to calculate the Peak Voltage of a CT.
+    
+    .. math:: \\sqrt{3.5*|Z_burden|*I_{peak}*CTR}
     
     Parameters
     ----------
@@ -468,7 +489,7 @@ def ct_vpeak(Zb,Ip,N):
                 The burden impedance magnitude (in ohms).
     Ip:         float
                 The peak current for the CT.
-    N:          float
+    CTR:        float
                 The CTR turns ratio of the CT.
     
     Returns
@@ -476,11 +497,11 @@ def ct_vpeak(Zb,Ip,N):
     Vpeak:      float
                 The peak voltage.
     """
-    return(np.sqrt(3.5*Zb*Ip*N))
+    return(np.sqrt(3.5*abs(Zb)*Ip*CTR))
 
 
 # Define Saturation Time Calculator
-def ct_timetosat(Vknee,XR,Rb,CTR,Imax,ts=None,npts=100,freq=60,plot=False):
+def ct_timetosat(Vknee,XoR,Rb,CTR,Imax,ts=None,npts=100,freq=60,plot=False):
     """
     Current Transformer (CT) Time to Saturation Function
     
@@ -491,7 +512,7 @@ def ct_timetosat(Vknee,XR,Rb,CTR,Imax,ts=None,npts=100,freq=60,plot=False):
     ----------
     Vknee:      float
                 The knee-voltage for the CT.
-    XR:         float
+    XoR:        float
                 The X-over-R ratio of the system.
     Rb:         float
                 The total burden resistance in ohms.
@@ -515,12 +536,12 @@ def ct_timetosat(Vknee,XR,Rb,CTR,Imax,ts=None,npts=100,freq=60,plot=False):
     # Calculate omega
     w = 2*np.pi*freq
     # Calculate Tp
-    Tp = XR/w
+    Tp = XoR/w
     # If ts isn't specified, generate it
     if ts==None:
         ts = np.linspace(0,0.1,freq*npts)
     # Calculate inner term
-    term = -XR*(np.exp(-ts/Tp)-1)
+    term = -XoR*(np.exp(-ts/Tp)-1)
     # Calculate Vsaturation terms
     Vsat1 = Imax*Rb*(term+1)
     Vsat2 = Imax*Rb*(term-np.sin(w*ts))
