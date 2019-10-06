@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>ct_timetosat &#8212; electricpy 0.0.4 documentation</title>
+    <title>ct_timetosat &#8212; electricpy 0.0.5 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="electricpy.fault.ct_saturation.html" title="ct_saturation"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../fault.html" accesskey="U">FAULT Sub-Module</a> &#187;</li> 
       </ul>
@@ -52,7 +52,7 @@
 <h1>ct_timetosat<a class="headerlink" href="#ct-timetosat" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="electricpy.fault.ct_timetosat">
-<code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">ct_timetosat</code><span class="sig-paren">(</span><em class="sig-param">Vknee</em>, <em class="sig-param">XR</em>, <em class="sig-param">Rb</em>, <em class="sig-param">CTR</em>, <em class="sig-param">Imax</em>, <em class="sig-param">ts=None</em>, <em class="sig-param">npts=100</em>, <em class="sig-param">freq=60</em>, <em class="sig-param">plot=False</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.ct_timetosat" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">ct_timetosat</code><span class="sig-paren">(</span><em class="sig-param">Vknee</em>, <em class="sig-param">XoR</em>, <em class="sig-param">Rb</em>, <em class="sig-param">CTR</em>, <em class="sig-param">Imax</em>, <em class="sig-param">ts=None</em>, <em class="sig-param">npts=100</em>, <em class="sig-param">freq=60</em>, <em class="sig-param">plot=False</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.ct_timetosat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Current Transformer (CT) Time to Saturation Function</p>
 <p>Function to determine the “time to saturate” for an underrated C-Class
 CT using three standard curves described by Juergen Holbach.</p>
@@ -60,13 +60,13 @@ CT using three standard curves described by Juergen Holbach.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>Vknee</strong> (<em>float</em>) – The knee-voltage for the CT.</p></li>
-<li><p><strong>XR</strong> (<em>float</em>) – The X-over-R ratio of the system.</p></li>
+<li><p><strong>XoR</strong> (<em>float</em>) – The X-over-R ratio of the system.</p></li>
 <li><p><strong>Rb</strong> (<em>float</em>) – The total burden resistance in ohms.</p></li>
 <li><p><strong>CTR</strong> (<em>float</em>) – The CT Ratio (primary/secondary, N) to be used.</p></li>
 <li><p><strong>Imax</strong> (<em>float</em>) – The (maximum) current magnitude to use for calculation,
 typically the fault current.</p></li>
 <li><p><strong>ts</strong> (<em>numpy.ndarray</em><em> or </em><em>float</em><em>, </em><em>optional</em>) – The time-array or particular (floatint point) time at which
-to calculate the values. default=np.linspace(0,0.1,freq*npts)</p></li>
+to calculate the values. default=_np.linspace(0,0.1,freq*npts)</p></li>
 <li><p><strong>npts</strong> (<em>float</em><em>, </em><em>optional</em>) – The number of points (per cycle) to calculate if ts is not
 specified, default=100.</p></li>
 <li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – The system frequency in Hz, default=60.</p></li>
@@ -130,7 +130,7 @@ default=False.</p></li>
         <li class="right" >
           <a href="electricpy.fault.ct_saturation.html" title="ct_saturation"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../fault.html" >FAULT Sub-Module</a> &#187;</li> 
       </ul>

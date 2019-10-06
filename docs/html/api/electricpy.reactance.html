@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>reactance &#8212; electricpy 0.0.4 documentation</title>
+    <title>reactance &#8212; electricpy 0.0.5 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="electricpy.puchgbase.html" title="puchgbase"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>  
@@ -51,18 +51,34 @@
 <h1>reactance<a class="headerlink" href="#reactance" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="electricpy.reactance">
-<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">reactance</code><span class="sig-paren">(</span><em class="sig-param">z</em>, <em class="sig-param">f=60</em>, <em class="sig-param">sensetivity=1e-12</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.reactance" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">reactance</code><span class="sig-paren">(</span><em class="sig-param">z</em>, <em class="sig-param">freq=60</em>, <em class="sig-param">sensetivity=1e-12</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.reactance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Capacitance/Inductance from Impedance</p>
 <p>Calculates the Capacitance or Inductance in Farads or Henreys
 (respectively) provided the impedance of an element.
 Will return capacitance (in Farads) if ohmic impedance is
-negative, or inductance (in Henrys) if ohmic impedance is
-positive. If imaginary: calculate with j factor (imaginary number).</p>
+negative <a class="reference internal" href="#equation-cap">(1)</a>, or inductance (in Henrys) if ohmic impedance is
+positive <a class="reference internal" href="#equation-ind">(2)</a>. If imaginary: calculate with j factor
+(imaginary number).</p>
+<div class="math notranslate nohighlight" id="equation-cap">
+<span class="eqno">(1)<a class="headerlink" href="#equation-cap" title="Permalink to this equation">¶</a></span>\[C = \frac{1}{\omega*Z}\]</div>
+<div class="math notranslate nohighlight" id="equation-ind">
+<span class="eqno">(2)<a class="headerlink" href="#equation-ind" title="Permalink to this equation">¶</a></span>\[L = \frac{Z}{\omega}\]</div>
+<p>This requires that the radian frequency is found as follows:</p>
+<div class="math notranslate nohighlight">
+\[\omega = 2*\pi*freq\]</div>
+<p>where <cite>freq</cite> is the frequency in Hertz.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It’s worth noting here, that the resistance will be found by
+extracting the real part of a complex value. That is:</p>
+<div class="math notranslate nohighlight">
+\[R = Real( R + jX )\]</div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>z</strong> (<em>complex</em>) – The Impedance Provided, may be complex (R+jI)</p></li>
-<li><p><strong>f</strong> (<em>float</em><em>, </em><em>optional</em>) – The Frequency Base for Provided Impedance, default=60</p></li>
+<li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – The Frequency Base for Provided Impedance, default=60</p></li>
 <li><p><strong>sensetivity</strong> (<em>float</em><em>, </em><em>optional</em>) – The sensetivity used to check if a resistance was
 provided, default=1e-12</p></li>
 </ul>
@@ -129,7 +145,7 @@ provided, default=1e-12</p></li>
         <li class="right" >
           <a href="electricpy.puchgbase.html" title="puchgbase"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>

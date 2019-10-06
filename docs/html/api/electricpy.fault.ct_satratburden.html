@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>ct_satratburden &#8212; electricpy 0.0.4 documentation</title>
+    <title>ct_satratburden &#8212; electricpy 0.0.5 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="electricpy.fault.ct_cclass.html" title="ct_cclass"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../fault.html" accesskey="U">FAULT Sub-Module</a> &#187;</li> 
       </ul>
@@ -55,6 +55,11 @@
 <code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">ct_satratburden</code><span class="sig-paren">(</span><em class="sig-param">Inom</em>, <em class="sig-param">VArat=None</em>, <em class="sig-param">ANSIv=None</em>, <em class="sig-param">ALF=20</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.ct_satratburden" title="Permalink to this definition">¶</a></dt>
 <dd><p>Current Transformer (CT) Saturation at Rated Burden Calculator</p>
 <p>A function to determine the Saturation at rated burden.</p>
+<div class="math notranslate nohighlight">
+\[V_{saturated}=ALF*\frac{VA_{rated}}{I_{nominal}}\]</div>
+<p>where:</p>
+<div class="math notranslate nohighlight">
+\[VA_{rated}=I_{nominal}*\frac{ANSI_{voltage}}{20}\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -126,7 +131,7 @@
         <li class="right" >
           <a href="electricpy.fault.ct_cclass.html" title="ct_cclass"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../fault.html" >FAULT Sub-Module</a> &#187;</li> 
       </ul>

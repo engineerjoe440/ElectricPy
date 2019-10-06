@@ -224,11 +224,11 @@ def sbode(f,NN=1000,title="",xlim=False,ylim=False,mn=0,mx=1000,
     aaa = _np.angle(H)
     for n in range(NN):
         if aaa[n] > _pi:
-            aaa[n] = aaa[n] - 2*pi
+            aaa[n] = aaa[n] - 2*_pi
 
     if(angle):
         _plt.title(title+" Phase")
-        _plt.semilogx(W,(180/pi)*aaa,'k')
+        _plt.semilogx(W,(180/_pi)*aaa,'k')
         _plt.ylabel('H phase (degrees)')
         _plt.xlabel('Frequency (rad/sec)')
         _plt.grid(which='both')
@@ -241,7 +241,7 @@ def sbode(f,NN=1000,title="",xlim=False,ylim=False,mn=0,mx=1000,
         _plt.show()
 
 
-def zbode(f,dt=0.01,NN=1000,title="",mn=0,mx=2*pi,xlim=False,ylim=False,
+def zbode(f,dt=0.01,NN=1000,title="",mn=0,mx=2*_pi,xlim=False,ylim=False,
           approx=False,disp3db=False,lowcut=None,magnitude=True,angle=True):
     """
     Z-Domain Bode Plotting Function
@@ -298,7 +298,7 @@ def zbode(f,dt=0.01,NN=1000,title="",mn=0,mx=2*pi,xlim=False,ylim=False,
             H[n] = dt*f(z)
             
     if(magnitude):
-        _plt.semilogx((180/pi)*phi,20*_np.log10(abs(H)),'k')
+        _plt.semilogx((180/_pi)*phi,20*_np.log10(abs(H)),'k')
         _plt.ylabel('|H| dB')
         _plt.xlabel('Frequency (degrees)')
         _plt.title(title+" Magnitude")
@@ -318,10 +318,10 @@ def zbode(f,dt=0.01,NN=1000,title="",mn=0,mx=2*pi,xlim=False,ylim=False,
     aaa = _np.angle(H)
     for n in range(NN):
         if aaa[n] > _pi:
-            aaa[n] = aaa[n] - 2*pi
+            aaa[n] = aaa[n] - 2*_pi
 
     if(angle):
-        _plt.semilogx((180/pi)*phi,(180/pi)*aaa,'k')
+        _plt.semilogx((180/_pi)*phi,(180/_pi)*aaa,'k')
         _plt.ylabel('H (degrees)')
         _plt.grid(which='both')
         _plt.xlabel('Frequency (degrees)')

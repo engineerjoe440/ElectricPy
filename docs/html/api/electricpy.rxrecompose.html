@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>rxrecompose &#8212; electricpy 0.0.4 documentation</title>
+    <title>rxrecompose &#8212; electricpy 0.0.5 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="electricpy.rtdtemp.html" title="rtdtemp"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>  
@@ -51,7 +51,7 @@
 <h1>rxrecompose<a class="headerlink" href="#rxrecompose" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="electricpy.rxrecompose">
-<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">rxrecompose</code><span class="sig-paren">(</span><em class="sig-param">x_pu</em>, <em class="sig-param">XR</em>, <em class="sig-param">S3phs</em>, <em class="sig-param">VLL=None</em>, <em class="sig-param">VLN=None</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.rxrecompose" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">rxrecompose</code><span class="sig-paren">(</span><em class="sig-param">x_pu</em>, <em class="sig-param">XoR</em>, <em class="sig-param">S3phs=None</em>, <em class="sig-param">VLL=None</em>, <em class="sig-param">VLN=None</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.rxrecompose" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resistance/Reactance from Per-Unit System Evaluator</p>
 <p>Function to reverse per-unit conversion and return the ohmic value
 of an impedance given its per-unit parameters of X.</p>
@@ -60,7 +60,10 @@ of an impedance given its per-unit parameters of X.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x_pu</strong> (<em>float</em>) – The per-unit, complex value corresponding to the
 impedance</p></li>
-<li><p><strong>S3phs</strong> (<em>float</em>) – The total three-phase power rating of the system.</p></li>
+<li><p><strong>XoR</strong> (<em>float</em>) – The X/R ratio (reactance over impedance).</p></li>
+<li><p><strong>S3phs</strong> (<em>float</em><em>, </em><em>optional</em>) – The total three-phase power rating of the system.
+If left as None, the per-unit values will be set
+to 1, resulting in an unscaled impedance</p></li>
 <li><p><strong>VLL</strong> (<em>float</em><em>, </em><em>optional</em>) – The Line-to-Line Voltage; default=None</p></li>
 <li><p><strong>VLN</strong> (<em>float</em><em>, </em><em>optional</em>) – The Line-to-Neutral Voltage; default=None</p></li>
 </ul>
@@ -127,7 +130,7 @@ impedance</p></li>
         <li class="right" >
           <a href="electricpy.rtdtemp.html" title="rtdtemp"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>

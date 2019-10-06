@@ -13,11 +13,11 @@ Included Functions
 #################################################################################
 
 # Import External Dependencies
-import matplotlib.pyplot as plt
-import numpy as np
-import scipy.signal as sig
-from numpy import pi
-from cmath import exp
+import matplotlib.pyplot as _plt
+import numpy as _np
+import scipy.signal as _sig
+from numpy import pi as _pi
+from cmath import exp as _exp
 
 # Define System Conditioning Function
 def _sys_condition(system,feedback):
@@ -33,9 +33,9 @@ def _sys_condition(system,feedback):
             ld = len(den) # Length of denominator
             ln = len(num) # Length of numerator
             if(ld > ln):
-                num = np.append(np.zeros(ld-ln),num) # Pad beginning with zeros
+                num = _np.append(_np.zeros(ld-ln),num) # Pad beginning with zeros
             if(ld < ln):
-                den = np.append(np.zeros(ln-ld),den) # Pad beginning with zeros
+                den = _np.append(_np.zeros(ln-ld),den) # Pad beginning with zeros
             den = den + num # Add numerator and denominator
         for i in range( len( num ) ):
             if (num[i] != 0):
@@ -104,62 +104,62 @@ def bode(system,mn=0.001,mx=1000,npts=100,title="",xlim=False,ylim=False,sv=Fals
     if freqaxis.lower().find("deg") != -1: # degrees requested
         degrees = True
         # Scale Degrees to Radians for calculation
-        mn = 2*np.pi*mn
-        mx = 2*np.pi*mx
-    mn = np.log10(mn) # find the exponent value
-    mx = np.log10(mx) # find the exponent value
+        mn = 2*_np.pi*mn
+        mx = 2*_np.pi*mx
+    mn = _np.log10(mn) # find the _exponent value
+    mx = _np.log10(mx) # find the _exponent value
     
     # Generate the frequency range to calculate over
-    wover = np.logspace(mn,mx,npts)
+    wover = _np.logspace(mn,mx,npts)
     
     # Calculate the bode system
-    w, mag, ang = sig.bode(system, wover)
+    w, mag, ang = _sig.bode(system, wover)
     
     # Plot Magnitude
     if(magnitude):
         magTitle = "Magnitude "+title
-        plt.title(magTitle)
+        _plt.title(magTitle)
         if degrees: # Plot in degrees
-            plt.plot(w/(2*np.pi), mag)
-            plt.xlabel("Frequency (Hz)")
+            _plt.plot(w/(2*_np.pi), mag)
+            _plt.xlabel("Frequency (Hz)")
         else: # Plot in radians
-            plt.plot(w, mag)
-            plt.xlabel("Frequency (rad/sec)")
-        plt.xscale("log")
-        plt.grid(which="both")
-        plt.ylabel("Magnitude (dB)")
+            _plt.plot(w, mag)
+            _plt.xlabel("Frequency (rad/sec)")
+        _plt.xscale("log")
+        _plt.grid(which="both")
+        _plt.ylabel("Magnitude (dB)")
         if disp3db:
-            plt.axhline(-3)
+            _plt.axhline(-3)
         if lowcut!=None:
-            plt.axhline(lowcut)
+            _plt.axhline(lowcut)
         if xlim!=False:
-            plt.xlim(xlim)
+            _plt.xlim(xlim)
         if ylim!=False:
-            plt.ylim(ylim)
+            _plt.ylim(ylim)
         if sv:
-            plt.savefig(magTitle+".png")
-        plt.show()
+            _plt.savefig(magTitle+".png")
+        _plt.show()
 
     # Plot Angle
     if(angle):
         angTitle = "Angle "+title
-        plt.title(angTitle)
+        _plt.title(angTitle)
         if degrees: # Plot in degrees
-            plt.plot(w/(2*np.pi), ang)
-            plt.xlabel("Frequency (Hz)")
+            _plt.plot(w/(2*_np.pi), ang)
+            _plt.xlabel("Frequency (Hz)")
         else: # Plot in radians
-            plt.plot(w, ang)
-            plt.xlabel("Frequency (rad/sec)")
-        plt.xscale("log")
-        plt.grid(which="both")
-        plt.ylabel("Angle (degrees)")
+            _plt.plot(w, ang)
+            _plt.xlabel("Frequency (rad/sec)")
+        _plt.xscale("log")
+        _plt.grid(which="both")
+        _plt.ylabel("Angle (degrees)")
         if xlim!=False:
-            plt.xlim(xlim)
+            _plt.xlim(xlim)
         if ylim!=False:
-            plt.ylim(ylim)
+            _plt.ylim(ylim)
         if sv:
-            plt.savefig(angTitle+".png")
-        plt.show()
+            _plt.savefig(angTitle+".png")
+        _plt.show()
 
 def sbode(f,NN=1000,title="",xlim=False,ylim=False,mn=0,mx=1000,
           disp3db=False,lowcut=None,magnitude=True,angle=True):
@@ -197,51 +197,51 @@ def sbode(f,NN=1000,title="",xlim=False,ylim=False,mn=0,mx=1000,
     angle:          bool, optional
                     Control argument to enable plotting of angle, default=True
     """
-    W = np.linspace(mn,mx,NN)
-    H = np.zeros(NN, dtype = np.complex)
+    W = _np.linspace(mn,mx,NN)
+    H = _np.zeros(NN, dtype = _np.complex)
 
     for n in range(0,NN):
         s = 1j*W[n]
         H[n] = f(s)
     if(magnitude):
-        plt.semilogx(W,20*np.log10(abs(H)),'k')
-        plt.ylabel('|H| dB')
-        plt.xlabel('Frequency (rad/sec)')
-        plt.title(title+" Magnitude")
-        plt.grid(which='both')
+        _plt.semilogx(W,20*_np.log10(abs(H)),'k')
+        _plt.ylabel('|H| dB')
+        _plt.xlabel('Frequency (rad/sec)')
+        _plt.title(title+" Magnitude")
+        _plt.grid(which='both')
         if disp3db:
-            plt.axhline(-3)
+            _plt.axhline(-3)
         if lowcut!=None:
-            plt.axhline(lowcut)
+            _plt.axhline(lowcut)
         if xlim!=False:
-            plt.xlim(xlim)
+            _plt.xlim(xlim)
         if ylim!=False:
-            plt.ylim(ylim)
+            _plt.ylim(ylim)
         if sv:
-            plt.savefig(title+" Magnitude.png")
-        plt.show()
+            _plt.savefig(title+" Magnitude.png")
+        _plt.show()
 
-    aaa = np.angle(H)
+    aaa = _np.angle(H)
     for n in range(NN):
-        if aaa[n] > pi:
-            aaa[n] = aaa[n] - 2*pi
+        if aaa[n] > _pi:
+            aaa[n] = aaa[n] - 2*_pi
 
     if(angle):
-        plt.title(title+" Phase")
-        plt.semilogx(W,(180/pi)*aaa,'k')
-        plt.ylabel('H phase (degrees)')
-        plt.xlabel('Frequency (rad/sec)')
-        plt.grid(which='both')
+        _plt.title(title+" Phase")
+        _plt.semilogx(W,(180/_pi)*aaa,'k')
+        _plt.ylabel('H phase (degrees)')
+        _plt.xlabel('Frequency (rad/sec)')
+        _plt.grid(which='both')
         if xlim!=False:
-            plt.xlim(xlim)
+            _plt.xlim(xlim)
         if ylim!=False:
-            plt.ylim(ylim)
+            _plt.ylim(ylim)
         if sv:
-            plt.savefig(title+" Phase.png")
-        plt.show()
+            _plt.savefig(title+" Phase.png")
+        _plt.show()
 
 
-def zbode(f,dt=0.01,NN=1000,title="",mn=0,mx=2*pi,xlim=False,ylim=False,
+def zbode(f,dt=0.01,NN=1000,title="",mn=0,mx=2*_pi,xlim=False,ylim=False,
           approx=False,disp3db=False,lowcut=None,magnitude=True,angle=True):
     """
     Z-Domain Bode Plotting Function
@@ -286,11 +286,11 @@ def zbode(f,dt=0.01,NN=1000,title="",mn=0,mx=2*pi,xlim=False,ylim=False,
     angle:          bool, optional
                     Control argument to enable plotting of angle, default=True
     """
-    phi = np.linspace(mn,mx,NN)
+    phi = _np.linspace(mn,mx,NN)
 
-    H = np.zeros(NN, dtype = np.complex)
+    H = _np.zeros(NN, dtype = _np.complex)
     for n in range(0,NN):
-        z = exp(1j*phi[n])
+        z = _exp(1j*phi[n])
         if(approx!=False): # Approximated Z-Domain
             s = approx(z,dt) # Pass current z-value and dt
             H[n] = f(s)
@@ -298,41 +298,41 @@ def zbode(f,dt=0.01,NN=1000,title="",mn=0,mx=2*pi,xlim=False,ylim=False,
             H[n] = dt*f(z)
             
     if(magnitude):
-        plt.semilogx((180/pi)*phi,20*np.log10(abs(H)),'k')
-        plt.ylabel('|H| dB')
-        plt.xlabel('Frequency (degrees)')
-        plt.title(title+" Magnitude")
-        plt.grid(which='both')
+        _plt.semilogx((180/_pi)*phi,20*_np.log10(abs(H)),'k')
+        _plt.ylabel('|H| dB')
+        _plt.xlabel('Frequency (degrees)')
+        _plt.title(title+" Magnitude")
+        _plt.grid(which='both')
         if disp3db:
-            plt.axhline(-3)
+            _plt.axhline(-3)
         if lowcut!=None:
-            plt.axhline(lowcut)
+            _plt.axhline(lowcut)
         if xlim!=False:
-            plt.xlim(xlim)
+            _plt.xlim(xlim)
         if ylim!=False:
-            plt.ylim(ylim)
+            _plt.ylim(ylim)
         if sv:
-            plt.savefig(title+" Magnitude.png")
-        plt.show()
+            _plt.savefig(title+" Magnitude.png")
+        _plt.show()
 
-    aaa = np.angle(H)
+    aaa = _np.angle(H)
     for n in range(NN):
-        if aaa[n] > pi:
-            aaa[n] = aaa[n] - 2*pi
+        if aaa[n] > _pi:
+            aaa[n] = aaa[n] - 2*_pi
 
     if(angle):
-        plt.semilogx((180/pi)*phi,(180/pi)*aaa,'k')
-        plt.ylabel('H (degrees)')
-        plt.grid(which='both')
-        plt.xlabel('Frequency (degrees)')
-        plt.title(title+" Phase")
+        _plt.semilogx((180/_pi)*phi,(180/_pi)*aaa,'k')
+        _plt.ylabel('H (degrees)')
+        _plt.grid(which='both')
+        _plt.xlabel('Frequency (degrees)')
+        _plt.title(title+" Phase")
         if xlim!=False:
-            plt.xlim(xlim)
+            _plt.xlim(xlim)
         if ylim!=False:
-            plt.ylim(ylim)
+            _plt.ylim(ylim)
         if sv:
-            plt.savefig(title+" Phase.png")
-        plt.show()
+            _plt.savefig(title+" Phase.png")
+        _plt.show()
 
 
 # End of BODE.PY

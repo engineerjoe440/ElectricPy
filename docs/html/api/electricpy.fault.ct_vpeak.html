@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>ct_vpeak &#8212; electricpy 0.0.4 documentation</title>
+    <title>ct_vpeak &#8212; electricpy 0.0.5 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="electricpy.fault.ct_timetosat.html" title="ct_timetosat"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../fault.html" accesskey="U">FAULT Sub-Module</a> &#187;</li> 
       </ul>
@@ -52,15 +52,17 @@
 <h1>ct_vpeak<a class="headerlink" href="#ct-vpeak" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="electricpy.fault.ct_vpeak">
-<code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">ct_vpeak</code><span class="sig-paren">(</span><em class="sig-param">Zb</em>, <em class="sig-param">Ip</em>, <em class="sig-param">N</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.ct_vpeak" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">ct_vpeak</code><span class="sig-paren">(</span><em class="sig-param">Zb</em>, <em class="sig-param">Ip</em>, <em class="sig-param">CTR</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.ct_vpeak" title="Permalink to this definition">¶</a></dt>
 <dd><p>Current Transformer (CT) Peak Voltage Calculator</p>
 <p>Simple formula to calculate the Peak Voltage of a CT.</p>
+<div class="math notranslate nohighlight">
+\[\sqrt{3.5*|Z_burden|*I_{peak}*CTR}\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>Zb</strong> (<em>float</em>) – The burden impedance magnitude (in ohms).</p></li>
 <li><p><strong>Ip</strong> (<em>float</em>) – The peak current for the CT.</p></li>
-<li><p><strong>N</strong> (<em>float</em>) – The CTR turns ratio of the CT.</p></li>
+<li><p><strong>CTR</strong> (<em>float</em>) – The CTR turns ratio of the CT.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -125,7 +127,7 @@
         <li class="right" >
           <a href="electricpy.fault.ct_timetosat.html" title="ct_timetosat"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../fault.html" >FAULT Sub-Module</a> &#187;</li> 
       </ul>
