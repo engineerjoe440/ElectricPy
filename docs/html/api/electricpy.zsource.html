@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>zsource &#8212; electricpy 0.0.4 documentation</title>
+    <title>zsource &#8212; electricpy 0.0.5 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="electricpy.zrecompose.html" title="zrecompose"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>  
@@ -51,7 +51,7 @@
 <h1>zsource<a class="headerlink" href="#zsource" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="electricpy.zsource">
-<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">zsource</code><span class="sig-paren">(</span><em class="sig-param">S</em>, <em class="sig-param">V</em>, <em class="sig-param">XoverR</em>, <em class="sig-param">Sbase=None</em>, <em class="sig-param">Vbase=None</em>, <em class="sig-param">perunit=True</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.zsource" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">zsource</code><span class="sig-paren">(</span><em class="sig-param">S</em>, <em class="sig-param">V</em>, <em class="sig-param">XoR</em>, <em class="sig-param">Sbase=None</em>, <em class="sig-param">Vbase=None</em>, <em class="sig-param">perunit=True</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.zsource" title="Permalink to this definition">¶</a></dt>
 <dd><p>Source Impedance Calculator</p>
 <p>Used to calculate the source impedance given the apparent power
 magnitude and the X/R ratio.</p>
@@ -63,7 +63,8 @@ This may also be refferred to as the “Short-Circuit MVA”</p></li>
 <li><p><strong>V</strong> (<em>float</em>) – The (rated) voltage of the source terminals, not
 specifically identified as either Line-to-Line or Line-to-
 Neutral.</p></li>
-<li><p><strong>XoverR</strong> (<em>float</em>) – The X/R ratio rated for the source.</p></li>
+<li><p><strong>XoR</strong> (<em>float</em>) – The X/R ratio rated for the source, may optionally be a list
+of floats to accomidate sequence impedances or otherwise.</p></li>
 <li><p><strong>Sbase</strong> (<em>float</em><em>, </em><em>optional</em>) – The per-unit base for the apparent power. If set to
 None, will automatically force Sbase to equal S.
 If set to True will treat S as the per-unit value.</p></li>
@@ -138,7 +139,7 @@ Will be returned in ohmic (not per-unit) value if
         <li class="right" >
           <a href="electricpy.zrecompose.html" title="zrecompose"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>

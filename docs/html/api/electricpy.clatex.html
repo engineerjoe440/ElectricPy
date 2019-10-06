@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>clatex &#8212; electricpy 0.0.4 documentation</title>
+    <title>clatex &#8212; electricpy 0.0.5 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="electricpy.characterz.html" title="characterz"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>  
@@ -53,6 +53,35 @@
 <dt id="electricpy.clatex">
 <code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">clatex</code><span class="sig-paren">(</span><em class="sig-param">val</em>, <em class="sig-param">round=3</em>, <em class="sig-param">polar=True</em>, <em class="sig-param">predollar=True</em>, <em class="sig-param">postdollar=True</em>, <em class="sig-param">double=False</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.clatex" title="Permalink to this definition">¶</a></dt>
 <dd><p>Complex Value Latex Generator</p>
+<p>Function to generate a LaTeX string of complex value(s)
+in either polar or rectangular form. May generate both dollar
+signs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>val</strong> (<em>complex</em>) – The complex value to be printed, if value
+is a list or numpy array, the result will be
+demonstrated as a matrix.</p></li>
+<li><p><strong>round</strong> (<em>int</em><em>, </em><em>optional</em>) – Control to specify number of decimal places
+that should displayed. default=True</p></li>
+<li><p><strong>polar</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force result into polar
+coordinates instead of rectangular. default=True</p></li>
+<li><p><strong>predollar</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to enable/disable the dollar
+sign before the string. default=True</p></li>
+<li><p><strong>postdollar</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to enable/disable the dollar
+sign after the string. default=True</p></li>
+<li><p><strong>double</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to specify whether or not
+LaTeX dollar signs should be double or single,
+default=False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>latex</strong> – LaTeX string for the complex value.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -108,7 +137,7 @@
         <li class="right" >
           <a href="electricpy.characterz.html" title="characterz"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>

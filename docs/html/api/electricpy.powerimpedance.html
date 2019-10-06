@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>powerimpedance &#8212; electricpy 0.0.4 documentation</title>
+    <title>powerimpedance &#8212; electricpy 0.0.5 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="electricpy.powerflow.html" title="powerflow"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>  
@@ -51,7 +51,7 @@
 <h1>powerimpedance<a class="headerlink" href="#powerimpedance" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="electricpy.powerimpedance">
-<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">powerimpedance</code><span class="sig-paren">(</span><em class="sig-param">S</em>, <em class="sig-param">V</em>, <em class="sig-param">PF=None</em>, <em class="sig-param">parallel=False</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.powerimpedance" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">powerimpedance</code><span class="sig-paren">(</span><em class="sig-param">S</em>, <em class="sig-param">V</em>, <em class="sig-param">PF=None</em>, <em class="sig-param">parallel=False</em>, <em class="sig-param">terms=False</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.powerimpedance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Impedance from Apparent Power Formula</p>
 <p>Function to determine the ohmic resistance/reactance
 (impedance) represented by the apparent power (S).</p>
@@ -67,7 +67,10 @@ connected circuits.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>S</strong> (<em>complex</em><em>, </em><em>float</em>) – The apparent power of the passive element,
 may be purely resistive or purely reactive.</p></li>
-<li><p><strong>V</strong> (<em>float</em>) – The operating voltage of the passive element.</p></li>
+<li><p><strong>V</strong> (<em>float</em>) – The operating voltage of the passive element.
+Note that this is specifically not Line-Line or
+Line-Neutral voltage, rather the voltage of the
+element.</p></li>
 <li><p><strong>PF</strong> (<em>float</em><em>, </em><em>optional</em>) – The operating Power-Factor, should be specified
 if S is given as a float (not complex). Positive
 PF correlates to lagging, negative to leading.
@@ -75,6 +78,11 @@ default=None</p></li>
 <li><p><strong>parallel</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control point to specify whether the ohmic
 impedance should be returned as series components
 (False opt.) or parallel components (True opt.).</p></li>
+<li><p><strong>terms</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control point to specify whether return should
+be made as resistance and reactance, or simply
+the complex impedance. Setting of False will
+return complex impedance, setting of True will
+return individual components (R, X).</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -144,7 +152,7 @@ voltage (V).</p></li>
         <li class="right" >
           <a href="electricpy.powerflow.html" title="powerflow"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>

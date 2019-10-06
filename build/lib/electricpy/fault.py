@@ -38,8 +38,8 @@ Included Functions
 ####################################################################
 
 # Import Necessary Libraries
-import numpy as np
-from scipy.optimize import fsolve
+import numpy as _np
+from scipy.optimize import fsolve as _fsolve
 
 # Import Local Dependencies
 from .constants import *
@@ -52,9 +52,9 @@ def _phaseroll(M012,reference):
     if reference == 'A':
         pass
     elif reference == 'B':
-        M = np.roll(M, 1, 0)
+        M = _np.roll(M, 1, 0)
     elif reference == 'C':
-        M = np.roll(M, 2, 0)
+        M = _np.roll(M, 2, 0)
     else:
         raise ValueError("Invalid Phase Reference.")
     return(M)
@@ -68,6 +68,11 @@ def phs1g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     sequence currents for a single-line-to-ground fault with the
     option of calculating with or without a load.
     
+    .. math::
+       I_1 = \\frac{V_{src}}{Z_0+Z_1+Z_2+3*R_f}//
+       I_2 = I_1//
+       I_0 = I_1
+    
     Parameters
     ----------
     Vsrc:       complex
@@ -79,7 +84,7 @@ def phs1g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     sequence:   bool, optional
                 Control argument to force return into symmetrical-
                 or phase-domain values.
-    reference:  str, optional
+    reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
     
@@ -96,7 +101,7 @@ def phs1g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     if(not isinstance(X2, complex)): X2 *= 1j
     # Calculate Fault Current
     Ifault = Vsrc / (X0 + X1 + X2 + 3*Rf)
-    Ifault = np.array([ Ifault, Ifault, Ifault ])
+    Ifault = _np.array([ Ifault, Ifault, Ifault ])
     # Prepare Value for return
     if not sequence:
         Ifault = _phaseroll( Ifault, reference ) # Convert to ABC-Domain
@@ -112,6 +117,11 @@ def phs2g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     sequence currents for a double-line-to-ground fault with the
     option of calculating with or without a load.
     
+    .. math::
+       I_1 = \\frac{V_{src}}{Z_1+\\frac{Z_2*(Z_0+3*R_f)}{Z_0+Z_2+3*R_f}//
+       I_2 = -\\frac{V_{src}-Z_1*I_1}{X_2}//
+       I_0 = -\\frac{V_{src}-Z_1*I_1}{X_0+3*R_f}
+    
     Parameters
     ----------
     Vsrc:       complex
@@ -123,7 +133,7 @@ def phs2g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     sequence:   bool, optional
                 Control argument to force return into symmetrical-
                 or phase-domain values.
-    reference:  str, optional
+    reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
     
@@ -142,7 +152,7 @@ def phs2g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     If1 = Vsrc / (X1 + (X2*(X0+3*Rf))/(X0+X2+3*Rf))
     If2 = -(Vsrc - X1*If1)/X2
     If0 = -(Vsrc - X1*If1)/(X0+3*Rf)
-    Ifault = np.array([If0, If1, If2])
+    Ifault = _np.array([If0, If1, If2])
     # Return Currents
     if not sequence:
         Ifault = _phaseroll( Ifault, reference ) # Convert to ABC-Domain
@@ -157,6 +167,11 @@ def phs2(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     sequence currents for a phase-to-phase fault with the
     option of calculating with or without a load.
     
+    .. math::
+       I_1 = \\frac{V_{src}}{Z_1+Z_2+R_f}//
+       I_2 = -I_1
+       I_0 = 0
+    
     Parameters
     ----------
     Vsrc:       complex
@@ -168,7 +183,7 @@ def phs2(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     sequence:   bool, optional
                 Control argument to force return into symmetrical-
                 or phase-domain values.
-    reference:  str, optional
+    reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
     
@@ -187,7 +202,7 @@ def phs2(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     If0 = 0
     If1 = Vsrc / (X1 + X2 + Rf)
     If2 = -If1
-    Ifault = np.array([If0, If1, If2])
+    Ifault = _np.array([If0, If1, If2])
     # Return Currents
     if not sequence:
         Ifault = _phaseroll( Ifault, reference ) # Convert to ABC-Domain
@@ -202,6 +217,11 @@ def phs3(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     sequence currents for a three-phase fault with the
     option of calculating with or without a load.
     
+    .. math::
+       I_1 = \\frac{V_{src}}{Z_1+R_1}//
+       I_2 = 0//
+       I_0 = 0
+    
     Parameters
     ----------
     Vsrc:       complex
@@ -213,7 +233,7 @@ def phs3(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     sequence:   bool, optional
                 Control argument to force return into symmetrical-
                 or phase-domain values.
-    reference:  str, optional
+    reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
     
@@ -228,7 +248,7 @@ def phs3(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     if(not isinstance(X1, complex)): X1 *= 1j
     # Calculate Fault Currents
     Ifault = Vsrc/(X1 + Rf)
-    Ifault = np.array([ 0, Ifault, 0 ])
+    Ifault = _np.array([ 0, Ifault, 0 ])
     # Prepare to Return Value
     if not sequence:
         Ifault = _phaseroll( Ifault, reference ) # Convert to ABC-Domain
@@ -262,7 +282,7 @@ def busvolt(k,n,Vpf,Z0,Z1,Z2,If,sequence=True,reference='A'):
     sequence:   bool, optional
                 Control argument to force return into symmetrical-
                 or phase-domain values.
-    reference:  str, optional
+    reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
     
@@ -275,13 +295,13 @@ def busvolt(k,n,Vpf,Z0,Z1,Z2,If,sequence=True,reference='A'):
     # Condition Inputs
     k = k-1
     n = n-1
-    Z0 = np.asarray(Z0)
-    Z1 = np.asarray(Z1)
-    Z2 = np.asarray(Z2)
-    If = np.asarray(If)
+    Z0 = _np.asarray(Z0)
+    Z1 = _np.asarray(Z1)
+    Z2 = _np.asarray(Z2)
+    If = _np.asarray(If)
     # Generate Arrays For Calculation
-    Vfmat = np.array([0, Vpf, 0]).T
-    Zmat = np.array([[Z0[k,n], 0, 0],
+    Vfmat = _np.array([0, Vpf, 0]).T
+    Zmat = _np.array([[Z0[k,n], 0, 0],
                      [0, Z1[k,n], 0],
                      [0, 0, Z2[k,n]]])
     # Perform Calculation
@@ -292,16 +312,23 @@ def busvolt(k,n,Vpf,Z0,Z1,Z2,If,sequence=True,reference='A'):
 
 
 # Define CT Saturation Function
-def ct_saturation(XR,Imag,Vrated,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
+def ct_saturation(XoR,Imag,Vrated,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
     """
     Current Transformer Saturation Calculator
     
     A function to determine the saturation value and a boolean indicator
     showing whether or not CT is -in fact- saturated.
     
+    To perform this evaluation, we must satisfy the equation:
+    
+    .. math::
+       20\\geq(1+\\frac{X}{R})*\\frac{|I_{mag}|}{I_{rated}*CTR}
+       *\\frac{\\left|R_{burden}+j*\\omega*\\frac{X_{burden}}
+       {\\omega}\\right|*100}{V_{rated}*(1-remnanc)}
+    
     Parameters
     ----------
-    XR:         float
+    XoR:        float
                 The X-over-R ratio of the system.
     Imag:       float
                 The (maximum) current magnitude to use for calculation,
@@ -333,13 +360,13 @@ def ct_saturation(XR,Imag,Vrated,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
                 Boolean indicator to mark presence of saturation.
     """
     # Define omega
-    w = 2*np.pi*freq
+    w = 2*_np.pi*freq
     # Find Lb
     Lb = Xb/w
     # Re-evaluate Vrated
     Vrated = Vrated*(1-remnance)
     # Calculate each "term" (multiple)
-    t1 = (1+XR)
+    t1 = (1+XoR)
     t2 = (Imag/(Irated*CTR))
     t3 = abs(Rb+1j*w*Lb)*100/Vrated
     # Evaluate
@@ -351,15 +378,22 @@ def ct_saturation(XR,Imag,Vrated,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
 
 
 # Define C-Class Calculator
-def ct_cclass(XR,Imag,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
+def ct_cclass(XoR,Imag,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
     """
     Current Transformer (CT) C-Class Function
     
     A function to determine the C-Class rated voltage for a CT.
+    The formula shown below is used.
+    
+    .. math::
+       C_{class}=\\frac{(1+\\frac{X}{R})*\\frac{|I_{mag}|}
+       {I_{rated}*CTR}*\\frac{\\left|R_{burden}+j*\\omega*
+       \\frac{X_{burden}}{\\omega}\\right|*100}{V_{rated}}}
+       {1-remnance}
     
     Parameters
     ----------
-    XR:         float
+    XoR:        float
                 The X-over-R ratio of the system.
     Imag:       float
                 The (maximum) current magnitude to use for calculation,
@@ -386,11 +420,11 @@ def ct_cclass(XR,Imag,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
                 The calculated C-Class rated voltage.
     """
     # Define omega
-    w = 2*np.pi*freq
+    w = 2*_np.pi*freq
     # Find Lb
     Lb = Xb/w
     # Calculate each "term" (multiple)
-    t1 = (1+XR)
+    t1 = (1+XoR)
     t2 = (Imag/(Irated*CTR))
     t3 = abs(Rb+1j*w*Lb)*100/ALF
     # Evaluate
@@ -406,6 +440,12 @@ def ct_satratburden(Inom,VArat=None,ANSIv=None,ALF=20,):
     Current Transformer (CT) Saturation at Rated Burden Calculator
     
     A function to determine the Saturation at rated burden.
+    
+    .. math:: V_{saturated}=ALF*\\frac{VA_{rated}}{I_{nominal}}
+    
+    where:
+    
+    .. math:: VA_{rated}=I_{nominal}*\\frac{ANSI_{voltage}}{20}
     
     Parameters
     ----------
@@ -428,19 +468,20 @@ def ct_satratburden(Inom,VArat=None,ANSIv=None,ALF=20,):
         raise ValueError("VArat or ANSIv must be specified.")
     elif VArat==None:
         # Calculate VArat from ANSIv
-        Zrat = ANSIv/(20*Inom)
-        VArat = Inom**2 * Zrat
+        VArat = Inom*ANSIv/(20)
     # Determine Vsaturation
     Vsat = ALF * VArat/Inom
     return(Vsat)
 
 
 # Define CT Vpeak Formula
-def ct_vpeak(Zb,Ip,N):
+def ct_vpeak(Zb,Ip,CTR):
     """
     Current Transformer (CT) Peak Voltage Calculator
     
     Simple formula to calculate the Peak Voltage of a CT.
+    
+    .. math:: \\sqrt{3.5*|Z_burden|*I_{peak}*CTR}
     
     Parameters
     ----------
@@ -448,7 +489,7 @@ def ct_vpeak(Zb,Ip,N):
                 The burden impedance magnitude (in ohms).
     Ip:         float
                 The peak current for the CT.
-    N:          float
+    CTR:        float
                 The CTR turns ratio of the CT.
     
     Returns
@@ -456,11 +497,11 @@ def ct_vpeak(Zb,Ip,N):
     Vpeak:      float
                 The peak voltage.
     """
-    return(np.sqrt(3.5*Zb*Ip*N))
+    return(_np.sqrt(3.5*abs(Zb)*Ip*CTR))
 
 
 # Define Saturation Time Calculator
-def ct_timetosat(Vknee,XR,Rb,CTR,Imax,ts=None,npts=100,freq=60,plot=False):
+def ct_timetosat(Vknee,XoR,Rb,CTR,Imax,ts=None,npts=100,freq=60,plot=False):
     """
     Current Transformer (CT) Time to Saturation Function
     
@@ -471,7 +512,7 @@ def ct_timetosat(Vknee,XR,Rb,CTR,Imax,ts=None,npts=100,freq=60,plot=False):
     ----------
     Vknee:      float
                 The knee-voltage for the CT.
-    XR:         float
+    XoR:        float
                 The X-over-R ratio of the system.
     Rb:         float
                 The total burden resistance in ohms.
@@ -482,7 +523,7 @@ def ct_timetosat(Vknee,XR,Rb,CTR,Imax,ts=None,npts=100,freq=60,plot=False):
                 typically the fault current.
     ts:         numpy.ndarray or float, optional
                 The time-array or particular (floatint point) time at which
-                to calculate the values. default=np.linspace(0,0.1,freq*npts)
+                to calculate the values. default=_np.linspace(0,0.1,freq*npts)
     npts:       float, optional
                 The number of points (per cycle) to calculate if ts is not
                 specified, default=100.
@@ -493,20 +534,20 @@ def ct_timetosat(Vknee,XR,Rb,CTR,Imax,ts=None,npts=100,freq=60,plot=False):
                 default=False.
     """
     # Calculate omega
-    w = 2*np.pi*freq
+    w = 2*_np.pi*freq
     # Calculate Tp
-    Tp = XR/w
+    Tp = XoR/w
     # If ts isn't specified, generate it
     if ts==None:
-        ts = np.linspace(0,0.1,freq*npts)
+        ts = _np.linspace(0,0.1,freq*npts)
     # Calculate inner term
-    term = -XR*(np.exp(-ts/Tp)-1)
+    term = -XoR*(_np.exp(-ts/Tp)-1)
     # Calculate Vsaturation terms
     Vsat1 = Imax*Rb*(term+1)
-    Vsat2 = Imax*Rb*(term-np.sin(w*ts))
-    Vsat3 = Imax*Rb*(1-np.cos(w*ts))
+    Vsat2 = Imax*Rb*(term-_np.sin(w*ts))
+    Vsat3 = Imax*Rb*(1-_np.cos(w*ts))
     # If plotting requested
-    if plot and isinstance(ts,np.ndarray):
+    if plot and isinstance(ts,_np.ndarray):
         plt.plot(ts,Vsat1,label="Vsat1")
         plt.plot(ts,Vsat2,label="Vsat2")
         plt.plot(ts,Vsat3,label="Vsat3")
@@ -519,7 +560,7 @@ def ct_timetosat(Vknee,XR,Rb,CTR,Imax,ts=None,npts=100,freq=60,plot=False):
         print("Unable to plot a single point, *ts* must be a numpy-array.")
     # Determine the crossover points for each saturation curve
     Vsat1c = Vsat2c = Vsat3c = 0
-    if isinstance(ts,np.ndarray):
+    if isinstance(ts,_np.ndarray):
         for i in range(len(ts)):
             if Vsat1[i]>Vknee and Vsat1c==0:
                 Vsat1c = ts[i-1]
@@ -571,17 +612,17 @@ def pktransrecvolt(C,L,R=0,VLL=None,VLN=None,freq=60):
     """
     # Evaluate alpha, omega-n, and fn
     alpha = R/(2*L)
-    wn = 1/np.sqrt(L*C) - alpha
-    fn = wn/(2*np.pi)
+    wn = 1/_np.sqrt(L*C) - alpha
+    fn = wn/(2*_np.pi)
     # Evaluate Vm
     if VLL!=None:
-        Vm = np.sqrt(2/3)*VLL
+        Vm = _np.sqrt(2/3)*VLL
     elif VLN!=None:
-        Vm = np.sqrt(2)*VLN
+        Vm = _np.sqrt(2)*VLN
     else:
         raise ValueError("One voltage must be specified.")
     # Evaluate Vcpk (worst case)
-    Vcpk = wn**2/(wn**2-2*np.pi*freq)*Vm*2
+    Vcpk = wn**2/(wn**2-2*_np.pi*freq)*Vm*2
     # Evaluate RRRV
     RRRV = 2*Vm*fn/0.5
     return(Vcpk,RRRV)
@@ -623,17 +664,17 @@ def trvresistor(C,L,reduction,Rd0=500,wd0=260e3,tpk0=10e-6):
                 Time of peak voltage.
     """
     # Evaluate omega-n
-    wn = 1/np.sqrt(L*C)
+    wn = 1/_np.sqrt(L*C)
     # Generate Constant Factor
     fctr = (1-reduction)*2 - 1
     # Define Function Set
     def equations(data):
         Rd, wd, tpk = data
-        X = np.sqrt(wn**2-(1/(2*Rd*C))**2) - wd
-        Y = np.exp(-tpk/(2*Rd*C))-fctr
-        Z = wd*tpk - np.pi
+        X = _np.sqrt(wn**2-(1/(2*Rd*C))**2) - wd
+        Y = _np.exp(-tpk/(2*Rd*C))-fctr
+        Z = wd*tpk - _np.pi
         return(X,Y,Z)
-    Rd, wd, tpk = fsolve(equations, (Rd0,wd0,tpk0))
+    Rd, wd, tpk = _fsolve(equations, (Rd0,wd0,tpk0))
     return(Rd, wd, tpk)
 
 # Define Time-Overcurrent Trip Time Function
@@ -761,7 +802,7 @@ def pickup(Iloadmax,Ifaultmin,scale=0,printout=False,units="A"):
     IL2 = 2*Iloadmax
     IF2 = Ifaultmin/2
     exponent = len(str(IL2).split('.')[0])
-    setpoint = np.ceil(IL2*10**(-exponent+1+scale))*10**(exponent-1-scale)
+    setpoint = _np.ceil(IL2*10**(-exponent+1+scale))*10**(exponent-1-scale)
     if printout:
         print("Range Min:",IL2,units,"\t\tRange Max:",IF2,units)
     if IF2 < setpoint:
@@ -857,7 +898,7 @@ def tdradial(I,CTI,Ipu_up,Ipu_dn=0,TDdn=0,curve="U1",scale=2,freq=60,
     # Calculate TD setting
     TD = tpu_desired / (A/(M**2-1)+B)
     # Scale and Round
-    TD = np.floor(TD*10**scale)/10**scale
+    TD = _np.floor(TD*10**scale)/10**scale
     return(TD)
 
 # Define TAP Calculator
@@ -889,7 +930,7 @@ def protectiontap(S,CTR=1,VLN=None,VLL=None):
     """
     # Condition Voltage(s)
     if VLL != None:
-        V = abs(np.sqrt(3)*VLL)
+        V = abs(_np.sqrt(3)*VLL)
     elif VLN != None:
         V = abs(3 * VLN)
     else:
@@ -935,14 +976,14 @@ def correctedcurrents(Ipri,TAP,correction="Y",CTR=1):
               "D-" : XFMD11,
               "Z"  : XFM12}
     # Condition Inputs
-    Ipri = np.asarray(Ipri)
+    Ipri = _np.asarray(Ipri)
     if isinstance(correction,list):
         mult = MAT[correction[0]]
         for i in correction[1:]:
             mult = mult.dot(MAT[i])
     elif isinstance(correction,str):
         mult = MAT[correction]
-    elif isinstance(correction,np.ndarray):
+    elif isinstance(correction,_np.ndarray):
         mult = correction
     else:
         raise ValueError("Correction must be string or list of strings.")
@@ -1008,8 +1049,8 @@ def iopirt(IpriHV,IpriLV,TAPHV,TAPLV,corrHV="Y",corrLV="Y",CTRHV=1,CTRLV=1):
     IcorHV = correctedcurrents(IpriHV,TAPHV,corrHV,CTRHV)
     IcorLV = correctedcurrents(IpriLV,TAPLV,corrLV,CTRLV)
     # Calculate Operate/Restraint Currents
-    Iop = np.absolute( IcorHV + IcorLV )
-    Irt = np.absolute(IcorHV) + np.absolute(IcorLV)
+    Iop = _np.absolute( IcorHV + IcorLV )
+    Irt = _np.absolute(IcorHV) + _np.absolute(IcorLV)
     # Calculate Slopes
     slope = Iop/Irt
     return(Iop,Irt,slope)
@@ -1048,12 +1089,12 @@ def symrmsfaultcur(V,R,X,t=1/60,freq=60):
                 RMS fault current in amps.
     """
     # Calculate Z and tau
-    Z = np.sqrt(R**2+X**2)
-    tau = X/(2*np.pi*freq*R)
+    Z = _np.sqrt(R**2+X**2)
+    tau = X/(2*_np.pi*freq*R)
     # Calculate Symmetrical Fault Current
-    Isym = (V/np.sqrt(3))/Z
+    Isym = (V/_np.sqrt(3))/Z
     # Calculate RMS Fault Current
-    Irms = np.sqrt(1+2*np.exp(-2*t/tau))*Isym
+    Irms = _np.sqrt(1+2*_np.exp(-2*t/tau))*Isym
     return(tau,Isym,Irms)
 
 # Define Relay M Formula

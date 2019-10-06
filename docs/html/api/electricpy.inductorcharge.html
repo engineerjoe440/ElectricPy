@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>inductorcharge &#8212; electricpy 0.0.4 documentation</title>
+    <title>inductorcharge &#8212; electricpy 0.0.5 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="electricpy.hp_to_watts.html" title="hp_to_watts"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>  
@@ -55,6 +55,9 @@
 <dd><p>Charging Inductor Formula</p>
 <p>Calculates the Voltage and Current of an inductor
 that is charging/storing energy.</p>
+<div class="math notranslate nohighlight">
+\[V_L = V_s*e^{\frac{-R*t}{L}}//
+I_L = \frac{V_s}{R}*(1-e^{\frac{-R*t}{L}})\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -66,8 +69,8 @@ that is charging/storing energy.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p><strong>V1</strong> (<em>float</em>) – Voltage across inductor at time t.</p></li>
-<li><p><strong>I1</strong> (<em>float</em>) – Current through inductor at time t.</p></li>
+<li><p><strong>Vl</strong> (<em>float</em>) – Voltage across inductor at time t.</p></li>
+<li><p><strong>Il</strong> (<em>float</em>) – Current through inductor at time t.</p></li>
 </ul>
 </p>
 </dd>
@@ -127,7 +130,7 @@ that is charging/storing energy.</p>
         <li class="right" >
           <a href="electricpy.hp_to_watts.html" title="hp_to_watts"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>

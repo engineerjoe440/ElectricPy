@@ -39,7 +39,7 @@ Included Functions
 
 # Import Necessary Libraries
 import numpy as _np
-from scipy.optimize import __fsolve
+from scipy.optimize import fsolve as _fsolve
 
 # Import Local Dependencies
 from .constants import *
