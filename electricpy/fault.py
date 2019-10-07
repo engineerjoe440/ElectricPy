@@ -118,7 +118,7 @@ def phs2g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     sequence currents for a double-line-to-ground fault with the
     option of calculating with or without a load.
     
-    .. math:: I_1 = \\frac{V_{src}}{Z_1+\\frac{Z_2*(Z_0+3*R_f)}{Z_0+Z_2+3*R_f}
+    .. math:: I_1 = \\frac{V_{src}}{Z_1+\\frac{Z_2*(Z_0+3*R_f)}{Z_0+Z_2+3*R_f}}
     
     .. math:: I_2 = -\\frac{V_{src}-Z_1*I_1}{X_2}
     
