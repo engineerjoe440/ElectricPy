@@ -69,8 +69,8 @@ def phs1g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     option of calculating with or without a load.
     
     .. math::
-       I_1 = \\frac{V_{src}}{Z_0+Z_1+Z_2+3*R_f}\\
-       I_2 = I_1\\
+       I_1 = \\frac{V_{src}}{Z_0+Z_1+Z_2+3*R_f}\\\
+       I_2 = I_1\\\
        I_0 = I_1
     
     Parameters
@@ -118,8 +118,8 @@ def phs2g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     option of calculating with or without a load.
     
     .. math::
-       I_1 = \\frac{V_{src}}{Z_1+\\frac{Z_2*(Z_0+3*R_f)}{Z_0+Z_2+3*R_f}\\
-       I_2 = -\\frac{V_{src}-Z_1*I_1}{X_2}\\
+       I_1 = \\frac{V_{src}}{Z_1+\\frac{Z_2*(Z_0+3*R_f)}{Z_0+Z_2+3*R_f}\\\
+       I_2 = -\\frac{V_{src}-Z_1*I_1}{X_2}\\\
        I_0 = -\\frac{V_{src}-Z_1*I_1}{X_0+3*R_f}
     
     Parameters
@@ -168,8 +168,8 @@ def phs2(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     option of calculating with or without a load.
     
     .. math::
-       I_1 = \\frac{V_{src}}{Z_1+Z_2+R_f}\\
-       I_2 = -I_1\\
+       I_1 = \\frac{V_{src}}{Z_1+Z_2+R_f}\\\
+       I_2 = -I_1\\\
        I_0 = 0
     
     Parameters
@@ -218,8 +218,8 @@ def phs3(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     option of calculating with or without a load.
     
     .. math::
-       I_1 = \\frac{V_{src}}{Z_1+R_1}\\
-       I_2 = 0\\
+       I_1 = \\frac{V_{src}}{Z_1+R_1}\\\
+       I_2 = 0\\\
        I_0 = 0
     
     Parameters
