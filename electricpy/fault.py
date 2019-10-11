@@ -34,6 +34,7 @@ Included Functions
 - High-Impedance Minimum Current PU:    highzmini
 - Instantaneous Overcurrent PU:         instoc
 - Generator Loss of Field Settings:     genlossfield
+- Thermal Time Limit Calculator:        thermaltime
 """
 ####################################################################
 
