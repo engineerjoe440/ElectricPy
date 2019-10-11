@@ -20,6 +20,9 @@ Included Constants
  - Mega Multiple:                            M
  - 'A' Operator for Symmetrical Components:  a
  - Not a Number value (NaN):                 NAN
+ 
+Additional constants may not be listed. For a complete list,
+visit constants page.
 
 Symmetrical Components Matricies
 --------------------------------
