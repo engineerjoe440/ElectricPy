@@ -1437,5 +1437,40 @@ def genlossfield(Xd,Xpd,Zbase=1,CTR=1,VTR=1):
     # Return
     return(ZoneOff,Z1dia,Z2dia)
 
+# Define Thermal Time Limit Calculator
+def thermaltime(In,Ibase,tbase):
+    """
+    Simple Thermal Time Limit Calculator
+    
+    Computes the maximum allowable time for a specified
+    current `In` given parameters for a maximum current
+    and time at some other level, (`Ibase`, `tbase`).
+    
+    Uses the following formula:
+    
+    .. math:: t_n=\\frac{I_{base}^2*t_{base}}{I_n^2}
+    
+    Parameters
+    ----------
+    In:         float
+                Current at which to calculate max time.
+    Ibase:      float
+                Base current, at which maximum time
+                `tbase` is allowable.
+    tbase:      float
+                Base time for which a maximum allowable
+                current `Ibase` is specified. Unitless.
+    
+    Returns
+    -------
+    tn:         float
+                Time allowable for specified current,
+                `In`.
+    """
+    # Perform Calculation
+    tn = (Ibase**2*tbase)/(In**2)
+    return(tn)
+    
+
 
 # END OF FILE

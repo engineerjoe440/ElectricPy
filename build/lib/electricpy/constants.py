@@ -11,7 +11,6 @@ import cmath as _c
 
 # Define Electrical Engineering Constants
 a = _c.rect(1,_np.radians(120)) #: 'A' Operator for Symmetrical Components
-"""A Operator""" # pylint: disable=W0105
 p = 1e-12 #: Pico Multiple      (10^-12)
 n = 1e-9 #: Nano Multiple       (10^-9)
 u = 1e-6 #: Micro (mu) Multiple (10^-6)
