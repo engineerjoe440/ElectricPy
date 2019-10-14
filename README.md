@@ -47,7 +47,6 @@ for research, development, education, and exploration in the realm of electrical
     - DC/DC Converters
     - DC/AC Converters
     - Stationary and Synchronous Reference Frame conversion Matricies/Constants
-    - Add Phase Reference (A/B/C) to fault equations (np.roll)
     
 
 ## Contact:

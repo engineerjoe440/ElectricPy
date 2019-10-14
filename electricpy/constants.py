@@ -22,13 +22,25 @@ NAN = float('nan')
 VLLcVLN = _c.rect(_np.sqrt(3),_np.radians(30)) # Conversion Operator
 ILcIP = _c.rect(_np.sqrt(3),_np.radians(-30)) # Conversion Operator
 
-# Define Electrical Engineering Matricies
+# Define Symmetrical Component Matricies
 Aabc = 1/3 * _np.array([[ 1, 1, 1    ],  # Convert ABC to 012
                        [ 1, a, a**2 ],  # (i.e. phase to sequence)
                        [ 1, a**2, a ]])
 A012 = _np.array([[ 1, 1, 1    ],        # Convert 012 to ABC
                  [ 1, a**2, a ],        # (i.e. sequence to phase)
                  [ 1, a, a**2 ]])
+# Define Clark Component Matricies
+Cabc = _np.sqrt(2/3) * _np.array([[ 1, -1/2, -1/2],         # Convert ABC to alpha/beta/gamma
+                                  [ 0, _np.sqrt(3)/2, -_np.sqrt(3)/2],
+                                  [ 1/_np.sqrt(2), 1/_np.sqrt(2), 1/_np.sqrt(2)]])
+Cxyz = _np.array([[ 2/_np.sqrt(6), 0, 1/_np.sqrt(3)],       # Convert alpha/beta/gamma to ABC
+                  [ -1/_np.sqrt(6), 1/_np.sqrt(2), 1/_np.sqrt(3)],
+                  [ -1/_np.sqrt(6), -1/_np.sqrt(2), 1/_np.sqrt(3)]])
+# Define Park Components Matricies
+_rad = lambda th: _np.radians( th )
+Pxyz = lambda th: _np.array([[ _np.cos(_rad(th)), _np.sin(_rad(th)), 0],
+                             [ -_np.sin(_rad(th)),_np.cos(_rad(th)), 0],
+                             [0, 0, 1]])
                  
 # Define Transformer Shift Correction Matricies
 XFMY0 = _np.array([[1,0,0],[0,1,0],[0,0,1]])
