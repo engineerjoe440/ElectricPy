@@ -10,6 +10,8 @@ Included Functions
 - Double Line to Ground:                phs2g
 - Line to Line:                         phs2
 - Three-Phase Fault:                    phs3
+- Single Pole Open:                     poleopen1
+- Double Pole Open:                     poleopen2
 - Faulted Bus Voltage:                  busvolt
 - CT Saturation Function:               ct_saturation
 - CT C-Class Calculator:                ct_cclass
@@ -65,9 +67,8 @@ def phs1g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     """
     Single-Phase-to-Ground Fault Calculator
     
-    This function will evaluate the 0, Positive, and Negative
-    sequence currents for a single-line-to-ground fault with the
-    option of calculating with or without a load.
+    This function will evaluate the Zero, Positive, and Negative
+    sequence currents for a single-line-to-ground fault.
     
     .. math:: I_1 = \\frac{V_{src}}{Z_0+Z_1+Z_2+3*R_f}
     
@@ -115,9 +116,8 @@ def phs2g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     """
     Double-Line-to-Ground Fault Calculator
     
-    This function will evaluate the 0, Positive, and Negative
-    sequence currents for a double-line-to-ground fault with the
-    option of calculating with or without a load.
+    This function will evaluate the Zero, Positive, and Negative
+    sequence currents for a double-line-to-ground fault.
     
     .. math:: I_1 = \\frac{V_{src}}{Z_1+\\frac{Z_2*(Z_0+3*R_f)}{Z_0+Z_2+3*R_f}}
     
@@ -166,9 +166,8 @@ def phs2(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     """
     Line-to-Line Fault Calculator
     
-    This function will evaluate the 0, Positive, and Negative
-    sequence currents for a phase-to-phase fault with the
-    option of calculating with or without a load.
+    This function will evaluate the Zero, Positive, and Negative
+    sequence currents for a phase-to-phase fault.
     
     .. math:: I_1 = \\frac{V_{src}}{Z_1+Z_2+R_f}
     
@@ -217,9 +216,8 @@ def phs3(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     """
     Three-Phase Fault Calculator
     
-    This function will evaluate the 0, Positive, and Negative
-    sequence currents for a three-phase fault with the
-    option of calculating with or without a load.
+    This function will evaluate the Zero, Positive, and Negative
+    sequence currents for a three-phase fault.
     
     .. math:: I_1 = \\frac{V_{src}}{Z_1+R_1}
     
@@ -259,6 +257,101 @@ def phs3(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
         Ifault = _phaseroll( Ifault, reference ) # Convert to ABC-Domain
     return(Ifault)
 
+# Define Single Pole Open Calculator
+def poleopen1(Vsrc,Zseq,sequence=True,reference='A'):
+    """
+    Single Pole Open Fault Calculator
+    
+    This function will evaluate the Zero, Positive, and Negative
+    sequence currents for a single pole open fault.
+    
+    .. math:: I_1 = \\frac{V_{src}}{Z_1+(\\frac{1}{Z_2}+\\frac{1}{Z_0})^-1}
+    
+    .. math:: I_2 = -I_1 * \\frac{Z_0}{Z_2+Z_0}
+    
+    .. math:: I_0 = -I_1 * \\frac{Z_2}{Z_2+Z_0}
+    
+    Parameters
+    ----------
+    Vsrc:       complex
+                The Source Voltage
+    Zseq:       list of complex
+                Tupple of sequence reactances as (Z0, Z1, Z2)
+    sequence:   bool, optional
+                Control argument to force return into symmetrical-
+                or phase-domain values.
+    reference:  {'A', 'B', 'C'}
+                Single character denoting the reference,
+                default='A'
+    
+    Returns
+    -------
+    Ifault:     list of complex,
+                The Array of Fault Currents as (If0, If1, If2)
+    """
+    # Decompose Reactance Tuple
+    X0, X1, X2 = Zseq
+    # Ensure that X-components are imaginary
+    if(not isinstance(X0, complex)): X0 *= 1j
+    if(not isinstance(X1, complex)): X1 *= 1j
+    if(not isinstance(X2, complex)): X2 *= 1j
+    # Calculate Fault Currents
+    If1 = Vsrc / (X1 + (1/X2 + 1/X0)**(-1))
+    If2 = -If1 * X0/(X2 + X0)
+    If0 = -If1 * X2/(X2 + X0)
+    Ifault = _np.array([If0, If1, If2])
+    # Return Currents
+    if not sequence:
+        Ifault = _phaseroll( Ifault, reference ) # Convert to ABC-Domain
+    return(Ifault)
+
+# Define Double Pole Open Calculator
+def poleopen2(Vsrc,Zseq,sequence=True,reference='A'):
+    """
+    Single Pole Open Fault Calculator
+    
+    This function will evaluate the Zero, Positive, and Negative
+    sequence currents for a single pole open fault.
+    
+    .. math:: I_1 = \\frac{V_{src}}{Z_1+(\\frac{1}{Z_2}+\\frac{1}{Z_0})^-1}
+    
+    .. math:: I_2 = -I_1 * \\frac{Z_0}{Z_2+Z_0}
+    
+    .. math:: I_0 = -I_1 * \\frac{Z_2}{Z_2+Z_0}
+    
+    Parameters
+    ----------
+    Vsrc:       complex
+                The Source Voltage
+    Zseq:       list of complex
+                Tupple of sequence reactances as (Z0, Z1, Z2)
+    sequence:   bool, optional
+                Control argument to force return into symmetrical-
+                or phase-domain values.
+    reference:  {'A', 'B', 'C'}
+                Single character denoting the reference,
+                default='A'
+    
+    Returns
+    -------
+    Ifault:     list of complex,
+                The Array of Fault Currents as (If0, If1, If2)
+    """
+    # Decompose Reactance Tuple
+    X0, X1, X2 = Zseq
+    # Ensure that X-components are imaginary
+    if(not isinstance(X0, complex)): X0 *= 1j
+    if(not isinstance(X1, complex)): X1 *= 1j
+    if(not isinstance(X2, complex)): X2 *= 1j
+    # Calculate Fault Currents
+    If1 = Vsrc / (X1 + (1/X2 + 1/X0)**(-1))
+    If2 = -If1 * X0/(X2 + X0)
+    If0 = -If1 * X2/(X2 + X0)
+    Ifault = _np.array([If0, If1, If2])
+    # Return Currents
+    if not sequence:
+        Ifault = _phaseroll( Ifault, reference ) # Convert to ABC-Domain
+    return(Ifault)
 
 # Define Faulted Bus Voltage Calculator
 def busvolt(k,n,Vpf,Z0,Z1,Z2,If,sequence=True,reference='A'):
