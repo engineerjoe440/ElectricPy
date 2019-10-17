@@ -313,11 +313,11 @@ def poleopen2(Vsrc,Zseq,sequence=True,reference='A'):
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a single pole open fault.
     
-    .. math:: I_1 = \\frac{V_{src}}{Z_1+(\\frac{1}{Z_2}+\\frac{1}{Z_0})^-1}
+    .. math:: I_1 = \\frac{V_{src}}{Z_1+Z_2+Z_0}
     
-    .. math:: I_2 = -I_1 * \\frac{Z_0}{Z_2+Z_0}
+    .. math:: I_2 = I_1
     
-    .. math:: I_0 = -I_1 * \\frac{Z_2}{Z_2+Z_0}
+    .. math:: I_0 = I_1
     
     Parameters
     ----------
@@ -344,9 +344,9 @@ def poleopen2(Vsrc,Zseq,sequence=True,reference='A'):
     if(not isinstance(X1, complex)): X1 *= 1j
     if(not isinstance(X2, complex)): X2 *= 1j
     # Calculate Fault Currents
-    If1 = Vsrc / (X1 + (1/X2 + 1/X0)**(-1))
-    If2 = -If1 * X0/(X2 + X0)
-    If0 = -If1 * X2/(X2 + X0)
+    If1 = Vsrc / (X1 + X2 + X0)
+    If2 = If1
+    If0 = If1
     Ifault = _np.array([If0, If1, If2])
     # Return Currents
     if not sequence:
