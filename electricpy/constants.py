@@ -44,7 +44,7 @@ Pdq0 = lambda th: _np.sqrt(2/3)*_np.array([[ _np.cos(_rad(th)), _np.cos(_rad(th)
                                            [ _np.sqrt(2)/2,     _np.sqrt(2)/2,            _np.sqrt(2)/2]])
 Pabc = lambda th: _np.sqrt(2/3)*_np.array([[ _np.cos(_rad(th)),      -_np.sin(_rad(th)),        _np.sqrt(2)/2],
                                            [_np.cos(_rad(th)-2*pi/3),-_np.sin(_rad(th)-2*pi/3), _np.sqrt(2)/2],
-                                           [_np.cos(_rad(th)+2*pi/3),-_np.sin(_rad(th)+2*pi/3), _np.sqrt(2)/2]]
+                                           [_np.cos(_rad(th)+2*pi/3),-_np.sin(_rad(th)+2*pi/3), _np.sqrt(2)/2]])
                  
 # Define Transformer Shift Correction Matricies
 XFMY0 = _np.array([[1,0,0],[0,1,0],[0,0,1]])

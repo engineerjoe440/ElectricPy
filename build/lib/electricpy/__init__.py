@@ -20,6 +20,9 @@ Included Constants
  - Mega Multiple:                            M
  - 'A' Operator for Symmetrical Components:  a
  - Not a Number value (NaN):                 NAN
+ 
+Additional constants may not be listed. For a complete list,
+visit constants page.
 
 Symmetrical Components Matricies
 --------------------------------
@@ -147,6 +150,7 @@ Functions Available in `electricpy.fault.py`
  - High-Impedance Minimum Current PU:    highzmini
  - Instantaneous Overcurrent PU:         instoc
  - Generator Loss of Field Settings:     genlossfield
+ - Thermal Time Limit Calculator:        thermaltime
 
 Functions Available in `electricpy.bode.py`
 -------------------------------------------
