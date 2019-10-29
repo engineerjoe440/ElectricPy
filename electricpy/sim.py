@@ -784,7 +784,10 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100):
     F_norm = _np.linalg.norm(F_value, ord=2)  # L2 norm of vector
     iteration_counter = 0
     while abs(F_norm) > eps and iteration_counter < mxiter:
-        delta = _np.linalg.solve(J(X0), -F_value)
+        try: # Try Solve Operation
+            delta = _np.linalg.solve(J(X0), -F_value)
+        except LinAlgError: # Use Least Square if Error
+            delta = _np.linalg.lstsq(J(X0), -F_value)
         X0 = X0 + delta
         F_value = F(X0)
         F_norm = _np.linalg.norm(F_value, ord=2)
