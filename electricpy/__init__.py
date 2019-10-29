@@ -1573,7 +1573,7 @@ def powerflow( Vsend, Vrec, Zline ):
     the receiving voltage (complex) and the line impedance.
     
     .. math::
-       P_{flow}=\\frac{V_{send}*V_{rec}}{Z_{line}}*sin(\\theta_{send}
+       P_{flow}=\\frac{|V_{send}|*|V_{rec}|}{Z_{line}}*sin(\\theta_{send}
        -\\theta_{rec})
     
     Parameters
