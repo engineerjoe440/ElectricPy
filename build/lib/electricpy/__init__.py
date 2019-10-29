@@ -165,6 +165,9 @@ Functions Available in `electricpy.sim.py`
  - Ramp Response Filter Simulator:       ramp_response
  - Parabolic Response Filter Simulator:  parabolic_response
  - State-Space System Simulator:         statespace
+ - Newton Raphson Calculator:            NewtonRaphson
+ - Power Flow System Generator:          nr_pq
+ - Multi-Bus Power Flow Calculator:      mbuspowerflow
 """
 ###################################################################
 
@@ -178,7 +181,7 @@ _version_ = "0.0.5"
 from .constants import *
 from . import fault
 from . import bode
-#from . import sim
+from . import sim
 
 # Import Supporting Modules
 import numpy as _np

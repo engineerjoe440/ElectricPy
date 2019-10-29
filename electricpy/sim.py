@@ -11,12 +11,17 @@ Included Functions
 - Ramp Response Filter Simulator:       ramp_response
 - Parabolic Response Filter Simulator:  parabolic_response
 - State-Space System Simulator:         statespace
+- Newton Raphson Calculator:            NewtonRaphson
+- Power Flow System Generator:          nr_pq
+- Multi-Bus Power Flow Calculator:      mbuspowerflow
 """
 ###################################################################
 
 # Import Required Libraries
 import numpy as _np
 import matplotlib.pyplot as _plt
+from numdifftools import Jacobian as jacobian
+from scipy.optimize import newton
 from warnings import warn as _warn
 
 
@@ -698,5 +703,353 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
     # Return Variables if asked to
     if ret:
         return(TT, xtim)
+
+# Define Newton-Raphson Calculator
+def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100):
+    """
+    Newton Raphson Calculator
+    
+    Solve nonlinear system F=0 by Newton's method.
+    J is the Jacobian of F. Both F and J must be functions of x.
+    At input, x holds the start value. The iteration continues
+    until ||F|| < eps.
+    
+    Parameters
+    ----------
+    F:          array_like
+                The Non-Linear System; a function handle/instance.
+                The input function must accept only one (1) argument as an
+                array or int/float representing the variables required.
+    J:          array_like
+                The Jacobian of F; a function handle/instance.
+                The input Jacobian of F must accept only one (1) argument as
+                an array or int/float representing the variables required.
+    X0:         array_like
+                The Initial Value (or initial guess); a representative array.
+    eps:        float, optional
+                Epsilon - The error value, default=0.0001
+    mxiter:     int, optional
+                Maximum Iterations - The highest number of iterations allowed,
+                default=100
+    
+    Returns
+    -------
+    X0:                 array_like
+                        The computed result
+    iteration_counter:  int
+                        The number of iterations completed before returning
+                        either due to solution being found, or max iterations
+                        being surpassed.
+    """
+    # Test for one-variable inputs
+    if isinstance(F(X0),(int,float,_np.float64)): # System is size-1
+        if not isinstance(J(X0),(int,float,_np.float64)): # Jacobian isn't size-1
+            raise ValueError("ERROR: The Jacobian isn't size-1.")
+        return( newton( F, X0, J ) )
+    
+    # Test for valid argument sizes
+    f0sz = len(F(X0))
+    j0sz = len(J(X0))
+    if(f0sz!=j0sz): # Size mismatch
+        raise ValueError("ERROR: The arguments return arrays or lists"+
+                        " of different sizes: f0="+str(f0sz)+"; j0="+str(j0sz))
+    
+    F_value = F(X0)
+    F_norm = _np.linalg.norm(F_value, ord=2)  # L2 norm of vector
+    iteration_counter = 0
+    while abs(F_norm) > eps and iteration_counter < mxiter:
+        delta = _np.linalg.solve(J(X0), -F_value)
+        X0 = X0 + delta
+        F_value = F(X0)
+        F_norm = _np.linalg.norm(F_value, ord=2)
+        iteration_counter += 1
+
+    # Here, either a solution is found, or too many iterations
+    if abs(F_norm) > eps:
+        iteration_counter = -1
+    return(X0, iteration_counter)
+
+# Define Newton-Raphson P/Q Evaluator
+def nr_pq(Ybus,V_set,P_set,Q_set,extend=True,argshape=False,verbose=False):
+    """
+    Parameters
+    ----------
+    Ybus:       array_like
+                Postitive Sequence Y-Bus Matrix for Network.
+    V_set:      list of list of float
+                List of known and unknown voltages.
+                Known voltages should be provided as
+                a list of floating values in the form of:
+                [mag, ang], unknown voltages should
+                be provided as None.
+    P_set:      list of float
+                List of known and unknown real powers.
+                Known powers should be provided as
+                a floating point value, unknown powers
+                should be provided as None. Generated power
+                should be noted as positive, consumed power
+                should be noted as negative.
+    Q_set:      list of float
+                List of known and unknown reactive powers.
+                Known powers should be provided as
+                a floating point value, unknown powers
+                should be provided as None. Generated power
+                should be noted as positive, consumed power
+                should be noted as negative.
+    extend:     bool, optional
+                Control argument to format returned value as
+                singular function handle or lists of function
+                handles. default=True; singular function
+    argshape:   bool, optional
+                Control argument to force return of the voltage
+                argument array as a tuple of: (Θ-len, |V|-len).
+                default=False
+    verbose:    bool, optional
+                Control argument to print verbose information
+                about function generation, useful for debugging.
+                default=False
+    
+    Returns
+    -------
+    retset:     array_like
+                An array of function handles corresponding to
+                the appropriate voltage magnitude and angle
+                calculation functions based on the real and
+                reactive power values. Function(s) will accept
+                an argument of the form:
+                [Θ1, Θ2,..., Θn, |V1|, |V2|,..., |Vm|]
+                where n is the number of busses with unknown
+                voltage angle, and m is the number of busses
+                with unknown voltage magnitude.
+    """
+    # Condition Inputs
+    Ybus = _np.asarray(Ybus)
+    row, col = Ybus.shape
+    N = row
+    # Check Ybus shape
+    if row != col:
+        raise ValueError("Invalid Y-Bus Shape")
+        # Define Function Concatinator Class
+    class c_func_concat:
+        def __init__(self,funcs): # Initialize class with tupple of functions
+            self.nfuncs = len(funcs) # Determine how many functions are in tuple
+            self.func_reg = {} # Create empty keyed list of function handles
+            for key in range(self.nfuncs): # Iterate adding to key
+                self.func_reg[key] = funcs[key] # Fill keyed list with functions
+
+        def func_c(self,x): # Concatenated Function
+            rets = _np.array([]) # Create blank numpy array to store function outputs
+            for i in range(self.nfuncs):
+                y = self.func_reg[i](x) # Calculate each function at value x
+                rets = _np.append(rets, y) # Add value to return array
+            return(rets)
+    # Impliment Global Lists
+    global P_funcs, Q_funcs, P_strgs, Q_strgs
+    global V_list, YBUS, P_list, Q_list
+    global d_list, x_list
+    P_funcs = []
+    Q_funcs = []
+    P_strgs = []
+    Q_strgs = []
+    Vi_list = []
+    lists = [P_strgs,Q_strgs]
+    i = 0 # Index
+    ii = 0 # String Index
+    # Load Global Lists
+    V_list = V_set
+    YBUS = Ybus
+    P_list = P_set
+    Q_list = Q_set
+    # Define Calculation Strings
+    ## 0:  Vk magnitude
+    ## 1:  Vk angle
+    ## 2:  Vj magnitude
+    ## 3:  Vj angle
+    ## 4:  [k][j] (for Y-Bus)
+    ## 5:  Qgen Term
+    Pstr = ("{0}*{2}*(YBUS{4}.real*_np.cos({1}-{3})+YBUS{4}.imag*_np.sin({1}-{3}))")
+    Qstr = ("{0}*{2}*(YBUS{4}.real*_np.sin({1}-{3})-YBUS{4}.imag*_np.cos({1}-{3})){5}")
+    # Iteratively Identify Vector Length Terms
+    ang_len = 0
+    mag_len = 0
+    # Set Offset Factors
+    magoff = 1
+    angoff = 1
+    for _k in range(N):
+        Padd = False
+        Qadd = False
+        for _j in range(N):
+            if P_list[_k] == None:
+                continue # Don't Generate Requirements for Slack Bus
+            if (_k != _j) and not Padd: # Skip i,i Terms
+                ang_len += 1
+                Padd = True
+            if (_k != _j) and (Q_list[_k] != None) and not Qadd:
+                mag_len += 1
+                Qadd = True
+    Vxdim = ang_len + mag_len
+    if verbose:
+        print("Angle EQ's (P):",ang_len,"\tMagnitude EQ's (Q):",mag_len)
+        print("Vx Dimension:",Vxdim)
+    # Iteratively Generate P and Q Requirements
+    for _k in range(N):
+        # Set for New Entry
+        newentry = True
+        for _j in range(N):
+            # Add New Entry To Lists
+            for LST in lists:
+                LST.append(None)
+            if P_list[_k] == None:
+                continue # Don't Generate Requirements for Slack Bus
+            # Collect Other Terms
+            Yind = "[{}][{}]".format(_k,_j)
+            if verbose: print("K:",_k,"\tJ:",_j)
+            # Generate Voltage-Related Strings
+            if _k != _j: # Skip i,i Terms
+                # Generate K-Related Strings
+                if V_list[_k][0] == None: # The Vk magnitude is unknown
+                    Vkm = "Vx[{}]".format(_k+ang_len-magoff*_k) # Use Variable Magnitude
+                    Vka = "Vx[{}]".format(_k-angoff) # Use Variable Angle
+                else: # The Vk magnitude is known
+                    Vkm = "V_list[{}][0]".format(_k) # Load Magnitude
+                    if V_list[_k][1] == None: # The Vj angle is unknown
+                        Vka = "Vx[{}]".format(_k-angoff) # Use Variable Angle
+                    else:
+                        Vka = "V_list[{}][1]".format(_k) # Load Angle
+                # Generate J-Related Strings
+                if V_list[_j][0] == None: # The Vj magnitude is unknown
+                    Vjm = "Vx[{}]".format(_j+ang_len-magoff*_j) # Use Variable Magnitude
+                    Vja = "Vx[{}]".format(_j-angoff) # Use Variable Angle
+                else: # The Vj magnitude is known
+                    Vjm = "V_list[{}][0]".format(_j) # Load Magnitude
+                    if V_list[_j][1] == None: # The Vj angle is unknown
+                        Vja = "Vx[{}]".format(_j-angoff) # Use Variable Angle
+                    else:
+                        Vja = "V_list[{}][1]".format(_j) # Load Angle
+                # Generate String and Append to List of Functions
+                P_strgs[i] = ( Pstr.format(Vkm,Vka,Vjm,Vja,Yind) ) 
+                if verbose: print("New P-String:",P_strgs[i])
+                # Generate Q Requirement
+                if Q_list[_k] != None:
+                   # Generate String and Append to List of Functions
+                    if newentry:
+                        newentry = False
+                        Qgen = "-Vx[{0}]**2*YBUS[{0}][{0}].imag".format(_k)
+                    else:
+                        Qgen = ""
+                    Q_strgs[i] = ( Qstr.format(Vkm,Vka,Vjm,Vja,Yind,Qgen) )
+                    if verbose: print("New Q-String:",Q_strgs[i])
+            # Increment Index at Each Interior Level
+            i += 1
+        tempPstr = "P_funcs.append(lambda Vx: -P_list[{0}]".format(_k)
+        tempQstr = "Q_funcs.append(lambda Vx: -Q_list[{0}]".format(_k)
+        for _i in range(ii,i):
+            P = P_strgs[_i]
+            Q = Q_strgs[_i]
+            if P != None:
+                tempPstr += "+"+P
+            if Q != None:
+                tempQstr += "+"+Q
+        tempPstr += ")"
+        tempQstr += ")"
+        if any(P_strgs[ii:i]):
+            if verbose: print("Full P-Func Str:",tempPstr)
+            exec(tempPstr)
+        if any(Q_strgs[ii:i]):
+            if verbose: print("Full Q-Func Str:",tempQstr)
+            exec(tempQstr)
+        ii = i # Increase Lower Index
+    retset = (P_funcs,Q_funcs)
+    if extend:
+        funcset = P_funcs.copy()
+        funcset.extend(Q_funcs)
+        funcgroup = c_func_concat(funcset)
+        retset = funcgroup.func_c
+    if argshape:
+        retset = (retset,(ang_len,mag_len))
+    return(retset)
+
+# Define Multi-Bus Power Flow Calculator
+def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0='flatstart',eps=1e-4,
+                  mxiter=100,returnct=False,degrees=True,split=False):
+    """
+    Multi-Bus Power Flow Calculator
+    
+    Function wrapper to simplify the evaluation of a power flow calculation.
+    Determines the function array (F) and the Jacobian array (J) and uses the
+    Newton-Raphson method to iteratively evaluate the system to converge to a
+    solution.
+    
+    Parameters
+    ----------
+    Ybus:       array_like
+                Postitive Sequence Y-Bus Matrix for Network.
+    Vknown:     list of list of float
+                List of known and unknown voltages.
+                Known voltages should be provided as
+                a list of floating values in the form of:
+                [mag, ang], unknown voltages should
+                be provided as None.
+    Pknown:     list of float
+                List of known and unknown real powers.
+                Known powers should be provided as
+                a floating point value, unknown powers
+                should be provided as None. Generated power
+                should be noted as positive, consumed power
+                should be noted as negative.
+    Qknown:     list of float
+                List of known and unknown reactive powers.
+                Known powers should be provided as
+                a floating point value, unknown powers
+                should be provided as None. Generated power
+                should be noted as positive, consumed power
+                should be noted as negative.
+    X0:         {'flatstart', list of float}, optional
+                Initial conditions/Initial guess. May be set
+                to 'flatstart' to force function to generate
+                flat voltages and angles of 1∠0°. Must be
+                specified in the form:
+                [Θ1, Θ2,..., Θn, |V1|, |V2|,..., |Vm|]
+                where n is the number of busses with unknown
+                voltage angle, and m is the number of busses
+                with unknown voltage magnitude.
+    eps:        float, optional
+                Epsilon - The error value, default=0.0001
+    mxiter:     int, optional
+                Maximum Iterations - The highest number of
+                iterations allowed, default=100
+    returnct:   bool, optional
+                Control argument to force function to return
+                the iteration counter from the Newton-Raphson
+                solution. default=False
+    degrees:    bool, optional
+                Control argument to force returned angles to
+                degrees. default=True
+    split:      bool, optional
+                Control argument to force returned array to
+                split into lists of magnitudes and angles.
+                default=False
+    """
+    # Generate F Function Array
+    F, shp = nr_pq(Ybus,Vknown,Pknown,Qknown,True,True,False)
+    # Handle Flat-Start Condition
+    if X0 == 'flatstart':
+        ang_len, mag_len = shp
+        X0 = _np.append(_np.zeros(ang_len),_np.ones(mag_len))
+    # Evaluate Jacobian
+    J = jacobian(F)
+    # Compute Newton-Raphson
+    nr_result, iter_count = NewtonRaphson(F,J,X0, eps, mxiter)
+    # Convert to Degrees if Necessary
+    if degrees:
+        for i in range(ang_len):
+            nr_result[i] = _np.degrees(nr_result[i])
+    # Split into Mag/Ang Arrays if Necessary
+    if split:
+        nr_result = [nr_result[:ang_len],nr_result[-mag_len:]]
+    # Return with Iteration Counter
+    if returnct:
+        return(nr_result, iter_count)
+    return(nr_result)
 
 # END OF FILE

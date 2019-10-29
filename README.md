@@ -22,14 +22,16 @@ for research, development, education, and exploration in the realm of electrical
 - MATPLOTLIB
 - SCIPY
 - SYMPY
+- NUMDIFFTOOLS
 
 
 ## INSTALLATION:
- 1. Install required dependencies (NUMPY, SCIPY, and MATPLOTLIB)
+ 1. Install required dependencies (NUMPY, SCIPY, SYMPY, NUMDIFFTOOLS, and MATPLOTLIB)
     - `pip install numpy`
     - `pip install scipy`
     - `pip install matplotlib`
     - `pip install sympy`
+    - `pip install numdifftools`
   
  2. Install *electricpy*
     - `pip install electricpy`
