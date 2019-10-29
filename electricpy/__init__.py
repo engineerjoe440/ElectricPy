@@ -173,7 +173,7 @@ Functions Available in `electricpy.sim.py`
 
 # Define Module Specific Variables
 _name_ = "electricpy"
-_version_ = "0.0.5"
+_version_ = "0.0.6"
 # Version Breakdown:
 # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
 
