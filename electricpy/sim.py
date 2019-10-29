@@ -705,7 +705,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
         return(TT, xtim)
 
 # Define Newton-Raphson Calculator
-def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100):
+def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
     """
     Newton Raphson Calculator
     
@@ -731,6 +731,9 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100):
     mxiter:     int, optional
                 Maximum Iterations - The highest number of iterations allowed,
                 default=100
+    lsq_eps:    float, optional
+                Least Squares Method (Failover) Epsilon - the error value.
+                default=0.25
     
     Returns
     -------
@@ -779,23 +782,43 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100):
     if(f0sz!=j0sz): # Size mismatch
         raise ValueError("ERROR: The arguments return arrays or lists"+
                         " of different sizes: f0="+str(f0sz)+"; j0="+str(j0sz))
-    
+    # Define Internal Inversion System
+    def inv(m):
+        a, b = m.shape
+        if a != b:
+            raise ValueError("Only square matrices are invertible.")
+        i = _np.eye(a, a)
+        return _np.linalg.lstsq(m, i, rcond=None)[0]
     F_value = F(X0)
     F_norm = _np.linalg.norm(F_value, ord=2)  # L2 norm of vector
     iteration_counter = 0
-    while abs(F_norm) > eps and iteration_counter < mxiter:
+    teps = eps
+    while abs(F_norm) > teps and iteration_counter < mxiter:
         try: # Try Solve Operation
             delta = _np.linalg.solve(J(X0), -F_value)
-        except LinAlgError: # Use Least Square if Error
-            delta = _np.linalg.lstsq(J(X0), -F_value)
+            teps = eps # Change Test Epsilon if Needed
+        except _np.linalg.LinAlgError: # Use Least Square if Error
+            # Warn User, but only Once
+            try:
+                tst = userhasbeenwarned
+            except NameError:
+                userhasbeenwarned = True
+                _warn("WARNING: Singular matrix, attempting LSQ method.")
+            # Calculate Delta Using Least-Squares Inverse
+            delta = - inv(J(X0)).dot(F_value)
+            # Change Epsilon Test
+            teps = lsq_eps
         X0 = X0 + delta
         F_value = F(X0)
         F_norm = _np.linalg.norm(F_value, ord=2)
         iteration_counter += 1
 
     # Here, either a solution is found, or too many iterations
-    if abs(F_norm) > eps:
+    if abs(F_norm) > teps:
         iteration_counter = -1
+        _warn("WARNING: Maximum number of iterations exceeded.")
+        _warn("Most recent delta:"+str(delta))
+        _warn("Most recent F-Norm:"+str(F_norm))
     return(X0, iteration_counter)
 
 # Define Newton-Raphson P/Q Evaluator
@@ -1035,7 +1058,7 @@ def nr_pq(Ybus,V_set,P_set,Q_set,extend=True,argshape=False,verbose=False):
 # Define Multi-Bus Power Flow Calculator
 def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0='flatstart',eps=1e-4,
                   mxiter=100,returnct=False,degrees=True,split=False,
-                  slackbus=0):
+                  slackbus=0,lsq_eps=0.25):
     """
     Multi-Bus Power Flow Calculator
     
@@ -1101,6 +1124,9 @@ def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0='flatstart',eps=1e-4,
                 necessary for proper generation and Newton
                 Raphson computation. Must be zero-based.
                 default=0
+    lsq_eps:    float, optional
+                Least Squares Method (Failover) Epsilon - the error value.
+                default=0.25
     
     Examples
     --------
@@ -1142,7 +1168,7 @@ def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0='flatstart',eps=1e-4,
     # Evaluate Jacobian
     J = jacobian(F)
     # Compute Newton-Raphson
-    nr_result, iter_count = NewtonRaphson(F,J,X0, eps, mxiter)
+    nr_result, iter_count = NewtonRaphson(F,J,X0,eps,mxiter,lsq_eps)
     # Convert to Degrees if Necessary
     if degrees:
         for i in range(ang_len):
