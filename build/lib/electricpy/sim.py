@@ -740,6 +740,32 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100):
                         The number of iterations completed before returning
                         either due to solution being found, or max iterations
                         being surpassed.
+    
+    Examples
+    --------
+    >>> import numpy as np
+    >>> from electricpy import sim # Import Simulation Submodule
+    >>> def F(x):
+        matr = np.array([[x[1]*10*np.sin(x[0])+2],
+            [x[1]*(-10)*np.cos(x[0])+x[1]**2*10+1]])
+        return(matr)
+    >>> def J(x):
+        matr = np.array([[10*x[1]*np.cos(x[0]), 10*np.sin(x[0])],
+            [10*x[1]*np.sin(x[0]), -10*np.cos(x[0])+20*x[1]]])
+        return(matr)
+    # Now compute Newton-Raphson
+    >>> X0 = [0, 1]
+    >>> results, iter = sim.NewtonRaphson(F,J,X0)
+    >>> print(results)
+    [-0.236,0.8554]
+    >>> print(iter) # Iteration Counter
+    4
+    
+    See Also
+    --------
+    nr_pq:              Newton-Raphson System Generator
+    mbuspowerflow:      Multi-Bus Power Flow Calculator
+    
     """
     # Test for one-variable inputs
     if isinstance(F(X0),(int,float,_np.float64)): # System is size-1
@@ -821,6 +847,31 @@ def nr_pq(Ybus,V_set,P_set,Q_set,extend=True,argshape=False,verbose=False):
                 where n is the number of busses with unknown
                 voltage angle, and m is the number of busses
                 with unknown voltage magnitude.
+    
+    Examples
+    --------
+    >>> import numpy as np
+    >>> from electricpy import sim # Import Simulation Submodule
+    >>> ybustest = [[-10j,10j],
+        [10j,-10j]]
+    >>> Vlist = [[1,0],[None,None]] # We don't know the voltage or angle at bus 2
+    >>> Plist = [None,-2.0] # 2pu watts consumed
+    >>> Qlist = [None,-1.0] # 1pu vars consumed
+    >>> F = nr_pq(ybustest,Vlist,Plist,Qlist)
+    >>> X0 = [0,1] # Define Initial Conditions
+    >>> J = sim.jacobian(F) # Find Jacobian
+    >>> # Now use Newton-Raphson to Solve
+    >>> results, iter = sim.NewtonRaphson(F,J,X0)
+    >>> print(results)
+    [-0.236,0.8554]
+    >>> print(iter) # Iteration Counter
+    4
+    
+    See Also
+    --------
+    NewtonRaphson:      Newton-Raphson System Solver
+    mbuspowerflow:      Multi-Bus Power Flow Calculator
+    
     """
     # Condition Inputs
     Ybus = _np.asarray(Ybus)
@@ -1029,6 +1080,27 @@ def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0='flatstart',eps=1e-4,
                 Control argument to force returned array to
                 split into lists of magnitudes and angles.
                 default=False
+    
+    Examples
+    --------
+    .. image:: source/mbuspowerflow_example.png
+    >>> # Perform Power-Flow Analysis for Figure
+    >>> import numpy as np
+    >>> from electricpy import sim # Import Simulation Submodule
+    >>> ybustest = [[-10j,10j],
+        [10j,-10j]]
+    >>> Vlist = [[1,0],[None,None]] # We don't know the voltage or angle at bus 2
+    >>> Plist = [None,-2.0] # 2pu watts consumed
+    >>> Qlist = [None,-1.0] # 1pu vars consumed
+    >>> nr_res = sim.mbuspowerflow(ybustest,Vlist,Plist,Qlist,degrees=True,split=True,returnct=True)
+    >>> print(nr_res)
+    ([array([-13.52185223]), array([ 0.85537271])], 4)
+    
+    See Also
+    --------
+    NewtonRaphson:      Newton-Raphson System Solver
+    nr_pq:              Newton-Raphson System Generator
+    powerflow:          Simple (2-bus) Power Flow Calculator
     """
     # Generate F Function Array
     F, shp = nr_pq(Ybus,Vknown,Pknown,Qknown,True,True,False)
