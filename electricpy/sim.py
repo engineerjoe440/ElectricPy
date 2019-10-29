@@ -1031,7 +1031,8 @@ def nr_pq(Ybus,V_set,P_set,Q_set,extend=True,argshape=False,verbose=False):
 
 # Define Multi-Bus Power Flow Calculator
 def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0='flatstart',eps=1e-4,
-                  mxiter=100,returnct=False,degrees=True,split=False):
+                  mxiter=100,returnct=False,degrees=True,split=False,
+                  slackbus=0):
     """
     Multi-Bus Power Flow Calculator
     
@@ -1089,6 +1090,14 @@ def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0='flatstart',eps=1e-4,
                 Control argument to force returned array to
                 split into lists of magnitudes and angles.
                 default=False
+    slackbus:   int, optional
+                Control argument to specify the bus index for
+                the slack bus. If the slack bus is not positioned
+                at bus index 1 (default), this control can be
+                used to reformat the data sets to a format
+                necessary for proper generation and Newton
+                Raphson computation. Must be zero-based.
+                default=0
     
     Examples
     --------
@@ -1111,6 +1120,16 @@ def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0='flatstart',eps=1e-4,
     nr_pq:              Newton-Raphson System Generator
     powerflow:          Simple (2-bus) Power Flow Calculator
     """
+    # Reformat Inputs to Meet Criteria
+    if slackbus != 0:
+        # Ybus
+        Ybus = _np.asarray(Ybus)
+        row, col = Ybus.shape
+        Ybus = _np.roll(Ybus,(col-slackbus),(0,1))
+        # Vknown, Pknown, and Qknown
+        Vknown = _np.roll(Vknown,(len(Vknown)-slackbus),0).tolist()
+        Pknown = _np.roll(Pknown,(len(Pknown)-slackbus),0).tolist()
+        Qknown = _np.roll(Qknown,(len(Qknown)-slackbus),0).tolist()
     # Generate F Function Array
     F, shp = nr_pq(Ybus,Vknown,Pknown,Qknown,True,True,False)
     # Handle Flat-Start Condition
