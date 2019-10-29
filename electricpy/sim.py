@@ -880,7 +880,16 @@ def nr_pq(Ybus,V_set,P_set,Q_set,extend=True,argshape=False,verbose=False):
     # Check Ybus shape
     if row != col:
         raise ValueError("Invalid Y-Bus Shape")
-        # Define Function Concatinator Class
+    if N != len(V_set):
+        raise ValueError("Invalid V_set Shape")
+    if N != len(P_set):
+        raise ValueError("Invalid P_set Shape")
+    if N != len(Q_set):
+        raise ValueError("Invalid Q_set Shape")
+    for i in range(N):
+        if all((P_set[i],Q_set[i],V_set[i][0])):
+            raise ValueError("Over-Constrained System")
+    # Define Function Concatinator Class
     class c_func_concat:
         def __init__(self,funcs): # Initialize class with tupple of functions
             self.nfuncs = len(funcs) # Determine how many functions are in tuple
