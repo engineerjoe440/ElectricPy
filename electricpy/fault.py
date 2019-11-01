@@ -281,8 +281,8 @@ def poleopen1(Vsrc,Zseq,sequence=True,reference='A'):
                 Control argument to force return into symmetrical-
                 or phase-domain values.
     reference:  {'A', 'B', 'C'}
-                Single character denoting the reference,
-                default='A'
+                Single character denoting the reference, or the
+                faulted phase indicator; default='A'
     
     Returns
     -------
@@ -329,8 +329,8 @@ def poleopen2(Vsrc,Zseq,sequence=True,reference='A'):
                 Control argument to force return into symmetrical-
                 or phase-domain values.
     reference:  {'A', 'B', 'C'}
-                Single character denoting the reference,
-                default='A'
+                Single character denoting the reference, or the
+                faulted phase indicator; default='A'
     
     Returns
     -------
