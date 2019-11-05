@@ -420,7 +420,7 @@ def phs3mvasc(Vth,Zseq,Rf=0,Sbase=1):
     Calculator to evaluate the Short-Circuit MVA of a three-phase fault given the system
     parameters of Vth, Zseq, and an optional Rf. Uses the formula as follows:
     
-    .. math:: MVA_{sc} = \\frac{\\left|V_{th}**2\\right|}{|Z_1|} * Sbase
+    .. math:: MVA_{sc} = \\frac{\\left|V_{th}^2\\right|}{|Z_1|} * Sbase
     
     Parameters
     ----------
@@ -440,6 +440,9 @@ def phs3mvasc(Vth,Zseq,Rf=0,Sbase=1):
     """
     # Calculate Three-Phase MVA
     MVA = abs(Vth)**2 / abs(Zseq[1]) * Sbase
+    # Scale VA to MVA if Sbase is not 1
+    if Sbase != 1:
+        MVA = MVA * 1e-6 # Divide by 1e6 (M)
     # Return
     return(MVA)
     
@@ -452,7 +455,7 @@ def phs1mvasc(Vth,Zseq,Rf=0,Sbase=1):
     Calculator to evaluate the Short-Circuit MVA of a single-phase fault given the system
     parameters of Vth, Zseq, and an optional Rf. Uses the formula as follows:
     
-    .. math:: MVA_{sc} = \\left|I_1**2\\right|*|Z_1| * Sbase
+    .. math:: MVA_{sc} = \\left|I_1^2\\right|*|Z_1| * Sbase
     
     where:
     
@@ -484,6 +487,9 @@ def phs1mvasc(Vth,Zseq,Rf=0,Sbase=1):
     Ifault = Vth / (X0 + X1 + X2 + 3*Rf)
     # Calculate MVA
     MVA = abs(Ifault)**2 * abs(X1) * Sbase
+    # Scale VA to MVA if Sbase is not 1
+    if Sbase != 1:
+        MVA = MVA * 1e-6 # Divide by 1e6 (M)
     # Return
     return(MVA)
 
