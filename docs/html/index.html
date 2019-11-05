@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>ELECTRICPY &#8212; electricpy 0.0.5 documentation</title>
+    <title>ELECTRICPY &#8212; electricpy 0.0.6 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
@@ -33,7 +33,7 @@
         <li class="right" >
           <a href="electricpy.html" title="ELECTRICPY Module"
              accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">electricpy 0.0.5 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">electricpy 0.0.6 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -97,16 +97,18 @@ for research, development, education, and exploration in the realm of electrical
 <li><p>MATPLOTLIB</p></li>
 <li><p>SCIPY</p></li>
 <li><p>SYMPY</p></li>
+<li><p>NUMDIFFTOOLS</p></li>
 </ul>
 </div>
 <div class="section" id="installation">
 <h2>INSTALLATION:<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p>Install required dependencies (NUMPY, SCIPY, SYMPY, and MATPLOTLIB)</p>
+<li><p>Install required dependencies (NUMPY, SCIPY, SYMPY, NUMDIFFTOOLS, and MATPLOTLIB)</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$&gt; pip install numpy
 $&gt; pip install scipy
 $&gt; pip install matplotlib
 $&gt; pip install sympy
+$&gt; pip install numdifftools
 </pre></div>
 </div>
 </li>
@@ -161,6 +163,8 @@ that are related to Power in Electrical Engineering.</cite></p>
 <li><p>Not a Number value (NaN):                 NAN</p></li>
 </ul>
 </div></blockquote>
+<p>Additional constants may not be listed. For a complete list,
+visit constants page.</p>
 </div>
 <div class="section" id="symmetrical-components-matricies">
 <h4>Symmetrical Components Matricies<a class="headerlink" href="#symmetrical-components-matricies" title="Permalink to this headline">¶</a></h4>
@@ -257,6 +261,7 @@ that are related to Power in Electrical Engineering.</cite></p>
 <li><p>Natural Frequency Calculator             natfreq</p></li>
 <li><p>3-Phase Voltage/Current Unbalance:       unbalance</p></li>
 <li><p>Characteristic Impedance Calculator:     characterz</p></li>
+<li><p>Transformer Phase Shift Calculator:      xfmphs</p></li>
 </ul>
 </div></blockquote>
 </div>
@@ -278,6 +283,11 @@ that are related to Power in Electrical Engineering.</cite></p>
 <li><p>Double Line to Ground                 phs2g</p></li>
 <li><p>Line to Line                          phs2</p></li>
 <li><p>Three-Phase Fault                     phs3</p></li>
+<li><p>Single Pole Open:                     poleopen1</p></li>
+<li><p>Double Pole Open:                     poleopen2</p></li>
+<li><p>Simple MVA Calculator:                scMVA</p></li>
+<li><p>Three-Phase MVA Calculator:           phs3mvasc</p></li>
+<li><p>Single-Phase MVA Calculator:          phs1mvasc</p></li>
 <li><p>Faulted Bus Voltage                   busvolt</p></li>
 <li><p>CT Saturation Function                ct_saturation</p></li>
 <li><p>CT C-Class Calculator                 ct_cclass</p></li>
@@ -302,6 +312,7 @@ that are related to Power in Electrical Engineering.</cite></p>
 <li><p>High-Impedance Minimum Current PU:    highzmini</p></li>
 <li><p>Instantaneous Overcurrent PU:         instoc</p></li>
 <li><p>Generator Loss of Field Settings:     genlossfield</p></li>
+<li><p>Thermal Time Limit Calculator:        thermaltime</p></li>
 </ul>
 </div></blockquote>
 </div>
@@ -324,6 +335,9 @@ that are related to Power in Electrical Engineering.</cite></p>
 <li><p>Ramp Response Filter Simulator:       ramp_response</p></li>
 <li><p>Parabolic Response Filter Simulator:  parabolic_response</p></li>
 <li><p>State-Space System Simulator:         statespace</p></li>
+<li><p>Newton Raphson Calculator:            NewtonRaphson</p></li>
+<li><p>Power Flow System Generator:          nr_pq</p></li>
+<li><p>Multi-Bus Power Flow Calculator:      mbuspowerflow</p></li>
 </ul>
 </div></blockquote>
 </div>
@@ -401,7 +415,7 @@ that are related to Power in Electrical Engineering.</cite></p>
         <li class="right" >
           <a href="electricpy.html" title="ELECTRICPY Module"
              >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">electricpy 0.0.5 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">electricpy 0.0.6 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

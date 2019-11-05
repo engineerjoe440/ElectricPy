@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>phs1g &#8212; electricpy 0.0.5 documentation</title>
+    <title>phs1g &#8212; electricpy 0.0.6 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -19,7 +19,7 @@
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="phs2" href="electricpy.fault.phs2.html" />
+    <link rel="next" title="phs1mvasc" href="electricpy.fault.phs1mvasc.html" />
     <link rel="prev" title="iopirt" href="electricpy.fault.iopirt.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -32,12 +32,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.fault.phs2.html" title="phs2"
+          <a href="electricpy.fault.phs1mvasc.html" title="phs1mvasc"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="electricpy.fault.iopirt.html" title="iopirt"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.6 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../fault.html" accesskey="U">FAULT Sub-Module</a> &#187;</li> 
       </ul>
@@ -52,13 +52,12 @@
 <h1>phs1g<a class="headerlink" href="#phs1g" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="electricpy.fault.phs1g">
-<code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">phs1g</code><span class="sig-paren">(</span><em class="sig-param">Vsrc</em>, <em class="sig-param">Zseq</em>, <em class="sig-param">Rf=0</em>, <em class="sig-param">sequence=True</em>, <em class="sig-param">reference='A'</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.phs1g" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">phs1g</code><span class="sig-paren">(</span><em class="sig-param">Vth</em>, <em class="sig-param">Zseq</em>, <em class="sig-param">Rf=0</em>, <em class="sig-param">sequence=True</em>, <em class="sig-param">reference='A'</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.phs1g" title="Permalink to this definition">¶</a></dt>
 <dd><p>Single-Phase-to-Ground Fault Calculator</p>
-<p>This function will evaluate the 0, Positive, and Negative
-sequence currents for a single-line-to-ground fault with the
-option of calculating with or without a load.</p>
+<p>This function will evaluate the Zero, Positive, and Negative
+sequence currents for a single-line-to-ground fault.</p>
 <div class="math notranslate nohighlight">
-\[I_1 = \frac{V_{src}}{Z_0+Z_1+Z_2+3*R_f}\]</div>
+\[I_1 = \frac{V_{th}}{Z_0+Z_1+Z_2+3*R_f}\]</div>
 <div class="math notranslate nohighlight">
 \[I_2 = I_1\]</div>
 <div class="math notranslate nohighlight">
@@ -66,7 +65,7 @@ option of calculating with or without a load.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>Vsrc</strong> (<em>complex</em>) – The Source Voltage</p></li>
+<li><p><strong>Vth</strong> (<em>complex</em>) – The Thevenin-Equivalent-Voltage</p></li>
 <li><p><strong>Zseq</strong> (<em>list of complex</em>) – Tupple of sequence reactances as (Z0, Z1, Z2)</p></li>
 <li><p><strong>Rf</strong> (<em>complex</em><em>, </em><em>optional</em>) – The fault resistance, default=0</p></li>
 <li><p><strong>sequence</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force return into symmetrical-
@@ -99,8 +98,8 @@ default=’A’</p></li>
   <p class="topless"><a href="electricpy.fault.iopirt.html"
                         title="previous chapter">iopirt</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="electricpy.fault.phs2.html"
-                        title="next chapter">phs2</a></p>
+  <p class="topless"><a href="electricpy.fault.phs1mvasc.html"
+                        title="next chapter">phs1mvasc</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -132,12 +131,12 @@ default=’A’</p></li>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.fault.phs2.html" title="phs2"
+          <a href="electricpy.fault.phs1mvasc.html" title="phs1mvasc"
              >next</a> |</li>
         <li class="right" >
           <a href="electricpy.fault.iopirt.html" title="iopirt"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.5 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.6 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../fault.html" >FAULT Sub-Module</a> &#187;</li> 
       </ul>

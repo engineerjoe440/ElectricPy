@@ -19,6 +19,8 @@ to aid in scientific calculations.
 .. automodapi:: electricpy
    :no-heading:
    :no-main-docstr:
+   :skip: Pabc
+   :skip: Pdq0
 
 -----------
 SUB-MODULES
