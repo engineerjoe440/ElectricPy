@@ -113,6 +113,7 @@ Included Functions
  - Natural Frequency Calculator             natfreq
  - 3-Phase Voltage/Current Unbalance:       unbalance
  - Characteristic Impedance Calculator:     characterz
+ - Transformer Phase Shift Calculator:      xfmphs
 
 Additional Available Sub-Modules
 --------------------------------
@@ -126,6 +127,11 @@ Functions Available in `electricpy.fault.py`
  - Double Line to Ground                 phs2g
  - Line to Line                          phs2
  - Three-Phase Fault                     phs3
+ - Single Pole Open:                     poleopen1
+ - Double Pole Open:                     poleopen2
+ - Simple MVA Calculator:                scMVA
+ - Three-Phase MVA Calculator:           phs3mvasc
+ - Single-Phase MVA Calculator:          phs1mvasc
  - Faulted Bus Voltage                   busvolt
  - CT Saturation Function                ct_saturation
  - CT C-Class Calculator                 ct_cclass
@@ -4331,6 +4337,52 @@ def characterz(R,G,L,C,freq=60):
     # Evaluate Zc
     Zc = _np.sqrt((R+1j*w*L)/(G+1j*w*C))
     return(Zc)
+
+# Define Simple Transformer Phase Shift Function
+def xfmphs(style="DY",shift=30):
+    """
+    Simple Transformer Phase-Shift Calculator
+    
+    Use with transformer orientation to evaluate
+    the phase-shift across a transformer. For
+    example, find the phase shift for a Delta-Wye
+    transformer as seen from the delta side.
+    
+    Parameters
+    ----------
+    style:      {'DY','YD','DD','YY'}, optional
+                String that denotes the transformer
+                orientation. default='DY'
+    shift:      float, optional
+                Transformer angle shift, default=30
+    
+    Returns
+    -------
+    phase:      complex
+                Phasor including the phase shift and
+                positive or negative characteristic.
+    
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> # Find shift of Delta-Wye Transformer w/ 30° shift
+    >>> shift = ep.xfmphs(style="DY",shift=30)
+    >>> ep.cprint(shift)
+    1.0 ∠ 30.0°
+    """
+    # Define Direction Dictionary
+    orientation = {
+        "DY" : 1,
+        "YD" : -1,
+        "DD" : 0,
+        "YY" : 0,
+    }
+    # Find Direction
+    v = orientation[style.upper()]
+    # Calculate Shift
+    phase = np.exp(1j*np.radians(v*abs(shift)))
+    # Return
+    return(phase)
 
 
 
