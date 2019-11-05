@@ -16,6 +16,5 @@ command similar to the one below.
 .. automodapi:: electricpy.bode
    :no-heading:
    :no-main-docstr:
-   :skip: exp
    
  

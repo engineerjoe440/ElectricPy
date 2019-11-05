@@ -15,6 +15,7 @@ Importing is reccomended as a command similar to the following command.
 .. automodapi:: electricpy.fault
    :no-heading:
    :no-main-docstr:
-   :skip: fsolve
+   :skip: Pabc
+   :skip: Pdq0
    
  
