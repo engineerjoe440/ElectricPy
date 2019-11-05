@@ -113,6 +113,7 @@ Included Functions
  - Natural Frequency Calculator             natfreq
  - 3-Phase Voltage/Current Unbalance:       unbalance
  - Characteristic Impedance Calculator:     characterz
+ - Transformer Phase Shift Calculator:      xfmphs
 
 Additional Available Sub-Modules
 --------------------------------
@@ -126,6 +127,11 @@ Functions Available in `electricpy.fault.py`
  - Double Line to Ground                 phs2g
  - Line to Line                          phs2
  - Three-Phase Fault                     phs3
+ - Single Pole Open:                     poleopen1
+ - Double Pole Open:                     poleopen2
+ - Simple MVA Calculator:                scMVA
+ - Three-Phase MVA Calculator:           phs3mvasc
+ - Single-Phase MVA Calculator:          phs1mvasc
  - Faulted Bus Voltage                   busvolt
  - CT Saturation Function                ct_saturation
  - CT C-Class Calculator                 ct_cclass
@@ -642,7 +648,8 @@ def reactance(z,freq=60,sensetivity=1e-12):
     return(out)
 
 # Define display function
-def cprint(val,unit=None,label=None,pretty=False,printval=True,ret=False,round=3):
+def cprint(val,unit=None,label=None,title=None,
+           pretty=False,printval=True,ret=False,round=3):
     """
     Phasor (Complex) Printing Function
     
@@ -663,6 +670,8 @@ def cprint(val,unit=None,label=None,pretty=False,printval=True,ret=False,round=3
                 The string to be printed corresponding to the unit mark.
     label:      str, optional
                 The pre-pended string used as a descriptive labeling string.
+    title:      str, optional
+                The pre-pended string describing a set of complex values.
     pretty:     bool, optional
                 Control argument to force printed result to a *pretty*
                 format without array braces. default=False
@@ -786,13 +795,19 @@ def cprint(val,unit=None,label=None,pretty=False,printval=True,ret=False,round=3
         numarr = _np.reshape(numarr, (sz, 2))
         # Print
         if printval and row==1:
+            if title != None:
+                print(title)
             print(strg)
         elif printval and pretty:
             strg = ''
             for i in printarr:
                 strg += str(i[0]) + '\n'
+            if title != None:
+                print(title)
             print(strg)
         elif printval:
+            if title != None:
+                print(title)
             print(printarr)
         # Return if Necessary
         if ret:
@@ -815,6 +830,8 @@ def cprint(val,unit=None,label=None,pretty=False,printval=True,ret=False,round=3
             strg += " " + unit
         # Print values (by default)
         if printval:
+            if title != None:
+                print(title)
             print(strg)
         # Return values when requested
         if ret:
@@ -823,7 +840,7 @@ def cprint(val,unit=None,label=None,pretty=False,printval=True,ret=False,round=3
         raise ValueError("Invalid Input Type")
 
 # Define Impedance Conversion function
-def phasorz(C=None,L=None,f=60,complex=True):
+def phasorz(C=None,L=None,freq=60,complex=True):
     """
     Phasor Impedance Generator
     
@@ -848,7 +865,7 @@ def phasorz(C=None,L=None,f=60,complex=True):
     L:          float, optional
                 The inductance value (specified in Henreys),
                 default=None
-    f:          float, optional
+    freq:       float, optional
                 The system frequency to be calculated upon, default=60
     complex:    bool, optional
                 Control argument to specify whether the returned
@@ -860,7 +877,7 @@ def phasorz(C=None,L=None,f=60,complex=True):
     Z:      complex
             The ohmic impedance of either C or L (respectively).
     """
-    w = 2*_np.pi*f
+    w = 2*_np.pi*freq
     #C Given in ohms, return as Z
     if (C!=None):
         Z = -1/(w*C)
@@ -1471,7 +1488,7 @@ def curdiv(Ri,Rset,Vin=None,Iin=None,Vout=False):
         return(Ii)
 
 # Define Instantaneous Power Calculator
-def instpower(P,Q,t,f=60):
+def instpower(P,Q,t,freq=60):
     """
     Instantaneous Power Function
     
@@ -1482,14 +1499,14 @@ def instpower(P,Q,t,f=60):
     
     Parameters
     ----------
-    P:  float
-        Magnitude of Real Power
-    Q:  float
-        Magnitude of Reactive Power
-    t:  float
-        Time at which to evaluate
-    f:  float, optional
-        System frequency (in Hz), default=60
+    P:      float
+            Magnitude of Real Power
+    Q:      float
+            Magnitude of Reactive Power
+    t:      float
+            Time at which to evaluate
+    freq:   float, optional
+            System frequency (in Hz), default=60
     
     Returns
     -------
@@ -1497,7 +1514,7 @@ def instpower(P,Q,t,f=60):
             Instantaneous Power at time t
     """
     # Evaluate omega
-    w = 2*_np.pi*f
+    w = 2*_np.pi*freq
     # Calculate
     Pinst = P + P*_np.cos(2*w*t) - Q*_np.sin(2*w*t)
     return(Pinst)
@@ -2602,7 +2619,7 @@ def vscdcbus(VLL,Zs,P,Q=0,mmax=0.8,debug=False):
     return(VDC)
 
 # Define kp/ki/w0L calculating function
-def vscgains(Rs,Ls,tau=0.005,f=60):
+def vscgains(Rs,Ls,tau=0.005,freq=60):
     """
     Voltage Sourced Converter Gains Calculator
     
@@ -2617,7 +2634,7 @@ def vscgains(Rs,Ls,tau=0.005,f=60):
             The equiv-inductance (in Henrys) of the VSC
     tau:    float, optional
             The desired time-constant, default=0.005
-    f:      float, optional
+    freq:   float, optional
             The system frequency (in Hz), default=60
     
     Returns
@@ -2634,7 +2651,7 @@ def vscgains(Rs,Ls,tau=0.005,f=60):
     # Calculate ki
     ki = kp*Rs/Ls
     # Calculate w0L
-    w0L = 2*_np.pi*f*Ls
+    w0L = 2*_np.pi*freq*Ls
     return(kp,ki,w0L)
 
 # Define Convolution Bar-Graph Function:
@@ -4320,6 +4337,52 @@ def characterz(R,G,L,C,freq=60):
     # Evaluate Zc
     Zc = _np.sqrt((R+1j*w*L)/(G+1j*w*C))
     return(Zc)
+
+# Define Simple Transformer Phase Shift Function
+def xfmphs(style="DY",shift=30):
+    """
+    Simple Transformer Phase-Shift Calculator
+    
+    Use with transformer orientation to evaluate
+    the phase-shift across a transformer. For
+    example, find the phase shift for a Delta-Wye
+    transformer as seen from the delta side.
+    
+    Parameters
+    ----------
+    style:      {'DY','YD','DD','YY'}, optional
+                String that denotes the transformer
+                orientation. default='DY'
+    shift:      float, optional
+                Transformer angle shift, default=30
+    
+    Returns
+    -------
+    phase:      complex
+                Phasor including the phase shift and
+                positive or negative characteristic.
+    
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> # Find shift of Delta-Wye Transformer w/ 30° shift
+    >>> shift = ep.xfmphs(style="DY",shift=30)
+    >>> ep.cprint(shift)
+    1.0 ∠ 30.0°
+    """
+    # Define Direction Dictionary
+    orientation = {
+        "DY" : 1,
+        "YD" : -1,
+        "DD" : 0,
+        "YY" : 0,
+    }
+    # Find Direction
+    v = orientation[style.upper()]
+    # Calculate Shift
+    phase = np.exp(1j*np.radians(v*abs(shift)))
+    # Return
+    return(phase)
 
 
 

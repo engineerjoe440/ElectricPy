@@ -12,6 +12,9 @@ Included Functions
 - Three-Phase Fault:                    phs3
 - Single Pole Open:                     poleopen1
 - Double Pole Open:                     poleopen2
+- Simple MVA Calculator:                scMVA
+- Three-Phase MVA Calculator:           phs3mvasc
+- Single-Phase MVA Calculator:          phs1mvasc
 - Faulted Bus Voltage:                  busvolt
 - CT Saturation Function:               ct_saturation
 - CT C-Class Calculator:                ct_cclass
@@ -63,14 +66,14 @@ def _phaseroll(M012,reference):
     return(M)
 
 # Define Single Line to Ground Fault Function
-def phs1g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
+def phs1g(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     """
     Single-Phase-to-Ground Fault Calculator
     
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a single-line-to-ground fault.
     
-    .. math:: I_1 = \\frac{V_{src}}{Z_0+Z_1+Z_2+3*R_f}
+    .. math:: I_1 = \\frac{V_{th}}{Z_0+Z_1+Z_2+3*R_f}
     
     .. math:: I_2 = I_1
     
@@ -78,8 +81,8 @@ def phs1g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     
     Parameters
     ----------
-    Vsrc:       complex
-                The Source Voltage
+    Vth:        complex
+                The Thevenin-Equivalent-Voltage
     Zseq:       list of complex
                 Tupple of sequence reactances as (Z0, Z1, Z2)
     Rf:         complex, optional
@@ -103,7 +106,7 @@ def phs1g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     if(not isinstance(X1, complex)): X1 *= 1j
     if(not isinstance(X2, complex)): X2 *= 1j
     # Calculate Fault Current
-    Ifault = Vsrc / (X0 + X1 + X2 + 3*Rf)
+    Ifault = Vth / (X0 + X1 + X2 + 3*Rf)
     Ifault = _np.array([ Ifault, Ifault, Ifault ])
     # Prepare Value for return
     if not sequence:
@@ -112,23 +115,23 @@ def phs1g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     return(Ifault)
     
 # Define Double Line to Ground Fault Current Calculator
-def phs2g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
+def phs2g(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     """
     Double-Line-to-Ground Fault Calculator
     
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a double-line-to-ground fault.
     
-    .. math:: I_1 = \\frac{V_{src}}{Z_1+\\frac{Z_2*(Z_0+3*R_f)}{Z_0+Z_2+3*R_f}}
+    .. math:: I_1 = \\frac{V_{th}}{Z_1+\\frac{Z_2*(Z_0+3*R_f)}{Z_0+Z_2+3*R_f}}
     
-    .. math:: I_2 = -\\frac{V_{src}-Z_1*I_1}{X_2}
+    .. math:: I_2 = -\\frac{V_{th}-Z_1*I_1}{X_2}
     
-    .. math:: I_0 = -\\frac{V_{src}-Z_1*I_1}{X_0+3*R_f}
+    .. math:: I_0 = -\\frac{V_{th}-Z_1*I_1}{X_0+3*R_f}
     
     Parameters
     ----------
-    Vsrc:       complex
-                The Source Voltage
+    Vth:        complex
+                The Thevenin-Equivalent-Voltage
     Zseq:       list of complex
                 Tupple of sequence reactances as (Z0, Z1, Z2)
     Rf:         complex, optional
@@ -152,9 +155,9 @@ def phs2g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     if(not isinstance(X1, complex)): X1 *= 1j
     if(not isinstance(X2, complex)): X2 *= 1j
     # Calculate Fault Currents
-    If1 = Vsrc / (X1 + (X2*(X0+3*Rf))/(X0+X2+3*Rf))
-    If2 = -(Vsrc - X1*If1)/X2
-    If0 = -(Vsrc - X1*If1)/(X0+3*Rf)
+    If1 = Vth / (X1 + (X2*(X0+3*Rf))/(X0+X2+3*Rf))
+    If2 = -(Vth - X1*If1)/X2
+    If0 = -(Vth - X1*If1)/(X0+3*Rf)
     Ifault = _np.array([If0, If1, If2])
     # Return Currents
     if not sequence:
@@ -162,14 +165,14 @@ def phs2g(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     return(Ifault)
 
 # Define Phase-to-Phase Fault Current Calculator
-def phs2(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
+def phs2(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     """
     Line-to-Line Fault Calculator
     
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a phase-to-phase fault.
     
-    .. math:: I_1 = \\frac{V_{src}}{Z_1+Z_2+R_f}
+    .. math:: I_1 = \\frac{V_{th}}{Z_1+Z_2+R_f}
     
     .. math:: I_2 = -I_1
     
@@ -177,8 +180,8 @@ def phs2(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     
     Parameters
     ----------
-    Vsrc:       complex
-                The Source Voltage
+    Vth:        complex
+                The Thevenin-Equivalent-Voltage
     Zseq:       list of complex
                 Tupple of sequence reactances as (Z0, Z1, Z2)
     Rf:         complex, optional
@@ -203,7 +206,7 @@ def phs2(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     if(not isinstance(X2, complex)): X2 *= 1j
     # Calculate Fault Currents
     If0 = 0
-    If1 = Vsrc / (X1 + X2 + Rf)
+    If1 = Vth / (X1 + X2 + Rf)
     If2 = -If1
     Ifault = _np.array([If0, If1, If2])
     # Return Currents
@@ -212,14 +215,14 @@ def phs2(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     return(Ifault)
 
 # Define Three-Phase Fault Current Calculator
-def phs3(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
+def phs3(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     """
     Three-Phase Fault Calculator
     
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a three-phase fault.
     
-    .. math:: I_1 = \\frac{V_{src}}{Z_1+R_1}
+    .. math:: I_1 = \\frac{V_{th}}{Z_1+R_1}
     
     .. math:: I_2 = 0
     
@@ -227,8 +230,8 @@ def phs3(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     
     Parameters
     ----------
-    Vsrc:       complex
-                The Source Voltage
+    Vth:        complex
+                The Thevenin-Equivalent-Voltage
     Zseq:       list of complex
                 Tupple of sequence reactances as (Z0, Z1, Z2)
     Rf:         complex, optional
@@ -250,7 +253,7 @@ def phs3(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     # Ensure that X-components are imaginary
     if(not isinstance(X1, complex)): X1 *= 1j
     # Calculate Fault Currents
-    Ifault = Vsrc/(X1 + Rf)
+    Ifault = Vth/(X1 + Rf)
     Ifault = _np.array([ 0, Ifault, 0 ])
     # Prepare to Return Value
     if not sequence:
@@ -258,14 +261,14 @@ def phs3(Vsrc,Zseq,Rf=0,sequence=True,reference='A'):
     return(Ifault)
 
 # Define Single Pole Open Calculator
-def poleopen1(Vsrc,Zseq,sequence=True,reference='A'):
+def poleopen1(Vth,Zseq,sequence=True,reference='A'):
     """
     Single Pole Open Fault Calculator
     
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a single pole open fault.
     
-    .. math:: I_1 = \\frac{V_{src}}{Z_1+(\\frac{1}{Z_2}+\\frac{1}{Z_0})^-1}
+    .. math:: I_1 = \\frac{V_{th}}{Z_1+(\\frac{1}{Z_2}+\\frac{1}{Z_0})^-1}
     
     .. math:: I_2 = -I_1 * \\frac{Z_0}{Z_2+Z_0}
     
@@ -273,16 +276,16 @@ def poleopen1(Vsrc,Zseq,sequence=True,reference='A'):
     
     Parameters
     ----------
-    Vsrc:       complex
-                The Source Voltage
+    Vth:        complex
+                The Thevenin-Equivalent-Voltage
     Zseq:       list of complex
                 Tupple of sequence reactances as (Z0, Z1, Z2)
     sequence:   bool, optional
                 Control argument to force return into symmetrical-
                 or phase-domain values.
     reference:  {'A', 'B', 'C'}
-                Single character denoting the reference,
-                default='A'
+                Single character denoting the reference, or the
+                faulted phase indicator; default='A'
     
     Returns
     -------
@@ -296,7 +299,7 @@ def poleopen1(Vsrc,Zseq,sequence=True,reference='A'):
     if(not isinstance(X1, complex)): X1 *= 1j
     if(not isinstance(X2, complex)): X2 *= 1j
     # Calculate Fault Currents
-    If1 = Vsrc / (X1 + (1/X2 + 1/X0)**(-1))
+    If1 = Vth / (X1 + (1/X2 + 1/X0)**(-1))
     If2 = -If1 * X0/(X2 + X0)
     If0 = -If1 * X2/(X2 + X0)
     Ifault = _np.array([If0, If1, If2])
@@ -306,14 +309,14 @@ def poleopen1(Vsrc,Zseq,sequence=True,reference='A'):
     return(Ifault)
 
 # Define Double Pole Open Calculator
-def poleopen2(Vsrc,Zseq,sequence=True,reference='A'):
+def poleopen2(Vth,Zseq,sequence=True,reference='A'):
     """
     Single Pole Open Fault Calculator
     
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a single pole open fault.
     
-    .. math:: I_1 = \\frac{V_{src}}{Z_1+Z_2+Z_0}
+    .. math:: I_1 = \\frac{V_{th}}{Z_1+Z_2+Z_0}
     
     .. math:: I_2 = I_1
     
@@ -321,16 +324,16 @@ def poleopen2(Vsrc,Zseq,sequence=True,reference='A'):
     
     Parameters
     ----------
-    Vsrc:       complex
-                The Source Voltage
+    Vth:        complex
+                The Thevenin-Equivalent-Voltage
     Zseq:       list of complex
                 Tupple of sequence reactances as (Z0, Z1, Z2)
     sequence:   bool, optional
                 Control argument to force return into symmetrical-
                 or phase-domain values.
     reference:  {'A', 'B', 'C'}
-                Single character denoting the reference,
-                default='A'
+                Single character denoting the reference, or the
+                faulted phase indicator; default='A'
     
     Returns
     -------
@@ -344,7 +347,7 @@ def poleopen2(Vsrc,Zseq,sequence=True,reference='A'):
     if(not isinstance(X1, complex)): X1 *= 1j
     if(not isinstance(X2, complex)): X2 *= 1j
     # Calculate Fault Currents
-    If1 = Vsrc / (X1 + X2 + X0)
+    If1 = Vth / (X1 + X2 + X0)
     If2 = If1
     If0 = If1
     Ifault = _np.array([If0, If1, If2])
@@ -352,6 +355,137 @@ def poleopen2(Vsrc,Zseq,sequence=True,reference='A'):
     if not sequence:
         Ifault = _phaseroll( Ifault, reference ) # Convert to ABC-Domain
     return(Ifault)
+
+# Define MVA Short Circuit
+def scMVA(Zth=None,Isc=None,Vth=1):
+    """
+    Simple Short-Circuit MVA Calculator
+    
+    Function defines a method of interpretively
+    calculating the short-circuit MVA value
+    given two of the three arguments. The formulas
+    are all based around the following:
+    
+    .. math:: MVA_{sc} = V_{th}*I_{sc}
+    
+    .. math:: V_{th} = I_{sc}*Z_{th}
+    
+    Parameters
+    ----------
+    Zth:        float
+                The Thevenin-Equivalent-Impedance
+    Isc:        float, optional
+                Short-Circuit-Current, if left as
+                None, will force function to use
+                default setting for Vth.
+                default=None
+    Vth:        float, optional
+                The Thevenin-Equivalent-Voltage,
+                defaults to a 1-per-unit value.
+                default=1
+    
+    Returns
+    -------
+    MVA:        float
+                Short-Circuit MVA, not described
+                as three-phase or otherwise, such
+                determination is dependent upon
+                inputs.
+    """
+    # Test for too few inputs
+    if not any((Zth,Isc)):
+        raise ValueError("Either Zth or Isc must be specified.")
+    # Condition Inputs
+    if Zth is not None:
+        Zth = abs(Zth)
+    if Isc is not None:
+        Isc = abs(Isc)
+    if Vth != 1:
+        Vth = abs(Vth)
+    # Calculate MVA from one of the available methods
+    if all((Zth,Isc)):
+        MVA = Isc**2 * Zth
+    elif all((Zth,Vth)):
+        MVA = Vth**2 / Zth
+    else:
+        MVA = Vth * Isc
+    # Return Value
+    return(MVA)
+
+# Define Explicitly 3-Phase MVAsc Calculator
+def phs3mvasc(Vth,Zseq,Rf=0,Sbase=1):
+    """
+    Three-Phase MVA Short-Circuit Calculator
+    
+    Calculator to evaluate the Short-Circuit MVA of a three-phase fault given the system
+    parameters of Vth, Zseq, and an optional Rf. Uses the formula as follows:
+    
+    .. math:: MVA_{sc} = \\frac{\\left|V_{th}**2\\right|}{|Z_1|} * Sbase
+    
+    Parameters
+    ----------
+    Vth:        complex
+                The Thevenin-Equivalent-Voltage
+    Zseq:       list of complex
+                Tupple of sequence reactances as (Z0, Z1, Z2)
+    Rf:         complex, optional
+                The fault resistance, default=0
+    Sbase:      real, optional
+                The per-unit base for power. default=1
+    
+    Returns
+    -------
+    MVA:        real
+                Three-Phase Short-Circuit MVA.
+    """
+    # Calculate Three-Phase MVA
+    MVA = abs(Vth)**2 / abs(Zseq[1]) * Sbase
+    # Return
+    return(MVA)
+    
+    
+# Define Explicitly 1-Phase MVAsc Calculator
+def phs1mvasc(Vth,Zseq,Rf=0,Sbase=1):
+    """
+    Single-Phase MVA Short-Circuit Calculator
+    
+    Calculator to evaluate the Short-Circuit MVA of a single-phase fault given the system
+    parameters of Vth, Zseq, and an optional Rf. Uses the formula as follows:
+    
+    .. math:: MVA_{sc} = \\left|I_1**2\\right|*|Z_1| * Sbase
+    
+    where:
+    
+    .. math:: I_1 = \\frac{V_{th}}{Z_0+Z_1+Z_2+3*R_f}
+    
+    Parameters
+    ----------
+    Vth:        complex
+                The Thevenin-Equivalent-Voltage
+    Zseq:       list of complex
+                Tupple of sequence reactances as (Z0, Z1, Z2)
+    Rf:         complex, optional
+                The fault resistance, default=0
+    Sbase:      real, optional
+                The per-unit base for power. default=1
+    
+    Returns
+    -------
+    MVA:        real
+                Single-Phase Short-Circuit MVA.
+    """
+    # Decompose Reactance Tuple
+    X0, X1, X2 = Zseq
+    # Ensure that X-components are imaginary
+    if(not isinstance(X0, complex)): X0 *= 1j
+    if(not isinstance(X1, complex)): X1 *= 1j
+    if(not isinstance(X2, complex)): X2 *= 1j
+    # Calculate Fault Current
+    Ifault = Vth / (X0 + X1 + X2 + 3*Rf)
+    # Calculate MVA
+    MVA = abs(Ifault)**2 * abs(X1) * Sbase
+    # Return
+    return(MVA)
 
 # Define Faulted Bus Voltage Calculator
 def busvolt(k,n,Vpf,Z0,Z1,Z2,If,sequence=True,reference='A'):
