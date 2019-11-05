@@ -420,7 +420,7 @@ def phs3mvasc(Vth,Zseq,Rf=0,Sbase=1):
     Calculator to evaluate the Short-Circuit MVA of a three-phase fault given the system
     parameters of Vth, Zseq, and an optional Rf. Uses the formula as follows:
     
-    .. math:: MVA_{sc} = \\frac{\\left|V_{th}**2\\right|}{|Z_1|} * Sbase
+    .. math:: MVA_{sc} = \\frac{\\left|V_{th}^2\\right|}{|Z_1|} * Sbase
     
     Parameters
     ----------
@@ -452,7 +452,7 @@ def phs1mvasc(Vth,Zseq,Rf=0,Sbase=1):
     Calculator to evaluate the Short-Circuit MVA of a single-phase fault given the system
     parameters of Vth, Zseq, and an optional Rf. Uses the formula as follows:
     
-    .. math:: MVA_{sc} = \\left|I_1**2\\right|*|Z_1| * Sbase
+    .. math:: MVA_{sc} = \\left|I_1^2\\right|*|Z_1| * Sbase
     
     where:
     
