@@ -215,7 +215,7 @@ def phs( ang ):
     
 
 # Define Phasor Generator
-def phasor( mag, ang=None ):
+def phasor( mag, ang=0 ):
     """
     Complex Phasor Generator
     
@@ -1217,7 +1217,8 @@ def transformertest(Poc=False,Voc=False,Ioc=False,Psc=False,Vsc=False,
 
 # Define Phasor Plot Generator
 def phasorplot(phasor,title="Phasor Diagram",legend=False,bg=None,
-               radius=None,colors=None):
+               radius=None,colors=None,filename=None,plot=True,
+               size=None,linewidth=None):
     """
     Phasor Plotting Function
     
@@ -1240,6 +1241,14 @@ def phasorplot(phasor,title="Phasor Diagram",legend=False,bg=None,
                 The diagram radius, unless specified, automatically scales
     colors:     list of str, optional
                 List of hexidecimal color strings denoting the line colors to use.
+    filename:   string, optional
+                String of filename, if set, will force function to save image.
+    plot:       bool, optional
+                Control argument to disable plotting. default=True
+    size:       float, optional
+                Control argument for figure size. default=None
+    linewidth:  float, optional
+                Control argument to declare the line thickness. default=None
     """
     # Manage Colors
     if colors==None:
@@ -1257,9 +1266,10 @@ def phasorplot(phasor,title="Phasor Diagram",legend=False,bg=None,
     if numphs > numclr:
         raise ValueError("ERROR: Too many phasors provided. Specify more line colors.")
     
-    # Force square figure and square axes looks better for polar, IMO
-    width, height = _matplotlib.rcParams['figure.figsize']
-    size = min(width, height)
+    if size==None:
+        # Force square figure and square axes
+        width, height = _matplotlib.rcParams['figure.figsize']
+        size = min(width, height)
     # Make a square figure
     fig = _plt.figure(figsize=(size, size))
     ax = fig.add_axes([0.1, 0.1, 0.8, 0.8], polar=True, facecolor=bg)
@@ -1271,12 +1281,22 @@ def phasorplot(phasor,title="Phasor Diagram",legend=False,bg=None,
     handles=_np.array([]) # Empty array for plot handles
     for i in range(numphs):
         mag, ang_r = _c.polar(phasor[i])
+        # Plot with labels
         if legend!=False:
-            hand = _plt.arrow(0,0,ang_r,mag,color=colors[i],label=legend[i])
+            hand = _plt.arrow(0,0,ang_r,mag,color=colors[i],
+                              label=legend[i],linewidth=linewidth)
             handles = _np.append(handles,[hand])
-        else: _plt.arrow(0,0,ang_r,mag,color=colors[i])
+        # Plot without labels
+        else: _plt.arrow(0,0,ang_r,mag,color=colors[i],linewidth=linewidth)
     if legend!=False: _plt.legend((handles),legend)
-    _plt.show()
+    if filename!=None:
+        if not any(sub in filename for sub in ['.png','.jpg']):
+            filename += '.png' # Add File Extension
+        _plt.savefig( filename )
+    if plot:
+        _plt.show()
+    else:
+        _plt.close()
 
 # Define Non-Linear Power Factor Calculator
 def nlinpf(PFtrue=False,PFdist=False,PFdisp=False):
