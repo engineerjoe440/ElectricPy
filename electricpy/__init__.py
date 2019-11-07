@@ -116,6 +116,8 @@ Included Functions
  - Transformer Phase Shift Calculator:      xfmphs
  - Hertz to Radians Converter:              hz_to_rad
  - Radians to Hertz Converter:              rad_to_hz
+ - Induction Machine Vth Calculator:        indmachvth
+ - Induction Machine Zth Calculator:        indmachzth
 
 Additional Available Sub-Modules
 --------------------------------
@@ -4523,6 +4525,102 @@ def hz_to_rad( hertz ):
     """
     return( hertz * (2*_np.pi) ) # Evaluate and Return
 radsec = hz_to_rad # Make Duplicate Name
+
+# Define Induction Machine Thevenin Voltage Calculator
+def indmachvth(Vas,Rs,Lm,Lls=0,Ls=None,freq=60,calcX=True):
+    """
+    Induction Machine Thevenin Voltage Calculator
+    
+    Function to calculate the Thevenin equivalent voltage of an
+    induction machine given a specific set of parameters.
+    
+    .. math:: V_{th}=\\frac{j\\omega L_m}{R_s+j\\omega(L_{ls}+L_m)}V_{as}
+    
+    where:
+    
+    .. math:: \\omega = \\omega_{es} = 2\\pi\\cdot f_{\\text{electric}}
+    
+    Parameters
+    ----------
+    Vas:        complex
+                Terminal Stator Voltage in Volts
+    Rs:         float
+                Stator resistance in ohms
+    Lm:         float
+                Magnetizing inductance in Henrys
+    Lls:        float, optional
+                Stator leakage inductance in Henrys, default=0
+    Ls:         float, optional
+                Stator inductance in Henrys
+    freq:       float, optional
+                System (electrical) frequency in Hz, default=60
+    calcX:      bool, optional
+                Control argument to force system to calculate
+                system reactances with system frequency, or to
+                treat them as previously-calculated reactances.
+                default=True
+    """
+    # Condition Inputs
+    if Ls != None: # Use Ls instead of Lls
+        Lls = Ls - Lm
+    if calcX: # Convert Inductances to Reactances
+        w = 2*_np.pi*freq
+        Lm *= w
+        Lls *= w
+    # Calculate Thevenin Voltage, Return
+    Vth = 1j*Lm / (Rs + 1j*(Lls+Lm)) * Vas
+    return(Vth)
+
+# Define Induction Machine Thevenin Impedance Calculator
+def indmachzth(Rs,Lm,Lls=0,Llr=0,Ls=None,Lr=None,freq=60,calcX=True):
+    """
+    Induction Machine Thevenin Impedance Calculator
+    
+    Function to calculate the Thevenin equivalent impedance of an
+    induction machine given a specific set of parameters.
+    
+    .. math::
+       \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}{R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}
+    
+    where:
+    
+    .. math:: \\omega = \\omega_{es} = 2\\pi\\cdot f_{\\text{electric}}
+    
+    Parameters
+    ----------
+    Rs:         float
+                Stator resistance in ohms
+    Lm:         float
+                Magnetizing inductance in Henrys
+    Lls:        float, optional
+                Stator leakage inductance in Henrys, default=0
+    Llr:        float, optional
+                Rotor leakage inductance in Henrys, default=0
+    Ls:         float, optional
+                Stator inductance in Henrys
+    Lr:         float, optional
+                Rotor inductance in Henrys
+    freq:       float, optional
+                System (electrical) frequency in Hz, default=60
+    calcX:      bool, optional
+                Control argument to force system to calculate
+                system reactances with system frequency, or to
+                treat them as previously-calculated reactances.
+                default=True
+    """
+    # Condition Inputs
+    if Ls != None: # Use Ls instead of Lls
+        Lls = Ls - Lm
+    if Lr != None: # Use Lr instead of Llr
+        Llr = Lr - Lm
+    if calcX: # Convert Inductances to Reactances
+        w = 2*_np.pi*freq
+        Lm *= w
+        Lls *= w
+        Llr *= w
+    # Calculate Thevenin Impedance
+    Zth = (Rs+1j*Lls)*(1j*Lm) / (Rs+1j*(Lls+Lm)) + 1j*Llr
+    
 
 
 # END OF FILE
