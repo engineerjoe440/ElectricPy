@@ -4620,6 +4620,7 @@ def indmachzth(Rs,Lm,Lls=0,Llr=0,Ls=None,Lr=None,freq=60,calcX=True):
         Llr *= w
     # Calculate Thevenin Impedance
     Zth = (Rs+1j*Lls)*(1j*Lm) / (Rs+1j*(Lls+Lm)) + 1j*Llr
+    return(Zth)
     
 
 
