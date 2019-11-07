@@ -553,6 +553,56 @@ def tflatex(sys,sysp=None,var='s',predollar=True,
         latex = latex + dollar
     return( latex )
 
+# Define Complex Composition Function
+def compose(arr):
+    """
+    Complex Composition Function
+    
+    Accepts a set of real values and generates an array
+    of complex values. Input must be array-like, but can
+    appear in various forms:
+    
+    - [ real, imag]
+    - [ [ real1, ..., realn ], [ imag1, ..., imagn ] ]
+    - [ [ real1, imag1 ], ..., [ realn, imagn ] ]
+    
+    Will always return values in form:
+    
+    [ complex1, ... complexn ]
+    
+    Parameters
+    ----------
+    arr:        array_like
+                The input of real and imaginary term(s)
+    """
+    # Input comes in various forms, we must first detect shape
+    arr = _np.asarray( arr ) # Format as Numpy Array
+    # Gather Shape to Detect Format
+    try:
+        row, col = arr.shape
+        # Passed Test, Valid Shape
+        retarr = _np.array([]) # Empty Return Array
+        # Now, Determine whether is type 2 or 3
+        if col == 2: # Type 3
+            for i in range(row): # Iterate over each row
+                item = arr[i][0] + 1j*arr[i][1]
+                retarr = _np.append(retarr, item)
+        elif row == 2: # Type 2
+            for i in range(col): # Iterate over each column
+                item = arr[0][i] + 1j*arr[1][i]
+                retarr = _np.append(retarr, item)
+        else:
+            raise ValueError("Invalid Array Shape, must be 2xN or Nx2.")
+        # Successfully Generated Array, Return
+        return( retarr )
+    except: # 1-Dimension Array
+        len = arr.size
+        # Test for invalid Array Size
+        if len != 2:
+            raise ValueError("Invalid Array Size, Saw Length of "+str(len))
+        # Valid Size, Calculate and Return
+        return( arr[0] + 1j*arr[1] )
+
 # Define Cycle Time Function
 def tcycle(ncycles=1,freq=60):
     """

@@ -583,13 +583,13 @@ def compose(arr):
         # Passed Test, Valid Shape
         retarr = _np.array([]) # Empty Return Array
         # Now, Determine whether is type 2 or 3
-        if row == 2: # Type 2
-            for i in range(col): # Iterate over each column
-                item = arr[0][i] + 1j*arr[1][i]
-                retarr = _np.append(retarr, item)
-        elif col == 2: # Type 3
+        if col == 2: # Type 3
             for i in range(row): # Iterate over each row
                 item = arr[i][0] + 1j*arr[i][1]
+                retarr = _np.append(retarr, item)
+        elif row == 2: # Type 2
+            for i in range(col): # Iterate over each column
+                item = arr[0][i] + 1j*arr[1][i]
                 retarr = _np.append(retarr, item)
         else:
             raise ValueError("Invalid Array Shape, must be 2xN or Nx2.")
