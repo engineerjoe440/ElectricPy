@@ -119,6 +119,8 @@ Included Functions
  - Induction Machine Vth Calculator:        indmachvth
  - Induction Machine Zth Calculator:        indmachzth
  - Induction Machine Pem Calculator:        indmachpem
+ - Induction Machine Tem Calculator:        indmachtem
+ - Induction Machine Peak Slip Calculator:  indamachpkslip
 
 Additional Available Sub-Modules
 --------------------------------
@@ -4587,7 +4589,8 @@ def indmachzth(Rs,Lm,Lls=0,Llr=0,Ls=None,Lr=None,freq=60,calcX=True):
     induction machine given a specific set of parameters.
     
     .. math::
-       \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}{R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}
+       Z_{th} = \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}
+       {R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}
     
     where:
     
@@ -4823,6 +4826,50 @@ def indmachpkslip(Rr,Zth=None,Rs=0,Lm=0,Lls=0,Llr=0,Ls=None,
                   Lr=None,freq=60,calcX=True):
     """
     Induction Machine Peak Slip Calculator
+    
+    Function to calculate the peak slip encountered by an induction machine
+    with the parameters specified. Uses formula as shown below.
+    
+    .. math:: \\text{slip} = \\frac{R_r}{|Z_{th}|}
+    
+    where:
+
+    .. math::
+       Z_{th} = \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}
+       {R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}
+    
+    Parameters
+    ----------
+    Rr:         float
+                Rotor resistance in ohms
+    Zth:        complex, optional
+                Thevenin-equivalent inductance (in ohms) of the
+                induction machine, may be calculated internally
+                if given machine parameters.
+    Rs:         float, optional
+                Stator resistance in ohms
+    Lm:         float, optional
+                Magnetizing inductance in Henrys
+    Lls:        float, optional
+                Stator leakage inductance in Henrys, default=0
+    Llr:        float, optional
+                Rotor leakage inductance in Henrys, default=0
+    Ls:         float, optional
+                Stator inductance in Henrys
+    Lr:         float, optional
+                Rotor inductance in Henrys
+    freq:       float, optional
+                System (electrical) frequency in Hz, default=60
+    calcX:      bool, optional
+                Control argument to force system to calculate
+                system reactances with system frequency, or to
+                treat them as previously-calculated reactances.
+                default=True
+    
+    Returns
+    -------
+    s_peak:     float
+                The peak slip for the induction machine described.
     """
     # Condition Inputs
     w = 2*_np.pi*freq
