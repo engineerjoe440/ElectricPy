@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>convbar &#8212; electricpy 0.0.6 documentation</title>
+    <title>indmachpkslip &#8212; electricpy 0.0.6 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -19,8 +19,8 @@
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="convolve" href="electricpy.convolve.html" />
-    <link rel="prev" title="compose" href="electricpy.compose.html" /> 
+    <link rel="next" title="indmachtem" href="electricpy.indmachtem.html" />
+    <link rel="prev" title="indmachpem" href="electricpy.indmachpem.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -32,10 +32,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.convolve.html" title="convolve"
+          <a href="electricpy.indmachtem.html" title="indmachtem"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="electricpy.compose.html" title="compose"
+          <a href="electricpy.indmachpem.html" title="indmachpem"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.6 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
@@ -47,21 +47,45 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="convbar">
-<h1>convbar<a class="headerlink" href="#convbar" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="indmachpkslip">
+<h1>indmachpkslip<a class="headerlink" href="#indmachpkslip" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
-<dt id="electricpy.convbar">
-<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">convbar</code><span class="sig-paren">(</span><em class="sig-param">h</em>, <em class="sig-param">x</em>, <em class="sig-param">outline=True</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.convbar" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convolution Bar-Graph Plotter Function</p>
-<p>Generates plots of each of two input arrays as bar-graphs, then
-generates a convolved bar-graph of the two inputs to demonstrate
-and illustrate convolution, typically for an educational purpose.</p>
+<dt id="electricpy.indmachpkslip">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">indmachpkslip</code><span class="sig-paren">(</span><em class="sig-param">Rr</em>, <em class="sig-param">Zth=None</em>, <em class="sig-param">Rs=0</em>, <em class="sig-param">Lm=0</em>, <em class="sig-param">Lls=0</em>, <em class="sig-param">Llr=0</em>, <em class="sig-param">Ls=None</em>, <em class="sig-param">Lr=None</em>, <em class="sig-param">freq=60</em>, <em class="sig-param">calcX=True</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.indmachpkslip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Induction Machine Peak Slip Calculator</p>
+<p>Function to calculate the peak slip encountered by an induction machine
+with the parameters specified. Uses formula as shown below.</p>
+<div class="math notranslate nohighlight">
+\[\text{slip} = \frac{R_r}{|Z_{th}|}\]</div>
+<p>where:</p>
+<div class="math notranslate nohighlight">
+\[Z_{th} = \frac{(R_s+j\omega L_{ls})j\omega L_m}
+{R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>h</strong> (<em>numpy.ndarray</em>) – Impulse Response - Given as Array (Prefferably Numpy Array)</p></li>
-<li><p><strong>x</strong> (<em>numpy.ndarray</em>) – Input Function - Given as Array (Prefferably Numpy Array)</p></li>
+<li><p><strong>Rr</strong> (<em>float</em>) – Rotor resistance in ohms</p></li>
+<li><p><strong>Zth</strong> (<em>complex</em><em>, </em><em>optional</em>) – Thevenin-equivalent inductance (in ohms) of the
+induction machine, may be calculated internally
+if given machine parameters.</p></li>
+<li><p><strong>Rs</strong> (<em>float</em><em>, </em><em>optional</em>) – Stator resistance in ohms</p></li>
+<li><p><strong>Lm</strong> (<em>float</em><em>, </em><em>optional</em>) – Magnetizing inductance in Henrys</p></li>
+<li><p><strong>Lls</strong> (<em>float</em><em>, </em><em>optional</em>) – Stator leakage inductance in Henrys, default=0</p></li>
+<li><p><strong>Llr</strong> (<em>float</em><em>, </em><em>optional</em>) – Rotor leakage inductance in Henrys, default=0</p></li>
+<li><p><strong>Ls</strong> (<em>float</em><em>, </em><em>optional</em>) – Stator inductance in Henrys</p></li>
+<li><p><strong>Lr</strong> (<em>float</em><em>, </em><em>optional</em>) – Rotor inductance in Henrys</p></li>
+<li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – System (electrical) frequency in Hz, default=60</p></li>
+<li><p><strong>calcX</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force system to calculate
+system reactances with system frequency, or to
+treat them as previously-calculated reactances.
+default=True</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>s_peak</strong> – The peak slip for the induction machine described.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -78,15 +102,15 @@ and illustrate convolution, typically for an educational purpose.</p>
               <img class="logo" src="../_static/ElectricpyLogo.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="electricpy.compose.html"
-                        title="previous chapter">compose</a></p>
+  <p class="topless"><a href="electricpy.indmachpem.html"
+                        title="previous chapter">indmachpem</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="electricpy.convolve.html"
-                        title="next chapter">convolve</a></p>
+  <p class="topless"><a href="electricpy.indmachtem.html"
+                        title="next chapter">indmachtem</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/electricpy.convbar.rst.txt"
+      <li><a href="../_sources/api/electricpy.indmachpkslip.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -114,10 +138,10 @@ and illustrate convolution, typically for an educational purpose.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.convolve.html" title="convolve"
+          <a href="electricpy.indmachtem.html" title="indmachtem"
              >next</a> |</li>
         <li class="right" >
-          <a href="electricpy.compose.html" title="compose"
+          <a href="electricpy.indmachpem.html" title="indmachpem"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.6 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 

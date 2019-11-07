@@ -116,6 +116,11 @@ Included Functions
  - Transformer Phase Shift Calculator:      xfmphs
  - Hertz to Radians Converter:              hz_to_rad
  - Radians to Hertz Converter:              rad_to_hz
+ - Induction Machine Vth Calculator:        indmachvth
+ - Induction Machine Zth Calculator:        indmachzth
+ - Induction Machine Pem Calculator:        indmachpem
+ - Induction Machine Tem Calculator:        indmachtem
+ - Induction Machine Peak Slip Calculator:  indamachpkslip
 
 Additional Available Sub-Modules
 --------------------------------
@@ -206,6 +211,8 @@ def phs( ang ):
     Generate a complex value given the phase angle
     for the complex value.
     
+    Same as `phase`.
+    
     Parameters
     ----------
     ang:        float
@@ -214,6 +221,7 @@ def phs( ang ):
     """
     # Return the Complex Angle Modulator
     return(_np.exp(1j*_np.radians( ang )))
+phase = phs # Create Duplicate Name
     
 
 # Define Phasor Generator
@@ -4523,6 +4531,368 @@ def hz_to_rad( hertz ):
     """
     return( hertz * (2*_np.pi) ) # Evaluate and Return
 radsec = hz_to_rad # Make Duplicate Name
+
+# Define Induction Machine Thevenin Voltage Calculator
+def indmachvth(Vas,Rs,Lm,Lls=0,Ls=None,freq=60,calcX=True):
+    """
+    Induction Machine Thevenin Voltage Calculator
+    
+    Function to calculate the Thevenin equivalent voltage of an
+    induction machine given a specific set of parameters.
+    
+    .. math:: V_{th}=\\frac{j\\omega L_m}{R_s+j\\omega(L_{ls}+L_m)}V_{as}
+    
+    where:
+    
+    .. math:: \\omega = \\omega_{es} = 2\\pi\\cdot f_{\\text{electric}}
+    
+    Parameters
+    ----------
+    Vas:        complex
+                Terminal Stator Voltage in Volts
+    Rs:         float
+                Stator resistance in ohms
+    Lm:         float
+                Magnetizing inductance in Henrys
+    Lls:        float, optional
+                Stator leakage inductance in Henrys, default=0
+    Ls:         float, optional
+                Stator inductance in Henrys
+    freq:       float, optional
+                System (electrical) frequency in Hz, default=60
+    calcX:      bool, optional
+                Control argument to force system to calculate
+                system reactances with system frequency, or to
+                treat them as previously-calculated reactances.
+                default=True
+    
+    Returns
+    -------
+    Vth:        complex
+                Thevenin-Equivalent voltage (in volts) of induction
+                machine described.
+    """
+    # Condition Inputs
+    if Ls != None: # Use Ls instead of Lls
+        Lls = Ls - Lm
+    if calcX: # Convert Inductances to Reactances
+        w = 2*_np.pi*freq
+        Lm *= w
+        Lls *= w
+    # Calculate Thevenin Voltage, Return
+    Vth = 1j*Lm / (Rs + 1j*(Lls+Lm)) * Vas
+    return(Vth)
+
+# Define Induction Machine Thevenin Impedance Calculator
+def indmachzth(Rs,Lm,Lls=0,Llr=0,Ls=None,Lr=None,freq=60,calcX=True):
+    """
+    Induction Machine Thevenin Impedance Calculator
+    
+    Function to calculate the Thevenin equivalent impedance of an
+    induction machine given a specific set of parameters.
+    
+    .. math::
+       Z_{th} = \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}
+       {R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}
+    
+    where:
+    
+    .. math:: \\omega = \\omega_{es} = 2\\pi\\cdot f_{\\text{electric}}
+    
+    Parameters
+    ----------
+    Rs:         float
+                Stator resistance in ohms
+    Lm:         float
+                Magnetizing inductance in Henrys
+    Lls:        float, optional
+                Stator leakage inductance in Henrys, default=0
+    Llr:        float, optional
+                Rotor leakage inductance in Henrys, default=0
+    Ls:         float, optional
+                Stator inductance in Henrys
+    Lr:         float, optional
+                Rotor inductance in Henrys
+    freq:       float, optional
+                System (electrical) frequency in Hz, default=60
+    calcX:      bool, optional
+                Control argument to force system to calculate
+                system reactances with system frequency, or to
+                treat them as previously-calculated reactances.
+                default=True
+    
+    Returns
+    -------
+    Zth:        complex
+                Thevenin-Equivalent impedance (in ohms) of induction
+                machine described.
+    """
+    # Condition Inputs
+    if Ls != None: # Use Ls instead of Lls
+        Lls = Ls - Lm
+    if Lr != None: # Use Lr instead of Llr
+        Llr = Lr - Lm
+    if calcX: # Convert Inductances to Reactances
+        w = 2*_np.pi*freq
+        Lm *= w
+        Lls *= w
+        Llr *= w
+    # Calculate Thevenin Impedance
+    Zth = (Rs+1j*Lls)*(1j*Lm) / (Rs+1j*(Lls+Lm)) + 1j*Llr
+    return(Zth)
+    
+# Define Induction Machine Mechancal Power Calculator
+def indmachpem(slip,Rr,Vth=None,Zth=None,Vas=0,Rs=0,Lm=0,Lls=0,
+               Llr=0,Ls=None,Lr=None,freq=60,calcX=True):
+    """
+    Mechanical Power Calculator for Induction Machines
+    
+    Function to calculate the mechanical power using the thevenin
+    equivalent circuit terms.
+    
+    .. math:: 
+       P_{em}=\\frac{|V_{th_{\\text{stator}}}|^2\\cdot\\frac{R_r}{slip}}
+       {\\left[\\left(\\frac{R_r}{slip}+R_{th_{\\text{stator}}}\\right)^2
+       +X_{th_{\\text{stator}}}^2\\right]\\cdot\\omega_{es}}\\cdot(1-slip)
+    
+    Parameters
+    ----------
+    slip:       float
+                The mechanical/electrical slip factor of the
+                induction machine.
+    Rr:         float
+                Rotor resistance in ohms
+    Vth:        complex, optional
+                Thevenin-equivalent stator voltage of the
+                induction machine, may be calculated internally
+                if given stator voltage and machine parameters.
+    Zth:        complex, optional
+                Thevenin-equivalent inductance (in ohms) of the
+                induction machine, may be calculated internally
+                if given machine parameters.
+    Vas:        complex, optional
+                Terminal Stator Voltage in Volts
+    Rs:         float, optional
+                Stator resistance in ohms
+    Lm:         float, optional
+                Magnetizing inductance in Henrys
+    Lls:        float, optional
+                Stator leakage inductance in Henrys, default=0
+    Llr:        float, optional
+                Rotor leakage inductance in Henrys, default=0
+    Ls:         float, optional
+                Stator inductance in Henrys
+    Lr:         float, optional
+                Rotor inductance in Henrys
+    freq:       float, optional
+                System (electrical) frequency in Hz, default=60
+    calcX:      bool, optional
+                Control argument to force system to calculate
+                system reactances with system frequency, or to
+                treat them as previously-calculated reactances.
+                default=True
+    
+    Returns
+    -------
+    Pem:        float
+                Power (in watts) that is produced or consumed
+                by the mechanical portion of the induction machine.
+    """
+    # Condition Inputs
+    w = 2*_np.pi*freq
+    if Ls != None: # Use Ls instead of Lls
+        Lls = Ls - Lm
+    if Lr != None: # Use Lr instead of Llr
+        Llr = Lr - Lm
+    if calcX: # Convert Inductances to Reactances
+        Lm *= w
+        Lls *= w
+        Llr *= w
+    # Test for Valid Input Set
+    if Vth == None:
+        if not all((Vas,Rs,Lm,Lls)):
+            raise ValueError("Invalid Argument Set, too few provided.")
+        # Valid Argument Set, Calculate Vth
+        Vth = indmachvth(Vas,Rs,Lm,Lls,Ls,freq,calcX)
+    if Zth == None:
+        if not all((Rs,Llr,Lm,Lls)):
+            raise ValueError("Invalid Argument Set, too few provided.")
+        # Valid Argument Set, Calculate Zth
+        Zth = indmachzth(Rs,Lm,Lls,Ll,Ls,Lr,freq,calcX)
+    # Use Terms to Calculate Pem
+    Rth = Zth.real
+    Xth = Zth.imag
+    Pem = (abs(Vth)**2*Rr/slip)/(((Rr/slip+Rth)**2+Xth**2)*w) * (1-slip)
+    return(Pem)
+
+# Define Induction Machine Torque Calculator
+def indmachtem(slip,Rr,p=0,Vth=None,Zth=None,Vas=0,Rs=0,Lm=0,Lls=0,
+               Llr=0,Ls=None,Lr=None,wsyn=None,freq=60,calcX=True):
+    """
+    Induction Machine Torque Calculator
+    
+    Calculate the torque generated or consumed by an induction
+    machine given the machine parameters of Vth and Zth by use
+    of the equation below.
+    
+    .. math:: 
+       T_{em}=\\frac{3|V_{th_{\\text{stator}}}|^2}
+       {\\left[\\left(\\frac{R_r}{slip}+R_{th_{\\text{stator}}}\\right)^2
+       +X_{th_{\\text{stator}}}\\right]}\\frac{R_r}{slip*\\omega_{sync}}
+    
+    where:
+    
+    .. math:: 
+       \\omega_{sync}=\\frac{\\omega_{es}}{\\left(\\frac{poles}{2}\\right)}
+    
+    Parameters
+    ----------
+    slip:       float
+                The mechanical/electrical slip factor of the
+                induction machine.
+    Rr:         float
+                Rotor resistance in ohms
+    p:          int, optional
+                Number of poles in the induction machine
+    Vth:        complex, optional
+                Thevenin-equivalent stator voltage of the
+                induction machine, may be calculated internally
+                if given stator voltage and machine parameters.
+    Zth:        complex, optional
+                Thevenin-equivalent inductance (in ohms) of the
+                induction machine, may be calculated internally
+                if given machine parameters.
+    Vas:        complex, optional
+                Terminal Stator Voltage in Volts
+    Rs:         float, optional
+                Stator resistance in ohms
+    Lm:         float, optional
+                Magnetizing inductance in Henrys
+    Lls:        float, optional
+                Stator leakage inductance in Henrys, default=0
+    Llr:        float, optional
+                Rotor leakage inductance in Henrys, default=0
+    Ls:         float, optional
+                Stator inductance in Henrys
+    Lr:         float, optional
+                Rotor inductance in Henrys
+    wsyn:       float, optional
+                Synchronous speed in rad/sec, may be specified
+                directly as a replacement of p (number of poles).
+    freq:       float, optional
+                System (electrical) frequency in Hz, default=60
+    calcX:      bool, optional
+                Control argument to force system to calculate
+                system reactances with system frequency, or to
+                treat them as previously-calculated reactances.
+                default=True
+    
+    Returns
+    -------
+    Tem:        float
+                Torque (in Newton-meters) that is produced or consumed
+                by the mechanical portion of the induction machine.
+    """
+    # Condition Inputs
+    w = 2*_np.pi*freq
+    if Ls != None: # Use Ls instead of Lls
+        Lls = Ls - Lm
+    if Lr != None: # Use Lr instead of Llr
+        Llr = Lr - Lm
+    if p != 0: # Calculate Sync. Speed from Num. Poles
+        wsyn = w/(p/2)
+    if calcX: # Convert Inductances to Reactances
+        Lm *= w
+        Lls *= w
+        Llr *= w
+    # Test for Valid Input Set
+    if not any((p, wsync)):
+        raise ValueError("Poles or Synchronous Speed must be specified.")
+    if Vth == None:
+        if not all((Vas,Rs,Lm,Lls)):
+            raise ValueError("Invalid Argument Set, too few provided.")
+        # Valid Argument Set, Calculate Vth
+        Vth = indmachvth(Vas,Rs,Lm,Lls,Ls,freq,calcX)
+    if Zth == None:
+        if not all((Rs,Llr,Lm,Lls)):
+            raise ValueError("Invalid Argument Set, too few provided.")
+        # Valid Argument Set, Calculate Zth
+        Zth = indmachzth(Rs,Lm,Lls,Ll,Ls,Lr,freq,calcX)
+    # Use Terms to Calculate Pem
+    Rth = Zth.real
+    Xth = Zth.imag
+    Tem = 3*abs(Vth)**2/((Rr/slip+Rth)**2+Xth) * Rr/(slip*wsyn)
+    return(Tem)
+
+# Define Induction Machine Peak Slip Calculator
+def indmachpkslip(Rr,Zth=None,Rs=0,Lm=0,Lls=0,Llr=0,Ls=None,
+                  Lr=None,freq=60,calcX=True):
+    """
+    Induction Machine Peak Slip Calculator
+    
+    Function to calculate the peak slip encountered by an induction machine
+    with the parameters specified. Uses formula as shown below.
+    
+    .. math:: \\text{slip} = \\frac{R_r}{|Z_{th}|}
+    
+    where:
+
+    .. math::
+       Z_{th} = \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}
+       {R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}
+    
+    Parameters
+    ----------
+    Rr:         float
+                Rotor resistance in ohms
+    Zth:        complex, optional
+                Thevenin-equivalent inductance (in ohms) of the
+                induction machine, may be calculated internally
+                if given machine parameters.
+    Rs:         float, optional
+                Stator resistance in ohms
+    Lm:         float, optional
+                Magnetizing inductance in Henrys
+    Lls:        float, optional
+                Stator leakage inductance in Henrys, default=0
+    Llr:        float, optional
+                Rotor leakage inductance in Henrys, default=0
+    Ls:         float, optional
+                Stator inductance in Henrys
+    Lr:         float, optional
+                Rotor inductance in Henrys
+    freq:       float, optional
+                System (electrical) frequency in Hz, default=60
+    calcX:      bool, optional
+                Control argument to force system to calculate
+                system reactances with system frequency, or to
+                treat them as previously-calculated reactances.
+                default=True
+    
+    Returns
+    -------
+    s_peak:     float
+                The peak slip for the induction machine described.
+    """
+    # Condition Inputs
+    w = 2*_np.pi*freq
+    if Ls != None: # Use Ls instead of Lls
+        Lls = Ls - Lm
+    if Lr != None: # Use Lr instead of Llr
+        Llr = Lr - Lm
+    if calcX: # Convert Inductances to Reactances
+        Lm *= w
+        Lls *= w
+        Llr *= w
+    # Test for Valid Input Set
+    if Zth == None:
+        if not all((Rs,Llr,Lm,Lls)):
+            raise ValueError("Invalid Argument Set, too few provided.")
+        # Valid Argument Set, Calculate Zth
+        Zth = indmachzth(Rs,Lm,Lls,Ll,Ls,Lr,freq,calcX)
+    # Calculate Peak Slip
+    s_peak = Rr / abs(Zth)
+    return( s_peak )
 
 
 # END OF FILE

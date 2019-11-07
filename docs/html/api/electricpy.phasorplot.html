@@ -51,7 +51,7 @@
 <h1>phasorplot<a class="headerlink" href="#phasorplot" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="electricpy.phasorplot">
-<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">phasorplot</code><span class="sig-paren">(</span><em class="sig-param">phasor</em>, <em class="sig-param">title='Phasor Diagram'</em>, <em class="sig-param">legend=False</em>, <em class="sig-param">bg=None</em>, <em class="sig-param">radius=None</em>, <em class="sig-param">colors=None</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.phasorplot" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">phasorplot</code><span class="sig-paren">(</span><em class="sig-param">phasor</em>, <em class="sig-param">title='Phasor Diagram'</em>, <em class="sig-param">legend=False</em>, <em class="sig-param">bg=None</em>, <em class="sig-param">colors=None</em>, <em class="sig-param">radius=None</em>, <em class="sig-param">linewidth=None</em>, <em class="sig-param">size=None</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">plot=True</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.phasorplot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Phasor Plotting Function</p>
 <p>This function is designed to plot a phasor-diagram with angles in degrees
 for up to 12 phasor sets. Phasors must be passed as a complex number set,
@@ -66,6 +66,10 @@ as an array or list of strings, default=False</p></li>
 <li><p><strong>bg</strong> (<em>string</em><em>, </em><em>optional</em>) – Background-Color control, default=”#d5de9c”</p></li>
 <li><p><strong>radius</strong> (<em>float</em><em>, </em><em>optional</em>) – The diagram radius, unless specified, automatically scales</p></li>
 <li><p><strong>colors</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of hexidecimal color strings denoting the line colors to use.</p></li>
+<li><p><strong>filename</strong> (<em>string</em><em>, </em><em>optional</em>) – String of filename, if set, will force function to save image.</p></li>
+<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to disable plotting. default=True</p></li>
+<li><p><strong>size</strong> (<em>float</em><em>, </em><em>optional</em>) – Control argument for figure size. default=None</p></li>
+<li><p><strong>linewidth</strong> (<em>float</em><em>, </em><em>optional</em>) – Control argument to declare the line thickness. default=None</p></li>
 </ul>
 </dd>
 </dl>

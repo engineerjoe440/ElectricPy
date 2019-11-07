@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>watts_to_hp &#8212; electricpy 0.0.6 documentation</title>
+    <title>indmachpem &#8212; electricpy 0.0.6 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -19,8 +19,8 @@
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="wrms" href="electricpy.wrms.html" />
-    <link rel="prev" title="vscgains" href="electricpy.vscgains.html" /> 
+    <link rel="next" title="indmachpkslip" href="electricpy.indmachpkslip.html" />
+    <link rel="prev" title="hz_to_rad" href="electricpy.hz_to_rad.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -32,10 +32,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.wrms.html" title="wrms"
+          <a href="electricpy.indmachpkslip.html" title="indmachpkslip"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="electricpy.vscgains.html" title="vscgains"
+          <a href="electricpy.hz_to_rad.html" title="hz_to_rad"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.6 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
@@ -47,23 +47,47 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="watts-to-hp">
-<h1>watts_to_hp<a class="headerlink" href="#watts-to-hp" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="indmachpem">
+<h1>indmachpem<a class="headerlink" href="#indmachpem" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
-<dt id="electricpy.watts_to_hp">
-<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">watts_to_hp</code><span class="sig-paren">(</span><em class="sig-param">watts</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.watts_to_hp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Watts to Horsepower Function</p>
-<p>Calculates the power (in horsepower) given
-the power in watts.</p>
+<dt id="electricpy.indmachpem">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">indmachpem</code><span class="sig-paren">(</span><em class="sig-param">slip</em>, <em class="sig-param">Rr</em>, <em class="sig-param">Vth=None</em>, <em class="sig-param">Zth=None</em>, <em class="sig-param">Vas=0</em>, <em class="sig-param">Rs=0</em>, <em class="sig-param">Lm=0</em>, <em class="sig-param">Lls=0</em>, <em class="sig-param">Llr=0</em>, <em class="sig-param">Ls=None</em>, <em class="sig-param">Lr=None</em>, <em class="sig-param">freq=60</em>, <em class="sig-param">calcX=True</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.indmachpem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mechanical Power Calculator for Induction Machines</p>
+<p>Function to calculate the mechanical power using the thevenin
+equivalent circuit terms.</p>
 <div class="math notranslate nohighlight">
-\[P_{\text{horsepower}}=\frac{P_{\text{watts}}}{745.699872}\]</div>
-<p>Same as <cite>horsepower</cite>.</p>
+\[P_{em}=\frac{|V_{th_{\text{stator}}}|^2\cdot\frac{R_r}{slip}}
+{\left[\left(\frac{R_r}{slip}+R_{th_{\text{stator}}}\right)^2
++X_{th_{\text{stator}}}^2\right]\cdot\omega_{es}}\cdot(1-slip)\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>watts</strong> (<em>float</em>) – The wattage to compute.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>slip</strong> (<em>float</em>) – The mechanical/electrical slip factor of the
+induction machine.</p></li>
+<li><p><strong>Rr</strong> (<em>float</em>) – Rotor resistance in ohms</p></li>
+<li><p><strong>Vth</strong> (<em>complex</em><em>, </em><em>optional</em>) – Thevenin-equivalent stator voltage of the
+induction machine, may be calculated internally
+if given stator voltage and machine parameters.</p></li>
+<li><p><strong>Zth</strong> (<em>complex</em><em>, </em><em>optional</em>) – Thevenin-equivalent inductance (in ohms) of the
+induction machine, may be calculated internally
+if given machine parameters.</p></li>
+<li><p><strong>Vas</strong> (<em>complex</em><em>, </em><em>optional</em>) – Terminal Stator Voltage in Volts</p></li>
+<li><p><strong>Rs</strong> (<em>float</em><em>, </em><em>optional</em>) – Stator resistance in ohms</p></li>
+<li><p><strong>Lm</strong> (<em>float</em><em>, </em><em>optional</em>) – Magnetizing inductance in Henrys</p></li>
+<li><p><strong>Lls</strong> (<em>float</em><em>, </em><em>optional</em>) – Stator leakage inductance in Henrys, default=0</p></li>
+<li><p><strong>Llr</strong> (<em>float</em><em>, </em><em>optional</em>) – Rotor leakage inductance in Henrys, default=0</p></li>
+<li><p><strong>Ls</strong> (<em>float</em><em>, </em><em>optional</em>) – Stator inductance in Henrys</p></li>
+<li><p><strong>Lr</strong> (<em>float</em><em>, </em><em>optional</em>) – Rotor inductance in Henrys</p></li>
+<li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – System (electrical) frequency in Hz, default=60</p></li>
+<li><p><strong>calcX</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force system to calculate
+system reactances with system frequency, or to
+treat them as previously-calculated reactances.
+default=True</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>hp</strong> – The power in horsepower.</p>
+<dd class="field-even"><p><strong>Pem</strong> – Power (in watts) that is produced or consumed
+by the mechanical portion of the induction machine.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
@@ -83,15 +107,15 @@ the power in watts.</p>
               <img class="logo" src="../_static/ElectricpyLogo.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="electricpy.vscgains.html"
-                        title="previous chapter">vscgains</a></p>
+  <p class="topless"><a href="electricpy.hz_to_rad.html"
+                        title="previous chapter">hz_to_rad</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="electricpy.wrms.html"
-                        title="next chapter">wrms</a></p>
+  <p class="topless"><a href="electricpy.indmachpkslip.html"
+                        title="next chapter">indmachpkslip</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/electricpy.watts_to_hp.rst.txt"
+      <li><a href="../_sources/api/electricpy.indmachpem.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -119,10 +143,10 @@ the power in watts.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.wrms.html" title="wrms"
+          <a href="electricpy.indmachpkslip.html" title="indmachpkslip"
              >next</a> |</li>
         <li class="right" >
-          <a href="electricpy.vscgains.html" title="vscgains"
+          <a href="electricpy.hz_to_rad.html" title="hz_to_rad"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.6 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 

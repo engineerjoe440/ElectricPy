@@ -1,6 +1,6 @@
-phs_to_seq
+indmachtem
 ==========
 
 .. currentmodule:: electricpy
 
-.. autofunction:: phs_to_seq
+.. autofunction:: indmachtem
