@@ -1750,6 +1750,10 @@ def hp_to_watts(hp):
     Calculates the power (in watts) given the
     horsepower.
     
+    .. math:: P_{\\text{watts}}=P_{\\text{horsepower}}\\cdot745.699872
+    
+    Same as `watts`.
+    
     Parameters
     ----------
     hp:         float
@@ -1761,7 +1765,7 @@ def hp_to_watts(hp):
                 The power in watts.
     """
     return(hp * 745.699872)
-
+watts = hp_to_watts # Make Duplicate Name
 # Define Watts to HP Calculation
 def watts_to_hp(watts):
     """
@@ -1769,6 +1773,10 @@ def watts_to_hp(watts):
     
     Calculates the power (in horsepower) given
     the power in watts.
+    
+    .. math:: P_{\\text{horsepower}}=\\frac{P_{\\text{watts}}}{745.699872}
+    
+    Same as `horsepower`.
     
     Parameters
     ----------
@@ -1781,6 +1789,7 @@ def watts_to_hp(watts):
                 The power in horsepower.
     """
     return(watts / 745.699872)
+horsepower = watts_to_hp # Make Duplicate Name
     
 # Define Power Reactance Calculator
 def powerimpedance(S,V,PF=None,parallel=False,terms=False):
@@ -3290,6 +3299,10 @@ def kwh_to_btu(kWh):
     Converts kWh (killo-Watt-hours) to BTU
     (British Thermal Units).
     
+    .. math:: \\text{BTU} = \\text{kWh}\\cdot3412.14
+    
+    Same as `btu`.
+    
     Parameters
     ----------
     kWh:        float
@@ -3301,12 +3314,17 @@ def kwh_to_btu(kWh):
                 The number of British Thermal Units
     """
     return(kWh*3412.14)
+btu = kwh_to_btu # Make Duplicate Name
 def btu_to_kwh(BTU):
     """
     BTU to Killo-Watt-Hours Function:
     
     Converts BTU (British Thermal Units) to
     kWh (killo-Watt-hours).
+    
+    .. math:: \\text{kWh} = \\frac{\\text{BTU}}{3412.14}
+    
+    Same as `kwh`.
     
     Parameters
     ----------
@@ -3319,6 +3337,7 @@ def btu_to_kwh(BTU):
                 The number of killo-Watt-hours
     """
     return(BTU/3412.14)
+kwh = btu_to_kwh # Make Duplicate Name
 
 # Define Per-Unit Impedance Formula
 def zpu(S,VLL=None,VLN=None):
@@ -4416,6 +4435,8 @@ def rad_to_hz( radians ):
     
     .. math:: f_{\\text{Hz}} = \\frac{f_{\\text{rad/sec}}}{2\\cdot\\pi}
     
+    Same as `hertz`.
+    
     Paramters
     ---------
     radians:    float
@@ -4427,7 +4448,7 @@ def rad_to_hz( radians ):
                 The frequency (represented in Hertz)
     """
     return( radians / (2*_np.pi) ) # Evaluate and Return
-    
+hertz = rad_to_hz # Make Duplicate Name
 # Define Simple Hertz to Radians Converter
 def hz_to_rad( hertz ):
     """
@@ -4437,6 +4458,8 @@ def hz_to_rad( hertz ):
     the frequency in radians/sec.
     
     .. math:: f_{\\text{rad/sec}} = f_{\\text{Hz}}\\cdot2\\cdot\\pi
+    
+    Same as `radsec`.
     
     Paramters
     ---------
@@ -4448,8 +4471,8 @@ def hz_to_rad( hertz ):
     radians:    float
                 The frequency (represented in radians/sec)
     """
-    return( hertz / (2*_np.pi) ) # Evaluate and Return
-
+    return( hertz * (2*_np.pi) ) # Evaluate and Return
+radsec = hz_to_rad # Make Duplicate Name
 
 
 # END OF FILE
