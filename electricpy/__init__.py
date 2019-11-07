@@ -1219,7 +1219,7 @@ def transformertest(Poc=False,Voc=False,Ioc=False,Psc=False,Vsc=False,
 
 # Define Phasor Plot Generator
 def phasorplot(phasor,title="Phasor Diagram",legend=False,bg=None,
-               colors=None,radius=None,linewidth=None,size=None
+               colors=None,radius=None,linewidth=None,size=None,
                filename=None,plot=True,):
     """
     Phasor Plotting Function
