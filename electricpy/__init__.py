@@ -211,6 +211,8 @@ def phs( ang ):
     Generate a complex value given the phase angle
     for the complex value.
     
+    Same as `phase`.
+    
     Parameters
     ----------
     ang:        float
@@ -219,6 +221,7 @@ def phs( ang ):
     """
     # Return the Complex Angle Modulator
     return(_np.exp(1j*_np.radians( ang )))
+phase = phs # Create Duplicate Name
     
 
 # Define Phasor Generator

@@ -1,6 +1,6 @@
-seq_to_phs
+indmachvth
 ==========
 
 .. currentmodule:: electricpy
 
-.. autofunction:: seq_to_phs
+.. autofunction:: indmachvth

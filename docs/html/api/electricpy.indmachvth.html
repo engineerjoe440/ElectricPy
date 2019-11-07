@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>seq_to_phs &#8212; electricpy 0.0.6 documentation</title>
+    <title>indmachvth &#8212; electricpy 0.0.6 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -19,8 +19,8 @@
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="sequencez" href="electricpy.sequencez.html" />
-    <link rel="prev" title="seq_to_abc" href="electricpy.seq_to_abc.html" /> 
+    <link rel="next" title="indmachzth" href="electricpy.indmachzth.html" />
+    <link rel="prev" title="indmachtem" href="electricpy.indmachtem.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -32,10 +32,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.sequencez.html" title="sequencez"
+          <a href="electricpy.indmachzth.html" title="indmachzth"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="electricpy.seq_to_abc.html" title="seq_to_abc"
+          <a href="electricpy.indmachtem.html" title="indmachtem"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.6 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
@@ -47,28 +47,40 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="seq-to-phs">
-<h1>seq_to_phs<a class="headerlink" href="#seq-to-phs" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="indmachvth">
+<h1>indmachvth<a class="headerlink" href="#indmachvth" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
-<dt id="electricpy.seq_to_phs">
-<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">seq_to_phs</code><span class="sig-paren">(</span><em class="sig-param">M012</em>, <em class="sig-param">reference='A'</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.seq_to_phs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sequence-System to Phase-System Conversion</p>
-<p>Converts sequence-based values to phase
-components.</p>
-<p>Same as seq_to_phs.</p>
+<dt id="electricpy.indmachvth">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">indmachvth</code><span class="sig-paren">(</span><em class="sig-param">Vas</em>, <em class="sig-param">Rs</em>, <em class="sig-param">Lm</em>, <em class="sig-param">Lls=0</em>, <em class="sig-param">Ls=None</em>, <em class="sig-param">freq=60</em>, <em class="sig-param">calcX=True</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.indmachvth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Induction Machine Thevenin Voltage Calculator</p>
+<p>Function to calculate the Thevenin equivalent voltage of an
+induction machine given a specific set of parameters.</p>
+<div class="math notranslate nohighlight">
+\[V_{th}=\frac{j\omega L_m}{R_s+j\omega(L_{ls}+L_m)}V_{as}\]</div>
+<p>where:</p>
+<div class="math notranslate nohighlight">
+\[\omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>M012</strong> (<em>list of complex</em>) – Sequence-based values to convert.</p></li>
-<li><p><strong>reference</strong> (<em>{'A'</em><em>, </em><em>'B'</em><em>, </em><em>'C'}</em>) – Single character denoting the reference,
-default=’A’</p></li>
+<li><p><strong>Vas</strong> (<em>complex</em>) – Terminal Stator Voltage in Volts</p></li>
+<li><p><strong>Rs</strong> (<em>float</em>) – Stator resistance in ohms</p></li>
+<li><p><strong>Lm</strong> (<em>float</em>) – Magnetizing inductance in Henrys</p></li>
+<li><p><strong>Lls</strong> (<em>float</em><em>, </em><em>optional</em>) – Stator leakage inductance in Henrys, default=0</p></li>
+<li><p><strong>Ls</strong> (<em>float</em><em>, </em><em>optional</em>) – Stator inductance in Henrys</p></li>
+<li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – System (electrical) frequency in Hz, default=60</p></li>
+<li><p><strong>calcX</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force system to calculate
+system reactances with system frequency, or to
+treat them as previously-calculated reactances.
+default=True</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>Mabc</strong> – Phase-based values in order of A-B-C</p>
+<dd class="field-even"><p><strong>Vth</strong> – Thevenin-Equivalent voltage (in volts) of induction
+machine described.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>numpy.ndarray</p>
+<dd class="field-odd"><p>complex</p>
 </dd>
 </dl>
 </dd></dl>
@@ -85,15 +97,15 @@ default=’A’</p></li>
               <img class="logo" src="../_static/ElectricpyLogo.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="electricpy.seq_to_abc.html"
-                        title="previous chapter">seq_to_abc</a></p>
+  <p class="topless"><a href="electricpy.indmachtem.html"
+                        title="previous chapter">indmachtem</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="electricpy.sequencez.html"
-                        title="next chapter">sequencez</a></p>
+  <p class="topless"><a href="electricpy.indmachzth.html"
+                        title="next chapter">indmachzth</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/electricpy.seq_to_phs.rst.txt"
+      <li><a href="../_sources/api/electricpy.indmachvth.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -121,10 +133,10 @@ default=’A’</p></li>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.sequencez.html" title="sequencez"
+          <a href="electricpy.indmachzth.html" title="indmachzth"
              >next</a> |</li>
         <li class="right" >
-          <a href="electricpy.seq_to_abc.html" title="seq_to_abc"
+          <a href="electricpy.indmachtem.html" title="indmachtem"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.6 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 

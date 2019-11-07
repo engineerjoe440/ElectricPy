@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>convbar &#8212; electricpy 0.0.6 documentation</title>
+    <title>rad_to_hz &#8212; electricpy 0.0.6 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -19,8 +19,8 @@
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="convolve" href="electricpy.convolve.html" />
-    <link rel="prev" title="compose" href="electricpy.compose.html" /> 
+    <link rel="next" title="reactance" href="electricpy.reactance.html" />
+    <link rel="prev" title="puchgbase" href="electricpy.puchgbase.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -32,10 +32,10 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.convolve.html" title="convolve"
+          <a href="electricpy.reactance.html" title="reactance"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="electricpy.compose.html" title="compose"
+          <a href="electricpy.puchgbase.html" title="puchgbase"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.6 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
@@ -47,23 +47,17 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="convbar">
-<h1>convbar<a class="headerlink" href="#convbar" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="rad-to-hz">
+<h1>rad_to_hz<a class="headerlink" href="#rad-to-hz" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
-<dt id="electricpy.convbar">
-<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">convbar</code><span class="sig-paren">(</span><em class="sig-param">h</em>, <em class="sig-param">x</em>, <em class="sig-param">outline=True</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.convbar" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convolution Bar-Graph Plotter Function</p>
-<p>Generates plots of each of two input arrays as bar-graphs, then
-generates a convolved bar-graph of the two inputs to demonstrate
-and illustrate convolution, typically for an educational purpose.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>h</strong> (<em>numpy.ndarray</em>) – Impulse Response - Given as Array (Prefferably Numpy Array)</p></li>
-<li><p><strong>x</strong> (<em>numpy.ndarray</em>) – Input Function - Given as Array (Prefferably Numpy Array)</p></li>
-</ul>
-</dd>
-</dl>
+<dt id="electricpy.rad_to_hz">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">rad_to_hz</code><span class="sig-paren">(</span><em class="sig-param">radians</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.rad_to_hz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple Radians to Hertz Converter</p>
+<p>Accepts a frequency in radians/sec and calculates
+the hertzian frequency (in Hz).</p>
+<div class="math notranslate nohighlight">
+\[f_{\text{Hz}} = \frac{f_{\text{rad/sec}}}{2\cdot\pi}\]</div>
+<p>Same as <cite>hertz</cite>.</p>
 </dd></dl>
 
 </div>
@@ -78,15 +72,15 @@ and illustrate convolution, typically for an educational purpose.</p>
               <img class="logo" src="../_static/ElectricpyLogo.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="electricpy.compose.html"
-                        title="previous chapter">compose</a></p>
+  <p class="topless"><a href="electricpy.puchgbase.html"
+                        title="previous chapter">puchgbase</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="electricpy.convolve.html"
-                        title="next chapter">convolve</a></p>
+  <p class="topless"><a href="electricpy.reactance.html"
+                        title="next chapter">reactance</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/electricpy.convbar.rst.txt"
+      <li><a href="../_sources/api/electricpy.rad_to_hz.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -114,10 +108,10 @@ and illustrate convolution, typically for an educational purpose.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.convolve.html" title="convolve"
+          <a href="electricpy.reactance.html" title="reactance"
              >next</a> |</li>
         <li class="right" >
-          <a href="electricpy.compose.html" title="compose"
+          <a href="electricpy.puchgbase.html" title="puchgbase"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.6 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 

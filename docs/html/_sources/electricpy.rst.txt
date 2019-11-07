@@ -21,6 +21,15 @@ to aid in scientific calculations.
    :no-main-docstr:
    :skip: Pabc
    :skip: Pdq0
+   :skip: hertz
+   :skip: horsepower
+   :skip: radsec
+   :skip: watts
+   :skip: phase
+   :skip: phs_to_seq
+   :skip: seq_to_phs
+   :skip: btu
+   :skip: kwh
 
 -----------
 SUB-MODULES
