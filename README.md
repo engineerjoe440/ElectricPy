@@ -51,6 +51,7 @@ for research, development, education, and exploration in the realm of electrical
     - Stationary and Synchronous Reference Frame conversion Matricies/Constants
     - Starting Current and Torque functions for Induction Machine
     - Induction Machine Peak Torque and slip finder
+    - CEV and COMTRADE reader/writer functions
     
 
 ## Contact:
