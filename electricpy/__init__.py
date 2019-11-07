@@ -114,6 +114,8 @@ Included Functions
  - 3-Phase Voltage/Current Unbalance:       unbalance
  - Characteristic Impedance Calculator:     characterz
  - Transformer Phase Shift Calculator:      xfmphs
+ - Hertz to Radians Converter:              hz_to_rad
+ - Radians to Hertz Converter:              rad_to_hz
 
 Additional Available Sub-Modules
 --------------------------------
@@ -4403,6 +4405,50 @@ def xfmphs(style="DY",shift=30):
     phase = np.exp(1j*np.radians(v*abs(shift)))
     # Return
     return(phase)
+
+# Define Simple Radians to Hertz Converter
+def rad_to_hz( radians ):
+    """
+    Simple Radians to Hertz Converter
+    
+    Accepts a frequency in radians/sec and calculates
+    the hertzian frequency (in Hz).
+    
+    .. math:: f_{\\text{Hz}} = \\frac{f_{\\text{rad/sec}}}{2\\cdot\\pi}
+    
+    Paramters
+    ---------
+    radians:    float
+                The frequency (represented in radians/sec)
+    
+    Returns
+    -------
+    hertz:      float
+                The frequency (represented in Hertz)
+    """
+    return( radians / (2*_np.pi) ) # Evaluate and Return
+    
+# Define Simple Hertz to Radians Converter
+def hz_to_rad( hertz ):
+    """
+    Simple Hertz to Radians Converter
+    
+    Accepts a frequency in Hertz and calculates
+    the frequency in radians/sec.
+    
+    .. math:: f_{\\text{rad/sec}} = f_{\\text{Hz}}\\cdot2\\cdot\\pi
+    
+    Paramters
+    ---------
+    hertz:      float
+                The frequency (represented in Hertz)
+    
+    Returns
+    -------
+    radians:    float
+                The frequency (represented in radians/sec)
+    """
+    return( hertz / (2*_np.pi) ) # Evaluate and Return
 
 
 
