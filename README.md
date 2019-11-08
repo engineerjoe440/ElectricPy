@@ -59,3 +59,8 @@ for research, development, education, and exploration in the realm of electrical
 For more information regarding this resource, please contact Joe Stanley
 - <stan3926@vandals.uidaho.edu>
 - <joe_stanley@selinc.com>
+
+## License and Usage:
+ElectricPy is licensed under the standard MIT license, and as such, you are permitted
+to use this resource as you see fit. Please feel free to ask questions, suggest edits
+and report bugs or other issues.
