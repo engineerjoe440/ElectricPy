@@ -6,7 +6,7 @@ Python Libraries with functions and constants related to electrical engineering.
 The functions and constants that make up these modules represent a library of material compiled with the intent of being used primarily
 for research, development, education, and exploration in the realm of electrical engineering.
 
-Check out our full documentation: https://engineerjoe440.github.io/electricpy/html/
+Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/html/
 
 ### Special thanks to:
 - Stephen Weeks | Student - University of Idaho
