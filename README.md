@@ -12,6 +12,7 @@ for research, development, education, and exploration in the realm of electrical
 - Daniel Allen | Student - Universtiy of Idaho
 - Dr. Dennis Sullivan | Proffessor - University of Idaho
 - Dr. Brian Johnson | Proffessor - University of Idaho
+- Dr. Joe Law | Proffessor - University of Idaho
 - StackOverflow user gg349
 - Shaurya Uppal | Online Code Contributor
 - Paul Ortman | Power Quality Engineer - Idaho Power | Instructor - University of Idaho
@@ -51,7 +52,7 @@ for research, development, education, and exploration in the realm of electrical
     - Stationary and Synchronous Reference Frame conversion Matricies/Constants
     - Starting Current and Torque functions for Induction Machine
     - Induction Machine Peak Torque and slip finder
-    - CEV and COMTRADE reader/writer functions
+    - CEV reader/writer functions
     
 
 ## Contact:

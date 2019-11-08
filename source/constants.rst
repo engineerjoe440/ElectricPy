@@ -26,5 +26,7 @@ Importing is reccomended as a command similar to the following command.
    :skip: A012
    :skip: Pabc
    :skip: Pdq0
+   :skip: Cabc
+   :skip: Cxyz
    
  
