@@ -24,7 +24,7 @@ setuptools.setup(
     description="Electrical Engineering Functions in Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/engineerjoe440/electricpy",
+    url="https://github.com/engineerjoe440/ElectricPy",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -32,8 +32,8 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     project_urls={
-        "Source Repository": "https://github.com/engineerjoe440/electricpy",
-        "Bug Tracker": "https://github.com/engineerjoe440/electricpy/issues",
-        "Documentation": "https://engineerjoe440.github.io/electricpy/",
+        "Source Repository": "https://github.com/engineerjoe440/ElectricPy",
+        "Bug Tracker": "https://github.com/engineerjoe440/ElectricPy/issues",
+        "Documentation": "https://engineerjoe440.github.io/ElectricPy/",
         }
 )
