@@ -39,12 +39,18 @@ Cxyz = _np.array([[ 2/_np.sqrt(6), 0, 1/_np.sqrt(3)],       # Convert alpha/beta
                   [ -1/_np.sqrt(6), -1/_np.sqrt(2), 1/_np.sqrt(3)]])
 # Define Park Components Matricies
 _rad = lambda th: _np.radians( th )
-Pdq0 = lambda th: _np.sqrt(2/3)*_np.array([[ _np.cos(_rad(th)), _np.cos(_rad(th)-2*pi/3), _np.cos(_rad(th)+2*pi/3)],
+Pdq0_im = lambda th: _np.sqrt(2/3)*_np.array([[ _np.cos(_rad(th)), _np.cos(_rad(th)-2*pi/3), _np.cos(_rad(th)+2*pi/3)],
                                            [-_np.sin(_rad(th)),-_np.sin(_rad(th)-2*pi/3),-_np.sin(_rad(th)+2*pi/3)],
                                            [ _np.sqrt(2)/2,     _np.sqrt(2)/2,            _np.sqrt(2)/2]])
-Pabc = lambda th: _np.sqrt(2/3)*_np.array([[ _np.cos(_rad(th)),      -_np.sin(_rad(th)),        _np.sqrt(2)/2],
+Pabc_im = lambda th: _np.sqrt(2/3)*_np.array([[ _np.cos(_rad(th)),      -_np.sin(_rad(th)),        _np.sqrt(2)/2],
                                            [_np.cos(_rad(th)-2*pi/3),-_np.sin(_rad(th)-2*pi/3), _np.sqrt(2)/2],
                                            [_np.cos(_rad(th)+2*pi/3),-_np.sin(_rad(th)+2*pi/3), _np.sqrt(2)/2]])
+Pdq0 = 2/3 * _np.array([[0,-_np.sqrt(3/2),_np.sqrt(3/2)],
+                        [1,-1/2,-1/2],
+                        [1/2, 1/2, 1/2]])
+Pqd0 = 2/3 * _np.array([[1,-1/2,-1/2],
+                        [0,-_np.sqrt(3/2),_np.sqrt(3/2)],
+                        [1/2, 1/2, 1/2]])
                  
 # Define Transformer Shift Correction Matricies
 XFMY0 = _np.array([[1,0,0],[0,1,0],[0,0,1]])
