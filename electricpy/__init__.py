@@ -75,7 +75,9 @@ Included Functions
  - Cap. VAR to FARAD Conversion:            farads
  - VSC DC Bus Voltage Calculator:           vscdcbus
  - PLL-VSC Gains Calculator:                vscgains
- - RMS Calculator:                          rms
+ - Sinusoid Peak-to-RMS Converter:          rms
+ - Sinusoid RMS-to-Peak Converter:          peak
+ - Arbitrary Waveform RMS Calculator:       funcrms
  - Step Function:                           step
  - Multi-Argument Convolution:              convolve
  - Convolution Bar Graph Visualizer:        convbar
@@ -2838,8 +2840,32 @@ def step(t):
     """
     return( _np.heaviside( t, 1) )
 
-# RMS Calculating Function
-def rms(f, T):
+# Define Peak Calculator
+def peak(val):
+    """
+    Sinusoid RMS to Peak Converter
+    
+    Provides a readable format to convert an
+    RMS (Root-Mean-Square) value to its peak
+    representation. Performs a simple multiplication
+    with the square-root of two.
+    """
+    return(_np.sqrt(2) * val)
+    
+# Define RMS Calculator
+def rms(val):
+    """
+    Sinusoid Peak to RMS Converter
+    
+    Provides a readable format to convert a peak
+    value to its RMS (Root-Mean-Square) representation.
+    Performs a simple division by the square-root of
+    two.
+    """
+    return(val * _np.sqrt(0.5))
+
+# Arbitrary Waveform RMS Calculating Function
+def funcrms(f, T):
     """
     Function Root-Mean-Square (RMS) Evaluator
     
