@@ -52,8 +52,7 @@ Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/ht
     - DC/DC Converters
     - DC/AC Converters
     - Stationary and Synchronous Reference Frame conversion Matricies/Constants
-    - Starting Current and Torque functions for Induction Machine
-    - Induction Machine Peak Torque and slip finder
+    - Induction Machine slip finder
     - CEV reader/writer functions
     
 
