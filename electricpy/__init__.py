@@ -3746,7 +3746,7 @@ def seq_to_abc(M012,reference='A'):
 seq_to_phs = seq_to_abc
 
 # Define Sequence Impedance Calculator
-def sequencez(Zabc,reference='A',resolve=False,round=3):
+def sequencez(Zabc,reference='A',resolve=False,diag=False,round=3):
     """
     Sequence Impedance Calculator
     
@@ -3777,6 +3777,9 @@ def sequencez(Zabc,reference='A',resolve=False,round=3):
                 Control argument to force the function to
                 evaluate the individual sequence impedances
                 [Z0, Z1, Z2], default=False
+    diag:       bool, optional
+                Control argument to force the function to
+                reduce the matrix to its diagonal terms.
     round:      int, optional
                 Integer denoting number of decimal places
                 resulting matrix should be rounded to.
@@ -3808,12 +3811,11 @@ def sequencez(Zabc,reference='A',resolve=False,round=3):
     # Compute Sequence Impedances
     if resolve:
         Z012 = M012.dot( Zabc.dot(Minv) )
-        Z0 = Z012[0][0]
-        Z1 = Z012[1][1]
-        Z2 = Z012[2][2]
-        Z012 = _np.array([Z0,Z1,Z2])
     else:
         Z012 = Minv.dot( Zabc.dot(M012) )
+    # Reduce to Diagonal Terms if Needed
+    if diag:
+        Z012 = Z012.dot( _np.identity(3) )
     return(_np.around(Z012,round))
 
 # FFT Coefficient Calculator Function
