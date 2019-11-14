@@ -3808,6 +3808,10 @@ def sequencez(Zabc,reference='A',resolve=False,round=3):
     # Compute Sequence Impedances
     if resolve:
         Z012 = M012.dot( Zabc.dot(Minv) )
+        Z0 = Z012[0][0]
+        Z1 = Z012[1][1]
+        Z2 = Z012[2][2]
+        Z012 = _np.array([Z0,Z1,Z2])
     else:
         Z012 = Minv.dot( Zabc.dot(M012) )
     return(_np.around(Z012,round))
