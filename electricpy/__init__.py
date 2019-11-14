@@ -4646,6 +4646,16 @@ def indmachvth(Vas,Rs,Lm,Lls=0,Ls=None,freq=60,calcX=True):
     Vth:        complex
                 Thevenin-Equivalent voltage (in volts) of induction
                 machine described.
+    
+    See Also
+    --------
+    indmachzth:         Induction Machine Thevenin Impedance Calculator
+    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
+    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
+    indmachpkslip:      Induction Machine Peak Slip Calculator
+    indmachpktorq:      Induction Machine Peak Torque Calculator
+    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
+    indmachstarttorq:   Induction Machine Starting Torque Calculator
     """
     # Condition Inputs
     if Ls != None: # Use Ls instead of Lls
@@ -4701,6 +4711,16 @@ def indmachzth(Rs,Lm,Lls=0,Llr=0,Ls=None,Lr=None,freq=60,calcX=True):
     Zth:        complex
                 Thevenin-Equivalent impedance (in ohms) of induction
                 machine described.
+    
+    See Also
+    --------
+    indmachvth:         Induction Machine Thevenin Voltage Calculator
+    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
+    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
+    indmachpkslip:      Induction Machine Peak Slip Calculator
+    indmachpktorq:      Induction Machine Peak Torque Calculator
+    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
+    indmachstarttorq:   Induction Machine Starting Torque Calculator
     """
     # Condition Inputs
     if Ls != None: # Use Ls instead of Lls
@@ -4772,6 +4792,16 @@ def indmachpem(slip,Rr,Vth=None,Zth=None,Vas=0,Rs=0,Lm=0,Lls=0,
     Pem:        float
                 Power (in watts) that is produced or consumed
                 by the mechanical portion of the induction machine.
+    
+    See Also
+    --------
+    indmachvth:         Induction Machine Thevenin Voltage Calculator
+    indmachzth:         Induction Machine Thevenin Impedance Calculator
+    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
+    indmachpkslip:      Induction Machine Peak Slip Calculator
+    indmachpktorq:      Induction Machine Peak Torque Calculator
+    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
+    indmachstarttorq:   Induction Machine Starting Torque Calculator
     """
     # Condition Inputs
     w = 2*_np.pi*freq
@@ -4867,6 +4897,16 @@ def indmachtem(slip,Rr,p=0,Vth=None,Zth=None,Vas=0,Rs=0,Lm=0,Lls=0,
     Tem:        float
                 Torque (in Newton-meters) that is produced or consumed
                 by the mechanical portion of the induction machine.
+    
+    See Also
+    --------
+    indmachvth:         Induction Machine Thevenin Voltage Calculator
+    indmachzth:         Induction Machine Thevenin Impedance Calculator
+    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
+    indmachpkslip:      Induction Machine Peak Slip Calculator
+    indmachpktorq:      Induction Machine Peak Torque Calculator
+    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
+    indmachstarttorq:   Induction Machine Starting Torque Calculator
     """
     # Condition Inputs
     w = 2*_np.pi*freq
@@ -4949,6 +4989,16 @@ def indmachpkslip(Rr,Zth=None,Rs=0,Lm=0,Lls=0,Llr=0,Ls=None,
     -------
     s_peak:     float
                 The peak slip for the induction machine described.
+    
+    See Also
+    --------
+    indmachvth:         Induction Machine Thevenin Voltage Calculator
+    indmachzth:         Induction Machine Thevenin Impedance Calculator
+    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
+    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
+    indmachpktorq:      Induction Machine Peak Torque Calculator
+    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
+    indmachstarttorq:   Induction Machine Starting Torque Calculator
     """
     # Condition Inputs
     w = 2*_np.pi*freq
@@ -5029,6 +5079,16 @@ def indmachiar(Vth=None,Zth=None,Vas=0,Rs=0,Lm=0,Lls=0,
     -------
     Iar:        complex
                 The rotor, phase-A current in amps.
+    
+    See Also
+    --------
+    indmachvth:         Induction Machine Thevenin Voltage Calculator
+    indmachzth:         Induction Machine Thevenin Impedance Calculator
+    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
+    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
+    indmachpkslip:      Induction Machine Peak Slip Calculator
+    indmachpktorq:      Induction Machine Peak Torque Calculator
+    indmachstarttorq:   Induction Machine Starting Torque Calculator
     """
     # Condition Inputs
     w = 2*_np.pi*freq
@@ -5131,6 +5191,16 @@ def indmachpktorq(Rr,s_pk=None,Iar=None,Vth=None,Zth=None,Vas=0,Rs=0,
     Tpk:        float
                 Peak torque of specified induction machine in
                 newton-meters.
+    
+    See Also
+    --------
+    indmachvth:         Induction Machine Thevenin Voltage Calculator
+    indmachzth:         Induction Machine Thevenin Impedance Calculator
+    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
+    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
+    indmachpkslip:      Induction Machine Peak Slip Calculator
+    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
+    indmachstarttorq:   Induction Machine Starting Torque Calculator
     """
     # Condition Inputs
     w = 2*_np.pi*freq
@@ -5242,6 +5312,16 @@ def indmachstarttorq(Rr,Iar=None,Vth=None,Zth=None,Vas=0,Rs=0,Lm=0,
     Tstart:     float
                 Peak torque of specified induction machine in
                 newton-meters.
+    
+    See Also
+    --------
+    indmachvth:         Induction Machine Thevenin Voltage Calculator
+    indmachzth:         Induction Machine Thevenin Impedance Calculator
+    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
+    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
+    indmachpkslip:      Induction Machine Peak Slip Calculator
+    indmachpktorq:      Induction Machine Peak Torque Calculator
+    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
     """
     # Condition Inputs
     w = 2*_np.pi*freq
