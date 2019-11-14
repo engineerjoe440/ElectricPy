@@ -225,6 +225,13 @@ def phs( ang ):
     ang:        float
                 The angle (in degrees) for which
                 the value should be calculated.
+    
+    See Also
+    --------
+    phasorlist: Phasor Generator for List or Array
+    cprint:     Complex Variable Printing Function
+    phasorz:    Impedance Phasor Generator
+    phasor:     Phasor Generating Function
     """
     # Return the Complex Angle Modulator
     return(_np.exp(1j*_np.radians( ang )))
@@ -263,7 +270,8 @@ def phasor( mag, ang=0 ):
     --------
     phasorlist: Phasor Generator for List or Array
     cprint:     Complex Variable Printing Function
-    phasorz:    Impedance Phasor Generator    
+    phasorz:    Impedance Phasor Generator
+    phs:        Complex Phase Angle Generator
     """
     # Test for Tuple/List Arg
     if isinstance(mag, (tuple,list,_np.ndarray)):
@@ -3655,6 +3663,8 @@ def abc_to_seq(Mabc,reference='A'):
     Converts phase-based values to sequence
     components.
     
+    .. math:: M_{\\text{012}}=A_{\\text{012}}\\cdot M_{\\text{ABC}}
+    
     Same as phs_to_seq.
     
     Parameters
@@ -3669,6 +3679,11 @@ def abc_to_seq(Mabc,reference='A'):
     -------
     M012:       numpy.ndarray
                 Sequence-based values in order of 0-1-2
+    
+    See Also
+    --------
+    seq_to_abc: Sequence to Phase Conversion
+    sequencez:  Phase Impedance to Sequence Converter
     """
     # Condition Reference:
     reference = reference.upper()
@@ -3692,6 +3707,8 @@ def seq_to_abc(M012,reference='A'):
     Converts sequence-based values to phase
     components.
     
+    .. math:: M_{\\text{ABC}}=A_{\\text{012}}^{-1}\\cdot M_{\\text{012}}
+    
     Same as seq_to_phs.
     
     Parameters
@@ -3706,6 +3723,11 @@ def seq_to_abc(M012,reference='A'):
     -------
     Mabc:       numpy.ndarray
                 Phase-based values in order of A-B-C
+    
+    See Also
+    --------
+    abc_to_seq: Phase to Sequence Conversion
+    sequencez:  Phase Impedance to Sequence Converter
     """
     # Compute Dot Product
     M = A012.dot(M012)
@@ -3724,13 +3746,23 @@ def seq_to_abc(M012,reference='A'):
 seq_to_phs = seq_to_abc
 
 # Define Sequence Impedance Calculator
-def sequencez(Zabc,reference='A',round=3):
+def sequencez(Zabc,reference='A',resolve=False,round=3):
     """
     Sequence Impedance Calculator
     
     Accepts the phase (ABC-domain) impedances for a
     system and calculates the sequence (012-domain)
-    impedances for the same system.
+    impedances for the same system. If the argument
+    `resolve` is set to true, the function will
+    combine terms into the set of [Z0, Z1, Z2].
+    
+    When resolve is False:
+    
+    .. math:: Z_{\\text{012-M}}=A_{\\text{012}}^{-1}Z_{\\text{ABC}}A_{\\text{012}}
+    
+    When resolve is True:
+    
+    .. math:: Z_{\\text{012}}=A_{\\text{012}}Z_{\\text{ABC}}A_{\\text{012}}^{-1}
     
     Parameters
     ----------
@@ -3741,6 +3773,10 @@ def sequencez(Zabc,reference='A',round=3):
     reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
+    resolve:    bool, optional
+                Control argument to force the function to
+                evaluate the individual sequence impedances
+                [Z0, Z1, Z2], default=False
     round:      int, optional
                 Integer denoting number of decimal places
                 resulting matrix should be rounded to.
@@ -3752,6 +3788,11 @@ def sequencez(Zabc,reference='A',round=3):
                 2-D (3x3) matrix of complex values
                 representing the sequence impedances
                 in the 012-domain
+    
+    See Also
+    --------
+    seq_to_abc: Sequence to Phase Conversion
+    abc_to_seq: Phase to Sequence Conversion
     """
     # Condition Reference
     reference = reference.upper()
@@ -3765,7 +3806,10 @@ def sequencez(Zabc,reference='A',round=3):
     M012 = _np.roll(A012,roll,0)
     Minv = _np.linalg.inv(M012)
     # Compute Sequence Impedances
-    Z012 = Minv.dot( Zabc.dot(M012) )
+    if resolve:
+        Z012 = M012.dot( Zabc.dot(Minv) )
+    else:
+        Z012 = Minv.dot( Zabc.dot(M012) )
     return(_np.around(Z012,round))
 
 # FFT Coefficient Calculator Function
