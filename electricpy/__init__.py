@@ -128,6 +128,8 @@ Included Functions
  - Induction Machine Starting Torque:       indmachstarttorq
  - Stator Power for Induction Machine:      pstator
  - Rotor Power for Induction Machine:       protor
+ - De Calculator:                           de_calc
+ - Z Per Length Calculator:                 zperlength
 
 Additional Available Sub-Modules
 --------------------------------
@@ -3815,7 +3817,7 @@ def sequencez(Zabc,reference='A',resolve=False,diag=False,round=3):
         Z012 = Minv.dot( Zabc.dot(M012) )
     # Reduce to Diagonal Terms if Needed
     if diag:
-        Z012 = Z012.dot( _np.identity(3) )
+        Z012 = [Z012[0][0],Z012[1][1],Z012[2][2]]
     return(_np.around(Z012,round))
 
 # FFT Coefficient Calculator Function
@@ -5416,6 +5418,117 @@ def protor(Pem, slip):
     # Calculate and Return
     Pr = -slip * (Pem / (1-slip))
     return(Pr)
+
+# Define De Calculator for Transmission Lines
+def de_calc(rho,freq=60):
+    """
+    Calculator for De Transmission Line Value
+    
+    Simple calculator to find the De value for a line
+    with particular earth resistivity (rho).
+    
+    .. math:: D_e=D_{e_{\\text{constant}}}\\sqrt{\\frac{\\rho}{freq}}
+    
+    Parameters
+    ----------
+    rho:        float
+                Earth resistivity (in ohm-meters), may also
+                be passed a string in the set: {SEA, SWAMP,
+                AVG,AVERAGE,DAMP,DRY,SAND,SANDSTONE}
+    freq:       float, optional
+                System frequency in Hertz, default=60
+    """
+    # If Descriptive String Provided, Use to Determine Rho
+    if isinstance(rho,str):
+        rho = rho.upper()
+        rho = { 'SEA':          0.01,
+                'SWAMP':        10,
+                'AVG':          100,
+                'AVERAGE':      100,
+                'DAMP':         100,
+                'DRY':          1000,
+                'SAND':         1E9,
+                'SANDSTONE':    1E9,
+              }[rho]
+    # Calculate De
+    De = De0 * _np.sqrt( rho / freq )
+    return(De)
+
+# Define Impedance Per Length Calculator
+def zperlength(Rd=None,Rself=None,Rac=None,De=None,rho=None,
+               Dab=None,Dbc=None,Dca=None,Ds=None,freq=60):
+    """
+    Transmission Line Impedance (RL) Calculator
+    
+    Simple impedance matrix generator to provide the full
+    impedance per length matrix.
+    
+    Parameters
+    ----------
+    Rd:         float, optional
+                Resistance Rd term in ohms, will be generated
+                automatically if set to None, default=None
+    Rself:      float, optional
+                Self Resistance term in ohms.
+    Rac:        float, optional
+                AC resistance in ohms.
+    De:         float, optional
+                De term, in feet.
+    rho:        float, optional
+                Earth resistivity in ohm-meters.
+    Dab:        float, optional
+                Distance between phases A and B, in feet.
+    Dbc:        float, optional
+                Distance between phases B and C, in feet.
+    Dca:        float, optional
+                Distance between phases C and A, in feet.
+    Ds:         float, optional
+                Distance (self) for each phase conductor in feet,
+                commonly known as GMR.
+    freq:       float, optional
+                System frequency in Hertz.
+    """
+    # Start with Empty Arrays
+    Rperlen = 0
+    Lperlen = 0
+    # Generate Rd
+    if Rd==None:
+        Rd = freq * carson_r
+    # Generate Real Part
+    if Rd > 0:
+        # Generate Rself if not Provided
+        if Rself==None:
+            # Validate Inputs
+            if not all((Rd,Rac)):
+                raise ValueError("Too few arguments")
+            Rself = Rac + Rd
+        # Generate RperLength Matrix
+        Rperlen = _np.array([
+            [Rself,Rd,Rd],
+            [Rd,Rself,Rd],
+            [Rd,Rd,Rself]
+            ])
+    # Generate Imaginary Part
+    if any((De,Ds,rho)):
+        # Validate Inputs
+        if not all((Dab,Dbc,Dca)):
+            raise ValueError("Distance Terms [Dab,Dbc,Dca] Required")
+        if Ds==None:
+            raise ValueError("Distance Self (Ds) Required")
+        # De must be generated
+        if De==None:
+            if rho==None:
+                raise ValueError("Too few arguments")
+            De = de_calc(rho,freq)
+        # Generate LperLength Matrix
+        Lperlen = _np.array([
+            [_np.log(De/Ds),_np.log(De/Dab),_np.log(De/Dca)],
+            [_np.log(De/Dab),_np.log(De/Ds),_np.log(De/Dbc)],
+            [_np.log(De/Dca),_np.log(De/Dbc),_np.log(De/Ds)]
+            ]) * 2j*_np.pi*freq
+    # Add Real and Imaginary Parts
+    Zperlen = Rperlen + Lperlen
+    return(Zperlen)
 
 
 # END OF FILE
