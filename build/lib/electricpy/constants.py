@@ -19,6 +19,10 @@ m = 1e-3 #: Mili Multiple       (10^-3)
 k = 1e+3 #: Kili Multiple       (10^3)
 M = 1e+6 #: Mega Multiple       (10^6)
 G = 1e+9 #: Giga Multiple       (10^9)
+u0 = 4*_np.pi*10**(-7) #: µ0 (mu-not)       4πE-7
+e0 = 8.8541878128e-12  #: ε0 (epsilon-not)  8.854E-12
+carson_r = 9.869e-7 #: Carson's Ristance Constant  8.869E-7
+De0 = 2160 #: De Constant for Use with Transmission Impedance Calculations      2160
 NAN = float('nan')
 VLLcVLN = _c.rect(_np.sqrt(3),_np.radians(30)) # Conversion Operator
 ILcIP = _c.rect(_np.sqrt(3),_np.radians(-30)) # Conversion Operator
@@ -39,12 +43,18 @@ Cxyz = _np.array([[ 2/_np.sqrt(6), 0, 1/_np.sqrt(3)],       # Convert alpha/beta
                   [ -1/_np.sqrt(6), -1/_np.sqrt(2), 1/_np.sqrt(3)]])
 # Define Park Components Matricies
 _rad = lambda th: _np.radians( th )
-Pdq0 = lambda th: _np.sqrt(2/3)*_np.array([[ _np.cos(_rad(th)), _np.cos(_rad(th)-2*pi/3), _np.cos(_rad(th)+2*pi/3)],
+Pdq0_im = lambda th: _np.sqrt(2/3)*_np.array([[ _np.cos(_rad(th)), _np.cos(_rad(th)-2*pi/3), _np.cos(_rad(th)+2*pi/3)],
                                            [-_np.sin(_rad(th)),-_np.sin(_rad(th)-2*pi/3),-_np.sin(_rad(th)+2*pi/3)],
                                            [ _np.sqrt(2)/2,     _np.sqrt(2)/2,            _np.sqrt(2)/2]])
-Pabc = lambda th: _np.sqrt(2/3)*_np.array([[ _np.cos(_rad(th)),      -_np.sin(_rad(th)),        _np.sqrt(2)/2],
+Pabc_im = lambda th: _np.sqrt(2/3)*_np.array([[ _np.cos(_rad(th)),      -_np.sin(_rad(th)),        _np.sqrt(2)/2],
                                            [_np.cos(_rad(th)-2*pi/3),-_np.sin(_rad(th)-2*pi/3), _np.sqrt(2)/2],
                                            [_np.cos(_rad(th)+2*pi/3),-_np.sin(_rad(th)+2*pi/3), _np.sqrt(2)/2]])
+Pdq0 = 2/3 * _np.array([[0,-_np.sqrt(3/2),_np.sqrt(3/2)],
+                        [1,-1/2,-1/2],
+                        [1/2, 1/2, 1/2]])
+Pqd0 = 2/3 * _np.array([[1,-1/2,-1/2],
+                        [0,-_np.sqrt(3/2),_np.sqrt(3/2)],
+                        [1/2, 1/2, 1/2]])
                  
 # Define Transformer Shift Correction Matricies
 XFMY0 = _np.array([[1,0,0],[0,1,0],[0,0,1]])

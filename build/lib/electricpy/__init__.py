@@ -75,7 +75,9 @@ Included Functions
  - Cap. VAR to FARAD Conversion:            farads
  - VSC DC Bus Voltage Calculator:           vscdcbus
  - PLL-VSC Gains Calculator:                vscgains
- - RMS Calculator:                          rms
+ - Sinusoid Peak-to-RMS Converter:          rms
+ - Sinusoid RMS-to-Peak Converter:          peak
+ - Arbitrary Waveform RMS Calculator:       funcrms
  - Step Function:                           step
  - Multi-Argument Convolution:              convolve
  - Convolution Bar Graph Visualizer:        convbar
@@ -120,7 +122,14 @@ Included Functions
  - Induction Machine Zth Calculator:        indmachzth
  - Induction Machine Pem Calculator:        indmachpem
  - Induction Machine Tem Calculator:        indmachtem
- - Induction Machine Peak Slip Calculator:  indamachpkslip
+ - Induction Machine Peak Slip Calculator:  indmachpkslip
+ - Induction Machine Peak Torque Calc.:     indmachpktorq
+ - Induction Machine Rotor Current:         indmachiar
+ - Induction Machine Starting Torque:       indmachstarttorq
+ - Stator Power for Induction Machine:      pstator
+ - Rotor Power for Induction Machine:       protor
+ - De Calculator:                           de_calc
+ - Z Per Length Calculator:                 zperlength
 
 Additional Available Sub-Modules
 --------------------------------
@@ -218,6 +227,13 @@ def phs( ang ):
     ang:        float
                 The angle (in degrees) for which
                 the value should be calculated.
+    
+    See Also
+    --------
+    phasorlist: Phasor Generator for List or Array
+    cprint:     Complex Variable Printing Function
+    phasorz:    Impedance Phasor Generator
+    phasor:     Phasor Generating Function
     """
     # Return the Complex Angle Modulator
     return(_np.exp(1j*_np.radians( ang )))
@@ -256,7 +272,8 @@ def phasor( mag, ang=0 ):
     --------
     phasorlist: Phasor Generator for List or Array
     cprint:     Complex Variable Printing Function
-    phasorz:    Impedance Phasor Generator    
+    phasorz:    Impedance Phasor Generator
+    phs:        Complex Phase Angle Generator
     """
     # Test for Tuple/List Arg
     if isinstance(mag, (tuple,list,_np.ndarray)):
@@ -2833,8 +2850,32 @@ def step(t):
     """
     return( _np.heaviside( t, 1) )
 
-# RMS Calculating Function
-def rms(f, T):
+# Define Peak Calculator
+def peak(val):
+    """
+    Sinusoid RMS to Peak Converter
+    
+    Provides a readable format to convert an
+    RMS (Root-Mean-Square) value to its peak
+    representation. Performs a simple multiplication
+    with the square-root of two.
+    """
+    return(_np.sqrt(2) * val)
+    
+# Define RMS Calculator
+def rms(val):
+    """
+    Sinusoid Peak to RMS Converter
+    
+    Provides a readable format to convert a peak
+    value to its RMS (Root-Mean-Square) representation.
+    Performs a simple division by the square-root of
+    two.
+    """
+    return(val * _np.sqrt(0.5))
+
+# Arbitrary Waveform RMS Calculating Function
+def funcrms(f, T):
     """
     Function Root-Mean-Square (RMS) Evaluator
     
@@ -3624,6 +3665,8 @@ def abc_to_seq(Mabc,reference='A'):
     Converts phase-based values to sequence
     components.
     
+    .. math:: M_{\\text{012}}=A_{\\text{012}}\\cdot M_{\\text{ABC}}
+    
     Same as phs_to_seq.
     
     Parameters
@@ -3638,6 +3681,11 @@ def abc_to_seq(Mabc,reference='A'):
     -------
     M012:       numpy.ndarray
                 Sequence-based values in order of 0-1-2
+    
+    See Also
+    --------
+    seq_to_abc: Sequence to Phase Conversion
+    sequencez:  Phase Impedance to Sequence Converter
     """
     # Condition Reference:
     reference = reference.upper()
@@ -3661,6 +3709,8 @@ def seq_to_abc(M012,reference='A'):
     Converts sequence-based values to phase
     components.
     
+    .. math:: M_{\\text{ABC}}=A_{\\text{012}}^{-1}\\cdot M_{\\text{012}}
+    
     Same as seq_to_phs.
     
     Parameters
@@ -3675,6 +3725,11 @@ def seq_to_abc(M012,reference='A'):
     -------
     Mabc:       numpy.ndarray
                 Phase-based values in order of A-B-C
+    
+    See Also
+    --------
+    abc_to_seq: Phase to Sequence Conversion
+    sequencez:  Phase Impedance to Sequence Converter
     """
     # Compute Dot Product
     M = A012.dot(M012)
@@ -3693,13 +3748,23 @@ def seq_to_abc(M012,reference='A'):
 seq_to_phs = seq_to_abc
 
 # Define Sequence Impedance Calculator
-def sequencez(Zabc,reference='A',round=3):
+def sequencez(Zabc,reference='A',resolve=False,diag=False,round=3):
     """
     Sequence Impedance Calculator
     
     Accepts the phase (ABC-domain) impedances for a
     system and calculates the sequence (012-domain)
-    impedances for the same system.
+    impedances for the same system. If the argument
+    `resolve` is set to true, the function will
+    combine terms into the set of [Z0, Z1, Z2].
+    
+    When resolve is False:
+    
+    .. math:: Z_{\\text{012-M}}=A_{\\text{012}}^{-1}Z_{\\text{ABC}}A_{\\text{012}}
+    
+    When resolve is True:
+    
+    .. math:: Z_{\\text{012}}=A_{\\text{012}}Z_{\\text{ABC}}A_{\\text{012}}^{-1}
     
     Parameters
     ----------
@@ -3710,6 +3775,13 @@ def sequencez(Zabc,reference='A',round=3):
     reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
+    resolve:    bool, optional
+                Control argument to force the function to
+                evaluate the individual sequence impedances
+                [Z0, Z1, Z2], default=False
+    diag:       bool, optional
+                Control argument to force the function to
+                reduce the matrix to its diagonal terms.
     round:      int, optional
                 Integer denoting number of decimal places
                 resulting matrix should be rounded to.
@@ -3721,6 +3793,11 @@ def sequencez(Zabc,reference='A',round=3):
                 2-D (3x3) matrix of complex values
                 representing the sequence impedances
                 in the 012-domain
+    
+    See Also
+    --------
+    seq_to_abc: Sequence to Phase Conversion
+    abc_to_seq: Phase to Sequence Conversion
     """
     # Condition Reference
     reference = reference.upper()
@@ -3734,7 +3811,13 @@ def sequencez(Zabc,reference='A',round=3):
     M012 = _np.roll(A012,roll,0)
     Minv = _np.linalg.inv(M012)
     # Compute Sequence Impedances
-    Z012 = Minv.dot( Zabc.dot(M012) )
+    if resolve:
+        Z012 = M012.dot( Zabc.dot(Minv) )
+    else:
+        Z012 = Minv.dot( Zabc.dot(M012) )
+    # Reduce to Diagonal Terms if Needed
+    if diag:
+        Z012 = [Z012[0][0],Z012[1][1],Z012[2][2]]
     return(_np.around(Z012,round))
 
 # FFT Coefficient Calculator Function
@@ -4571,6 +4654,16 @@ def indmachvth(Vas,Rs,Lm,Lls=0,Ls=None,freq=60,calcX=True):
     Vth:        complex
                 Thevenin-Equivalent voltage (in volts) of induction
                 machine described.
+    
+    See Also
+    --------
+    indmachzth:         Induction Machine Thevenin Impedance Calculator
+    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
+    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
+    indmachpkslip:      Induction Machine Peak Slip Calculator
+    indmachpktorq:      Induction Machine Peak Torque Calculator
+    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
+    indmachstarttorq:   Induction Machine Starting Torque Calculator
     """
     # Condition Inputs
     if Ls != None: # Use Ls instead of Lls
@@ -4626,6 +4719,16 @@ def indmachzth(Rs,Lm,Lls=0,Llr=0,Ls=None,Lr=None,freq=60,calcX=True):
     Zth:        complex
                 Thevenin-Equivalent impedance (in ohms) of induction
                 machine described.
+    
+    See Also
+    --------
+    indmachvth:         Induction Machine Thevenin Voltage Calculator
+    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
+    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
+    indmachpkslip:      Induction Machine Peak Slip Calculator
+    indmachpktorq:      Induction Machine Peak Torque Calculator
+    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
+    indmachstarttorq:   Induction Machine Starting Torque Calculator
     """
     # Condition Inputs
     if Ls != None: # Use Ls instead of Lls
@@ -4697,6 +4800,16 @@ def indmachpem(slip,Rr,Vth=None,Zth=None,Vas=0,Rs=0,Lm=0,Lls=0,
     Pem:        float
                 Power (in watts) that is produced or consumed
                 by the mechanical portion of the induction machine.
+    
+    See Also
+    --------
+    indmachvth:         Induction Machine Thevenin Voltage Calculator
+    indmachzth:         Induction Machine Thevenin Impedance Calculator
+    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
+    indmachpkslip:      Induction Machine Peak Slip Calculator
+    indmachpktorq:      Induction Machine Peak Torque Calculator
+    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
+    indmachstarttorq:   Induction Machine Starting Torque Calculator
     """
     # Condition Inputs
     w = 2*_np.pi*freq
@@ -4792,6 +4905,16 @@ def indmachtem(slip,Rr,p=0,Vth=None,Zth=None,Vas=0,Rs=0,Lm=0,Lls=0,
     Tem:        float
                 Torque (in Newton-meters) that is produced or consumed
                 by the mechanical portion of the induction machine.
+    
+    See Also
+    --------
+    indmachvth:         Induction Machine Thevenin Voltage Calculator
+    indmachzth:         Induction Machine Thevenin Impedance Calculator
+    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
+    indmachpkslip:      Induction Machine Peak Slip Calculator
+    indmachpktorq:      Induction Machine Peak Torque Calculator
+    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
+    indmachstarttorq:   Induction Machine Starting Torque Calculator
     """
     # Condition Inputs
     w = 2*_np.pi*freq
@@ -4828,10 +4951,11 @@ def indmachtem(slip,Rr,p=0,Vth=None,Zth=None,Vas=0,Rs=0,Lm=0,Lls=0,
 def indmachpkslip(Rr,Zth=None,Rs=0,Lm=0,Lls=0,Llr=0,Ls=None,
                   Lr=None,freq=60,calcX=True):
     """
-    Induction Machine Peak Slip Calculator
+    Induction Machine Slip at Peak Torque Calculator
     
-    Function to calculate the peak slip encountered by an induction machine
-    with the parameters specified. Uses formula as shown below.
+    Function to calculate the slip encountered by an induction machine
+    with the parameters specified when the machine is generating peak
+    torque. Uses formula as shown below.
     
     .. math:: \\text{slip} = \\frac{R_r}{|Z_{th}|}
     
@@ -4873,6 +4997,16 @@ def indmachpkslip(Rr,Zth=None,Rs=0,Lm=0,Lls=0,Llr=0,Ls=None,
     -------
     s_peak:     float
                 The peak slip for the induction machine described.
+    
+    See Also
+    --------
+    indmachvth:         Induction Machine Thevenin Voltage Calculator
+    indmachzth:         Induction Machine Thevenin Impedance Calculator
+    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
+    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
+    indmachpktorq:      Induction Machine Peak Torque Calculator
+    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
+    indmachstarttorq:   Induction Machine Starting Torque Calculator
     """
     # Condition Inputs
     w = 2*_np.pi*freq
@@ -4893,6 +5027,508 @@ def indmachpkslip(Rr,Zth=None,Rs=0,Lm=0,Lls=0,Llr=0,Ls=None,
     # Calculate Peak Slip
     s_peak = Rr / abs(Zth)
     return( s_peak )
+    
+# Define Induction Machine Phase-A, Rotor Current Calculator
+def indmachiar(Vth=None,Zth=None,Vas=0,Rs=0,Lm=0,Lls=0,
+               Llr=0,Ls=None,Lr=None,freq=60,calcX=True):
+    """
+    Induction Machine Rotor Current Calculator
+    
+    Calculation function to find the phase-A, rotor current for an
+    induction machine given the thevenin voltage and impedance.
+    
+    This current is calculated using the following formulas:
+    
+    .. math:: I_{a_{\\text{rotor}}} = \\frac{V_{th}}{|Z_{th}|+Z_{th}}
+    
+    where:
+    
+    .. math:: V_{th}=\\frac{j\\omega L_m}{R_s+j\\omega(L_{ls}+L_m)}V_{as}
+    
+    .. math::
+       Z_{th} = \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}
+       {R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}
+    
+    .. math:: \\omega = \\omega_{es} = 2\\pi\\cdot f_{\\text{electric}}
+    
+    Parameters
+    ----------
+    Vth:        complex, optional
+                Thevenin-equivalent stator voltage of the
+                induction machine, may be calculated internally
+                if given stator voltage and machine parameters.
+    Zth:        complex, optional
+                Thevenin-equivalent inductance (in ohms) of the
+                induction machine, may be calculated internally
+                if given machine parameters.
+    Vas:        complex, optional
+                Terminal Stator Voltage in Volts
+    Rs:         float, optional
+                Stator resistance in ohms
+    Lm:         float, optional
+                Magnetizing inductance in Henrys
+    Lls:        float, optional
+                Stator leakage inductance in Henrys, default=0
+    Llr:        float, optional
+                Rotor leakage inductance in Henrys, default=0
+    Ls:         float, optional
+                Stator inductance in Henrys
+    Lr:         float, optional
+                Rotor inductance in Henrys
+    freq:       float, optional
+                System (electrical) frequency in Hz, default=60
+    calcX:      bool, optional
+                Control argument to force system to calculate
+                system reactances with system frequency, or to
+                treat them as previously-calculated reactances.
+                default=True
+    
+    Returns
+    -------
+    Iar:        complex
+                The rotor, phase-A current in amps.
+    
+    See Also
+    --------
+    indmachvth:         Induction Machine Thevenin Voltage Calculator
+    indmachzth:         Induction Machine Thevenin Impedance Calculator
+    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
+    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
+    indmachpkslip:      Induction Machine Peak Slip Calculator
+    indmachpktorq:      Induction Machine Peak Torque Calculator
+    indmachstarttorq:   Induction Machine Starting Torque Calculator
+    """
+    # Condition Inputs
+    w = 2*_np.pi*freq
+    if Ls != None: # Use Ls instead of Lls
+        Lls = Ls - Lm
+    if Lr != None: # Use Lr instead of Llr
+        Llr = Lr - Lm
+    if p != 0: # Calculate Sync. Speed from Num. Poles
+        wsyn = w/(p/2)
+    if calcX: # Convert Inductances to Reactances
+        Lm *= w
+        Lls *= w
+        Llr *= w
+    # Test for Valid Input Set
+    if Vth == None:
+        if not all((Vas,Rs,Lm,Lls)):
+            raise ValueError("Invalid Argument Set, too few provided.")
+        # Valid Argument Set, Calculate Vth
+        Vth = indmachvth(Vas,Rs,Lm,Lls,Ls,freq,calcX)
+    if Zth == None:
+        if not all((Rs,Llr,Lm,Lls)):
+            raise ValueError("Invalid Argument Set, too few provided.")
+        # Valid Argument Set, Calculate Zth
+        Zth = indmachzth(Rs,Lm,Lls,Ll,Ls,Lr,freq,calcX)
+    # Calculate Rotor Current
+    Iar = Vth / (Zth.real + Zth)
+    return(Iar)
+
+# Define Induction Machine Peak Torque Calculator
+def indmachpktorq(Rr,s_pk=None,Iar=None,Vth=None,Zth=None,Vas=0,Rs=0,
+                  Lm=0,Lls=0,Llr=0,Ls=None,Lr=None,freq=60,calcX=True):
+    """
+    Induction Machine Peak Torque Calculator
+    
+    Calculation function to find the peak torque for an
+    induction machine given the thevenin voltage and impedance.
+    
+    This current is calculated using the following formulas:
+    
+    .. math:: 
+       T_{em}=(|I_{a_{\\text{rotor}}}|)^2\\cdot\\frac{R_r}
+       {\\text{slip}_{\\text{peak}}}
+    
+    where:
+    
+    .. math:: I_{a_{\\text{rotor}}} = \\frac{V_{th}}{|Z_{th}|+Z_{th}}
+    
+    .. math:: V_{th}=\\frac{j\\omega L_m}{R_s+j\\omega(L_{ls}+L_m)}V_{as}
+    
+    .. math::
+       Z_{th} = \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}
+       {R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}
+    
+    .. math:: \\omega = \\omega_{es} = 2\\pi\\cdot f_{\\text{electric}}
+    
+    Parameters
+    ----------
+    Rr:         float
+                Rotor resistance in Ohms
+    s_pk:       float, optional
+                Peak induction machine slip, may be calculated
+                internally if remaining machine characteristics are
+                provided.
+    Iar:        complex, optional
+                Phase-A, Rotor Current in Amps, may be calculated
+                internally if remaining machine characteristics are
+                provided.
+    Vth:        complex, optional
+                Thevenin-equivalent stator voltage of the
+                induction machine, may be calculated internally
+                if given stator voltage and machine parameters.
+    Zth:        complex, optional
+                Thevenin-equivalent inductance (in ohms) of the
+                induction machine, may be calculated internally
+                if given machine parameters.
+    Vas:        complex, optional
+                Terminal Stator Voltage in Volts
+    Rs:         float, optional
+                Stator resistance in ohms
+    Lm:         float, optional
+                Magnetizing inductance in Henrys
+    Lls:        float, optional
+                Stator leakage inductance in Henrys, default=0
+    Llr:        float, optional
+                Rotor leakage inductance in Henrys, default=0
+    Ls:         float, optional
+                Stator inductance in Henrys
+    Lr:         float, optional
+                Rotor inductance in Henrys
+    freq:       float, optional
+                System (electrical) frequency in Hz, default=60
+    calcX:      bool, optional
+                Control argument to force system to calculate
+                system reactances with system frequency, or to
+                treat them as previously-calculated reactances.
+                default=True
+    
+    Returns
+    -------
+    Tpk:        float
+                Peak torque of specified induction machine in
+                newton-meters.
+    
+    See Also
+    --------
+    indmachvth:         Induction Machine Thevenin Voltage Calculator
+    indmachzth:         Induction Machine Thevenin Impedance Calculator
+    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
+    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
+    indmachpkslip:      Induction Machine Peak Slip Calculator
+    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
+    indmachstarttorq:   Induction Machine Starting Torque Calculator
+    """
+    # Condition Inputs
+    w = 2*_np.pi*freq
+    if Ls != None: # Use Ls instead of Lls
+        Lls = Ls - Lm
+    if Lr != None: # Use Lr instead of Llr
+        Llr = Lr - Lm
+    if p != 0: # Calculate Sync. Speed from Num. Poles
+        wsyn = w/(p/2)
+    if calcX: # Convert Inductances to Reactances
+        Lm *= w
+        Lls *= w
+        Llr *= w
+    # Test for Valid Input Set
+    if Vth == None:
+        if not all((Vas,Rs,Lm,Lls)):
+            raise ValueError("Invalid Argument Set, too few provided.")
+        # Valid Argument Set, Calculate Vth
+        Vth = indmachvth(Vas,Rs,Lm,Lls,Ls,freq,calcX)
+    if Zth == None:
+        if not all((Rs,Llr,Lm,Lls)):
+            raise ValueError("Invalid Argument Set, too few provided.")
+        # Valid Argument Set, Calculate Zth
+        Zth = indmachzth(Rs,Lm,Lls,Ll,Ls,Lr,freq,calcX)
+    if Iar == None:
+        if not all((Vth,Zth)):
+            raise ValueError("Invalid Argument Set, too few provided.")
+        # Valid Argument Set, Calculate Ias
+        Iar = indmachiar(Vth=Vth,Zth=Zth)
+    if s_pk == None:
+        if not all((Rr,Zth)):
+            raise ValueError("Invalid Argument Set, too few provided.")
+        # Valid Argument Set, Calculate Peak Slip
+        s_pk = indmachpkslip(Rr=Rr,Zth=Zth)
+    # Use Terms to Calculate Peak Torque
+    Tpk = abs(Iar)**2 * Rr/s_pk
+    return(Tpk)
+    
+# Define Induction Machine Peak Torque Calculator
+def indmachstarttorq(Rr,Iar=None,Vth=None,Zth=None,Vas=0,Rs=0,Lm=0,
+                     Lls=0,Llr=0,Ls=None,Lr=None,freq=60,calcX=True):
+    """
+    Induction Machine Starting Torque Calculator
+    
+    Calculation function to find the starting torque for an
+    induction machine given the thevenin voltage and impedance.
+    
+    This current is calculated using the following formulas:
+    
+    .. math:: 
+       T_{em}=(|I_{a_{\\text{rotor}}}|)^2\\cdot\\frac{R_r}
+       {\\text{slip}_{\\text{peak}}}
+    
+    where:
+    
+    .. math:: \\text{slip} = 1
+    
+    .. math::
+       I_{a_{\\text{rotor}}} = \\frac{V_{th}}{\\frac{R_r}{\\text{slip}}+Z_{th}}
+    
+    .. math:: V_{th}=\\frac{j\\omega L_m}{R_s+j\\omega(L_{ls}+L_m)}V_{as}
+    
+    .. math::
+       Z_{th} = \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}
+       {R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}
+    
+    .. math:: \\omega = \\omega_{es} = 2\\pi\\cdot f_{\\text{electric}}
+    
+    Parameters
+    ----------
+    Rr:         float
+                Rotor resistance in Ohms
+    Iar:        complex, optional
+                Phase-A, Rotor Current in Amps, may be calculated
+                internally if remaining machine characteristics are
+                provided.
+    Vth:        complex, optional
+                Thevenin-equivalent stator voltage of the
+                induction machine, may be calculated internally
+                if given stator voltage and machine parameters.
+    Zth:        complex, optional
+                Thevenin-equivalent inductance (in ohms) of the
+                induction machine, may be calculated internally
+                if given machine parameters.
+    Vas:        complex, optional
+                Terminal Stator Voltage in Volts
+    Rs:         float, optional
+                Stator resistance in ohms
+    Lm:         float, optional
+                Magnetizing inductance in Henrys
+    Lls:        float, optional
+                Stator leakage inductance in Henrys, default=0
+    Llr:        float, optional
+                Rotor leakage inductance in Henrys, default=0
+    Ls:         float, optional
+                Stator inductance in Henrys
+    Lr:         float, optional
+                Rotor inductance in Henrys
+    freq:       float, optional
+                System (electrical) frequency in Hz, default=60
+    calcX:      bool, optional
+                Control argument to force system to calculate
+                system reactances with system frequency, or to
+                treat them as previously-calculated reactances.
+                default=True
+    
+    Returns
+    -------
+    Tstart:     float
+                Peak torque of specified induction machine in
+                newton-meters.
+    
+    See Also
+    --------
+    indmachvth:         Induction Machine Thevenin Voltage Calculator
+    indmachzth:         Induction Machine Thevenin Impedance Calculator
+    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
+    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
+    indmachpkslip:      Induction Machine Peak Slip Calculator
+    indmachpktorq:      Induction Machine Peak Torque Calculator
+    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
+    """
+    # Condition Inputs
+    w = 2*_np.pi*freq
+    if Ls != None: # Use Ls instead of Lls
+        Lls = Ls - Lm
+    if Lr != None: # Use Lr instead of Llr
+        Llr = Lr - Lm
+    if p != 0: # Calculate Sync. Speed from Num. Poles
+        wsyn = w/(p/2)
+    if calcX: # Convert Inductances to Reactances
+        Lm *= w
+        Lls *= w
+        Llr *= w
+    # Slip is 1 (one) for starting
+    slip = 1
+    # Test for Valid Input Set
+    if Vth == None:
+        if not all((Vas,Rs,Lm,Lls)):
+            raise ValueError("Invalid Argument Set, too few provided.")
+        # Valid Argument Set, Calculate Vth
+        Vth = indmachvth(Vas,Rs,Lm,Lls,Ls,freq,calcX)
+    if Zth == None:
+        if not all((Rs,Llr,Lm,Lls)):
+            raise ValueError("Invalid Argument Set, too few provided.")
+        # Valid Argument Set, Calculate Zth
+        Zth = indmachzth(Rs,Lm,Lls,Ll,Ls,Lr,freq,calcX)
+    if Iar == None:
+        if not all((Vth,Zth)):
+            raise ValueError("Invalid Argument Set, too few provided.")
+        # Valid Argument Set, Calculate Ias
+        Iar = Vth / (Rr/slip + Zth)
+    # Use Terms to Calculate Peak Torque
+    Tstart = abs(Iar)**2 * Rr/s_pk
+    return(Tstart)
+
+# Define Induction Machine Stator Torque Calculator
+def pstator(Pem, slip):
+    """
+    Stator Power Calculator for Induction Machine
+    
+    Given the electromechanical power and the slip,
+    this function will calculate the power related to the
+    stator (provided or consumed).
+    
+    .. math:: P_s=\\frac{P_{em}}{1-\\text{slip}}
+    
+    Parameters
+    ----------
+    Pem:        float
+                Electromechanical power in watts.
+    slip:       float
+                Slip factor in rad/sec.
+    
+    Returns
+    -------
+    Ps:         float
+                Power related to the stator in watts.
+    """
+    # Calculate and Return
+    Ps = Pem / (1-slip)
+    return(Ps)
+
+# Define Induction Machine Rotor Torque Calculator
+def protor(Pem, slip):
+    """
+    Rotor Power Calculator for Induction Machine
+    
+    Given the electromechanical power and the slip,
+    this function will calculate the power related to the
+    rotor (provided or consumed).
+    
+    .. math:: P_r=-\\text{slip}\\cdot\\frac{P_{em}}{1-\\text{slip}}
+    
+    Parameters
+    ----------
+    Pem:        float
+                Electromechanical power in watts.
+    slip:       float
+                Slip factor in rad/sec.
+    
+    Returns
+    -------
+    Pr:         float
+                Power related to the rotor in watts.
+    """
+    # Calculate and Return
+    Pr = -slip * (Pem / (1-slip))
+    return(Pr)
+
+# Define De Calculator for Transmission Lines
+def de_calc(rho,freq=60):
+    """
+    Calculator for De Transmission Line Value
+    
+    Simple calculator to find the De value for a line
+    with particular earth resistivity (rho).
+    
+    .. math:: D_e=D_{e_{\\text{constant}}}\\sqrt{\\frac{\\rho}{freq}}
+    
+    Parameters
+    ----------
+    rho:        float
+                Earth resistivity (in ohm-meters), may also
+                be passed a string in the set: {SEA, SWAMP,
+                AVG,AVERAGE,DAMP,DRY,SAND,SANDSTONE}
+    freq:       float, optional
+                System frequency in Hertz, default=60
+    """
+    # If Descriptive String Provided, Use to Determine Rho
+    if isinstance(rho,str):
+        rho = rho.upper()
+        rho = { 'SEA':          0.01,
+                'SWAMP':        10,
+                'AVG':          100,
+                'AVERAGE':      100,
+                'DAMP':         100,
+                'DRY':          1000,
+                'SAND':         1E9,
+                'SANDSTONE':    1E9,
+              }[rho]
+    # Calculate De
+    De = De0 * _np.sqrt( rho / freq )
+    return(De)
+
+# Define Impedance Per Length Calculator
+def zperlength(Rd=None,Rself=None,Rac=None,De=None,rho=None,
+               Dab=None,Dbc=None,Dca=None,Ds=None,freq=60):
+    """
+    Transmission Line Impedance (RL) Calculator
+    
+    Simple impedance matrix generator to provide the full
+    impedance per length matrix.
+    
+    Parameters
+    ----------
+    Rd:         float, optional
+                Resistance Rd term in ohms, will be generated
+                automatically if set to None, default=None
+    Rself:      float, optional
+                Self Resistance term in ohms.
+    Rac:        float, optional
+                AC resistance in ohms.
+    De:         float, optional
+                De term, in feet.
+    rho:        float, optional
+                Earth resistivity in ohm-meters.
+    Dab:        float, optional
+                Distance between phases A and B, in feet.
+    Dbc:        float, optional
+                Distance between phases B and C, in feet.
+    Dca:        float, optional
+                Distance between phases C and A, in feet.
+    Ds:         float, optional
+                Distance (self) for each phase conductor in feet,
+                commonly known as GMR.
+    freq:       float, optional
+                System frequency in Hertz.
+    """
+    # Start with Empty Arrays
+    Rperlen = 0
+    Lperlen = 0
+    # Generate Rd
+    if Rd==None:
+        Rd = freq * carson_r
+    # Generate Real Part
+    if Rd > 0:
+        # Generate Rself if not Provided
+        if Rself==None:
+            # Validate Inputs
+            if not all((Rd,Rac)):
+                raise ValueError("Too few arguments")
+            Rself = Rac + Rd
+        # Generate RperLength Matrix
+        Rperlen = _np.array([
+            [Rself,Rd,Rd],
+            [Rd,Rself,Rd],
+            [Rd,Rd,Rself]
+            ])
+    # Generate Imaginary Part
+    if any((De,Ds,rho)):
+        # Validate Inputs
+        if not all((Dab,Dbc,Dca)):
+            raise ValueError("Distance Terms [Dab,Dbc,Dca] Required")
+        if Ds==None:
+            raise ValueError("Distance Self (Ds) Required")
+        # De must be generated
+        if De==None:
+            if rho==None:
+                raise ValueError("Too few arguments")
+            De = de_calc(rho,freq)
+        # Generate LperLength Matrix
+        Lperlen = _np.array([
+            [_np.log(De/Ds),_np.log(De/Dab),_np.log(De/Dca)],
+            [_np.log(De/Dab),_np.log(De/Ds),_np.log(De/Dbc)],
+            [_np.log(De/Dca),_np.log(De/Dbc),_np.log(De/Ds)]
+            ]) * 2j*_np.pi*freq
+    # Add Real and Imaginary Parts
+    Zperlen = Rperlen + Lperlen
+    return(Zperlen)
 
 
 # END OF FILE
