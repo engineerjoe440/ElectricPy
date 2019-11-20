@@ -5455,8 +5455,10 @@ def de_calc(rho,freq=60):
     return(De)
 
 # Define Impedance Per Length Calculator
-def zperlength(Rd=None,Rself=None,Rac=None,De=None,rho=None,
-               Dab=None,Dbc=None,Dca=None,Ds=None,freq=60):
+def zperlength(Rd=None,Rself=None,Rac=None,Rgwac=None,De=None,
+               rho="AVG",Ds=None,Dsgw=None,dia_gw=None,Dab=None,
+               Dbc=None,Dca=None,Dagw=None,Dbgw=None,Dcgw=None,
+               resolve=True,freq=60):
     """
     Transmission Line Impedance (RL) Calculator
     
@@ -5472,19 +5474,37 @@ def zperlength(Rd=None,Rself=None,Rac=None,De=None,rho=None,
                 Self Resistance term in ohms.
     Rac:        float, optional
                 AC resistance in ohms.
+    Rgwac:      float, optional
+                Ground-Wire AC resistance in ohms.
     De:         float, optional
-                De term, in feet.
+                De term, in feet, if None provided, and `rho`
+                parameter is specified, will interpretively be
+                calculated.
     rho:        float, optional
-                Earth resistivity in ohm-meters.
+                Earth resistivity in ohm-meters. default="AVG"
+    Ds:         float, optional
+                Distance (self) for each phase conductor in feet,
+                commonly known as GMD.
+    Dsgw:       float, optional
+                Distance (self) for the ground wire conductor in
+                feet, commonly known as GMD.
+    dia_gw:     float, optional
+                Ground-Wire diameter in feet, may be used to
+                calculate an approximate Dsgw if no Dsgw is provided.
     Dab:        float, optional
                 Distance between phases A and B, in feet.
     Dbc:        float, optional
                 Distance between phases B and C, in feet.
     Dca:        float, optional
                 Distance between phases C and A, in feet.
-    Ds:         float, optional
-                Distance (self) for each phase conductor in feet,
-                commonly known as GMR.
+    Dagw:       float, optional
+    Dbgw:       float, optional
+    Dcgw:       float, optional
+    resolve:    bool, optional
+                Control argument to specify whether the resultant
+                ground-wire inclusive per-length impedance matrix
+                should be reduced to a 3x3 equivalent matrix.
+                default=True
     freq:       float, optional
                 System frequency in Hertz.
     """
@@ -5494,6 +5514,9 @@ def zperlength(Rd=None,Rself=None,Rac=None,De=None,rho=None,
     # Generate Rd
     if Rd==None:
         Rd = freq * carson_r
+    # Generate Dsgw if Not Provided
+    if Dsgw==None and dia_gw!=None:
+        Dsgw = _np.exp(-1/4) * dia_gw/2
     # Generate Real Part
     if Rd > 0:
         # Generate Rself if not Provided
@@ -5508,6 +5531,16 @@ def zperlength(Rd=None,Rself=None,Rac=None,De=None,rho=None,
             [Rd,Rself,Rd],
             [Rd,Rd,Rself]
             ])
+        # Add GW effects If Necessary
+        if all((Rgwac,Dsgw,Dagw,Dbgw,Dcgw)):
+            # Calculate Rselfgw
+            Rselfgw = Rgwac + Rd
+            # Append Right-Most Column
+            Rperlen = _np.append(Rperlen,
+                [[Rd],[Rd],[Rd]],axis=1)
+            # Append New Row
+            Rperlen = _np.append(Rperlen,
+                [[Rd,Rd,Rd,Rselfgw]],axis=0)
     # Generate Imaginary Part
     if any((De,Ds,rho)):
         # Validate Inputs
@@ -5525,9 +5558,33 @@ def zperlength(Rd=None,Rself=None,Rac=None,De=None,rho=None,
             [_np.log(De/Ds),_np.log(De/Dab),_np.log(De/Dca)],
             [_np.log(De/Dab),_np.log(De/Ds),_np.log(De/Dbc)],
             [_np.log(De/Dca),_np.log(De/Dbc),_np.log(De/Ds)]
-            ]) * 2j*_np.pi*freq
+            ])
+        # Add GW effects If Necessary
+        if all((Rgwac,Dsgw,Dagw,Dbgw,Dcgw)):
+            # Append Right-Most Column
+            Lperlen = _np.append(Lperlen,
+                [[_np.log(De/Dagw)],[_np.log(De/Dbgw)],[_np.log(De/Dcgw)]],
+                axis=1)
+            # Append New Row
+            Lperlen = _np.append(Lperlen,
+                [[_np.log(De/Dagw),_np.log(De/Dbgw),
+                _np.log(De/Dcgw),_np.log(De/Dsgw)]],axis=0)
+        Lperlen = Lperlen * (1j*u0*freq)
     # Add Real and Imaginary Parts
     Zperlen = Rperlen + Lperlen
+    # Resolve to 3x3 Matrix if Needed
+    if resolve and all((Rgwac,Dsgw,Dagw,Dbgw,Dcgw)):
+        # Perform Slicing to Retrieve Useful Arrays
+        Za = Zperlen[:3,:3]
+        Zb = Zperlen[:3,3:6]
+        Zc = Zperlen[3:6,:3]
+        Zd = Zperlen[3:6,3:6]
+        # Perform Arithmetic to Generate Useful Arrays
+        Zbnew = Zb-Za
+        Zcnew = Zc-Za
+        Zdnew = Za - Zb - Zc + Zd
+        # Calculate New (3x3) Equivalent Zperlen
+        Zperlen = Za - np.dot(Zbnew,np.dot(np.linalg.inv(Zdnew),Zcnew))
     return(Zperlen)
 
 
