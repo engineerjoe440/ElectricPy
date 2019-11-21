@@ -5498,8 +5498,11 @@ def zperlength(Rd=None,Rself=None,Rac=None,Rgwac=None,De=None,
     Dca:        float, optional
                 Distance between phases C and A, in feet.
     Dagw:       float, optional
+                Distance between phase A and ground conductor, in feet.
     Dbgw:       float, optional
+                Distance between phase B and ground conductor, in feet.
     Dcgw:       float, optional
+                Distance between phase C and ground conductor, in feet.
     resolve:    bool, optional
                 Control argument to specify whether the resultant
                 ground-wire inclusive per-length impedance matrix
@@ -5576,16 +5579,90 @@ def zperlength(Rd=None,Rself=None,Rac=None,Rgwac=None,De=None,
     if resolve and all((Rgwac,Dsgw,Dagw,Dbgw,Dcgw)):
         # Perform Slicing to Retrieve Useful Arrays
         Za = Zperlen[:3,:3]
-        Zb = Zperlen[:3,3:6]
-        Zc = Zperlen[3:6,:3]
-        Zd = Zperlen[3:6,3:6]
-        # Perform Arithmetic to Generate Useful Arrays
-        Zbnew = Zb-Za
-        Zcnew = Zc-Za
-        Zdnew = Za - Zb - Zc + Zd
+        Zb = Zperlen[:3,3:4]
+        Zc = Zperlen[3:4,:3]
+        Zd = Zperlen[3:4,3:4]
         # Calculate New (3x3) Equivalent Zperlen
-        Zperlen = Za - np.dot(Zbnew,np.dot(np.linalg.inv(Zdnew),Zcnew))
+        Zperlen = Za - _np.dot(Zb,_np.dot(_np.linalg.inv(Zd),Zc))
     return(Zperlen)
+    
+# Define Transposition Matrix Formula
+def transposez(Zeq,fabc=1/3,fcab=1/3,fbca=1/3,linelen=1):
+    """
+    Transmission Matrix Equivalent Transposition Calculator
+    
+    Given the impedance matrix and the percent of the line spent
+    in each transposition relation (ABC, CAB, and BCA).
+    
+    .. math::
+       f_{abc}Z_{eq}+f_{cab}R_p^{-1}\\cdot Z_{eq}\\cdot R_p+
+       f_{bca}Z_{eq}R_p\\cdot Z_{eq}\\cdot R_p^{-1}
+    
+    where:
+    
+    .. math:
+       R_p=\\begin{bmatrix}\\\\
+       0 & 0 & 1 \\\\
+       1 & 0 & 0 \\\\
+       0 & 1 & 0 \\\\
+       \\end{bmatrix}
+    
+    Parameters
+    ----------
+    Zeq:        array_like
+                Per-Length (or total length) line impedance in ohms.
+    fabc:       float, optional
+                Percentage of line set with phase relation ABC,
+                default=1/3
+    fcab:       float, optional
+                Percentage of line set with phase relation CAB,
+                default=1/3
+    fbca:       float, optional
+                Percentage of line set with phase relation BCA,
+                default=1/3
+    linelen:    Length of line (unitless), default=1
+    """
+    # Condition Input
+    Zeq = _np.asarray(Zeq)
+    # Define Rp Array
+    Rp = _np.array([
+        [0,0,1],
+        [1,0,0],
+        [0,1,0]
+    ])
+    # Define Inverse Rp Array
+    _Rp = np.linalg.inv(Rp)
+    Zeq = fabc*Zeq + fcab*(_Rp.dot(Zeq.dot(Rp))) + fbca*(Rp.dot(Zeq.dot(_Rp)))
+    Zeq = Zeq * linelen
+    return(Zeq)
+    
+# Define GMD Calculator
+def gmd(Ds,*args):
+    """
+    Simple GMD Calculator
+    
+    Calculates the GMD (Geometric Mean Distance) for a system
+    with the parameters of a list of arguments.
+    
+    .. math:: GMD=(D_s*D_1*\\ddot*D_n)^{\\frac{1}{1+n}}
+    
+    Parameters
+    ----------
+    Ds:         float
+                Self distance (unitless), normally provided from
+                datasheet/reference
+    *args:      floats, optional
+                Remaining set of distance values (unitless)
+    """
+    # Find the Root from Number of Arguments
+    root = len(args) + 1
+    # Calculate the Root Term
+    gmdx = Ds
+    for dist in args:
+        gmdx *= dist
+    # Apply Root Calculation
+    GMD = gmdx**(1/root)
+    return(GMD)
 
 
 # END OF FILE
