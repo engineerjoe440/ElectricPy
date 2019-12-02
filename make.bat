@@ -26,7 +26,7 @@ if errorlevel 9009 (
 )
 
 %SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
-copy source\google3f0012ecef33265f.html .\docs\html \y
+copy source\google3f0012ecef33265f.html .\docs\html /y
 goto end
 
 :help

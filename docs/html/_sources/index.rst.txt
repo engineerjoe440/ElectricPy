@@ -1,7 +1,7 @@
 .. _electricpy_home:
 
 ==========
-ELECTRICPY
+ElectricPy
 ==========
 
 
@@ -20,6 +20,7 @@ for research, development, education, and exploration in the realm of electrical
    * Daniel Allen | Student | Universtiy of Idaho
    * Dr. Dennis Sullivan | Proffessor | University of Idaho
    * Dr. Brian Johnson | Proffessor | University of Idaho
+   * Dr. Joe Law | Proffessor | University of Idaho
    * StackOverflow user gg349
    * Shaurya Uppal | Online Code Contributor
    * Paul Ortman | Power Quality Engineer | Idaho Power | Instructor | University of Idaho
@@ -37,12 +38,13 @@ CONTENTS:
    fault
    bode
 
----------------------
-ADDITIONAL RESOURCES:
----------------------
+-------------------------
+ADDITIONAL PROJECT LINKS:
+-------------------------
 PyPI: https://pypi.org/project/electricpy/
 
 GitHub: https://github.com/engineerjoe440/electricpy
+
 
 -------------
 Dependencies:
@@ -58,7 +60,7 @@ Dependencies:
 INSTALLATION:
 -------------
 
-#. Install required dependencies (NUMPY, SCIPY, SYMPY, NUMDIFFTOOLS, and MATPLOTLIB)
+#. Install required dependencies (NumPy, SciPy, SymPy, NUMDIFFTOOLS, and Matplotlib)
 
    .. code-block:: bash
    
@@ -68,7 +70,7 @@ INSTALLATION:
       $> pip install sympy
       $> pip install numdifftools
   
-#. Install `electricpy`
+#. Install ElectricPy
 
    .. code-block:: bash
    
@@ -94,6 +96,30 @@ To Do List
 * DC/AC Converters
 
 * Stationary and Synchronous Reference Frame conversion Matricies/Constants
+
+
+---------------------
+ADDITIONAL RESOURCES:
+---------------------
+Generic; Data Science:
+
+    * NumPy: https://numpy.org/
+
+    * SciPy: https://scipy.org/
+
+    * Matplotlib: https://matplotlib.org/
+
+    * SymPy: https://www.sympy.org/en/index.html
+
+Electrical Engineering Focus:
+
+    * Python COMTRADE File Interpreter: https://github.com/dparrini/python-comtrade
+    
+    * PandaPower: https://www.pandapower.org/start/
+    
+    * PyPSA: https://github.com/PyPSA/PyPSA
+    
+    * PyPower (no longer supported): https://pypi.org/project/PYPOWER/
 
 
 -------

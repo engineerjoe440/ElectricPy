@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>poleopen2 &#8212; electricpy 0.0.6 documentation</title>
+    <title>poleopen2 &#8212; electricpy 0.1.1 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="electricpy.fault.poleopen1.html" title="poleopen1"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.6 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../fault.html" accesskey="U">FAULT Sub-Module</a> &#187;</li> 
       </ul>
@@ -52,12 +52,12 @@
 <h1>poleopen2<a class="headerlink" href="#poleopen2" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="electricpy.fault.poleopen2">
-<code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">poleopen2</code><span class="sig-paren">(</span><em class="sig-param">Vth</em>, <em class="sig-param">Zseq</em>, <em class="sig-param">sequence=True</em>, <em class="sig-param">reference='A'</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.poleopen2" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">poleopen2</code><span class="sig-paren">(</span><em class="sig-param">Vsrc</em>, <em class="sig-param">Zseq</em>, <em class="sig-param">sequence=True</em>, <em class="sig-param">reference='A'</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.poleopen2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Single Pole Open Fault Calculator</p>
 <p>This function will evaluate the Zero, Positive, and Negative
 sequence currents for a single pole open fault.</p>
 <div class="math notranslate nohighlight">
-\[I_1 = \frac{V_{th}}{Z_1+Z_2+Z_0}\]</div>
+\[I_1 = \frac{V_{src}}{Z_1+Z_2+Z_0}\]</div>
 <div class="math notranslate nohighlight">
 \[I_2 = I_1\]</div>
 <div class="math notranslate nohighlight">
@@ -65,12 +65,12 @@ sequence currents for a single pole open fault.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>Vth</strong> (<em>complex</em>) – The Thevenin-Equivalent-Voltage</p></li>
+<li><p><strong>Vsrc</strong> (<em>complex</em>) – The Source Voltage</p></li>
 <li><p><strong>Zseq</strong> (<em>list of complex</em>) – Tupple of sequence reactances as (Z0, Z1, Z2)</p></li>
 <li><p><strong>sequence</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force return into symmetrical-
 or phase-domain values.</p></li>
-<li><p><strong>reference</strong> (<em>{'A'</em><em>, </em><em>'B'</em><em>, </em><em>'C'}</em>) – Single character denoting the reference, or the
-faulted phase indicator; default=’A’</p></li>
+<li><p><strong>reference</strong> (<em>{'A'</em><em>, </em><em>'B'</em><em>, </em><em>'C'}</em>) – Single character denoting the reference,
+default=’A’</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -135,7 +135,7 @@ faulted phase indicator; default=’A’</p></li>
         <li class="right" >
           <a href="electricpy.fault.poleopen1.html" title="poleopen1"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.0.6 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../fault.html" >FAULT Sub-Module</a> &#187;</li> 
       </ul>
