@@ -37,6 +37,7 @@ CONTENTS:
    constants
    fault
    bode
+   sim
 
 -------------------------
 ADDITIONAL PROJECT LINKS:

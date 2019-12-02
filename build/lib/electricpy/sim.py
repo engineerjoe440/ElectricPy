@@ -54,6 +54,7 @@ def digifiltersim(fin,filter,freqs,NN=1000,dt=0.01,title="",
                 The filter parameter set as shown here:
                 
                 .. code-block:: python
+                   
                    [[ a11, a12, b10, b11, b12],
                    [ a21, a22, b20, b21, b22],
                    [           ...          ],
@@ -824,6 +825,11 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
 # Define Newton-Raphson P/Q Evaluator
 def nr_pq(Ybus,V_set,P_set,Q_set,extend=True,argshape=False,verbose=False):
     """
+    Newton Raphson Real/Reactive Power Function Generator
+    
+    Given specified parameters, will generate the necessary real and reactive
+    power functions necessary to compute the system's power flow.
+    
     Parameters
     ----------
     Ybus:       array_like
@@ -854,7 +860,7 @@ def nr_pq(Ybus,V_set,P_set,Q_set,extend=True,argshape=False,verbose=False):
                 handles. default=True; singular function
     argshape:   bool, optional
                 Control argument to force return of the voltage
-                argument array as a tuple of: (Θ-len, |V|-len).
+                argument array as a tuple of: (Θ-len, V-len).
                 default=False
     verbose:    bool, optional
                 Control argument to print verbose information
@@ -869,7 +875,7 @@ def nr_pq(Ybus,V_set,P_set,Q_set,extend=True,argshape=False,verbose=False):
                 calculation functions based on the real and
                 reactive power values. Function(s) will accept
                 an argument of the form:
-                [Θ1, Θ2,..., Θn, |V1|, |V2|,..., |Vm|]
+                [Θ1, Θ2,..., Θn, V1, V2,..., Vm]
                 where n is the number of busses with unknown
                 voltage angle, and m is the number of busses
                 with unknown voltage magnitude.
@@ -1096,7 +1102,7 @@ def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0='flatstart',eps=1e-4,
                 to 'flatstart' to force function to generate
                 flat voltages and angles of 1∠0°. Must be
                 specified in the form:
-                [Θ1, Θ2,..., Θn, |V1|, |V2|,..., |Vm|]
+                [Θ1, Θ2,..., Θn, V1, V2,..., Vm]
                 where n is the number of busses with unknown
                 voltage angle, and m is the number of busses
                 with unknown voltage magnitude.
@@ -1128,9 +1134,11 @@ def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0='flatstart',eps=1e-4,
                 Least Squares Method (Failover) Epsilon - the error value.
                 default=0.25
     
+    
+    .. image:: /_static/mbuspowerflow_example.png
+    
     Examples
     --------
-    .. image:: source/mbuspowerflow_example.png
     >>> # Perform Power-Flow Analysis for Figure
     >>> import numpy as np
     >>> from electricpy import sim # Import Simulation Submodule
@@ -1145,9 +1153,9 @@ def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0='flatstart',eps=1e-4,
     
     See Also
     --------
-    NewtonRaphson:      Newton-Raphson System Solver
-    nr_pq:              Newton-Raphson System Generator
-    powerflow:          Simple (2-bus) Power Flow Calculator
+    NewtonRaphson:          Newton-Raphson System Solver
+    nr_pq:                  Newton-Raphson System Generator
+    electricpy.powerflow:   Simple (2-bus) Power Flow Calculator
     """
     # Reformat Inputs to Meet Criteria
     if slackbus != 0:

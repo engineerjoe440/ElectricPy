@@ -19,8 +19,8 @@ to aid in scientific calculations.
 .. automodapi:: electricpy
    :no-heading:
    :no-main-docstr:
-   :skip: Pabc
-   :skip: Pdq0
+   :skip: Pabc_im
+   :skip: Pdq0_im
    :skip: hertz
    :skip: horsepower
    :skip: radsec
@@ -41,4 +41,5 @@ SUB-MODULES
    constants
    fault
    bode
+   sim
  

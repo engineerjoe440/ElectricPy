@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Pabc &#8212; electricpy 0.1.1 documentation</title>
+    <title>gmd &#8212; electricpy 0.1.2 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -16,11 +16,12 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.gmd.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="G" href="electricpy.constants.G.html" />
-    <link rel="prev" title="INCLUDED CONSTANTS" href="../constants.html" /> 
+    <link rel="next" title="harmonics" href="electricpy.harmonics.html" />
+    <link rel="prev" title="geninternalv" href="electricpy.geninternalv.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -32,14 +33,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.constants.G.html" title="G"
+          <a href="electricpy.harmonics.html" title="harmonics"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../constants.html" title="INCLUDED CONSTANTS"
+          <a href="electricpy.geninternalv.html" title="geninternalv"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../constants.html" accesskey="U">INCLUDED CONSTANTS</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -48,12 +48,26 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="pabc">
-<h1>Pabc<a class="headerlink" href="#pabc" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="gmd">
+<h1>gmd<a class="headerlink" href="#gmd" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
-<dt id="electricpy.constants.Pabc">
-<code class="sig-prename descclassname">electricpy.constants.</code><code class="sig-name descname">Pabc</code><span class="sig-paren">(</span><em class="sig-param">th</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.constants.Pabc" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="electricpy.gmd">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">gmd</code><span class="sig-paren">(</span><em class="sig-param">Ds</em>, <em class="sig-param">*args</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.gmd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple GMD Calculator</p>
+<p>Calculates the GMD (Geometric Mean Distance) for a system
+with the parameters of a list of arguments.</p>
+<div class="math notranslate nohighlight">
+\[GMD=(D_s*D_1*\ddot*D_n)^{\frac{1}{1+n}}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Ds</strong> (<em>float</em>) – Self distance (unitless), normally provided from
+datasheet/reference</p></li>
+<li><p><strong>*args</strong> (<em>floats</em><em>, </em><em>optional</em>) – Remaining set of distance values (unitless)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </div>
 
@@ -67,15 +81,15 @@
               <img class="logo" src="../_static/ElectricpyLogo.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../constants.html"
-                        title="previous chapter">INCLUDED CONSTANTS</a></p>
+  <p class="topless"><a href="electricpy.geninternalv.html"
+                        title="previous chapter">geninternalv</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="electricpy.constants.G.html"
-                        title="next chapter">G</a></p>
+  <p class="topless"><a href="electricpy.harmonics.html"
+                        title="next chapter">harmonics</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/electricpy.constants.Pabc.rst.txt"
+      <li><a href="../_sources/api/electricpy.gmd.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -103,19 +117,18 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.constants.G.html" title="G"
+          <a href="electricpy.harmonics.html" title="harmonics"
              >next</a> |</li>
         <li class="right" >
-          <a href="../constants.html" title="INCLUDED CONSTANTS"
+          <a href="electricpy.geninternalv.html" title="geninternalv"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../constants.html" >INCLUDED CONSTANTS</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, Joe Stanley.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.2.
     </div>
   </body>
 </html>

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>ElectricPy &#8212; electricpy 0.1.1 documentation</title>
+    <title>ElectricPy &#8212; electricpy 0.1.2 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
@@ -16,6 +16,7 @@
     <script type="text/javascript" src="_static/language_data.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/index.html" />
     <link rel="shortcut icon" href="_static/ElectricpyLogo.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,7 +34,7 @@
         <li class="right" >
           <a href="electricpy.html" title="ELECTRICPY Module"
              accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">electricpy 0.1.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">electricpy 0.1.2 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -72,7 +73,6 @@ for research, development, education, and exploration in the realm of electrical
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="constants.html">INCLUDED CONSTANTS</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="constants.html#functions">Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="constants.html#variables">Variables</a></li>
 </ul>
 </li>
@@ -82,6 +82,10 @@ for research, development, education, and exploration in the realm of electrical
 </li>
 <li class="toctree-l1"><a class="reference internal" href="bode.html">BODE Sub-Module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="bode.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sim.html">SIM Sub-Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sim.html#functions">Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -246,7 +250,9 @@ visit constants page.</p>
 <li><p>Cap. VAR to FARAD Conversion:            farads</p></li>
 <li><p>VSC DC Bus Voltage Calculator:           vscdcbus</p></li>
 <li><p>PLL-VSC Gains Calculator:                vscgains</p></li>
-<li><p>RMS Calculator:                          rms</p></li>
+<li><p>Sinusoid Peak-to-RMS Converter:          rms</p></li>
+<li><p>Sinusoid RMS-to-Peak Converter:          peak</p></li>
+<li><p>Arbitrary Waveform RMS Calculator:       funcrms</p></li>
 <li><p>Step Function:                           step</p></li>
 <li><p>Multi-Argument Convolution:              convolve</p></li>
 <li><p>Convolution Bar Graph Visualizer:        convbar</p></li>
@@ -284,6 +290,21 @@ visit constants page.</p>
 <li><p>Natural Frequency Calculator             natfreq</p></li>
 <li><p>3-Phase Voltage/Current Unbalance:       unbalance</p></li>
 <li><p>Characteristic Impedance Calculator:     characterz</p></li>
+<li><p>Transformer Phase Shift Calculator:      xfmphs</p></li>
+<li><p>Hertz to Radians Converter:              hz_to_rad</p></li>
+<li><p>Radians to Hertz Converter:              rad_to_hz</p></li>
+<li><p>Induction Machine Vth Calculator:        indmachvth</p></li>
+<li><p>Induction Machine Zth Calculator:        indmachzth</p></li>
+<li><p>Induction Machine Pem Calculator:        indmachpem</p></li>
+<li><p>Induction Machine Tem Calculator:        indmachtem</p></li>
+<li><p>Induction Machine Peak Slip Calculator:  indmachpkslip</p></li>
+<li><p>Induction Machine Peak Torque Calc.:     indmachpktorq</p></li>
+<li><p>Induction Machine Rotor Current:         indmachiar</p></li>
+<li><p>Induction Machine Starting Torque:       indmachstarttorq</p></li>
+<li><p>Stator Power for Induction Machine:      pstator</p></li>
+<li><p>Rotor Power for Induction Machine:       protor</p></li>
+<li><p>De Calculator:                           de_calc</p></li>
+<li><p>Z Per Length Calculator:                 zperlength</p></li>
 </ul>
 </div></blockquote>
 </div>
@@ -305,6 +326,11 @@ visit constants page.</p>
 <li><p>Double Line to Ground                 phs2g</p></li>
 <li><p>Line to Line                          phs2</p></li>
 <li><p>Three-Phase Fault                     phs3</p></li>
+<li><p>Single Pole Open:                     poleopen1</p></li>
+<li><p>Double Pole Open:                     poleopen2</p></li>
+<li><p>Simple MVA Calculator:                scMVA</p></li>
+<li><p>Three-Phase MVA Calculator:           phs3mvasc</p></li>
+<li><p>Single-Phase MVA Calculator:          phs1mvasc</p></li>
 <li><p>Faulted Bus Voltage                   busvolt</p></li>
 <li><p>CT Saturation Function                ct_saturation</p></li>
 <li><p>CT C-Class Calculator                 ct_cclass</p></li>
@@ -433,12 +459,12 @@ visit constants page.</p>
         <li class="right" >
           <a href="electricpy.html" title="ELECTRICPY Module"
              >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">electricpy 0.1.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">electricpy 0.1.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, Joe Stanley.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.2.
     </div>
   </body>
 </html>
