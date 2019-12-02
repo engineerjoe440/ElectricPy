@@ -195,7 +195,7 @@ Functions Available in `electricpy.sim.py`
 
 # Define Module Specific Variables
 _name_ = "electricpy"
-_version_ = "0.1.2"
+_version_ = "0.1.4"
 # Version Breakdown:
 # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
 
@@ -1136,9 +1136,17 @@ def powerset(P=None,Q=None,S=None,PF=None):
     #Given P and PF
     elif (P!=None) and (PF!=None):
         S = P/PF
-        Q = Q = _np.sqrt(S**2-P**2)
+        Q = _np.sqrt(S**2-P**2)
         if PF<0:
             Q=-Q
+    # Given P and S
+    elif (P!=None) and (S!=None):
+        Q = _np.sqrt(S**2 - P**2)
+        PF = P/S
+    # Given Q and S
+    elif (Q!=None) and (S!=None):
+        P = _np.sqrt(S**2 - Q**2)
+        PF = P/S
     else:
         raise ValueError("ERROR: Invalid Parameters or too few"+
                         " parameters given to calculate.")
@@ -1327,6 +1335,11 @@ def phasorplot(phasor,title="Phasor Diagram",legend=False,bg=None,
     linewidth:  float, optional
                 Control argument to declare the line thickness. default=None
     """
+    # Load Complex Values if Necessary
+    try:
+        len(phasor)
+    except TypeError:
+        phasor = [phasor]
     # Manage Colors
     if colors==None:
         colors = ["#FF0000","#800000","#FFFF00","#808000","#00ff00","#008000",
@@ -3948,7 +3961,9 @@ def fftplot(dc, real, imag=None, title="Fourier Coefficients"):
     _plt.title(title)
     _plt.plot(a0x,a0y,'g',label="DC-Term")
     _plt.stem(rng,real,'r','ro',label="Real-Terms",use_line_collection=True)
-    if imag != None:
+    try:
+        imag != None
+    except ValueError:
         _plt.stem(rng,imag,'b','bo',label="Imaginary-Terms",use_line_collection=True)
     _plt.xlabel("Harmonics (Multiple of Fundamental)")
     _plt.ylabel("Harmonic Magnitude")
