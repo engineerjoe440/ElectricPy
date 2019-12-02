@@ -45,6 +45,7 @@ extensions = [  'sphinx.ext.autodoc',
                 'sphinx.ext.mathjax',
                 'numpydoc',
                 'sphinx_automodapi.automodapi',
+                'sphinx_sitemap',
 ]
 numpydoc_show_class_members = False
 
@@ -70,6 +71,7 @@ html_theme = 'classic'
 html_static_path = ['_static']
 html_logo="_static/ElectricpyLogo.png"
 html_favicon="_static/ElectricpyLogo.png"
+html_base_url="https://engineerjoe440.github.io/ElectricPy/html/"
 
 github_repo = "electricpy"
 github_user = "engineerjoe440"
