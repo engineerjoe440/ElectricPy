@@ -24,7 +24,11 @@ Importing is reccomended as a command similar to the following command.
    :skip: XFM12
    :skip: Aabc
    :skip: A012
-   :skip: Pabc
+   :skip: Pabc_im
    :skip: Pdq0
+   :skip: Pqd0
+   :skip: Pdq0_im
+   :skip: Cabc
+   :skip: Cxyz
    
  
