@@ -12,6 +12,8 @@
 #
 import os
 import re
+import sys
+print("Build with:", sys.version)
 cwd = os.getcwd()
 nwd = cwd.replace("\\source","\\electricpy")
 # Gather Version Information from Python File
@@ -71,7 +73,7 @@ html_theme = 'classic'
 html_static_path = ['_static']
 html_logo="_static/ElectricpyLogo.png"
 html_favicon="_static/ElectricpyLogo.png"
-html_base_url="https://engineerjoe440.github.io/ElectricPy/html/"
+html_baseurl="https://engineerjoe440.github.io/ElectricPy/html/"
 
 github_repo = "electricpy"
 github_user = "engineerjoe440"

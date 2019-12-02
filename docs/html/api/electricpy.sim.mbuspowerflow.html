@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>mbuspowerflow &#8212; electricpy 0.1.2 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.sim.mbuspowerflow.html" />
+    <link rel="shortcut icon" href="../_static/ElectricpyLogo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="nr_pq" href="electricpy.sim.nr_pq.html" />
+    <link rel="prev" title="digifiltersim" href="electricpy.sim.digifiltersim.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.sim.nr_pq.html" title="nr_pq"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.sim.digifiltersim.html" title="digifiltersim"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../sim.html" accesskey="U">SIM Sub-Module</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="mbuspowerflow">
+<h1>mbuspowerflow<a class="headerlink" href="#mbuspowerflow" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="electricpy.sim.mbuspowerflow">
+<code class="sig-prename descclassname">electricpy.sim.</code><code class="sig-name descname">mbuspowerflow</code><span class="sig-paren">(</span><em class="sig-param">Ybus</em>, <em class="sig-param">Vknown</em>, <em class="sig-param">Pknown</em>, <em class="sig-param">Qknown</em>, <em class="sig-param">X0='flatstart'</em>, <em class="sig-param">eps=0.0001</em>, <em class="sig-param">mxiter=100</em>, <em class="sig-param">returnct=False</em>, <em class="sig-param">degrees=True</em>, <em class="sig-param">split=False</em>, <em class="sig-param">slackbus=0</em>, <em class="sig-param">lsq_eps=0.25</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.sim.mbuspowerflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multi-Bus Power Flow Calculator</p>
+<p>Function wrapper to simplify the evaluation of a power flow calculation.
+Determines the function array (F) and the Jacobian array (J) and uses the
+Newton-Raphson method to iteratively evaluate the system to converge to a
+solution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Ybus</strong> (<em>array_like</em>) – Postitive Sequence Y-Bus Matrix for Network.</p></li>
+<li><p><strong>Vknown</strong> (<em>list of list of float</em>) – List of known and unknown voltages.
+Known voltages should be provided as
+a list of floating values in the form of:
+[mag, ang], unknown voltages should
+be provided as None.</p></li>
+<li><p><strong>Pknown</strong> (<em>list of float</em>) – List of known and unknown real powers.
+Known powers should be provided as
+a floating point value, unknown powers
+should be provided as None. Generated power
+should be noted as positive, consumed power
+should be noted as negative.</p></li>
+<li><p><strong>Qknown</strong> (<em>list of float</em>) – List of known and unknown reactive powers.
+Known powers should be provided as
+a floating point value, unknown powers
+should be provided as None. Generated power
+should be noted as positive, consumed power
+should be noted as negative.</p></li>
+<li><p><strong>X0</strong> (<em>{'flatstart'</em><em>, </em><em>list of float}</em><em>, </em><em>optional</em>) – Initial conditions/Initial guess. May be set
+to ‘flatstart’ to force function to generate
+flat voltages and angles of 1∠0°. Must be
+specified in the form:
+[Θ1, Θ2,…, Θn, V1, V2,…, Vm]
+where n is the number of busses with unknown
+voltage angle, and m is the number of busses
+with unknown voltage magnitude.</p></li>
+<li><p><strong>eps</strong> (<em>float</em><em>, </em><em>optional</em>) – Epsilon - The error value, default=0.0001</p></li>
+<li><p><strong>mxiter</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum Iterations - The highest number of
+iterations allowed, default=100</p></li>
+<li><p><strong>returnct</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force function to return
+the iteration counter from the Newton-Raphson
+solution. default=False</p></li>
+<li><p><strong>degrees</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force returned angles to
+degrees. default=True</p></li>
+<li><p><strong>split</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force returned array to
+split into lists of magnitudes and angles.
+default=False</p></li>
+<li><p><strong>slackbus</strong> (<em>int</em><em>, </em><em>optional</em>) – Control argument to specify the bus index for
+the slack bus. If the slack bus is not positioned
+at bus index 1 (default), this control can be
+used to reformat the data sets to a format
+necessary for proper generation and Newton
+Raphson computation. Must be zero-based.
+default=0</p></li>
+<li><p><strong>lsq_eps</strong> (<em>float</em><em>, </em><em>optional</em>) – Least Squares Method (Failover) Epsilon - the error value.
+default=0.25</p></li>
+</ul>
+</dd>
+</dl>
+<img alt="../_images/mbuspowerflow_example.png" src="../_images/mbuspowerflow_example.png" />
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Perform Power-Flow Analysis for Figure</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy</span> <span class="k">import</span> <span class="n">sim</span> <span class="c1"># Import Simulation Submodule</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ybustest</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mi">10</span><span class="n">j</span><span class="p">,</span><span class="mi">10</span><span class="n">j</span><span class="p">],</span>
+<span class="go">    [10j,-10j]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Vlist</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">]]</span> <span class="c1"># We don&#39;t know the voltage or angle at bus 2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Plist</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span><span class="o">-</span><span class="mf">2.0</span><span class="p">]</span> <span class="c1"># 2pu watts consumed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Qlist</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span><span class="o">-</span><span class="mf">1.0</span><span class="p">]</span> <span class="c1"># 1pu vars consumed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nr_res</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">mbuspowerflow</span><span class="p">(</span><span class="n">ybustest</span><span class="p">,</span><span class="n">Vlist</span><span class="p">,</span><span class="n">Plist</span><span class="p">,</span><span class="n">Qlist</span><span class="p">,</span><span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">returnct</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">nr_res</span><span class="p">)</span>
+<span class="go">([array([-13.52185223]), array([ 0.85537271])], 4)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="electricpy.sim.NewtonRaphson.html#electricpy.sim.NewtonRaphson" title="electricpy.sim.NewtonRaphson"><code class="xref py py-func docutils literal notranslate"><span class="pre">NewtonRaphson()</span></code></a></dt><dd><p>Newton-Raphson System Solver</p>
+</dd>
+<dt><a class="reference internal" href="electricpy.sim.nr_pq.html#electricpy.sim.nr_pq" title="electricpy.sim.nr_pq"><code class="xref py py-func docutils literal notranslate"><span class="pre">nr_pq()</span></code></a></dt><dd><p>Newton-Raphson System Generator</p>
+</dd>
+<dt><a class="reference internal" href="electricpy.powerflow.html#electricpy.powerflow" title="electricpy.powerflow"><code class="xref py py-func docutils literal notranslate"><span class="pre">electricpy.powerflow()</span></code></a></dt><dd><p>Simple (2-bus) Power Flow Calculator</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ElectricpyLogo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.sim.digifiltersim.html"
+                        title="previous chapter">digifiltersim</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.sim.nr_pq.html"
+                        title="next chapter">nr_pq</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/electricpy.sim.mbuspowerflow.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.sim.nr_pq.html" title="nr_pq"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.sim.digifiltersim.html" title="digifiltersim"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../sim.html" >SIM Sub-Module</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Joe Stanley.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.2.
+    </div>
+  </body>
+</html>

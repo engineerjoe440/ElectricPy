@@ -1,6 +1,6 @@
-Pabc
-====
+e0
+==
 
 .. currentmodule:: electricpy.constants
 
-.. autofunction:: Pabc
+.. autodata:: e0

@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>ramp_response &#8212; electricpy 0.1.2 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.sim.ramp_response.html" />
+    <link rel="shortcut icon" href="../_static/ElectricpyLogo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="statespace" href="electricpy.sim.statespace.html" />
+    <link rel="prev" title="parabolic_response" href="electricpy.sim.parabolic_response.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.sim.statespace.html" title="statespace"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.sim.parabolic_response.html" title="parabolic_response"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../sim.html" accesskey="U">SIM Sub-Module</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ramp-response">
+<h1>ramp_response<a class="headerlink" href="#ramp-response" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="electricpy.sim.ramp_response">
+<code class="sig-prename descclassname">electricpy.sim.</code><code class="sig-name descname">ramp_response</code><span class="sig-paren">(</span><em class="sig-param">system</em>, <em class="sig-param">npts=1000</em>, <em class="sig-param">dt=0.01</em>, <em class="sig-param">combine=True</em>, <em class="sig-param">xlim=False</em>, <em class="sig-param">title='Ramp Response'</em>, <em class="sig-param">errtitle='Ramp Response Error'</em>, <em class="sig-param">resplabel='Ramp Response'</em>, <em class="sig-param">funclabel='Ramp Function'</em>, <em class="sig-param">errlabel='Error'</em>, <em class="sig-param">filename=None</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.sim.ramp_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ramp Function Response Plotter Function</p>
+<p>Given a transfer function, plots the response against step input
+and plots the error for the function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>system</strong> (<em>array_like</em>) – The Transfer Function; can be provided as the following:
+* 1 (instance of lti)
+* 2 (num, den)
+* 3 (zeros, poles, gain)
+* 4 (A, B, C, D)</p></li>
+<li><p><strong>npts</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of steps to calculate over; default is 1000.</p></li>
+<li><p><strong>dt</strong> (<em>float</em><em>, </em><em>optional</em>) – Difference between each data point, default is 0.01.</p></li>
+<li><p><strong>combine</strong> (<em>bool</em><em>, </em><em>optional</em>) – If combination of numerator and denominator is needed.
+This value should be set to “True” if the parts should be
+combined to show the complete system with feedback.
+default=True.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Additional string to be added to plot titles;
+default=””</p></li>
+<li><p><strong>xlim</strong> (<em>list</em><em>, </em><em>optional</em>) – Limit in x-axis for graph plot. Accepts tuple of: (xmin, xmax).
+default=False.</p></li>
+<li><p><strong>filename</strong> (<em>str</em><em>, </em><em>optional</em>) – File directory/name with which the plotted figures
+should be saved. default=None</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ElectricpyLogo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.sim.parabolic_response.html"
+                        title="previous chapter">parabolic_response</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.sim.statespace.html"
+                        title="next chapter">statespace</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/electricpy.sim.ramp_response.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.sim.statespace.html" title="statespace"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.sim.parabolic_response.html" title="parabolic_response"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../sim.html" >SIM Sub-Module</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Joe Stanley.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.2.
+    </div>
+  </body>
+</html>

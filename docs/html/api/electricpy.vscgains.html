@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>vscgains &#8212; electricpy 0.1.1 documentation</title>
+    <title>vscgains &#8212; electricpy 0.1.2 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -16,6 +16,7 @@
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.vscgains.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -37,7 +38,7 @@
         <li class="right" >
           <a href="electricpy.vscdcbus.html" title="vscdcbus"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>  
@@ -51,7 +52,7 @@
 <h1>vscgains<a class="headerlink" href="#vscgains" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="electricpy.vscgains">
-<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">vscgains</code><span class="sig-paren">(</span><em class="sig-param">Rs</em>, <em class="sig-param">Ls</em>, <em class="sig-param">tau=0.005</em>, <em class="sig-param">f=60</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.vscgains" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">vscgains</code><span class="sig-paren">(</span><em class="sig-param">Rs</em>, <em class="sig-param">Ls</em>, <em class="sig-param">tau=0.005</em>, <em class="sig-param">freq=60</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.vscgains" title="Permalink to this definition">¶</a></dt>
 <dd><p>Voltage Sourced Converter Gains Calculator</p>
 <p>This function is designed to calculate the kp, ki,
 and omega-not-L values for a Phase-Lock-Loop based VSC.</p>
@@ -61,7 +62,7 @@ and omega-not-L values for a Phase-Lock-Loop based VSC.</p>
 <li><p><strong>Rs</strong> (<em>float</em>) – The equiv-resistance (in ohms) of the VSC</p></li>
 <li><p><strong>Ls</strong> (<em>float</em>) – The equiv-inductance (in Henrys) of the VSC</p></li>
 <li><p><strong>tau</strong> (<em>float</em><em>, </em><em>optional</em>) – The desired time-constant, default=0.005</p></li>
-<li><p><strong>f</strong> (<em>float</em><em>, </em><em>optional</em>) – The system frequency (in Hz), default=60</p></li>
+<li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – The system frequency (in Hz), default=60</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -128,13 +129,13 @@ and omega-not-L values for a Phase-Lock-Loop based VSC.</p>
         <li class="right" >
           <a href="electricpy.vscdcbus.html" title="vscdcbus"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, Joe Stanley.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.2.
     </div>
   </body>
 </html>

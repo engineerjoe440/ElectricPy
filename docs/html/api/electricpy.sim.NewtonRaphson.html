@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>NewtonRaphson &#8212; electricpy 0.1.2 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.sim.NewtonRaphson.html" />
+    <link rel="shortcut icon" href="../_static/ElectricpyLogo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="digifiltersim" href="electricpy.sim.digifiltersim.html" />
+    <link rel="prev" title="SIM Sub-Module" href="../sim.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.sim.digifiltersim.html" title="digifiltersim"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../sim.html" title="SIM Sub-Module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../sim.html" accesskey="U">SIM Sub-Module</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="newtonraphson">
+<h1>NewtonRaphson<a class="headerlink" href="#newtonraphson" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="electricpy.sim.NewtonRaphson">
+<code class="sig-prename descclassname">electricpy.sim.</code><code class="sig-name descname">NewtonRaphson</code><span class="sig-paren">(</span><em class="sig-param">F</em>, <em class="sig-param">J</em>, <em class="sig-param">X0</em>, <em class="sig-param">eps=0.0001</em>, <em class="sig-param">mxiter=100</em>, <em class="sig-param">lsq_eps=0.25</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.sim.NewtonRaphson" title="Permalink to this definition">¶</a></dt>
+<dd><p>Newton Raphson Calculator</p>
+<p>Solve nonlinear system F=0 by Newton’s method.
+J is the Jacobian of F. Both F and J must be functions of x.
+At input, x holds the start value. The iteration continues
+until ||F|| &lt; eps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>F</strong> (<em>array_like</em>) – The Non-Linear System; a function handle/instance.
+The input function must accept only one (1) argument as an
+array or int/float representing the variables required.</p></li>
+<li><p><strong>J</strong> (<em>array_like</em>) – The Jacobian of F; a function handle/instance.
+The input Jacobian of F must accept only one (1) argument as
+an array or int/float representing the variables required.</p></li>
+<li><p><strong>X0</strong> (<em>array_like</em>) – The Initial Value (or initial guess); a representative array.</p></li>
+<li><p><strong>eps</strong> (<em>float</em><em>, </em><em>optional</em>) – Epsilon - The error value, default=0.0001</p></li>
+<li><p><strong>mxiter</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum Iterations - The highest number of iterations allowed,
+default=100</p></li>
+<li><p><strong>lsq_eps</strong> (<em>float</em><em>, </em><em>optional</em>) – Least Squares Method (Failover) Epsilon - the error value.
+default=0.25</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>X0</strong> (<em>array_like</em>) – The computed result</p></li>
+<li><p><strong>iteration_counter</strong> (<em>int</em>) – The number of iterations completed before returning
+either due to solution being found, or max iterations
+being surpassed.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy</span> <span class="k">import</span> <span class="n">sim</span> <span class="c1"># Import Simulation Submodule</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">F</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="go">    matr = np.array([[x[1]*10*np.sin(x[0])+2],</span>
+<span class="go">        [x[1]*(-10)*np.cos(x[0])+x[1]**2*10+1]])</span>
+<span class="go">    return(matr)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">J</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="go">    matr = np.array([[10*x[1]*np.cos(x[0]), 10*np.sin(x[0])],</span>
+<span class="go">        [10*x[1]*np.sin(x[0]), -10*np.cos(x[0])+20*x[1]]])</span>
+<span class="go">    return(matr)</span>
+<span class="go"># Now compute Newton-Raphson</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span><span class="p">,</span> <span class="nb">iter</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">NewtonRaphson</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">J</span><span class="p">,</span><span class="n">X0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="go">[-0.236,0.8554]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">iter</span><span class="p">)</span> <span class="c1"># Iteration Counter</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="electricpy.sim.nr_pq.html#electricpy.sim.nr_pq" title="electricpy.sim.nr_pq"><code class="xref py py-func docutils literal notranslate"><span class="pre">nr_pq()</span></code></a></dt><dd><p>Newton-Raphson System Generator</p>
+</dd>
+<dt><a class="reference internal" href="electricpy.sim.mbuspowerflow.html#electricpy.sim.mbuspowerflow" title="electricpy.sim.mbuspowerflow"><code class="xref py py-func docutils literal notranslate"><span class="pre">mbuspowerflow()</span></code></a></dt><dd><p>Multi-Bus Power Flow Calculator</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ElectricpyLogo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../sim.html"
+                        title="previous chapter">SIM Sub-Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.sim.digifiltersim.html"
+                        title="next chapter">digifiltersim</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/electricpy.sim.NewtonRaphson.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.sim.digifiltersim.html" title="digifiltersim"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../sim.html" title="SIM Sub-Module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../sim.html" >SIM Sub-Module</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Joe Stanley.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.2.
+    </div>
+  </body>
+</html>
