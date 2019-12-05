@@ -130,6 +130,8 @@ Included Functions
  - Rotor Power for Induction Machine:       protor
  - De Calculator:                           de_calc
  - Z Per Length Calculator:                 zperlength
+ - Induction Machine FOC Rating Calculator: indmachfocratings
+ - Induction Machine FOC Control Calc.:     imfoc_control
 
 Additional Available Sub-Modules
 --------------------------------
@@ -195,7 +197,7 @@ Functions Available in `electricpy.sim.py`
 
 # Define Module Specific Variables
 _name_ = "electricpy"
-_version_ = "0.1.4"
+_version_ = "0.1.5"
 # Version Breakdown:
 # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
 
@@ -210,6 +212,7 @@ import numpy as _np
 import matplotlib as _matplotlib
 import matplotlib.pyplot as _plt
 import cmath as _c
+from scipy.optimize import fsolve as _fsolve
 
 
 # Define Phase Angle Generator
@@ -579,7 +582,7 @@ def tflatex(sys,sysp=None,var='s',predollar=True,
     return( latex )
 
 # Define Complex Composition Function
-def compose(arr):
+def compose(*arr):
     """
     Complex Composition Function
     
@@ -600,6 +603,9 @@ def compose(arr):
     arr:        array_like
                 The input of real and imaginary term(s)
     """
+    # Condition Input
+    if len(arr) == 1:
+        arr = arr[0] # Extract 0-th term
     # Input comes in various forms, we must first detect shape
     arr = _np.asarray( arr ) # Format as Numpy Array
     # Gather Shape to Detect Format
@@ -621,10 +627,10 @@ def compose(arr):
         # Successfully Generated Array, Return
         return( retarr )
     except: # 1-Dimension Array
-        len = arr.size
+        length = arr.size
         # Test for invalid Array Size
-        if len != 2:
-            raise ValueError("Invalid Array Size, Saw Length of "+str(len))
+        if length != 2:
+            raise ValueError("Invalid Array Size, Saw Length of "+str(length))
         # Valid Size, Calculate and Return
         return( arr[0] + 1j*arr[1] )
 
@@ -5679,5 +5685,190 @@ def gmd(Ds,*args):
     GMD = gmdx**(1/root)
     return(GMD)
 
+# Define FOC IM Rated Value Calculator
+def indmachfocratings(Rr,Rs,Lm,Llr=0,Lls=0,Lr=None,
+                      Ls=None,Vdqs=1,Tem=1,wes=1):
+    """
+    FOC Ind. Machine Rated Operation Calculator
+    
+    Determines the parameters and characteristics of a Field-
+    Oriented-Controlled Induction Machine operating at its
+    rated limits.
+    
+    Parameters
+    ----------
+    Rr:         float
+                Rotor resistance in per-unit-ohms
+    Rs:         float
+                Stator resistance in per-unit-ohms
+    Lm:         float
+                Magnetizing inductance in per-unit-Henrys
+    Llr:        float, optional
+                Rotor leakage inductance in per-unit-Henrys,
+                default=0
+    Lls:        float, optional
+                Stator leakage inductance in per-unit-Henrys,
+                default=0
+    Lr:         float, optional
+                Rotor inductance in per-unit-Henrys
+    Ls:         float, optional
+                Stator inductance in per-unit-Henrys
+    Vdqs:       complex, optional
+                The combined DQ-axis voltage required for rated
+                operation, in per-unit-volts, default=1+j0
+    Tem:        float, optional
+                The mechanical torque required for rated operation,
+                in per-unit-newton-meters, default=1
+    wes:        float, optional
+                The per-unit electrical system frequency, default=1
+    
+    Returns
+    -------
+    Idqr:       complex
+                Combined DQ-axis Rotor Current in per-unit-amps
+    Idqs:       complex
+                Combined DQ-axis Stator Current in per-unit-amps
+    LAMdqr:     complex
+                Combined DQ-axis Rotor Flux in per-unit
+    LAMdqs:     complex
+                Combined DQ-axis Stator Flux in per-unit
+    slip_rat:   float
+                Rated Slip as percent of rotational and system frequencies
+    w_rat:      float
+                Rated System frequency in per-unit-rad/sec
+    lamdr_rat:  float
+                Rated D-axis rotor flux in per-unit
+    """
+    # Condition Inputs:
+    if Ls == None: # Use Lls instead of Ls
+        Ls = Lls + Lm
+    if Lr == None: # Use Llr instead of Lr
+        Lr = Llr + Lm
+    # Define Equations Function as Solver
+    def equations(val):
+        Idr,Iqr,Ids,Iqs,LAMdr,LAMqr,LAMds,LAMqs,wr = val
+        A = (Rs*Ids - wes*LAMqs) - Vdqs
+        B = Rs*Iqs - wes*LAMds
+        C = Rr*Idr - (wes-wr)*LAMqr
+        D = Rr*Iqr + (wes-wr)*LAMdr
+        E = (Ls*Ids + Lm*Idr) - LAMds
+        F = (Ls*Iqs + Lm*Iqr) - LAMqs
+        G = (Lm*Ids+Lr*Idr) - LAMdr
+        H = (Lm*Iqs+Lr*Iqr) - LAMqr
+        I = (Lm/Lr*(LAMdr*Iqs-LAMqr*Ids)) - Tem
+        return(A,B,C,D,E,F,G,H,I)
+    # Define Initial Guesses
+    Idr0 = -1
+    Iqr0 = -1
+    Ids0 = 1
+    Iqs0 = 1
+    LAMdr0 = Lm*Ids0 + Lr*Idr0
+    LAMqr0 = Lm*Iqs0 + Lr*Iqr0
+    LAMds0 = Ls*Ids0 + Lm*Idr0
+    LAMqs0 = Ls*Iqs0 + Lm*Iqr0
+    wr = 1
+    # Use Iterative Solver to Find Results
+    Idr,Iqr,Ids,Iqs,LAMdr,LAMqr,LAMds,LAMqs,wr = _fsolve(equations,(
+        Idr0,Iqr0,Ids0,Iqs0,LAMdr0,LAMqr0,LAMds0,LAMqs0,wr))
+    # Calculate Remaining Rating Terms
+    slip_rated = (wes-wr)/wes
+    w_rated = wr
+    lamdr_rated = abs(LAMdr+1j*LAMqr)
+    return(
+        compose(Idr,Iqr),
+        compose(Ids,Iqs),
+        compose(LAMdr,LAMqr),
+        compose(LAMds,LAMqs),
+        slip_rated,
+        w_rated,
+        lamdr_rated
+    )
+
+# Define FOC IM Control Equation Evaluation Function
+def imfoc_control(Tem_cmd,LAMdr_cmd,wr_cmd,Rr,Rs,Lm,
+                  Llr=0,Lls=0,Lr=None,Ls=None,s_err=0):
+    """
+    FOC Ind. Machine Rated Operation Calculator
+    
+    Determines the parameters and characteristics of a Field-
+    Oriented-Controlled Induction Machine operating at its
+    rated limits.
+    
+    Parameters
+    ----------
+    Tem_cmd:    float
+                Mechanical torque setpoint in per-unit-newton-meters
+    LAMdr_cmd:  float
+                D-axis flux setpoint in per-unit
+    wr_cmd:     float
+                Mechanical (rotor) speed in per-unit-rad/sec
+    Rr:         float
+                Rotor resistance in per-unit-ohms
+    Rs:         float
+                Stator resistance in per-unit-ohms
+    Lm:         float
+                Magnetizing inductance in per-unit-Henrys
+    Llr:        float, optional
+                Rotor leakage inductance in per-unit-Henrys,
+                default=0
+    Lls:        float, optional
+                Stator leakage inductance in per-unit-Henrys,
+                default=0
+    Lr:         float, optional
+                Rotor inductance in per-unit-Henrys
+    Ls:         float, optional
+                Stator inductance in per-unit-Henrys
+    s_err:      float, optional
+                Error in slip calculation as a percent (e.g. 0.25),
+                default=0
+    
+    Returns
+    -------
+    Vdqs:       complex
+                Combined DQ-axis Stator Voltage in per-unit volts
+    Idqr:       complex
+                Combined DQ-axis Rotor Current in per-unit-amps
+    Idqs:       complex
+                Combined DQ-axis Stator Current in per-unit-amps
+    LAMdqr:     complex
+                Combined DQ-axis Rotor Flux in per-unit
+    LAMdqs:     complex
+                Combined DQ-axis Stator Flux in per-unit
+    wslip:      float
+                Machine Slip frequency in per-unit-rad/sec
+    wes:        float
+                The electrical system frequency in per-unit-rad/sec
+    """
+    # Condition Inputs:
+    if Ls == None: # Use Lls instead of Ls
+        Ls = Lls + Lm
+    if Lr == None: # Use Llr instead of Lr
+        Lr = Llr + Lm
+    # Calculate Additional Constraints
+    sigma = (1-Lm**2/(Ls*Lr))
+    accuracy = 1+s_err
+    # Command Values (Transient and Steady State)
+    Ids = LAMdr_cmd/Lm
+    Iqs = Tem_cmd/((Lm/Lr)*LAMdr_cmd)
+    wslip = Rr/(Lr*accuracy) * (Lm*Iqs)/LAMdr_cmd
+    wes = wslip + wr_cmd
+    # Stator dq Voltages (Steady State)
+    Vds = Rs*Ids - wes*sigma*Ls*Iqs
+    Vqs = Rs*Iqs - wes*Ls*Ids
+    # Remaining Steady State
+    Iqr = -Lm/Lr * Iqs
+    Idr = 0
+    LAMqr = 0
+    LAMqs = sigma*Ls*Iqs
+    LAMds = Ls*Ids
+    return(
+        compose(Vds,Vqs),
+        compose(Idr,Iqr),
+        compose(Ids,Iqs),
+        compose(LAMdr_cmd,LAMqr),
+        compose(LAMds,LAMqs),
+        wslip,
+        wes
+    )
 
 # END OF FILE
