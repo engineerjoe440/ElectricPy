@@ -40,6 +40,8 @@ Included Functions
 - Instantaneous Overcurrent PU:         instoc
 - Generator Loss of Field Settings:     genlossfield
 - Thermal Time Limit Calculator:        thermaltime
+- Synchronous Machine Symm. Current:    synmach_Ia
+- Synchronous Machine Asymm. Current:   synmach_Iasym
 """
 ####################################################################
 
@@ -1706,5 +1708,92 @@ def thermaltime(In,Ibase,tbase):
     return(tn)
     
 
+# Define Synch. Machine Fault Current Calculator
+def synmach_Ia(t,Eq,Xd,Xdp,Xdpp,Tdp,Tdpp):
+    """
+    Synch. Machine Symmetrical Fault Current Calc.
+    
+    Determines the Symmetrical Fault Current of a synchronous
+    machine given the machine parameters, the internal voltage,
+    and the time for which to calculate.
+    
+    .. math:: I_a(t)=\\sqrt{2}\\left|E_q\\right|\\left[
+       \\frac{1}{X_d}+\\left(\\frac{1}{X'_d}-\\frac{1}{X_d}
+       \\right)\\cdot e^{\\frac{-t}{T'_d}}+\\left(\\frac{1}
+       {X"_d}-\\frac{1}{X'_d}\\right)\\cdot e^{\\frac{-t}{T"_d}}
+       \\right]
+    
+    Parameters
+    ----------
+    t:          float
+                Time at which to calculate the fault current
+    Eq:         float
+                The internal machine voltage in per-unit-volts
+    Xd:         float
+                The Xd (d-axis) reactance in per-unit-ohms
+    Xdp:        float
+                The X"d (d-axis transient) reactance in
+                per-unit-ohms
+    Xdpp:       float
+                The X"d (d-axis subtransient) reactance in
+                per-unit-ohms
+    Tdp:        float
+                The T'd (d-axis transient) time constant of the
+                machine in seconds
+    Tdpp:       float
+                The T"d (d-axis subtransient) time constant of
+                the machine in seconds
+    
+    Returns
+    -------
+    Ia:         float
+                Peak symmetrical fault current in per-unit-amps
+    """
+    # Calculate Time-Constant Term
+    t_c = 1/Xd+(1/Xdp-1/Xd)*_np.exp(-t/Tdp)+(1/Xdpp-1/Xdp)*_np.exp(-t/Tdpp)
+    # Calculate Fault Current
+    Ia = _np.sqrt(2)*abs(Eq)*t_c
+    return(Ia)
+
+# Define Synch. Machine Asymmetrical Current Calculator
+def synmach_Iasym(t,Eq,Xdpp,Xqpp,Ta):
+    """
+    Synch. Machine Asymmetrical Fault Current Calc.
+    
+    Determines the asymmetrical fault current of a synchronous
+    machine given the machine parameters, the internal voltage,
+    and the time for which to calculate.
+    
+    .. math:: I_{asym}=\\sqrt{2}\\left|E_q\\right|\\frac{1}{2}
+       \\left(\\frac{1}{X"_d}+\\frac{1}{X"_q}\\right)e^{\\frac{-t}
+       {T_a}}
+    
+    Parameters
+    ----------
+    t:          float
+                Time at which to calculate the fault current
+    Eq:         float
+                The internal machine voltage in per-unit-volts
+    Xdpp:       float
+                The X"d (d-axis subtransient) reactance in
+                per-unit-ohms
+    Xqpp:       float
+                The X"q (q-axis subtransient) reactance in
+                per-unit-ohms
+    Ta:         float
+                Armature short-circuit (DC) time constant in seconds
+    
+    Returns
+    -------
+    Iasym:      float
+                Peak asymmetrical fault current in per-unit-amps
+    """
+    # Calculate Time Constant Term
+    t_c = 1/Xdpp + 1/Xqpp
+    # Calculate Asymmetrical Current
+    Iasym = _np.sqrt(2)*abs(Eq)*1/2*t_c*_np.exp(-t/Ta)
+    return(Iasym)
+    
+    
 
 # END OF FILE

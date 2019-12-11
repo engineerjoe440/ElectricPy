@@ -132,6 +132,8 @@ Included Functions
  - Z Per Length Calculator:                 zperlength
  - Induction Machine FOC Rating Calculator: indmachfocratings
  - Induction Machine FOC Control Calc.:     imfoc_control
+ - Synchronous Machine Internal Voltage:    synmach_Eq
+ - Voltage / Current / PF Relation:         vipf
 
 Additional Available Sub-Modules
 --------------------------------
@@ -175,6 +177,8 @@ Functions Available in `electricpy.fault.py`
  - Instantaneous Overcurrent PU:         instoc
  - Generator Loss of Field Settings:     genlossfield
  - Thermal Time Limit Calculator:        thermaltime
+ - Synchronous Machine Symm. Current:    synmach_Ia
+ - Synchronous Machine Asymm. Current:   synmach_Iasym
 
 Functions Available in `electricpy.bode.py`
 -------------------------------------------
@@ -197,7 +201,7 @@ Functions Available in `electricpy.sim.py`
 
 # Define Module Specific Variables
 _name_ = "electricpy"
-_version_ = "0.1.5"
+_version_ = "0.1.6"
 # Version Breakdown:
 # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
 
@@ -656,8 +660,16 @@ def tcycle(ncycles=1,freq=60):
     t:          float
                 Total time for *ncycles*
     """
+    # Condition Inputs
+    ncycles = _np.asarray(ncycles)
+    freq = _np.asarray(freq)
     # Evaluate the time for ncycles
-    return(ncycles/freq)
+    time = ncycles/freq
+    # Return
+    if len(time) == 1:
+        return(time[0])
+    else:
+        return(time)
 
 # Define Reactance Calculator
 def reactance(z,freq=60,sensetivity=1e-12):
@@ -1092,7 +1104,7 @@ def phaseline(VLL=None,VLN=None,Iline=None,Iphase=None,complex=False):
     return(abs( output ))
 
 # Define Power Set Function
-def powerset(P=None,Q=None,S=None,PF=None):
+def powerset(P=None,Q=None,S=None,PF=None,find=''):
     """
     Power Triangle Conversion Function
     
@@ -1115,6 +1127,9 @@ def powerset(P=None,Q=None,S=None,PF=None):
             Power Factor, unitless, provided as a
             decimal value, lagging is positive,
             leading is negative; default=None
+    find:   str, optional
+            Control argument to specify which value
+            should be returned.
     
     Returns
     -------
@@ -1156,9 +1171,18 @@ def powerset(P=None,Q=None,S=None,PF=None):
     else:
         raise ValueError("ERROR: Invalid Parameters or too few"+
                         " parameters given to calculate.")
-    
-    # Return Values!
-    return(P,Q,S,PF)
+    # Return
+    find = find.upper()
+    if find == 'P':
+        return(P)
+    elif find == 'Q':
+        return(Q)
+    elif find == 'S':
+        return(S)
+    elif find == 'PF':
+        return(PF)
+    else:
+        return(P,Q,S,PF)
 
 # Define Power Triangle Function
 def powertriangle(P=None,Q=None,S=None,PF=None,color="red",
@@ -1309,7 +1333,8 @@ def transformertest(Poc=False,Voc=False,Ioc=False,Psc=False,Vsc=False,
 # Define Phasor Plot Generator
 def phasorplot(phasor,title="Phasor Diagram",legend=False,bg=None,
                colors=None,radius=None,linewidth=None,size=None,
-               filename=None,plot=True,):
+               filename=None,plot=True,label=False,labels=False,
+               tolerance=None):
     """
     Phasor Plotting Function
     
@@ -1325,7 +1350,8 @@ def phasorplot(phasor,title="Phasor Diagram",legend=False,bg=None,
                 The Plot Title, default="Phasor Diagram"
     legend:     bool, optional
                 Control argument to enable displaying the legend, must be passed
-                as an array or list of strings, default=False
+                as an array or list of strings. `label` and `labels` are mimic-
+                arguments and will perform similar operation, default=False
     bg:         string, optional
                 Background-Color control, default="#d5de9c"
     radius:     float, optional
@@ -1340,6 +1366,11 @@ def phasorplot(phasor,title="Phasor Diagram",legend=False,bg=None,
                 Control argument for figure size. default=None
     linewidth:  float, optional
                 Control argument to declare the line thickness. default=None
+    tolerance:  float, optional
+                Minimum magnitude to plot, anything less than tolerance will be
+                plotted as a single point at the origin, by default, the tolerance
+                is scaled to be 1/25-th the maximum radius. To disable the tolerance,
+                simply provide either False or -1.
     """
     # Load Complex Values if Necessary
     try:
@@ -1353,9 +1384,19 @@ def phasorplot(phasor,title="Phasor Diagram",legend=False,bg=None,
     # Scale Radius
     if radius==None:
         radius = _np.abs(phasor).max()
+    # Set Tolerance
+    if tolerance==None:
+        tolerance = radius/25
+    elif tolerance==False:
+        tolerance = -1
     # Set Background Color
     if bg==None:
         bg = "#FFFFFF"
+    # Load labels if handled in other argument
+    if label!=False:
+        legend = label
+    if labels!=False:
+        legend = labels
     # Check for more phasors than colors
     numphs = len(phasor)
     numclr = len(colors)
@@ -1369,7 +1410,6 @@ def phasorplot(phasor,title="Phasor Diagram",legend=False,bg=None,
     # Make a square figure
     fig = _plt.figure(figsize=(size, size))
     ax = fig.add_axes([0.1, 0.1, 0.8, 0.8], polar=True, facecolor=bg)
-    ax.set_rmax(radius)
     _plt.grid(True)
     
     # Plot the diagram
@@ -1379,12 +1419,19 @@ def phasorplot(phasor,title="Phasor Diagram",legend=False,bg=None,
         mag, ang_r = _c.polar(phasor[i])
         # Plot with labels
         if legend!=False:
-            hand = _plt.arrow(0,0,ang_r,mag,color=colors[i],
-                              label=legend[i],linewidth=linewidth)
+            if mag > tolerance:
+                hand = _plt.arrow(0,0,ang_r,mag,color=colors[i],
+                                  label=legend[i],linewidth=linewidth)
+            else:
+                hand = _plt.plot(0,0,'o',markersize=linewidth*3,
+                                 label=legend[i],color=colors[i])
             handles = _np.append(handles,[hand])
         # Plot without labels
         else: _plt.arrow(0,0,ang_r,mag,color=colors[i],linewidth=linewidth)
     if legend!=False: _plt.legend((handles),legend)
+    # Set Minimum and Maximum Radius Terms
+    ax.set_rmax(radius)
+    ax.set_rmin(0)
     if filename!=None:
         if not any(sub in filename for sub in ['.png','.jpg']):
             filename += '.png' # Add File Extension
@@ -5870,5 +5917,118 @@ def imfoc_control(Tem_cmd,LAMdr_cmd,wr_cmd,Rr,Rs,Lm,
         wslip,
         wes
     )
+
+# Define Synch. Machine Eq Calculator
+def synmach_Eq(Vt_pu,Itmag,PF,Ra,Xd,Xq):
+    """
+    Synchronous Machine Eq Calculator
+    
+    Given specified parameter set, will calculate
+    the internal voltage on the q-axis (Eq).
+    
+    .. math:: E_q=V_{t_{pu}}-\\left[R_a\\cdot I_{t_{pu}}+
+       j\\cdot X_q\\cdot I_{t_{pu}}+j(X_d-X_q)\\cdot I_{ad}\\right]
+    
+    where:
+    
+    .. math:: I_{t_{pu}}=I_{t_{mag}}\\cdot e^{-j(
+       \\angle{V_{t_{pu}}}-\\cos^{-1}(PF))}
+    
+    .. math:: \\theta_q=\\angle{V_{t_{pu}}-\\left(R_a
+       I_{t_{pu}}+j\\cdot X_qI_{t_{pu}}\\right)
+    
+    .. math:: I_{ad}=\\left|I_{t_{pu}}\\cdot\\sin(
+       -\\cos^{-1}(PF)+\\theta_q)\\right|e^{j(\\theta_q
+       -90°)}
+    
+    Parameters
+    ----------
+    Vt_pu:      complex
+                Terminal voltage in per-unit-volts
+    Itmag:      float
+                Terminal current magnitude in per-
+                unit-amps
+    PF:         float
+                Machine Power Factor, (+)ive values denote
+                leading power factor, (-)ive values denote
+                lagging power factor
+    Ra:         float
+                AC resistance in per-unit-ohms
+    Xd:         float
+                D-axis reactance in per-unit-ohms
+    Xq:         float
+                Q-axis reactance in per-unit-ohms
+    
+    Returns
+    -------
+    Eq:         complex
+                Internal Synchronous Machine Voltage
+                in per-unit-volts
+    """
+    # Calculate Required Terms
+    phi = _np.arccos(PF)
+    Itmag = abs(Itmag)
+    It_pu = Itmag*_np.exp(-1j*(_np.angle(Vt_pu)+phi))
+    th_q = _np.angle(Vt_pu - (Ra*It_pu+1j*Xq*It_pu))
+    Iad = (abs(It_pu)*_np.sin(phi+th_q))*_np.exp(1j*(th_q-_np.pi/2))
+    # Calculate Eq
+    Eq = Vt_pu - (Ra*It_pu+1j*Xq*It_pu+1j*(Xd-Xq)*Iad)
+    return(Eq)
+
+# Define Power-Factor Voltage/Current Relation
+def vipf(V=None,I=None,PF=1,find=''):
+    """
+    Voltage / Current / Power Factor Solver
+    
+    Given two of the three parameters, will solve for the
+    third, beit voltage, current, or power factor.
+    
+    Parameters
+    ----------
+    V:          complex
+                System voltage (in volts), default=None
+    I:          complex
+                System current (in amps), default=None
+    PF:         float
+                System power factor, (+)ive values denote
+                leading power factor, (-)ive values denote
+                lagging power factor; default=1
+    find:       str, optional
+                Control argument to specify which value
+                should be returned.
+    
+    Returns
+    -------
+    V:          complex
+                System voltage (in volts), default=None
+    I:          complex
+                System current (in amps), default=None
+    PF:         float
+                System power factor, (+)ive values denote
+                leading power factor, (-)ive values denote
+                lagging poer factor; default=1
+    """
+    # Test to find Voltage
+    if isinstance(V,float) and isinstance(I,complex):
+        phi = -_np.sign(PF)*_np.arccos(PF)
+        V = V*_np.exp(-1j*phi)
+    # Test to find Current
+    elif isinstance(V,complex) and isinstance(I,float):
+        phi = _np.sign(PF)*_np.arccos(PF)
+        I = I*_np.exp(-1j*phi)
+    # Test to find Power Factor
+    else:
+        phi = _np.angle(V) - _np.angle(I)
+        PF = _np.cos(phi)
+    # Return
+    find = find.upper()
+    if find == 'V':
+        return(V)
+    elif find == 'I':
+        return(I)
+    elif find == 'PF':
+        return(PF)
+    else:
+        return(V,I,PF)
 
 # END OF FILE
