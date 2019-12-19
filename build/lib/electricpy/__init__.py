@@ -134,6 +134,12 @@ Included Functions
  - Induction Machine FOC Control Calc.:     imfoc_control
  - Synchronous Machine Internal Voltage:    synmach_Eq
  - Voltage / Current / PF Relation:         vipf
+ - Radians/Second to RPM Converter:         rad_to_rpm
+ - RPM to Radians/Second Converter:         rpm_to_rad
+ - Hertz to RPM Converter:                  hz_to_rpm
+ - RPM to Hertz Converter:                  rpm_to_hz
+ - Synchronous Speed Calculator:            syncspeed
+ - Machine Slip Calculator:                 machslip
 
 Additional Available Sub-Modules
 --------------------------------
@@ -177,8 +183,11 @@ Functions Available in `electricpy.fault.py`
  - Instantaneous Overcurrent PU:         instoc
  - Generator Loss of Field Settings:     genlossfield
  - Thermal Time Limit Calculator:        thermaltime
- - Synchronous Machine Symm. Current:    synmach_Ia
+ - Synchronous Machine Symm. Current:    synmach_Isym
  - Synchronous Machine Asymm. Current:   synmach_Iasym
+ - Induction Machine Eigenvalue Calc.:   indmacheigenvalues
+ - Induction Machine 3-Phase-SC Calc.:   indmachphs3sc
+ - Induction Machine 3-Phs-Torq. Calc.:  indmachphs3torq
 
 Functions Available in `electricpy.bode.py`
 -------------------------------------------
@@ -201,7 +210,7 @@ Functions Available in `electricpy.sim.py`
 
 # Define Module Specific Variables
 _name_ = "electricpy"
-_version_ = "0.1.5"
+_version_ = "0.1.6"
 # Version Breakdown:
 # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
 
@@ -744,7 +753,7 @@ def reactance(z,freq=60,sensetivity=1e-12):
 
 # Define display function
 def cprint(val,unit=None,label=None,title=None,
-           pretty=False,printval=True,ret=False,round=3):
+           pretty=True,printval=True,ret=False,round=3):
     """
     Phasor (Complex) Printing Function
     
@@ -769,7 +778,7 @@ def cprint(val,unit=None,label=None,title=None,
                 The pre-pended string describing a set of complex values.
     pretty:     bool, optional
                 Control argument to force printed result to a *pretty*
-                format without array braces. default=False
+                format without array braces. default=True
     printval:   bool, optional
                 Control argument enabling/disabling printing of the string.
                 default=True
@@ -895,8 +904,12 @@ def cprint(val,unit=None,label=None,title=None,
             print(strg)
         elif printval and pretty:
             strg = ''
+            start = True
             for i in printarr:
-                strg += str(i[0]) + '\n'
+                if not start:
+                    strg += '\n'
+                strg += str(i[0])
+                start = False
             if title != None:
                 print(title)
             print(strg)
@@ -1602,7 +1615,7 @@ def voltdiv(Vin,R1,R2,Rload=None):
     return(Vout)
 
 # Define Current Divider Calculator
-def curdiv(Ri,Rset,Vin=None,Iin=None,Vout=False):
+def curdiv(Ri,Rset,Vin=None,Iin=None,Vout=False,combine=True):
     """
     Current Divider Function
     
@@ -1612,18 +1625,20 @@ def curdiv(Ri,Rset,Vin=None,Iin=None,Vout=False):
     
     Parameters
     ----------
-    Ri:     float
-            The Particular Resistor of Interest, should not be included in
-            the tuple passed to Rset.
-    Rset:   float
-            Tuple of remaining resistances (impedances) in network.
-    Vin:    float, optional
-            The input voltage for the system, default=None
-    Iin:    float, optional
-            The input current for the system, default=None
-    Vout:   bool, optional
-            Control Argument to enable return of the voltage across the
-            resistor (impecance) of interest (Ri)
+    Ri:         float
+                The Particular Resistor of Interest, should not be included in
+                the tuple passed to Rset.
+    Rset:       float
+                Tuple of remaining resistances (impedances) in network.
+    Vin:        float, optional
+                The input voltage for the system, default=None
+    Iin:        float, optional
+                The input current for the system, default=None
+    Vout:       bool, optional
+                Control argument to enable return of the voltage across the
+                resistor (impedance) of interest (Ri)
+    combine:    bool, optional
+                Control argument to force resistance combination. default=True
     
     Returns
     -------
@@ -1635,7 +1650,10 @@ def curdiv(Ri,Rset,Vin=None,Iin=None,Vout=False):
     if not isinstance(Rset,tuple):
         Rset = (Rset,) # Set as Tuple
     # Calculate The total impedance
-    Rtot = parallelz( Rset + (Ri,) ) # Combine tuples, then calculate total resistance
+    if combine:
+        Rtot = parallelz( Rset + (Ri,) ) # Combine tuples, then calculate total resistance
+    else:
+        Rtot = parallelz( Rset )
     # Determine Whether Input was given as Voltage or Current
     if(Vin!=None and Iin==None): # Vin Provided
         Iin = Vin / Rtot # Calculate total current
@@ -4229,7 +4247,7 @@ def pfcorrection(S,PFold,PFnew,VLL=None,VLN=None,V=None,freq=60):
     return(C,Qc)
 
 # Define Apparent Power / Voltage / Current Relation Function
-def acpiv(S=None,I=None,VLL=None,VLN=None,V=None):
+def acpiv(S=None,I=None,VLL=None,VLN=None,V=None,PF=None):
     """
     AC Power-Voltage-Current Relation Function
     
@@ -4270,10 +4288,16 @@ def acpiv(S=None,I=None,VLL=None,VLN=None,V=None):
                 Single-phase voltage, returned only if current
                 and apparent power specified, returned as set
                 with other voltages in form: (VLL, VLN, V)
+    PF:         float, optional
+                Supporting argument to convert floating-point
+                apparent power to complex representation.
     """
     # Validate Inputs
     if S == I == None:
         raise ValueError("To few arguments.")
+    # Convert Apparent Power to Complex
+    if PF != None:
+        S = S*PF + 1j*_np.sqrt(S**2 - (S*PF)**2)
     # Solve Single-Phase
     if V != None:
         if S == None:   # Solve for Apparent Power
@@ -4630,7 +4654,7 @@ def xfmphs(style="DY",shift=30):
     # Find Direction
     v = orientation[style.upper()]
     # Calculate Shift
-    phase = np.exp(1j*np.radians(v*abs(shift)))
+    phase = _np.exp(1j*_np.radians(v*abs(shift)))
     # Return
     return(phase)
 
@@ -4899,7 +4923,7 @@ def indmachpem(slip,Rr,Vth=None,Zth=None,Vas=0,Rs=0,Lm=0,Lls=0,
         if not all((Rs,Llr,Lm,Lls)):
             raise ValueError("Invalid Argument Set, too few provided.")
         # Valid Argument Set, Calculate Zth
-        Zth = indmachzth(Rs,Lm,Lls,Ll,Ls,Lr,freq,calcX)
+        Zth = indmachzth(Rs,Lm,Lls,Llr,Ls,Lr,freq,calcX)
     # Use Terms to Calculate Pem
     Rth = Zth.real
     Xth = Zth.imag
@@ -5455,6 +5479,10 @@ def pstator(Pem, slip):
     -------
     Ps:         float
                 Power related to the stator in watts.
+    
+    See Also
+    --------
+    protor:         Rotor Power Calculator for Induction Machines
     """
     # Calculate and Return
     Ps = Pem / (1-slip)
@@ -5482,6 +5510,10 @@ def protor(Pem, slip):
     -------
     Pr:         float
                 Power related to the rotor in watts.
+    
+    See Also
+    --------
+    pstator:         Stator Power Calculator for Induction Machines
     """
     # Calculate and Return
     Pr = -slip * (Pem / (1-slip))
@@ -5981,7 +6013,7 @@ def vipf(V=None,I=None,PF=1,find=''):
     Voltage / Current / Power Factor Solver
     
     Given two of the three parameters, will solve for the
-    third, beit voltage, current, or power factor.
+    third; beit voltage, current, or power factor.
     
     Parameters
     ----------
@@ -6017,9 +6049,12 @@ def vipf(V=None,I=None,PF=1,find=''):
         phi = _np.sign(PF)*_np.arccos(PF)
         I = I*_np.exp(-1j*phi)
     # Test to find Power Factor
-    else:
+    elif all([V,I]):
         phi = _np.angle(V) - _np.angle(I)
         PF = _np.cos(phi)
+    # Failed Mode
+    else:
+        raise ValueError("All values must be provided.")
     # Return
     find = find.upper()
     if find == 'V':
@@ -6030,5 +6065,166 @@ def vipf(V=None,I=None,PF=1,find=''):
         return(PF)
     else:
         return(V,I,PF)
+
+# Define Angular Velocity Conversion Functions
+def rad_to_rpm(rad):
+    """
+    Radians-per-Second to RPM Converter
+    
+    Given the angular velocity in rad/sec, this
+    function will evaluate the velocity in RPM
+    (Revolutions-Per-Minute).
+    
+    Parameters
+    ----------
+    rad:        float
+                The angular velocity in radians-
+                per-second
+    
+    Returns
+    -------
+    rpm:        float
+                The angular velocity in revolutions-
+                per-minute (RPM)
+    """
+    rpm = 60/(2*_np.pi)*rad
+    return(rpm)
+
+# Define Angular Velocity Conversion Functions
+def rpm_to_rad(rpm):
+    """
+    RPM to Radians-per-Second Converter
+    
+    Given the angular velocity in RPM (Revolutions-
+    Per-Minute), this function will evaluate the
+    velocity in rad/sec.
+    
+    Parameters
+    ----------
+    rpm:        float
+                The angular velocity in revolutions-
+                per-minute (RPM)
+    
+    Returns
+    -------
+    rad:        float
+                The angular velocity in radians-
+                per-second
+    """
+    rad = 2*_np.pi/60*rpm
+    return(rad)
+
+# Define Angular Velocity Conversion Functions
+def hz_to_rpm(hz):
+    """
+    Hertz to RPM Converter
+    
+    Given the angular velocity in Hertz, this
+    function will evaluate the velocity in RPM
+    (Revolutions-Per-Minute).
+    
+    Parameters
+    ----------
+    hz:         float
+                The angular velocity in Hertz
+    
+    Returns
+    -------
+    rpm:        float
+                The angular velocity in revolutions-
+                per-minute (RPM)
+    """
+    rpm = hz*60
+    return(rpm)
+
+# Define Angular Velocity Conversion Functions
+def rpm_to_hz(rpm):
+    """
+    RPM to Hertz Converter
+    
+    Given the angular velocity in RPM (Revolutions-
+    Per-Minute), this function will evaluate the
+    velocity in Hertz.
+    
+    Parameters
+    ----------
+    rpm:        float
+                The angular velocity in revolutions-
+                per-minute (RPM)
+    
+    Returns
+    -------
+    hz:         float
+                The angular velocity in Hertz
+    """
+    hz = rpm/60
+    return(hz)
+
+# Define Synchronous Speed Calculator
+def syncspeed(Npol,freq=60,Hz=False):
+    """
+    Synchronous Speed Calculator Function
+    
+    Simple method of calculating the synchronous
+    speed of an induction machine given the number
+    of poles in the machine's construction, and
+    the machine's operating electrical frequency.
+    
+    .. math:: \\omega_{\\text{syn}}=\\frac{2\\pi
+       \\cdot\\text{freq}}{\\frac{N_{\\text{pol}}}{2}}
+    
+    Parameters
+    ----------
+    Npol:       int
+                Number of electrical poles in
+                machine's construction.
+    freq:       float, optional
+                Frequency of electrical system in
+                Hertz, default=60
+    Hz:         bool, optional
+                Boolean control to enable return
+                in Hertz. default=False
+    
+    Returns
+    -------
+    wsyn:       float
+                Synchronous Speed of Induction Machine,
+                defaults to units of rad/sec, but may
+                be set to Hertz if `Hz` set to True.
+    """
+    wsyn = 2*_np.pi*freq / (Npol/2)
+    if Hz:
+        return(wsyn / (2*_np.pi))
+    return(wsyn)
+
+# Define Machine Slip Calculation Function
+def machslip(mech,syn=60):
+    """
+    Machine Slip Calculator
+    
+    Given the two parameters (mechanical and synchronous
+    speed, or frequency) this function will return the
+    unitless slip of the rotating machine.
+    
+    .. math:: \\text{slip}=\\frac{\\text{syn}-\\text{mech}}
+       {\\text{syn}}
+    
+    Parameters
+    ----------
+    mech:       float
+                The mechanical frequency (or speed),
+                of the rotating machine.
+    syn:        float, optional
+                The synchronous frequency (or speed),
+                defaults as a frequency set to 60Hz,
+                default=60
+    
+    Returns
+    -------
+    slip:       float
+                The rotating machine's slip constant.
+    """
+    slip = (syn-mech)/syn
+    return(slip)
 
 # END OF FILE

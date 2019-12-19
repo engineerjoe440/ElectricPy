@@ -40,8 +40,11 @@ Included Functions
 - Instantaneous Overcurrent PU:         instoc
 - Generator Loss of Field Settings:     genlossfield
 - Thermal Time Limit Calculator:        thermaltime
-- Synchronous Machine Symm. Current:    synmach_Ia
+- Synchronous Machine Symm. Current:    synmach_Isym
 - Synchronous Machine Asymm. Current:   synmach_Iasym
+- Induction Machine Eigenvalue Calc.:   indmacheigenvalues
+- Induction Machine 3-Phase-SC Calc.:   indmachphs3sc
+- Induction Machine 3-Phs-Torq. Calc.:  indmachphs3torq
 """
 ####################################################################
 
@@ -1709,7 +1712,7 @@ def thermaltime(In,Ibase,tbase):
     
 
 # Define Synch. Machine Fault Current Calculator
-def synmach_Ia(t,Eq,Xd,Xdp,Xdpp,Tdp,Tdpp):
+def synmach_Isym(t,Eq,Xd,Xdp,Xdpp,Tdp,Tdpp):
     """
     Synch. Machine Symmetrical Fault Current Calc.
     
@@ -1793,6 +1796,253 @@ def synmach_Iasym(t,Eq,Xdpp,Xqpp,Ta):
     # Calculate Asymmetrical Current
     Iasym = _np.sqrt(2)*abs(Eq)*1/2*t_c*_np.exp(-t/Ta)
     return(Iasym)
+
+# Define Induction Machine Eigenvalue Calculator
+def indmacheigenvalues(Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60):
+    """
+    Induction Machine Eigenvalue Calculator
+    
+    Calculates the pertinent eigenvalues for an unloaded
+    induction machine given a specific set of machine
+    parameters.
+    
+    Parameters
+    ----------
+    Lr:         float
+                Inductance of the Rotor (in Henrys).
+    Ls:         float
+                Inductance of the Stator (in Henrys).
+    Lm:         float
+                Inductance of the Magnetizing branch
+                (in Henrys).
+    Rr:         float
+                Resistance of the Rotor (in Ohms).
+    Rs:         float
+                Resistance of the Stator (in Ohms).
+    wrf:        float, optional
+                Frequency (in radians/sec) of the rotor slip.
+                default=0
+    freq:       float, optional
+                Base frequency of the system (in Hertz).
+                default=60
+    
+    Returns
+    -------
+    lam1:       complex
+                The First Eigenvalue
+    lam2:       complex
+                The Second Eigenvalue
+    """
+    # Calculate Required Values
+    omega_e_base = 2*_np.pi*freq
+    omega_rf = wrf
+    torque_s = Ls/(omega_e_base*Rs)
+    torque_r = Lr/(omega_e_base*Rr)
+    alpha = torque_r / torque_s
+    phi = 1 - Lm**2/(Ls*Lr)
+    omega_r = omega_e_base
+    # Calculate k1
+    k1 = -1/(2*phi*torque_r)*(1+alpha)
+    k1 += 1j*(omega_r/2-omega_rf)
+    # Calculate k2
+    k2 = 1/(2*phi*torque_r)
+    k2 *= _np.sqrt((1+alpha)**2-4*phi*alpha-(omega_r*phi*torque_r)**2
+                 +2j*(alpha-1)*omega_r*phi*torque_r)
+    # Evaluate Eigenvalues and Return
+    lam1 = k1+k2
+    lam2 = k1-k2
+    return(lam1,lam2)
+
+# Define IM 3-Phase SC Current Calculator
+def indmachphs3sc(t,Is0,Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60,real=True):
+    """
+    Induction Machine 3-Phase SC Calculator
+    
+    Determines the short-circuit current at
+    a specified time for a three-phase fault
+    on an unloaded induction machine.
+    
+    Parameters
+    ----------
+    t:          array_like
+                The time at which to find the
+                current, may be int, float, or
+                numpy array.
+    Is0:        complex
+                The initial (t=0) current on
+                the stator.
+    Lr:         float
+                Inductance of the Rotor (in Henrys).
+    Ls:         float
+                Inductance of the Stator (in Henrys).
+    Lm:         float
+                Inductance of the Magnetizing branch
+                (in Henrys).
+    Rr:         float
+                Resistance of the Rotor (in Ohms).
+    Rs:         float
+                Resistance of the Stator (in Ohms).
+    wrf:        float, optional
+                Frequency (in radians/sec) of the rotor slip.
+                default=0
+    freq:       float, optional
+                Base frequency of the system (in Hertz).
+                default=60
+    real:       bool, optional
+                Control argument to force returned value
+                to be real part only. default=True
+    
+    Returns
+    -------
+    ias:        array_like
+                Fault Current
+    """
+    # Calculate Required Values
+    omega_r = 2*_np.pi*freq
+    torque_s = Ls/(omega_r*Rs)
+    phi = 1 - Lm**2/(Ls*Lr)
+    # Calculate Eigenvalues
+    lam1, lam2 = indmacheigenvalues(Lr,Ls,Lm,Rr,Rs,wrf,freq)
+    # Calculate pIs0
+    pIs0 = -(1/(phi*torque_s)+1j*(1-phi)/phi*omega_r)*Is0
+    # Calculate Constants
+    C1 = (lam2*Is0-pIs0)/(lam2-lam1)
+    C2 = (pIs0-lam1*Is0)/(lam2-lam1)
+    # Calculate ias and Return
+    ias = C1*_np.exp(lam1*t)+C2*_np.exp(lam2*t)
+    if real:
+        ias = _np.real(ias)
+    return(ias)
+
+# Define IM Torque Calculation
+def indmachphs3torq(t,Is0,Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60):
+    """
+    Parameters
+    ----------
+    t:          array_like
+                The time at which to find the
+                current, may be int, float, or
+                numpy array.
+    Is0:        complex
+                The initial (t=0) current on
+                the stator.
+    Lr:         float
+                Inductance of the Rotor (in Henrys).
+    Ls:         float
+                Inductance of the Stator (in Henrys).
+    Lm:         float
+                Inductance of the Magnetizing branch
+                (in Henrys).
+    Rr:         float
+                Resistance of the Rotor (in Ohms).
+    Rs:         float
+                Resistance of the Stator (in Ohms).
+    p:          int
+                Number of electrical poles.
+    wrf:        float, optional
+                Frequency (in radians/sec) of the rotor slip.
+                default=0
+    freq:       float, optional
+                Base frequency of the system (in Hertz).
+                default=60
+    
+    Returns
+    -------
+    Tem:        array_like
+                Induction machine torque in N*m
+    """
+    # Calculate Required Values
+    omega_r = 2*_np.pi*freq
+    torque_s = Ls/(omega_r*Rs)
+    phi = 1 - Lm**2/(Ls*Lr)
+    # Calculate Eigenvalues
+    lam1, lam2 = indmacheigenvalues(Lr,Ls,Lm,Rr,Rs,wrf,freq)
+    # Calculate pIs0
+    pIs0 = -(1/(phi*torque_s)+1j*(1-phi)/phi*omega_r)*Is0
+    # Calculate Constants
+    C1 = (lam2*Is0-pIs0)/(lam2-lam1)
+    C2 = (pIs0-lam1*Is0)/(lam2-lam1)
+    # Calculate ias and Return
+    idqs = C1*_np.exp(lam1*t)+C2*_np.exp(lam2*t)
+    idqr = C2*_np.exp(lam1*t)+C1*_np.exp(lam2*t)
+    # Calculate Lambda
+    lamdqr = Lm*idqs+Lr*idqr
+    # Calculate Torque
+    Tem = Lm/Lr * (lamdqr.real*idqs.imag - lamdqr.imag*idqs.real)
+    return(Tem)
+
+# Define Complete Sync. Mach. Fault Current Function
+def synmach_ifault(t,Ea,alpha,Xd,Xdp,Xdpp,Xqpp,Tdp,Tdpp,Ta,freq=60):
+    """
+    Synchronous Machine Fault Current Calculator
+    
+    Given machine parameters, fault inception angle, and time at
+    which to calculate fault current, this function will identify
+    the complete (symmetrical, asymmetrical, and double frequency)
+    fault current.
+    
+    .. image:: synmach_ifault_formula.png
+    
+    Parameters
+    ----------
+    t:          float
+                Time at which to calculate the fault current
+    Eq:         float
+                The internal machine voltage in per-unit-volts
+    alpha:      float
+                Fault inception angle (in degrees)
+    Xd:         float
+                The Xd (d-axis) reactance in per-unit-ohms
+    Xdp:        float
+                The X"d (d-axis transient) reactance in
+                per-unit-ohms
+    Xdpp:       float
+                The X"d (d-axis subtransient) reactance in
+                per-unit-ohms
+    Xqpp:       float
+                The X"q (q-axis subtransient) reactance in
+                per-unit-ohms
+    Tdp:        float
+                The T'd (d-axis transient) time constant of the
+                machine in seconds
+    Tdpp:       float
+                The T"d (d-axis subtransient) time constant of
+                the machine in seconds
+    Ta:         float
+                Armature short-circuit (DC) time constant in seconds
+    freq:       float, optional
+                System (electrical) frequency (in degrees),
+                default=60
+    
+    Returns
+    -------
+    ias:        float
+                Synchronous machine fault current (symmetrical,
+                asymmetrical, and double frequency component) in
+                amps
+    """
+    # Calculate we Component
+    we = 2*_np.pi*freq
+    # Condition Inputs
+    Ea = abs(Ea)
+    alpha = _np.radians(alpha)
+    # Define Constant Term
+    const = _np.sqrt(2)*Ea
+    if Xqpp != 0:
+        val = 1/Xqpp
+    else:
+        val = 0
+    asym = 1/2*(1/Xdpp+val)*_np.exp(t/Ta)
+    # Define Symmetrical Portion
+    isym = const*(1/Xd+(1/Xdp-1/Xd)*_np.exp(-t/Tdp)
+               +(1/Xdpp-1/Xdp)*_np.exp(-t/Tdpp))*_np.sin(we*t+alpha)
+    # Define Asymmetrical Portion
+    iasym = const*asym*_np.sin(alpha)
+    # Define Double Frequency Term
+    idbl = const*1/2*asym*_np.sin(2*we*t+alpha)
+    # Compose Complet Current Value
+    ias = isym - iasym - idbl
+    return(ias)
     
     
 
