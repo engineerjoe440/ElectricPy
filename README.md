@@ -29,6 +29,8 @@ Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/ht
 
 
 ## INSTALLATION:
+
+### With Python's Own `pip`
  1. Install required dependencies (NUMPY, SCIPY, SYMPY, NUMDIFFTOOLS, and MATPLOTLIB)
     - `pip install numpy`
     - `pip install scipy`
@@ -40,6 +42,31 @@ Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/ht
     - `pip install electricpy`
   
  3. Check installation success in Python environment
+
+   ```python
+   import electricpy
+   electricpy._version_
+   ```
+
+### From Source
+[Python Documentation](https://docs.python.org/3/install/index.html)
+
+ 1. Install required dependencies (NUMPY, SCIPY, SYMPY, NUMDIFFTOOLS, and MATPLOTLIB)
+    - `pip install numpy`
+    - `pip install scipy`
+    - `pip install matplotlib`
+    - `pip install sympy`
+    - `pip install numdifftools`
+  
+ 2. Clone/Download Source Code from GitHub [Repository](https://github.com/engineerjoe440/ElectricPy)
+  
+ 3. Open Terminal and Navigate to Folder with `cd` Commands:
+    - `cd <path\to\containing\folder>\electricpy`
+
+ 4. Use Python to Install Module from `setup.py`:
+    - `python setup.py install`
+  
+ 5. Check installation success in Python environment
 
    ```python
    import electricpy
