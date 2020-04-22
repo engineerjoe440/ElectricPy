@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: electricpy
-Version: 0.1.6
+Version: 0.1.7
 Summary: Electrical Engineering Functions in Python
 Home-page: https://github.com/engineerjoe440/ElectricPy
 Author: Joe Stanley
@@ -40,6 +40,8 @@ Description: # ElectricPy
         
         
         ## INSTALLATION:
+        
+        ### With Python's Own `pip`
          1. Install required dependencies (NUMPY, SCIPY, SYMPY, NUMDIFFTOOLS, and MATPLOTLIB)
             - `pip install numpy`
             - `pip install scipy`
@@ -51,6 +53,31 @@ Description: # ElectricPy
             - `pip install electricpy`
           
          3. Check installation success in Python environment
+        
+           ```python
+           import electricpy
+           electricpy._version_
+           ```
+        
+        ### From Source
+        [Python Documentation](https://docs.python.org/3/install/index.html)
+        
+         1. Install required dependencies (NUMPY, SCIPY, SYMPY, NUMDIFFTOOLS, and MATPLOTLIB)
+            - `pip install numpy`
+            - `pip install scipy`
+            - `pip install matplotlib`
+            - `pip install sympy`
+            - `pip install numdifftools`
+          
+         2. Clone/Download Source Code from GitHub [Repository](https://github.com/engineerjoe440/ElectricPy)
+          
+         3. Open Terminal and Navigate to Folder with `cd` Commands:
+            - `cd <path\to\containing\folder>\electricpy`
+        
+         4. Use Python to Install Module from `setup.py`:
+            - `python setup.py install`
+          
+         5. Check installation success in Python environment
         
            ```python
            import electricpy
