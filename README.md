@@ -1,6 +1,7 @@
 # ElectricPy
 *Electrical-Engineering-for-Python*
 
+[![](https://img.shields.io/pypi/pyversions/electricpy.svg?color=3776AB&logo=python&logoColor=white)](https://www.python.org/)
 ![ElectricPy Tests](https://github.com/engineerjoe440/ElectricPy/workflows/ElectricPy%20Tests/badge.svg)
 
 Python Libraries with functions and constants related to electrical engineering.
