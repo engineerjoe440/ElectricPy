@@ -1,0 +1,7 @@
+action: py38, msg: getenv
+cwd: D:\Files\Stanley Solutions\electricpy\.tox
+cmd: 'c:\users\joe stanley\appdata\local\programs\python\python38\python.exe' -m virtualenv --no-download --python 'c:\users\joe stanley\appdata\local\programs\python\python38\python.exe' py38
+created virtual environment CPython3.8.2.final.0-64 in 1245ms
+  creator CPython3Windows(dest=D:\Files\Stanley Solutions\electricpy\.tox\py38, clear=False, global=False)
+  seeder FromAppData(download=False, pip=latest, setuptools=latest, wheel=latest, via=copy, app_data_dir=C:\Users\Joe Stanley\AppData\Local\pypa\virtualenv\seed-app-data\v1.0.1)
+  activators BashActivator,BatchActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator
