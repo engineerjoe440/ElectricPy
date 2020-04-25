@@ -1,0 +1,15 @@
+action: py38, msg: envreport
+cwd: D:\Files\Stanley Solutions\electricpy
+cmd: 'D:\Files\Stanley Solutions\electricpy\.tox\py38\Scripts\python.EXE' -m pip freeze
+cycler==0.10.0
+electricpy==0.1.7
+kiwisolver==1.2.0
+matplotlib==3.2.1
+mpmath==1.1.0
+numdifftools==0.9.39
+numpy==1.18.3
+pyparsing==2.4.7
+python-dateutil==2.8.1
+scipy==1.4.1
+six==1.14.0
+sympy==1.5.1
