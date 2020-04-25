@@ -1,6 +1,8 @@
 # ElectricPy
 *Electrical-Engineering-for-Python*
 
+![ElectricPy Tests](https://github.com/engineerjoe440/ElectricPy/workflows/ElectricPy%20Tests/badge.svg)
+
 Python Libraries with functions and constants related to electrical engineering.
 
 The functions and constants that make up these modules represent a library of material compiled with the intent of being used primarily
