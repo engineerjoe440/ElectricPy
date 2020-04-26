@@ -4,6 +4,11 @@
 [![](https://img.shields.io/pypi/pyversions/electricpy.svg?color=3776AB&logo=python&logoColor=white)](https://www.python.org/)
 ![ElectricPy Tests](https://github.com/engineerjoe440/ElectricPy/workflows/ElectricPy%20Tests/badge.svg)
 
+[![](https://img.shields.io/pypi/v/electricpy.svg?color=blue&logo=pypi&logoColor=white)](https://pypi.org/project/electricpy/)
+[![](https://pepy.tech/badge/electricpy)](https://pepy.tech/project/electricpy)
+[![](https://img.shields.io/github/stars/engineerjoe440/electricpy?logo=github)](https://github.com/engineerjoe440/electricpy/)
+[![](https://img.shields.io/pypi/l/electricpy.svg?color=blue)](https://github.com/engineerjoe440/electricpy/blob/master/LICENSE.txt)
+
 Python Libraries with functions and constants related to electrical engineering.
 
 The functions and constants that make up these modules represent a library of material compiled with the intent of being used primarily
