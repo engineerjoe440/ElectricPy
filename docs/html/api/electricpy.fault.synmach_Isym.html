@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>synmach_Isym &#8212; electricpy 0.1.7 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.fault.synmach_Isym.html" />
+    <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="synmach_ifault" href="electricpy.fault.synmach_ifault.html" />
+    <link rel="prev" title="synmach_Iasym" href="electricpy.fault.synmach_Iasym.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.synmach_ifault.html" title="synmach_ifault"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.synmach_Iasym.html" title="synmach_Iasym"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../fault.html" accesskey="U">FAULT Sub-Module</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="synmach-isym">
+<h1>synmach_Isym<a class="headerlink" href="#synmach-isym" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="electricpy.fault.synmach_Isym">
+<code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">synmach_Isym</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">Eq</em>, <em class="sig-param">Xd</em>, <em class="sig-param">Xdp</em>, <em class="sig-param">Xdpp</em>, <em class="sig-param">Tdp</em>, <em class="sig-param">Tdpp</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.synmach_Isym" title="Permalink to this definition">¶</a></dt>
+<dd><p>Synch. Machine Symmetrical Fault Current Calc.</p>
+<p>Determines the Symmetrical Fault Current of a synchronous
+machine given the machine parameters, the internal voltage,
+and the time for which to calculate.</p>
+<div class="math notranslate nohighlight">
+\[I_a(t)=\sqrt{2}\left|E_q\right|\left[
+\frac{1}{X_d}+\left(\frac{1}{X'_d}-\frac{1}{X_d}
+\right)\cdot e^{\frac{-t}{T'_d}}+\left(\frac{1}
+{X&quot;_d}-\frac{1}{X'_d}\right)\cdot e^{\frac{-t}{T&quot;_d}}
+\right]\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<em>float</em>) – Time at which to calculate the fault current</p></li>
+<li><p><strong>Eq</strong> (<em>float</em>) – The internal machine voltage in per-unit-volts</p></li>
+<li><p><strong>Xd</strong> (<em>float</em>) – The Xd (d-axis) reactance in per-unit-ohms</p></li>
+<li><p><strong>Xdp</strong> (<em>float</em>) – The X”d (d-axis transient) reactance in
+per-unit-ohms</p></li>
+<li><p><strong>Xdpp</strong> (<em>float</em>) – The X”d (d-axis subtransient) reactance in
+per-unit-ohms</p></li>
+<li><p><strong>Tdp</strong> (<em>float</em>) – The T’d (d-axis transient) time constant of the
+machine in seconds</p></li>
+<li><p><strong>Tdpp</strong> (<em>float</em>) – The T”d (d-axis subtransient) time constant of
+the machine in seconds</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Ia</strong> – Peak symmetrical fault current in per-unit-amps</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.fault.synmach_Iasym.html"
+                        title="previous chapter">synmach_Iasym</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.fault.synmach_ifault.html"
+                        title="next chapter">synmach_ifault</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/electricpy.fault.synmach_Isym.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.synmach_ifault.html" title="synmach_ifault"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.synmach_Iasym.html" title="synmach_Iasym"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../fault.html" >FAULT Sub-Module</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Joe Stanley.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  </body>
+</html>

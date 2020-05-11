@@ -4,20 +4,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>curdiv &#8212; electricpy 0.1.4 documentation</title>
+    <title>curdiv &#8212; electricpy 0.1.7 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.curdiv.html" />
-    <link rel="shortcut icon" href="../_static/ElectricpyLogo.png"/>
+    <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="de_calc" href="electricpy.de_calc.html" />
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="electricpy.crcsender.html" title="crcsender"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" accesskey="U">ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>  
@@ -52,7 +52,7 @@
 <h1>curdiv<a class="headerlink" href="#curdiv" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="electricpy.curdiv">
-<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">curdiv</code><span class="sig-paren">(</span><em class="sig-param">Ri</em>, <em class="sig-param">Rset</em>, <em class="sig-param">Vin=None</em>, <em class="sig-param">Iin=None</em>, <em class="sig-param">Vout=False</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.curdiv" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">curdiv</code><span class="sig-paren">(</span><em class="sig-param">Ri</em>, <em class="sig-param">Rset</em>, <em class="sig-param">Vin=None</em>, <em class="sig-param">Iin=None</em>, <em class="sig-param">Vout=False</em>, <em class="sig-param">combine=True</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.curdiv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Current Divider Function</p>
 <p>This function is disigned to accept the input current, or input
 voltage to a resistor (or impedance) network of parallel resistors
@@ -65,8 +65,9 @@ the tuple passed to Rset.</p></li>
 <li><p><strong>Rset</strong> (<em>float</em>) – Tuple of remaining resistances (impedances) in network.</p></li>
 <li><p><strong>Vin</strong> (<em>float</em><em>, </em><em>optional</em>) – The input voltage for the system, default=None</p></li>
 <li><p><strong>Iin</strong> (<em>float</em><em>, </em><em>optional</em>) – The input current for the system, default=None</p></li>
-<li><p><strong>Vout</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control Argument to enable return of the voltage across the
-resistor (impecance) of interest (Ri)</p></li>
+<li><p><strong>Vout</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to enable return of the voltage across the
+resistor (impedance) of interest (Ri)</p></li>
+<li><p><strong>combine</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force resistance combination. default=True</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -88,7 +89,7 @@ resistor (impecance) of interest (Ri)</p></li>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="../index.html">
-              <img class="logo" src="../_static/ElectricpyLogo.png" alt="Logo"/>
+              <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
   <p class="topless"><a href="electricpy.crcsender.html"
@@ -112,7 +113,7 @@ resistor (impecance) of interest (Ri)</p></li>
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -132,13 +133,13 @@ resistor (impecance) of interest (Ri)</p></li>
         <li class="right" >
           <a href="electricpy.crcsender.html" title="crcsender"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.4 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, Joe Stanley.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
     </div>
   </body>
 </html>
