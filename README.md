@@ -38,43 +38,33 @@ Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/ht
 
 ## INSTALLATION:
 
-### With Python's Own `pip`
- 1. Install required dependencies (NUMPY, SCIPY, SYMPY, NUMDIFFTOOLS, and MATPLOTLIB)
+### 1) Install Required Dependencies:
+ 1. Install Dependencies
     - `pip install numpy`
     - `pip install scipy`
     - `pip install matplotlib`
     - `pip install sympy`
     - `pip install numdifftools`
-  
+
+### 2) (option a) Install ElectricPy with Python's Own `pip`
  2. Install *electricpy*
     - `pip install electricpy`
-  
- 3. Check installation success in Python environment
 
-   ```python
-   import electricpy
-   electricpy._version_
-   ```
-
-### From Source
+### 2) (option b) Install ElectricPy from Source
 [Python Documentation](https://docs.python.org/3/install/index.html)
+  
+ 2. Collect Repository and Install
+    
+    1. Clone/Download Source Code from GitHub [Repository](https://github.com/engineerjoe440/ElectricPy)
+  
+    2. Open Terminal and Navigate to Folder with `cd` Commands:
+        - `cd <path\to\containing\folder>\electricpy`
 
- 1. Install required dependencies (NUMPY, SCIPY, SYMPY, NUMDIFFTOOLS, and MATPLOTLIB)
-    - `pip install numpy`
-    - `pip install scipy`
-    - `pip install matplotlib`
-    - `pip install sympy`
-    - `pip install numdifftools`
+    3. Use Python to Install Module from `setup.py`:
+        - `python setup.py install`
   
- 2. Clone/Download Source Code from GitHub [Repository](https://github.com/engineerjoe440/ElectricPy)
-  
- 3. Open Terminal and Navigate to Folder with `cd` Commands:
-    - `cd <path\to\containing\folder>\electricpy`
-
- 4. Use Python to Install Module from `setup.py`:
-    - `python setup.py install`
-  
- 5. Check installation success in Python environment
+### 3) Verify Installation
+ 3. Check installation success in Python environment
 
    ```python
    import electricpy
@@ -86,7 +76,7 @@ Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/ht
     - Add Heat Sink Solver
     - DC/DC Converters
     - DC/AC Converters
-    - Stationary and Synchronous Reference Frame conversion Matricies/Constants
+    - Stationary and Synchronous Reference Frame conversion Matrices/Constants
     - Induction Machine slip finder
     - CEV reader/writer functions
     
