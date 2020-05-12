@@ -1,4 +1,4 @@
-# ElectricPy ![logo](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/master/Logo/ElectricpyLogo.svg)
+# ElectricPy <img src="https://raw.githubusercontent.com/engineerjoe440/ElectricPy/master/Logo/ElectricpyLogo.svg" width="100" alt="logo" align="right">
 *Electrical-Engineering-for-Python*
 
 [![](https://img.shields.io/pypi/pyversions/electricpy.svg?color=3776AB&logo=python&logoColor=white)](https://www.python.org/)
