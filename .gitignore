@@ -1,0 +1,6 @@
+# Ignore Python Compiled Files
+*.pyc
+*.pyo
+*__pycache__/
+dist/
+build/
