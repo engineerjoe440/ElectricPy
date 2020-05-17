@@ -8,6 +8,7 @@
 [![](https://pepy.tech/badge/electricpy)](https://pepy.tech/project/electricpy)
 [![](https://img.shields.io/github/stars/engineerjoe440/electricpy?logo=github)](https://github.com/engineerjoe440/electricpy/)
 [![](https://img.shields.io/pypi/l/electricpy.svg?color=blue)](https://github.com/engineerjoe440/electricpy/blob/master/LICENSE.txt)
+[<img align="right" src="https://cdn.buymeacoffee.com/buttons/default-orange.png" width="217px" height="51x">](https://www.buymeacoffee.com/engineerjoe440)
 
 Python Libraries with functions and constants related to electrical engineering.
 
