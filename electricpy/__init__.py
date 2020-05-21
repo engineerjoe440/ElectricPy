@@ -6226,5 +6226,48 @@ def machslip(mech,syn=60):
     """
     slip = (syn-mech)/syn
     return(slip)
+    
+# Define 3-Phase Valpha Calculator
+def phs3valpha( VA, VB=0, VC=0 ):
+    """
+    Three-Phase V-Alpha Calculator
+    
+    Accepts the three-phase voltages for which the
+    accumulated Alpha voltage should be calculated.
+    
+    .. math:: V_{\\alpha}=V_A-\\frac{V_B}{2}-\\frac{V_C}{2}
+    
+    Parameters
+    ----------
+    VA:         [float, complex]
+                A-phase voltage, (or tuple/list of
+                voltages), unitless.
+    VB:         [float, complex], optional
+                B-phase voltage, unitless.
+    VC:         [float, complex], optional
+                C-phase voltage, unitless.
+    
+    Returns
+    -------
+    Valpha:     [float, complex]
+                Alpha-voltage as calculated from
+                input three-phase voltages. Matches
+                type of inputs.
+    """
+    # Handle Combined (list/tuple) Input
+    if (isinstance(VA, (tuple,list) and
+        VB==0 and VC==C):
+        if len(VA) != 3:
+            raise ValueError("Invalid input set, must "
+                +"be list of three elements, three inputs,"
+                +" or three array-like objects of equal "
+                +"length.")
+        Valpha = VA[0] - VA[1]/2 - VA[2]/2
+    # Handle Separated Inputs
+    else:
+        Valpha = VA - VB/2 - VC/2
+    # Return the Alpha-Voltage
+    return( Valpha )
+
 
 # END OF FILE
