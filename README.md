@@ -80,6 +80,14 @@ Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/ht
     - Stationary and Synchronous Reference Frame conversion Matrices/Constants
     - Induction Machine slip finder
     - CEV reader/writer functions
+- Develop Testing for All Functions
+
+## Get Involved / Contribute
+If you're interested in contributing, we'd love to see your support in a number of ways!
+ 1. **Write Tests** - We're really lacking in this area. We've recently added simple GitHub actions to test installation, but that's about it. We hope that someday we can test all functions in this module for verification.
+ 2. **Contribute New Electrical Engineering Functions** - If you've got a new function related to electrical engineering that you'd like to see added, we'd love to throw it into this module. Our goal is that this module can become the comprehensive electrical engineering toolkit in Python. Drop us a note, or create a pull request!
+ 3. **Report Issues** - We don't want issues to go unnoticed. Please help us track bugs and resolve them!
+ 4. **Get the Word Out** - This project is still in its infancy, so please share it with your friends and colleagues. We want to make sure that everyone has the opportunity to take advantage of this project.
     
 
 ## Contact:
