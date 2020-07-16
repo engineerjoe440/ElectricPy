@@ -1,0 +1,2998 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.4" />
+<title>electricpy.sim API documentation</title>
+<meta name="description" content="`electricpy.fault.py`
+…" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>electricpy.sim</code></h1>
+</header>
+<section id="section-intro">
+<hr>
+<h2 id="electricpyfaultpy"><code>electricpy.fault.py</code></h2>
+<h2 id="included-functions">Included Functions</h2>
+<ul>
+<li>Digital Filter Simulator:
+digifiltersim</li>
+<li>Step Response Filter Simulator:
+step_response</li>
+<li>Ramp Response Filter Simulator:
+ramp_response</li>
+<li>Parabolic Response Filter Simulator:
+parabolic_response</li>
+<li>State-Space System Simulator:
+statespace</li>
+<li>Newton Raphson Calculator:
+NewtonRaphson</li>
+<li>Power Flow System Generator:
+nr_pq</li>
+<li>Multi-Bus Power Flow Calculator:
+mbuspowerflow</li>
+</ul>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">###################################################################
+&#34;&#34;&#34;
+---------------------
+`electricpy.fault.py`
+---------------------
+
+Included Functions
+------------------
+- Digital Filter Simulator:             digifiltersim
+- Step Response Filter Simulator:       step_response
+- Ramp Response Filter Simulator:       ramp_response
+- Parabolic Response Filter Simulator:  parabolic_response
+- State-Space System Simulator:         statespace
+- Newton Raphson Calculator:            NewtonRaphson
+- Power Flow System Generator:          nr_pq
+- Multi-Bus Power Flow Calculator:      mbuspowerflow
+&#34;&#34;&#34;
+###################################################################
+
+# Import Required Libraries
+import numpy as _np
+import matplotlib.pyplot as _plt
+from numdifftools import Jacobian as jacobian
+from scipy.optimize import newton
+from warnings import warn as _warn
+
+
+# Define Digital Filter Simulator Function
+def digifiltersim(fin,filter,freqs,NN=1000,dt=0.01,title=&#34;&#34;,
+               legend=True,xlim=False,xmxscale=None,figsize=None):
+    &#34;&#34;&#34;
+    Digital Filter Simulator
+    
+    Given an input function and filter parameters (specified in
+    the z-domain) this function will plot the input function over
+    NN time-steps of an unspecified size (the step-size must be
+    specified outside the scope of this function). This function
+    will also plot the resultant (output) function over the NN
+    time-steps after having been filtered by that filter which
+    is specified.
+    
+    The applied filter should be of the form:
+    
+    .. math:: \\frac{b_0+b_1z^{-1}+b_2z^{-2}}{1-a_1z^{-1}-a_2z^{-2}}
+    
+    Where each row corresponds to a 1- or 2-pole filter.
+    
+    Parameters
+    ----------
+    fin:        function
+                The input function, must be callable with specified
+                step-size.
+    filter:     array_like
+                The filter parameter set as shown here:
+                
+                .. code-block:: python
+                   
+                   [[ a11, a12, b10, b11, b12],
+                   [ a21, a22, b20, b21, b22],
+                   [           ...          ],
+                   [ an1, an2, bn0, bn1, bn2]]
+                
+    freqs:      list of float
+                The set of frequencies to plot the input and output for.
+    NN:         int, optional
+                The number of time-steps to be plotted; default=1000
+    dt:         float, optional
+                The time-step size; default=0.01
+    title:      str, optional
+                The title presented on each plot; default=&#34;&#34;
+    xlim:       list, optional
+                Limit in x-axis for graph plot. Accepts tuple of: (xmin, xmax).
+                default=False.
+    xmxscale:   float, optional
+                Scaling limit of the x-axis, will set the maximum of the
+                x-axis to xmxscale/(dt*freq) where freq is the current
+                frequency being plotted.
+    legend:     str, optional
+                An argument to control whether the legend is shown,
+                default=True.
+    figsize:    tuple, optional
+                The figure dimensions for each subplot, default=None
+    &#34;&#34;&#34;
+    if(figsize!=None): _plt.figure(figsize=figsize)
+    flen = len(freqs)
+    for i in range(flen):
+        # Gather frequency
+        freq = freqs[i]
+        
+        # Start with arrays set to zero
+        x = _np.zeros(NN)
+        y = _np.zeros(NN)
+        
+        # ----- The input  -----
+        for k in range(NN):
+            x[k] = fin(k*dt,freq)
+        
+        # Identify how many rows were provided
+        sz = filter.size
+        if(sz &lt; 5):
+            raise ValueError(&#34;ERROR: Too few filter arguments provided. &#34;+
+                             &#34;Refer to documentation for proper format.&#34;)
+        elif(sz == 5):
+            rows = 1
+        else:
+            rows, cols = filter.shape
+        # Operate with each individual filter set
+        x_tmp = _np.copy( x )
+        nsteps = NN - 4
+        for row_n in range(rows):
+            row = filter[row_n] # Capture individual row
+            A1 = row[0]
+            A2 = row[1]
+            B0 = row[2]
+            B1 = row[3]
+            B2 = row[4]
+            T = 3
+            for _ in range(nsteps):
+                T = T + 1
+                # Apply Filtering Specified by Individual Row
+                y[T] = (A1*y[T-1] + A2*y[T-2] +
+                        B0*x_tmp[T] + B1*x_tmp[T-1] +  B2*x_tmp[T-2])
+            # Copy New output into temporary input
+            x_tmp = _np.copy( y )
+        # Copy finalized output into *ytime* for plotting
+        ytime = _np.copy( x_tmp )
+        # Plot Filtered Output
+        if(flen%2==0): _plt.subplot(flen,2,i+1)
+        else: _plt.subplot(flen,1,i+1)
+        _plt.plot(x,&#39;k--&#39;,label=&#34;Input&#34;)
+        _plt.plot(ytime,&#39;k&#39;,label=&#34;Output&#34;)
+        _plt.title(title)
+        _plt.grid(which=&#39;both&#39;)
+        if legend: _plt.legend(title=&#34;Frequency = &#34;+str(freq)+&#34;Hz&#34;)
+        if xlim!=False: _plt.xlim(xlim)
+        elif xmxscale!=None: _plt.xlim((0,xmxscale/(freq*dt)))
+        
+    _plt.tight_layout()
+    _plt.show()
+
+# Define Step Response Simulator Function
+def step_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
+                  title=&#34;Step Response&#34;,errtitle=&#34;Step Response Error&#34;,
+                  resplabel=&#34;Step Response&#34;,funclabel=&#34;Step Function&#34;,
+                  errlabel=&#34;Error&#34;,filename=None):
+    &#34;&#34;&#34;
+    Step Function Response Plotter Function
+    
+    Given a transfer function, plots the response against step input
+    and plots the error for the function.
+    
+    Parameters
+    ----------
+    system:     array_like
+                The Transfer Function; can be provided as the following:
+                * 1 (instance of lti)
+                * 2 (num, den)
+                * 3 (zeros, poles, gain)
+                * 4 (A, B, C, D)
+    npts:       int, optional
+                Number of steps to calculate over; default is 1000.
+    dt:         float, optional
+                Difference between each data point, default is 0.01.
+    combine:    bool, optional
+                If combination of numerator and denominator is needed.
+                This value should be set to &#34;True&#34; if the parts should be
+                combined to show the complete system with feedback.
+                default=True.
+    title:      str, optional
+                Additional string to be added to plot titles;
+                default=&#34;&#34;
+    xlim:       list, optional
+                Limit in x-axis for graph plot. Accepts tuple of: (xmin, xmax).
+                default=False.
+    filename:   bool, optional
+                Control argument to specify whether the plotted
+                figures should be saved. default=False
+    &#34;&#34;&#34;
+    # Define Time Axis
+    TT = _np.arange(0,npts*dt,dt)
+    
+    # Condition system input to ensure proper execution
+    system = _sys_condition(system,combine)    
+    
+    # Allocate space for all outputs
+    step = _np.zeros(npts)
+    errS = _np.zeros(npts)
+    
+    # Generate Inputs
+    for i in range(npts):
+        step[i] = 1.0
+    
+    # Simulate Response for each input (step, ramp, parabola)
+    # All &#39;x&#39; values are variables that are considered don&#39;t-care
+    x, y1, x = sig.lsim((system),step,TT)
+    
+    # Calculate error over all points
+    for k in range(npts):
+        errS[k] = step[k] - y1[k]
+    
+    # Plot Step Response
+    _plt.figure()
+    _plt.subplot(121)
+    _plt.title(title)
+    _plt.plot(TT,y1,&#39;k--&#39;, label=resplabel)
+    _plt.plot(TT,step,&#39;k&#39;, label=funclabel)
+    _plt.grid()
+    _plt.legend()
+    _plt.xlabel(&#34;Time (seconds)&#34;)
+    if xlim != False:
+        _plt.xlim(xlim)
+    _plt.subplot(122)
+    _plt.title(errtitle)
+    _plt.plot(TT,errS,&#39;k&#39;, label=errlabel)
+    _plt.grid()
+    _plt.legend()
+    _plt.xlabel(&#34;Time (seconds)&#34;)
+    if xlim != False:
+        _plt.xlim(xlim)
+    _plt.subplots_adjust(wspace=0.3)
+    if filename!=None:
+        _plt.savefig(filename)
+    _plt.show()
+
+# Define Ramp Response Simulator Function
+def ramp_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
+                  title=&#34;Ramp Response&#34;,errtitle=&#34;Ramp Response Error&#34;,
+                  resplabel=&#34;Ramp Response&#34;,funclabel=&#34;Ramp Function&#34;,
+                  errlabel=&#34;Error&#34;,filename=None):
+    &#34;&#34;&#34;
+    Ramp Function Response Plotter Function
+    
+    Given a transfer function, plots the response against step input
+    and plots the error for the function.
+    
+    Parameters
+    ----------
+    system:     array_like
+                The Transfer Function; can be provided as the following:
+                * 1 (instance of lti)
+                * 2 (num, den)
+                * 3 (zeros, poles, gain)
+                * 4 (A, B, C, D)
+    npts:       int, optional
+                Number of steps to calculate over; default is 1000.
+    dt:         float, optional
+                Difference between each data point, default is 0.01.
+    combine:    bool, optional
+                If combination of numerator and denominator is needed.
+                This value should be set to &#34;True&#34; if the parts should be
+                combined to show the complete system with feedback.
+                default=True.
+    title:      str, optional
+                Additional string to be added to plot titles;
+                default=&#34;&#34;
+    xlim:       list, optional
+                Limit in x-axis for graph plot. Accepts tuple of: (xmin, xmax).
+                default=False.
+    filename:   str, optional
+                File directory/name with which the plotted figures 
+                should be saved. default=None
+    &#34;&#34;&#34;
+    # Define Time Axis
+    TT = _np.arange(0,npts*dt,dt)
+    
+    # Condition system input to ensure proper execution
+    system = _sys_condition(system,combine)
+    
+    # Allocate space for all outputs
+    ramp = _np.zeros(npts)
+    errR = _np.zeros(npts)
+    
+    # Generate Inputs
+    for i in range(npts):
+        ramp[i] = (dt*i)
+    
+    # Simulate Response for each input (step, ramp, parabola)
+    # All &#39;x&#39; values are variables that are considered don&#39;t-care
+    x, y2, x = sig.lsim((system),ramp,TT)
+    
+    # Calculate error over all points
+    for k in range(npts):
+        errR[k] = ramp[k] - y2[k]
+    
+    # Plot Ramp Response
+    _plt.figure()
+    _plt.subplot(121)
+    _plt.title(title)
+    _plt.plot(TT,y2,&#39;k--&#39;, label=resplabel)
+    _plt.plot(TT,ramp,&#39;k&#39;, label=funclabel)
+    _plt.grid()
+    _plt.legend()
+    _plt.xlabel(&#34;Time (seconds)&#34;)
+    if xlim != False:
+        _plt.xlim(xlim)
+    _plt.subplot(122)
+    _plt.title(errtitle)
+    _plt.plot(TT,errR,&#39;k&#39;, label=errlabel)
+    _plt.grid()
+    _plt.legend()
+    _plt.xlabel(&#34;Time (seconds)&#34;)
+    if xlim != False:
+        _plt.xlim(xlim)
+    _plt.subplots_adjust(wspace=0.3)
+    if filename!=None:
+        _plt.savefig(filename)
+    _plt.show()
+    
+# Define Parabolic Response Simulator Function
+def parabolic_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
+                  title=&#34;Parabolic Response&#34;,errtitle=&#34;Parabolic Response Error&#34;,
+                  resplabel=&#34;Parabolic Response&#34;,funclabel=&#34;Parabolic Function&#34;,
+                  errlabel=&#34;Error&#34;,filename=None):
+    &#34;&#34;&#34;
+    Parabolic Function Response Plotter Function
+    
+    Given a transfer function, plots the response against step input
+    and plots the error for the function.
+    
+    Parameters
+    ----------
+    system:     array_like
+                The Transfer Function; can be provided as the following:
+                * 1 (instance of lti)
+                * 2 (num, den)
+                * 3 (zeros, poles, gain)
+                * 4 (A, B, C, D)
+    npts:       int, optional
+                Number of steps to calculate over; default is 1000.
+    dt:         float, optional
+                Difference between each data point, default is 0.01.
+    combine:    bool, optional
+                If combination of numerator and denominator is needed.
+                This value should be set to &#34;True&#34; if the parts should be
+                combined to show the complete system with feedback.
+                default=True.
+    title:      str, optional
+                Additional string to be added to plot titles;
+                default=&#34;&#34;
+    xlim:       list, optional
+                Limit in x-axis for graph plot. Accepts tuple of: (xmin, xmax).
+                default=False.
+    filename:   bool, optional
+                Control argument to specify whether the plotted
+                figures should be saved. default=False
+    &#34;&#34;&#34;
+    # Define Time Axis
+    TT = _np.arange(0,npts*dt,dt)
+    
+    # Condition system input to ensure proper execution
+    system = _sys_condition(system,combine)
+    
+    # Allocate space for all outputs
+    parabola = _np.zeros(npts)
+    errP = _np.zeros(npts)
+    
+    # Generate Inputs
+    for i in range(npts):
+        parabola[i] = (dt*i)**(2)
+    
+    # Simulate Response for each input (step, ramp, parabola)
+    # All &#39;x&#39; values are variables that are considered don&#39;t-care
+    x, y3, x = sig.lsim((system),parabola,TT)
+    
+    # Calculate error over all points
+    for k in range(npts):
+        errP[k] = parabola[k] - y3[k]
+    
+    # Plot Parabolic Response
+    _plt.figure()
+    _plt.subplot(121)
+    _plt.title(title)
+    _plt.plot(TT,y3,&#39;k--&#39;, label=resplabel)
+    _plt.plot(TT,parabola,&#39;k&#39;, label=funclabel)
+    _plt.grid()
+    _plt.legend()
+    _plt.xlabel(&#34;Time (seconds)&#34;)
+    if xlim != False:
+        _plt.xlim(xlim)
+    _plt.subplot(122)
+    _plt.title(errtitle)
+    _plt.plot(TT,errP,&#39;k&#39;, label=errlabel)
+    _plt.grid()
+    _plt.legend()
+    _plt.xlabel(&#34;Time (seconds)&#34;)
+    if xlim != False:
+        _plt.xlim(xlim)
+    _plt.subplots_adjust(wspace=0.3)
+    if filename!=None:
+        _plt.savefig(filename)
+    _plt.show()
+
+# Define State Space Simulator
+def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
+               xlim=False,ylim=False,title=&#34;&#34;,ret=False,plotstate=True,
+               plotforcing=None,plotresult=None,filename=None):
+    &#34;&#34;&#34;
+    State-Space Simulation Plotter
+
+    Parameters
+    ----------
+    A:          array_like
+                Matrix A of State-Space Formulation
+    B:          array_like
+                Matrix B of State-Space Formulation
+    x:          array_like, optional
+                Initial Condition Matrix, if not provided, will assume
+                initial conditions of zero.
+    f:          function, optional
+                State-Space Forcing Function; callable function that
+                will return any/all forcing function Arguments needed as
+                array-like object.
+                Forcing function(s) can be provided as tuple of function
+                handles, system will automatically concatenate their output
+                to a matrix that can be handled.
+    simpts:     int, optional
+                Changes the range of simulation; defualt=9999
+    NN:         int, optional
+                Number of descrete points; default=10,000
+    dt:         float, optional
+                Time-step-size; default=0.01
+    xlim:       list of float, optional
+                Limit in x-axis for graph plot.
+    ylim:       list of float, optional
+                Limit in y-axis for graph plot.
+    title:      str, optional
+                Additional String for Plot Title
+    ret:        bool, optional
+                Control value to specify whether the state space terms should
+                be returned.
+    plot:       bool, optional
+                Control value to enable/disable all plotting capabilities.
+    plotforcing:bool, optional
+                Control value to enable plotting of the forcing function(s)
+    plotresult: bool, optional
+                Control value to enable plotting of the final (combined) result.
+
+    Figures:
+    --------
+    Forcing Functions:        The plot of forcing functions, only provided if plotforcing is true.
+    State Variables:        The plot of state variables, always provided if plot is true.
+    Combined Output:        The plot of the combined terms in the output, provided if C and D are not False.
+
+    &#34;&#34;&#34;
+    # Define Initial Condition for Solution
+    solution = 3
+    #0=zero-input    ( No Forcing Function )
+    #1=zero-state    ( No Initial Conditions )
+    #2=total         ( Both Initial Conditions and Forcing Function )
+    #3=total, output ( Both ICs and FFs, also plot combined output )
+    
+    # Tuple to Matrix Converter
+    def tuple_to_matrix(x,yx):
+        n = yx(x) # Evaluate function at specified point
+        n = _np.asmatrix(n) # Convert tuple output to matrix
+        n = n.T # Transpose matrix
+        return(n)
+
+    # Numpy Array to Matrix Converter
+    def nparr_to_matrix(x,yx):
+        n = yx(x) # Evaluate function at specified point
+        n = _np.asmatrix(n) # Convert _np.arr output to matrix
+        if n.shape[1] != 1: # If there is more than 1 column
+            n = _np.matrix.reshape(n,(n.size,1)) # Reshape
+        return(n)
+    
+    # Define Function Concatinator Class
+    class c_func_concat:
+        def __init__(self,funcs): # Initialize class with tupple of functions
+            self.nfuncs = len(funcs) # Determine how many functions are in tuple
+            self.func_reg = {} # Create empty keyed list of function handles
+            for key in range(self.nfuncs): # Iterate adding to key
+                self.func_reg[key] = funcs[key] # Fill keyed list with functions
+
+        def func_c(self,x): # Concatenated Function
+            rets = _np.array([]) # Create blank numpy array to store function outputs
+            for i in range(self.nfuncs):
+                y = self.func_reg[i](x) # Calculate each function at value x
+                rets = _np.append(rets, y) # Add value to return array
+            rets = _np.asmatrix(rets).T # Convert array to matrix, then transpose
+            return(rets)
+    
+    # Condition Inputs
+    A = _np.asmatrix(A)
+    B = _np.asmatrix(B)
+    
+    # Define Tuple of Types For Testing
+    typetest = (_np.matrixlib.defmatrix.matrix,_np.ndarray,tuple,list)
+    
+    # Test for NN and simpts
+    if (simpts &gt;= NN):
+        _warn(&#34;WARNING: NN must be greater than simpts; NN=&#34;+str(NN)+
+             &#34;simpts=&#34;+str(simpts),&#34; Autocorrecting simpts to be NN-1.&#34;)
+        simpts = NN-1
+
+    # Test for C and D matricies
+    if isinstance(C,typetest) and isinstance(D,typetest):
+        solution = 3 # Set to solve and plot complete output
+    elif isinstance(C,typetest) and not isinstance(D,typetest):
+        if (D==None):
+            _warn(&#34;WARNING: D matrix not provided; D now assumed to be 0.&#34;)
+            D = _np.matrix(&#39;0&#39;)
+            solution = 3 # Set to solve and plot complete output
+    else:
+        C = _np.matrix(&#39;0&#39;)
+        D = _np.matrix(&#39;0&#39;)
+        solution = 2
+    
+    # Condition C/D Matrices
+    C = _np.asmatrix(C)
+    D = _np.asmatrix(D)
+
+
+    # Create values for input testing
+    if isinstance(func,function): # if f is a function, test as one
+        mF = f(1) # f should return: int, float, tuple, _np.arr, _np.matrix
+    elif isinstance(func,(tuple,list)): # if f is tupple of arguments
+        if isinstance(func[0], function): #if first argument is a function
+            c_funcs = c_func_concat(func) # concatinate functions into one
+            mF = &#34;MultiFunctions&#34; # label as multiple concatenated functions
+        else:
+            mF = &#34;NA&#34; # Can&#39;t handle function type
+    else:
+        mF = &#34;NA&#34; # Can&#39;t handle function type
+
+    # Test for x input
+    if not isinstance(x,typetest):
+        if x==None: # No specified initial conditions
+            rA = A.shape[0]
+            x = _np.asmatrix(_np.zeros(rA)).T
+    # Condition x
+    x = _np.asmatrix(x)
+
+    # Gather dimensions of inputs
+    rA, cA = A.shape
+    rB, cB = B.shape
+    rx, cx = x.shape
+    rC, cC = C.shape
+    rD, cD = D.shape
+    rF, cF = 1, 1 # Defualt for a function returning one value
+
+    if isinstance(mF,tuple): # If function returns tuple
+        fn = lambda x: tuple_to_matrix(x, func) # Use conversion function
+        rF, cF = fn(1).shape # Prepare for further testing
+    elif isinstance(mF,_np.ndarray): # If function returns numpy array
+        fn = lambda x: nparr_to_matrix(x, func) # Use conversion function
+        rF, cF = fn(1).shape # Prepare for further testing
+    elif isinstance(mF,(int,float,_np.float64)): # If function returns int or float or numpy float
+        fn = f # Pass function handle
+    elif isinstance(mF,_np.matrixlib.defmatrix.matrix): # If function returns matrix
+        fn = f # Pass function handle
+        rF, cF = fn(1).shape # Prepare for further testing
+    elif (mF==&#34;MultiFunctions&#34;): # There are multiple functions in one argument
+        fn = c_funcs.func_c # Gather function handle from function concatenation class
+        rF, cF = fn(1).shape # Prepare for further testing
+    elif (mF==&#34;NA&#34;): # Function doesn&#39;t meet requirements
+        raise ValueError(&#34;Forcing function does not meet requirements.&#34;+
+                        &#34;\nFunction doesn&#39;t return data type: int, float, numpy.ndarray&#34;+
+                        &#34;\n or numpy.matrixlib.defmatrix.matrix. Nor does function &#34;+
+                        &#34;\ncontain tuple of function handles. Please review function.&#34;)
+
+    # Test for size correlation between matricies
+    if (cA != rA): # A isn&#39;t nxn matrix
+        raise ValueError(&#34;Matrix &#39;A&#39; is not NxN matrix.&#34;)
+    elif (rA != rB): # A and B matricies don&#39;t have same number of rows
+        if (B.size % rA) == 0: # Elements in B divisible by rows in A
+            _warn(&#34;WARNING: Reshaping &#39;B&#39; matrix to match &#39;A&#39; matrix.&#34;)
+            B = _np.matrix.reshape(B,(rA,int(B.size/rA))) # Reshape Matrix
+        else:
+            raise ValueError(&#34;&#39;A&#39; matrix dimensions don&#39;t match &#39;B&#39; matrix dimensions.&#34;)
+    elif (rA != rx): # A and x matricies don&#39;t have same number of rows
+        if (x.size % rA) == 0: # Elements in x divisible by rows in A
+            _warn(&#34;WARNING: Reshaping &#39;x&#39; matrix to match &#39;A&#39; matrix.&#34;)
+            x = _np.matrix.reshape(x,(rA,1)) # Reshape Matrix
+        else:
+            raise ValueError(&#34;&#39;A&#39; matrix dimensions don&#39;t match &#39;B&#39; matrix dimensions.&#34;)
+    elif (cB != rF) or (cF != 1): # Forcing Function matrix doesn&#39;t match B matrix
+        raise ValueError(&#34;&#39;B&#39; matrix dimensions don&#39;t match forcing function dimensions.&#34;)
+    elif (solution==3) and (cC != cA) or (rC != 1): # Number of elements in C don&#39;t meet requirements
+        raise ValueError(&#34;&#39;C&#39; matrix dimensions don&#39;t match state-space variable dimensions.&#34;)
+    elif (solution==3) and ((cD != rF) or (rD != 1)): # Number of elements in D don&#39;t meet requirements
+        if (cD == rD) and (cD == 1) and (D[0] == 0): # D matrix is set to [0]
+            D = _np.asmatrix(_np.zeros(rF)) # Re-create D to meet requirements
+            _warn(&#34;WARNING: Autogenerating &#39;D&#39; matrix of zeros to match forcing functions.&#34;)
+        else:
+            raise ValueError(&#34;&#39;D&#39; matrix dimensions don&#39;t match forcing function dimensions.&#34;)
+
+    # Test for forcing function
+    if (f==None) and (solution!=0):
+        solution = 0 # Change to Zero-Input calculation
+
+    # Start by defining Constants
+    T = 0
+    TT = _np.arange(0,(dt*(NN)),dt)
+    yout = 0
+
+    # Define list of strings for plot output
+    soltype = [&#34;(Zero-Input)&#34;,&#34;(Zero-State)&#34;,&#34;(Complete Simulation)&#34;,&#34;(Complete Sim., Combined Output)&#34;]
+
+    # Create a dictionary of state-space variables
+    xtim = {}
+    xtim_len = rA # Number of Rows in A matrix
+    for n in range(xtim_len):
+        key = n #Each key should be the iterative variable
+        xtim_init = _np.zeros(NN) #Define the initial array
+        xtim[key] = xtim_init #Create each xtim
+
+    # Create a dictionary of function outputs
+    if (mF!=tint) and (mF!=tfloat):
+        fn_arr = {}
+        for n in range(rF):
+            key = n #Each key should be the iterative variable
+            fn_init = _np.zeros(NN) #Define the initial array
+            fn_arr[key] = fn_init #Create each fn_arr
+            fnc = rF
+    else:
+        fn_arr = _np.zeros(NN) #Create the fn_arr
+        fnc = 1
+
+    # When asked to find zero-state, set all ICs to zero
+    if solution == 1:
+        for n in range(xtim_len):
+            x[n] = 0 #Set each value to zero
+
+    # Finite-Difference Simulation
+    for i in range(0,simpts):
+        for n in range(xtim_len):
+            xtim[n][i] = x[n] #xtim[state-variable][domain] = x[state-variable]
+        # Create Forcing Function output
+
+        if fnc &gt; 1: # More than one forcing function
+            for n in range(fnc):
+                fn_arr[n][i] = _np.asarray(fn(T))[n][0]
+        else: # only one forcing function
+            fn_arr[i] = fn(T)
+
+        if solution == 0: #Zero-input, no added function input
+            x = x + dt*A*x
+        else: #Zero-state or Total, add function input
+            x = x + dt*A*x + dt*B*fn(T)
+            if solution==3:
+                yout = yout + dt*D*fn(T)
+
+        T = T+dt #Add discrete increment to T
+
+    # Plot Forcing Functions
+    if (plotforcing):
+        fffig = _plt.figure(&#34;Forcing Functions&#34;)
+        if fnc &gt; 1:
+            for x in range(fnc):
+                _plt.plot(TT,fn_arr[x],label=&#34;f&#34;+str(x+1))
+        else:
+            _plt.plot(TT,fn_arr,label=&#34;f1&#34;)
+        if xlim!=False:
+            _plt.xlim(xlim)
+        if ylim!=False:
+            _plt.ylim(ylim)
+        _plt.title(&#34;Forcing Functions &#34;+title)
+        _plt.xlabel(&#34;Time (seconds)&#34;)
+        _plt.legend(title=&#34;Forcing Functions&#34;)
+        _plt.grid()
+        if filename!=None:
+            _plt.savefig(&#39;Simulation Forcing Functions.png&#39;)
+        if plot:
+            _plt.show()
+
+    # Plot each state-variable over time
+    stvfig = _plt.figure(&#34;State Variables&#34;)
+    for x in range(xtim_len):
+        _plt.plot(TT,xtim[x],label=&#34;x&#34;+str(x+1))
+    if xlim!=False:
+            _plt.xlim(xlim)
+    if ylim!=False:
+        _plt.ylim(ylim)
+    _plt.title(&#34;Simulated Output Terms &#34;+soltype[solution]+title)
+    _plt.xlabel(&#34;Time (seconds)&#34;)
+    _plt.legend(title=&#34;State Variable&#34;)
+    _plt.grid()
+    if filename!=None:
+        _plt.savefig(&#39;Simulation Terms.png&#39;)
+    if plot:
+        _plt.show()
+
+    # Plot combined output
+    if (plotresult and solution==3):
+        cofig = _plt.figure(&#34;Combined Output&#34;)
+        C = _np.asarray(C) # convert back to array for operation
+        for i in range(cC):
+            yout = yout + xtim[i]*C[0][i] # Sum all st-space var mult. by their coeff
+        yout = _np.asarray(yout) # convert output to array for plotting purposes
+        _plt.plot(TT,yout[0])
+        if xlim!=False:
+            _plt.xlim(xlim)
+        if ylim!=False:
+            _plt.ylim(ylim)
+        _plt.title(&#34;Combined Output &#34;+title)
+        _plt.xlabel(&#34;Time (seconds)&#34;)
+        _plt.grid()
+        if filename!=None:
+            _plt.savefig(&#39;Simulation Combined Output.png&#39;)
+        if plot:
+            _plt.show()
+
+    # Return Variables if asked to
+    if ret:
+        return(TT, xtim)
+
+# Define Newton-Raphson Calculator
+def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
+    &#34;&#34;&#34;
+    Newton Raphson Calculator
+    
+    Solve nonlinear system F=0 by Newton&#39;s method.
+    J is the Jacobian of F. Both F and J must be functions of x.
+    At input, x holds the start value. The iteration continues
+    until ||F|| &lt; eps.
+    
+    Parameters
+    ----------
+    F:          array_like
+                The Non-Linear System; a function handle/instance.
+                The input function must accept only one (1) argument as an
+                array or int/float representing the variables required.
+    J:          array_like
+                The Jacobian of F; a function handle/instance.
+                The input Jacobian of F must accept only one (1) argument as
+                an array or int/float representing the variables required.
+    X0:         array_like
+                The Initial Value (or initial guess); a representative array.
+    eps:        float, optional
+                Epsilon - The error value, default=0.0001
+    mxiter:     int, optional
+                Maximum Iterations - The highest number of iterations allowed,
+                default=100
+    lsq_eps:    float, optional
+                Least Squares Method (Failover) Epsilon - the error value.
+                default=0.25
+    
+    Returns
+    -------
+    X0:                 array_like
+                        The computed result
+    iteration_counter:  int
+                        The number of iterations completed before returning
+                        either due to solution being found, or max iterations
+                        being surpassed.
+    
+    Examples
+    --------
+    &gt;&gt;&gt; import numpy as np
+    &gt;&gt;&gt; from electricpy import sim # Import Simulation Submodule
+    &gt;&gt;&gt; def F(x):
+        matr = np.array([[x[1]*10*np.sin(x[0])+2],
+            [x[1]*(-10)*np.cos(x[0])+x[1]**2*10+1]])
+        return(matr)
+    &gt;&gt;&gt; def J(x):
+        matr = np.array([[10*x[1]*np.cos(x[0]), 10*np.sin(x[0])],
+            [10*x[1]*np.sin(x[0]), -10*np.cos(x[0])+20*x[1]]])
+        return(matr)
+    # Now compute Newton-Raphson
+    &gt;&gt;&gt; X0 = [0, 1]
+    &gt;&gt;&gt; results, iter = sim.NewtonRaphson(F,J,X0)
+    &gt;&gt;&gt; print(results)
+    [-0.236,0.8554]
+    &gt;&gt;&gt; print(iter) # Iteration Counter
+    4
+    
+    See Also
+    --------
+    nr_pq:              Newton-Raphson System Generator
+    mbuspowerflow:      Multi-Bus Power Flow Calculator
+    
+    &#34;&#34;&#34;
+    # Test for one-variable inputs
+    if isinstance(F(X0),(int,float,_np.float64)): # System is size-1
+        if not isinstance(J(X0),(int,float,_np.float64)): # Jacobian isn&#39;t size-1
+            raise ValueError(&#34;ERROR: The Jacobian isn&#39;t size-1.&#34;)
+        return( newton( F, X0, J ) )
+    
+    # Test for valid argument sizes
+    f0sz = len(F(X0))
+    j0sz = len(J(X0))
+    if(f0sz!=j0sz): # Size mismatch
+        raise ValueError(&#34;ERROR: The arguments return arrays or lists&#34;+
+                        &#34; of different sizes: f0=&#34;+str(f0sz)+&#34;; j0=&#34;+str(j0sz))
+    # Define Internal Inversion System
+    def inv(m):
+        a, b = m.shape
+        if a != b:
+            raise ValueError(&#34;Only square matrices are invertible.&#34;)
+        i = _np.eye(a, a)
+        return _np.linalg.lstsq(m, i, rcond=None)[0]
+    F_value = F(X0)
+    F_norm = _np.linalg.norm(F_value, ord=2)  # L2 norm of vector
+    iteration_counter = 0
+    teps = eps
+    while abs(F_norm) &gt; teps and iteration_counter &lt; mxiter:
+        try: # Try Solve Operation
+            delta = _np.linalg.solve(J(X0), -F_value)
+            teps = eps # Change Test Epsilon if Needed
+        except _np.linalg.LinAlgError: # Use Least Square if Error
+            # Warn User, but only Once
+            try:
+                tst = userhasbeenwarned
+            except NameError:
+                userhasbeenwarned = True
+                _warn(&#34;WARNING: Singular matrix, attempting LSQ method.&#34;)
+            # Calculate Delta Using Least-Squares Inverse
+            delta = - inv(J(X0)).dot(F_value)
+            # Change Epsilon Test
+            teps = lsq_eps
+        X0 = X0 + delta
+        F_value = F(X0)
+        F_norm = _np.linalg.norm(F_value, ord=2)
+        iteration_counter += 1
+
+    # Here, either a solution is found, or too many iterations
+    if abs(F_norm) &gt; teps:
+        iteration_counter = -1
+        _warn(&#34;WARNING: Maximum number of iterations exceeded.&#34;)
+        _warn(&#34;Most recent delta:&#34;+str(delta))
+        _warn(&#34;Most recent F-Norm:&#34;+str(F_norm))
+    return(X0, iteration_counter)
+
+# Define Newton-Raphson P/Q Evaluator
+def nr_pq(Ybus,V_set,P_set,Q_set,extend=True,argshape=False,verbose=False):
+    &#34;&#34;&#34;
+    Newton Raphson Real/Reactive Power Function Generator
+    
+    Given specified parameters, will generate the necessary real and reactive
+    power functions necessary to compute the system&#39;s power flow.
+    
+    Parameters
+    ----------
+    Ybus:       array_like
+                Postitive Sequence Y-Bus Matrix for Network.
+    V_set:      list of list of float
+                List of known and unknown voltages.
+                Known voltages should be provided as
+                a list of floating values in the form of:
+                [mag, ang], unknown voltages should
+                be provided as None.
+    P_set:      list of float
+                List of known and unknown real powers.
+                Known powers should be provided as
+                a floating point value, unknown powers
+                should be provided as None. Generated power
+                should be noted as positive, consumed power
+                should be noted as negative.
+    Q_set:      list of float
+                List of known and unknown reactive powers.
+                Known powers should be provided as
+                a floating point value, unknown powers
+                should be provided as None. Generated power
+                should be noted as positive, consumed power
+                should be noted as negative.
+    extend:     bool, optional
+                Control argument to format returned value as
+                singular function handle or lists of function
+                handles. default=True; singular function
+    argshape:   bool, optional
+                Control argument to force return of the voltage
+                argument array as a tuple of: (Θ-len, V-len).
+                default=False
+    verbose:    bool, optional
+                Control argument to print verbose information
+                about function generation, useful for debugging.
+                default=False
+    
+    Returns
+    -------
+    retset:     array_like
+                An array of function handles corresponding to
+                the appropriate voltage magnitude and angle
+                calculation functions based on the real and
+                reactive power values. Function(s) will accept
+                an argument of the form:
+                [Θ1, Θ2,..., Θn, V1, V2,..., Vm]
+                where n is the number of busses with unknown
+                voltage angle, and m is the number of busses
+                with unknown voltage magnitude.
+    
+    Examples
+    --------
+    &gt;&gt;&gt; import numpy as np
+    &gt;&gt;&gt; from electricpy import sim # Import Simulation Submodule
+    &gt;&gt;&gt; ybustest = [[-10j,10j],
+        [10j,-10j]]
+    &gt;&gt;&gt; Vlist = [[1,0],[None,None]] # We don&#39;t know the voltage or angle at bus 2
+    &gt;&gt;&gt; Plist = [None,-2.0] # 2pu watts consumed
+    &gt;&gt;&gt; Qlist = [None,-1.0] # 1pu vars consumed
+    &gt;&gt;&gt; F = nr_pq(ybustest,Vlist,Plist,Qlist)
+    &gt;&gt;&gt; X0 = [0,1] # Define Initial Conditions
+    &gt;&gt;&gt; J = sim.jacobian(F) # Find Jacobian
+    &gt;&gt;&gt; # Now use Newton-Raphson to Solve
+    &gt;&gt;&gt; results, iter = sim.NewtonRaphson(F,J,X0)
+    &gt;&gt;&gt; print(results)
+    [-0.236,0.8554]
+    &gt;&gt;&gt; print(iter) # Iteration Counter
+    4
+    
+    See Also
+    --------
+    NewtonRaphson:      Newton-Raphson System Solver
+    mbuspowerflow:      Multi-Bus Power Flow Calculator
+    
+    &#34;&#34;&#34;
+    # Condition Inputs
+    Ybus = _np.asarray(Ybus)
+    row, col = Ybus.shape
+    N = row
+    # Check Ybus shape
+    if row != col:
+        raise ValueError(&#34;Invalid Y-Bus Shape&#34;)
+    if N != len(V_set):
+        raise ValueError(&#34;Invalid V_set Shape&#34;)
+    if N != len(P_set):
+        raise ValueError(&#34;Invalid P_set Shape&#34;)
+    if N != len(Q_set):
+        raise ValueError(&#34;Invalid Q_set Shape&#34;)
+    for i in range(N):
+        if all((P_set[i],Q_set[i],V_set[i][0])):
+            raise ValueError(&#34;Over-Constrained System&#34;)
+    # Define Function Concatinator Class
+    class c_func_concat:
+        def __init__(self,funcs): # Initialize class with tupple of functions
+            self.nfuncs = len(funcs) # Determine how many functions are in tuple
+            self.func_reg = {} # Create empty keyed list of function handles
+            for key in range(self.nfuncs): # Iterate adding to key
+                self.func_reg[key] = funcs[key] # Fill keyed list with functions
+
+        def func_c(self,x): # Concatenated Function
+            rets = _np.array([]) # Create blank numpy array to store function outputs
+            for i in range(self.nfuncs):
+                y = self.func_reg[i](x) # Calculate each function at value x
+                rets = _np.append(rets, y) # Add value to return array
+            return(rets)
+    # Impliment Global Lists
+    global P_funcs, Q_funcs, P_strgs, Q_strgs
+    global V_list, YBUS, P_list, Q_list
+    global d_list, x_list
+    P_funcs = []
+    Q_funcs = []
+    P_strgs = []
+    Q_strgs = []
+    Vi_list = []
+    lists = [P_strgs,Q_strgs]
+    i = 0 # Index
+    ii = 0 # String Index
+    # Load Global Lists
+    V_list = V_set
+    YBUS = Ybus
+    P_list = P_set
+    Q_list = Q_set
+    # Define Calculation Strings
+    ## 0:  Vk magnitude
+    ## 1:  Vk angle
+    ## 2:  Vj magnitude
+    ## 3:  Vj angle
+    ## 4:  [k][j] (for Y-Bus)
+    ## 5:  Qgen Term
+    Pstr = (&#34;{0}*{2}*(YBUS{4}.real*_np.cos({1}-{3})+YBUS{4}.imag*_np.sin({1}-{3}))&#34;)
+    Qstr = (&#34;{0}*{2}*(YBUS{4}.real*_np.sin({1}-{3})-YBUS{4}.imag*_np.cos({1}-{3})){5}&#34;)
+    # Iteratively Identify Vector Length Terms
+    ang_len = 0
+    mag_len = 0
+    # Set Offset Factors
+    magoff = 1
+    angoff = 1
+    for _k in range(N):
+        Padd = False
+        Qadd = False
+        for _j in range(N):
+            if P_list[_k] == None:
+                continue # Don&#39;t Generate Requirements for Slack Bus
+            if (_k != _j) and not Padd: # Skip i,i Terms
+                ang_len += 1
+                Padd = True
+            if (_k != _j) and (Q_list[_k] != None) and not Qadd:
+                mag_len += 1
+                Qadd = True
+    Vxdim = ang_len + mag_len
+    if verbose:
+        print(&#34;Angle EQ&#39;s (P):&#34;,ang_len,&#34;\tMagnitude EQ&#39;s (Q):&#34;,mag_len)
+        print(&#34;Vx Dimension:&#34;,Vxdim)
+    # Iteratively Generate P and Q Requirements
+    for _k in range(N):
+        # Set for New Entry
+        newentry = True
+        for _j in range(N):
+            # Add New Entry To Lists
+            for LST in lists:
+                LST.append(None)
+            if P_list[_k] == None:
+                continue # Don&#39;t Generate Requirements for Slack Bus
+            # Collect Other Terms
+            Yind = &#34;[{}][{}]&#34;.format(_k,_j)
+            if verbose: print(&#34;K:&#34;,_k,&#34;\tJ:&#34;,_j)
+            # Generate Voltage-Related Strings
+            if _k != _j: # Skip i,i Terms
+                # Generate K-Related Strings
+                if V_list[_k][0] == None: # The Vk magnitude is unknown
+                    Vkm = &#34;Vx[{}]&#34;.format(_k+ang_len-magoff*_k) # Use Variable Magnitude
+                    Vka = &#34;Vx[{}]&#34;.format(_k-angoff) # Use Variable Angle
+                else: # The Vk magnitude is known
+                    Vkm = &#34;V_list[{}][0]&#34;.format(_k) # Load Magnitude
+                    if V_list[_k][1] == None: # The Vj angle is unknown
+                        Vka = &#34;Vx[{}]&#34;.format(_k-angoff) # Use Variable Angle
+                    else:
+                        Vka = &#34;V_list[{}][1]&#34;.format(_k) # Load Angle
+                # Generate J-Related Strings
+                if V_list[_j][0] == None: # The Vj magnitude is unknown
+                    Vjm = &#34;Vx[{}]&#34;.format(_j+ang_len-magoff*_j) # Use Variable Magnitude
+                    Vja = &#34;Vx[{}]&#34;.format(_j-angoff) # Use Variable Angle
+                else: # The Vj magnitude is known
+                    Vjm = &#34;V_list[{}][0]&#34;.format(_j) # Load Magnitude
+                    if V_list[_j][1] == None: # The Vj angle is unknown
+                        Vja = &#34;Vx[{}]&#34;.format(_j-angoff) # Use Variable Angle
+                    else:
+                        Vja = &#34;V_list[{}][1]&#34;.format(_j) # Load Angle
+                # Generate String and Append to List of Functions
+                P_strgs[i] = ( Pstr.format(Vkm,Vka,Vjm,Vja,Yind) ) 
+                if verbose: print(&#34;New P-String:&#34;,P_strgs[i])
+                # Generate Q Requirement
+                if Q_list[_k] != None:
+                   # Generate String and Append to List of Functions
+                    if newentry:
+                        newentry = False
+                        Qgen = &#34;-Vx[{0}]**2*YBUS[{0}][{0}].imag&#34;.format(_k)
+                    else:
+                        Qgen = &#34;&#34;
+                    Q_strgs[i] = ( Qstr.format(Vkm,Vka,Vjm,Vja,Yind,Qgen) )
+                    if verbose: print(&#34;New Q-String:&#34;,Q_strgs[i])
+            # Increment Index at Each Interior Level
+            i += 1
+        tempPstr = &#34;P_funcs.append(lambda Vx: -P_list[{0}]&#34;.format(_k)
+        tempQstr = &#34;Q_funcs.append(lambda Vx: -Q_list[{0}]&#34;.format(_k)
+        for _i in range(ii,i):
+            P = P_strgs[_i]
+            Q = Q_strgs[_i]
+            if P != None:
+                tempPstr += &#34;+&#34;+P
+            if Q != None:
+                tempQstr += &#34;+&#34;+Q
+        tempPstr += &#34;)&#34;
+        tempQstr += &#34;)&#34;
+        if any(P_strgs[ii:i]):
+            if verbose: print(&#34;Full P-Func Str:&#34;,tempPstr)
+            exec(tempPstr)
+        if any(Q_strgs[ii:i]):
+            if verbose: print(&#34;Full Q-Func Str:&#34;,tempQstr)
+            exec(tempQstr)
+        ii = i # Increase Lower Index
+    retset = (P_funcs,Q_funcs)
+    if extend:
+        funcset = P_funcs.copy()
+        funcset.extend(Q_funcs)
+        funcgroup = c_func_concat(funcset)
+        retset = funcgroup.func_c
+    if argshape:
+        retset = (retset,(ang_len,mag_len))
+    return(retset)
+
+# Define Multi-Bus Power Flow Calculator
+def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0=&#39;flatstart&#39;,eps=1e-4,
+                  mxiter=100,returnct=False,degrees=True,split=False,
+                  slackbus=0,lsq_eps=0.25):
+    &#34;&#34;&#34;
+    Multi-Bus Power Flow Calculator
+    
+    Function wrapper to simplify the evaluation of a power flow calculation.
+    Determines the function array (F) and the Jacobian array (J) and uses the
+    Newton-Raphson method to iteratively evaluate the system to converge to a
+    solution.
+    
+    Parameters
+    ----------
+    Ybus:       array_like
+                Postitive Sequence Y-Bus Matrix for Network.
+    Vknown:     list of list of float
+                List of known and unknown voltages.
+                Known voltages should be provided as
+                a list of floating values in the form of:
+                [mag, ang], unknown voltages should
+                be provided as None.
+    Pknown:     list of float
+                List of known and unknown real powers.
+                Known powers should be provided as
+                a floating point value, unknown powers
+                should be provided as None. Generated power
+                should be noted as positive, consumed power
+                should be noted as negative.
+    Qknown:     list of float
+                List of known and unknown reactive powers.
+                Known powers should be provided as
+                a floating point value, unknown powers
+                should be provided as None. Generated power
+                should be noted as positive, consumed power
+                should be noted as negative.
+    X0:         {&#39;flatstart&#39;, list of float}, optional
+                Initial conditions/Initial guess. May be set
+                to &#39;flatstart&#39; to force function to generate
+                flat voltages and angles of 1∠0°. Must be
+                specified in the form:
+                [Θ1, Θ2,..., Θn, V1, V2,..., Vm]
+                where n is the number of busses with unknown
+                voltage angle, and m is the number of busses
+                with unknown voltage magnitude.
+    eps:        float, optional
+                Epsilon - The error value, default=0.0001
+    mxiter:     int, optional
+                Maximum Iterations - The highest number of
+                iterations allowed, default=100
+    returnct:   bool, optional
+                Control argument to force function to return
+                the iteration counter from the Newton-Raphson
+                solution. default=False
+    degrees:    bool, optional
+                Control argument to force returned angles to
+                degrees. default=True
+    split:      bool, optional
+                Control argument to force returned array to
+                split into lists of magnitudes and angles.
+                default=False
+    slackbus:   int, optional
+                Control argument to specify the bus index for
+                the slack bus. If the slack bus is not positioned
+                at bus index 1 (default), this control can be
+                used to reformat the data sets to a format
+                necessary for proper generation and Newton
+                Raphson computation. Must be zero-based.
+                default=0
+    lsq_eps:    float, optional
+                Least Squares Method (Failover) Epsilon - the error value.
+                default=0.25
+    
+    
+    .. image:: /_static/mbuspowerflow_example.png
+    
+    Examples
+    --------
+    &gt;&gt;&gt; # Perform Power-Flow Analysis for Figure
+    &gt;&gt;&gt; import numpy as np
+    &gt;&gt;&gt; from electricpy import sim # Import Simulation Submodule
+    &gt;&gt;&gt; ybustest = [[-10j,10j],
+        [10j,-10j]]
+    &gt;&gt;&gt; Vlist = [[1,0],[None,None]] # We don&#39;t know the voltage or angle at bus 2
+    &gt;&gt;&gt; Plist = [None,-2.0] # 2pu watts consumed
+    &gt;&gt;&gt; Qlist = [None,-1.0] # 1pu vars consumed
+    &gt;&gt;&gt; nr_res = sim.mbuspowerflow(ybustest,Vlist,Plist,Qlist,degrees=True,split=True,returnct=True)
+    &gt;&gt;&gt; print(nr_res)
+    ([array([-13.52185223]), array([ 0.85537271])], 4)
+    
+    See Also
+    --------
+    NewtonRaphson:          Newton-Raphson System Solver
+    nr_pq:                  Newton-Raphson System Generator
+    electricpy.powerflow:   Simple (2-bus) Power Flow Calculator
+    &#34;&#34;&#34;
+    # Reformat Inputs to Meet Criteria
+    if slackbus != 0:
+        # Ybus
+        Ybus = _np.asarray(Ybus)
+        row, col = Ybus.shape
+        Ybus = _np.roll(Ybus,(col-slackbus),(0,1))
+        # Vknown, Pknown, and Qknown
+        Vknown = _np.roll(Vknown,(len(Vknown)-slackbus),0).tolist()
+        Pknown = _np.roll(Pknown,(len(Pknown)-slackbus),0).tolist()
+        Qknown = _np.roll(Qknown,(len(Qknown)-slackbus),0).tolist()
+    # Generate F Function Array
+    F, shp = nr_pq(Ybus,Vknown,Pknown,Qknown,True,True,False)
+    # Handle Flat-Start Condition
+    if X0 == &#39;flatstart&#39;:
+        ang_len, mag_len = shp
+        X0 = _np.append(_np.zeros(ang_len),_np.ones(mag_len))
+    # Evaluate Jacobian
+    J = jacobian(F)
+    # Compute Newton-Raphson
+    nr_result, iter_count = NewtonRaphson(F,J,X0,eps,mxiter,lsq_eps)
+    # Convert to Degrees if Necessary
+    if degrees:
+        for i in range(ang_len):
+            nr_result[i] = _np.degrees(nr_result[i])
+    # Split into Mag/Ang Arrays if Necessary
+    if split:
+        nr_result = [nr_result[:ang_len],nr_result[-mag_len:]]
+    # Return with Iteration Counter
+    if returnct:
+        return(nr_result, iter_count)
+    return(nr_result)
+
+# END OF FILE</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="electricpy.sim.NewtonRaphson"><code class="name flex">
+<span>def <span class="ident">NewtonRaphson</span></span>(<span>F, J, X0, eps=0.0001, mxiter=100, lsq_eps=0.25)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Newton Raphson Calculator</p>
+<p>Solve nonlinear system F=0 by Newton's method.
+J is the Jacobian of F. Both F and J must be functions of x.
+At input, x holds the start value. The iteration continues
+until ||F|| &lt; eps.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>F</code></strong> :&ensp;<code>
+array_like</code></dt>
+<dd>The Non-Linear System; a function handle/instance.
+The input function must accept only one (1) argument as an
+array or int/float representing the variables required.</dd>
+<dt><strong><code>J</code></strong> :&ensp;<code>
+array_like</code></dt>
+<dd>The Jacobian of F; a function handle/instance.
+The input Jacobian of F must accept only one (1) argument as
+an array or int/float representing the variables required.</dd>
+<dt><strong><code>X0</code></strong> :&ensp;<code>
+array_like</code></dt>
+<dd>The Initial Value (or initial guess); a representative array.</dd>
+<dt><strong><code>eps</code></strong> :&ensp;<code>
+float</code>, optional</dt>
+<dd>Epsilon - The error value, default=0.0001</dd>
+<dt><strong><code>mxiter</code></strong> :&ensp;<code>
+int</code>, optional</dt>
+<dd>Maximum Iterations - The highest number of iterations allowed,
+default=100</dd>
+<dt><strong><code>lsq_eps</code></strong> :&ensp;<code>
+float</code>, optional</dt>
+<dd>Least Squares Method (Failover) Epsilon - the error value.
+default=0.25</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>X0</code></strong> :&ensp;<code>
+array_like</code></dt>
+<dd>The computed result</dd>
+<dt><strong><code>iteration_counter</code></strong> :&ensp;<code> int</code></dt>
+<dd>The number of iterations completed before returning
+either due to solution being found, or max iterations
+being surpassed.</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<pre><code class="python">&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; from electricpy import sim # Import Simulation Submodule
+&gt;&gt;&gt; def F(x):
+    matr = np.array([[x[1]*10*np.sin(x[0])+2],
+        [x[1]*(-10)*np.cos(x[0])+x[1]**2*10+1]])
+    return(matr)
+&gt;&gt;&gt; def J(x):
+    matr = np.array([[10*x[1]*np.cos(x[0]), 10*np.sin(x[0])],
+        [10*x[1]*np.sin(x[0]), -10*np.cos(x[0])+20*x[1]]])
+    return(matr)
+# Now compute Newton-Raphson
+&gt;&gt;&gt; X0 = [0, 1]
+&gt;&gt;&gt; results, iter = sim.NewtonRaphson(F,J,X0)
+&gt;&gt;&gt; print(results)
+[-0.236,0.8554]
+&gt;&gt;&gt; print(iter) # Iteration Counter
+4
+</code></pre>
+<h2 id="see-also">See Also</h2>
+<dl>
+<dt><code><a title="electricpy.sim.nr_pq" href="#electricpy.sim.nr_pq">nr_pq()</a></code></dt>
+<dd>Newton-Raphson System Generator</dd>
+<dt><code><a title="electricpy.sim.mbuspowerflow" href="#electricpy.sim.mbuspowerflow">mbuspowerflow()</a></code></dt>
+<dd>Multi-Bus Power Flow Calculator</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
+    &#34;&#34;&#34;
+    Newton Raphson Calculator
+    
+    Solve nonlinear system F=0 by Newton&#39;s method.
+    J is the Jacobian of F. Both F and J must be functions of x.
+    At input, x holds the start value. The iteration continues
+    until ||F|| &lt; eps.
+    
+    Parameters
+    ----------
+    F:          array_like
+                The Non-Linear System; a function handle/instance.
+                The input function must accept only one (1) argument as an
+                array or int/float representing the variables required.
+    J:          array_like
+                The Jacobian of F; a function handle/instance.
+                The input Jacobian of F must accept only one (1) argument as
+                an array or int/float representing the variables required.
+    X0:         array_like
+                The Initial Value (or initial guess); a representative array.
+    eps:        float, optional
+                Epsilon - The error value, default=0.0001
+    mxiter:     int, optional
+                Maximum Iterations - The highest number of iterations allowed,
+                default=100
+    lsq_eps:    float, optional
+                Least Squares Method (Failover) Epsilon - the error value.
+                default=0.25
+    
+    Returns
+    -------
+    X0:                 array_like
+                        The computed result
+    iteration_counter:  int
+                        The number of iterations completed before returning
+                        either due to solution being found, or max iterations
+                        being surpassed.
+    
+    Examples
+    --------
+    &gt;&gt;&gt; import numpy as np
+    &gt;&gt;&gt; from electricpy import sim # Import Simulation Submodule
+    &gt;&gt;&gt; def F(x):
+        matr = np.array([[x[1]*10*np.sin(x[0])+2],
+            [x[1]*(-10)*np.cos(x[0])+x[1]**2*10+1]])
+        return(matr)
+    &gt;&gt;&gt; def J(x):
+        matr = np.array([[10*x[1]*np.cos(x[0]), 10*np.sin(x[0])],
+            [10*x[1]*np.sin(x[0]), -10*np.cos(x[0])+20*x[1]]])
+        return(matr)
+    # Now compute Newton-Raphson
+    &gt;&gt;&gt; X0 = [0, 1]
+    &gt;&gt;&gt; results, iter = sim.NewtonRaphson(F,J,X0)
+    &gt;&gt;&gt; print(results)
+    [-0.236,0.8554]
+    &gt;&gt;&gt; print(iter) # Iteration Counter
+    4
+    
+    See Also
+    --------
+    nr_pq:              Newton-Raphson System Generator
+    mbuspowerflow:      Multi-Bus Power Flow Calculator
+    
+    &#34;&#34;&#34;
+    # Test for one-variable inputs
+    if isinstance(F(X0),(int,float,_np.float64)): # System is size-1
+        if not isinstance(J(X0),(int,float,_np.float64)): # Jacobian isn&#39;t size-1
+            raise ValueError(&#34;ERROR: The Jacobian isn&#39;t size-1.&#34;)
+        return( newton( F, X0, J ) )
+    
+    # Test for valid argument sizes
+    f0sz = len(F(X0))
+    j0sz = len(J(X0))
+    if(f0sz!=j0sz): # Size mismatch
+        raise ValueError(&#34;ERROR: The arguments return arrays or lists&#34;+
+                        &#34; of different sizes: f0=&#34;+str(f0sz)+&#34;; j0=&#34;+str(j0sz))
+    # Define Internal Inversion System
+    def inv(m):
+        a, b = m.shape
+        if a != b:
+            raise ValueError(&#34;Only square matrices are invertible.&#34;)
+        i = _np.eye(a, a)
+        return _np.linalg.lstsq(m, i, rcond=None)[0]
+    F_value = F(X0)
+    F_norm = _np.linalg.norm(F_value, ord=2)  # L2 norm of vector
+    iteration_counter = 0
+    teps = eps
+    while abs(F_norm) &gt; teps and iteration_counter &lt; mxiter:
+        try: # Try Solve Operation
+            delta = _np.linalg.solve(J(X0), -F_value)
+            teps = eps # Change Test Epsilon if Needed
+        except _np.linalg.LinAlgError: # Use Least Square if Error
+            # Warn User, but only Once
+            try:
+                tst = userhasbeenwarned
+            except NameError:
+                userhasbeenwarned = True
+                _warn(&#34;WARNING: Singular matrix, attempting LSQ method.&#34;)
+            # Calculate Delta Using Least-Squares Inverse
+            delta = - inv(J(X0)).dot(F_value)
+            # Change Epsilon Test
+            teps = lsq_eps
+        X0 = X0 + delta
+        F_value = F(X0)
+        F_norm = _np.linalg.norm(F_value, ord=2)
+        iteration_counter += 1
+
+    # Here, either a solution is found, or too many iterations
+    if abs(F_norm) &gt; teps:
+        iteration_counter = -1
+        _warn(&#34;WARNING: Maximum number of iterations exceeded.&#34;)
+        _warn(&#34;Most recent delta:&#34;+str(delta))
+        _warn(&#34;Most recent F-Norm:&#34;+str(F_norm))
+    return(X0, iteration_counter)</code></pre>
+</details>
+</dd>
+<dt id="electricpy.sim.digifiltersim"><code class="name flex">
+<span>def <span class="ident">digifiltersim</span></span>(<span>fin, filter, freqs, NN=1000, dt=0.01, title='', legend=True, xlim=False, xmxscale=None, figsize=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Digital Filter Simulator</p>
+<p>Given an input function and filter parameters (specified in
+the z-domain) this function will plot the input function over
+NN time-steps of an unspecified size (the step-size must be
+specified outside the scope of this function). This function
+will also plot the resultant (output) function over the NN
+time-steps after having been filtered by that filter which
+is specified.</p>
+<p>The applied filter should be of the form:</p>
+<p>[
+]
+Where each row corresponds to a 1- or 2-pole filter.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>fin</code></strong> :&ensp;<code>
+function</code></dt>
+<dd>The input function, must be callable with specified
+step-size.</dd>
+<dt><strong><code>filter</code></strong> :&ensp;<code>
+array_like</code></dt>
+<dd>The filter parameter set as shown here:<pre><code>    .. code-block:: python
+
+       [[ a11, a12, b10, b11, b12],
+       [ a21, a22, b20, b21, b22],
+       [           ...          ],
+       [ an1, an2, bn0, bn1, bn2]]
+</code></pre>
+</dd>
+<dt><strong><code>freqs</code></strong> :&ensp;<code>
+list</code> of <code>float</code></dt>
+<dd>The set of frequencies to plot the input and output for.</dd>
+<dt><strong><code>NN</code></strong> :&ensp;<code>
+int</code>, optional</dt>
+<dd>The number of time-steps to be plotted; default=1000</dd>
+<dt><strong><code>dt</code></strong> :&ensp;<code>
+float</code>, optional</dt>
+<dd>The time-step size; default=0.01</dd>
+<dt><strong><code>title</code></strong> :&ensp;<code>
+str</code>, optional</dt>
+<dd>The title presented on each plot; default=""</dd>
+<dt><strong><code>xlim</code></strong> :&ensp;<code>
+list</code>, optional</dt>
+<dd>Limit in x-axis for graph plot. Accepts tuple of: (xmin, xmax).
+default=False.</dd>
+<dt><strong><code>xmxscale</code></strong> :&ensp;<code>
+float</code>, optional</dt>
+<dd>Scaling limit of the x-axis, will set the maximum of the
+x-axis to xmxscale/(dt*freq) where freq is the current
+frequency being plotted.</dd>
+<dt><strong><code>legend</code></strong> :&ensp;<code>
+str</code>, optional</dt>
+<dd>An argument to control whether the legend is shown,
+default=True.</dd>
+<dt><strong><code>figsize</code></strong> :&ensp;<code>
+tuple</code>, optional</dt>
+<dd>The figure dimensions for each subplot, default=None</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def digifiltersim(fin,filter,freqs,NN=1000,dt=0.01,title=&#34;&#34;,
+               legend=True,xlim=False,xmxscale=None,figsize=None):
+    &#34;&#34;&#34;
+    Digital Filter Simulator
+    
+    Given an input function and filter parameters (specified in
+    the z-domain) this function will plot the input function over
+    NN time-steps of an unspecified size (the step-size must be
+    specified outside the scope of this function). This function
+    will also plot the resultant (output) function over the NN
+    time-steps after having been filtered by that filter which
+    is specified.
+    
+    The applied filter should be of the form:
+    
+    .. math:: \\frac{b_0+b_1z^{-1}+b_2z^{-2}}{1-a_1z^{-1}-a_2z^{-2}}
+    
+    Where each row corresponds to a 1- or 2-pole filter.
+    
+    Parameters
+    ----------
+    fin:        function
+                The input function, must be callable with specified
+                step-size.
+    filter:     array_like
+                The filter parameter set as shown here:
+                
+                .. code-block:: python
+                   
+                   [[ a11, a12, b10, b11, b12],
+                   [ a21, a22, b20, b21, b22],
+                   [           ...          ],
+                   [ an1, an2, bn0, bn1, bn2]]
+                
+    freqs:      list of float
+                The set of frequencies to plot the input and output for.
+    NN:         int, optional
+                The number of time-steps to be plotted; default=1000
+    dt:         float, optional
+                The time-step size; default=0.01
+    title:      str, optional
+                The title presented on each plot; default=&#34;&#34;
+    xlim:       list, optional
+                Limit in x-axis for graph plot. Accepts tuple of: (xmin, xmax).
+                default=False.
+    xmxscale:   float, optional
+                Scaling limit of the x-axis, will set the maximum of the
+                x-axis to xmxscale/(dt*freq) where freq is the current
+                frequency being plotted.
+    legend:     str, optional
+                An argument to control whether the legend is shown,
+                default=True.
+    figsize:    tuple, optional
+                The figure dimensions for each subplot, default=None
+    &#34;&#34;&#34;
+    if(figsize!=None): _plt.figure(figsize=figsize)
+    flen = len(freqs)
+    for i in range(flen):
+        # Gather frequency
+        freq = freqs[i]
+        
+        # Start with arrays set to zero
+        x = _np.zeros(NN)
+        y = _np.zeros(NN)
+        
+        # ----- The input  -----
+        for k in range(NN):
+            x[k] = fin(k*dt,freq)
+        
+        # Identify how many rows were provided
+        sz = filter.size
+        if(sz &lt; 5):
+            raise ValueError(&#34;ERROR: Too few filter arguments provided. &#34;+
+                             &#34;Refer to documentation for proper format.&#34;)
+        elif(sz == 5):
+            rows = 1
+        else:
+            rows, cols = filter.shape
+        # Operate with each individual filter set
+        x_tmp = _np.copy( x )
+        nsteps = NN - 4
+        for row_n in range(rows):
+            row = filter[row_n] # Capture individual row
+            A1 = row[0]
+            A2 = row[1]
+            B0 = row[2]
+            B1 = row[3]
+            B2 = row[4]
+            T = 3
+            for _ in range(nsteps):
+                T = T + 1
+                # Apply Filtering Specified by Individual Row
+                y[T] = (A1*y[T-1] + A2*y[T-2] +
+                        B0*x_tmp[T] + B1*x_tmp[T-1] +  B2*x_tmp[T-2])
+            # Copy New output into temporary input
+            x_tmp = _np.copy( y )
+        # Copy finalized output into *ytime* for plotting
+        ytime = _np.copy( x_tmp )
+        # Plot Filtered Output
+        if(flen%2==0): _plt.subplot(flen,2,i+1)
+        else: _plt.subplot(flen,1,i+1)
+        _plt.plot(x,&#39;k--&#39;,label=&#34;Input&#34;)
+        _plt.plot(ytime,&#39;k&#39;,label=&#34;Output&#34;)
+        _plt.title(title)
+        _plt.grid(which=&#39;both&#39;)
+        if legend: _plt.legend(title=&#34;Frequency = &#34;+str(freq)+&#34;Hz&#34;)
+        if xlim!=False: _plt.xlim(xlim)
+        elif xmxscale!=None: _plt.xlim((0,xmxscale/(freq*dt)))
+        
+    _plt.tight_layout()
+    _plt.show()</code></pre>
+</details>
+</dd>
+<dt id="electricpy.sim.mbuspowerflow"><code class="name flex">
+<span>def <span class="ident">mbuspowerflow</span></span>(<span>Ybus, Vknown, Pknown, Qknown, X0='flatstart', eps=0.0001, mxiter=100, returnct=False, degrees=True, split=False, slackbus=0, lsq_eps=0.25)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Multi-Bus Power Flow Calculator</p>
+<p>Function wrapper to simplify the evaluation of a power flow calculation.
+Determines the function array (F) and the Jacobian array (J) and uses the
+Newton-Raphson method to iteratively evaluate the system to converge to a
+solution.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>Ybus</code></strong> :&ensp;<code>
+array_like</code></dt>
+<dd>Postitive Sequence Y-Bus Matrix for Network.</dd>
+<dt><strong><code>Vknown</code></strong> :&ensp;<code>
+list</code> of <code>list</code> of <code>float</code></dt>
+<dd>List of known and unknown voltages.
+Known voltages should be provided as
+a list of floating values in the form of:
+[mag, ang], unknown voltages should
+be provided as None.</dd>
+<dt><strong><code>Pknown</code></strong> :&ensp;<code>
+list</code> of <code>float</code></dt>
+<dd>List of known and unknown real powers.
+Known powers should be provided as
+a floating point value, unknown powers
+should be provided as None. Generated power
+should be noted as positive, consumed power
+should be noted as negative.</dd>
+<dt><strong><code>Qknown</code></strong> :&ensp;<code>
+list</code> of <code>float</code></dt>
+<dd>List of known and unknown reactive powers.
+Known powers should be provided as
+a floating point value, unknown powers
+should be provided as None. Generated power
+should be noted as positive, consumed power
+should be noted as negative.</dd>
+<dt><strong><code>X0</code></strong> :&ensp;<code>{'flatstart', list</code> of <code>float}</code>, optional</dt>
+<dd>Initial conditions/Initial guess. May be set
+to 'flatstart' to force function to generate
+flat voltages and angles of 1∠0°. Must be
+specified in the form:
+[Θ1, Θ2,&hellip;, Θn, V1, V2,&hellip;, Vm]
+where n is the number of busses with unknown
+voltage angle, and m is the number of busses
+with unknown voltage magnitude.</dd>
+<dt><strong><code>eps</code></strong> :&ensp;<code>
+float</code>, optional</dt>
+<dd>Epsilon - The error value, default=0.0001</dd>
+<dt><strong><code>mxiter</code></strong> :&ensp;<code>
+int</code>, optional</dt>
+<dd>Maximum Iterations - The highest number of
+iterations allowed, default=100</dd>
+<dt><strong><code>returnct</code></strong> :&ensp;<code>
+bool</code>, optional</dt>
+<dd>Control argument to force function to return
+the iteration counter from the Newton-Raphson
+solution. default=False</dd>
+<dt><strong><code>degrees</code></strong> :&ensp;<code>
+bool</code>, optional</dt>
+<dd>Control argument to force returned angles to
+degrees. default=True</dd>
+<dt><strong><code>split</code></strong> :&ensp;<code>
+bool</code>, optional</dt>
+<dd>Control argument to force returned array to
+split into lists of magnitudes and angles.
+default=False</dd>
+<dt><strong><code>slackbus</code></strong> :&ensp;<code>
+int</code>, optional</dt>
+<dd>Control argument to specify the bus index for
+the slack bus. If the slack bus is not positioned
+at bus index 1 (default), this control can be
+used to reformat the data sets to a format
+necessary for proper generation and Newton
+Raphson computation. Must be zero-based.
+default=0</dd>
+<dt><strong><code>lsq_eps</code></strong> :&ensp;<code>
+float</code>, optional</dt>
+<dd>Least Squares Method (Failover) Epsilon - the error value.
+default=0.25</dd>
+</dl>
+<p><img alt="" src="/_static/mbuspowerflow_example.png"></p>
+<h2 id="examples">Examples</h2>
+<pre><code class="python">&gt;&gt;&gt; # Perform Power-Flow Analysis for Figure
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; from electricpy import sim # Import Simulation Submodule
+&gt;&gt;&gt; ybustest = [[-10j,10j],
+    [10j,-10j]]
+&gt;&gt;&gt; Vlist = [[1,0],[None,None]] # We don't know the voltage or angle at bus 2
+&gt;&gt;&gt; Plist = [None,-2.0] # 2pu watts consumed
+&gt;&gt;&gt; Qlist = [None,-1.0] # 1pu vars consumed
+&gt;&gt;&gt; nr_res = sim.mbuspowerflow(ybustest,Vlist,Plist,Qlist,degrees=True,split=True,returnct=True)
+&gt;&gt;&gt; print(nr_res)
+([array([-13.52185223]), array([ 0.85537271])], 4)
+</code></pre>
+<h2 id="see-also">See Also</h2>
+<dl>
+<dt><code><a title="electricpy.sim.NewtonRaphson" href="#electricpy.sim.NewtonRaphson">NewtonRaphson()</a></code></dt>
+<dd>Newton-Raphson System Solver</dd>
+<dt><code><a title="electricpy.sim.nr_pq" href="#electricpy.sim.nr_pq">nr_pq()</a></code></dt>
+<dd>Newton-Raphson System Generator</dd>
+<dt><code><a title="electricpy.powerflow" href="index.html#electricpy.powerflow">powerflow()</a></code></dt>
+<dd>Simple (2-bus) Power Flow Calculator</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0=&#39;flatstart&#39;,eps=1e-4,
+                  mxiter=100,returnct=False,degrees=True,split=False,
+                  slackbus=0,lsq_eps=0.25):
+    &#34;&#34;&#34;
+    Multi-Bus Power Flow Calculator
+    
+    Function wrapper to simplify the evaluation of a power flow calculation.
+    Determines the function array (F) and the Jacobian array (J) and uses the
+    Newton-Raphson method to iteratively evaluate the system to converge to a
+    solution.
+    
+    Parameters
+    ----------
+    Ybus:       array_like
+                Postitive Sequence Y-Bus Matrix for Network.
+    Vknown:     list of list of float
+                List of known and unknown voltages.
+                Known voltages should be provided as
+                a list of floating values in the form of:
+                [mag, ang], unknown voltages should
+                be provided as None.
+    Pknown:     list of float
+                List of known and unknown real powers.
+                Known powers should be provided as
+                a floating point value, unknown powers
+                should be provided as None. Generated power
+                should be noted as positive, consumed power
+                should be noted as negative.
+    Qknown:     list of float
+                List of known and unknown reactive powers.
+                Known powers should be provided as
+                a floating point value, unknown powers
+                should be provided as None. Generated power
+                should be noted as positive, consumed power
+                should be noted as negative.
+    X0:         {&#39;flatstart&#39;, list of float}, optional
+                Initial conditions/Initial guess. May be set
+                to &#39;flatstart&#39; to force function to generate
+                flat voltages and angles of 1∠0°. Must be
+                specified in the form:
+                [Θ1, Θ2,..., Θn, V1, V2,..., Vm]
+                where n is the number of busses with unknown
+                voltage angle, and m is the number of busses
+                with unknown voltage magnitude.
+    eps:        float, optional
+                Epsilon - The error value, default=0.0001
+    mxiter:     int, optional
+                Maximum Iterations - The highest number of
+                iterations allowed, default=100
+    returnct:   bool, optional
+                Control argument to force function to return
+                the iteration counter from the Newton-Raphson
+                solution. default=False
+    degrees:    bool, optional
+                Control argument to force returned angles to
+                degrees. default=True
+    split:      bool, optional
+                Control argument to force returned array to
+                split into lists of magnitudes and angles.
+                default=False
+    slackbus:   int, optional
+                Control argument to specify the bus index for
+                the slack bus. If the slack bus is not positioned
+                at bus index 1 (default), this control can be
+                used to reformat the data sets to a format
+                necessary for proper generation and Newton
+                Raphson computation. Must be zero-based.
+                default=0
+    lsq_eps:    float, optional
+                Least Squares Method (Failover) Epsilon - the error value.
+                default=0.25
+    
+    
+    .. image:: /_static/mbuspowerflow_example.png
+    
+    Examples
+    --------
+    &gt;&gt;&gt; # Perform Power-Flow Analysis for Figure
+    &gt;&gt;&gt; import numpy as np
+    &gt;&gt;&gt; from electricpy import sim # Import Simulation Submodule
+    &gt;&gt;&gt; ybustest = [[-10j,10j],
+        [10j,-10j]]
+    &gt;&gt;&gt; Vlist = [[1,0],[None,None]] # We don&#39;t know the voltage or angle at bus 2
+    &gt;&gt;&gt; Plist = [None,-2.0] # 2pu watts consumed
+    &gt;&gt;&gt; Qlist = [None,-1.0] # 1pu vars consumed
+    &gt;&gt;&gt; nr_res = sim.mbuspowerflow(ybustest,Vlist,Plist,Qlist,degrees=True,split=True,returnct=True)
+    &gt;&gt;&gt; print(nr_res)
+    ([array([-13.52185223]), array([ 0.85537271])], 4)
+    
+    See Also
+    --------
+    NewtonRaphson:          Newton-Raphson System Solver
+    nr_pq:                  Newton-Raphson System Generator
+    electricpy.powerflow:   Simple (2-bus) Power Flow Calculator
+    &#34;&#34;&#34;
+    # Reformat Inputs to Meet Criteria
+    if slackbus != 0:
+        # Ybus
+        Ybus = _np.asarray(Ybus)
+        row, col = Ybus.shape
+        Ybus = _np.roll(Ybus,(col-slackbus),(0,1))
+        # Vknown, Pknown, and Qknown
+        Vknown = _np.roll(Vknown,(len(Vknown)-slackbus),0).tolist()
+        Pknown = _np.roll(Pknown,(len(Pknown)-slackbus),0).tolist()
+        Qknown = _np.roll(Qknown,(len(Qknown)-slackbus),0).tolist()
+    # Generate F Function Array
+    F, shp = nr_pq(Ybus,Vknown,Pknown,Qknown,True,True,False)
+    # Handle Flat-Start Condition
+    if X0 == &#39;flatstart&#39;:
+        ang_len, mag_len = shp
+        X0 = _np.append(_np.zeros(ang_len),_np.ones(mag_len))
+    # Evaluate Jacobian
+    J = jacobian(F)
+    # Compute Newton-Raphson
+    nr_result, iter_count = NewtonRaphson(F,J,X0,eps,mxiter,lsq_eps)
+    # Convert to Degrees if Necessary
+    if degrees:
+        for i in range(ang_len):
+            nr_result[i] = _np.degrees(nr_result[i])
+    # Split into Mag/Ang Arrays if Necessary
+    if split:
+        nr_result = [nr_result[:ang_len],nr_result[-mag_len:]]
+    # Return with Iteration Counter
+    if returnct:
+        return(nr_result, iter_count)
+    return(nr_result)</code></pre>
+</details>
+</dd>
+<dt id="electricpy.sim.nr_pq"><code class="name flex">
+<span>def <span class="ident">nr_pq</span></span>(<span>Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Newton Raphson Real/Reactive Power Function Generator</p>
+<p>Given specified parameters, will generate the necessary real and reactive
+power functions necessary to compute the system's power flow.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>Ybus</code></strong> :&ensp;<code>
+array_like</code></dt>
+<dd>Postitive Sequence Y-Bus Matrix for Network.</dd>
+<dt><strong><code>V_set</code></strong> :&ensp;<code>
+list</code> of <code>list</code> of <code>float</code></dt>
+<dd>List of known and unknown voltages.
+Known voltages should be provided as
+a list of floating values in the form of:
+[mag, ang], unknown voltages should
+be provided as None.</dd>
+<dt><strong><code>P_set</code></strong> :&ensp;<code>
+list</code> of <code>float</code></dt>
+<dd>List of known and unknown real powers.
+Known powers should be provided as
+a floating point value, unknown powers
+should be provided as None. Generated power
+should be noted as positive, consumed power
+should be noted as negative.</dd>
+<dt><strong><code>Q_set</code></strong> :&ensp;<code>
+list</code> of <code>float</code></dt>
+<dd>List of known and unknown reactive powers.
+Known powers should be provided as
+a floating point value, unknown powers
+should be provided as None. Generated power
+should be noted as positive, consumed power
+should be noted as negative.</dd>
+<dt><strong><code>extend</code></strong> :&ensp;<code>
+bool</code>, optional</dt>
+<dd>Control argument to format returned value as
+singular function handle or lists of function
+handles. default=True; singular function</dd>
+<dt><strong><code>argshape</code></strong> :&ensp;<code>
+bool</code>, optional</dt>
+<dd>Control argument to force return of the voltage
+argument array as a tuple of: (Θ-len, V-len).
+default=False</dd>
+<dt><strong><code>verbose</code></strong> :&ensp;<code>
+bool</code>, optional</dt>
+<dd>Control argument to print verbose information
+about function generation, useful for debugging.
+default=False</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>retset</code></strong> :&ensp;<code>
+array_like</code></dt>
+<dd>An array of function handles corresponding to
+the appropriate voltage magnitude and angle
+calculation functions based on the real and
+reactive power values. Function(s) will accept
+an argument of the form:
+[Θ1, Θ2,&hellip;, Θn, V1, V2,&hellip;, Vm]
+where n is the number of busses with unknown
+voltage angle, and m is the number of busses
+with unknown voltage magnitude.</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<pre><code class="python">&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; from electricpy import sim # Import Simulation Submodule
+&gt;&gt;&gt; ybustest = [[-10j,10j],
+    [10j,-10j]]
+&gt;&gt;&gt; Vlist = [[1,0],[None,None]] # We don't know the voltage or angle at bus 2
+&gt;&gt;&gt; Plist = [None,-2.0] # 2pu watts consumed
+&gt;&gt;&gt; Qlist = [None,-1.0] # 1pu vars consumed
+&gt;&gt;&gt; F = nr_pq(ybustest,Vlist,Plist,Qlist)
+&gt;&gt;&gt; X0 = [0,1] # Define Initial Conditions
+&gt;&gt;&gt; J = sim.jacobian(F) # Find Jacobian
+&gt;&gt;&gt; # Now use Newton-Raphson to Solve
+&gt;&gt;&gt; results, iter = sim.NewtonRaphson(F,J,X0)
+&gt;&gt;&gt; print(results)
+[-0.236,0.8554]
+&gt;&gt;&gt; print(iter) # Iteration Counter
+4
+</code></pre>
+<h2 id="see-also">See Also</h2>
+<dl>
+<dt><code><a title="electricpy.sim.NewtonRaphson" href="#electricpy.sim.NewtonRaphson">NewtonRaphson()</a></code></dt>
+<dd>Newton-Raphson System Solver</dd>
+<dt><code><a title="electricpy.sim.mbuspowerflow" href="#electricpy.sim.mbuspowerflow">mbuspowerflow()</a></code></dt>
+<dd>Multi-Bus Power Flow Calculator</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def nr_pq(Ybus,V_set,P_set,Q_set,extend=True,argshape=False,verbose=False):
+    &#34;&#34;&#34;
+    Newton Raphson Real/Reactive Power Function Generator
+    
+    Given specified parameters, will generate the necessary real and reactive
+    power functions necessary to compute the system&#39;s power flow.
+    
+    Parameters
+    ----------
+    Ybus:       array_like
+                Postitive Sequence Y-Bus Matrix for Network.
+    V_set:      list of list of float
+                List of known and unknown voltages.
+                Known voltages should be provided as
+                a list of floating values in the form of:
+                [mag, ang], unknown voltages should
+                be provided as None.
+    P_set:      list of float
+                List of known and unknown real powers.
+                Known powers should be provided as
+                a floating point value, unknown powers
+                should be provided as None. Generated power
+                should be noted as positive, consumed power
+                should be noted as negative.
+    Q_set:      list of float
+                List of known and unknown reactive powers.
+                Known powers should be provided as
+                a floating point value, unknown powers
+                should be provided as None. Generated power
+                should be noted as positive, consumed power
+                should be noted as negative.
+    extend:     bool, optional
+                Control argument to format returned value as
+                singular function handle or lists of function
+                handles. default=True; singular function
+    argshape:   bool, optional
+                Control argument to force return of the voltage
+                argument array as a tuple of: (Θ-len, V-len).
+                default=False
+    verbose:    bool, optional
+                Control argument to print verbose information
+                about function generation, useful for debugging.
+                default=False
+    
+    Returns
+    -------
+    retset:     array_like
+                An array of function handles corresponding to
+                the appropriate voltage magnitude and angle
+                calculation functions based on the real and
+                reactive power values. Function(s) will accept
+                an argument of the form:
+                [Θ1, Θ2,..., Θn, V1, V2,..., Vm]
+                where n is the number of busses with unknown
+                voltage angle, and m is the number of busses
+                with unknown voltage magnitude.
+    
+    Examples
+    --------
+    &gt;&gt;&gt; import numpy as np
+    &gt;&gt;&gt; from electricpy import sim # Import Simulation Submodule
+    &gt;&gt;&gt; ybustest = [[-10j,10j],
+        [10j,-10j]]
+    &gt;&gt;&gt; Vlist = [[1,0],[None,None]] # We don&#39;t know the voltage or angle at bus 2
+    &gt;&gt;&gt; Plist = [None,-2.0] # 2pu watts consumed
+    &gt;&gt;&gt; Qlist = [None,-1.0] # 1pu vars consumed
+    &gt;&gt;&gt; F = nr_pq(ybustest,Vlist,Plist,Qlist)
+    &gt;&gt;&gt; X0 = [0,1] # Define Initial Conditions
+    &gt;&gt;&gt; J = sim.jacobian(F) # Find Jacobian
+    &gt;&gt;&gt; # Now use Newton-Raphson to Solve
+    &gt;&gt;&gt; results, iter = sim.NewtonRaphson(F,J,X0)
+    &gt;&gt;&gt; print(results)
+    [-0.236,0.8554]
+    &gt;&gt;&gt; print(iter) # Iteration Counter
+    4
+    
+    See Also
+    --------
+    NewtonRaphson:      Newton-Raphson System Solver
+    mbuspowerflow:      Multi-Bus Power Flow Calculator
+    
+    &#34;&#34;&#34;
+    # Condition Inputs
+    Ybus = _np.asarray(Ybus)
+    row, col = Ybus.shape
+    N = row
+    # Check Ybus shape
+    if row != col:
+        raise ValueError(&#34;Invalid Y-Bus Shape&#34;)
+    if N != len(V_set):
+        raise ValueError(&#34;Invalid V_set Shape&#34;)
+    if N != len(P_set):
+        raise ValueError(&#34;Invalid P_set Shape&#34;)
+    if N != len(Q_set):
+        raise ValueError(&#34;Invalid Q_set Shape&#34;)
+    for i in range(N):
+        if all((P_set[i],Q_set[i],V_set[i][0])):
+            raise ValueError(&#34;Over-Constrained System&#34;)
+    # Define Function Concatinator Class
+    class c_func_concat:
+        def __init__(self,funcs): # Initialize class with tupple of functions
+            self.nfuncs = len(funcs) # Determine how many functions are in tuple
+            self.func_reg = {} # Create empty keyed list of function handles
+            for key in range(self.nfuncs): # Iterate adding to key
+                self.func_reg[key] = funcs[key] # Fill keyed list with functions
+
+        def func_c(self,x): # Concatenated Function
+            rets = _np.array([]) # Create blank numpy array to store function outputs
+            for i in range(self.nfuncs):
+                y = self.func_reg[i](x) # Calculate each function at value x
+                rets = _np.append(rets, y) # Add value to return array
+            return(rets)
+    # Impliment Global Lists
+    global P_funcs, Q_funcs, P_strgs, Q_strgs
+    global V_list, YBUS, P_list, Q_list
+    global d_list, x_list
+    P_funcs = []
+    Q_funcs = []
+    P_strgs = []
+    Q_strgs = []
+    Vi_list = []
+    lists = [P_strgs,Q_strgs]
+    i = 0 # Index
+    ii = 0 # String Index
+    # Load Global Lists
+    V_list = V_set
+    YBUS = Ybus
+    P_list = P_set
+    Q_list = Q_set
+    # Define Calculation Strings
+    ## 0:  Vk magnitude
+    ## 1:  Vk angle
+    ## 2:  Vj magnitude
+    ## 3:  Vj angle
+    ## 4:  [k][j] (for Y-Bus)
+    ## 5:  Qgen Term
+    Pstr = (&#34;{0}*{2}*(YBUS{4}.real*_np.cos({1}-{3})+YBUS{4}.imag*_np.sin({1}-{3}))&#34;)
+    Qstr = (&#34;{0}*{2}*(YBUS{4}.real*_np.sin({1}-{3})-YBUS{4}.imag*_np.cos({1}-{3})){5}&#34;)
+    # Iteratively Identify Vector Length Terms
+    ang_len = 0
+    mag_len = 0
+    # Set Offset Factors
+    magoff = 1
+    angoff = 1
+    for _k in range(N):
+        Padd = False
+        Qadd = False
+        for _j in range(N):
+            if P_list[_k] == None:
+                continue # Don&#39;t Generate Requirements for Slack Bus
+            if (_k != _j) and not Padd: # Skip i,i Terms
+                ang_len += 1
+                Padd = True
+            if (_k != _j) and (Q_list[_k] != None) and not Qadd:
+                mag_len += 1
+                Qadd = True
+    Vxdim = ang_len + mag_len
+    if verbose:
+        print(&#34;Angle EQ&#39;s (P):&#34;,ang_len,&#34;\tMagnitude EQ&#39;s (Q):&#34;,mag_len)
+        print(&#34;Vx Dimension:&#34;,Vxdim)
+    # Iteratively Generate P and Q Requirements
+    for _k in range(N):
+        # Set for New Entry
+        newentry = True
+        for _j in range(N):
+            # Add New Entry To Lists
+            for LST in lists:
+                LST.append(None)
+            if P_list[_k] == None:
+                continue # Don&#39;t Generate Requirements for Slack Bus
+            # Collect Other Terms
+            Yind = &#34;[{}][{}]&#34;.format(_k,_j)
+            if verbose: print(&#34;K:&#34;,_k,&#34;\tJ:&#34;,_j)
+            # Generate Voltage-Related Strings
+            if _k != _j: # Skip i,i Terms
+                # Generate K-Related Strings
+                if V_list[_k][0] == None: # The Vk magnitude is unknown
+                    Vkm = &#34;Vx[{}]&#34;.format(_k+ang_len-magoff*_k) # Use Variable Magnitude
+                    Vka = &#34;Vx[{}]&#34;.format(_k-angoff) # Use Variable Angle
+                else: # The Vk magnitude is known
+                    Vkm = &#34;V_list[{}][0]&#34;.format(_k) # Load Magnitude
+                    if V_list[_k][1] == None: # The Vj angle is unknown
+                        Vka = &#34;Vx[{}]&#34;.format(_k-angoff) # Use Variable Angle
+                    else:
+                        Vka = &#34;V_list[{}][1]&#34;.format(_k) # Load Angle
+                # Generate J-Related Strings
+                if V_list[_j][0] == None: # The Vj magnitude is unknown
+                    Vjm = &#34;Vx[{}]&#34;.format(_j+ang_len-magoff*_j) # Use Variable Magnitude
+                    Vja = &#34;Vx[{}]&#34;.format(_j-angoff) # Use Variable Angle
+                else: # The Vj magnitude is known
+                    Vjm = &#34;V_list[{}][0]&#34;.format(_j) # Load Magnitude
+                    if V_list[_j][1] == None: # The Vj angle is unknown
+                        Vja = &#34;Vx[{}]&#34;.format(_j-angoff) # Use Variable Angle
+                    else:
+                        Vja = &#34;V_list[{}][1]&#34;.format(_j) # Load Angle
+                # Generate String and Append to List of Functions
+                P_strgs[i] = ( Pstr.format(Vkm,Vka,Vjm,Vja,Yind) ) 
+                if verbose: print(&#34;New P-String:&#34;,P_strgs[i])
+                # Generate Q Requirement
+                if Q_list[_k] != None:
+                   # Generate String and Append to List of Functions
+                    if newentry:
+                        newentry = False
+                        Qgen = &#34;-Vx[{0}]**2*YBUS[{0}][{0}].imag&#34;.format(_k)
+                    else:
+                        Qgen = &#34;&#34;
+                    Q_strgs[i] = ( Qstr.format(Vkm,Vka,Vjm,Vja,Yind,Qgen) )
+                    if verbose: print(&#34;New Q-String:&#34;,Q_strgs[i])
+            # Increment Index at Each Interior Level
+            i += 1
+        tempPstr = &#34;P_funcs.append(lambda Vx: -P_list[{0}]&#34;.format(_k)
+        tempQstr = &#34;Q_funcs.append(lambda Vx: -Q_list[{0}]&#34;.format(_k)
+        for _i in range(ii,i):
+            P = P_strgs[_i]
+            Q = Q_strgs[_i]
+            if P != None:
+                tempPstr += &#34;+&#34;+P
+            if Q != None:
+                tempQstr += &#34;+&#34;+Q
+        tempPstr += &#34;)&#34;
+        tempQstr += &#34;)&#34;
+        if any(P_strgs[ii:i]):
+            if verbose: print(&#34;Full P-Func Str:&#34;,tempPstr)
+            exec(tempPstr)
+        if any(Q_strgs[ii:i]):
+            if verbose: print(&#34;Full Q-Func Str:&#34;,tempQstr)
+            exec(tempQstr)
+        ii = i # Increase Lower Index
+    retset = (P_funcs,Q_funcs)
+    if extend:
+        funcset = P_funcs.copy()
+        funcset.extend(Q_funcs)
+        funcgroup = c_func_concat(funcset)
+        retset = funcgroup.func_c
+    if argshape:
+        retset = (retset,(ang_len,mag_len))
+    return(retset)</code></pre>
+</details>
+</dd>
+<dt id="electricpy.sim.parabolic_response"><code class="name flex">
+<span>def <span class="ident">parabolic_response</span></span>(<span>system, npts=1000, dt=0.01, combine=True, xlim=False, title='Parabolic Response', errtitle='Parabolic Response Error', resplabel='Parabolic Response', funclabel='Parabolic Function', errlabel='Error', filename=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Parabolic Function Response Plotter Function</p>
+<p>Given a transfer function, plots the response against step input
+and plots the error for the function.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>system</code></strong> :&ensp;<code>
+array_like</code></dt>
+<dd>The Transfer Function; can be provided as the following:
+* 1 (instance of lti)
+* 2 (num, den)
+* 3 (zeros, poles, gain)
+* 4 (A, B, C, D)</dd>
+<dt><strong><code>npts</code></strong> :&ensp;<code>
+int</code>, optional</dt>
+<dd>Number of steps to calculate over; default is 1000.</dd>
+<dt><strong><code>dt</code></strong> :&ensp;<code>
+float</code>, optional</dt>
+<dd>Difference between each data point, default is 0.01.</dd>
+<dt><strong><code>combine</code></strong> :&ensp;<code>
+bool</code>, optional</dt>
+<dd>If combination of numerator and denominator is needed.
+This value should be set to "True" if the parts should be
+combined to show the complete system with feedback.
+default=True.</dd>
+<dt><strong><code>title</code></strong> :&ensp;<code>
+str</code>, optional</dt>
+<dd>Additional string to be added to plot titles;
+default=""</dd>
+<dt><strong><code>xlim</code></strong> :&ensp;<code>
+list</code>, optional</dt>
+<dd>Limit in x-axis for graph plot. Accepts tuple of: (xmin, xmax).
+default=False.</dd>
+<dt><strong><code>filename</code></strong> :&ensp;<code>
+bool</code>, optional</dt>
+<dd>Control argument to specify whether the plotted
+figures should be saved. default=False</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def parabolic_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
+                  title=&#34;Parabolic Response&#34;,errtitle=&#34;Parabolic Response Error&#34;,
+                  resplabel=&#34;Parabolic Response&#34;,funclabel=&#34;Parabolic Function&#34;,
+                  errlabel=&#34;Error&#34;,filename=None):
+    &#34;&#34;&#34;
+    Parabolic Function Response Plotter Function
+    
+    Given a transfer function, plots the response against step input
+    and plots the error for the function.
+    
+    Parameters
+    ----------
+    system:     array_like
+                The Transfer Function; can be provided as the following:
+                * 1 (instance of lti)
+                * 2 (num, den)
+                * 3 (zeros, poles, gain)
+                * 4 (A, B, C, D)
+    npts:       int, optional
+                Number of steps to calculate over; default is 1000.
+    dt:         float, optional
+                Difference between each data point, default is 0.01.
+    combine:    bool, optional
+                If combination of numerator and denominator is needed.
+                This value should be set to &#34;True&#34; if the parts should be
+                combined to show the complete system with feedback.
+                default=True.
+    title:      str, optional
+                Additional string to be added to plot titles;
+                default=&#34;&#34;
+    xlim:       list, optional
+                Limit in x-axis for graph plot. Accepts tuple of: (xmin, xmax).
+                default=False.
+    filename:   bool, optional
+                Control argument to specify whether the plotted
+                figures should be saved. default=False
+    &#34;&#34;&#34;
+    # Define Time Axis
+    TT = _np.arange(0,npts*dt,dt)
+    
+    # Condition system input to ensure proper execution
+    system = _sys_condition(system,combine)
+    
+    # Allocate space for all outputs
+    parabola = _np.zeros(npts)
+    errP = _np.zeros(npts)
+    
+    # Generate Inputs
+    for i in range(npts):
+        parabola[i] = (dt*i)**(2)
+    
+    # Simulate Response for each input (step, ramp, parabola)
+    # All &#39;x&#39; values are variables that are considered don&#39;t-care
+    x, y3, x = sig.lsim((system),parabola,TT)
+    
+    # Calculate error over all points
+    for k in range(npts):
+        errP[k] = parabola[k] - y3[k]
+    
+    # Plot Parabolic Response
+    _plt.figure()
+    _plt.subplot(121)
+    _plt.title(title)
+    _plt.plot(TT,y3,&#39;k--&#39;, label=resplabel)
+    _plt.plot(TT,parabola,&#39;k&#39;, label=funclabel)
+    _plt.grid()
+    _plt.legend()
+    _plt.xlabel(&#34;Time (seconds)&#34;)
+    if xlim != False:
+        _plt.xlim(xlim)
+    _plt.subplot(122)
+    _plt.title(errtitle)
+    _plt.plot(TT,errP,&#39;k&#39;, label=errlabel)
+    _plt.grid()
+    _plt.legend()
+    _plt.xlabel(&#34;Time (seconds)&#34;)
+    if xlim != False:
+        _plt.xlim(xlim)
+    _plt.subplots_adjust(wspace=0.3)
+    if filename!=None:
+        _plt.savefig(filename)
+    _plt.show()</code></pre>
+</details>
+</dd>
+<dt id="electricpy.sim.ramp_response"><code class="name flex">
+<span>def <span class="ident">ramp_response</span></span>(<span>system, npts=1000, dt=0.01, combine=True, xlim=False, title='Ramp Response', errtitle='Ramp Response Error', resplabel='Ramp Response', funclabel='Ramp Function', errlabel='Error', filename=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Ramp Function Response Plotter Function</p>
+<p>Given a transfer function, plots the response against step input
+and plots the error for the function.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>system</code></strong> :&ensp;<code>
+array_like</code></dt>
+<dd>The Transfer Function; can be provided as the following:
+* 1 (instance of lti)
+* 2 (num, den)
+* 3 (zeros, poles, gain)
+* 4 (A, B, C, D)</dd>
+<dt><strong><code>npts</code></strong> :&ensp;<code>
+int</code>, optional</dt>
+<dd>Number of steps to calculate over; default is 1000.</dd>
+<dt><strong><code>dt</code></strong> :&ensp;<code>
+float</code>, optional</dt>
+<dd>Difference between each data point, default is 0.01.</dd>
+<dt><strong><code>combine</code></strong> :&ensp;<code>
+bool</code>, optional</dt>
+<dd>If combination of numerator and denominator is needed.
+This value should be set to "True" if the parts should be
+combined to show the complete system with feedback.
+default=True.</dd>
+<dt><strong><code>title</code></strong> :&ensp;<code>
+str</code>, optional</dt>
+<dd>Additional string to be added to plot titles;
+default=""</dd>
+<dt><strong><code>xlim</code></strong> :&ensp;<code>
+list</code>, optional</dt>
+<dd>Limit in x-axis for graph plot. Accepts tuple of: (xmin, xmax).
+default=False.</dd>
+<dt><strong><code>filename</code></strong> :&ensp;<code>
+str</code>, optional</dt>
+<dd>File directory/name with which the plotted figures
+should be saved. default=None</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ramp_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
+                  title=&#34;Ramp Response&#34;,errtitle=&#34;Ramp Response Error&#34;,
+                  resplabel=&#34;Ramp Response&#34;,funclabel=&#34;Ramp Function&#34;,
+                  errlabel=&#34;Error&#34;,filename=None):
+    &#34;&#34;&#34;
+    Ramp Function Response Plotter Function
+    
+    Given a transfer function, plots the response against step input
+    and plots the error for the function.
+    
+    Parameters
+    ----------
+    system:     array_like
+                The Transfer Function; can be provided as the following:
+                * 1 (instance of lti)
+                * 2 (num, den)
+                * 3 (zeros, poles, gain)
+                * 4 (A, B, C, D)
+    npts:       int, optional
+                Number of steps to calculate over; default is 1000.
+    dt:         float, optional
+                Difference between each data point, default is 0.01.
+    combine:    bool, optional
+                If combination of numerator and denominator is needed.
+                This value should be set to &#34;True&#34; if the parts should be
+                combined to show the complete system with feedback.
+                default=True.
+    title:      str, optional
+                Additional string to be added to plot titles;
+                default=&#34;&#34;
+    xlim:       list, optional
+                Limit in x-axis for graph plot. Accepts tuple of: (xmin, xmax).
+                default=False.
+    filename:   str, optional
+                File directory/name with which the plotted figures 
+                should be saved. default=None
+    &#34;&#34;&#34;
+    # Define Time Axis
+    TT = _np.arange(0,npts*dt,dt)
+    
+    # Condition system input to ensure proper execution
+    system = _sys_condition(system,combine)
+    
+    # Allocate space for all outputs
+    ramp = _np.zeros(npts)
+    errR = _np.zeros(npts)
+    
+    # Generate Inputs
+    for i in range(npts):
+        ramp[i] = (dt*i)
+    
+    # Simulate Response for each input (step, ramp, parabola)
+    # All &#39;x&#39; values are variables that are considered don&#39;t-care
+    x, y2, x = sig.lsim((system),ramp,TT)
+    
+    # Calculate error over all points
+    for k in range(npts):
+        errR[k] = ramp[k] - y2[k]
+    
+    # Plot Ramp Response
+    _plt.figure()
+    _plt.subplot(121)
+    _plt.title(title)
+    _plt.plot(TT,y2,&#39;k--&#39;, label=resplabel)
+    _plt.plot(TT,ramp,&#39;k&#39;, label=funclabel)
+    _plt.grid()
+    _plt.legend()
+    _plt.xlabel(&#34;Time (seconds)&#34;)
+    if xlim != False:
+        _plt.xlim(xlim)
+    _plt.subplot(122)
+    _plt.title(errtitle)
+    _plt.plot(TT,errR,&#39;k&#39;, label=errlabel)
+    _plt.grid()
+    _plt.legend()
+    _plt.xlabel(&#34;Time (seconds)&#34;)
+    if xlim != False:
+        _plt.xlim(xlim)
+    _plt.subplots_adjust(wspace=0.3)
+    if filename!=None:
+        _plt.savefig(filename)
+    _plt.show()</code></pre>
+</details>
+</dd>
+<dt id="electricpy.sim.statespace"><code class="name flex">
+<span>def <span class="ident">statespace</span></span>(<span>A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, dt=0.01, xlim=False, ylim=False, title='', ret=False, plotstate=True, plotforcing=None, plotresult=None, filename=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>State-Space Simulation Plotter</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>A</code></strong> :&ensp;<code>
+array_like</code></dt>
+<dd>Matrix A of State-Space Formulation</dd>
+<dt><strong><code>B</code></strong> :&ensp;<code>
+array_like</code></dt>
+<dd>Matrix B of State-Space Formulation</dd>
+<dt><strong><code>x</code></strong> :&ensp;<code>
+array_like</code>, optional</dt>
+<dd>Initial Condition Matrix, if not provided, will assume
+initial conditions of zero.</dd>
+<dt><strong><code>f</code></strong> :&ensp;<code>
+function</code>, optional</dt>
+<dd>State-Space Forcing Function; callable function that
+will return any/all forcing function Arguments needed as
+array-like object.
+Forcing function(s) can be provided as tuple of function
+handles, system will automatically concatenate their output
+to a matrix that can be handled.</dd>
+<dt><strong><code>simpts</code></strong> :&ensp;<code>
+int</code>, optional</dt>
+<dd>Changes the range of simulation; defualt=9999</dd>
+<dt><strong><code>NN</code></strong> :&ensp;<code>
+int</code>, optional</dt>
+<dd>Number of descrete points; default=10,000</dd>
+<dt><strong><code>dt</code></strong> :&ensp;<code>
+float</code>, optional</dt>
+<dd>Time-step-size; default=0.01</dd>
+<dt><strong><code>xlim</code></strong> :&ensp;<code>
+list</code> of <code>float</code>, optional</dt>
+<dd>Limit in x-axis for graph plot.</dd>
+<dt><strong><code>ylim</code></strong> :&ensp;<code>
+list</code> of <code>float</code>, optional</dt>
+<dd>Limit in y-axis for graph plot.</dd>
+<dt><strong><code>title</code></strong> :&ensp;<code>
+str</code>, optional</dt>
+<dd>Additional String for Plot Title</dd>
+<dt><strong><code>ret</code></strong> :&ensp;<code>
+bool</code>, optional</dt>
+<dd>Control value to specify whether the state space terms should
+be returned.</dd>
+<dt><strong><code>plot</code></strong> :&ensp;<code>
+bool</code>, optional</dt>
+<dd>Control value to enable/disable all plotting capabilities.</dd>
+<dt>plotforcing:bool, optional</dt>
+<dt>Control value to enable plotting of the forcing function(s)</dt>
+<dt><strong><code>plotresult</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>Control value to enable plotting of the final (combined) result.</dd>
+</dl>
+<h2 id="figures">Figures:</h2>
+<p>Forcing Functions:
+The plot of forcing functions, only provided if plotforcing is true.
+State Variables:
+The plot of state variables, always provided if plot is true.
+Combined Output:
+The plot of the combined terms in the output, provided if C and D are not False.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
+               xlim=False,ylim=False,title=&#34;&#34;,ret=False,plotstate=True,
+               plotforcing=None,plotresult=None,filename=None):
+    &#34;&#34;&#34;
+    State-Space Simulation Plotter
+
+    Parameters
+    ----------
+    A:          array_like
+                Matrix A of State-Space Formulation
+    B:          array_like
+                Matrix B of State-Space Formulation
+    x:          array_like, optional
+                Initial Condition Matrix, if not provided, will assume
+                initial conditions of zero.
+    f:          function, optional
+                State-Space Forcing Function; callable function that
+                will return any/all forcing function Arguments needed as
+                array-like object.
+                Forcing function(s) can be provided as tuple of function
+                handles, system will automatically concatenate their output
+                to a matrix that can be handled.
+    simpts:     int, optional
+                Changes the range of simulation; defualt=9999
+    NN:         int, optional
+                Number of descrete points; default=10,000
+    dt:         float, optional
+                Time-step-size; default=0.01
+    xlim:       list of float, optional
+                Limit in x-axis for graph plot.
+    ylim:       list of float, optional
+                Limit in y-axis for graph plot.
+    title:      str, optional
+                Additional String for Plot Title
+    ret:        bool, optional
+                Control value to specify whether the state space terms should
+                be returned.
+    plot:       bool, optional
+                Control value to enable/disable all plotting capabilities.
+    plotforcing:bool, optional
+                Control value to enable plotting of the forcing function(s)
+    plotresult: bool, optional
+                Control value to enable plotting of the final (combined) result.
+
+    Figures:
+    --------
+    Forcing Functions:        The plot of forcing functions, only provided if plotforcing is true.
+    State Variables:        The plot of state variables, always provided if plot is true.
+    Combined Output:        The plot of the combined terms in the output, provided if C and D are not False.
+
+    &#34;&#34;&#34;
+    # Define Initial Condition for Solution
+    solution = 3
+    #0=zero-input    ( No Forcing Function )
+    #1=zero-state    ( No Initial Conditions )
+    #2=total         ( Both Initial Conditions and Forcing Function )
+    #3=total, output ( Both ICs and FFs, also plot combined output )
+    
+    # Tuple to Matrix Converter
+    def tuple_to_matrix(x,yx):
+        n = yx(x) # Evaluate function at specified point
+        n = _np.asmatrix(n) # Convert tuple output to matrix
+        n = n.T # Transpose matrix
+        return(n)
+
+    # Numpy Array to Matrix Converter
+    def nparr_to_matrix(x,yx):
+        n = yx(x) # Evaluate function at specified point
+        n = _np.asmatrix(n) # Convert _np.arr output to matrix
+        if n.shape[1] != 1: # If there is more than 1 column
+            n = _np.matrix.reshape(n,(n.size,1)) # Reshape
+        return(n)
+    
+    # Define Function Concatinator Class
+    class c_func_concat:
+        def __init__(self,funcs): # Initialize class with tupple of functions
+            self.nfuncs = len(funcs) # Determine how many functions are in tuple
+            self.func_reg = {} # Create empty keyed list of function handles
+            for key in range(self.nfuncs): # Iterate adding to key
+                self.func_reg[key] = funcs[key] # Fill keyed list with functions
+
+        def func_c(self,x): # Concatenated Function
+            rets = _np.array([]) # Create blank numpy array to store function outputs
+            for i in range(self.nfuncs):
+                y = self.func_reg[i](x) # Calculate each function at value x
+                rets = _np.append(rets, y) # Add value to return array
+            rets = _np.asmatrix(rets).T # Convert array to matrix, then transpose
+            return(rets)
+    
+    # Condition Inputs
+    A = _np.asmatrix(A)
+    B = _np.asmatrix(B)
+    
+    # Define Tuple of Types For Testing
+    typetest = (_np.matrixlib.defmatrix.matrix,_np.ndarray,tuple,list)
+    
+    # Test for NN and simpts
+    if (simpts &gt;= NN):
+        _warn(&#34;WARNING: NN must be greater than simpts; NN=&#34;+str(NN)+
+             &#34;simpts=&#34;+str(simpts),&#34; Autocorrecting simpts to be NN-1.&#34;)
+        simpts = NN-1
+
+    # Test for C and D matricies
+    if isinstance(C,typetest) and isinstance(D,typetest):
+        solution = 3 # Set to solve and plot complete output
+    elif isinstance(C,typetest) and not isinstance(D,typetest):
+        if (D==None):
+            _warn(&#34;WARNING: D matrix not provided; D now assumed to be 0.&#34;)
+            D = _np.matrix(&#39;0&#39;)
+            solution = 3 # Set to solve and plot complete output
+    else:
+        C = _np.matrix(&#39;0&#39;)
+        D = _np.matrix(&#39;0&#39;)
+        solution = 2
+    
+    # Condition C/D Matrices
+    C = _np.asmatrix(C)
+    D = _np.asmatrix(D)
+
+
+    # Create values for input testing
+    if isinstance(func,function): # if f is a function, test as one
+        mF = f(1) # f should return: int, float, tuple, _np.arr, _np.matrix
+    elif isinstance(func,(tuple,list)): # if f is tupple of arguments
+        if isinstance(func[0], function): #if first argument is a function
+            c_funcs = c_func_concat(func) # concatinate functions into one
+            mF = &#34;MultiFunctions&#34; # label as multiple concatenated functions
+        else:
+            mF = &#34;NA&#34; # Can&#39;t handle function type
+    else:
+        mF = &#34;NA&#34; # Can&#39;t handle function type
+
+    # Test for x input
+    if not isinstance(x,typetest):
+        if x==None: # No specified initial conditions
+            rA = A.shape[0]
+            x = _np.asmatrix(_np.zeros(rA)).T
+    # Condition x
+    x = _np.asmatrix(x)
+
+    # Gather dimensions of inputs
+    rA, cA = A.shape
+    rB, cB = B.shape
+    rx, cx = x.shape
+    rC, cC = C.shape
+    rD, cD = D.shape
+    rF, cF = 1, 1 # Defualt for a function returning one value
+
+    if isinstance(mF,tuple): # If function returns tuple
+        fn = lambda x: tuple_to_matrix(x, func) # Use conversion function
+        rF, cF = fn(1).shape # Prepare for further testing
+    elif isinstance(mF,_np.ndarray): # If function returns numpy array
+        fn = lambda x: nparr_to_matrix(x, func) # Use conversion function
+        rF, cF = fn(1).shape # Prepare for further testing
+    elif isinstance(mF,(int,float,_np.float64)): # If function returns int or float or numpy float
+        fn = f # Pass function handle
+    elif isinstance(mF,_np.matrixlib.defmatrix.matrix): # If function returns matrix
+        fn = f # Pass function handle
+        rF, cF = fn(1).shape # Prepare for further testing
+    elif (mF==&#34;MultiFunctions&#34;): # There are multiple functions in one argument
+        fn = c_funcs.func_c # Gather function handle from function concatenation class
+        rF, cF = fn(1).shape # Prepare for further testing
+    elif (mF==&#34;NA&#34;): # Function doesn&#39;t meet requirements
+        raise ValueError(&#34;Forcing function does not meet requirements.&#34;+
+                        &#34;\nFunction doesn&#39;t return data type: int, float, numpy.ndarray&#34;+
+                        &#34;\n or numpy.matrixlib.defmatrix.matrix. Nor does function &#34;+
+                        &#34;\ncontain tuple of function handles. Please review function.&#34;)
+
+    # Test for size correlation between matricies
+    if (cA != rA): # A isn&#39;t nxn matrix
+        raise ValueError(&#34;Matrix &#39;A&#39; is not NxN matrix.&#34;)
+    elif (rA != rB): # A and B matricies don&#39;t have same number of rows
+        if (B.size % rA) == 0: # Elements in B divisible by rows in A
+            _warn(&#34;WARNING: Reshaping &#39;B&#39; matrix to match &#39;A&#39; matrix.&#34;)
+            B = _np.matrix.reshape(B,(rA,int(B.size/rA))) # Reshape Matrix
+        else:
+            raise ValueError(&#34;&#39;A&#39; matrix dimensions don&#39;t match &#39;B&#39; matrix dimensions.&#34;)
+    elif (rA != rx): # A and x matricies don&#39;t have same number of rows
+        if (x.size % rA) == 0: # Elements in x divisible by rows in A
+            _warn(&#34;WARNING: Reshaping &#39;x&#39; matrix to match &#39;A&#39; matrix.&#34;)
+            x = _np.matrix.reshape(x,(rA,1)) # Reshape Matrix
+        else:
+            raise ValueError(&#34;&#39;A&#39; matrix dimensions don&#39;t match &#39;B&#39; matrix dimensions.&#34;)
+    elif (cB != rF) or (cF != 1): # Forcing Function matrix doesn&#39;t match B matrix
+        raise ValueError(&#34;&#39;B&#39; matrix dimensions don&#39;t match forcing function dimensions.&#34;)
+    elif (solution==3) and (cC != cA) or (rC != 1): # Number of elements in C don&#39;t meet requirements
+        raise ValueError(&#34;&#39;C&#39; matrix dimensions don&#39;t match state-space variable dimensions.&#34;)
+    elif (solution==3) and ((cD != rF) or (rD != 1)): # Number of elements in D don&#39;t meet requirements
+        if (cD == rD) and (cD == 1) and (D[0] == 0): # D matrix is set to [0]
+            D = _np.asmatrix(_np.zeros(rF)) # Re-create D to meet requirements
+            _warn(&#34;WARNING: Autogenerating &#39;D&#39; matrix of zeros to match forcing functions.&#34;)
+        else:
+            raise ValueError(&#34;&#39;D&#39; matrix dimensions don&#39;t match forcing function dimensions.&#34;)
+
+    # Test for forcing function
+    if (f==None) and (solution!=0):
+        solution = 0 # Change to Zero-Input calculation
+
+    # Start by defining Constants
+    T = 0
+    TT = _np.arange(0,(dt*(NN)),dt)
+    yout = 0
+
+    # Define list of strings for plot output
+    soltype = [&#34;(Zero-Input)&#34;,&#34;(Zero-State)&#34;,&#34;(Complete Simulation)&#34;,&#34;(Complete Sim., Combined Output)&#34;]
+
+    # Create a dictionary of state-space variables
+    xtim = {}
+    xtim_len = rA # Number of Rows in A matrix
+    for n in range(xtim_len):
+        key = n #Each key should be the iterative variable
+        xtim_init = _np.zeros(NN) #Define the initial array
+        xtim[key] = xtim_init #Create each xtim
+
+    # Create a dictionary of function outputs
+    if (mF!=tint) and (mF!=tfloat):
+        fn_arr = {}
+        for n in range(rF):
+            key = n #Each key should be the iterative variable
+            fn_init = _np.zeros(NN) #Define the initial array
+            fn_arr[key] = fn_init #Create each fn_arr
+            fnc = rF
+    else:
+        fn_arr = _np.zeros(NN) #Create the fn_arr
+        fnc = 1
+
+    # When asked to find zero-state, set all ICs to zero
+    if solution == 1:
+        for n in range(xtim_len):
+            x[n] = 0 #Set each value to zero
+
+    # Finite-Difference Simulation
+    for i in range(0,simpts):
+        for n in range(xtim_len):
+            xtim[n][i] = x[n] #xtim[state-variable][domain] = x[state-variable]
+        # Create Forcing Function output
+
+        if fnc &gt; 1: # More than one forcing function
+            for n in range(fnc):
+                fn_arr[n][i] = _np.asarray(fn(T))[n][0]
+        else: # only one forcing function
+            fn_arr[i] = fn(T)
+
+        if solution == 0: #Zero-input, no added function input
+            x = x + dt*A*x
+        else: #Zero-state or Total, add function input
+            x = x + dt*A*x + dt*B*fn(T)
+            if solution==3:
+                yout = yout + dt*D*fn(T)
+
+        T = T+dt #Add discrete increment to T
+
+    # Plot Forcing Functions
+    if (plotforcing):
+        fffig = _plt.figure(&#34;Forcing Functions&#34;)
+        if fnc &gt; 1:
+            for x in range(fnc):
+                _plt.plot(TT,fn_arr[x],label=&#34;f&#34;+str(x+1))
+        else:
+            _plt.plot(TT,fn_arr,label=&#34;f1&#34;)
+        if xlim!=False:
+            _plt.xlim(xlim)
+        if ylim!=False:
+            _plt.ylim(ylim)
+        _plt.title(&#34;Forcing Functions &#34;+title)
+        _plt.xlabel(&#34;Time (seconds)&#34;)
+        _plt.legend(title=&#34;Forcing Functions&#34;)
+        _plt.grid()
+        if filename!=None:
+            _plt.savefig(&#39;Simulation Forcing Functions.png&#39;)
+        if plot:
+            _plt.show()
+
+    # Plot each state-variable over time
+    stvfig = _plt.figure(&#34;State Variables&#34;)
+    for x in range(xtim_len):
+        _plt.plot(TT,xtim[x],label=&#34;x&#34;+str(x+1))
+    if xlim!=False:
+            _plt.xlim(xlim)
+    if ylim!=False:
+        _plt.ylim(ylim)
+    _plt.title(&#34;Simulated Output Terms &#34;+soltype[solution]+title)
+    _plt.xlabel(&#34;Time (seconds)&#34;)
+    _plt.legend(title=&#34;State Variable&#34;)
+    _plt.grid()
+    if filename!=None:
+        _plt.savefig(&#39;Simulation Terms.png&#39;)
+    if plot:
+        _plt.show()
+
+    # Plot combined output
+    if (plotresult and solution==3):
+        cofig = _plt.figure(&#34;Combined Output&#34;)
+        C = _np.asarray(C) # convert back to array for operation
+        for i in range(cC):
+            yout = yout + xtim[i]*C[0][i] # Sum all st-space var mult. by their coeff
+        yout = _np.asarray(yout) # convert output to array for plotting purposes
+        _plt.plot(TT,yout[0])
+        if xlim!=False:
+            _plt.xlim(xlim)
+        if ylim!=False:
+            _plt.ylim(ylim)
+        _plt.title(&#34;Combined Output &#34;+title)
+        _plt.xlabel(&#34;Time (seconds)&#34;)
+        _plt.grid()
+        if filename!=None:
+            _plt.savefig(&#39;Simulation Combined Output.png&#39;)
+        if plot:
+            _plt.show()
+
+    # Return Variables if asked to
+    if ret:
+        return(TT, xtim)</code></pre>
+</details>
+</dd>
+<dt id="electricpy.sim.step_response"><code class="name flex">
+<span>def <span class="ident">step_response</span></span>(<span>system, npts=1000, dt=0.01, combine=True, xlim=False, title='Step Response', errtitle='Step Response Error', resplabel='Step Response', funclabel='Step Function', errlabel='Error', filename=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Step Function Response Plotter Function</p>
+<p>Given a transfer function, plots the response against step input
+and plots the error for the function.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>system</code></strong> :&ensp;<code>
+array_like</code></dt>
+<dd>The Transfer Function; can be provided as the following:
+* 1 (instance of lti)
+* 2 (num, den)
+* 3 (zeros, poles, gain)
+* 4 (A, B, C, D)</dd>
+<dt><strong><code>npts</code></strong> :&ensp;<code>
+int</code>, optional</dt>
+<dd>Number of steps to calculate over; default is 1000.</dd>
+<dt><strong><code>dt</code></strong> :&ensp;<code>
+float</code>, optional</dt>
+<dd>Difference between each data point, default is 0.01.</dd>
+<dt><strong><code>combine</code></strong> :&ensp;<code>
+bool</code>, optional</dt>
+<dd>If combination of numerator and denominator is needed.
+This value should be set to "True" if the parts should be
+combined to show the complete system with feedback.
+default=True.</dd>
+<dt><strong><code>title</code></strong> :&ensp;<code>
+str</code>, optional</dt>
+<dd>Additional string to be added to plot titles;
+default=""</dd>
+<dt><strong><code>xlim</code></strong> :&ensp;<code>
+list</code>, optional</dt>
+<dd>Limit in x-axis for graph plot. Accepts tuple of: (xmin, xmax).
+default=False.</dd>
+<dt><strong><code>filename</code></strong> :&ensp;<code>
+bool</code>, optional</dt>
+<dd>Control argument to specify whether the plotted
+figures should be saved. default=False</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def step_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
+                  title=&#34;Step Response&#34;,errtitle=&#34;Step Response Error&#34;,
+                  resplabel=&#34;Step Response&#34;,funclabel=&#34;Step Function&#34;,
+                  errlabel=&#34;Error&#34;,filename=None):
+    &#34;&#34;&#34;
+    Step Function Response Plotter Function
+    
+    Given a transfer function, plots the response against step input
+    and plots the error for the function.
+    
+    Parameters
+    ----------
+    system:     array_like
+                The Transfer Function; can be provided as the following:
+                * 1 (instance of lti)
+                * 2 (num, den)
+                * 3 (zeros, poles, gain)
+                * 4 (A, B, C, D)
+    npts:       int, optional
+                Number of steps to calculate over; default is 1000.
+    dt:         float, optional
+                Difference between each data point, default is 0.01.
+    combine:    bool, optional
+                If combination of numerator and denominator is needed.
+                This value should be set to &#34;True&#34; if the parts should be
+                combined to show the complete system with feedback.
+                default=True.
+    title:      str, optional
+                Additional string to be added to plot titles;
+                default=&#34;&#34;
+    xlim:       list, optional
+                Limit in x-axis for graph plot. Accepts tuple of: (xmin, xmax).
+                default=False.
+    filename:   bool, optional
+                Control argument to specify whether the plotted
+                figures should be saved. default=False
+    &#34;&#34;&#34;
+    # Define Time Axis
+    TT = _np.arange(0,npts*dt,dt)
+    
+    # Condition system input to ensure proper execution
+    system = _sys_condition(system,combine)    
+    
+    # Allocate space for all outputs
+    step = _np.zeros(npts)
+    errS = _np.zeros(npts)
+    
+    # Generate Inputs
+    for i in range(npts):
+        step[i] = 1.0
+    
+    # Simulate Response for each input (step, ramp, parabola)
+    # All &#39;x&#39; values are variables that are considered don&#39;t-care
+    x, y1, x = sig.lsim((system),step,TT)
+    
+    # Calculate error over all points
+    for k in range(npts):
+        errS[k] = step[k] - y1[k]
+    
+    # Plot Step Response
+    _plt.figure()
+    _plt.subplot(121)
+    _plt.title(title)
+    _plt.plot(TT,y1,&#39;k--&#39;, label=resplabel)
+    _plt.plot(TT,step,&#39;k&#39;, label=funclabel)
+    _plt.grid()
+    _plt.legend()
+    _plt.xlabel(&#34;Time (seconds)&#34;)
+    if xlim != False:
+        _plt.xlim(xlim)
+    _plt.subplot(122)
+    _plt.title(errtitle)
+    _plt.plot(TT,errS,&#39;k&#39;, label=errlabel)
+    _plt.grid()
+    _plt.legend()
+    _plt.xlabel(&#34;Time (seconds)&#34;)
+    if xlim != False:
+        _plt.xlim(xlim)
+    _plt.subplots_adjust(wspace=0.3)
+    if filename!=None:
+        _plt.savefig(filename)
+    _plt.show()</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul>
+<li><a href="#electricpyfaultpy">electricpy.fault.py</a></li>
+<li><a href="#included-functions">Included Functions</a></li>
+</ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="electricpy" href="index.html">electricpy</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="two-column">
+<li><code><a title="electricpy.sim.NewtonRaphson" href="#electricpy.sim.NewtonRaphson">NewtonRaphson</a></code></li>
+<li><code><a title="electricpy.sim.digifiltersim" href="#electricpy.sim.digifiltersim">digifiltersim</a></code></li>
+<li><code><a title="electricpy.sim.mbuspowerflow" href="#electricpy.sim.mbuspowerflow">mbuspowerflow</a></code></li>
+<li><code><a title="electricpy.sim.nr_pq" href="#electricpy.sim.nr_pq">nr_pq</a></code></li>
+<li><code><a title="electricpy.sim.parabolic_response" href="#electricpy.sim.parabolic_response">parabolic_response</a></code></li>
+<li><code><a title="electricpy.sim.ramp_response" href="#electricpy.sim.ramp_response">ramp_response</a></code></li>
+<li><code><a title="electricpy.sim.statespace" href="#electricpy.sim.statespace">statespace</a></code></li>
+<li><code><a title="electricpy.sim.step_response" href="#electricpy.sim.step_response">step_response</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.4</a>.</p>
+</footer>
+</body>
+</html>
