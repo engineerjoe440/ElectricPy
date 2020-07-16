@@ -1,7 +1,7 @@
 ###################################################################
 """
 ---------------
-`electricpy.py`
+`electricpy`
 ---------------
 
  `A library of functions, constants and more
@@ -6255,7 +6255,7 @@ def phs3valpha( VA, VB=0, VC=0 ):
                 type of inputs.
     """
     # Handle Combined (list/tuple) Input
-    if (isinstance(VA, (tuple,list) and
+    if (isinstance(VA, (tuple,list)) and
         VB==0 and VC==C):
         if len(VA) != 3:
             raise ValueError("Invalid input set, must "
