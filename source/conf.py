@@ -26,7 +26,6 @@ with open(initfile) as fh:
     print("Sphinx HTML Build For:",name,"   Version:",ver)
 
 
-
 # -- Project information -----------------------------------------------------
 
 project = 'electricpy'
