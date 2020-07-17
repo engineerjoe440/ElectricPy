@@ -21,7 +21,7 @@ jobs:
       # I don't know where the "run" thing is documented.
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip install -r sphinxrequires.txt
       - name: Build Sphinx docs
         run: |
           make html
@@ -42,7 +42,7 @@ jobs:
         with:
           publish_branch: gh-pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: _build/html/
+          publish_dir: docs/html/
 
 
 # This action probably does everything for you:
