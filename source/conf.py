@@ -30,7 +30,7 @@ with open(initfile) as fh:
 # -- Project information -----------------------------------------------------
 
 project = 'electricpy'
-copyright = '2019, Joe Stanley'
+copyright = '2020, Joe Stanley'
 author = 'Joe Stanley'
 
 # The full version, including alpha/beta/rc tags
@@ -50,9 +50,6 @@ extensions = [  'sphinx.ext.autodoc',
                 'sphinx_sitemap',
 ]
 numpydoc_show_class_members = False
-
-# Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
