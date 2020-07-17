@@ -4,3 +4,7 @@
 *__pycache__/
 dist/
 build/
+*.egg-info/
+
+# Ignore TOX
+.tox/
