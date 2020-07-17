@@ -1,9 +1,10 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>statespace &#8212; electricpy 0.1.7 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -14,7 +15,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.sim.statespace.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
@@ -40,7 +41,8 @@
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../sim.html" accesskey="U">SIM Sub-Module</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="../sim.html" accesskey="U">SIM Sub-Module</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">statespace</a></li> 
       </ul>
     </div>  
 
@@ -51,9 +53,9 @@
             
   <div class="section" id="statespace">
 <h1>statespace<a class="headerlink" href="#statespace" title="Permalink to this headline">¶</a></h1>
-<dl class="function">
+<dl class="py function">
 <dt id="electricpy.sim.statespace">
-<code class="sig-prename descclassname">electricpy.sim.</code><code class="sig-name descname">statespace</code><span class="sig-paren">(</span><em class="sig-param">A</em>, <em class="sig-param">B</em>, <em class="sig-param">x=None</em>, <em class="sig-param">func=None</em>, <em class="sig-param">C=None</em>, <em class="sig-param">D=None</em>, <em class="sig-param">simpts=9999</em>, <em class="sig-param">NN=10000</em>, <em class="sig-param">dt=0.01</em>, <em class="sig-param">xlim=False</em>, <em class="sig-param">ylim=False</em>, <em class="sig-param">title=''</em>, <em class="sig-param">ret=False</em>, <em class="sig-param">plotstate=True</em>, <em class="sig-param">plotforcing=None</em>, <em class="sig-param">plotresult=None</em>, <em class="sig-param">filename=None</em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.sim.statespace" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">electricpy.sim.</code><code class="sig-name descname">statespace</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">B</span></em>, <em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">func</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">C</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">D</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">simpts</span><span class="o">=</span><span class="default_value">9999</span></em>, <em class="sig-param"><span class="n">NN</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="n">dt</span><span class="o">=</span><span class="default_value">0.01</span></em>, <em class="sig-param"><span class="n">xlim</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ylim</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">ret</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">plotstate</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">plotforcing</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">plotresult</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.sim.statespace" title="Permalink to this definition">¶</a></dt>
 <dd><p>State-Space Simulation Plotter</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -92,6 +94,7 @@ be returned.</p></li>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -144,12 +147,13 @@ be returned.</p></li>
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >ELECTRICPY Module</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../sim.html" >SIM Sub-Module</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="../sim.html" >SIM Sub-Module</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">statespace</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, Joe Stanley.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
     </div>
   </body>
 </html>
