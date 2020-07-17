@@ -25,6 +25,9 @@ jobs:
       - name: Install Module
         run: |
           pip install .
+      - name: Clean Documentation
+        run: |
+          make clean
       - name: Build Sphinx docs
         run: |
           make html
