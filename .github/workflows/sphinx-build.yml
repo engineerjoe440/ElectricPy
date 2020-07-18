@@ -27,7 +27,7 @@ jobs:
           pip install .
       - name: Clean Documentation
         run: |
-          sphinx-build -E
+          make clean
       - name: Test Python?
         run: |
           python -c "import sphinx_automodapi.automodapi"
