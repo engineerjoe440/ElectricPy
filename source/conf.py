@@ -14,8 +14,9 @@ import os
 import re
 import sys
 print("Build with:", sys.version)
-cwd = os.getcwd()
-initfile = os.path.join(os.path.dirname(cwd),'electricpy','__init__.py')
+parent_dir = os.path.dirname(os.getcwd())
+initfile = os.path.join(parent_dir,'electricpy','__init__.py')
+sys.path.insert(0,parent_dir)
 # Gather Version Information from Python File
 with open(initfile) as fh:
     file_str = fh.read()
