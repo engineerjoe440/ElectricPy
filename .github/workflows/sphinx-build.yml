@@ -30,7 +30,7 @@ jobs:
           make clean
       - name: Build Sphinx docs
         run: |
-          make html
+          sphinx-build -M html source docs
 
       # https://github.com/marketplace/actions/github-pages
       #- if: success()
