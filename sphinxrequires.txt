@@ -2,4 +2,3 @@ sphinx
 numpydoc
 sphinx-automodapi
 sphinx-sitemap
-sphinx-autopackagesummary
