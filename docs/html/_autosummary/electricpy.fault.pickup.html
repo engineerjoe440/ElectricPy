@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>electricpy.fault.pickup &#8212; electricpy 0.1.7 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_autosummary/electricpy.fault.pickup.html" />
+    <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.fault.pktransrecvolt" href="electricpy.fault.pktransrecvolt.html" />
+    <link rel="prev" title="electricpy.fault.phs3mvasc" href="electricpy.fault.phs3mvasc.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.pktransrecvolt.html" title="electricpy.fault.pktransrecvolt"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.phs3mvasc.html" title="electricpy.fault.phs3mvasc"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../fault.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.fault.html" accesskey="U">electricpy.fault</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.fault.pickup</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="electricpy-fault-pickup">
+<h1>electricpy.fault.pickup<a class="headerlink" href="#electricpy-fault-pickup" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.fault.pickup">
+<code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">pickup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Iloadmax</span></em>, <em class="sig-param"><span class="n">Ifaultmin</span></em>, <em class="sig-param"><span class="n">scale</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">printout</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">units</span><span class="o">=</span><span class="default_value">'A'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.pickup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current Pickup Selection Assistant</p>
+<p>Used to assist in evaluating an optimal phase-over-current pickup
+setting. Uses maximum load and minimum fault current to provide
+user assistance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Iloadmax</strong> (<em>float</em>) – The maximum load current in amps.</p></li>
+<li><p><strong>Ifaultmin</strong> (<em>float</em>) – The minimum fault current in amps.</p></li>
+<li><p><strong>scale</strong> (<em>int</em><em>, </em><em>optional</em>) – Control scaling to set number of significant figures.
+default=0</p></li>
+<li><p><strong>printout</strong> (<em>boolean</em><em>, </em><em>optional</em>) – Control argument to enable printing of intermediate
+stages, default=False.</p></li>
+<li><p><strong>units</strong> (<em>string</em><em>, </em><em>optional</em>) – String to be appended to any printed output denoting
+the units of which are being printed, default=”A”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>setpoint</strong> – The evaluated setpoint at which the function suggests
+the phase-over-current pickup setting be placed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.fault.phs3mvasc.html"
+                        title="previous chapter">electricpy.fault.phs3mvasc</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.fault.pktransrecvolt.html"
+                        title="next chapter">electricpy.fault.pktransrecvolt</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/electricpy.fault.pickup.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.pktransrecvolt.html" title="electricpy.fault.pktransrecvolt"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.phs3mvasc.html" title="electricpy.fault.phs3mvasc"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../fault.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.fault.html" >electricpy.fault</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.fault.pickup</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Joe Stanley.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

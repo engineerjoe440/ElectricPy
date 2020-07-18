@@ -26,9 +26,12 @@ Built to support operations similar to Numpy and Scipy, this package is designed
 to aid in scientific calculations.
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
    
-   apireference
+   electricpy
+   bode
+   fault
+   sim
 
 -------------------------
 ADDITIONAL PROJECT LINKS:

@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>electricpy.zperlength &#8212; electricpy 0.1.7 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_autosummary/electricpy.zperlength.html" />
+    <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.zpu" href="electricpy.zpu.html" />
+    <link rel="prev" title="electricpy.zdecompose" href="electricpy.zdecompose.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.zpu.html" title="electricpy.zpu"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.zdecompose.html" title="electricpy.zdecompose"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.zperlength</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="electricpy-zperlength">
+<h1>electricpy.zperlength<a class="headerlink" href="#electricpy-zperlength" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.zperlength">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">zperlength</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Rd</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Rself</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Rac</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Rgwac</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">De</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rho</span><span class="o">=</span><span class="default_value">'AVG'</span></em>, <em class="sig-param"><span class="n">Ds</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Dsgw</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dia_gw</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Dab</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Dbc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Dca</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Dagw</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Dbgw</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Dcgw</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">resolve</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">freq</span><span class="o">=</span><span class="default_value">60</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.zperlength" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transmission Line Impedance (RL) Calculator</p>
+<p>Simple impedance matrix generator to provide the full
+impedance per length matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Rd</strong> (<em>float</em><em>, </em><em>optional</em>) – Resistance Rd term in ohms, will be generated
+automatically if set to None, default=None</p></li>
+<li><p><strong>Rself</strong> (<em>float</em><em>, </em><em>optional</em>) – Self Resistance term in ohms.</p></li>
+<li><p><strong>Rac</strong> (<em>float</em><em>, </em><em>optional</em>) – AC resistance in ohms.</p></li>
+<li><p><strong>Rgwac</strong> (<em>float</em><em>, </em><em>optional</em>) – Ground-Wire AC resistance in ohms.</p></li>
+<li><p><strong>De</strong> (<em>float</em><em>, </em><em>optional</em>) – De term, in feet, if None provided, and <cite>rho</cite>
+parameter is specified, will interpretively be
+calculated.</p></li>
+<li><p><strong>rho</strong> (<em>float</em><em>, </em><em>optional</em>) – Earth resistivity in ohm-meters. default=”AVG”</p></li>
+<li><p><strong>Ds</strong> (<em>float</em><em>, </em><em>optional</em>) – Distance (self) for each phase conductor in feet,
+commonly known as GMD.</p></li>
+<li><p><strong>Dsgw</strong> (<em>float</em><em>, </em><em>optional</em>) – Distance (self) for the ground wire conductor in
+feet, commonly known as GMD.</p></li>
+<li><p><strong>dia_gw</strong> (<em>float</em><em>, </em><em>optional</em>) – Ground-Wire diameter in feet, may be used to
+calculate an approximate Dsgw if no Dsgw is provided.</p></li>
+<li><p><strong>Dab</strong> (<em>float</em><em>, </em><em>optional</em>) – Distance between phases A and B, in feet.</p></li>
+<li><p><strong>Dbc</strong> (<em>float</em><em>, </em><em>optional</em>) – Distance between phases B and C, in feet.</p></li>
+<li><p><strong>Dca</strong> (<em>float</em><em>, </em><em>optional</em>) – Distance between phases C and A, in feet.</p></li>
+<li><p><strong>Dagw</strong> (<em>float</em><em>, </em><em>optional</em>) – Distance between phase A and ground conductor, in feet.</p></li>
+<li><p><strong>Dbgw</strong> (<em>float</em><em>, </em><em>optional</em>) – Distance between phase B and ground conductor, in feet.</p></li>
+<li><p><strong>Dcgw</strong> (<em>float</em><em>, </em><em>optional</em>) – Distance between phase C and ground conductor, in feet.</p></li>
+<li><p><strong>resolve</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to specify whether the resultant
+ground-wire inclusive per-length impedance matrix
+should be reduced to a 3x3 equivalent matrix.
+default=True</p></li>
+<li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – System frequency in Hertz.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.zdecompose.html"
+                        title="previous chapter">electricpy.zdecompose</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.zpu.html"
+                        title="next chapter">electricpy.zpu</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/electricpy.zperlength.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.zpu.html" title="electricpy.zpu"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.zdecompose.html" title="electricpy.zdecompose"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.zperlength</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Joe Stanley.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

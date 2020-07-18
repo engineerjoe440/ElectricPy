@@ -44,9 +44,11 @@ release = ver
 extensions = [  'sphinx.ext.autodoc',
                 'sphinx.ext.napoleon',
                 'sphinx.ext.mathjax',
+                'sphinx.ext.autosummary',
                 'numpydoc',
                 'sphinx_sitemap',
 ]
+autosummary_generate = True
 numpydoc_show_class_members = False
 
 # List of patterns, relative to source directory, that match files and
@@ -54,8 +56,7 @@ numpydoc_show_class_members = False
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
-templates_path = ["docs/templates"]
-autosummary_generate = True
+templates_path = ["_templates"]
 
 
 # -- Options for HTML output -------------------------------------------------
