@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>electricpy.thermocouple &#8212; electricpy 0.1.7 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_autosummary/electricpy.thermocouple.html" />
+    <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.timedischarge" href="electricpy.timedischarge.html" />
+    <link rel="prev" title="electricpy.tflatex" href="electricpy.tflatex.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.timedischarge.html" title="electricpy.timedischarge"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.tflatex.html" title="electricpy.tflatex"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.thermocouple</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="electricpy-thermocouple">
+<h1>electricpy.thermocouple<a class="headerlink" href="#electricpy-thermocouple" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.thermocouple">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">thermocouple</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">V</span></em>, <em class="sig-param"><span class="n">coupletype</span><span class="o">=</span><span class="default_value">'K'</span></em>, <em class="sig-param"><span class="n">fahrenheit</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">cjt</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">To</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Vo</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">P1</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">P2</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">P3</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">P4</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Q1</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Q2</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Q3</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">round</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.thermocouple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Thermocouple Temperature Calculator</p>
+<p>Utilizes polynomial formula to calculate the temperature being monitored
+by a thermocouple. Allows for various thermocouple types (B,E,J,K,N,R,S,T)
+and various cold-junction-temperatures.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>V</strong> (<em>float</em>) – Measured voltage (in Volts)</p></li>
+<li><p><strong>coupletype</strong> (<em>string</em><em>, </em><em>optional</em>) – Thermocouple Type, may be one of (B,E,J,K,N,R,S,T), default=”K”</p></li>
+<li><p><strong>fahrenheit</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control to enable return value as Fahrenheit instead of Celsius,
+default=False</p></li>
+<li><p><strong>cjt</strong> (<em>float</em><em>, </em><em>optional</em>) – Cold-Junction-Temperature</p></li>
+<li><p><strong>To</strong> (<em>float</em><em>, </em><em>optional</em>) – Temperature Constant used in Polynomial.</p></li>
+<li><p><strong>Vo</strong> (<em>float</em><em>, </em><em>optional</em>) – Voltage Constant used in Polynomial.</p></li>
+<li><p><strong>P1</strong> (<em>float</em><em>, </em><em>optional</em>) – Polynomial constant.</p></li>
+<li><p><strong>P2</strong> (<em>float</em><em>, </em><em>optional</em>) – Polynomial constant.</p></li>
+<li><p><strong>P3</strong> (<em>float</em><em>, </em><em>optional</em>) – Polynomial constant.</p></li>
+<li><p><strong>P4</strong> (<em>float</em><em>, </em><em>optional</em>) – Polynomial constant.</p></li>
+<li><p><strong>Q1</strong> (<em>float</em><em>, </em><em>optional</em>) – Polynomial constant.</p></li>
+<li><p><strong>Q2</strong> (<em>float</em><em>, </em><em>optional</em>) – Polynomial constant.</p></li>
+<li><p><strong>Q3</strong> (<em>float</em><em>, </em><em>optional</em>) – Polynomial constant.</p></li>
+<li><p><strong>round</strong> (<em>int</em><em>, </em><em>optional</em>) – Control input to specify how many decimal places the result
+should be rounded to, default=1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>T</strong> – The temperature (by default in degrees C, but optionally in
+degrees F) as computed by the function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.tflatex.html"
+                        title="previous chapter">electricpy.tflatex</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.timedischarge.html"
+                        title="next chapter">electricpy.timedischarge</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/_autosummary/electricpy.thermocouple.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.timedischarge.html" title="electricpy.timedischarge"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.tflatex.html" title="electricpy.tflatex"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.thermocouple</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Joe Stanley.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

@@ -22,16 +22,13 @@ jobs:
       - name: Install dependencies
         id: install-dep
         run: |
-          pip install -r sphinxrequires.txt
+          pip install -r source/sphinxrequires.txt
       - name: Install Module
         run: |
           pip install .
       - name: Clean Documentation
         run: |
           make clean
-      - name: Test Python?
-        run: |
-          python -c "import sphinx_automodapi.automodapi"
       - name: Build Sphinx docs
         if: success()
         run: |
