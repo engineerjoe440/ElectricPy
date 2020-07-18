@@ -45,7 +45,7 @@ extensions = [  'sphinx.ext.autodoc',
                 'sphinx.ext.napoleon',
                 'sphinx.ext.mathjax',
                 'numpydoc',
-                'sphinx_automodapi.automodapi',
+                #'sphinx_automodapi.automodapi',
                 'sphinx_sitemap',
 ]
 numpydoc_show_class_members = False
