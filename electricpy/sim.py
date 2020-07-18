@@ -1,19 +1,8 @@
 ###################################################################
 """
----------------------
-`electricpy.fault.py`
----------------------
+`electricpy.sim.py`
 
-Included Functions
-------------------
-- Digital Filter Simulator:             digifiltersim
-- Step Response Filter Simulator:       step_response
-- Ramp Response Filter Simulator:       ramp_response
-- Parabolic Response Filter Simulator:  parabolic_response
-- State-Space System Simulator:         statespace
-- Newton Raphson Calculator:            NewtonRaphson
-- Power Flow System Generator:          nr_pq
-- Multi-Bus Power Flow Calculator:      mbuspowerflow
+>>> from electricpy import sim
 """
 ###################################################################
 

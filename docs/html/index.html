@@ -14,13 +14,12 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/index.html" />
     <link rel="shortcut icon" href="_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="ELECTRICPY Module" href="electricpy.html" /> 
+    <link rel="next" title="ElectricPy API Reference" href="apireference.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -32,7 +31,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.html" title="ELECTRICPY Module"
+          <a href="apireference.html" title="ElectricPy API Reference"
              accesskey="N">next</a> |</li>
         <li class="nav-item nav-item-0"><a href="#">electricpy 0.1.7 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">ElectricPy</a></li> 
@@ -48,37 +47,33 @@
 <span id="electricpy-home"></span><h1>ElectricPy<a class="headerlink" href="#electricpy" title="Permalink to this headline">¶</a></h1>
 <p><em>Electrical-Engineering-for-Python</em></p>
 <p>Python Libraries with functions and constants related to electrical engineering.</p>
-<p>The functions and constants that make up these modules represent a library of material compiled with the intent of being used primarily
-for research, development, education, and exploration in the realm of electrical engineering.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><strong>Special thanks to:</strong></p>
-<ul class="simple">
-<li><p>Stephen Weeks | Student | University of Idaho</p></li>
-<li><p>Jeremy Perhac | Student | University of Idaho</p></li>
-<li><p>Daniel Allen | Student | Universtiy of Idaho</p></li>
-<li><p>Dr. Dennis Sullivan | Proffessor | University of Idaho</p></li>
-<li><p>Dr. Brian Johnson | Proffessor | University of Idaho</p></li>
-<li><p>Dr. Joe Law | Proffessor | University of Idaho</p></li>
-<li><p>StackOverflow user gg349</p></li>
-<li><p>Shaurya Uppal | Online Code Contributor</p></li>
-<li><p>Paul Ortman | Power Quality Engineer | Idaho Power | Instructor | University of Idaho</p></li>
-</ul>
+<p>The functions and constants that make up these modules represent a library of
+material compiled with the intent of being used primarily for research,
+development, education, and exploration in the realm of electrical engineering.</p>
+<p>The base module for the <cite>electricpy</cite> package, electricpy.py may be leveraged
+in any Python script or program by using the <em>import</em> command similar to that
+shown below.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">electricpy</span> <span class="k">as</span> <span class="nn">ep</span>
+</pre></div>
 </div>
-<div class="section" id="contents">
-<h2>CONTENTS:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<p>Filled with calculators, evaluators, and plotting functions, this package will
+provide a wide array of capabilities to any electrical engineer.</p>
+<p>Built to support operations similar to Numpy and Scipy, this package is designed
+to aid in scientific calculations.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="electricpy.html">ELECTRICPY Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="electricpy.html#sub-modules">SUB-MODULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apireference.html">ElectricPy API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="electricpy.html">electricpy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="electricpy.bode.html">electricpy.bode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="electricpy.constants.html">electricpy.constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="electricpy.fault.html">electricpy.fault</a></li>
+<li class="toctree-l3"><a class="reference internal" href="electricpy.sim.html">electricpy.sim</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="constants.html">INCLUDED CONSTANTS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fault.html">FAULT Sub-Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bode.html">BODE Sub-Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sim.html">SIM Sub-Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apireference.html#changelog">Changelog</a></li>
 </ul>
-</div>
+</li>
+</ul>
 </div>
 <div class="section" id="additional-project-links">
 <h2>ADDITIONAL PROJECT LINKS:<a class="headerlink" href="#additional-project-links" title="Permalink to this headline">¶</a></h2>
@@ -158,15 +153,23 @@ $&gt; pip install numdifftools
 <li><p>&lt;<a class="reference external" href="mailto:stan3926&#37;&#52;&#48;vandals&#46;uidaho&#46;edu">stan3926<span>&#64;</span>vandals<span>&#46;</span>uidaho<span>&#46;</span>edu</a>&gt;</p></li>
 <li><p>&lt;<a class="reference external" href="mailto:joe_stanley&#37;&#52;&#48;selinc&#46;com">joe_stanley<span>&#64;</span>selinc<span>&#46;</span>com</a>&gt;</p></li>
 </ul>
-<span class="target" id="module-electricpy"></span><div class="section" id="id1">
-<h3><cite>electricpy</cite><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><p><cite>A library of functions, constants and more
-that are related to Power in Electrical Engineering.</cite></p>
-<p>Written by Joe Stanley</p>
-</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Special thanks to:</strong></p>
+<ul class="simple">
+<li><p>Stephen Weeks | Student | University of Idaho</p></li>
+<li><p>Jeremy Perhac | Student | University of Idaho</p></li>
+<li><p>Daniel Allen | Student | Universtiy of Idaho</p></li>
+<li><p>Dr. Dennis Sullivan | Proffessor | University of Idaho</p></li>
+<li><p>Dr. Brian Johnson | Proffessor | University of Idaho</p></li>
+<li><p>Dr. Joe Law | Proffessor | University of Idaho</p></li>
+<li><p>StackOverflow user gg349</p></li>
+<li><p>Shaurya Uppal | Online Code Contributor</p></li>
+<li><p>Paul Ortman | Power Quality Engineer | Idaho Power | Instructor | University of Idaho</p></li>
+</ul>
+</div>
 <div class="section" id="included-constants">
-<h4>Included Constants<a class="headerlink" href="#included-constants" title="Permalink to this headline">¶</a></h4>
+<h3>Included Constants<a class="headerlink" href="#included-constants" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Pico Multiple:                            p</p></li>
@@ -183,7 +186,7 @@ that are related to Power in Electrical Engineering.</cite></p>
 visit constants page.</p>
 </div>
 <div class="section" id="symmetrical-components-matricies">
-<h4>Symmetrical Components Matricies<a class="headerlink" href="#symmetrical-components-matricies" title="Permalink to this headline">¶</a></h4>
+<h3>Symmetrical Components Matricies<a class="headerlink" href="#symmetrical-components-matricies" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>ABC to 012 Conversion:        Aabc</p></li>
@@ -192,7 +195,7 @@ visit constants page.</p>
 </div></blockquote>
 </div>
 <div class="section" id="included-functions">
-<h4>Included Functions<a class="headerlink" href="#included-functions" title="Permalink to this headline">¶</a></h4>
+<h3>Included Functions<a class="headerlink" href="#included-functions" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Phasor V/I Generator:                    phasor</p></li>
@@ -308,7 +311,7 @@ visit constants page.</p>
 </div></blockquote>
 </div>
 <div class="section" id="additional-available-sub-modules">
-<h4>Additional Available Sub-Modules<a class="headerlink" href="#additional-available-sub-modules" title="Permalink to this headline">¶</a></h4>
+<h3>Additional Available Sub-Modules<a class="headerlink" href="#additional-available-sub-modules" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>fault.py</p></li>
@@ -318,7 +321,7 @@ visit constants page.</p>
 </div></blockquote>
 </div>
 <div class="section" id="functions-available-in-electricpy-fault-py">
-<h4>Functions Available in <cite>electricpy.fault.py</cite><a class="headerlink" href="#functions-available-in-electricpy-fault-py" title="Permalink to this headline">¶</a></h4>
+<h3>Functions Available in <cite>electricpy.fault.py</cite><a class="headerlink" href="#functions-available-in-electricpy-fault-py" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Single Line to Ground                 phs1g</p></li>
@@ -364,7 +367,7 @@ visit constants page.</p>
 </div></blockquote>
 </div>
 <div class="section" id="functions-available-in-electricpy-bode-py">
-<h4>Functions Available in <cite>electricpy.bode.py</cite><a class="headerlink" href="#functions-available-in-electricpy-bode-py" title="Permalink to this headline">¶</a></h4>
+<h3>Functions Available in <cite>electricpy.bode.py</cite><a class="headerlink" href="#functions-available-in-electricpy-bode-py" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Transfer Function Bode Plotter:       bode</p></li>
@@ -374,7 +377,7 @@ visit constants page.</p>
 </div></blockquote>
 </div>
 <div class="section" id="functions-available-in-electricpy-sim-py">
-<h4>Functions Available in <cite>electricpy.sim.py</cite><a class="headerlink" href="#functions-available-in-electricpy-sim-py" title="Permalink to this headline">¶</a></h4>
+<h3>Functions Available in <cite>electricpy.sim.py</cite><a class="headerlink" href="#functions-available-in-electricpy-sim-py" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Digital Filter Simulator:             digifiltersim</p></li>
@@ -387,7 +390,6 @@ visit constants page.</p>
 <li><p>Multi-Bus Power Flow Calculator:      mbuspowerflow</p></li>
 </ul>
 </div></blockquote>
-</div>
 </div>
 </div>
 </div>
@@ -405,14 +407,12 @@ visit constants page.</p>
   <h3><a href="#">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">ElectricPy</a><ul>
-<li><a class="reference internal" href="#contents">CONTENTS:</a></li>
 <li><a class="reference internal" href="#additional-project-links">ADDITIONAL PROJECT LINKS:</a></li>
 <li><a class="reference internal" href="#dependencies">Dependencies:</a></li>
 <li><a class="reference internal" href="#installation">INSTALLATION:</a></li>
 <li><a class="reference internal" href="#to-do-list">To Do List</a></li>
 <li><a class="reference internal" href="#additional-resources">ADDITIONAL RESOURCES:</a></li>
 <li><a class="reference internal" href="#contact">Contact</a><ul>
-<li><a class="reference internal" href="#id1"><cite>electricpy</cite></a><ul>
 <li><a class="reference internal" href="#included-constants">Included Constants</a></li>
 <li><a class="reference internal" href="#symmetrical-components-matricies">Symmetrical Components Matricies</a></li>
 <li><a class="reference internal" href="#included-functions">Included Functions</a></li>
@@ -425,12 +425,10 @@ visit constants page.</p>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 
   <h4>Next topic</h4>
-  <p class="topless"><a href="electricpy.html"
-                        title="next chapter">ELECTRICPY Module</a></p>
+  <p class="topless"><a href="apireference.html"
+                        title="next chapter">ElectricPy API Reference</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -462,7 +460,7 @@ visit constants page.</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.html" title="ELECTRICPY Module"
+          <a href="apireference.html" title="ElectricPy API Reference"
              >next</a> |</li>
         <li class="nav-item nav-item-0"><a href="#">electricpy 0.1.7 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">ElectricPy</a></li> 

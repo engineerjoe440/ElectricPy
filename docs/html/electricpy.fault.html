@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>electricpy.fault &#8212; electricpy 0.1.7 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/electricpy.fault.html" />
+    <link rel="shortcut icon" href="_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="electricpy.sim" href="electricpy.sim.html" />
+    <link rel="prev" title="electricpy.constants" href="electricpy.constants.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.sim.html" title="electricpy.sim"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.constants.html" title="electricpy.constants"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="apireference.html" >ElectricPy API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.fault</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-electricpy.fault">
+<span id="electricpy-fault"></span><h1>electricpy.fault<a class="headerlink" href="#module-electricpy.fault" title="Permalink to this headline">¶</a></h1>
+<p><cite>electricpy.fault.py</cite></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">fault</span>
+</pre></div>
+</div>
+<p class="rubric">Functions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">busvolt</span></code>(k, n, Vpf, Z0, Z1, Z2, If[, …])</p></td>
+<td><p>Faulted Bus Voltage Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">correctedcurrents</span></code>(Ipri, TAP[, correction, CTR])</p></td>
+<td><p>Transformer Current Correction Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_cclass</span></code>(XoR, Imag, Irated, CTR, Rb, Xb[, …])</p></td>
+<td><p>Current Transformer (CT) C-Class Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_satratburden</span></code>(Inom[, VArat, ANSIv, ALF])</p></td>
+<td><p>Current Transformer (CT) Saturation at Rated Burden Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_saturation</span></code>(XoR, Imag, Vrated, Irated, …)</p></td>
+<td><p>Current Transformer Saturation Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_timetosat</span></code>(Vknee, XoR, Rb, CTR, Imax[, …])</p></td>
+<td><p>Current Transformer (CT) Time to Saturation Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ct_vpeak</span></code>(Zb, Ip, CTR)</p></td>
+<td><p>Current Transformer (CT) Peak Voltage Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">distmeasz</span></code>(VLNmeas, If, Ip, Ipp[, CTR, VTR, …])</p></td>
+<td><p>Distance Element Measured Impedance Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">faultratio</span></code>(I, Ipickup[, CTR])</p></td>
+<td><p>Fault Multiple of Pickup (Ratio) Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">genlossfield</span></code>(Xd, Xpd[, Zbase, CTR, VTR])</p></td>
+<td><p>Generator Loss of Field Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">highzmini</span></code>(N, Ie[, Irly, Vset, Rrly, Imov, CTR])</p></td>
+<td><p>Minimum Current for High Impedance Protection Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">highzvpickup</span></code>(I, RL, Rct[, CTR, threephase, …])</p></td>
+<td><p>High Impedance Pickup Setting Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">indmacheigenvalues</span></code>(Lr, Ls, Lm, Rr, Rs[, …])</p></td>
+<td><p>Induction Machine Eigenvalue Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">indmachphs3sc</span></code>(t, Is0, Lr, Ls, Lm, Rr, Rs[, …])</p></td>
+<td><p>Induction Machine 3-Phase SC Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">indmachphs3torq</span></code>(t, Is0, Lr, Ls, Lm, Rr, Rs)</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">param t</dt>
+<dd class="field-odd"><p>The time at which to find the</p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">instoc</span></code>(Imin[, CTR, Ki])</p></td>
+<td><p>Instantaneous OverCurrent Pickup Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">iopirt</span></code>(IpriHV, IpriLV, TAPHV, TAPLV[, …])</p></td>
+<td><p>Operate/Restraint Current Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phs1g</span></code>(Vth, Zseq[, Rf, sequence, reference])</p></td>
+<td><p>Single-Phase-to-Ground Fault Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phs1mvasc</span></code>(Vth, Zseq[, Rf, Sbase])</p></td>
+<td><p>Single-Phase MVA Short-Circuit Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phs2</span></code>(Vth, Zseq[, Rf, sequence, reference])</p></td>
+<td><p>Line-to-Line Fault Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phs2g</span></code>(Vth, Zseq[, Rf, sequence, reference])</p></td>
+<td><p>Double-Line-to-Ground Fault Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phs3</span></code>(Vth, Zseq[, Rf, sequence, reference])</p></td>
+<td><p>Three-Phase Fault Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phs3mvasc</span></code>(Vth, Zseq[, Rf, Sbase])</p></td>
+<td><p>Three-Phase MVA Short-Circuit Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pickup</span></code>(Iloadmax, Ifaultmin[, scale, …])</p></td>
+<td><p>Current Pickup Selection Assistant</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pktransrecvolt</span></code>(C, L[, R, VLL, VLN, freq])</p></td>
+<td><p>Peak Transient Recovery Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">poleopen1</span></code>(Vth, Zseq[, sequence, reference])</p></td>
+<td><p>Single Pole Open Fault Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">poleopen2</span></code>(Vth, Zseq[, sequence, reference])</p></td>
+<td><p>Single Pole Open Fault Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">protectiontap</span></code>(S[, CTR, VLN, VLL])</p></td>
+<td><p>Protection TAP Setting Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">residcomp</span></code>(z1, z0[, linelength])</p></td>
+<td><p>Residual Compensation Factor Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">scMVA</span></code>([Zth, Isc, Vth])</p></td>
+<td><p>Simple Short-Circuit MVA Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">symrmsfaultcur</span></code>(V, R, X[, t, freq])</p></td>
+<td><p>Symmetrical/RMS Current Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">synmach_Iasym</span></code>(t, Eq, Xdpp, Xqpp, Ta)</p></td>
+<td><p>Synch.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">synmach_Isym</span></code>(t, Eq, Xd, Xdp, Xdpp, Tdp, Tdpp)</p></td>
+<td><p>Synch.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">synmach_ifault</span></code>(t, Ea, alpha, Xd, Xdp, Xdpp, …)</p></td>
+<td><p>Synchronous Machine Fault Current Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tdradial</span></code>(I, CTI, Ipu_up[, Ipu_dn, TDdn, …])</p></td>
+<td><p>Radial Time Dial Coordination Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">thermaltime</span></code>(In, Ibase, tbase)</p></td>
+<td><p>Simple Thermal Time Limit Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tocreset</span></code>(I, Ipickup, TD[, curve, CTR])</p></td>
+<td><p>Time OverCurrent Reset Time Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">toctriptime</span></code>(I, Ipickup, TD[, curve, CTR])</p></td>
+<td><p>Time OverCurrent Trip Time Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transmismatch</span></code>(I1, I2, tap1, tap2)</p></td>
+<td><p>Transformer TAP Mismatch Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">trvresistor</span></code>(C, L, reduction[, Rd0, wd0, tpk0])</p></td>
+<td><p>Transient Recovery Voltage (TRV) Reduction Resistor Function</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.constants.html"
+                        title="previous chapter">electricpy.constants</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.sim.html"
+                        title="next chapter">electricpy.sim</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/electricpy.fault.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.sim.html" title="electricpy.sim"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.constants.html" title="electricpy.constants"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="apireference.html" >ElectricPy API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.fault</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Joe Stanley.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>
