@@ -14,11 +14,14 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_autosummary/electricpy.acpiv.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.btu" href="electricpy.btu.html" />
+    <link rel="prev" title="electricpy.abc_to_seq" href="electricpy.abc_to_seq.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,7 +29,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.btu.html" title="electricpy.btu"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.abc_to_seq.html" title="electricpy.abc_to_seq"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.acpiv</a></li> 
       </ul>
     </div>  
@@ -38,6 +52,46 @@
             
   <div class="section" id="electricpy-acpiv">
 <h1>electricpy.acpiv<a class="headerlink" href="#electricpy-acpiv" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.acpiv">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">acpiv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">S</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">I</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">VLL</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">VLN</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">V</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">PF</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.acpiv" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Power-Voltage-Current Relation Function</p>
+<p>Relationship function to return apparent power, voltage, or
+current in one of various forms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>S</strong> (<em>complex</em><em>, </em><em>optional</em>) – Apparent power, may be single or three-phase,
+specified in volt-amps (VAs)</p></li>
+<li><p><strong>I</strong> (<em>complex</em><em>, </em><em>optional</em>) – Phase current in amps</p></li>
+<li><p><strong>VLL</strong> (<em>complex</em><em>, </em><em>optional</em>) – Line-to-Line voltage in volts</p></li>
+<li><p><strong>VLN</strong> (<em>complex</em><em>, </em><em>optional</em>) – Line-to-Neutral voltage in volts</p></li>
+<li><p><strong>V</strong> (<em>complex</em><em>, </em><em>optional</em>) – Single-phase voltage in volts</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>S</strong> (<em>complex</em>) – Apparent power, returned only if one voltage
+and current is specified</p></li>
+<li><p><strong>I</strong> (<em>complex</em>) – Phase current, returned only if one voltage
+and apparent power is specified</p></li>
+<li><p><strong>VLL</strong> (<em>complex</em>) – Line-to-Line voltage, returned only if current
+and apparent power specified, returned as set
+with other voltages in form: (VLL, VLN, V)</p></li>
+<li><p><strong>VLN</strong> (<em>complex</em>) – Line-to-Neutral voltage, returned only if
+current and apparent power specified, returned
+as set with other voltages in form: (VLL, VLN, V)</p></li>
+<li><p><strong>V</strong> (<em>complex</em>) – Single-phase voltage, returned only if current
+and apparent power specified, returned as set
+with other voltages in form: (VLL, VLN, V)</p></li>
+<li><p><strong>PF</strong> (<em>float, optional</em>) – Supporting argument to convert floating-point
+apparent power to complex representation.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -50,6 +104,12 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.abc_to_seq.html"
+                        title="previous chapter">electricpy.abc_to_seq</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.btu.html"
+                        title="next chapter">electricpy.btu</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -77,7 +137,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.btu.html" title="electricpy.btu"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.abc_to_seq.html" title="electricpy.abc_to_seq"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.acpiv</a></li> 
       </ul>
     </div>

@@ -14,11 +14,14 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_autosummary/electricpy.vcapdischarge.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.vipf" href="electricpy.vipf.html" />
+    <link rel="prev" title="electricpy.vcapcharge" href="electricpy.vcapcharge.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,7 +29,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.vipf.html" title="electricpy.vipf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.vcapcharge.html" title="electricpy.vcapcharge"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.vcapdischarge</a></li> 
       </ul>
     </div>  
@@ -38,6 +52,33 @@
             
   <div class="section" id="electricpy-vcapdischarge">
 <h1>electricpy.vcapdischarge<a class="headerlink" href="#electricpy-vcapdischarge" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.vcapdischarge">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">vcapdischarge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em>, <em class="sig-param"><span class="n">Vs</span></em>, <em class="sig-param"><span class="n">R</span></em>, <em class="sig-param"><span class="n">C</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.vcapdischarge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Discharging Capacitor Function</p>
+<p>Function to calculate the voltage of a
+capacitor that is discharging given the time.</p>
+<div class="math notranslate nohighlight">
+\[V_c=V_s*e^{\frac{-t}{R*C}}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<em>float</em>) – The time at which to calculate the voltage.</p></li>
+<li><p><strong>Vs</strong> (<em>float</em>) – The starting voltage for the capacitor.</p></li>
+<li><p><strong>R</strong> (<em>float</em>) – The ohmic value of the resistor being used
+to discharge.</p></li>
+<li><p><strong>C</strong> (<em>float</em>) – Capacitive value (in Farads).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Vc</strong> – The calculated voltage of the capacitor.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -50,6 +91,12 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.vcapcharge.html"
+                        title="previous chapter">electricpy.vcapcharge</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.vipf.html"
+                        title="next chapter">electricpy.vipf</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -77,7 +124,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.vipf.html" title="electricpy.vipf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.vcapcharge.html" title="electricpy.vcapcharge"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.vcapdischarge</a></li> 
       </ul>
     </div>

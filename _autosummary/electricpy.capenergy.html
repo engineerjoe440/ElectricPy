@@ -14,11 +14,14 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_autosummary/electricpy.capenergy.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.captransfer" href="electricpy.captransfer.html" />
+    <link rel="prev" title="electricpy.capbacktoback" href="electricpy.capbacktoback.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,7 +29,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.captransfer.html" title="electricpy.captransfer"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.capbacktoback.html" title="electricpy.capbacktoback"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.capenergy</a></li> 
       </ul>
     </div>  
@@ -38,6 +52,30 @@
             
   <div class="section" id="electricpy-capenergy">
 <h1>electricpy.capenergy<a class="headerlink" href="#electricpy-capenergy" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.capenergy">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">capenergy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">C</span></em>, <em class="sig-param"><span class="n">v</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.capenergy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Capacitor Energy Formula</p>
+<p>A simple function to calculate the stored voltage (in Joules)
+in a capacitor with a charged voltage.</p>
+<div class="math notranslate nohighlight">
+\[E=\frac{1}{2}*C*V^2\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>C</strong> (<em>float</em>) – Capacitance in Farads.</p></li>
+<li><p><strong>V</strong> (<em>float</em>) – Voltage across capacitor.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>energy</strong> – Energy stored in capacitor (Joules).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -50,6 +88,12 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.capbacktoback.html"
+                        title="previous chapter">electricpy.capbacktoback</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.captransfer.html"
+                        title="next chapter">electricpy.captransfer</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -77,7 +121,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.captransfer.html" title="electricpy.captransfer"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.capbacktoback.html" title="electricpy.capbacktoback"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.capenergy</a></li> 
       </ul>
     </div>

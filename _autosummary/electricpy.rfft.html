@@ -14,11 +14,14 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_autosummary/electricpy.rfft.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.rms" href="electricpy.rms.html" />
+    <link rel="prev" title="electricpy.rectifiercap" href="electricpy.rectifiercap.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,7 +29,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.rms.html" title="electricpy.rms"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.rectifiercap.html" title="electricpy.rectifiercap"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.rfft</a></li> 
       </ul>
     </div>  
@@ -38,6 +52,35 @@
             
   <div class="section" id="electricpy-rfft">
 <h1>electricpy.rfft<a class="headerlink" href="#electricpy-rfft" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.rfft">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">rfft</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arr</span></em>, <em class="sig-param"><span class="n">dt</span><span class="o">=</span><span class="default_value">0.01</span></em>, <em class="sig-param"><span class="n">absolute</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">resample</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.rfft" title="Permalink to this definition">¶</a></dt>
+<dd><p>RFFT Function</p>
+<p>This function is designed to evaluat the real FFT
+of a input signal in the form of an array or list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arr</strong> (<em>numpy.ndarray</em>) – The input array representing the signal</p></li>
+<li><p><strong>dt</strong> (<em>float</em><em>, </em><em>optional</em>) – The time-step used for the array,
+default=0.01</p></li>
+<li><p><strong>absolute</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force absolute
+values, default=True</p></li>
+<li><p><strong>resample</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument specifying whether
+the FFT output should be resampled,
+or if it should have a specific
+resampling rate, default=True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>FFT Array</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -50,6 +93,12 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.rectifiercap.html"
+                        title="previous chapter">electricpy.rectifiercap</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.rms.html"
+                        title="next chapter">electricpy.rms</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -77,7 +126,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.rms.html" title="electricpy.rms"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.rectifiercap.html" title="electricpy.rectifiercap"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.rfft</a></li> 
       </ul>
     </div>

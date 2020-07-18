@@ -14,11 +14,14 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_autosummary/electricpy.indmachpem.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.indmachpkslip" href="electricpy.indmachpkslip.html" />
+    <link rel="prev" title="electricpy.indmachiar" href="electricpy.indmachiar.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,7 +29,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.indmachpkslip.html" title="electricpy.indmachpkslip"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.indmachiar.html" title="electricpy.indmachiar"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.indmachpem</a></li> 
       </ul>
     </div>  
@@ -38,6 +52,71 @@
             
   <div class="section" id="electricpy-indmachpem">
 <h1>electricpy.indmachpem<a class="headerlink" href="#electricpy-indmachpem" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.indmachpem">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">indmachpem</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">slip</span></em>, <em class="sig-param"><span class="n">Rr</span></em>, <em class="sig-param"><span class="n">Vth</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Zth</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Vas</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">Rs</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">Lm</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">Lls</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">Llr</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">Ls</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Lr</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">freq</span><span class="o">=</span><span class="default_value">60</span></em>, <em class="sig-param"><span class="n">calcX</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.indmachpem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mechanical Power Calculator for Induction Machines</p>
+<p>Function to calculate the mechanical power using the thevenin
+equivalent circuit terms.</p>
+<div class="math notranslate nohighlight">
+\[P_{em}=\frac{|V_{th_{\text{stator}}}|^2\cdot\frac{R_r}{slip}}
+{\left[\left(\frac{R_r}{slip}+R_{th_{\text{stator}}}\right)^2
++X_{th_{\text{stator}}}^2\right]\cdot\omega_{es}}\cdot(1-slip)\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>slip</strong> (<em>float</em>) – The mechanical/electrical slip factor of the
+induction machine.</p></li>
+<li><p><strong>Rr</strong> (<em>float</em>) – Rotor resistance in ohms</p></li>
+<li><p><strong>Vth</strong> (<em>complex</em><em>, </em><em>optional</em>) – Thevenin-equivalent stator voltage of the
+induction machine, may be calculated internally
+if given stator voltage and machine parameters.</p></li>
+<li><p><strong>Zth</strong> (<em>complex</em><em>, </em><em>optional</em>) – Thevenin-equivalent inductance (in ohms) of the
+induction machine, may be calculated internally
+if given machine parameters.</p></li>
+<li><p><strong>Vas</strong> (<em>complex</em><em>, </em><em>optional</em>) – Terminal Stator Voltage in Volts</p></li>
+<li><p><strong>Rs</strong> (<em>float</em><em>, </em><em>optional</em>) – Stator resistance in ohms</p></li>
+<li><p><strong>Lm</strong> (<em>float</em><em>, </em><em>optional</em>) – Magnetizing inductance in Henrys</p></li>
+<li><p><strong>Lls</strong> (<em>float</em><em>, </em><em>optional</em>) – Stator leakage inductance in Henrys, default=0</p></li>
+<li><p><strong>Llr</strong> (<em>float</em><em>, </em><em>optional</em>) – Rotor leakage inductance in Henrys, default=0</p></li>
+<li><p><strong>Ls</strong> (<em>float</em><em>, </em><em>optional</em>) – Stator inductance in Henrys</p></li>
+<li><p><strong>Lr</strong> (<em>float</em><em>, </em><em>optional</em>) – Rotor inductance in Henrys</p></li>
+<li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – System (electrical) frequency in Hz, default=60</p></li>
+<li><p><strong>calcX</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force system to calculate
+system reactances with system frequency, or to
+treat them as previously-calculated reactances.
+default=True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Pem</strong> – Power (in watts) that is produced or consumed
+by the mechanical portion of the induction machine.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="electricpy.indmachvth.html#electricpy.indmachvth" title="electricpy.indmachvth"><code class="xref py py-func docutils literal notranslate"><span class="pre">indmachvth()</span></code></a></dt><dd><p>Induction Machine Thevenin Voltage Calculator</p>
+</dd>
+<dt><a class="reference internal" href="electricpy.indmachzth.html#electricpy.indmachzth" title="electricpy.indmachzth"><code class="xref py py-func docutils literal notranslate"><span class="pre">indmachzth()</span></code></a></dt><dd><p>Induction Machine Thevenin Impedance Calculator</p>
+</dd>
+<dt><a class="reference internal" href="electricpy.indmachtem.html#electricpy.indmachtem" title="electricpy.indmachtem"><code class="xref py py-func docutils literal notranslate"><span class="pre">indmachtem()</span></code></a></dt><dd><p>Induction Machine Electro-Mechanical Torque Calculator</p>
+</dd>
+<dt><a class="reference internal" href="electricpy.indmachpkslip.html#electricpy.indmachpkslip" title="electricpy.indmachpkslip"><code class="xref py py-func docutils literal notranslate"><span class="pre">indmachpkslip()</span></code></a></dt><dd><p>Induction Machine Peak Slip Calculator</p>
+</dd>
+<dt><a class="reference internal" href="electricpy.indmachpktorq.html#electricpy.indmachpktorq" title="electricpy.indmachpktorq"><code class="xref py py-func docutils literal notranslate"><span class="pre">indmachpktorq()</span></code></a></dt><dd><p>Induction Machine Peak Torque Calculator</p>
+</dd>
+<dt><a class="reference internal" href="electricpy.indmachiar.html#electricpy.indmachiar" title="electricpy.indmachiar"><code class="xref py py-func docutils literal notranslate"><span class="pre">indmachiar()</span></code></a></dt><dd><p>Induction Machine Phase-A Rotor Current Calculator</p>
+</dd>
+<dt><a class="reference internal" href="electricpy.indmachstarttorq.html#electricpy.indmachstarttorq" title="electricpy.indmachstarttorq"><code class="xref py py-func docutils literal notranslate"><span class="pre">indmachstarttorq()</span></code></a></dt><dd><p>Induction Machine Starting Torque Calculator</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
 </div>
 
 
@@ -50,6 +129,12 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.indmachiar.html"
+                        title="previous chapter">electricpy.indmachiar</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.indmachpkslip.html"
+                        title="next chapter">electricpy.indmachpkslip</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -77,7 +162,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.indmachpkslip.html" title="electricpy.indmachpkslip"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.indmachiar.html" title="electricpy.indmachiar"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.indmachpem</a></li> 
       </ul>
     </div>

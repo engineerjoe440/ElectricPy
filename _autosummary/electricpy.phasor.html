@@ -14,11 +14,14 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_autosummary/electricpy.phasor.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.phasordata" href="electricpy.phasordata.html" />
+    <link rel="prev" title="electricpy.phaseline" href="electricpy.phaseline.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,7 +29,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.phasordata.html" title="electricpy.phasordata"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.phaseline.html" title="electricpy.phaseline"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.phasor</a></li> 
       </ul>
     </div>  
@@ -38,6 +52,49 @@
             
   <div class="section" id="electricpy-phasor">
 <h1>electricpy.phasor<a class="headerlink" href="#electricpy-phasor" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.phasor">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">phasor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mag</span></em>, <em class="sig-param"><span class="n">ang</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.phasor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Complex Phasor Generator</p>
+<p>Generates the standard Pythonic complex representation
+of a phasor voltage or current when given the magnitude
+and angle of the specific voltage or current.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mag</strong> (<em>float</em>) – The Magnitude of the Voltage/Current</p></li>
+<li><p><strong>ang</strong> (<em>float</em>) – The Angle (in degrees) of the Voltage/Current</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>phasor</strong> – Standard Pythonic Complex Representation of
+the specified voltage or current.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>complex</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">electricpy</span> <span class="k">as</span> <span class="nn">ep</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">phasor</span><span class="p">(</span><span class="mi">67</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span> <span class="c1"># 67 volts at angle 120 degrees</span>
+<span class="go">(-33.499999999999986+58.02370205355739j)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="electricpy.phasorlist.html#electricpy.phasorlist" title="electricpy.phasorlist"><code class="xref py py-func docutils literal notranslate"><span class="pre">phasorlist()</span></code></a></dt><dd><p>Phasor Generator for List or Array</p>
+</dd>
+<dt><a class="reference internal" href="electricpy.cprint.html#electricpy.cprint" title="electricpy.cprint"><code class="xref py py-func docutils literal notranslate"><span class="pre">cprint()</span></code></a></dt><dd><p>Complex Variable Printing Function</p>
+</dd>
+<dt><a class="reference internal" href="electricpy.phasorz.html#electricpy.phasorz" title="electricpy.phasorz"><code class="xref py py-func docutils literal notranslate"><span class="pre">phasorz()</span></code></a></dt><dd><p>Impedance Phasor Generator</p>
+</dd>
+<dt><a class="reference internal" href="electricpy.phs.html#electricpy.phs" title="electricpy.phs"><code class="xref py py-func docutils literal notranslate"><span class="pre">phs()</span></code></a></dt><dd><p>Complex Phase Angle Generator</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
 </div>
 
 
@@ -50,6 +107,12 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.phaseline.html"
+                        title="previous chapter">electricpy.phaseline</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.phasordata.html"
+                        title="next chapter">electricpy.phasordata</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -77,7 +140,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.phasordata.html" title="electricpy.phasordata"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.phaseline.html" title="electricpy.phaseline"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.phasor</a></li> 
       </ul>
     </div>

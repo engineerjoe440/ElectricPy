@@ -14,11 +14,14 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_autosummary/electricpy.harmonics.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.hartleydata" href="electricpy.hartleydata.html" />
+    <link rel="prev" title="electricpy.gmd" href="electricpy.gmd.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,7 +29,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.hartleydata.html" title="electricpy.hartleydata"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.gmd.html" title="electricpy.gmd"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.harmonics</a></li> 
       </ul>
     </div>  
@@ -38,6 +52,41 @@
             
   <div class="section" id="electricpy-harmonics">
 <h1>electricpy.harmonics<a class="headerlink" href="#electricpy-harmonics" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.harmonics">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">harmonics</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">real</span></em>, <em class="sig-param"><span class="n">imag</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dc</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">freq</span><span class="o">=</span><span class="default_value">60</span></em>, <em class="sig-param"><span class="n">domain</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.harmonics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Harmonic Function Generator</p>
+<p>Generate a function or dataset for a harmonic system
+given the real (cosine), imaginary (sine), and DC
+components of the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>real</strong> (<em>list of float</em>) – The real (cosine) component coefficients
+for the harmonic system.</p></li>
+<li><p><strong>imag</strong> (<em>list of float</em><em>, </em><em>optional</em>) – The imaginary (sine) component coefficients
+for the harmonic system.</p></li>
+<li><p><strong>dc</strong> (<em>float</em><em>, </em><em>optional</em>) – The DC offset for the harmonic system,
+default=0</p></li>
+<li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – The fundamental frequency of the system in
+Hz, default=60</p></li>
+<li><p><strong>domain</strong> (<em>list of float</em><em>, </em><em>optional</em>) – Domain of time samples at which to calculate
+the harmonic system, must be array-like, will
+cause function to return numpy array instead
+of function object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>system</strong> – Function object handle which can be used to
+call the function to evaluate the harmonic
+system at specified times.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>function</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -50,6 +99,12 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.gmd.html"
+                        title="previous chapter">electricpy.gmd</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.hartleydata.html"
+                        title="next chapter">electricpy.hartleydata</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -77,7 +132,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.hartleydata.html" title="electricpy.hartleydata"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.gmd.html" title="electricpy.gmd"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.harmonics</a></li> 
       </ul>
     </div>

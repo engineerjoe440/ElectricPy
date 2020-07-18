@@ -14,11 +14,13 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_autosummary/electricpy.sim.step_response.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="electricpy.sim.statespace" href="electricpy.sim.statespace.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,7 +28,15 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.sim.statespace.html" title="electricpy.sim.statespace"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../sim.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.sim.html" accesskey="U">electricpy.sim</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.sim.step_response</a></li> 
       </ul>
     </div>  
@@ -38,6 +48,37 @@
             
   <div class="section" id="electricpy-sim-step-response">
 <h1>electricpy.sim.step_response<a class="headerlink" href="#electricpy-sim-step-response" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.sim.step_response">
+<code class="sig-prename descclassname">electricpy.sim.</code><code class="sig-name descname">step_response</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">system</span></em>, <em class="sig-param"><span class="n">npts</span><span class="o">=</span><span class="default_value">1000</span></em>, <em class="sig-param"><span class="n">dt</span><span class="o">=</span><span class="default_value">0.01</span></em>, <em class="sig-param"><span class="n">combine</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">xlim</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">'Step Response'</span></em>, <em class="sig-param"><span class="n">errtitle</span><span class="o">=</span><span class="default_value">'Step Response Error'</span></em>, <em class="sig-param"><span class="n">resplabel</span><span class="o">=</span><span class="default_value">'Step Response'</span></em>, <em class="sig-param"><span class="n">funclabel</span><span class="o">=</span><span class="default_value">'Step Function'</span></em>, <em class="sig-param"><span class="n">errlabel</span><span class="o">=</span><span class="default_value">'Error'</span></em>, <em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.sim.step_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Step Function Response Plotter Function</p>
+<p>Given a transfer function, plots the response against step input
+and plots the error for the function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>system</strong> (<em>array_like</em>) – The Transfer Function; can be provided as the following:
+* 1 (instance of lti)
+* 2 (num, den)
+* 3 (zeros, poles, gain)
+* 4 (A, B, C, D)</p></li>
+<li><p><strong>npts</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of steps to calculate over; default is 1000.</p></li>
+<li><p><strong>dt</strong> (<em>float</em><em>, </em><em>optional</em>) – Difference between each data point, default is 0.01.</p></li>
+<li><p><strong>combine</strong> (<em>bool</em><em>, </em><em>optional</em>) – If combination of numerator and denominator is needed.
+This value should be set to “True” if the parts should be
+combined to show the complete system with feedback.
+default=True.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Additional string to be added to plot titles;
+default=””</p></li>
+<li><p><strong>xlim</strong> (<em>list</em><em>, </em><em>optional</em>) – Limit in x-axis for graph plot. Accepts tuple of: (xmin, xmax).
+default=False.</p></li>
+<li><p><strong>filename</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to specify whether the plotted
+figures should be saved. default=False</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -50,6 +91,9 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.sim.statespace.html"
+                        title="previous chapter">electricpy.sim.statespace</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -77,7 +121,15 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.sim.statespace.html" title="electricpy.sim.statespace"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../sim.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.sim.html" >electricpy.sim</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.sim.step_response</a></li> 
       </ul>
     </div>

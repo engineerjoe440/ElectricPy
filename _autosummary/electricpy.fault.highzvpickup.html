@@ -14,11 +14,14 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_autosummary/electricpy.fault.highzvpickup.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.fault.indmacheigenvalues" href="electricpy.fault.indmacheigenvalues.html" />
+    <link rel="prev" title="electricpy.fault.highzmini" href="electricpy.fault.highzmini.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,7 +29,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.indmacheigenvalues.html" title="electricpy.fault.indmacheigenvalues"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.highzmini.html" title="electricpy.fault.highzmini"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../fault.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.fault.html" accesskey="U">electricpy.fault</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.fault.highzvpickup</a></li> 
       </ul>
     </div>  
@@ -38,6 +52,40 @@
             
   <div class="section" id="electricpy-fault-highzvpickup">
 <h1>electricpy.fault.highzvpickup<a class="headerlink" href="#electricpy-fault-highzvpickup" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.fault.highzvpickup">
+<code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">highzvpickup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">I</span></em>, <em class="sig-param"><span class="n">RL</span></em>, <em class="sig-param"><span class="n">Rct</span></em>, <em class="sig-param"><span class="n">CTR</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">threephase</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">Ks</span><span class="o">=</span><span class="default_value">1.5</span></em>, <em class="sig-param"><span class="n">Vstd</span><span class="o">=</span><span class="default_value">400</span></em>, <em class="sig-param"><span class="n">Kd</span><span class="o">=</span><span class="default_value">0.5</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.highzvpickup" title="Permalink to this definition">¶</a></dt>
+<dd><p>High Impedance Pickup Setting Function</p>
+<p>Evaluates the voltage pickup setting for a high
+impedance bus protection system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>I</strong> (<em>float</em>) – Fault current on primary side (in amps)</p></li>
+<li><p><strong>RL</strong> (<em>float</em>) – One-way line resistance in ohms</p></li>
+<li><p><strong>Rct</strong> (<em>float</em>) – Current Transformer Resistance in ohms</p></li>
+<li><p><strong>CTR</strong> (<em>float</em><em>, </em><em>optional</em>) – Current Transformer Ratio, default=1</p></li>
+<li><p><strong>threephase</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to set the function to
+evaluate the result for a three-phase
+fault or unbalanced fault. default=False</p></li>
+<li><p><strong>Ks</strong> (<em>float</em><em>, </em><em>optional</em>) – Security Factor for secure voltage pickup
+setting, default=1.5</p></li>
+<li><p><strong>Vstd</strong> (<em>float</em><em>, </em><em>optional</em>) – C-Class Voltage rating (i.e. C-400),
+default=400</p></li>
+<li><p><strong>Kd</strong> (<em>float</em><em>, </em><em>optional</em>) – The dependability factor for dependable
+voltage pickup setting, default=0.5</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>Vsens</strong> (<em>float</em>) – The calculated sensetive voltage-pickup.</p></li>
+<li><p><strong>Vdep</strong> (<em>float</em>) – The calculated dependable voltage-pickup.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -50,6 +98,12 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.fault.highzmini.html"
+                        title="previous chapter">electricpy.fault.highzmini</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.fault.indmacheigenvalues.html"
+                        title="next chapter">electricpy.fault.indmacheigenvalues</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -77,7 +131,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.indmacheigenvalues.html" title="electricpy.fault.indmacheigenvalues"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.highzmini.html" title="electricpy.fault.highzmini"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../fault.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.fault.html" >electricpy.fault</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.fault.highzvpickup</a></li> 
       </ul>
     </div>

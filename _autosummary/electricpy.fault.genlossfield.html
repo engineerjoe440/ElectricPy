@@ -14,11 +14,14 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_autosummary/electricpy.fault.genlossfield.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.fault.highzmini" href="electricpy.fault.highzmini.html" />
+    <link rel="prev" title="electricpy.fault.faultratio" href="electricpy.fault.faultratio.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,7 +29,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.highzmini.html" title="electricpy.fault.highzmini"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.faultratio.html" title="electricpy.fault.faultratio"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../fault.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.fault.html" accesskey="U">electricpy.fault</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.fault.genlossfield</a></li> 
       </ul>
     </div>  
@@ -38,6 +52,39 @@
             
   <div class="section" id="electricpy-fault-genlossfield">
 <h1>electricpy.fault.genlossfield<a class="headerlink" href="#electricpy-fault-genlossfield" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.fault.genlossfield">
+<code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">genlossfield</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Xd</span></em>, <em class="sig-param"><span class="n">Xpd</span></em>, <em class="sig-param"><span class="n">Zbase</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">CTR</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">VTR</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.genlossfield" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generator Loss of Field Function</p>
+<p>Generates the Loss-of-Field Element settings
+for a generator using the Xd value and
+per-unit base information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Xd</strong> (<em>float</em>) – The Transient Reactance (Xd) term. May be
+specified in ohms or Per-Unit ohms if
+<em>Zbase</em> is set.</p></li>
+<li><p><strong>Xpd</strong> (<em>float</em>) – The Sub-Transient Reactance (X’d) term. May
+be specified in ohms or Per-Unit ohms if
+<em>Zbase</em> is set.</p></li>
+<li><p><strong>Zbase</strong> (<em>float</em><em>, </em><em>optional</em>) – Base impedance, used to convert per-unit
+Xd and Xpd to secondary values. default=1</p></li>
+<li><p><strong>CTR</strong> (<em>float</em><em>, </em><em>optional</em>) – Current Transformer Ratio, default=1</p></li>
+<li><p><strong>VTR</strong> (<em>float</em><em>, </em><em>optional</em>) – Voltage Transformer Ratio, default=1</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>ZoneOff</strong> (<em>float</em>) – Zone Offset in ohms.</p></li>
+<li><p><strong>Z1dia</strong> (<em>float</em>) – Zone 1 diameter in ohms.</p></li>
+<li><p><strong>Z2dia</strong> (<em>float</em>) – Zone 2 diameter in ohms.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -50,6 +97,12 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.fault.faultratio.html"
+                        title="previous chapter">electricpy.fault.faultratio</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.fault.highzmini.html"
+                        title="next chapter">electricpy.fault.highzmini</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -77,7 +130,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.highzmini.html" title="electricpy.fault.highzmini"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.faultratio.html" title="electricpy.fault.faultratio"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../fault.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.fault.html" >electricpy.fault</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.fault.genlossfield</a></li> 
       </ul>
     </div>

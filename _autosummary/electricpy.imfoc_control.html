@@ -14,11 +14,14 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_autosummary/electricpy.imfoc_control.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.indmachfocratings" href="electricpy.indmachfocratings.html" />
+    <link rel="prev" title="electricpy.hz_to_rpm" href="electricpy.hz_to_rpm.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,7 +29,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.indmachfocratings.html" title="electricpy.indmachfocratings"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.hz_to_rpm.html" title="electricpy.hz_to_rpm"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.imfoc_control</a></li> 
       </ul>
     </div>  
@@ -38,6 +52,47 @@
             
   <div class="section" id="electricpy-imfoc-control">
 <h1>electricpy.imfoc_control<a class="headerlink" href="#electricpy-imfoc-control" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.imfoc_control">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">imfoc_control</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Tem_cmd</span></em>, <em class="sig-param"><span class="n">LAMdr_cmd</span></em>, <em class="sig-param"><span class="n">wr_cmd</span></em>, <em class="sig-param"><span class="n">Rr</span></em>, <em class="sig-param"><span class="n">Rs</span></em>, <em class="sig-param"><span class="n">Lm</span></em>, <em class="sig-param"><span class="n">Llr</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">Lls</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">Lr</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Ls</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">s_err</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.imfoc_control" title="Permalink to this definition">¶</a></dt>
+<dd><p>FOC Ind. Machine Rated Operation Calculator</p>
+<p>Determines the parameters and characteristics of a Field-
+Oriented-Controlled Induction Machine operating at its
+rated limits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Tem_cmd</strong> (<em>float</em>) – Mechanical torque setpoint in per-unit-newton-meters</p></li>
+<li><p><strong>LAMdr_cmd</strong> (<em>float</em>) – D-axis flux setpoint in per-unit</p></li>
+<li><p><strong>wr_cmd</strong> (<em>float</em>) – Mechanical (rotor) speed in per-unit-rad/sec</p></li>
+<li><p><strong>Rr</strong> (<em>float</em>) – Rotor resistance in per-unit-ohms</p></li>
+<li><p><strong>Rs</strong> (<em>float</em>) – Stator resistance in per-unit-ohms</p></li>
+<li><p><strong>Lm</strong> (<em>float</em>) – Magnetizing inductance in per-unit-Henrys</p></li>
+<li><p><strong>Llr</strong> (<em>float</em><em>, </em><em>optional</em>) – Rotor leakage inductance in per-unit-Henrys,
+default=0</p></li>
+<li><p><strong>Lls</strong> (<em>float</em><em>, </em><em>optional</em>) – Stator leakage inductance in per-unit-Henrys,
+default=0</p></li>
+<li><p><strong>Lr</strong> (<em>float</em><em>, </em><em>optional</em>) – Rotor inductance in per-unit-Henrys</p></li>
+<li><p><strong>Ls</strong> (<em>float</em><em>, </em><em>optional</em>) – Stator inductance in per-unit-Henrys</p></li>
+<li><p><strong>s_err</strong> (<em>float</em><em>, </em><em>optional</em>) – Error in slip calculation as a percent (e.g. 0.25),
+default=0</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>Vdqs</strong> (<em>complex</em>) – Combined DQ-axis Stator Voltage in per-unit volts</p></li>
+<li><p><strong>Idqr</strong> (<em>complex</em>) – Combined DQ-axis Rotor Current in per-unit-amps</p></li>
+<li><p><strong>Idqs</strong> (<em>complex</em>) – Combined DQ-axis Stator Current in per-unit-amps</p></li>
+<li><p><strong>LAMdqr</strong> (<em>complex</em>) – Combined DQ-axis Rotor Flux in per-unit</p></li>
+<li><p><strong>LAMdqs</strong> (<em>complex</em>) – Combined DQ-axis Stator Flux in per-unit</p></li>
+<li><p><strong>wslip</strong> (<em>float</em>) – Machine Slip frequency in per-unit-rad/sec</p></li>
+<li><p><strong>wes</strong> (<em>float</em>) – The electrical system frequency in per-unit-rad/sec</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -50,6 +105,12 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.hz_to_rpm.html"
+                        title="previous chapter">electricpy.hz_to_rpm</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.indmachfocratings.html"
+                        title="next chapter">electricpy.indmachfocratings</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -77,7 +138,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.indmachfocratings.html" title="electricpy.indmachfocratings"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.hz_to_rpm.html" title="electricpy.hz_to_rpm"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.imfoc_control</a></li> 
       </ul>
     </div>

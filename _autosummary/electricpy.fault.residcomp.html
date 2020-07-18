@@ -14,11 +14,14 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_autosummary/electricpy.fault.residcomp.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.fault.scMVA" href="electricpy.fault.scMVA.html" />
+    <link rel="prev" title="electricpy.fault.protectiontap" href="electricpy.fault.protectiontap.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,7 +29,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.scMVA.html" title="electricpy.fault.scMVA"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.protectiontap.html" title="electricpy.fault.protectiontap"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../fault.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.fault.html" accesskey="U">electricpy.fault</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.fault.residcomp</a></li> 
       </ul>
     </div>  
@@ -38,6 +52,38 @@
             
   <div class="section" id="electricpy-fault-residcomp">
 <h1>electricpy.fault.residcomp<a class="headerlink" href="#electricpy-fault-residcomp" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.fault.residcomp">
+<code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">residcomp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">z1</span></em>, <em class="sig-param"><span class="n">z0</span></em>, <em class="sig-param"><span class="n">linelength</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.residcomp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Residual Compensation Factor Function</p>
+<p>Evaluates the residual compensation factor based on
+the line’s positive and zero sequence impedance
+characteristics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>z1</strong> (<em>complex</em>) – The positive-sequence impedance
+characteristic of the line, specified in
+ohms-per-unit where the total line length
+(of same unit) is specified in
+<em>linelength</em> argument.</p></li>
+<li><p><strong>z0</strong> (<em>complex</em>) – The zero-sequence impedance characteristic
+of the line, specified in ohms-per-unit
+where the total line length (of same unit)
+is specified in <em>linelength</em> argument.</p></li>
+<li><p><strong>linelength</strong> (<em>float</em><em>, </em><em>optional</em>) – The length (in same base unit as impedance
+characteristics) of the line. default=1</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>k0</strong> – The residual compensation factor.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>complex</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -50,6 +96,12 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.fault.protectiontap.html"
+                        title="previous chapter">electricpy.fault.protectiontap</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.fault.scMVA.html"
+                        title="next chapter">electricpy.fault.scMVA</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -77,7 +129,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.scMVA.html" title="electricpy.fault.scMVA"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.protectiontap.html" title="electricpy.fault.protectiontap"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../fault.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.fault.html" >electricpy.fault</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.fault.residcomp</a></li> 
       </ul>
     </div>

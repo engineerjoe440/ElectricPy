@@ -14,11 +14,14 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_autosummary/electricpy.timedischarge.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.transformertest" href="electricpy.transformertest.html" />
+    <link rel="prev" title="electricpy.thermocouple" href="electricpy.thermocouple.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,7 +29,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.transformertest.html" title="electricpy.transformertest"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.thermocouple.html" title="electricpy.thermocouple"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.timedischarge</a></li> 
       </ul>
     </div>  
@@ -38,6 +52,34 @@
             
   <div class="section" id="electricpy-timedischarge">
 <h1>electricpy.timedischarge<a class="headerlink" href="#electricpy-timedischarge" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.timedischarge">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">timedischarge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Vinit</span></em>, <em class="sig-param"><span class="n">Vmin</span></em>, <em class="sig-param"><span class="n">C</span></em>, <em class="sig-param"><span class="n">P</span></em>, <em class="sig-param"><span class="n">dt</span><span class="o">=</span><span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">RMS</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">Eremain</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.timedischarge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Capacitor Discharge Time Formula</p>
+<p>Returns the time to discharge a capacitor to a specified
+voltage given set of inputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Vinit</strong> (<em>float</em>) – Initial Voltage (in volts)</p></li>
+<li><p><strong>Vmin</strong> (<em>float</em>) – Final Voltage (the minimum allowable voltage) (in volts)</p></li>
+<li><p><strong>C</strong> (<em>float</em>) – Capacitance (in Farads)</p></li>
+<li><p><strong>P</strong> (<em>float</em>) – Load Power being consumed (in Watts)</p></li>
+<li><p><strong>dt</strong> (<em>float</em><em>, </em><em>optional</em>) – Time step-size (in seconds) (defaults to 1e-3 | 1ms)</p></li>
+<li><p><strong>RMS</strong> (<em>bool</em><em>, </em><em>optional</em>) – if true converts RMS Vin to peak</p></li>
+<li><p><strong>Eremain</strong> (<em>bool</em><em>, </em><em>optional</em>) – if true: also returns the energy remaining in cap</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>Returns time to discharge from Vinit to Vmin in seconds.</em></p></li>
+<li><p><em>May also return remaining energy in capacitor if Eremain=True</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -50,6 +92,12 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.thermocouple.html"
+                        title="previous chapter">electricpy.thermocouple</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.transformertest.html"
+                        title="next chapter">electricpy.transformertest</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -77,7 +125,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.transformertest.html" title="electricpy.transformertest"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.thermocouple.html" title="electricpy.thermocouple"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.7 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.timedischarge</a></li> 
       </ul>
     </div>
