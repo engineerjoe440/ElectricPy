@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELECTRICPY Module &#8212; electricpy 0.1.7 documentation</title>
+    <title>electricpy &#8212; electricpy 0.1.7 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -14,14 +14,13 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/electricpy.html" />
     <link rel="shortcut icon" href="_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="INCLUDED CONSTANTS" href="constants.html" />
-    <link rel="prev" title="ElectricPy" href="index.html" /> 
+    <link rel="next" title="electricpy.bode" href="electricpy.bode.html" />
+    <link rel="prev" title="ElectricPy API Reference" href="apireference.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -33,13 +32,14 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="constants.html" title="INCLUDED CONSTANTS"
+          <a href="electricpy.bode.html" title="electricpy.bode"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="ElectricPy"
+          <a href="apireference.html" title="ElectricPy API Reference"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">electricpy 0.1.7 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">ELECTRICPY Module</a></li> 
+          <li class="nav-item nav-item-1"><a href="apireference.html" accesskey="U">ElectricPy API Reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy</a></li> 
       </ul>
     </div>  
 
@@ -48,11 +48,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="electricpy-module">
-<span id="electricpy-py"></span><h1>ELECTRICPY Module<a class="headerlink" href="#electricpy-module" title="Permalink to this headline">¶</a></h1>
-<p>The base module for the <cite>electricpy</cite> package, electricpy.py may be leveraged
-in any Python script or program by using the <em>import</em> command similar to that
-shown below.</p>
+  <div class="section" id="module-electricpy">
+<span id="electricpy"></span><h1>electricpy<a class="headerlink" href="#module-electricpy" title="Permalink to this headline">¶</a></h1>
+<p><cite>electricpy</cite> Package - Main Module</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">electricpy</span> <span class="k">as</span> <span class="nn">ep</span>
 </pre></div>
 </div>
@@ -60,17 +58,411 @@ shown below.</p>
 provide a wide array of capabilities to any electrical engineer.</p>
 <p>Built to support operations similar to Numpy and Scipy, this package is designed
 to aid in scientific calculations.</p>
-<div class="section" id="sub-modules">
-<h2>SUB-MODULES<a class="headerlink" href="#sub-modules" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="constants.html">INCLUDED CONSTANTS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="fault.html">FAULT Sub-Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bode.html">BODE Sub-Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sim.html">SIM Sub-Module</a></li>
-</ul>
-</div>
-</div>
+<p class="rubric">Functions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">abc_to_seq</span></code>(Mabc[, reference])</p></td>
+<td><p>Phase-System to Sequence-System Conversion</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">acpiv</span></code>([S, I, VLL, VLN, V, PF])</p></td>
+<td><p>AC Power-Voltage-Current Relation Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">btu</span></code>(kWh)</p></td>
+<td><p>Killo-Watt-Hours to BTU Function:</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">btu_to_kwh</span></code>(BTU)</p></td>
+<td><p>BTU to Killo-Watt-Hours Function:</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">capbacktoback</span></code>(C1, C2, Lm[, VLN, VLL])</p></td>
+<td><p>Back to Back Capacitor Transient Current Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">capenergy</span></code>(C, v)</p></td>
+<td><p>Capacitor Energy Formula</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">captransfer</span></code>(t, Vs, R, Cs, Cd)</p></td>
+<td><p>Capacitor Energy Transfer Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">characterz</span></code>(R, G, L, C[, freq])</p></td>
+<td><p>Characteristic Impedance Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">clatex</span></code>(val[, round, polar, predollar, …])</p></td>
+<td><p>Complex Value Latex Generator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coldjunction</span></code>(Tcj[, coupletype, To, Vo, P1, …])</p></td>
+<td><p>Thermocouple Cold-Junction Formula</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compose</span></code>(*arr)</p></td>
+<td><p>Complex Composition Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">convbar</span></code>(h, x[, outline])</p></td>
+<td><p>Convolution Bar-Graph Plotter Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">convolve</span></code>(tuple)</p></td>
+<td><p>Filter Convolution Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cosfilt</span></code>(arr, Srate[, domain])</p></td>
+<td><p>Cosine Filter Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cprint</span></code>(val[, unit, label, title, pretty, …])</p></td>
+<td><p>Phasor (Complex) Printing Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">crcremainder</span></code>(data, key)</p></td>
+<td><p>CRC Remainder Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">crcsender</span></code>(data, key)</p></td>
+<td><p>CRC Sender Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">curdiv</span></code>(Ri, Rset[, Vin, Iin, Vout, combine])</p></td>
+<td><p>Current Divider Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">de_calc</span></code>(rho[, freq])</p></td>
+<td><p>Calculator for De Transmission Line Value</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dynetz</span></code>([delta, wye, round])</p></td>
+<td><p>Delta-Wye Impedance Converter</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">farads</span></code>(VAR, V[, freq])</p></td>
+<td><p>Capacitance from Apparent Power Formula</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fftplot</span></code>(dc, real[, imag, title])</p></td>
+<td><p>FFT System Plotter</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fftsumplot</span></code>(dc, real[, imag, freq, xrange, …])</p></td>
+<td><p>FFT Summation Plotter</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">funcfft</span></code>(func[, minfreq, maxmult, complex])</p></td>
+<td><p>Function FFT Evaluator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">funcrms</span></code>(f, T)</p></td>
+<td><p>Function Root-Mean-Square (RMS) Evaluator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gausdist</span></code>(x[, mu, sigma])</p></td>
+<td><p>Gaussian Distribution Function:</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gaussian</span></code>(x[, mu, sigma])</p></td>
+<td><p>Gaussian Function:</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">geninternalv</span></code>(I, Zs, Vt[, Vgn, Zm, Ip, Ipp])</p></td>
+<td><p>Generator Internal Voltage Evaluator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">gmd</span></code>(Ds, *args)</p></td>
+<td><p>Simple GMD Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">harmonics</span></code>(real[, imag, dc, freq, domain])</p></td>
+<td><p>Harmonic Function Generator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">hartleydata</span></code>(BW, M)</p></td>
+<td><p>Hartley Data Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">hertz</span></code>(radians)</p></td>
+<td><p>Simple Radians to Hertz Converter</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">horsepower</span></code>(watts)</p></td>
+<td><p>Watts to Horsepower Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">hp_to_watts</span></code>(hp)</p></td>
+<td><p>Horsepower to Watts Formula</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">hz_to_rad</span></code>(hertz)</p></td>
+<td><p>Simple Hertz to Radians Converter</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">hz_to_rpm</span></code>(hz)</p></td>
+<td><p>Hertz to RPM Converter</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">imfoc_control</span></code>(Tem_cmd, LAMdr_cmd, wr_cmd, …)</p></td>
+<td><p>FOC Ind.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">indmachfocratings</span></code>(Rr, Rs, Lm[, Llr, Lls, …])</p></td>
+<td><p>FOC Ind.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">indmachiar</span></code>([Vth, Zth, Vas, Rs, Lm, Lls, …])</p></td>
+<td><p>Induction Machine Rotor Current Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">indmachpem</span></code>(slip, Rr[, Vth, Zth, Vas, Rs, …])</p></td>
+<td><p>Mechanical Power Calculator for Induction Machines</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">indmachpkslip</span></code>(Rr[, Zth, Rs, Lm, Lls, Llr, …])</p></td>
+<td><p>Induction Machine Slip at Peak Torque Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">indmachpktorq</span></code>(Rr[, s_pk, Iar, Vth, Zth, …])</p></td>
+<td><p>Induction Machine Peak Torque Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">indmachstarttorq</span></code>(Rr[, Iar, Vth, Zth, Vas, …])</p></td>
+<td><p>Induction Machine Starting Torque Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">indmachtem</span></code>(slip, Rr[, p, Vth, Zth, Vas, Rs, …])</p></td>
+<td><p>Induction Machine Torque Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">indmachvth</span></code>(Vas, Rs, Lm[, Lls, Ls, freq, calcX])</p></td>
+<td><p>Induction Machine Thevenin Voltage Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">indmachzth</span></code>(Rs, Lm[, Lls, Llr, Ls, Lr, freq, …])</p></td>
+<td><p>Induction Machine Thevenin Impedance Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inductorcharge</span></code>(t, Vs, R, L)</p></td>
+<td><p>Charging Inductor Formula</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inductordischarge</span></code>(t, Io, R, L)</p></td>
+<td><p>Discharging Inductor Formula</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inductorenergy</span></code>(L, I)</p></td>
+<td><p>Energy Stored in Inductor Formula</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">instpower</span></code>(P, Q, t[, freq])</p></td>
+<td><p>Instantaneous Power Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipu</span></code>(S[, VLL, VLN, V1phs])</p></td>
+<td><p>Per-Unit Current Evaluator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">iscrl</span></code>(V, Z[, t, f, mxcurrent, alpha])</p></td>
+<td><p>Short-Circuit-Current (ISC) Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">kwh</span></code>(BTU)</p></td>
+<td><p>BTU to Killo-Watt-Hours Function:</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">kwh_to_btu</span></code>(kWh)</p></td>
+<td><p>Killo-Watt-Hours to BTU Function:</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">loadedvcapdischarge</span></code>(t, vo, C, P)</p></td>
+<td><p>Loaded Capacitor Discharge Formula</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">machslip</span></code>(mech[, syn])</p></td>
+<td><p>Machine Slip Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">motorstartcap</span></code>(V, I[, freq])</p></td>
+<td><p>Single Phase Motor Starting Capacitor Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">natfreq</span></code>(C, L[, Hz])</p></td>
+<td><p>Natural Frequency Evaluator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">nlinpf</span></code>([PFtrue, PFdist, PFdisp])</p></td>
+<td><p>Non-Linear Power Factor Evaluator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">parallelz</span></code>(*args)</p></td>
+<td><p>Parallel Impedance Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">peak</span></code>(val)</p></td>
+<td><p>Sinusoid RMS to Peak Converter</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pfcorrection</span></code>(S, PFold, PFnew[, VLL, VLN, V, …])</p></td>
+<td><p>Power Factor Correction Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phase</span></code>(ang)</p></td>
+<td><p>Complex Phase Angle Generator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phaseline</span></code>([VLL, VLN, Iline, Iphase, complex])</p></td>
+<td><p>Line-Line to Line-Neutral Converter</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasor</span></code>(mag[, ang])</p></td>
+<td><p>Complex Phasor Generator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasordata</span></code>(mn[, mx, npts, mag, ang, freq, …])</p></td>
+<td><p>Complex Phasor Data Generator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasorlist</span></code>(arr)</p></td>
+<td><p>Complex Phasor Generator for 2-D Array or 2-D List</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasorplot</span></code>(phasor[, title, legend, bg, …])</p></td>
+<td><p>Phasor Plotting Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasorz</span></code>([C, L, freq, complex])</p></td>
+<td><p>Phasor Impedance Generator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phs</span></code>(ang)</p></td>
+<td><p>Complex Phase Angle Generator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phs3valpha</span></code>(VA[, VB, VC])</p></td>
+<td><p>Three-Phase V-Alpha Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phs_to_seq</span></code>(Mabc[, reference])</p></td>
+<td><p>Phase-System to Sequence-System Conversion</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">powerflow</span></code>(Vsend, Vrec, Zline)</p></td>
+<td><p>Simple Power-Flow Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">powerimpedance</span></code>(S, V[, PF, parallel, terms])</p></td>
+<td><p>Impedance from Apparent Power Formula</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">powerset</span></code>([P, Q, S, PF, find])</p></td>
+<td><p>Power Triangle Conversion Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">powertriangle</span></code>([P, Q, S, PF, color, text, …])</p></td>
+<td><p>Power Triangle Plotting Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">primary</span></code>(val, Np[, Ns, invert])</p></td>
+<td><p>Transformer Primary Evaluator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">probdensity</span></code>(func, x[, x0, scale])</p></td>
+<td><p>Probability Density Function:</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">protor</span></code>(Pem, slip)</p></td>
+<td><p>Rotor Power Calculator for Induction Machine</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pstator</span></code>(Pem, slip)</p></td>
+<td><p>Stator Power Calculator for Induction Machine</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">puchgbase</span></code>(quantity, puB_old, puB_new)</p></td>
+<td><p>Per-Unit Change of Base Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rad_to_hz</span></code>(radians)</p></td>
+<td><p>Simple Radians to Hertz Converter</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rad_to_rpm</span></code>(rad)</p></td>
+<td><p>Radians-per-Second to RPM Converter</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">radsec</span></code>(hertz)</p></td>
+<td><p>Simple Hertz to Radians Converter</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">reactance</span></code>(z[, freq, sensetivity])</p></td>
+<td><p>Capacitance/Inductance from Impedance</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rectifiercap</span></code>(Iload, fswitch, dVout)</p></td>
+<td><p>Rectifier Capacitor Formula</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rfft</span></code>(arr[, dt, absolute, resample])</p></td>
+<td><p>RFFT Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rms</span></code>(val)</p></td>
+<td><p>Sinusoid Peak to RMS Converter</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rpm_to_hz</span></code>(rpm)</p></td>
+<td><p>RPM to Hertz Converter</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rpm_to_rad</span></code>(rpm)</p></td>
+<td><p>RPM to Radians-per-Second Converter</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rtdtemp</span></code>(RT[, rtdtype, fahrenheit, Rref, …])</p></td>
+<td><p>RTD Temperature Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rxrecompose</span></code>(x_pu, XoR[, S3phs, VLL, VLN])</p></td>
+<td><p>Resistance/Reactance from Per-Unit System Evaluator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sampfft</span></code>(data, dt[, minfreq, complex])</p></td>
+<td><p>Sampled Dataset FFT Evaluator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">secondary</span></code>(val, Np[, Ns, invert])</p></td>
+<td><p>Transformer Secondary Evaluator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">seq_to_abc</span></code>(M012[, reference])</p></td>
+<td><p>Sequence-System to Phase-System Conversion</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">seq_to_phs</span></code>(M012[, reference])</p></td>
+<td><p>Sequence-System to Phase-System Conversion</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sequencez</span></code>(Zabc[, reference, resolve, diag, …])</p></td>
+<td><p>Sequence Impedance Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">shannondata</span></code>(BW, S, N)</p></td>
+<td><p>Shannon Data Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sinfilt</span></code>(arr, Srate[, domain])</p></td>
+<td><p>Sine Filter Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">step</span></code>(t)</p></td>
+<td><p>Step Function [ u(t) ]</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">string_to_bits</span></code>(str)</p></td>
+<td><p>String to Bits Converter</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">syncspeed</span></code>(Npol[, freq, Hz])</p></td>
+<td><p>Synchronous Speed Calculator Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">synmach_Eq</span></code>(Vt_pu, Itmag, PF, Ra, Xd, Xq)</p></td>
+<td><p>Synchronous Machine Eq Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tcycle</span></code>([ncycles, freq])</p></td>
+<td><p>Time of Electrical Cycles</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tflatex</span></code>(sys[, sysp, var, predollar, …])</p></td>
+<td><p>Transfer Function LaTeX String Generator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">thermocouple</span></code>(V[, coupletype, fahrenheit, …])</p></td>
+<td><p>Thermocouple Temperature Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">timedischarge</span></code>(Vinit, Vmin, C, P[, dt, RMS, …])</p></td>
+<td><p>Capacitor Discharge Time Formula</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transformertest</span></code>([Poc, Voc, Ioc, Psc, Vsc, Isc])</p></td>
+<td><p>Transformer Rated Test Evaluator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">transposez</span></code>(Zeq[, fabc, fcab, fbca, linelen])</p></td>
+<td><p>Transmission Matrix Equivalent Transposition Calculator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">unbalance</span></code>(A, B, C[, all])</p></td>
+<td><p>Voltage/Current Unbalance Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">vcapcharge</span></code>(t, Vs, R, C)</p></td>
+<td><p>Charging Capacitor Voltage</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">vcapdischarge</span></code>(t, Vs, R, C)</p></td>
+<td><p>Discharging Capacitor Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">vipf</span></code>([V, I, PF, find])</p></td>
+<td><p>Voltage / Current / Power Factor Solver</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">voltdiv</span></code>(Vin, R1, R2[, Rload])</p></td>
+<td><p>Voltage Divider Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">vscdcbus</span></code>(VLL, Zs, P[, Q, mmax, debug])</p></td>
+<td><p>Voltage Sourced Converter DC Bus Voltage Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">vscgains</span></code>(Rs, Ls[, tau, freq])</p></td>
+<td><p>Voltage Sourced Converter Gains Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">watts</span></code>(hp)</p></td>
+<td><p>Horsepower to Watts Formula</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">watts_to_hp</span></code>(watts)</p></td>
+<td><p>Watts to Horsepower Function</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">wrms</span></code>(func[, dw, NN, quad, plot, title, round])</p></td>
+<td><p>WRMS Function:</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">xfmphs</span></code>([style, shift])</p></td>
+<td><p>Simple Transformer Phase-Shift Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">zdecompose</span></code>(Zmag, XoR)</p></td>
+<td><p>Impedance Decomposition Function</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">zperlength</span></code>([Rd, Rself, Rac, Rgwac, De, rho, …])</p></td>
+<td><p>Transmission Line Impedance (RL) Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">zpu</span></code>(S[, VLL, VLN])</p></td>
+<td><p>Per-Unit Impedance Evaluator</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">zrecompose</span></code>(z_pu, S3phs[, VLL, VLN])</p></td>
+<td><p>Impedance from Per-Unit System Evaluator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">zsource</span></code>(S, V, XoR[, Sbase, Vbase, perunit])</p></td>
+<td><p>Source Impedance Calculator</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Modules</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.bode.html#module-electricpy.bode" title="electricpy.bode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">electricpy.bode</span></code></a></p></td>
+<td><p><cite>electricpy.bode.py</cite></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.constants.html#module-electricpy.constants" title="electricpy.constants"><code class="xref py py-obj docutils literal notranslate"><span class="pre">electricpy.constants</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.fault.html#module-electricpy.fault" title="electricpy.fault"><code class="xref py py-obj docutils literal notranslate"><span class="pre">electricpy.fault</span></code></a></p></td>
+<td><p><cite>electricpy.fault.py</cite></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.sim.html#module-electricpy.sim" title="electricpy.sim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">electricpy.sim</span></code></a></p></td>
+<td><p><cite>electricpy.sim.py</cite></p></td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
@@ -83,20 +475,12 @@ to aid in scientific calculations.</p>
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">ELECTRICPY Module</a><ul>
-<li><a class="reference internal" href="#sub-modules">SUB-MODULES</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">ElectricPy</a></p>
+  <p class="topless"><a href="apireference.html"
+                        title="previous chapter">ElectricPy API Reference</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="constants.html"
-                        title="next chapter">INCLUDED CONSTANTS</a></p>
+  <p class="topless"><a href="electricpy.bode.html"
+                        title="next chapter">electricpy.bode</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -128,13 +512,14 @@ to aid in scientific calculations.</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="constants.html" title="INCLUDED CONSTANTS"
+          <a href="electricpy.bode.html" title="electricpy.bode"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="ElectricPy"
+          <a href="apireference.html" title="ElectricPy API Reference"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">electricpy 0.1.7 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">ELECTRICPY Module</a></li> 
+          <li class="nav-item nav-item-1"><a href="apireference.html" >ElectricPy API Reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

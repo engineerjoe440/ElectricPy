@@ -1,50 +1,8 @@
 ###################################################################
 """
----------------------
 `electricpy.fault.py`
----------------------
 
-Included Functions
-------------------
-- Single Line to Ground:                phs1g
-- Double Line to Ground:                phs2g
-- Line to Line:                         phs2
-- Three-Phase Fault:                    phs3
-- Single Pole Open:                     poleopen1
-- Double Pole Open:                     poleopen2
-- Simple MVA Calculator:                scMVA
-- Three-Phase MVA Calculator:           phs3mvasc
-- Single-Phase MVA Calculator:          phs1mvasc
-- Faulted Bus Voltage:                  busvolt
-- CT Saturation Function:               ct_saturation
-- CT C-Class Calculator:                ct_cclass
-- CT Sat. V at rated Burden:            ct_satratburden
-- CT Voltage Peak Formula:              ct_vpeak
-- CT Time to Saturation:                ct_timetosat
-- Transient Recovery Voltage Calc.:     pktransrecvolt
-- TRV Reduction Resistor:               trvresistor
-- TOC Trip Time:                        toctriptime
-- TOC Reset Time:                       tocreset
-- Pickup Setting Assistant:             pickup
-- Radial TOC Coordination Tool:         tdradial
-- TAP Setting Calculator:               protectiontap
-- Transformer Current Correction:       correctedcurrents
-- Operate/Restraint Current Calc.:      iopirt
-- Symmetrical/RMS Fault Current Calc:   symrmsfaultcur
-- TOC Fault Current Ratio:              faultratio
-- Residual Compensation Factor Calc:    residcomp
-- Distance Elem. Impedance Calc:        distmeasz
-- Transformer Mismatch Calculator:      transmismatch
-- High-Impedance Voltage Pickup:        highzvpickup
-- High-Impedance Minimum Current PU:    highzmini
-- Instantaneous Overcurrent PU:         instoc
-- Generator Loss of Field Settings:     genlossfield
-- Thermal Time Limit Calculator:        thermaltime
-- Synchronous Machine Symm. Current:    synmach_Isym
-- Synchronous Machine Asymm. Current:   synmach_Iasym
-- Induction Machine Eigenvalue Calc.:   indmacheigenvalues
-- Induction Machine 3-Phase-SC Calc.:   indmachphs3sc
-- Induction Machine 3-Phs-Torq. Calc.:  indmachphs3torq
+>>> from electricpy import fault
 """
 ####################################################################
 

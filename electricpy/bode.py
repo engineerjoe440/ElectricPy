@@ -1,14 +1,8 @@
 #################################################################################
 """
---------------------
 `electricpy.bode.py`
---------------------
 
-Included Functions
-------------------
-- Transfer Function Bode Plot Generator     bode
-- S-Domain Bode Plot Generator              sbode
-- Z-Domain Bode Plot Generator              zbode
+>>> from electricpy import bode as bode
 """
 #################################################################################
 
