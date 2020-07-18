@@ -26,6 +26,14 @@ with open(initfile) as fh:
     print("Sphinx HTML Build For:",name,"   Version:",ver)
 
 
+# Verify Import
+try:
+    import electricpy
+except:
+    print("Couldn't import `electricpy` module!")
+    sys.exit(9)
+
+
 # -- Project information -----------------------------------------------------
 
 project = 'electricpy'
