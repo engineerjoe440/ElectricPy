@@ -1,20 +1,11 @@
-.. _bode.py:
+.. _electricpy.bode.py:
 
-===============
-BODE Sub-Module
-===============
 
-Specifically designed to support Bode-Plotting function routines, this
-submodule supports several methods of generating Bode plots showing both
-magnitude and angle.
+.. rubric:: Modules
 
-It is reccomended that the `electricpy.bode.py` submodule be imported using a
-command similar to the one below.
+.. autosummary::
+   :recursive:
+   :toctree: _autosummary
+   :template: module.rst
 
->>> import electricpy.bode as bode
-
-.. automodapi:: electricpy.bode
-   :no-heading:
-   :no-main-docstr:
-   
- 
+   electricpy.bode
