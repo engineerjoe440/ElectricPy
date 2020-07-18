@@ -20,17 +20,15 @@ jobs:
           python-version: 3.8
       # I don't know where the "run" thing is documented.
       - name: Install dependencies
-        id: install-dep
         run: |
           pip install -r source/sphinxrequires.txt
       - name: Install Module
+        uses: ./setup.py
         run: |
-          pip install .
-      - name: Test
-        run: |
-          ls ../
+          python3 setup.py install
       - name: Build Sphinx docs
         if: success()
+        uses: ./
         run: |
           sphinx-build -M html source docs
 
