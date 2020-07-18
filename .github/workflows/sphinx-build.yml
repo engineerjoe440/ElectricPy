@@ -26,6 +26,9 @@ jobs:
       - name: Install Module
         run: |
           pip install .
+      - name: Test
+        run: |
+          ls ../
       - name: Build Sphinx docs
         if: success()
         run: |
