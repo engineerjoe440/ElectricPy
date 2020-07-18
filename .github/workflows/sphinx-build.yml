@@ -22,14 +22,10 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r source/sphinxrequires.txt
-      - name: Install Module
-        uses: ./setup.py
-        run: |
-          python3 setup.py install
       - name: Build Sphinx docs
         if: success()
-        uses: ./
         run: |
+          pip install .
           sphinx-build -M html source docs
 
       # https://github.com/marketplace/actions/github-pages
