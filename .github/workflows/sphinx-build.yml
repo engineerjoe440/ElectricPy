@@ -33,7 +33,7 @@ jobs:
         run: |
           python -c "import sphinx_automodapi.automodapi"
       - name: Build Sphinx docs
-        if: steps.install-dep.outputs.conclusion == 'success'
+        if: success()
         run: |
           sphinx-build -M html source docs
 
