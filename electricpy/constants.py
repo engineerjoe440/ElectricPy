@@ -25,7 +25,7 @@ carson_r = 9.869e-7 #: Carson's Ristance Constant  8.869E-7
 De0 = 2160 #: De Constant for Use with Transmission Impedance Calculations      2160
 NAN = float('nan')
 VLLcVLN = _c.rect(_np.sqrt(3),_np.radians(30)) # Conversion Operator
-ILcIP = _c.rect(_np.sqrt(3),_np.radians(-30)) # Conversion Operator
+ILcIP = _c.rect(_np.sqrt(3),_np.radians(30)) # Conversion Operator
 
 # Define Symmetrical Component Matricies
 Aabc = 1/3 * _np.array([[ 1, 1, 1    ],  # Convert ABC to 012
