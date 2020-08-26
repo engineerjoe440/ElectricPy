@@ -871,7 +871,7 @@ def phaseline(VLL=None,VLN=None,Iline=None,Iphase=None,complex=False):
     is of value, this function uses the voltage :eq:`voltages` relation
     to evaluate either voltage given the other.
     
-    .. math:: I_{Φ} = \\frac{I_{line}}{\\sqrt{3}∠-30°}
+    .. math:: I_{Φ} = \\frac{I_{line}}{\\sqrt{3}∠30°}
        :label: currents
     
     Often, the phase current in a delta-connected device is of
