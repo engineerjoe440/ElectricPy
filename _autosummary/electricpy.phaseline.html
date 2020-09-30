@@ -54,7 +54,7 @@
 <h1>electricpy.phaseline<a class="headerlink" href="#electricpy-phaseline" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="electricpy.phaseline">
-<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">phaseline</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">VLL</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">VLN</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Iline</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Iphase</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">complex</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.phaseline" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">phaseline</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">VLL</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">VLN</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Iline</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Iphase</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">realonly</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">complex</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.phaseline" title="Permalink to this definition">¶</a></dt>
 <dd><p>Line-Line to Line-Neutral Converter</p>
 <p>This function is designed to return the phase- or line-equivalent
 of the voltage/current provided. It is designed to be used when
@@ -80,7 +80,9 @@ phase- and line-current given the opposing term.</p>
 <li><p><strong>VLN</strong> (<em>float</em><em>, </em><em>optional</em>) – The Line-to-Neutral Voltage; default=None</p></li>
 <li><p><strong>Iline</strong> (<em>float</em><em>, </em><em>optional</em>) – The Line-Current; default=None</p></li>
 <li><p><strong>Iphase</strong> (<em>float</em><em>, </em><em>optional</em>) – The Phase-Current; default=None</p></li>
-<li><p><strong>complex</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control to return value in complex form; default=False</p></li>
+<li><p><strong>realonly</strong> (<em>bool</em><em>, </em><em>optional</em>) – Replacement of <cite>complex</cite> argument. Control to return
+value in complex form; default=None</p></li>
+<li><p><strong>complex</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>DEPRECATED</em>) – Control to return value in complex form; default=None</p></li>
 </ul>
 </dd>
 </dl>

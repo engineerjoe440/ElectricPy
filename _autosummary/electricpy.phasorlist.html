@@ -62,7 +62,7 @@ and angle of the specific voltage or current for a list
 or array of values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>arr</strong> (<em>numpy.ndarray</em>) – 2-D array or list of magnitudes and angles.
+<dd class="field-odd"><p><strong>arr</strong> (<em>array-like</em>) – 2-D array or list of magnitudes and angles.
 Each item must be set of magnitude and angle
 in form of: [mag, ang].</p>
 </dd>
@@ -77,7 +77,7 @@ the specified voltage or current.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">electricpy</span> <span class="k">as</span> <span class="nn">ep</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">voltages</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">67</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">voltages</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">67</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
 <span class="go">                         [67,-120],</span>
 <span class="go">                         [67,120]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Vset</span> <span class="o">=</span> <span class="n">ep</span><span class="o">.</span><span class="n">phasorlist</span><span class="p">(</span> <span class="n">voltages</span> <span class="p">)</span>

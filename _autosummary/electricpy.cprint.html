@@ -54,7 +54,7 @@
 <h1>electricpy.cprint<a class="headerlink" href="#electricpy-cprint" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="electricpy.cprint">
-<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">cprint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">val</span></em>, <em class="sig-param"><span class="n">unit</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">label</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pretty</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">printval</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">ret</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">round</span><span class="o">=</span><span class="default_value">3</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.cprint" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">cprint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">val</span></em>, <em class="sig-param"><span class="n">unit</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">label</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pretty</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">printval</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">ret</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">decimals</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">round</span><span class="o">=</span><span class="default_value">3</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.cprint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Phasor (Complex) Printing Function</p>
 <p>This function is designed to accept a complex value (val) and print
 the value in the standard electrical engineering notation:</p>
@@ -75,7 +75,11 @@ format without array braces. default=True</p></li>
 default=True</p></li>
 <li><p><strong>ret</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument allowing the evaluated value to be returned.
 default=False</p></li>
-<li><p><strong>round</strong> (<em>int</em><em>, </em><em>optional</em>) – Control argument specifying how many decimals of the complex
+<li><p><strong>decimals</strong> (<em>int</em><em>, </em><em>optional</em>) – Replaces <cite>round</cite> argument. Control argument specifying how
+many decimals of the complex value to be printed. May be
+negative to round to spaces to the left of the decimal place
+(follows standard round() functionality). default=3</p></li>
+<li><p><strong>round</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>DEPRECATED</em>) – Control argument specifying how many decimals of the complex
 value to be printed. May be negative to round to spaces
 to the left of the decimal place (follows standard round()
 functionality). default=3</p></li>
@@ -95,7 +99,7 @@ where the angles are evaluated in degrees.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">ep</span><span class="o">.</span><span class="n">phasor</span><span class="p">(</span><span class="mi">67</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">cprint</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 <span class="go">67.0 ∠ 120.0°</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">voltages</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">67</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">voltages</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">67</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
 <span class="go">                         [67,-120],</span>
 <span class="go">                         [67,120]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Vset</span> <span class="o">=</span> <span class="n">ep</span><span class="o">.</span><span class="n">phasorlist</span><span class="p">(</span> <span class="n">voltages</span> <span class="p">)</span>
