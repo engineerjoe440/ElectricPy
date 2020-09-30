@@ -865,7 +865,7 @@ def parallelz(*args):
     return(Zp)
 
 # Define Phase/Line Converter
-def phaseline(VLL=None,VLN=None,Iline=None,Iphase=None,realonly=None,complex=False):
+def phaseline(VLL=None,VLN=None,Iline=None,Iphase=None,realonly=None,complex=None):
     """
     Line-Line to Line-Neutral Converter
     
