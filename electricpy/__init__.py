@@ -15,6 +15,7 @@ to aid in scientific calculations.
 # Define Module Specific Variables
 _name_ = "electricpy"
 _version_ = "0.1.8"
+__version__ = _version_ # Alias Version for User Ease
 # Version Breakdown:
 # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
 
