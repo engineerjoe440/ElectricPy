@@ -28,6 +28,8 @@ import matplotlib as _matplotlib
 import matplotlib.pyplot as _plt
 import cmath as _c
 from scipy.optimize import fsolve as _fsolve
+from warnings import showwarning
+from inspect import getframeinfo, stack
 
 
 # Define Phase Angle Generator
@@ -111,7 +113,7 @@ def phasorlist( arr ):
     
     Parameters
     ----------
-    arr:        numpy.ndarray
+    arr:        array-like
                 2-D array or list of magnitudes and angles.
                 Each item must be set of magnitude and angle
                 in form of: [mag, ang].
@@ -126,7 +128,7 @@ def phasorlist( arr ):
     --------
     >>> import numpy as np
     >>> import electricpy as ep
-    >>> voltages = _np.array([[67,0],
+    >>> voltages = np.array([[67,0],
                              [67,-120],
                              [67,120]])
     >>> Vset = ep.phasorlist( voltages )
@@ -555,7 +557,7 @@ def reactance(z,freq=60,sensetivity=1e-12):
 
 # Define display function
 def cprint(val,unit=None,label=None,title=None,
-           pretty=True,printval=True,ret=False,round=3):
+           pretty=True,printval=True,ret=False,decimals=3,round=3):
     """
     Phasor (Complex) Printing Function
     
@@ -587,7 +589,12 @@ def cprint(val,unit=None,label=None,title=None,
     ret:        bool, optional
                 Control argument allowing the evaluated value to be returned.
                 default=False
-    round:      int, optional
+    decimals:   int, optional
+                Replaces `round` argument. Control argument specifying how
+                many decimals of the complex value to be printed. May be
+                negative to round to spaces to the left of the decimal place
+                (follows standard round() functionality). default=3
+    round:      int, optional, DEPRECATED
                 Control argument specifying how many decimals of the complex
                 value to be printed. May be negative to round to spaces
                 to the left of the decimal place (follows standard round()
@@ -606,7 +613,7 @@ def cprint(val,unit=None,label=None,title=None,
     >>> v = ep.phasor(67, 120)
     >>> ep.cprint(v)
     67.0 ∠ 120.0°
-    >>> voltages = _np.array([[67,0],
+    >>> voltages = np.array([[67,0],
                              [67,-120],
                              [67,120]])
     >>> Vset = ep.phasorlist( voltages )
@@ -622,6 +629,13 @@ def cprint(val,unit=None,label=None,title=None,
     phasorlist: Phasor Generating Function for Lists or Arrays
     phasorz:    Impedance Phasor Generator
     """
+    # Use depricated `round`
+    if round != 3:
+        decimals = round
+        caller = getframeinfo(stack()[1][0])
+        # Demonstrate Deprecation Warning
+        showwarning('`round` argument will be deprecated in favor of `decimals`',
+                    DeprecationWarning, caller.filename, caller.lineno)
     # Interpret as numpy array if simple list
     if isinstance(val, list):
         val = _np.asarray(val) # Ensure that input is array
@@ -686,8 +700,8 @@ def cprint(val,unit=None,label=None,title=None,
             _unit = unit[i]
             mag, ang_r = _c.polar(_val) #Convert to polar form
             ang = _np.degrees(ang_r) #Convert to degrees
-            mag = _np.around( mag, round ) #Round
-            ang = _np.around( ang, round ) #Round
+            mag = _np.around( mag, decimals ) #Round
+            ang = _np.around( ang, decimals ) #Round
             strg = ""
             if _label != None:
                 strg += _label + " "
@@ -730,8 +744,8 @@ def cprint(val,unit=None,label=None,title=None,
             raise ValueError("Invalid Label Type for Value")
         mag, ang_r = _c.polar(val) #Convert to polar form
         ang = _np.degrees(ang_r) #Convert to degrees
-        mag = _np.around( mag, round ) #Round
-        ang = _np.around( ang, round ) #Round
+        mag = _np.around( mag, decimals ) #Round
+        ang = _np.around( ang, decimals ) #Round
         strg = ""
         if label != None:
             strg += label + " "
@@ -851,7 +865,7 @@ def parallelz(*args):
     return(Zp)
 
 # Define Phase/Line Converter
-def phaseline(VLL=None,VLN=None,Iline=None,Iphase=None,complex=False):
+def phaseline(VLL=None,VLN=None,Iline=None,Iphase=None,realonly=None,complex=False):
     """
     Line-Line to Line-Neutral Converter
     
@@ -887,9 +901,20 @@ def phaseline(VLL=None,VLN=None,Iline=None,Iphase=None,complex=False):
                 The Line-Current; default=None
     Iphase:     float, optional
                 The Phase-Current; default=None
-    complex:    bool, optional
-                Control to return value in complex form; default=False
+    realonly:   bool, optional
+                Replacement of `complex` argument. Control to return
+                value in complex form; default=None
+    complex:    bool, optional, DEPRECATED
+                Control to return value in complex form; default=None
     """
+    # Monitor for depricated input
+    if complex != None:
+        if realonly==None:
+            realonly = not complex
+        caller = getframeinfo(stack()[1][0])
+        # Demonstrate Deprecation Warning
+        showwarning('`complex` argument will be deprecated in favor of `realonly`',
+                    DeprecationWarning, caller.filename, caller.lineno)
     output = 0
     #Given VLL, convert to VLN
     if VLL is not None:
@@ -913,10 +938,13 @@ def phaseline(VLL=None,VLN=None,Iline=None,Iphase=None,complex=False):
                 "or innapropriate value"+
                 "given.")
         return(0)
+    # Auto-detect Complex Values
+    if isinstance(output, complex) and realonly==None:
+        realonly = True
     #Return as complex only when requested
-    if complex:
-        return( output )
-    return(abs( output ))
+    if realonly == True:
+        return abs( output )
+    return output 
 
 # Define Power Set Function
 def powerset(P=None,Q=None,S=None,PF=None,find=''):
