@@ -137,6 +137,7 @@ def phasorlist( arr ):
     See Also
     --------
     phasor:     Phasor Generating Function
+    vectarray:  Magnitude/Angle Array Pairing Function
     cprint:     Complex Variable Printing Function
     phasorz:    Impedance Phasor Generator
     """
@@ -146,6 +147,59 @@ def phasorlist( arr ):
         outarr = _np.append(outarr, phasor( i ))
     # Return Array
     return(outarr)
+
+# Define Vector Array Generator
+def vectarray( arr, degrees=True, flatarray=False ):
+    """
+    Format Complex as Array of Magnitude/Angle Pairs
+    
+    Consume an iterable (list/tuple/ndarray/etc.) of
+    complex numbers and generate an ndarray of magnitude
+    and angle pairs, formatted as a 2-dimension (or
+    optionally 1-dimension) array.
+    
+    Parameters
+    ----------
+    arr:        array-like
+                Array or list of complex numbers to be
+                cast to magnitude/angle pairs.
+    degrees:    bool, optional
+                Control option to set the angles in
+                degrees. Defaults to True.
+    flatarray:  bool, optional
+                Control option to set the array return
+                to work as a 1-dimension list. Defaults
+                to False, formatting as a 2-dimension
+                list.
+    
+    Returns
+    -------
+    polararr:   ndarray
+                Array of magnitude/angle pairs as a
+                2-dimension array (or optionally
+                1-dimension array).
+    
+    See Also
+    --------
+    phasor:     Phasor Generating Function
+    phasorlist: Phasor Generator for List or Array
+    """
+    # Iteratively Append Arrays to the Base
+    polararr = _np.array([])
+    for num in arr:
+        mag, ang_r = _c.polar( num )
+        # Cast to Degrees if Needed
+        if degrees:
+            ang = _np.degrees( ang_r )
+        else:
+            ang = ang_r
+        # Append to the Array
+        polararr = _np.append(polararr, [mag, ang])
+    # Reshape Array if Needed
+    if not flatarray:
+        polararr = _np.reshape(polararr, (-1,2))
+    return polararr
+    
 
 # Define Phasor Data Generator
 def phasordata(mn,mx=None,npts=1000,mag=1,ang=0,freq=60,
@@ -865,7 +919,7 @@ def parallelz(*args):
     return(Zp)
 
 # Define Phase/Line Converter
-def phaseline(VLL=None,VLN=None,Iline=None,Iphase=None,realonly=None,complex=None):
+def phaseline(VLL=None,VLN=None,Iline=None,Iphase=None,realonly=None,**kwargs):
     """
     Line-Line to Line-Neutral Converter
     
@@ -905,12 +959,13 @@ def phaseline(VLL=None,VLN=None,Iline=None,Iphase=None,realonly=None,complex=Non
                 Replacement of `complex` argument. Control to return
                 value in complex form; default=None
     complex:    bool, optional, DEPRECATED
-                Control to return value in complex form; default=None
+                Control to return value in complex form, refer to
+                `realonly` instead. default=None
     """
-    # Monitor for depricated input
-    if complex != None:
+    # Monitor for deprecated input
+    if 'complex' in kwargs.keys():
         if realonly==None:
-            realonly = not complex
+            realonly = not kwargs['complex']
         caller = getframeinfo(stack()[1][0])
         # Demonstrate Deprecation Warning
         showwarning('`complex` argument will be deprecated in favor of `realonly`',
@@ -940,7 +995,7 @@ def phaseline(VLL=None,VLN=None,Iline=None,Iphase=None,realonly=None,complex=Non
         return(0)
     # Auto-detect Complex Values
     if isinstance(output, complex) and realonly==None:
-        realonly = True
+        realonly = False
     #Return as complex only when requested
     if realonly == True:
         return abs( output )
