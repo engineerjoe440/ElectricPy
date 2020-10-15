@@ -28,8 +28,9 @@ import matplotlib as _matplotlib
 import matplotlib.pyplot as _plt
 import cmath as _c
 from scipy.optimize import fsolve as _fsolve
-from warnings import showwarning
-from inspect import getframeinfo, stack
+from warnings import showwarning as _showwarning
+from inspect import getframeinfo as _getframeinfo
+from inspect import stack as _stack
 
 
 # Define Phase Angle Generator
@@ -686,9 +687,9 @@ def cprint(val,unit=None,label=None,title=None,
     # Use depricated `round`
     if round != 3:
         decimals = round
-        caller = getframeinfo(stack()[1][0])
+        caller = _getframeinfo(_stack()[1][0])
         # Demonstrate Deprecation Warning
-        showwarning('`round` argument will be deprecated in favor of `decimals`',
+        _showwarning('`round` argument will be deprecated in favor of `decimals`',
                     DeprecationWarning, caller.filename, caller.lineno)
     # Interpret as numpy array if simple list
     if isinstance(val, list):
@@ -966,9 +967,9 @@ def phaseline(VLL=None,VLN=None,Iline=None,Iphase=None,realonly=None,**kwargs):
     if 'complex' in kwargs.keys():
         if realonly==None:
             realonly = not kwargs['complex']
-        caller = getframeinfo(stack()[1][0])
+        caller = _getframeinfo(_stack()[1][0])
         # Demonstrate Deprecation Warning
-        showwarning('`complex` argument will be deprecated in favor of `realonly`',
+        _showwarning('`complex` argument will be deprecated in favor of `realonly`',
                     DeprecationWarning, caller.filename, caller.lineno)
     output = 0
     #Given VLL, convert to VLN
