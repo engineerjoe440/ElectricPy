@@ -1,4 +1,4 @@
-electricpy
+﻿electricpy
 ==========
 
 .. rubric:: Description
@@ -238,6 +238,8 @@ electricpy
     vcapcharge
     
     vcapdischarge
+    
+    vectarray
     
     vipf
     

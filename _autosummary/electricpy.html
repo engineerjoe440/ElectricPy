@@ -256,7 +256,7 @@ to aid in scientific calculations.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="electricpy.phase.html#electricpy.phase" title="electricpy.phase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phase</span></code></a>(ang)</p></td>
 <td><p>Complex Phase Angle Generator</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.phaseline.html#electricpy.phaseline" title="electricpy.phaseline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phaseline</span></code></a>([VLL, VLN, Iline, Iphase, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.phaseline.html#electricpy.phaseline" title="electricpy.phaseline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phaseline</span></code></a>([VLL, VLN, Iline, Iphase, realonly])</p></td>
 <td><p>Line-Line to Line-Neutral Converter</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="electricpy.phasor.html#electricpy.phasor" title="electricpy.phasor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasor</span></code></a>(mag[, ang])</p></td>
@@ -403,43 +403,46 @@ to aid in scientific calculations.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="electricpy.vcapdischarge.html#electricpy.vcapdischarge" title="electricpy.vcapdischarge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vcapdischarge</span></code></a>(t, Vs, R, C)</p></td>
 <td><p>Discharging Capacitor Function</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.vipf.html#electricpy.vipf" title="electricpy.vipf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vipf</span></code></a>([V, I, PF, find])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.vectarray.html#electricpy.vectarray" title="electricpy.vectarray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vectarray</span></code></a>(arr[, degrees, flatarray])</p></td>
+<td><p>Format Complex as Array of Magnitude/Angle Pairs</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.vipf.html#electricpy.vipf" title="electricpy.vipf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vipf</span></code></a>([V, I, PF, find])</p></td>
 <td><p>Voltage / Current / Power Factor Solver</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.voltdiv.html#electricpy.voltdiv" title="electricpy.voltdiv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">voltdiv</span></code></a>(Vin, R1, R2[, Rload])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.voltdiv.html#electricpy.voltdiv" title="electricpy.voltdiv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">voltdiv</span></code></a>(Vin, R1, R2[, Rload])</p></td>
 <td><p>Voltage Divider Function</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.vscdcbus.html#electricpy.vscdcbus" title="electricpy.vscdcbus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vscdcbus</span></code></a>(VLL, Zs, P[, Q, mmax, debug])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.vscdcbus.html#electricpy.vscdcbus" title="electricpy.vscdcbus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vscdcbus</span></code></a>(VLL, Zs, P[, Q, mmax, debug])</p></td>
 <td><p>Voltage Sourced Converter DC Bus Voltage Function</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.vscgains.html#electricpy.vscgains" title="electricpy.vscgains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vscgains</span></code></a>(Rs, Ls[, tau, freq])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.vscgains.html#electricpy.vscgains" title="electricpy.vscgains"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vscgains</span></code></a>(Rs, Ls[, tau, freq])</p></td>
 <td><p>Voltage Sourced Converter Gains Calculator</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.watts.html#electricpy.watts" title="electricpy.watts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">watts</span></code></a>(hp)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.watts.html#electricpy.watts" title="electricpy.watts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">watts</span></code></a>(hp)</p></td>
 <td><p>Horsepower to Watts Formula</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.watts_to_hp.html#electricpy.watts_to_hp" title="electricpy.watts_to_hp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">watts_to_hp</span></code></a>(watts)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.watts_to_hp.html#electricpy.watts_to_hp" title="electricpy.watts_to_hp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">watts_to_hp</span></code></a>(watts)</p></td>
 <td><p>Watts to Horsepower Function</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.wrms.html#electricpy.wrms" title="electricpy.wrms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wrms</span></code></a>(func[, dw, NN, quad, plot, title, round])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.wrms.html#electricpy.wrms" title="electricpy.wrms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wrms</span></code></a>(func[, dw, NN, quad, plot, title, round])</p></td>
 <td><p>WRMS Function:</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.xfmphs.html#electricpy.xfmphs" title="electricpy.xfmphs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xfmphs</span></code></a>([style, shift])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.xfmphs.html#electricpy.xfmphs" title="electricpy.xfmphs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xfmphs</span></code></a>([style, shift])</p></td>
 <td><p>Simple Transformer Phase-Shift Calculator</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.zdecompose.html#electricpy.zdecompose" title="electricpy.zdecompose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zdecompose</span></code></a>(Zmag, XoR)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.zdecompose.html#electricpy.zdecompose" title="electricpy.zdecompose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zdecompose</span></code></a>(Zmag, XoR)</p></td>
 <td><p>Impedance Decomposition Function</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.zperlength.html#electricpy.zperlength" title="electricpy.zperlength"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zperlength</span></code></a>([Rd, Rself, Rac, Rgwac, De, rho, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.zperlength.html#electricpy.zperlength" title="electricpy.zperlength"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zperlength</span></code></a>([Rd, Rself, Rac, Rgwac, De, rho, …])</p></td>
 <td><p>Transmission Line Impedance (RL) Calculator</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.zpu.html#electricpy.zpu" title="electricpy.zpu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zpu</span></code></a>(S[, VLL, VLN])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.zpu.html#electricpy.zpu" title="electricpy.zpu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zpu</span></code></a>(S[, VLL, VLN])</p></td>
 <td><p>Per-Unit Impedance Evaluator</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.zrecompose.html#electricpy.zrecompose" title="electricpy.zrecompose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zrecompose</span></code></a>(z_pu, S3phs[, VLL, VLN])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.zrecompose.html#electricpy.zrecompose" title="electricpy.zrecompose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zrecompose</span></code></a>(z_pu, S3phs[, VLL, VLN])</p></td>
 <td><p>Impedance from Per-Unit System Evaluator</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.zsource.html#electricpy.zsource" title="electricpy.zsource"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zsource</span></code></a>(S, V, XoR[, Sbase, Vbase, perunit])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.zsource.html#electricpy.zsource" title="electricpy.zsource"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zsource</span></code></a>(S, V, XoR[, Sbase, Vbase, perunit])</p></td>
 <td><p>Source Impedance Calculator</p></td>
 </tr>
 </tbody>
