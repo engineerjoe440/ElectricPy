@@ -73,14 +73,23 @@ Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/
    ```
 
 ## To Do List:
-- Port Remaining Functions from ELECTRICALPYTHON
-    - Add Heat Sink Solver
-    - DC/DC Converters
-    - DC/AC Converters
-    - Stationary and Synchronous Reference Frame conversion Matrices/Constants
-    - Induction Machine slip finder
-    - CEV reader/writer functions
-- Develop Testing for All Functions
+- Add Heat Sink Solver
+- DC/DC Converters
+- DC/AC Converters
+- Stationary and Synchronous Reference Frame conversion Matrices/Constants
+- Induction Machine slip finder
+- Add [Pi Attenuator](https://www.basictables.com/electronics/resistor/pi-attenuator) Formula
+- Add [T Attenuator](https://www.basictables.com/electronics/resistor/t-attenuator) Formula
+- Add Simple [decibel](https://www.basictables.com/electronics/decibel-dbw) Formulas
+- Add Simple [wire resistance](https://www.basictables.com/electronics/resistor/wire-resistance) Formula(s)
+- Add Simple [Wheatstone Bridge](https://www.basictables.com/electronics/resistor/wheatstone-bridge) Formulas
+- Add [555 Timer](https://www.basictables.com/electronics/integrated-circuit/555-timer) Formulas
+- Add [Inductive Voltage Divider](https://www.basictables.com/electronics/inductor/inductive-voltage-divider) Formula
+- Add [Slew Rate](https://www.basictables.com/electronics/slew-rate) Formula(s)
+- Add Simple [Battery Discharge Rate](https://www.basictables.com/electronics/battery/battery-discharge-rate) Formula
+- Add Simple [Air Core Inductor](https://www.basictables.com/electronics/inductor/air-core-inductor) Formula(s)
+- Add Simple [Zener Diode](https://www.basictables.com/electronics/diode/zener-diode) Formulas
+- *Develop Testing for All Functions*
 
 ## Get Involved / Contribute
 If you're interested in contributing, we'd love to see your support in a number of ways!
