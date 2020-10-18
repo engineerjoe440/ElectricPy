@@ -4,7 +4,7 @@
 
 .. autosummary::
    :recursive:
-   :toctree: _autosummary
+   :toctree: api
    :template: module.rst
 
    electricpy.sim

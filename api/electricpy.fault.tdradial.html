@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>electricpy.fault.tdradial &#8212; electricpy 0.1.8 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.fault.tdradial.html" />
+    <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.fault.thermaltime" href="electricpy.fault.thermaltime.html" />
+    <link rel="prev" title="electricpy.fault.synmach_ifault" href="electricpy.fault.synmach_ifault.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.thermaltime.html" title="electricpy.fault.thermaltime"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.synmach_ifault.html" title="electricpy.fault.synmach_ifault"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.8 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../fault.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.fault.html" accesskey="U">electricpy.fault</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.fault.tdradial</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="electricpy-fault-tdradial">
+<h1>electricpy.fault.tdradial<a class="headerlink" href="#electricpy-fault-tdradial" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.fault.tdradial">
+<code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">tdradial</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">I</span></em>, <em class="sig-param"><span class="n">CTI</span></em>, <em class="sig-param"><span class="n">Ipu_up</span></em>, <em class="sig-param"><span class="n">Ipu_dn</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">TDdn</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">curve</span><span class="o">=</span><span class="default_value">'U1'</span></em>, <em class="sig-param"><span class="n">scale</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">freq</span><span class="o">=</span><span class="default_value">60</span></em>, <em class="sig-param"><span class="n">CTR_up</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">CTR_dn</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">tfixed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.tdradial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Radial Time Dial Coordination Function</p>
+<p>Function to evaluate the Time-Dial (TD) setting in radial schemes
+where the Coordinating Time Interval (CTI) and the up/downstream
+pickup settings are known along with the TD setting for the
+downstream protection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>I</strong> (<em>float</em>) – Measured fault current in Amps, typically set using the
+maximum fault current available.</p></li>
+<li><p><strong>CTI</strong> (<em>float</em>) – Coordinating Time Interval in cycles.</p></li>
+<li><p><strong>Ipu_up</strong> (<em>float</em>) – Pickup setting for upstream protection,
+specified in amps</p></li>
+<li><p><strong>Ipu_dn</strong> (<em>float</em><em>, </em><em>optional</em>) – Pickup setting for downstream protection,
+specified in amps, default=0</p></li>
+<li><p><strong>TDdn</strong> (<em>float</em><em>, </em><em>optional</em>) – Time-Dial setting for downstream protection,
+specified in seconds, default=0</p></li>
+<li><p><strong>curve</strong> (<em>string</em><em>, </em><em>optional</em>) – Name of specified TOC curve, may be entry from set:
+{U1,U2,U3,U4,U5,C1,C2,C3,C4,C5}, default=U1</p></li>
+<li><p><strong>scale</strong> (<em>int</em><em>, </em><em>optional</em>) – Scaling value used to evaluate a practical TD
+setting, default=2</p></li>
+<li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – System operating frequency, default=60</p></li>
+<li><p><strong>CTR_up</strong> (<em>float</em><em>, </em><em>optional</em>) – Current Transformer Ratio for upstream relay.
+default=1</p></li>
+<li><p><strong>CTR_dn</strong> (<em>float</em><em>, </em><em>optional</em>) – Current Transformer Ratio for downstream relay.
+default=1</p></li>
+<li><p><strong>tfixed</strong> (<em>float</em><em>, </em><em>optional</em>) – Used to specify a fixed time delay for coordinated
+protection elements, primarily used for coordinating
+TOC elements (51) with OC elements (50) with a fixed
+tripping time. Overrides downstream TOC arguments
+including <em>Ipu_dn</em> and <em>TDdn</em>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>TD</strong> – Calculated Time-Dial setting according to radial
+scheme logical analysis.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.fault.synmach_ifault.html"
+                        title="previous chapter">electricpy.fault.synmach_ifault</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.fault.thermaltime.html"
+                        title="next chapter">electricpy.fault.thermaltime</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/electricpy.fault.tdradial.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.thermaltime.html" title="electricpy.fault.thermaltime"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.synmach_ifault.html" title="electricpy.fault.synmach_ifault"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.8 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../fault.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.fault.html" >electricpy.fault</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.fault.tdradial</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Joe Stanley.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

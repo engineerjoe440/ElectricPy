@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>electricpy.sim.statespace &#8212; electricpy 0.1.8 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.sim.statespace.html" />
+    <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.sim.step_response" href="electricpy.sim.step_response.html" />
+    <link rel="prev" title="electricpy.sim.ramp_response" href="electricpy.sim.ramp_response.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.sim.step_response.html" title="electricpy.sim.step_response"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.sim.ramp_response.html" title="electricpy.sim.ramp_response"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.8 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../sim.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.sim.html" accesskey="U">electricpy.sim</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.sim.statespace</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="electricpy-sim-statespace">
+<h1>electricpy.sim.statespace<a class="headerlink" href="#electricpy-sim-statespace" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.sim.statespace">
+<code class="sig-prename descclassname">electricpy.sim.</code><code class="sig-name descname">statespace</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">B</span></em>, <em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">func</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">C</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">D</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">simpts</span><span class="o">=</span><span class="default_value">9999</span></em>, <em class="sig-param"><span class="n">NN</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="n">dt</span><span class="o">=</span><span class="default_value">0.01</span></em>, <em class="sig-param"><span class="n">xlim</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ylim</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">ret</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">plotstate</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">plotforcing</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">plotresult</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.sim.statespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>State-Space Simulation Plotter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>array_like</em>) – Matrix A of State-Space Formulation</p></li>
+<li><p><strong>B</strong> (<em>array_like</em>) – Matrix B of State-Space Formulation</p></li>
+<li><p><strong>x</strong> (<em>array_like</em><em>, </em><em>optional</em>) – Initial Condition Matrix, if not provided, will assume
+initial conditions of zero.</p></li>
+<li><p><strong>f</strong> (<em>function</em><em>, </em><em>optional</em>) – State-Space Forcing Function; callable function that
+will return any/all forcing function Arguments needed as
+array-like object.
+Forcing function(s) can be provided as tuple of function
+handles, system will automatically concatenate their output
+to a matrix that can be handled.</p></li>
+<li><p><strong>simpts</strong> (<em>int</em><em>, </em><em>optional</em>) – Changes the range of simulation; defualt=9999</p></li>
+<li><p><strong>NN</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of descrete points; default=10,000</p></li>
+<li><p><strong>dt</strong> (<em>float</em><em>, </em><em>optional</em>) – Time-step-size; default=0.01</p></li>
+<li><p><strong>xlim</strong> (<em>list of float</em><em>, </em><em>optional</em>) – Limit in x-axis for graph plot.</p></li>
+<li><p><strong>ylim</strong> (<em>list of float</em><em>, </em><em>optional</em>) – Limit in y-axis for graph plot.</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Additional String for Plot Title</p></li>
+<li><p><strong>ret</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control value to specify whether the state space terms should
+be returned.</p></li>
+<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control value to enable/disable all plotting capabilities.</p></li>
+<li><p><strong>plotforcing</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control value to enable plotting of the forcing function(s)</p></li>
+<li><p><strong>plotresult</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control value to enable plotting of the final (combined) result.</p></li>
+<li><p><strong>Figures</strong> – </p></li>
+<li><p><strong>--------</strong> – </p></li>
+<li><p><strong>Functions</strong> (<em>Forcing</em>) – </p></li>
+<li><p><strong>Variables</strong> (<em>State</em>) – </p></li>
+<li><p><strong>Output</strong> (<em>Combined</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.sim.ramp_response.html"
+                        title="previous chapter">electricpy.sim.ramp_response</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.sim.step_response.html"
+                        title="next chapter">electricpy.sim.step_response</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/electricpy.sim.statespace.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.sim.step_response.html" title="electricpy.sim.step_response"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.sim.ramp_response.html" title="electricpy.sim.ramp_response"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.8 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../sim.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.sim.html" >electricpy.sim</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.sim.statespace</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Joe Stanley.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

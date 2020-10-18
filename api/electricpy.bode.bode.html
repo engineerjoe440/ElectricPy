@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>electricpy.bode.bode &#8212; electricpy 0.1.8 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.bode.bode.html" />
+    <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.bode.sbode" href="electricpy.bode.sbode.html" />
+    <link rel="prev" title="electricpy.bode" href="electricpy.bode.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.bode.sbode.html" title="electricpy.bode.sbode"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.bode.html" title="electricpy.bode"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.8 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../bode.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.bode.html" accesskey="U">electricpy.bode</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.bode.bode</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="electricpy-bode-bode">
+<h1>electricpy.bode.bode<a class="headerlink" href="#electricpy-bode-bode" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.bode.bode">
+<code class="sig-prename descclassname">electricpy.bode.</code><code class="sig-name descname">bode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">system</span></em>, <em class="sig-param"><span class="n">mn</span><span class="o">=</span><span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">mx</span><span class="o">=</span><span class="default_value">1000</span></em>, <em class="sig-param"><span class="n">npts</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">xlim</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ylim</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">sv</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">disp3db</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">lowcut</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">magnitude</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">angle</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">freqaxis</span><span class="o">=</span><span class="default_value">'rad'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.bode.bode" title="Permalink to this definition">¶</a></dt>
+<dd><p>System Bode Plotting Function</p>
+<p>A simple function to generate the Bode Plot for magnitude
+and frequency given a transfer function system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>system</strong> (<em>transfer function object</em>) – The Transfer Function; can be provided as the following:
+- 1 (instance of lti)
+- 2 (num, den)
+- 3 (zeros, poles, gain)
+- 4 (A, B, C, D)</p></li>
+<li><p><strong>mn</strong> (<em>float</em><em>, </em><em>optional</em>) – The minimum frequency to be calculated for. default=0.01.</p></li>
+<li><p><strong>mx</strong> (<em>float</em><em>, </em><em>optional</em>) – The maximum frequency to be calculated for. default=1000.</p></li>
+<li><p><strong>npts</strong> (<em>float</em><em>, </em><em>optional</em>) – The number of points over which to calculate the system.
+default=100.</p></li>
+<li><p><strong>title</strong> (<em>string</em><em>, </em><em>optional</em>) – Additional string to be added to plot titles;
+default=””.</p></li>
+<li><p><strong>xlim</strong> (<em>list of float</em><em>, </em><em>optional</em>) – Limit in x-axis for graph plot. Accepts tuple of: (xmin, xmax).
+Default is False.</p></li>
+<li><p><strong>ylim</strong> (<em>list of float</em><em>, </em><em>optional</em>) – Limit in y-axis for graph plot. Accepts tuple of: (ymin, ymax).
+Default is False.</p></li>
+<li><p><strong>sv</strong> (<em>bool</em><em>, </em><em>optional</em>) – Save the plots as PNG files. Default is False.</p></li>
+<li><p><strong>disp3db</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to enable the display of the 3dB line,
+default=False.</p></li>
+<li><p><strong>lowcut</strong> (<em>float</em><em>, </em><em>optional</em>) – An additional marking line that can be plotted, default=None</p></li>
+<li><p><strong>magnitude</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to enable plotting of magnitude, default=True</p></li>
+<li><p><strong>angle</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to enable plotting of angle, default=True</p></li>
+<li><p><strong>freqaxis</strong> (<em>string</em><em>, </em><em>optional</em>) – Control argument to specify the freqency axis in degrees or
+radians, default is radians (rad)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.bode.html"
+                        title="previous chapter">electricpy.bode</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.bode.sbode.html"
+                        title="next chapter">electricpy.bode.sbode</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/electricpy.bode.bode.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.bode.sbode.html" title="electricpy.bode.sbode"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.bode.html" title="electricpy.bode"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.8 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../bode.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.bode.html" >electricpy.bode</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.bode.bode</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Joe Stanley.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

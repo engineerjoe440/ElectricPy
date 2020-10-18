@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>electricpy.fault.pktransrecvolt &#8212; electricpy 0.1.8 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.fault.pktransrecvolt.html" />
+    <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.fault.poleopen1" href="electricpy.fault.poleopen1.html" />
+    <link rel="prev" title="electricpy.fault.pickup" href="electricpy.fault.pickup.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.poleopen1.html" title="electricpy.fault.poleopen1"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.pickup.html" title="electricpy.fault.pickup"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.8 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../fault.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.fault.html" accesskey="U">electricpy.fault</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.fault.pktransrecvolt</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="electricpy-fault-pktransrecvolt">
+<h1>electricpy.fault.pktransrecvolt<a class="headerlink" href="#electricpy-fault-pktransrecvolt" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.fault.pktransrecvolt">
+<code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">pktransrecvolt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">C</span></em>, <em class="sig-param"><span class="n">L</span></em>, <em class="sig-param"><span class="n">R</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">VLL</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">VLN</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">freq</span><span class="o">=</span><span class="default_value">60</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.pktransrecvolt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Peak Transient Recovery Function</p>
+<p>Peak Transient Recovery Voltage calculation
+function, evaluates the peak transient
+recovery voltage (restriking voltage) and
+the Rate-of-Rise-Recovery Voltage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>C</strong> (<em>float</em>) – Capacitance Value in Farads.</p></li>
+<li><p><strong>L</strong> (<em>float</em>) – Inductance in Henries.</p></li>
+<li><p><strong>R</strong> (<em>float</em><em>, </em><em>optional</em>) – The resistance of the system used for
+calculation, default=0.</p></li>
+<li><p><strong>VLL</strong> (<em>float</em><em>, </em><em>exclusive</em>) – Line-to-Line voltage, exclusive
+optional argument.</p></li>
+<li><p><strong>VLN</strong> (<em>float</em><em>, </em><em>exclusive</em>) – Line-to-Neutral voltage, exclusive
+optional argument.</p></li>
+<li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – System frequency in Hz.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>Vcpk</strong> (<em>float</em>) – Peak Transient Recovery Voltage in volts.</p></li>
+<li><p><strong>RRRV</strong> (<em>float</em>) – The RRRV (Rate-of-Rise-Recovery Voltage)
+calculated given the parameters in volts
+per second.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.fault.pickup.html"
+                        title="previous chapter">electricpy.fault.pickup</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.fault.poleopen1.html"
+                        title="next chapter">electricpy.fault.poleopen1</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/electricpy.fault.pktransrecvolt.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.poleopen1.html" title="electricpy.fault.poleopen1"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.fault.pickup.html" title="electricpy.fault.pickup"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.8 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../fault.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.fault.html" >electricpy.fault</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.fault.pktransrecvolt</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Joe Stanley.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>

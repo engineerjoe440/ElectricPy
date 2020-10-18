@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>electricpy.phasordata &#8212; electricpy 0.1.8 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.phasordata.html" />
+    <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.phasorlist" href="electricpy.phasorlist.html" />
+    <link rel="prev" title="electricpy.phasor" href="electricpy.phasor.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.phasorlist.html" title="electricpy.phasorlist"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.phasor.html" title="electricpy.phasor"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.8 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.phasordata</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="electricpy-phasordata">
+<h1>electricpy.phasordata<a class="headerlink" href="#electricpy-phasordata" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="electricpy.phasordata">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">phasordata</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mn</span></em>, <em class="sig-param"><span class="n">mx</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">npts</span><span class="o">=</span><span class="default_value">1000</span></em>, <em class="sig-param"><span class="n">mag</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">ang</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">freq</span><span class="o">=</span><span class="default_value">60</span></em>, <em class="sig-param"><span class="n">retstep</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">rettime</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">sine</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.phasordata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Complex Phasor Data Generator</p>
+<p>Generates a sinusoidal data set with minimum, maximum,
+frequency, magnitude, and phase angle arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mn</strong> (<em>float</em><em>, </em><em>optional</em>) – Minimum time (in seconds) to generate data for.
+default=0</p></li>
+<li><p><strong>mx</strong> (<em>float</em>) – Maximum time (in seconds) to generate data for.</p></li>
+<li><p><strong>npts</strong> (<em>float</em><em>, </em><em>optional</em>) – Number of data samples. default=1000</p></li>
+<li><p><strong>mag</strong> (<em>float</em><em>, </em><em>optional</em>) – Sinusoid magnitude, default=1</p></li>
+<li><p><strong>ang</strong> (<em>float</em><em>, </em><em>optional</em>) – Sinusoid angle in degrees, default=0</p></li>
+<li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – Sinusoid frequency in Hz</p></li>
+<li><p><strong>retstep</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to request return of time
+step size (dt) in seconds.</p></li>
+<li><p><strong>sine</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to require data be generated
+with a sinusoidal function instead of cosine.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>data</strong> – The resultant data array.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.phasor.html"
+                        title="previous chapter">electricpy.phasor</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.phasorlist.html"
+                        title="next chapter">electricpy.phasorlist</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/electricpy.phasordata.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.phasorlist.html" title="electricpy.phasorlist"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.phasor.html" title="electricpy.phasor"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.8 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.phasordata</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Joe Stanley.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+    </div>
+  </body>
+</html>
