@@ -1,3 +1,6 @@
+# Built Documentation Reference Pages
+docs/
+
 # Ignore Python Compiled Files
 *.pyc
 *.pyo
@@ -8,5 +11,3 @@ build/
 
 # Ignore TOX
 .tox/
-
-*api/
