@@ -32,7 +32,6 @@ from warnings import showwarning as _showwarning
 from inspect import getframeinfo as _getframeinfo
 from inspect import stack as _stack
 
-
 # Define Phase Angle Generator
 def phs( ang ):
     """
