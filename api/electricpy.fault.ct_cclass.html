@@ -54,15 +54,26 @@
 <h1>electricpy.fault.ct_cclass<a class="headerlink" href="#electricpy-fault-ct-cclass" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="electricpy.fault.ct_cclass">
-<code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">ct_cclass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">XoR</span></em>, <em class="sig-param"><span class="n">Imag</span></em>, <em class="sig-param"><span class="n">Irated</span></em>, <em class="sig-param"><span class="n">CTR</span></em>, <em class="sig-param"><span class="n">Rb</span></em>, <em class="sig-param"><span class="n">Xb</span></em>, <em class="sig-param"><span class="n">remnance</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">freq</span><span class="o">=</span><span class="default_value">60</span></em>, <em class="sig-param"><span class="n">ALF</span><span class="o">=</span><span class="default_value">20</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.ct_cclass" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">electricpy.fault.</code><code class="sig-name descname">ct_cclass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">XoR</span></em>, <em class="sig-param"><span class="n">Imag</span></em>, <em class="sig-param"><span class="n">Irated</span></em>, <em class="sig-param"><span class="n">CTR</span></em>, <em class="sig-param"><span class="n">Rb</span></em>, <em class="sig-param"><span class="n">Xb</span></em>, <em class="sig-param"><span class="n">remnance</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">sat_crit</span><span class="o">=</span><span class="default_value">20</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.ct_cclass" title="Permalink to this definition">¶</a></dt>
 <dd><p>Current Transformer (CT) C-Class Function</p>
 <p>A function to determine the C-Class rated voltage for a CT.
-The formula shown below is used.</p>
+The formula shown below demonstrates the standard formula
+which is normally used to evaluate the saturation criteria.
+Worth noting here, is the fact that <span class="math notranslate nohighlight">\(V_{rated}\)</span> is the
+CT C-Class.</p>
 <div class="math notranslate nohighlight">
-\[C_{class}=\frac{(1+\frac{X}{R})*\frac{|I_{mag}|}
-{I_{rated}*CTR}*\frac{\left|R_{burden}+j*\omega*
-\frac{X_{burden}}{\omega}\right|*100}{V_{rated}}}
+\[\text{Saturation Criteria}=\frac{(1+\frac{X}{R})\cdot
+\frac{|I_{mag}|}{I_{rated}\cdot CTR}\cdot\frac{\left|
+R_{burden}+j\cdot X_{burden}\right|\cdot100}{V_{rated}}}
 {1-remnance}\]</div>
+<p>For the purposes of this function, the above formula is applied
+as follows to evaluate the CT C-Class such as to satisfy the
+saturation criteria defined.</p>
+<div class="math notranslate nohighlight">
+\[\text{CT C-Class}=\frac{(1+\frac{X}{R})\cdot
+\frac{|I_{mag}|}{I_{rated}\cdot CTR}\cdot\frac{
+\left|R_{burden}+j\cdot X_{burden}\right|\cdot100}
+{\text{Saturation Criteria (i.e., 20)}}}{1-remnance}\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -74,8 +85,8 @@ typically the fault current.</p></li>
 <li><p><strong>Rb</strong> (<em>float</em>) – The total burden resistance in ohms.</p></li>
 <li><p><strong>Xb</strong> (<em>float</em>) – The total burden reactance in ohms.</p></li>
 <li><p><strong>remnance</strong> (<em>float</em><em>, </em><em>optional</em>) – The system flux remnance, default=0.</p></li>
-<li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – The system frequency in Hz, default=60.</p></li>
-<li><p><strong>ALF</strong> (<em>float</em><em>, </em><em>optional</em>) – The Saturation Constant which must be satisfied,
+<li><p><strong>sat_crit</strong> (<em>float</em><em>, </em><em>optional</em>) – The saturation criteria which must be satisfied,
+typically such that CT saturation will not occur,
 default=20.</p></li>
 </ul>
 </dd>
