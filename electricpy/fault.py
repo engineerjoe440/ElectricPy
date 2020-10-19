@@ -579,18 +579,31 @@ def ct_saturation(XoR,Imag,Vrated,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
 
 
 # Define C-Class Calculator
-def ct_cclass(XoR,Imag,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
+def ct_cclass(XoR,Imag,Irated,CTR,Rb,Xb,remnance=0,sat_crit=20):
     """
     Current Transformer (CT) C-Class Function
     
     A function to determine the C-Class rated voltage for a CT.
-    The formula shown below is used.
+    The formula shown below demonstrates the standard formula
+    which is normally used to evaluate the saturation criteria.
+    Worth noting here, is the fact that :math:`V_{rated}` is the
+    CT C-Class.
     
     .. math::
-       C_{class}=\\frac{(1+\\frac{X}{R})*\\frac{|I_{mag}|}
-       {I_{rated}*CTR}*\\frac{\\left|R_{burden}+j*\\omega*
-       \\frac{X_{burden}}{\\omega}\\right|*100}{V_{rated}}}
+       \\text{Saturation Criteria}=\\frac{(1+\\frac{X}{R})\\cdot
+       \\frac{|I_{mag}|}{I_{rated}\\cdot CTR}\\cdot\\frac{\\left|
+       R_{burden}+j\\cdot X_{burden}\\right|\\cdot100}{V_{rated}}}
        {1-remnance}
+    
+    For the purposes of this function, the above formula is applied
+    as follows to evaluate the CT C-Class such as to satisfy the
+    saturation criteria defined.
+    
+    .. math::
+       \\text{CT C-Class}=\\frac{(1+\\frac{X}{R})\\cdot
+       \\frac{|I_{mag}|}{I_{rated}\\cdot CTR}\\cdot\\frac{
+       \\left|R_{burden}+j\\cdot X_{burden}\\right|\\cdot100}
+       {\\text{Saturation Criteria (i.e., 20)}}}{1-remnance}
     
     Parameters
     ----------
@@ -609,10 +622,9 @@ def ct_cclass(XoR,Imag,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
                 The total burden reactance in ohms.
     remnance:   float, optional
                 The system flux remnance, default=0.
-    freq:       float, optional
-                The system frequency in Hz, default=60.
-    ALF:        float, optional
-                The Saturation Constant which must be satisfied,
+    sat_crit:   float, optional
+                The saturation criteria which must be satisfied,
+                typically such that CT saturation will not occur,
                 default=20.
     
     Returns
@@ -620,14 +632,10 @@ def ct_cclass(XoR,Imag,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
     c_class:    float
                 The calculated C-Class rated voltage.
     """
-    # Define omega
-    w = 2*_np.pi*freq
-    # Find Lb
-    Lb = Xb/w
     # Calculate each "term" (multiple)
     t1 = (1+XoR)
     t2 = (Imag/(Irated*CTR))
-    t3 = abs(Rb+1j*w*Lb)*100/ALF
+    t3 = abs(Rb+1j*Xb)*100/sat_crit
     # Evaluate
     Vr_w_rem = t1*t2*t3
     c_class = Vr_w_rem/(1-remnance)
