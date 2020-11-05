@@ -80,6 +80,7 @@ html_theme = 'classic'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['static']
+html_extra_path = ['extra']
 html_logo="static/ElectricpyLogo.svg"
 html_favicon="static/ElectricpyLogo.svg"
 html_baseurl="https://engineerjoe440.github.io/ElectricPy/html/"
