@@ -82,15 +82,24 @@ INSTALLATION:
 To Do List
 ----------
 
-* Port Remaining Functions from ELECTRICALPYTHON
-
-* Add Heat Sink Solver
-
-* DC/DC Converters
-
-* DC/AC Converters
-
-* Stationary and Synchronous Reference Frame conversion Matricies/Constants
+- Add Heat Sink Solver
+- DC/DC Converters
+- DC/AC Converters
+- Stationary and Synchronous Reference Frame conversion Matrices/Constants
+- Induction Machine slip finder
+- Add arc-flash calculators suggested
+- Add [Pi Attenuator](https://www.basictables.com/electronics/resistor/pi-attenuator) Formula
+- Add [T Attenuator](https://www.basictables.com/electronics/resistor/t-attenuator) Formula
+- Add Simple [decibel](https://www.basictables.com/electronics/decibel-dbw) Formulas
+- Add Simple [wire resistance](https://www.basictables.com/electronics/resistor/wire-resistance) Formula(s)
+- Add Simple [Wheatstone Bridge](https://www.basictables.com/electronics/resistor/wheatstone-bridge) Formulas
+- Add [555 Timer](https://www.basictables.com/electronics/integrated-circuit/555-timer) Formulas
+- Add [Inductive Voltage Divider](https://www.basictables.com/electronics/inductor/inductive-voltage-divider) Formula
+- Add [Slew Rate](https://www.basictables.com/electronics/slew-rate) Formula(s)
+- Add Simple [Battery Discharge Rate](https://www.basictables.com/electronics/battery/battery-discharge-rate) Formula
+- Add Simple [Air Core Inductor](https://www.basictables.com/electronics/inductor/air-core-inductor) Formula(s)
+- Add Simple [Zener Diode](https://www.basictables.com/electronics/diode/zener-diode) Formulas
+- *Develop Testing for All Functions*
 
 
 ---------------------
@@ -105,16 +114,28 @@ Generic; Data Science:
     * Matplotlib: https://matplotlib.org/
 
     * SymPy: https://www.sympy.org/en/index.html
+    
+    * Pyomo: https://www.pyomo.org/
+    
+    * numdifftools: https://numdifftools.readthedocs.io/en/latest/
 
 Electrical Engineering Focus:
 
     * Python COMTRADE File Interpreter: https://github.com/dparrini/python-comtrade
+    
+    * Python COMTRADE Writer: https://github.com/relihanl/comtradehandlers
     
     * PandaPower: https://www.pandapower.org/start/
     
     * PyPSA: https://github.com/PyPSA/PyPSA
     
     * PyPower (no longer supported): https://pypi.org/project/PYPOWER/
+    
+    * minpower: http://adamgreenhall.github.io/minpower/index.html
+    
+    * oemof (Open Energy MOdeling Framework): https://oemof.org/
+    
+    * PowerGAMA: https://bitbucket.org/harald_g_svendsen/powergama/wiki/Home
 
 
 -------
@@ -123,7 +144,7 @@ Contact
 
 For more information regarding this resource, please contact Joe Stanley
 
-* <stan3926@vandals.uidaho.edu>
+* <stan3926@alumni.uidaho.edu>
 
 * <joe_stanley@selinc.com>
 
