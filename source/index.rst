@@ -88,17 +88,17 @@ To Do List
 - Stationary and Synchronous Reference Frame conversion Matrices/Constants
 - Induction Machine slip finder
 - Add arc-flash calculators suggested
-- Add [Pi Attenuator](https://www.basictables.com/electronics/resistor/pi-attenuator) Formula
-- Add [T Attenuator](https://www.basictables.com/electronics/resistor/t-attenuator) Formula
-- Add Simple [decibel](https://www.basictables.com/electronics/decibel-dbw) Formulas
-- Add Simple [wire resistance](https://www.basictables.com/electronics/resistor/wire-resistance) Formula(s)
-- Add Simple [Wheatstone Bridge](https://www.basictables.com/electronics/resistor/wheatstone-bridge) Formulas
-- Add [555 Timer](https://www.basictables.com/electronics/integrated-circuit/555-timer) Formulas
-- Add [Inductive Voltage Divider](https://www.basictables.com/electronics/inductor/inductive-voltage-divider) Formula
-- Add [Slew Rate](https://www.basictables.com/electronics/slew-rate) Formula(s)
-- Add Simple [Battery Discharge Rate](https://www.basictables.com/electronics/battery/battery-discharge-rate) Formula
-- Add Simple [Air Core Inductor](https://www.basictables.com/electronics/inductor/air-core-inductor) Formula(s)
-- Add Simple [Zener Diode](https://www.basictables.com/electronics/diode/zener-diode) Formulas
+- Add Pi Attenuator (https://www.basictables.com/electronics/resistor/pi-attenuator) Formula
+- Add T Attenuator (https://www.basictables.com/electronics/resistor/t-attenuator) Formula
+- Add Simple decibel (https://www.basictables.com/electronics/decibel-dbw) Formulas
+- Add Simple wire resistance (https://www.basictables.com/electronics/resistor/wire-resistance) Formula(s)
+- Add Simple Wheatstone Bridge (https://www.basictables.com/electronics/resistor/wheatstone-bridge) Formulas
+- Add 555 Timer (https://www.basictables.com/electronics/integrated-circuit/555-timer) Formulas
+- Add Inductive Voltage Divider (https://www.basictables.com/electronics/inductor/inductive-voltage-divider) Formula
+- Add Slew Rate (https://www.basictables.com/electronics/slew-rate) Formula(s)
+- Add Simple Battery Discharge Rate (https://www.basictables.com/electronics/battery/battery-discharge-rate) Formula
+- Add Simple Air Core Inductor (https://www.basictables.com/electronics/inductor/air-core-inductor) Formula(s)
+- Add Simple Zener Diode (https://www.basictables.com/electronics/diode/zener-diode) Formulas
 - *Develop Testing for All Functions*
 
 
@@ -153,6 +153,10 @@ For more information regarding this resource, please contact Joe Stanley
 
 
 .. note::
+   
+   A great many individuals contributed knowledge, formulas, resources and more!
+   This project certainly would not have been possible without their contributions.
+   
    **Special thanks to:**
    
    * Stephen Weeks | Student | University of Idaho
