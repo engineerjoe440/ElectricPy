@@ -78,6 +78,7 @@ Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/
 - DC/AC Converters
 - Stationary and Synchronous Reference Frame conversion Matrices/Constants
 - Induction Machine slip finder
+- Add arc-flash calculators suggested
 - Add [Pi Attenuator](https://www.basictables.com/electronics/resistor/pi-attenuator) Formula
 - Add [T Attenuator](https://www.basictables.com/electronics/resistor/t-attenuator) Formula
 - Add Simple [decibel](https://www.basictables.com/electronics/decibel-dbw) Formulas
@@ -101,7 +102,7 @@ If you're interested in contributing, we'd love to see your support in a number 
 
 ## Contact:
 For more information regarding this resource, please contact Joe Stanley
-- <stan3926@vandals.uidaho.edu>
+- <stan3926@almuni.uidaho.edu>
 - <joe_stanley@selinc.com>
 
 ## License and Usage:
