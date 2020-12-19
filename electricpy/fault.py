@@ -1883,6 +1883,11 @@ def indmachphs3sc(t,Is0,Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60,real=True):
 # Define IM Torque Calculation
 def indmachphs3torq(t,Is0,Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60):
     """
+    Induction Machine 3-Phase Torque Calculator
+    
+    Determines the torque exerted during a
+    three-phase fault on an induction machine.
+    
     Parameters
     ----------
     t:          array_like
