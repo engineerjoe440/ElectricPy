@@ -21,6 +21,8 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         if [ -f test/pytestrequires.txt ]; then pip install -r test/pytestrequires.txt; fi
+        pip install .
+        python3 -c "import electricpy; print('electricpy.__file__')"
     - name: Show Folder Structure
       run: |
         ls
