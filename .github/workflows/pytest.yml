@@ -23,9 +23,6 @@ jobs:
         if [ -f test/pytestrequires.txt ]; then pip install -r test/pytestrequires.txt; fi
         pip install .
         python3 -c "import electricpy; print('electricpy.__file__')"
-    - name: Show Folder Structure
-      run: |
-        ls
     - name: Test with pytest
       run: |
         pytest
