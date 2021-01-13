@@ -1489,7 +1489,7 @@ def iscrl(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
         raise ValueError("ERROR: Inappropriate Arguments Provided.\n" +
                          "Must provide both t and f or neither.")
     else:
-        IAC = abs(V / Z)
+        Iac = abs(V / Z)
         return (Iac)
 
 
@@ -1685,7 +1685,7 @@ def dynetz(delta=None, wye=None, round=None):
 #calculating impedance of bridge network
 def bridge_impedance(z1, z2, z3, z4, z5):
     """
-    bridge impedance calculator
+    "Bridge Impedance Calculator"
     
     z1*z3 == z2*z4 this is a condition of wheat stone bridje so current through z5 will be zero
     
@@ -2617,7 +2617,7 @@ def farads(VAR, V, freq=60):
 
 
 # Define Capacitor Energy Calculation
-def capenergy(C, v):
+def capenergy(C, V):
     """
     Capacitor Energy Formula
 
@@ -2714,7 +2714,7 @@ def timedischarge(Vinit, Vmin, C, P, dt=1e-3, RMS=True, Eremain=False):
         vcp = vc  # save previous voltage
         vc = loadedvcapdischarge(t, vo, C, P)  # calc. new voltage
     if (Eremain):
-        E = energy(C, vcp)  # calc. energy
+        E = capenergy(C, vcp)  # calc. energy
         return (t - dt, E)
     else:
         return (t - dt)
@@ -3716,7 +3716,7 @@ def rxrecompose(x_pu, XoR, S3phs=None, VLL=None, VLN=None):
 
 
 # Define Generator Internal Voltage Calculator
-def geninternalv(I, Zs, Vt, Vgn=None, Zm=None, Ip=None, Ipp=None):
+def geninternalv(I, Zs, Vt, Vgn=None,Zm=None, Zmp=None, Zmpp=None, Ip=None, Ipp=None):
     """
     Generator Internal Voltage Evaluator
 
@@ -4438,24 +4438,29 @@ def secondary(val, Np, Ns=1, invert=False):
     return (val * Ns / Np)
 
 
-def tap_changing_transformer(v1, v2, p, q, r, x):
+def tap_changing_transformer(Vgen, Vdis, Pload, Qload, R, X):
     '''
         calulating turn ration for on load tap chaining transformer
+
+        The purpose of a tap changer is to regulate the output voltage of a transformer.
+        It does this by altering the number of turns in one winding and thereby changing the turns ratio of the transformer
         
+        .. math:: frac{Vgen^2}{Vgen*Vdis-R*P-X*Q}
+
         Parameters
         ----------
         
-        v1: generating station voltage
+        Vgen: generating station voltage
         
-        v2: distribution network voltage
+        Vdis: distribution network voltage
         
-        p: transmission line active power in Watt
+        Pload: transmission line load active power in Watt
         
-        q: transmission line reactive power in VAR
+        Qload: transmission line load reactive power in VAR
         
-        r: resistance of transmission line
+        R: resistance of transmission line
         
-        x: reactance of transmission line
+        X: reactance of transmission line
         
         Returns
         -------
@@ -4465,10 +4470,59 @@ def tap_changing_transformer(v1, v2, p, q, r, x):
         
     '''
 
-    ts = (v2 / v1) * (1 / (1 - (r * p + x * q) / (v1 * v2)))
+    ts = (Vgen*Vgen) / (Vgen*Vdis - (R * Pload + X * Qload) )
 
     return pow(ts, 0.5)
 
+def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
+    '''
+        This function calculates the voltage across each capacitor in a suspension insulator strain
+
+        reference:https://electrical-engineering-portal.com/download-center/books-and-guides/power-substations/insulator-pollution  
+
+
+        Parameters
+        ----------
+        
+        number_capacitors: number of disk capacitors hung to transmission line
+        
+        capacitance_ratio: ratio of disk capacitance and pin to pole air capacitance
+        
+        Voltage: voltage to the wire
+        
+        Returns
+        -------
+        
+        string_efficiency: string effieciency of capacitive disks
+
+        capacitor_disk_voltages: Voltage across each capacitive disk starting from top to bottom
+    '''
+
+    m = _np.zeros((number_capacitors, number_capacitors))
+
+    for i in range(number_capacitors - 1):
+
+        for j in range(number_capacitors - 1):
+
+            if i >= j:
+                m[i, j] = 1 / capacitance_ratio
+
+    for i in range(number_capacitors - 1):
+        m[i, i] = (1 + 1 / capacitance_ratio)
+
+        m[i, i + 1] = -1
+
+    m[number_capacitors - 1, :] = 1
+
+    v = _np.zeros((number_capacitors, 1))
+
+    v[number_capacitors - 1, 0] = Voltage
+
+    capacitor_disk_voltages = _np.matmul(_np.linalg.inv(m), v)
+
+    string_efficiency = (Voltage * 100) / (number_capacitors * v[-1, 0])
+
+    return capacitor_disk_voltages, string_efficiency
 
 # Define Natural Frequency/Resonant Frequency Calculator
 def natfreq(C, L, Hz=True):
@@ -4695,47 +4749,57 @@ def characterz(R, G, L, C, freq=60):
     return (Zc)
 
 #define propagation_constants for long transmission line
-def propagation_constants(z, y, length):
+def propagation_constants(z, y, Length):
     
-    '''
-        this function calculates the propagation constants of long transmission line 
-        
-        long transmission line is governed by differential equation
-        
-        (d^2)V/d(x^2) = (gama)*V
-        
-        Parameters
-        ----------
-        z: impedence of the transmission line R+j*2*pi*f*L
-        
-        y: admitance of the transmission line g+j*2*pi*f*C
-        
-        Returns
-        -------
-        
-        gama: propagation constant
-        
-        zc: surge_impedence
-        
-        alpha : attenuation constant
-        
-        beta: imaginary part of gama
-        
+    """
+    Transaction Line Propagation Constant Calculator
+
+    This function will evaluate the propagation constants for a long transmission
+    line whose properties are governed by the differential equation:
     
-    '''
+    .. math:: \\frac{d^2V}{dx^2} = \\gamma V
+    
+    From the above equation, the following formulas are derived to evaluate the
+    desired constants.
+    
+    .. math:: \\gamma = \\sqrt( z * y )
+    
+    .. math:: Z_{\\text{surge}} = \\sqrt( z / y )
+    
+    .. math:: \\alpha = \\Re{ \\gamma }
+    
+    .. math:: \\beta = \\Im{ \\gamma }
+    
+    Parameters
+    ----------
+    z:              complex
+                    Impedence of the transmission line: R+j*2*pi*f*L
+    y:              complex
+                    Admitance of the transmission line g+j*2*pi*f*C
+        
+    Returns
+    -------
+    params:    dict
+               Dictionary of propagation constants including:
+                    
+                         gamma:   Propagation constant
+                         zc:            Surge impedance
+                         alpha:      Attenuation constant
+                         beta:        Imaginary portion of gamma
+    """
 
-    assert length > 500, "long transmission line length should be grater than 500km"
+    assert Length > 500, "long transmission line length should be grater than 500km"
 
-    gama = np.sqrt(z * y)
+    gamma = _np.sqrt(z * y)
 
-    alpha = gama.real
+    alpha = gamma.real
 
-    beta = gama.imag
+    beta = gamma.imag
 
-    zc = np.sqrt(z / y)
+    zc = _np.sqrt(z / y)
 
     params = {
-        'gama': gama,
+        'gama': gamma,
 
         'alpha': alpha,
 
@@ -6343,8 +6407,7 @@ def syncspeed(Npol, freq=60, Hz=False):
     Parameters
     ----------
     Npol:       int
-                Number of electric
-al poles in
+                Number of electrical poles in
                 machine's construction.
     freq:       float, optional
                 Frequency of electrical system in
