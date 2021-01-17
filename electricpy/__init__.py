@@ -1685,7 +1685,7 @@ def dynetz(delta=None, wye=None, round=None):
 #calculating impedance of bridge network
 def bridge_impedance(z1, z2, z3, z4, z5):
     """
-    "Bridge Impedance Calculator"
+    Bridge Impedance Calculator
     
     z1*z3 == z2*z4 this is a condition of wheat stone bridje so current through z5 will be zero
     
@@ -4440,7 +4440,7 @@ def secondary(val, Np, Ns=1, invert=False):
 
 def tap_changing_transformer(Vgen, Vdis, Pload, Qload, R, X):
     '''
-        calulating turn ration for on load tap chaining transformer
+        Calculate Turn Ratio of Load Tap Changing Transformer
 
         The purpose of a tap changer is to regulate the output voltage of a transformer.
         It does this by altering the number of turns in one winding and thereby changing the turns ratio of the transformer
@@ -4476,7 +4476,7 @@ def tap_changing_transformer(Vgen, Vdis, Pload, Qload, R, X):
 
 def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
     '''
-        This function calculates the voltage across each capacitor in a suspension insulator strain
+        Calculate the Voltage of Each Capacitor in a Suspension Insulator Strain
 
         reference:https://electrical-engineering-portal.com/download-center/books-and-guides/power-substations/insulator-pollution  
 
@@ -4488,7 +4488,7 @@ def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
         
         capacitance_ratio: ratio of disk capacitance and pin to pole air capacitance
         
-        Voltage: voltage to the wire
+        Voltage: voltage difference between the transmission line and ground
         
         Returns
         -------
@@ -4749,7 +4749,7 @@ def characterz(R, G, L, C, freq=60):
     return (Zc)
 
 #define propagation_constants for long transmission line
-def propagation_constants(z, y, Length):
+def propagation_constants(z, y, length):
     
     """
     Transaction Line Propagation Constant Calculator
@@ -4788,7 +4788,7 @@ def propagation_constants(z, y, Length):
                          beta:        Imaginary portion of gamma
     """
 
-    assert Length > 500, "long transmission line length should be grater than 500km"
+    assert length > 500, "Long transmission line length should be grater than 500km"
 
     gamma = _np.sqrt(z * y)
 
