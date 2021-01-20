@@ -1687,7 +1687,9 @@ def bridge_impedance(z1, z2, z3, z4, z5):
     """
     Bridge Impedance Calculator
     
-    z1*z3 == z2*z4 this is a condition of wheat stone bridje so current through z5 will be zero
+    The following condition describing the Wheatstone Bridge is utilized to ensure that current through `z5` will be zero.
+
+    .. math:: z1 \\cdot z3 = z2 \\cdot z4
     
     Parameters
     ----------
@@ -4481,6 +4483,14 @@ def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
         reference:https://electrical-engineering-portal.com/download-center/books-and-guides/power-substations/insulator-pollution  
 
 
+        To perform the calculations described here, the following formulas are satisfied, and used
+        to construct a matrix used to solve for :math:`V_i \\text{i in range(1,n)}`.
+
+        .. math:: \\sum_{i=1}^{n-2} V_{i} + V_{n-1} \\cdot (1+m) - V_{n} \\cdot m = 0
+
+        .. math:: \\sum_{i=1}^{n} V_{i} = V_{\\text{transmission line}}
+                
+        
         Parameters
         ----------
         
