@@ -1708,7 +1708,7 @@ def bridge_impedance(z1, z2, z3, z4, z5):
         ''' this is a wheat stone bridge'''
         return (z1 + z2) * (z3 + z4) / (z1 + z2 + z3 + z4)
     else:
-        za, zb, zc = dynetz((z4, z1, z5))
+        za, zb, zc = dynetz(delta = (z1, z5, z4))
 
         ze1 = zb + z2
 
@@ -4530,7 +4530,7 @@ def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
 
     capacitor_disk_voltages = _np.matmul(_np.linalg.inv(m), v)
 
-    string_efficiency = (Voltage * 100) / (number_capacitors * v[-1, 0])
+    string_efficiency = (Voltage * 100) / (number_capacitors * capacitor_disk_voltages[-1, 0])
 
     return capacitor_disk_voltages, string_efficiency
 
@@ -4809,7 +4809,7 @@ def propagation_constants(z, y, length):
     zc = _np.sqrt(z / y)
 
     params = {
-        'gama': gamma,
+        'gamma': gamma,
 
         'alpha': alpha,
 
