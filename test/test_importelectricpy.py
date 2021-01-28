@@ -1,9 +1,10 @@
-# Import SELProtoPy Just to Verify No Major Issues
+# Import ElectricPy modules just to make sure they load correctly
 
 import os
 import sys
 import pytest
 
+# Test importing the package itself
 def test_import_by_name():
     try:
         import electricpy
@@ -11,6 +12,7 @@ def test_import_by_name():
     except:
         assert False
 
+# Test importing the `bode` module
 def test_import_bode():
     try:
         from electricpy import bode
@@ -18,6 +20,7 @@ def test_import_bode():
     except:
         assert False
 
+# Test importing the `constants` module
 def test_import_constants():
     try:
         from electricpy import constants
@@ -25,6 +28,7 @@ def test_import_constants():
     except:
         assert False
 
+# Test importing the `fault` module
 def test_import_fault():
     try:
         from electricpy import fault
@@ -32,6 +36,7 @@ def test_import_fault():
     except:
         assert False
 
+# Test importing the `sim` module
 def test_import_sim():
     try:
         from electricpy import sim
