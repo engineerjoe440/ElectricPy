@@ -55,25 +55,27 @@
 <dt id="electricpy.suspension_insulators">
 <code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">suspension_insulators</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">number_capacitors</span></em>, <em class="sig-param"><span class="n">capacitance_ratio</span></em>, <em class="sig-param"><span class="n">Voltage</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.suspension_insulators" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Voltage of Each Capacitor in a Suspension Insulator Strain</p>
-<p>reference:https://electrical-engineering-portal.com/download-center/books-and-guides/power-substations/insulator-pollution</p>
 <p>To perform the calculations described here, the following formulas are satisfied, and used
 to construct a matrix used to solve for <span class="math notranslate nohighlight">\(V_i \text{i in range(1,n)}\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\sum_{i=1}^{n-2} V_{i} + V_{n-1} \cdot (1+m) - V_{n} \cdot m = 0\]</div>
 <div class="math notranslate nohighlight">
 \[\sum_{i=1}^{n} V_{i} = V_{\text{transmission line}}\]</div>
+<img alt="../_images/SuspensionInuslator.png" src="../_images/SuspensionInuslator.png" />
+<p><a class="reference external" href="https://electrical-engineering-portal.com/download-center/books-and-guides/power-substations/insulator-pollution">Additional Information</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>number_capacitors</strong> (<em>number of disk capacitors hung to transmission line</em>) – </p></li>
-<li><p><strong>capacitance_ratio</strong> (<em>ratio of disk capacitance and pin to pole air capacitance</em>) – </p></li>
-<li><p><strong>Voltage</strong> (<em>voltage difference between the transmission line and ground</em>) – </p></li>
+<li><p><strong>number_capacitors</strong> (<em>int</em>) – Number of disk capacitors hung to transmission line</p></li>
+<li><p><strong>capacitance_ratio</strong> (<em>float</em>) – Ratio of disk capacitance and pin to pole air capacitance</p></li>
+<li><p><strong>Voltage</strong> (<em>float</em>) – Voltage difference between the transmission line and ground</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p><strong>string_efficiency</strong> (<em>string effieciency of capacitive disks</em>)</p></li>
-<li><p><strong>capacitor_disk_voltages</strong> (<em>Voltage across each capacitive disk starting from top to bottom</em>)</p></li>
+<li><p><strong>string_efficiency</strong> (<em>float</em>) – String efficiency of capacitive disks</p></li>
+<li><p><strong>capacitor_disk_voltages</strong> (<em>float</em>) – Voltage across each capacitive disk starting from
+top to bottom</p></li>
 </ul>
 </p>
 </dd>

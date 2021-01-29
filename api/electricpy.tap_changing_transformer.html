@@ -58,23 +58,23 @@
 <p>The purpose of a tap changer is to regulate the output voltage of a transformer.
 It does this by altering the number of turns in one winding and thereby changing the turns ratio of the transformer</p>
 <div class="math notranslate nohighlight">
-\[frac{Vgen^2}{Vgen*Vdis-R*P-X*Q}\]</div>
+\[\frac{Vgen^2}{Vgen \cdot Vdis - R \cdot P - X \cdot Q}\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>Vgen</strong> (<em>generating station voltage</em>) – </p></li>
-<li><p><strong>Vdis</strong> (<em>distribution network voltage</em>) – </p></li>
-<li><p><strong>Pload</strong> (<em>transmission line load active power in Watt</em>) – </p></li>
-<li><p><strong>Qload</strong> (<em>transmission line load reactive power in VAR</em>) – </p></li>
-<li><p><strong>R</strong> (<em>resistance of transmission line</em>) – </p></li>
-<li><p><strong>X</strong> (<em>reactance of transmission line</em>) – </p></li>
+<li><p><strong>Vgen</strong> (<em>float</em>) – Generating station voltage</p></li>
+<li><p><strong>Vdis</strong> (<em>float</em>) – Distribution network voltage</p></li>
+<li><p><strong>Pload</strong> (<em>float</em>) – Transmission line load active power in Watt</p></li>
+<li><p><strong>Qload</strong> (<em>float</em>) – Transmission line load reactive power in VAR</p></li>
+<li><p><strong>R</strong> (<em>float</em>) – Resistance of transmission line</p></li>
+<li><p><strong>X</strong> (<em>float</em>) – Reactance of transmission line</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>ts</strong></p>
+<dd class="field-even"><p><strong>ts</strong> – Turns ration of transformer</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>turns ration of transformer</p>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
