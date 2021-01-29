@@ -21,7 +21,8 @@ jobs:
       # I don't know where the "run" thing is documented.
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install -r source/sphinxrequires.txt
       - name: Build Sphinx docs
         if: success()

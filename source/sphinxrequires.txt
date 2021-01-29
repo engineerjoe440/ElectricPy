@@ -2,3 +2,8 @@ wheel
 sphinx
 numpydoc
 sphinx-sitemap
+numpy
+matplotlib
+scipy
+sympy
+numdifftools
