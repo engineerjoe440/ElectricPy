@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="7.5in"
+   height="7.5in"
+   viewBox="0 0 190.5 190.50001"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.1 (1.0.1+r74)"
+   sodipodi:docname="WheatstoneBridgeCircuit.svg"
+   inkscape:export-filename="/home/joestan/Documents/ElectricPy/source/static/WheatstoneBridgeCircuit.png"
+   inkscape:export-xdpi="56.198833"
+   inkscape:export-ydpi="56.198833">
+  <defs
+     id="defs2">
+    <rect
+       x="70.752151"
+       y="111.44474"
+       width="17.511534"
+       height="16.211121"
+       id="rect4209" />
+    <symbol
+       id="generic">
+      <title
+         id="title1671">generic</title>
+      <g
+         stroke-miterlimit="10"
+         id="g1677">
+        <path
+           d="m -0.0142875,39.655221 h 0.27887083 m -0.27887083,0 H 17.447419 m 44.451058,0 h 17.461706 m -0.278871,0 h 0.278871"
+           id="path1673"
+           style="stroke-width:0.264583" />
+        <path
+           d="M 17.447154,31.321375 H 61.897948 V 47.984833 H 17.447154 Z"
+           id="path1675"
+           style="stroke-width:0.264583" />
+      </g>
+    </symbol>
+    <symbol
+       id="battery1">
+      <title
+         id="title1102">battery1</title>
+      <g
+         stroke-miterlimit="10"
+         id="g1108">
+        <path
+           d="M 0,39.6875 H 0.27887083 M 0,39.6875 h 31.353125 m 16.66875,0 H 79.375 m -0.278871,0 H 79.375 m -36.936627,0 h 5.583502 m -11.085513,0 h -5.583237"
+           id="path1104"
+           style="stroke-width:0.264583" />
+        <path
+           d="m 42.438373,31.353125 v 16.66875 M 36.936627,23.01875 v 33.3375"
+           id="path1106"
+           style="stroke-width:0.264583" />
+      </g>
+    </symbol>
+    <symbol
+       id="resistor">
+      <title
+         id="title2348">resistor</title>
+      <g
+         stroke-miterlimit="10"
+         id="g2354">
+        <path
+           d="m -0.00740833,39.700729 h 0.27913541 m -0.27913541,0 H 17.454562 m 44.450794,0 h 17.461706 m -0.27887,0 h 0.27887"
+           id="path2350"
+           style="stroke-width:0.264583" />
+        <path
+           d="m 16.898408,39.700729 4.309534,-8.334375 7.503054,16.663458 7.497762,-16.663458 7.503054,16.663458 7.503319,-16.663458 7.497763,16.663458 3.751527,-8.329083"
+           id="path2352"
+           style="stroke-width:0.264583" />
+      </g>
+    </symbol>
+    <symbol
+       id="european_resistor">
+      <title
+         id="title1437">european_resistor</title>
+      <g
+         stroke-miterlimit="10"
+         id="g1443">
+        <path
+           d="m -0.00740833,39.659983 h 0.27913541 m -0.27913541,0 H 17.454562 m 44.450794,0 h 17.461706 m -0.27887,0 h 0.27887"
+           id="path1439"
+           style="stroke-width:0.264583" />
+        <path
+           d="m 17.454033,31.326402 h 44.451059 v 16.66875 H 17.454033 Z"
+           id="path1441"
+           style="stroke-width:0.264583" />
+      </g>
+    </symbol>
+    <rect
+       x="70.752151"
+       y="111.44474"
+       width="17.511534"
+       height="16.211121"
+       id="rect4209-9" />
+    <rect
+       x="70.752151"
+       y="111.44474"
+       width="17.511534"
+       height="16.211121"
+       id="rect4222" />
+    <rect
+       x="70.752151"
+       y="111.44474"
+       width="17.511534"
+       height="16.211121"
+       id="rect4209-1" />
+    <rect
+       x="70.752151"
+       y="111.44474"
+       width="17.511534"
+       height="16.211121"
+       id="rect4251" />
+    <rect
+       x="70.752151"
+       y="111.44474"
+       width="17.511534"
+       height="16.211121"
+       id="rect4209-9-0" />
+    <rect
+       x="70.752151"
+       y="111.44474"
+       width="17.511534"
+       height="16.211121"
+       id="rect4254" />
+    <rect
+       x="70.752151"
+       y="111.44474"
+       width="17.511534"
+       height="16.211121"
+       id="rect4209-1-2" />
+    <rect
+       x="70.752151"
+       y="111.44474"
+       width="17.511534"
+       height="16.211121"
+       id="rect4298" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.44186671"
+     inkscape:cx="174.09739"
+     inkscape:cy="552.16085"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     units="in"
+     inkscape:window-width="1366"
+     inkscape:window-height="703"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g4126"
+       transform="translate(-8.7879029,-79.448149)">
+      <use
+         xlink:href="#generic"
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none"
+         id="use4002"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%"
+         transform="rotate(45,-5.9530665,189.29036)" />
+      <use
+         xlink:href="#generic"
+         style="fill:none;stroke:#000000;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none"
+         id="use4002-3"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%"
+         transform="rotate(45,-101.09325,149.882)" />
+      <use
+         xlink:href="#generic"
+         style="fill:none;stroke:#000000;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none"
+         id="use4002-6"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%"
+         transform="rotate(-45,149.54102,33.523417)" />
+      <use
+         xlink:href="#generic"
+         style="fill:none;stroke:#000000;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none"
+         id="use4002-6-7"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%"
+         transform="rotate(-45,245.15715,-5.6877877)" />
+    </g>
+    <g
+       id="g4120"
+       transform="translate(-5.2451274,-79.448149)">
+      <use
+         xlink:href="#battery1"
+         style="fill:none;stroke:#000000;stroke-width:3px"
+         id="use4069"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%"
+         transform="matrix(0.67363418,0,0,1,47.865163,205.64899)" />
+      <use
+         xlink:href="#resistor"
+         style="fill:none;stroke:#000000;stroke-width:3px"
+         id="use4100"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%"
+         transform="matrix(0.65537737,0,0,1,101.33973,205.63576)" />
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.251115px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 42.807456,165.88811 -25.73144,0.17844"
+       id="path4130" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 39.337384,64.162681 17.113379,63.869641"
+       id="path4132" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 17.192057,166.08748 17.267407,63.848481"
+       id="path4134" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.248289px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 173.26558,165.7099 -25.1556,0.17844"
+       id="path4130-5" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 173.4204,64.316101 -22.22592,-0.014"
+       id="path4132-3" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.263813px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 173.23293,165.84245 0.0754,-101.644429"
+       id="path4134-5" />
+    <use
+       xlink:href="#european_resistor"
+       style="fill:none;stroke:#000000;stroke-width:3px"
+       id="use4185"
+       x="0"
+       y="0"
+       width="100%"
+       height="100%"
+       transform="rotate(-90,78.446029,22.741801)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 95.364208,101.19523 -0.295,19.09357"
+       id="path4203" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 95.364208,21.820771 0.0994,-13.3900417"
+       id="path4205" />
+    <text
+       xml:space="preserve"
+       id="text4207"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:serif;-inkscape-font-specification:serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect4209);fill:#000000;fill-opacity:1;stroke:none;"
+       transform="translate(-10.693326,-80.798604)"><tspan
+         x="70.751953"
+         y="120.80905"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:serif;-inkscape-font-specification:serif">Z1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       id="text4207-6"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:serif;-inkscape-font-specification:serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect4209-9);fill:#000000;fill-opacity:1;stroke:none;"
+       transform="translate(46.416722,-80.798604)"><tspan
+         x="70.751953"
+         y="120.80905"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:serif;-inkscape-font-specification:serif">Z2</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       id="text4207-4"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:serif;-inkscape-font-specification:serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect4209-1);fill:#000000;fill-opacity:1;stroke:none;"
+       transform="translate(-10.670881,-26.445922)"><tspan
+         x="70.751953"
+         y="120.80905"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:serif;-inkscape-font-specification:serif">Z4</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       id="text4207-6-2"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:serif;-inkscape-font-specification:serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect4209-9-0);fill:#000000;fill-opacity:1;stroke:none;"
+       transform="translate(46.43916,-26.445922)"><tspan
+         x="70.751953"
+         y="120.80905"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:serif;-inkscape-font-specification:serif">Z3</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       id="text4207-4-2"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:serif;-inkscape-font-specification:serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect4209-1-2);fill:#000000;fill-opacity:1;stroke:none;"
+       transform="translate(17.794958,-55.185204)"><tspan
+         x="70.751953"
+         y="120.80905"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:serif;-inkscape-font-specification:serif">Z5</tspan></tspan></text>
+  </g>
+</svg>
