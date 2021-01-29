@@ -1,4 +1,4 @@
-electricpy
+﻿electricpy
 ==========
 
 .. rubric:: Description
@@ -18,6 +18,8 @@ electricpy
     abc_to_seq
     
     acpiv
+    
+    bridge_impedance
     
     btu
     
@@ -171,6 +173,8 @@ electricpy
     
     probdensity
     
+    propagation_constants
+    
     protor
     
     pstator
@@ -217,9 +221,13 @@ electricpy
     
     string_to_bits
     
+    suspension_insulators
+    
     syncspeed
     
     synmach_Eq
+    
+    tap_changing_transformer
     
     tcycle
     

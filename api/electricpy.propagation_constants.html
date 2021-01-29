@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>electricpy.syncspeed &#8212; electricpy 0.1.8 documentation</title>
+    <title>electricpy.propagation_constants &#8212; electricpy 0.1.8 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     
@@ -15,12 +15,12 @@
     <script src="../_static/doctools.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
-    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.syncspeed.html" />
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.propagation_constants.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.synmach_Eq" href="electricpy.synmach_Eq.html" />
-    <link rel="prev" title="electricpy.suspension_insulators" href="electricpy.suspension_insulators.html" /> 
+    <link rel="next" title="electricpy.protor" href="electricpy.protor.html" />
+    <link rel="prev" title="electricpy.probdensity" href="electricpy.probdensity.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -32,15 +32,15 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.synmach_Eq.html" title="electricpy.synmach_Eq"
+          <a href="electricpy.protor.html" title="electricpy.protor"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="electricpy.suspension_insulators.html" title="electricpy.suspension_insulators"
+          <a href="electricpy.probdensity.html" title="electricpy.probdensity"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">electricpy.syncspeed</a></li> 
+        <li class="nav-item nav-item-this"><a href="">electricpy.propagation_constants</a></li> 
       </ul>
     </div>  
 
@@ -49,37 +49,46 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="electricpy-syncspeed">
-<h1>electricpy.syncspeed<a class="headerlink" href="#electricpy-syncspeed" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="electricpy-propagation-constants">
+<h1>electricpy.propagation_constants<a class="headerlink" href="#electricpy-propagation-constants" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="electricpy.syncspeed">
-<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">syncspeed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Npol</span></em>, <em class="sig-param"><span class="n">freq</span><span class="o">=</span><span class="default_value">60</span></em>, <em class="sig-param"><span class="n">Hz</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.syncspeed" title="Permalink to this definition">¶</a></dt>
-<dd><p>Synchronous Speed Calculator Function</p>
-<p>Simple method of calculating the synchronous
-speed of an induction machine given the number
-of poles in the machine’s construction, and
-the machine’s operating electrical frequency.</p>
+<dt id="electricpy.propagation_constants">
+<code class="sig-prename descclassname">electricpy.</code><code class="sig-name descname">propagation_constants</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">z</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.propagation_constants" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transaction Line Propagation Constant Calculator</p>
+<p>This function will evaluate the propagation constants for a long transmission
+line whose properties are governed by the differential equation:</p>
 <div class="math notranslate nohighlight">
-\[\omega_{\text{syn}}=\frac{2\pi
-\cdot\text{freq}}{\frac{N_{\text{pol}}}{2}}\]</div>
+\[\frac{d^2V}{dx^2} = \gamma V\]</div>
+<p>From the above equation, the following formulas are derived to evaluate the
+desired constants.</p>
+<div class="math notranslate nohighlight">
+\[\gamma = \sqrt( z * y )\]</div>
+<div class="math notranslate nohighlight">
+\[Z_{\text{surge}} = \sqrt( z / y )\]</div>
+<div class="math notranslate nohighlight">
+\[\alpha = \Re{ \gamma }\]</div>
+<div class="math notranslate nohighlight">
+\[\beta = \Im{ \gamma }\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>Npol</strong> (<em>int</em>) – Number of electrical poles in
-machine’s construction.</p></li>
-<li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – Frequency of electrical system in
-Hertz, default=60</p></li>
-<li><p><strong>Hz</strong> (<em>bool</em><em>, </em><em>optional</em>) – Boolean control to enable return
-in Hertz. default=False</p></li>
+<li><p><strong>z</strong> (<em>complex</em>) – Impedence of the transmission line: R+j*2*pi*f*L</p></li>
+<li><p><strong>y</strong> (<em>complex</em>) – Admitance of the transmission line g+j*2*pi*f*C</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>wsyn</strong> – Synchronous Speed of Induction Machine,
-defaults to units of rad/sec, but may
-be set to Hertz if <cite>Hz</cite> set to True.</p>
+<dd class="field-even"><p><p><strong>params</strong> –</p>
+<p>Dictionary of propagation constants including:</p>
+<blockquote>
+<div><p>gamma:   Propagation constant
+zc:            Surge impedance
+alpha:      Attenuation constant
+beta:        Imaginary portion of gamma</p>
+</div></blockquote>
+</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
+<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -97,15 +106,15 @@ be set to Hertz if <cite>Hz</cite> set to True.</p>
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="electricpy.suspension_insulators.html"
-                        title="previous chapter">electricpy.suspension_insulators</a></p>
+  <p class="topless"><a href="electricpy.probdensity.html"
+                        title="previous chapter">electricpy.probdensity</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="electricpy.synmach_Eq.html"
-                        title="next chapter">electricpy.synmach_Eq</a></p>
+  <p class="topless"><a href="electricpy.protor.html"
+                        title="next chapter">electricpy.protor</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/electricpy.syncspeed.rst.txt"
+      <li><a href="../_sources/api/electricpy.propagation_constants.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -133,15 +142,15 @@ be set to Hertz if <cite>Hz</cite> set to True.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.synmach_Eq.html" title="electricpy.synmach_Eq"
+          <a href="electricpy.protor.html" title="electricpy.protor"
              >next</a> |</li>
         <li class="right" >
-          <a href="electricpy.suspension_insulators.html" title="electricpy.suspension_insulators"
+          <a href="electricpy.probdensity.html" title="electricpy.probdensity"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.1.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">electricpy.syncspeed</a></li> 
+        <li class="nav-item nav-item-this"><a href="">electricpy.propagation_constants</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
