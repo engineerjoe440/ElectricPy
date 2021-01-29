@@ -14,7 +14,7 @@ to aid in scientific calculations.
 
 # Define Module Specific Variables
 _name_ = "electricpy"
-_version_ = "0.1.8"
+_version_ = "0.2.0"
 __version__ = _version_  # Alias Version for User Ease
 
 # Version Breakdown:
@@ -1696,13 +1696,13 @@ def bridge_impedance(z1, z2, z3, z4, z5):
     Parameters
     ----------
     z1:     [float, complex]
-            Bridge impedance
+            Bridge impedance 1
     z2:     [float, complex]
-            Bridge impedance
+            Bridge impedance 2
     z3:     [float, complex]
-            Bridge impedance
+            Bridge impedance 3
     z4:     [float, complex]
-            Bridge impedance
+            Bridge impedance 4
     z5:     [float, complex]
             Detector impedance or impedance between two bridge branches
 
