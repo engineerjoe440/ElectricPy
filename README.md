@@ -19,6 +19,7 @@ for research, development, education, and exploration in the realm of electrical
 Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/
 
 ### Special thanks to:
+- Lakshmikanth Ayyadevara | Student
 - Stephen Weeks | Student - University of Idaho
 - Jeremy Perhac | Student - University of Idaho
 - Daniel Allen | Student - Universtiy of Idaho
