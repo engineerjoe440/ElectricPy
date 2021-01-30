@@ -4451,7 +4451,7 @@ def tap_changing_transformer(Vgen, Vdis, Pload, Qload, R, X):
         The purpose of a tap changer is to regulate the output voltage of a transformer.
         It does this by altering the number of turns in one winding and thereby changing the turns ratio of the transformer
         
-        .. math:: \\frac{Vgen^2}{Vgen \\cdot Vdis - R \\cdot P - X \\cdot Q}
+        .. math:: \\sqrt{\\frac{Vgen^2}{Vgen \\cdot Vdis - R \\cdot P - X \\cdot Q}}
 
         Parameters
         ----------
