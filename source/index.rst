@@ -32,6 +32,7 @@ to aid in scientific calculations.
    bode
    fault
    sim
+   changelog
 
 -------------------------
 ADDITIONAL PROJECT LINKS:
@@ -39,6 +40,14 @@ ADDITIONAL PROJECT LINKS:
 PyPI: https://pypi.org/project/electricpy/
 
 GitHub: https://github.com/engineerjoe440/electricpy
+
+
+---------------
+Recent Changes:
+---------------
+
+.. git_changelog::
+   :revisions: 5
 
 
 -------------

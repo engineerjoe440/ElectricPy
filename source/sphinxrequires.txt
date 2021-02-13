@@ -2,7 +2,7 @@ wheel
 sphinx
 numpydoc
 sphinx-sitemap
-gitchangelog
+sphinx-git
 numpy
 matplotlib
 scipy
