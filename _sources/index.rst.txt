@@ -32,7 +32,6 @@ to aid in scientific calculations.
    bode
    fault
    sim
-   changelog
 
 -------------------------
 ADDITIONAL PROJECT LINKS:
@@ -47,7 +46,6 @@ Recent Changes:
 ---------------
 
 .. git_changelog::
-   :revisions: 5
 
 
 -------------
