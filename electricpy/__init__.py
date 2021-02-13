@@ -1929,10 +1929,13 @@ def powerimpedance(S, V, PF=None, parallel=False, terms=False):
     Function to determine the ohmic resistance/reactance
     (impedance) represented by the apparent power (S).
 
-    .. math:: Z = \\frac{V^2}{S}
+    .. math:: R = \\frac{V^2}{P} \\hspace{2cm} X = \\frac{V^2}{Q}
        :label: series
 
-    .. math:: Z = \\frac{V^2}{(3*S)}
+    .. math:: Z = \\left(\\frac{V^2}{S}\\right)^*
+       :label: series
+
+    .. math:: Z = \\left(\\frac{V^2}{(3*S)}\\right)^*
        :label: parallel
 
     This function can evaluate the component values for
@@ -1988,18 +1991,19 @@ def powerimpedance(S, V, PF=None, parallel=False, terms=False):
             Q = S.imag
         # Compute Elements
         if parallel:
-            R = V ** 2 / (3 * P)
-            X = V ** 2 / (3 * Q)
+            Zp = V ** 2 / (3 * (P + 1j*Q))
         else:
-            R = V ** 2 / (P)
-            X = V ** 2 / (Q)
+            Zp = V ** 2 / (P + 1j*Q)
+        Z = _np.conjugate(Zp)
+        R = Z.real
+        X = Z.imag
         # Conditionally Return as Impedance
         if terms:
             return (R, X)
-        return (R + 1j * X)
+        return Z
     # Not Complex (just R)
     R = V ** 2 / S
-    return (R)
+    return R
 
 
 # Define Cold-Junction-Voltage Calculator
