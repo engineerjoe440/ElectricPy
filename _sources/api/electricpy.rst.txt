@@ -261,6 +261,8 @@
     
     watts_to_hp
     
+    wireresistance
+    
     wrms
     
     xfmphs

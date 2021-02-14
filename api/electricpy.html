@@ -13,7 +13,6 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
@@ -435,25 +434,28 @@ to aid in scientific calculations.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="electricpy.watts_to_hp.html#electricpy.watts_to_hp" title="electricpy.watts_to_hp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">watts_to_hp</span></code></a>(watts)</p></td>
 <td><p>Watts to Horsepower Function</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.wrms.html#electricpy.wrms" title="electricpy.wrms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wrms</span></code></a>(func[, dw, NN, quad, plot, title, round])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.wireresistance.html#electricpy.wireresistance" title="electricpy.wireresistance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wireresistance</span></code></a>([length, diameter, rho, R])</p></td>
+<td><p>Wire Resistance Calculator</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.wrms.html#electricpy.wrms" title="electricpy.wrms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wrms</span></code></a>(func[, dw, NN, quad, plot, title, round])</p></td>
 <td><p>WRMS Function:</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.xfmphs.html#electricpy.xfmphs" title="electricpy.xfmphs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xfmphs</span></code></a>([style, shift])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.xfmphs.html#electricpy.xfmphs" title="electricpy.xfmphs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xfmphs</span></code></a>([style, shift])</p></td>
 <td><p>Simple Transformer Phase-Shift Calculator</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.zdecompose.html#electricpy.zdecompose" title="electricpy.zdecompose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zdecompose</span></code></a>(Zmag, XoR)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.zdecompose.html#electricpy.zdecompose" title="electricpy.zdecompose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zdecompose</span></code></a>(Zmag, XoR)</p></td>
 <td><p>Impedance Decomposition Function</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.zperlength.html#electricpy.zperlength" title="electricpy.zperlength"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zperlength</span></code></a>([Rd, Rself, Rac, Rgwac, De, rho, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.zperlength.html#electricpy.zperlength" title="electricpy.zperlength"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zperlength</span></code></a>([Rd, Rself, Rac, Rgwac, De, rho, …])</p></td>
 <td><p>Transmission Line Impedance (RL) Calculator</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.zpu.html#electricpy.zpu" title="electricpy.zpu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zpu</span></code></a>(S[, VLL, VLN])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.zpu.html#electricpy.zpu" title="electricpy.zpu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zpu</span></code></a>(S[, VLL, VLN])</p></td>
 <td><p>Per-Unit Impedance Evaluator</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.zrecompose.html#electricpy.zrecompose" title="electricpy.zrecompose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zrecompose</span></code></a>(z_pu, S3phs[, VLL, VLN])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.zrecompose.html#electricpy.zrecompose" title="electricpy.zrecompose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zrecompose</span></code></a>(z_pu, S3phs[, VLL, VLN])</p></td>
 <td><p>Impedance from Per-Unit System Evaluator</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.zsource.html#electricpy.zsource" title="electricpy.zsource"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zsource</span></code></a>(S, V, XoR[, Sbase, Vbase, perunit])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.zsource.html#electricpy.zsource" title="electricpy.zsource"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zsource</span></code></a>(S, V, XoR[, Sbase, Vbase, perunit])</p></td>
 <td><p>Source Impedance Calculator</p></td>
 </tr>
 </tbody>
@@ -519,7 +521,7 @@ to aid in scientific calculations.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Joe Stanley.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.0.
     </div>
   </body>
 </html>
