@@ -6539,7 +6539,7 @@ def wireresistance(length=None,diameter=None,rho=16.8*10**-9,R=None):
                 Wire diameter, unitless.
     rho:        [float], optional
                 Material resistivity, unitless
-                Default value is copper resistivity: 16*10-9 ohm*m
+                Default value is copper resistivity: 16.8*10-9 
     R:          [float], optional
                 Wire resistance, unitless.
     Returns
@@ -6550,7 +6550,7 @@ def wireresistance(length=None,diameter=None,rho=16.8*10**-9,R=None):
                 Wire diameter, unitless.
     rho:        [float], optional
                 Material resistivity, unitless
-                Default value is copper resistivity: 16*10-9 ohm*m
+                Default value is copper resistivity: 16.8*10-9 
     R:          [float], optional
                 Wire resistance, unitless.
     """
