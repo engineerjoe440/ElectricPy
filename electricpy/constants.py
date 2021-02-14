@@ -71,3 +71,21 @@ e90 = _c.rect(1,_np.radians(90)) #: 90° Phase Operator
 en90 = _c.rect(1,_np.radians(-90)) #: -90° Phase Operator
 e45 = _c.rect(1,_np.radians(45)) #: 45° Phase Operator
 en45 = _c.rect(1,_np.radians(-45)) #: -45° Phase Operator
+
+# Define Material Resistivity (Rho)
+resistivity_rho = {
+    'silver':       15.9,
+    'copper':       16.8,
+    'aluminium':    6.5,
+    'tungsten':     56,
+    'iron':         97.1,
+    'platinum':     106,
+    'manganin':     482,
+    'lead':         220,
+    'mercury':      980,
+    'nichrome':     1000,
+    'constantan':   490,
+}
+
+
+# END OF FILE
