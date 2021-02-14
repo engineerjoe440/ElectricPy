@@ -6522,4 +6522,58 @@ def phs3valpha(VA, VB=0, VC=0):
     # Return the Alpha-Voltage
     return (Valpha)
 
+def wireresistance(length=None,diameter=None,rho=16.8*10**-9,R=None):
+    """
+    Wire Resistance Calculator
+
+    Enter three values to calculate the remaing one. Even though every variable
+    is unitless, please use the International System of Units.
+
+    .. math:: R = \\frac{\\rho*l}{A}
+
+    Parameters
+    ----------
+    length:     [float], optional
+                Wire length, unitless
+    diameter:   [float], optional
+                Wire diameter, unitless.
+    rho:        [float], optional
+                Material resistivity, unitless
+                Default value is copper resistivity: 16.8*10-9 
+    R:          [float], optional
+                Wire resistance, unitless.
+    Returns
+    -------
+    length:     [float], optional
+                Wire length, unitless
+    diameter:   [float], optional
+                Wire diameter, unitless.
+    rho:        [float], optional
+                Material resistivity, unitless
+                Default value is copper resistivity: 16.8*10-9 
+    R:          [float], optional
+                Wire resistance, unitless.
+    """
+    if R == length == diameter == None:
+        raise ValueError("To few arguments.")
+    # Given length and diameter
+    if length != None and diameter != None:
+        # calculating the area
+        A = pi*( diameter ** 2 ) / 4
+        return rho*length/A
+    # Given resistance and diameter
+    elif R != None and diameter != None:
+        # calculating the area
+        A = pi*( diameter ** 2 ) / 4
+        return R*A/rho
+    # Given resistance and length
+    elif R != None and length != None:
+        A = rho*length/R
+        return _np.sqrt(4*A/pi)
+        
+
+
+
+
+
 # END OF FILE
