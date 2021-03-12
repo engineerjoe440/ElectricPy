@@ -32,6 +32,8 @@ from scipy.optimize import fsolve as _fsolve
 from warnings import showwarning as _showwarning
 from inspect import getframeinfo as _getframeinfo
 from inspect import stack as _stack
+from scipy.integrate import quad as integrate
+import scipy.signal as sig
 
 
 # Define Phase Angle Generator
@@ -2977,7 +2979,7 @@ def funcrms(f, T):
 
     """
     fn = lambda x: f(x) ** 2
-    integral = integrate(fn, 0, T)
+    integral,_ = integrate(fn, 0, T)
     RMS = _np.sqrt(1 / T * integral)
     return (RMS)
 
@@ -5563,7 +5565,7 @@ def indmachpktorq(Rr, s_pk=None, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0,
     return (Tpk)
 
 
-# Define Induction Machine Peak Torque Calculator
+# Define Induction Machine Starting Torque Calculator
 def indmachstarttorq(Rr, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0,
                      Lls=0, Llr=0, Ls=None, Lr=None, freq=60, calcX=True):
     """
@@ -5960,7 +5962,7 @@ def transposez(Zeq, fabc=1 / 3, fcab=1 / 3, fbca=1 / 3, linelen=1):
         [0, 1, 0]
     ])
     # Define Inverse Rp Array
-    _Rp = np.linalg.inv(Rp)
+    _Rp = _np.linalg.inv(Rp)
     Zeq = fabc * Zeq + fcab * (_Rp.dot(Zeq.dot(Rp))) + fbca * (Rp.dot(Zeq.dot(_Rp)))
     Zeq = Zeq * linelen
     return (Zeq)
