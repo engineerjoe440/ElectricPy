@@ -11,3 +11,5 @@ build/
 
 # Ignore TOX
 .tox/
+/venv
+/.idea

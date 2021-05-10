@@ -1,5 +1,7 @@
 import pytest
+import cmath
 import numpy as np
+import numpy.testing as npt
 
 def assertAlmostEqual(a,b,abs=1e-6):
 
@@ -223,3 +225,38 @@ def test_convolve():
     B = (1,1,1)
 
     assert ([1,2,3,2,1] == convolve((A,B))).all()
+
+def test_ic_555():
+
+    from electricpy import ic_555
+
+    # Astable configuration
+    R = [10, 10]
+    C = 1e-6
+    result = ic_555('ASTABLE', R, C)
+
+    for key,value in result.items():
+        result[key] = np.round(value, decimals=6)
+
+    assertAlmostEqual(result['duty_cycle'], 66.666666667, abs=1e-3)
+    assertAlmostEqual(result['t_low'], 6.931*10**-6, abs=1e-3)
+    assertAlmostEqual(result['t_high'], 1.386*10**-5, abs=1e-3)
+
+    #test the other way around
+
+def test_induction_motor_circle():
+    from electricpy import InductionMotorCircle
+
+    open_circuit_test_data = {'V0': 400, 'I0': 9, 'W0': 1310}
+    blocked_rotor_test_data = {'Vsc': 200, 'Isc': 50, 'Wsc': 7100}
+    ratio = 1  # stator copper loss/ rotor copper loss
+    output_power = 15000
+    # InductionMotorCircle(open_circuit_test_data, blocked_rotor_test_data, output_power, torque_ration=ratio)
+    #
+    MotorCircle = InductionMotorCircle(open_circuit_test_data, blocked_rotor_test_data,
+                        output_power, torque_ration=ratio, frequency=50, poles=4)
+
+    assertAlmostEqual(MotorCircle()['no_load_loss'], open_circuit_test_data['W0'])
+
+
+

@@ -8,6 +8,7 @@
 
 # Import Necessary Libraries
 import numpy as _np
+import matplotlib.pyplot as plt
 from scipy.optimize import fsolve as _fsolve
 
 # Import Local Dependencies
