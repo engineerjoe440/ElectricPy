@@ -12,6 +12,7 @@ import numpy as _np
 import scipy.signal as _sig
 from numpy import pi as _pi
 from cmath import exp as _exp
+import scipy.signal as sig
 
 # Define System Conditioning Function
 def _sys_condition(system,feedback):
@@ -20,9 +21,9 @@ def _sys_condition(system,feedback):
         den = system[1]
         # Convolve numerator or denominator as needed
         if (str(type(num)) == tuple):
-            num = convolve(num)        # Convolve terms in numerator
+            num = sig.convolve(num)        # Convolve terms in numerator
         if (str(type(den)) == tuple):
-            den = convolve(den)        # Convolve terms in denominator
+            den = sig.convolve(den)        # Convolve terms in denominator
         if feedback: # If asked to add the numerator to the denominator
             ld = len(den) # Length of denominator
             ln = len(num) # Length of numerator
@@ -156,7 +157,7 @@ def bode(system,mn=0.001,mx=1000,npts=100,title="",xlim=False,ylim=False,sv=Fals
         _plt.show()
 
 def sbode(f,NN=1000,title="",xlim=False,ylim=False,mn=0,mx=1000,
-          disp3db=False,lowcut=None,magnitude=True,angle=True):
+          disp3db=False,lowcut=None,magnitude=True,angle=True,sv=False):
     """
     S-Domain Bode Plotting Function
     
@@ -236,7 +237,7 @@ def sbode(f,NN=1000,title="",xlim=False,ylim=False,mn=0,mx=1000,
 
 
 def zbode(f,dt=0.01,NN=1000,title="",mn=0,mx=2*_pi,xlim=False,ylim=False,
-          approx=False,disp3db=False,lowcut=None,magnitude=True,angle=True):
+          approx=False,disp3db=False,lowcut=None,magnitude=True,angle=True,sv=False):
     """
     Z-Domain Bode Plotting Function
     
