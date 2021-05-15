@@ -14,7 +14,7 @@ to aid in scientific calculations.
 
 # Define Module Specific Variables
 _name_ = "electricpy"
-_version_ = "0.1.8"
+_version_ = "0.2.0"
 __version__ = _version_  # Alias Version for User Ease
 
 # Version Breakdown:
@@ -1694,29 +1694,33 @@ def bridge_impedance(z1, z2, z3, z4, z5):
 
     .. math:: z1 \\cdot z3 = z2 \\cdot z4
     
+    .. image:: /static/WheatstoneBridgeCircuit.png
+    
     Parameters
     ----------
-    z1, z2, z3, z4 are bridge impedance's in clock wise direction
-
-    z5 is the detector impedance or impedance between two bridge branches
+    z1:     [float, complex]
+            Bridge impedance 1
+    z2:     [float, complex]
+            Bridge impedance 2
+    z3:     [float, complex]
+            Bridge impedance 3
+    z4:     [float, complex]
+            Bridge impedance 4
+    z5:     [float, complex]
+            Detector impedance or impedance between two bridge branches
 
     Returns
     -------
-
     effective bridge impedance
 
     """
 
     if z1 * z3 == z2 * z4:
-        ''' this is a wheat stone bridge'''
         return (z1 + z2) * (z3 + z4) / (z1 + z2 + z3 + z4)
     else:
         za, zb, zc = dynetz(delta = (z1, z5, z4))
-
         ze1 = zb + z2
-
         ze2 = zc + z3
-
         return za + (ze1*ze2)/(ze1+ze2)
 
 
@@ -1928,10 +1932,13 @@ def powerimpedance(S, V, PF=None, parallel=False, terms=False):
     Function to determine the ohmic resistance/reactance
     (impedance) represented by the apparent power (S).
 
-    .. math:: Z = \\frac{V^2}{S}
+    .. math:: R = \\frac{V^2}{P} \\hspace{2cm} X = \\frac{V^2}{Q}
        :label: series
 
-    .. math:: Z = \\frac{V^2}{(3*S)}
+    .. math:: Z = \\left(\\frac{V^2}{S}\\right)^*
+       :label: series
+
+    .. math:: Z = \\left(\\frac{V^2}{(3*S)}\\right)^*
        :label: parallel
 
     This function can evaluate the component values for
@@ -1987,18 +1994,19 @@ def powerimpedance(S, V, PF=None, parallel=False, terms=False):
             Q = S.imag
         # Compute Elements
         if parallel:
-            R = V ** 2 / (3 * P)
-            X = V ** 2 / (3 * Q)
+            Zp = V ** 2 / (3 * (P + 1j*Q))
         else:
-            R = V ** 2 / (P)
-            X = V ** 2 / (Q)
+            Zp = V ** 2 / (P + 1j*Q)
+        Z = _np.conjugate(Zp)
+        R = Z.real
+        X = Z.imag
         # Conditionally Return as Impedance
         if terms:
             return (R, X)
-        return (R + 1j * X)
+        return Z
     # Not Complex (just R)
     R = V ** 2 / S
-    return (R)
+    return R
 
 
 # Define Cold-Junction-Voltage Calculator
@@ -4444,46 +4452,44 @@ def secondary(val, Np, Ns=1, invert=False):
 
 
 def tap_changing_transformer(Vgen, Vdis, Pload, Qload, R, X):
-    '''
+    """
         Calculate Turn Ratio of Load Tap Changing Transformer
 
         The purpose of a tap changer is to regulate the output voltage of a transformer.
         It does this by altering the number of turns in one winding and thereby changing the turns ratio of the transformer
         
-        .. math:: frac{Vgen^2}{Vgen*Vdis-R*P-X*Q}
+        .. math:: \\sqrt{\\frac{Vgen^2}{Vgen \\cdot Vdis - R \\cdot P - X \\cdot Q}}
 
         Parameters
         ----------
-        
-        Vgen: generating station voltage
-        
-        Vdis: distribution network voltage
-        
-        Pload: transmission line load active power in Watt
-        
-        Qload: transmission line load reactive power in VAR
-        
-        R: resistance of transmission line
-        
-        X: reactance of transmission line
+        Vgen:   float
+                Generating station voltage
+        Vdis:   float
+                Distribution network voltage
+        Pload:  float
+                Transmission line load active power in Watt
+        Qload:  float
+                Transmission line load reactive power in VAR
+        R:      float
+                Resistance of transmission line
+        X:      float
+                Reactance of transmission line
         
         Returns
         -------
+        ts:     float
+                Turns ration of transformer
         
-        ts: turns ration of transformer
         
-        
-    '''
+    """
 
     ts = (Vgen*Vgen) / (Vgen*Vdis - (R * Pload + X * Qload) )
 
     return pow(ts, 0.5)
 
 def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
-    '''
+    """
         Calculate the Voltage of Each Capacitor in a Suspension Insulator Strain
-
-        reference:https://electrical-engineering-portal.com/download-center/books-and-guides/power-substations/insulator-pollution  
 
 
         To perform the calculations described here, the following formulas are satisfied, and used
@@ -4492,24 +4498,28 @@ def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
         .. math:: \\sum_{i=1}^{n-2} V_{i} + V_{n-1} \\cdot (1+m) - V_{n} \\cdot m = 0
 
         .. math:: \\sum_{i=1}^{n} V_{i} = V_{\\text{transmission line}}
-                
+        
+        .. image:: /static/SuspensionInuslator.png
+        
+        `Additional Information <https://electrical-engineering-portal.com/download-center/books-and-guides/power-substations/insulator-pollution>`_
         
         Parameters
         ----------
-        
-        number_capacitors: number of disk capacitors hung to transmission line
-        
-        capacitance_ratio: ratio of disk capacitance and pin to pole air capacitance
-        
-        Voltage: voltage difference between the transmission line and ground
+        number_capacitors:  int
+                            Number of disk capacitors hung to transmission line
+        capacitance_ratio:  float
+                            Ratio of disk capacitance and pin to pole air capacitance
+        Voltage:            float
+                            Voltage difference between the transmission line and ground
         
         Returns
         -------
-        
-        string_efficiency: string effieciency of capacitive disks
-
-        capacitor_disk_voltages: Voltage across each capacitive disk starting from top to bottom
-    '''
+        string_efficiency:          float
+                                    String efficiency of capacitive disks
+        capacitor_disk_voltages:    float
+                                    Voltage across each capacitive disk starting from
+                                    top to bottom
+    """
 
     m = _np.zeros((number_capacitors, number_capacitors))
 

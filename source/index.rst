@@ -41,6 +41,13 @@ PyPI: https://pypi.org/project/electricpy/
 GitHub: https://github.com/engineerjoe440/electricpy
 
 
+---------------
+Recent Changes:
+---------------
+
+.. git_changelog::
+
+
 -------------
 Dependencies:
 -------------
@@ -91,7 +98,6 @@ To Do List
 - Add Pi Attenuator (https://www.basictables.com/electronics/resistor/pi-attenuator) Formula
 - Add T Attenuator (https://www.basictables.com/electronics/resistor/t-attenuator) Formula
 - Add Simple decibel (https://www.basictables.com/electronics/decibel-dbw) Formulas
-- Add Simple wire resistance (https://www.basictables.com/electronics/resistor/wire-resistance) Formula(s)
 - Add Simple Wheatstone Bridge (https://www.basictables.com/electronics/resistor/wheatstone-bridge) Formulas
 - Add 555 Timer (https://www.basictables.com/electronics/integrated-circuit/555-timer) Formulas
 - Add Inductive Voltage Divider (https://www.basictables.com/electronics/inductor/inductive-voltage-divider) Formula
@@ -159,6 +165,7 @@ For more information regarding this resource, please contact Joe Stanley
    
    **Special thanks to:**
    
+   * Lakshmikanth Ayyadevara | Student
    * Stephen Weeks | Student | University of Idaho
    * Jeremy Perhac | Student | University of Idaho
    * Daniel Allen | Student | Universtiy of Idaho

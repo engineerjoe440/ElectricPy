@@ -19,6 +19,7 @@ for research, development, education, and exploration in the realm of electrical
 Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/
 
 ### Special thanks to:
+- Lakshmikanth Ayyadevara | Student
 - Stephen Weeks | Student - University of Idaho
 - Jeremy Perhac | Student - University of Idaho
 - Daniel Allen | Student - Universtiy of Idaho
@@ -83,8 +84,13 @@ Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/
 - Add [Pi Attenuator](https://www.basictables.com/electronics/resistor/pi-attenuator) Formula
 - Add [T Attenuator](https://www.basictables.com/electronics/resistor/t-attenuator) Formula
 - Add Simple [decibel](https://www.basictables.com/electronics/decibel-dbw) Formulas
+<<<<<<< HEAD
 - Add Simple [wire resistance](https://www.basictables.com/electronics/resistor/wire-resistance) Formula(s)
 Formulas
+=======
+- Add Simple [Wheatstone Bridge](https://www.basictables.com/electronics/resistor/wheatstone-bridge) Formulas
+- Add [555 Timer](https://www.basictables.com/electronics/integrated-circuit/555-timer) Formulas
+>>>>>>> upstream/master
 - Add [Inductive Voltage Divider](https://www.basictables.com/electronics/inductor/inductive-voltage-divider) Formula
 - Add [Slew Rate](https://www.basictables.com/electronics/slew-rate) Formula(s)
 - Add Simple [Battery Discharge Rate](https://www.basictables.com/electronics/battery/battery-discharge-rate) Formula
@@ -98,6 +104,8 @@ If you're interested in contributing, we'd love to see your support in a number 
  2. **Contribute New Electrical Engineering Functions** - If you've got a new function related to electrical engineering that you'd like to see added, we'd love to throw it into this module. Our goal is that this module can become the comprehensive electrical engineering toolkit in Python. Drop us a note, or create a pull request!
  3. **Report Issues** - We don't want issues to go unnoticed. Please help us track bugs and resolve them!
  4. **Get the Word Out** - This project is still in its infancy, so please share it with your friends and colleagues. We want to make sure that everyone has the opportunity to take advantage of this project.
+
+ #### Check out the *[contribution guide](CONTRIBUTING.md)*
     
 
 ## Contact:

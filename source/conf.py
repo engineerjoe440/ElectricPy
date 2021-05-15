@@ -56,6 +56,7 @@ extensions = [  'sphinx.ext.autodoc',
                 'sphinx.ext.mathjax',
                 'sphinx.ext.autosummary',
                 'numpydoc',
+                'sphinx_git',
                 'sphinx_sitemap',
 ]
 autosummary_generate = True

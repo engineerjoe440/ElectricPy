@@ -1125,7 +1125,7 @@ def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0='flatstart',eps=1e-4,
                 default=0.25
     
     
-    .. image:: /_static/mbuspowerflow_example.png
+    .. image:: /static/mbuspowerflow_example.png
     
     Examples
     --------
