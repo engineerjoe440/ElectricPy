@@ -11,6 +11,7 @@ import numpy as _np
 import matplotlib.pyplot as _plt
 from numdifftools import Jacobian as jacobian
 from scipy.optimize import newton
+import scipy.signal as sig
 from warnings import warn as _warn
 
 

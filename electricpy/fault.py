@@ -8,6 +8,7 @@
 
 # Import Necessary Libraries
 import numpy as _np
+import matplotlib.pyplot as _plt
 from scipy.optimize import fsolve as _fsolve
 
 # Import Local Dependencies
@@ -757,14 +758,14 @@ def ct_timetosat(Vknee,XoR,Rb,CTR,Imax,ts=None,npts=100,freq=60,plot=False):
     Vsat3 = Imax*Rb*(1-_np.cos(w*ts))
     # If plotting requested
     if plot and isinstance(ts,_np.ndarray):
-        plt.plot(ts,Vsat1,label="Vsat1")
-        plt.plot(ts,Vsat2,label="Vsat2")
-        plt.plot(ts,Vsat3,label="Vsat3")
-        plt.axhline(Vknee,label="V-knee",linestyle='--')
-        plt.title("Saturation Curves")
-        plt.xlabel("Time (ts)")
-        plt.legend()
-        plt.show()
+        _plt.plot(ts,Vsat1,label="Vsat1")
+        _plt.plot(ts,Vsat2,label="Vsat2")
+        _plt.plot(ts,Vsat3,label="Vsat3")
+        _plt.axhline(Vknee,label="V-knee",linestyle='--')
+        _plt.title("Saturation Curves")
+        _plt.xlabel("Time (ts)")
+        _plt.legend()
+        _plt.show()
     elif plot:
         print("Unable to plot a single point, *ts* must be a numpy-array.")
     # Determine the crossover points for each saturation curve
