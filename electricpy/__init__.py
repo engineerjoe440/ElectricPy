@@ -406,7 +406,7 @@ def tflatex(sys, sysp=None, var='s', predollar=True,
                 denominator of the transfer function.
     var:        str, optional
                 The variable that should be printed for each
-                term (i.e. 's' or 'j\\omega'). default='s'
+                term (i.e. 's' or 'j\omega'). default='s'
     predollar:  bool, optional
                 Control argument to enable/disable the dollar
                 sign before the string. default=True
@@ -534,7 +534,7 @@ def tcycle(ncycles=1, freq=60):
     Evaluates the time for a number of n
     cycles given the system frequency.
 
-    .. math:: t = \\frac{n_{cycles}}{freq}
+    .. math:: t = \frac{n_{cycles}}{freq}
 
     Parameters
     ----------
@@ -572,15 +572,15 @@ def reactance(z, freq=60, sensetivity=1e-12):
     positive :eq:`ind`. If imaginary: calculate with j factor
     (imaginary number).
 
-    .. math:: C = \\frac{1}{\\omega*Z}
+    .. math:: C = \frac{1}{\omega*Z}
        :label: cap
 
-    .. math:: L = \\frac{Z}{\\omega}
+    .. math:: L = \frac{Z}{\omega}
        :label: ind
 
     This requires that the radian frequency is found as follows:
 
-    .. math:: \\omega = 2*\\pi*freq
+    .. math:: \omega = 2*\pi*freq
 
     where `freq` is the frequency in Hertz.
 
@@ -851,13 +851,13 @@ def phasorz(C=None, L=None, freq=60, complex=True):
     capacitance (in Farads) or the inductance (in Henreys).
     The function will return the phasor value (in Ohms).
 
-    .. math:: Z = \\frac{-j}{\\omega*C}
+    .. math:: Z = \frac{-j}{\omega*C}
 
-    .. math:: Z = j*\\omega*L
+    .. math:: Z = j*\omega*L
 
     where:
 
-    .. math:: \\omega = 2*\\pi*freq
+    .. math:: \omega = 2*\pi*freq
 
     Parameters
     ----------
@@ -902,7 +902,7 @@ def parallelz(*args):
     or complex values.
 
     .. math::
-       Z_{eq}=(\\frac{1}{Z_1}+\\frac{1}{Z_2}+\\dots+\\frac{1}{Z_n})^{-1}
+       Z_{eq}=(\frac{1}{Z_1}+\frac{1}{Z_2}+\dots+\frac{1}{Z_n})^{-1}
 
     Parameters
     ----------
@@ -955,7 +955,7 @@ def phaseline(VLL=None, VLN=None, Iline=None, Iphase=None, realonly=None, **kwar
     Given a voltage of one type, this function will return the
     voltage of the opposite type. The same is true for current.
 
-    .. math:: V_{LL} = \\sqrt{3}∠30° * V_{LN}
+    .. math:: V_{LL} = \sqrt{3}∠30° * V_{LN}
        :label: voltages
 
     Typical American (United States) standard is to note voltages in
@@ -963,7 +963,7 @@ def phaseline(VLL=None, VLN=None, Iline=None, Iphase=None, realonly=None, **kwar
     is of value, this function uses the voltage :eq:`voltages` relation
     to evaluate either voltage given the other.
 
-    .. math:: I_{Φ} = \\frac{I_{line}}{\\sqrt{3}∠30°}
+    .. math:: I_{Φ} = \frac{I_{line}}{\sqrt{3}∠30°}
        :label: currents
 
     Often, the phase current in a delta-connected device is of
@@ -1505,9 +1505,9 @@ def voltdiv(Vin, R1, R2, Rload=None):
     the resistances (or impedances) and the load resistance
     (or impedance) if present.
 
-    .. math:: V_{out} = V_{in} * \\frac{R_2}{R_1+R+2}
+    .. math:: V_{out} = V_{in} * \frac{R_2}{R_1+R+2}
 
-    .. math:: V_{out}=V_{in}*\\frac{R_2||R_{load}}{R_1+(R_2||R_{load})}
+    .. math:: V_{out}=V_{in}*\frac{R_2||R_{load}}{R_1+(R_2||R_{load})}
 
     Parameters
     ----------
@@ -1599,7 +1599,7 @@ def instpower(P, Q, t, freq=60):
     This function is designed to calculate the instantaneous power at a
     specified time t given the magnitudes of P and Q.
 
-    .. math:: P_{inst} = P+P*cos(2*\\omega*t)-Q*sin(2*\\omega*t)
+    .. math:: P_{inst} = P+P*cos(2*\omega*t)-Q*sin(2*\omega*t)
 
     Parameters
     ----------
@@ -1635,15 +1635,15 @@ def dynetz(delta=None, wye=None, round=None):
 
     .. math::
        Z_{sum} = Z_{1/2} + Z_{2/3} + Z_{3/1}//
-       Z_1 = \\frac{Z_{1/2}*Z_{3/1}}{Z_{sum}}//
-       Z_2 = \\frac{Z_{1/2}*Z_{2/3}}{Z_{sum}}//
-       Z_3 = \\frac{Z_{2/3}*Z_{3/1}}{Z_{sum}}
+       Z_1 = \frac{Z_{1/2}*Z_{3/1}}{Z_{sum}}//
+       Z_2 = \frac{Z_{1/2}*Z_{2/3}}{Z_{sum}}//
+       Z_3 = \frac{Z_{2/3}*Z_{3/1}}{Z_{sum}}
 
     .. math::
        Z_{ms} = Z_1*Z_2 + Z_2*Z_3 + Z_3*Z_1//
-       Z_{2/3} = \\frac{Z_{ms}}{Z_1}//
-       Z_{3/1} = \\frac{Z_{ms}}{Z_2}//
-       Z_{1/2} = \\frac{Z_{ms}}{Z_3}
+       Z_{2/3} = \frac{Z_{ms}}{Z_1}//
+       Z_{3/1} = \frac{Z_{ms}}{Z_2}//
+       Z_{1/2} = \frac{Z_{ms}}{Z_3}
 
     Parameters
     ----------
@@ -1691,7 +1691,7 @@ def bridge_impedance(z1, z2, z3, z4, z5):
     
     The following condition describing the Wheatstone Bridge is utilized to ensure that current through `z5` will be zero.
 
-    .. math:: z1 \\cdot z3 = z2 \\cdot z4
+    .. math:: z1 \cdot z3 = z2 \cdot z4
     
     .. image:: /static/WheatstoneBridgeCircuit.png
     
@@ -1733,8 +1733,8 @@ def powerflow(Vsend, Vrec, Zline):
     the receiving voltage (complex) and the line impedance.
 
     .. math::
-       P_{flow}=\\frac{|V_{send}|*|V_{rec}|}{Z_{line}}*sin(\\theta_{send}
-       -\\theta_{rec})
+       P_{flow}=\frac{|V_{send}|*|V_{rec}|}{Z_{line}}*sin(\theta_{send}
+       -\theta_{rec})
 
     Parameters
     ----------
@@ -1874,7 +1874,7 @@ def hp_to_watts(hp):
     Calculates the power (in watts) given the
     horsepower.
 
-    .. math:: P_{\\text{watts}}=P_{\\text{horsepower}}\\cdot745.699872
+    .. math:: P_{\text{watts}}=P_{\text{horsepower}}\cdot745.699872
 
     Same as `watts`.
 
@@ -1902,7 +1902,7 @@ def watts_to_hp(watts):
     Calculates the power (in horsepower) given
     the power in watts.
 
-    .. math:: P_{\\text{horsepower}}=\\frac{P_{\\text{watts}}}{745.699872}
+    .. math:: P_{\text{horsepower}}=\frac{P_{\text{watts}}}{745.699872}
 
     Same as `horsepower`.
 
@@ -1930,13 +1930,13 @@ def powerimpedance(S, V, PF=None, parallel=False, terms=False):
     Function to determine the ohmic resistance/reactance
     (impedance) represented by the apparent power (S).
 
-    .. math:: R = \\frac{V^2}{P} \\hspace{2cm} X = \\frac{V^2}{Q}
+    .. math:: R = \frac{V^2}{P} \hspace{2cm} X = \frac{V^2}{Q}
        :label: series
 
-    .. math:: Z = \\left(\\frac{V^2}{S}\\right)^*
+    .. math:: Z = \left(\frac{V^2}{S}\right)^*
        :label: series
 
-    .. math:: Z = \\left(\\frac{V^2}{(3*S)}\\right)^*
+    .. math:: Z = \left(\frac{V^2}{(3*S)}\right)^*
        :label: parallel
 
     This function can evaluate the component values for
@@ -2374,7 +2374,7 @@ def vcapdischarge(t, Vs, R, C):
     Function to calculate the voltage of a
     capacitor that is discharging given the time.
 
-    .. math:: V_c=V_s*e^{\\frac{-t}{R*C}}
+    .. math:: V_c=V_s*e^{\frac{-t}{R*C}}
 
     Parameters
     ----------
@@ -2405,7 +2405,7 @@ def vcapcharge(t, Vs, R, C):
     Function to calculate the voltage of a
     capacitor that is charging given the time.
 
-    .. math:: V_c=V_s*(1-e^{\\frac{-t}{R*C}})
+    .. math:: V_c=V_s*(1-e^{\frac{-t}{R*C}})
 
     Parameters
     ----------
@@ -2473,7 +2473,7 @@ def inductorenergy(L, I):
     Function to calculate the energy stored in an inductor
     given the inductance (in Henries) and the current.
 
-    .. math:: E=\\frac{1}{2}*L*I^2
+    .. math:: E=\frac{1}{2}*L*I^2
 
     Parameters
     ----------
@@ -2499,8 +2499,8 @@ def inductorcharge(t, Vs, R, L):
     that is charging/storing energy.
 
     .. math::
-       V_L = V_s*e^{\\frac{-R*t}{L}}//
-       I_L = \\frac{V_s}{R}*(1-e^{\\frac{-R*t}{L}})
+       V_L = V_s*e^{\frac{-R*t}{L}}//
+       I_L = \frac{V_s}{R}*(1-e^{\frac{-R*t}{L}})
 
     Parameters
     ----------
@@ -2572,8 +2572,8 @@ def inductordischarge(t, Io, R, L):
     that is discharging its stored energy.
 
     .. math::
-       I_L=I_0*e^{\\frac{-R*t}{L}}//
-       V_L=I_0*R*(1-e^{\\frac{-R*t}{L}})
+       I_L=I_0*e^{\frac{-R*t}{L}}//
+       V_L=I_0*R*(1-e^{\frac{-R*t}{L}})
 
     Parameters
     ----------
@@ -2607,7 +2607,7 @@ def farads(VAR, V, freq=60):
     in Farads to provide the desired power rating
     (VARs).
 
-    .. math:: C = \\frac{VAR}{2*\\pi*freq*V^2}
+    .. math:: C = \frac{VAR}{2*\pi*freq*V^2}
 
     Parameters
     ----------
@@ -2636,7 +2636,7 @@ def capenergy(C, V):
     A simple function to calculate the stored voltage (in Joules)
     in a capacitor with a charged voltage.
 
-    .. math:: E=\\frac{1}{2}*C*V^2
+    .. math:: E=\frac{1}{2}*C*V^2
 
     Parameters
     ----------
@@ -2664,7 +2664,7 @@ def loadedvcapdischarge(t, vo, C, P):
     seconds) given initial voltage (vo - volts), capacitor size
     (cap - Farads), and load (P - Watts).
 
-    .. math:: V_t=\\sqrt{v_0^2-2*P*\\frac{t}{C}}
+    .. math:: V_t=\sqrt{v_0^2-2*P*\frac{t}{C}}
 
     Parameters
     ----------
@@ -2742,7 +2742,7 @@ def rectifiercap(Iload, fswitch, dVout):
     a rectifier configuration given the system frequency (in Hz),
     the load (in amps) and the desired voltage ripple.
 
-    .. math:: C=\\frac{I_{load}}{f_{switch}*\\Delta V_{out}}
+    .. math:: C=\frac{I_{load}}{f_{switch}*\Delta V_{out}}
 
     Parameters
     ----------
@@ -3497,7 +3497,7 @@ def kwh_to_btu(kWh):
 
     Converts kWh (killo-Watt-hours) to BTU (British Thermal Units).
 
-    .. math:: \\text{BTU} = \\text{kWh}\\cdot3412.14
+    .. math:: \text{BTU} = \text{kWh}\cdot3412.14
 
     Same as `btu`.
 
@@ -3523,7 +3523,7 @@ def btu_to_kwh(BTU):
 
     Converts BTU (British Thermal Units) to kWh (killo-Watt-hours).
 
-    .. math:: \\text{kWh} = \\frac{\\text{BTU}}{3412.14}
+    .. math:: \text{kWh} = \frac{\text{BTU}}{3412.14}
 
     Same as `kwh`.
 
@@ -3551,9 +3551,9 @@ def zpu(S, VLL=None, VLN=None):
     Evaluates the per-unit impedance value given the per-unit power and voltage
     bases.
 
-    .. math:: Z_{pu}=\\frac{V_{LL}^2}{S}
+    .. math:: Z_{pu}=\frac{V_{LL}^2}{S}
 
-    .. math:: Z_{pu}=\\frac{(\\sqrt{3}*V_{LN})^2}{S}
+    .. math:: Z_{pu}=\frac{(\sqrt{3}*V_{LN})^2}{S}
 
     Parameters
     ----------
@@ -3585,9 +3585,9 @@ def ipu(S, VLL=None, VLN=None, V1phs=None):
     Evaluates the per-unit current value given the per-unit
     power and voltage bases.
 
-    .. math:: I_{pu}=\\frac{S}{\\sqrt{3}*V_{LL}}
+    .. math:: I_{pu}=\frac{S}{\sqrt{3}*V_{LL}}
 
-    .. math:: I_{pu}=\\frac{S}{3*V_{LN}}
+    .. math:: I_{pu}=\frac{S}{3*V_{LN}}
 
     Parameters
     ----------
@@ -3623,7 +3623,7 @@ def puchgbase(quantity, puB_old, puB_new):
     Performs a per-unit change of base operation for the given
     value constrained by the old base and new base.
 
-    .. math:: Z_{pu-new}=Z_{pu-old}*\\frac{BASE_{OLD}}{BASE_{NEW}}
+    .. math:: Z_{pu-new}=Z_{pu-old}*\frac{BASE_{OLD}}{BASE_{NEW}}
 
     Parameters
     ----------
@@ -3776,7 +3776,7 @@ def abc_to_seq(Mabc, reference='A'):
     Converts phase-based values to sequence
     components.
 
-    .. math:: M_{\\text{012}}=A_{\\text{012}}\\cdot M_{\\text{ABC}}
+    .. math:: M_{\text{012}}=A_{\text{012}}\cdot M_{\text{ABC}}
 
     Same as phs_to_seq.
 
@@ -3823,7 +3823,7 @@ def seq_to_abc(M012, reference='A'):
     Converts sequence-based values to phase
     components.
 
-    .. math:: M_{\\text{ABC}}=A_{\\text{012}}^{-1}\\cdot M_{\\text{012}}
+    .. math:: M_{\text{ABC}}=A_{\text{012}}^{-1}\cdot M_{\text{012}}
 
     Same as seq_to_phs.
 
@@ -3877,11 +3877,11 @@ def sequencez(Zabc, reference='A', resolve=False, diag=False, round=3):
 
     When resolve is False:
 
-    .. math:: Z_{\\text{012-M}}=A_{\\text{012}}^{-1}Z_{\\text{ABC}}A_{\\text{012}}
+    .. math:: Z_{\text{012-M}}=A_{\text{012}}^{-1}Z_{\text{ABC}}A_{\text{012}}
 
     When resolve is True:
 
-    .. math:: Z_{\\text{012}}=A_{\\text{012}}Z_{\\text{ABC}}A_{\\text{012}}^{-1}
+    .. math:: Z_{\text{012}}=A_{\text{012}}Z_{\text{ABC}}A_{\text{012}}^{-1}
 
     Parameters
     ----------
@@ -4448,7 +4448,7 @@ def tap_changing_transformer(Vgen, Vdis, Pload, Qload, R, X):
     The purpose of a tap changer is to regulate the output voltage of a transformer.
     It does this by altering the number of turns in one winding and thereby changing the turns ratio of the transformer
     
-    .. math:: \\sqrt{\\frac{Vgen^2}{Vgen \\cdot Vdis - R \\cdot P - X \\cdot Q}}
+    .. math:: \sqrt{\frac{Vgen^2}{Vgen \cdot Vdis - R \cdot P - X \cdot Q}}
 
     Parameters
     ----------
@@ -4480,11 +4480,11 @@ def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
 
     To perform the calculations described here, the following formulas are
     satisfied, and used to construct a matrix used to solve for
-    :math:`V_i \\text{i in range(1,n)}`.
+    :math:`V_i \text{i in range(1,n)}`.
 
-    .. math:: \\sum_{i=1}^{n-2} V_{i} + V_{n-1} \\cdot (1+m) - V_{n} \\cdot m=0
+    .. math:: \sum_{i=1}^{n-2} V_{i} + V_{n-1} \cdot (1+m) - V_{n} \cdot m=0
 
-    .. math:: \\sum_{i=1}^{n} V_{i} = V_{\\text{transmission line}}
+    .. math:: \sum_{i=1}^{n} V_{i} = V_{\text{transmission line}}
     
     .. image:: /static/SuspensionInuslator.png
     
@@ -4543,7 +4543,7 @@ def natfreq(C, L, Hz=True):
     of a circuit given the circuit's C and L values. Defaults
     to returning values in Hz, but may also return in rad/sec.
 
-    .. math:: freq=\\frac{1}{\\sqrt{L*C}*(2*\\pi)}
+    .. math:: freq=\frac{1}{\sqrt{L*C}*(2*\pi)}
 
     Parameters
     ----------
@@ -4731,7 +4731,7 @@ def characterz(R, G, L, C, freq=60):
     the standard characteristic impedance
     equation :eq:`Zc`.
 
-    .. math:: Z_c = \\sqrt{\\frac{R+j\\omega L}{G+j\\omega C}}
+    .. math:: Z_c = \sqrt{\frac{R+j\omega L}{G+j\omega C}}
        :label: Zc
 
     Parameters
@@ -4766,18 +4766,18 @@ def propagation_constants(z, y, length):
     This function will evaluate the propagation constants for a long transmission
     line whose properties are governed by the differential equation:
     
-    .. math:: \\frac{d^2V}{dx^2} = \\gamma V
+    .. math:: \frac{d^2V}{dx^2} = \gamma V
     
     From the above equation, the following formulas are derived to evaluate the
     desired constants.
     
-    .. math:: \\gamma = \\sqrt( z * y )
+    .. math:: \gamma = \sqrt( z * y )
     
-    .. math:: Z_{\\text{surge}} = \\sqrt( z / y )
+    .. math:: Z_{\text{surge}} = \sqrt( z / y )
     
-    .. math:: \\alpha = \\Re{ \\gamma }
+    .. math:: \alpha = \Re{ \gamma }
     
-    .. math:: \\beta = \\Im{ \\gamma }
+    .. math:: \beta = \Im{ \gamma }
     
     Parameters
     ----------
@@ -4869,7 +4869,7 @@ def rad_to_hz(radians):
     Accepts a frequency in radians/sec and calculates
     the hertzian frequency (in Hz).
 
-    .. math:: f_{\\text{Hz}} = \\frac{f_{\\text{rad/sec}}}{2\\cdot\\pi}
+    .. math:: f_{\text{Hz}} = \frac{f_{\text{rad/sec}}}{2\cdot\pi}
 
     Same as `hertz`.
 
@@ -4897,7 +4897,7 @@ def hz_to_rad(hertz):
     Accepts a frequency in Hertz and calculates
     the frequency in radians/sec.
 
-    .. math:: f_{\\text{rad/sec}} = f_{\\text{Hz}}\\cdot2\\cdot\\pi
+    .. math:: f_{\text{rad/sec}} = f_{\text{Hz}}\cdot2\cdot\pi
 
     Same as `radsec`.
 
@@ -4925,11 +4925,11 @@ def indmachvth(Vas, Rs, Lm, Lls=0, Ls=None, freq=60, calcX=True):
     Function to calculate the Thevenin equivalent voltage of an
     induction machine given a specific set of parameters.
 
-    .. math:: V_{th}=\\frac{j\\omega L_m}{R_s+j\\omega(L_{ls}+L_m)}V_{as}
+    .. math:: V_{th}=\frac{j\omega L_m}{R_s+j\omega(L_{ls}+L_m)}V_{as}
 
     where:
 
-    .. math:: \\omega = \\omega_{es} = 2\\pi\\cdot f_{\\text{electric}}
+    .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
 
     Parameters
     ----------
@@ -4988,12 +4988,12 @@ def indmachzth(Rs, Lm, Lls=0, Llr=0, Ls=None, Lr=None, freq=60, calcX=True):
     induction machine given a specific set of parameters.
 
     .. math::
-       Z_{th} = \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}
-       {R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}
+       Z_{th} = \frac{(R_s+j\omega L_{ls})j\omega L_m}
+       {R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}
 
     where:
 
-    .. math:: \\omega = \\omega_{es} = 2\\pi\\cdot f_{\\text{electric}}
+    .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
 
     Parameters
     ----------
@@ -5058,9 +5058,9 @@ def indmachpem(slip, Rr, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
     equivalent circuit terms.
 
     .. math::
-       P_{em}=\\frac{|V_{th_{\\text{stator}}}|^2\\cdot\\frac{R_r}{slip}}
-       {\\left[\\left(\\frac{R_r}{slip}+R_{th_{\\text{stator}}}\\right)^2
-       +X_{th_{\\text{stator}}}^2\\right]\\cdot\\omega_{es}}\\cdot(1-slip)
+       P_{em}=\frac{|V_{th_{\text{stator}}}|^2\cdot\frac{R_r}{slip}}
+       {\left[\left(\frac{R_r}{slip}+R_{th_{\text{stator}}}\right)^2
+       +X_{th_{\text{stator}}}^2\right]\cdot\omega_{es}}\cdot(1-slip)
 
     Parameters
     ----------
@@ -5154,14 +5154,14 @@ def indmachtem(slip, Rr, p=0, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
     of the equation below.
 
     .. math::
-       T_{em}=\\frac{3|V_{th_{\\text{stator}}}|^2}
-       {\\left[\\left(\\frac{R_r}{slip}+R_{th_{\\text{stator}}}\\right)^2
-       +X_{th_{\\text{stator}}}\\right]}\\frac{R_r}{slip*\\omega_{sync}}
+       T_{em}=\frac{3|V_{th_{\text{stator}}}|^2}
+       {\left[\left(\frac{R_r}{slip}+R_{th_{\text{stator}}}\right)^2
+       +X_{th_{\text{stator}}}\right]}\frac{R_r}{slip*\omega_{sync}}
 
     where:
 
     .. math::
-       \\omega_{sync}=\\frac{\\omega_{es}}{\\left(\\frac{poles}{2}\\right)}
+       \omega_{sync}=\frac{\omega_{es}}{\left(\frac{poles}{2}\right)}
 
     Parameters
     ----------
@@ -5263,13 +5263,13 @@ def indmachpkslip(Rr, Zth=None, Rs=0, Lm=0, Lls=0, Llr=0, Ls=None,
     with the parameters specified when the machine is generating peak
     torque. Uses formula as shown below.
 
-    .. math:: \\text{slip} = \\frac{R_r}{|Z_{th}|}
+    .. math:: \text{slip} = \frac{R_r}{|Z_{th}|}
 
     where:
 
     .. math::
-       Z_{th} = \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}
-       {R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}
+       Z_{th} = \frac{(R_s+j\omega L_{ls})j\omega L_m}
+       {R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}
 
     Parameters
     ----------
@@ -5346,17 +5346,17 @@ def indmachiar(Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
 
     This current is calculated using the following formulas:
 
-    .. math:: I_{a_{\\text{rotor}}} = \\frac{V_{th}}{|Z_{th}|+Z_{th}}
+    .. math:: I_{a_{\text{rotor}}} = \frac{V_{th}}{|Z_{th}|+Z_{th}}
 
     where:
 
-    .. math:: V_{th}=\\frac{j\\omega L_m}{R_s+j\\omega(L_{ls}+L_m)}V_{as}
+    .. math:: V_{th}=\frac{j\omega L_m}{R_s+j\omega(L_{ls}+L_m)}V_{as}
 
     .. math::
-       Z_{th} = \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}
-       {R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}
+       Z_{th} = \frac{(R_s+j\omega L_{ls})j\omega L_m}
+       {R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}
 
-    .. math:: \\omega = \\omega_{es} = 2\\pi\\cdot f_{\\text{electric}}
+    .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
 
     Parameters
     ----------
@@ -5445,20 +5445,20 @@ def indmachpktorq(Rr, s_pk=None, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0,
     This current is calculated using the following formulas:
 
     .. math::
-       T_{em}=(|I_{a_{\\text{rotor}}}|)^2\\cdot\\frac{R_r}
-       {\\text{slip}_{\\text{peak}}}
+       T_{em}=(|I_{a_{\text{rotor}}}|)^2\cdot\frac{R_r}
+       {\text{slip}_{\text{peak}}}
 
     where:
 
-    .. math:: I_{a_{\\text{rotor}}} = \\frac{V_{th}}{|Z_{th}|+Z_{th}}
+    .. math:: I_{a_{\text{rotor}}} = \frac{V_{th}}{|Z_{th}|+Z_{th}}
 
-    .. math:: V_{th}=\\frac{j\\omega L_m}{R_s+j\\omega(L_{ls}+L_m)}V_{as}
+    .. math:: V_{th}=\frac{j\omega L_m}{R_s+j\omega(L_{ls}+L_m)}V_{as}
 
     .. math::
-       Z_{th} = \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}
-       {R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}
+       Z_{th} = \frac{(R_s+j\omega L_{ls})j\omega L_m}
+       {R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}
 
-    .. math:: \\omega = \\omega_{es} = 2\\pi\\cdot f_{\\text{electric}}
+    .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
 
     Parameters
     ----------
@@ -5568,23 +5568,23 @@ def indmachstarttorq(Rr, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0,
     This current is calculated using the following formulas:
 
     .. math::
-       T_{em}=(|I_{a_{\\text{rotor}}}|)^2\\cdot\\frac{R_r}
-       {\\text{slip}_{\\text{peak}}}
+       T_{em}=(|I_{a_{\text{rotor}}}|)^2\cdot\frac{R_r}
+       {\text{slip}_{\text{peak}}}
 
     where:
 
-    .. math:: \\text{slip} = 1
+    .. math:: \text{slip} = 1
 
     .. math::
-       I_{a_{\\text{rotor}}} = \\frac{V_{th}}{\\frac{R_r}{\\text{slip}}+Z_{th}}
+       I_{a_{\text{rotor}}} = \frac{V_{th}}{\frac{R_r}{\text{slip}}+Z_{th}}
 
-    .. math:: V_{th}=\\frac{j\\omega L_m}{R_s+j\\omega(L_{ls}+L_m)}V_{as}
+    .. math:: V_{th}=\frac{j\omega L_m}{R_s+j\omega(L_{ls}+L_m)}V_{as}
 
     .. math::
-       Z_{th} = \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}
-       {R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}
+       Z_{th} = \frac{(R_s+j\omega L_{ls})j\omega L_m}
+       {R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}
 
-    .. math:: \\omega = \\omega_{es} = 2\\pi\\cdot f_{\\text{electric}}
+    .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
 
     Parameters
     ----------
@@ -5684,7 +5684,7 @@ def pstator(Pem, slip):
     this function will calculate the power related to the
     stator (provided or consumed).
 
-    .. math:: P_s=\\frac{P_{em}}{1-\\text{slip}}
+    .. math:: P_s=\frac{P_{em}}{1-\text{slip}}
 
     Parameters
     ----------
@@ -5716,7 +5716,7 @@ def protor(Pem, slip):
     this function will calculate the power related to the
     rotor (provided or consumed).
 
-    .. math:: P_r=-\\text{slip}\\cdot\\frac{P_{em}}{1-\\text{slip}}
+    .. math:: P_r=-\text{slip}\cdot\frac{P_{em}}{1-\text{slip}}
 
     Parameters
     ----------
@@ -5747,7 +5747,7 @@ def de_calc(rho, freq=60):
     Simple calculator to find the De value for a line
     with particular earth resistivity (rho).
 
-    .. math:: D_e=D_{e_{\\text{constant}}}\\sqrt{\\frac{\\rho}{freq}}
+    .. math:: D_e=D_{e_{\text{constant}}}\sqrt{\frac{\rho}{freq}}
 
     Parameters
     ----------
@@ -5917,17 +5917,17 @@ def transposez(Zeq, fabc=1 / 3, fcab=1 / 3, fbca=1 / 3, linelen=1):
     in each transposition relation (ABC, CAB, and BCA).
 
     .. math::
-       f_{abc}Z_{eq}+f_{cab}R_p^{-1}\\cdot Z_{eq}\\cdot R_p+
-       f_{bca}Z_{eq}R_p\\cdot Z_{eq}\\cdot R_p^{-1}
+       f_{abc}Z_{eq}+f_{cab}R_p^{-1}\cdot Z_{eq}\cdot R_p+
+       f_{bca}Z_{eq}R_p\cdot Z_{eq}\cdot R_p^{-1}
 
     where:
 
     .. math:
-       R_p=\\begin{bmatrix}\\\\
-       0 & 0 & 1 \\\\
-       1 & 0 & 0 \\\\
-       0 & 1 & 0 \\\\
-       \\end{bmatrix}
+       R_p=\begin{bmatrix}\\
+       0 & 0 & 1 \\
+       1 & 0 & 0 \\
+       0 & 1 & 0 \\
+       \end{bmatrix}
 
     Parameters
     ----------
@@ -5967,7 +5967,7 @@ def gmd(Ds, *args):
     Calculates the GMD (Geometric Mean Distance) for a system
     with the parameters of a list of arguments.
 
-    .. math:: GMD=(D_s*D_1*\\ddot*D_n)^{\\frac{1}{1+n}}
+    .. math:: GMD=(D_s*D_1*\ddot*D_n)^{\frac{1}{1+n}}
 
     Parameters
     ----------
@@ -6187,19 +6187,19 @@ def synmach_Eq(Vt_pu, Itmag, PF, Ra, Xd, Xq):
     Given specified parameter set, will calculate
     the internal voltage on the q-axis (Eq).
 
-    .. math:: E_q=V_{t_{pu}}-\\left[R_a\\cdot I_{t_{pu}}+
-       j\\cdot X_q\\cdot I_{t_{pu}}+j(X_d-X_q)\\cdot I_{ad}\\right]
+    .. math:: E_q=V_{t_{pu}}-\left[R_a\cdot I_{t_{pu}}+
+       j\cdot X_q\cdot I_{t_{pu}}+j(X_d-X_q)\cdot I_{ad}\right]
 
     where:
 
-    .. math:: I_{t_{pu}}=I_{t_{mag}}\\cdot e^{-j(
-       \\angle{V_{t_{pu}}}-\\cos^{-1}(PF))}
+    .. math:: I_{t_{pu}}=I_{t_{mag}}\cdot e^{-j(
+       \angle{V_{t_{pu}}}-\cos^{-1}(PF))}
 
-    .. math:: \\theta_q=\\angle{V_{t_{pu}}-\\left(R_a
-       I_{t_{pu}}+j\\cdot X_qI_{t_{pu}}\\right)
+    .. math:: \theta_q=\angle{V_{t_{pu}}-\left(R_a
+       I_{t_{pu}}+j\cdot X_qI_{t_{pu}}\right)
 
-    .. math:: I_{ad}=\\left|I_{t_{pu}}\\cdot\\sin(
-       -\\cos^{-1}(PF)+\\theta_q)\\right|e^{j(\\theta_q
+    .. math:: I_{ad}=\left|I_{t_{pu}}\cdot\sin(
+       -\cos^{-1}(PF)+\theta_q)\right|e^{j(\theta_q
        -90°)}
 
     Parameters
@@ -6395,8 +6395,8 @@ def syncspeed(Npol, freq=60, Hz=False):
     given the number of poles in the machine's construction, and
     the machine's operating electrical frequency.
 
-    .. math:: \\omega_{\\text{syn}}=\\frac{2\\pi
-       \\cdot\\text{freq}}{\\frac{N_{\\text{pol}}}{2}}
+    .. math:: \omega_{\text{syn}}=\frac{2\pi
+       \cdot\text{freq}}{\frac{N_{\text{pol}}}{2}}
 
     Parameters
     ----------
@@ -6427,8 +6427,8 @@ def machslip(mech, syn=60):
     Given the two parameters (mechanical and synchronous speed, or frequency)
     this function will return the unitless slip of the rotating machine.
 
-    .. math:: \\text{slip}=\\frac{\\text{syn}-\\text{mech}}
-       {\\text{syn}}
+    .. math:: \text{slip}=\frac{\text{syn}-\text{mech}}
+       {\text{syn}}
 
     Parameters
     ----------
@@ -6455,7 +6455,7 @@ def phs3valpha(VA, VB=0, VC=0):
     Accepts the three-phase voltages for which the accumulated Alpha voltage
     should be calculated.
 
-    .. math:: V_{\\alpha}=V_A-\\frac{V_B}{2}-\\frac{V_C}{2}
+    .. math:: V_{\alpha}=V_A-\frac{V_B}{2}-\frac{V_C}{2}
 
     Parameters
     ----------
@@ -6493,7 +6493,7 @@ def wireresistance(length=None,diameter=None,rho=16.8*10**-9,R=None):
     Enter three values to calculate the remaing one. Even though every variable
     is unitless, please use the International System of Units.
 
-    .. math:: R = \\frac{\\rho*l}{A}
+    .. math:: R = \frac{\rho*l}{A}
 
     Parameters
     ----------

@@ -37,7 +37,7 @@ def phs1g(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a single-line-to-ground fault.
     
-    .. math:: I_1 = \\frac{V_{th}}{Z_0+Z_1+Z_2+3*R_f}
+    .. math:: I_1 = \frac{V_{th}}{Z_0+Z_1+Z_2+3*R_f}
     
     .. math:: I_2 = I_1
     
@@ -86,11 +86,11 @@ def phs2g(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a double-line-to-ground fault.
     
-    .. math:: I_1 = \\frac{V_{th}}{Z_1+\\frac{Z_2*(Z_0+3*R_f)}{Z_0+Z_2+3*R_f}}
+    .. math:: I_1 = \frac{V_{th}}{Z_1+\frac{Z_2*(Z_0+3*R_f)}{Z_0+Z_2+3*R_f}}
     
-    .. math:: I_2 = -\\frac{V_{th}-Z_1*I_1}{X_2}
+    .. math:: I_2 = -\frac{V_{th}-Z_1*I_1}{X_2}
     
-    .. math:: I_0 = -\\frac{V_{th}-Z_1*I_1}{X_0+3*R_f}
+    .. math:: I_0 = -\frac{V_{th}-Z_1*I_1}{X_0+3*R_f}
     
     Parameters
     ----------
@@ -136,7 +136,7 @@ def phs2(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a phase-to-phase fault.
     
-    .. math:: I_1 = \\frac{V_{th}}{Z_1+Z_2+R_f}
+    .. math:: I_1 = \frac{V_{th}}{Z_1+Z_2+R_f}
     
     .. math:: I_2 = -I_1
     
@@ -186,7 +186,7 @@ def phs3(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a three-phase fault.
     
-    .. math:: I_1 = \\frac{V_{th}}{Z_1+R_1}
+    .. math:: I_1 = \frac{V_{th}}{Z_1+R_1}
     
     .. math:: I_2 = 0
     
@@ -232,11 +232,11 @@ def poleopen1(Vth,Zseq,sequence=True,reference='A'):
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a single pole open fault.
     
-    .. math:: I_1 = \\frac{V_{th}}{Z_1+(\\frac{1}{Z_2}+\\frac{1}{Z_0})^-1}
+    .. math:: I_1 = \frac{V_{th}}{Z_1+(\frac{1}{Z_2}+\frac{1}{Z_0})^-1}
     
-    .. math:: I_2 = -I_1 * \\frac{Z_0}{Z_2+Z_0}
+    .. math:: I_2 = -I_1 * \frac{Z_0}{Z_2+Z_0}
     
-    .. math:: I_0 = -I_1 * \\frac{Z_2}{Z_2+Z_0}
+    .. math:: I_0 = -I_1 * \frac{Z_2}{Z_2+Z_0}
     
     Parameters
     ----------
@@ -280,7 +280,7 @@ def poleopen2(Vth,Zseq,sequence=True,reference='A'):
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a single pole open fault.
     
-    .. math:: I_1 = \\frac{V_{th}}{Z_1+Z_2+Z_0}
+    .. math:: I_1 = \frac{V_{th}}{Z_1+Z_2+Z_0}
     
     .. math:: I_2 = I_1
     
@@ -384,7 +384,7 @@ def phs3mvasc(Vth,Zseq,Rf=0,Sbase=1):
     Calculator to evaluate the Short-Circuit MVA of a three-phase fault given the system
     parameters of Vth, Zseq, and an optional Rf. Uses the formula as follows:
     
-    .. math:: MVA_{sc} = \\frac{\\left|V_{th}^2\\right|}{|Z_1|} * Sbase
+    .. math:: MVA_{sc} = \frac{\left|V_{th}^2\right|}{|Z_1|} * Sbase
     
     Parameters
     ----------
@@ -419,11 +419,11 @@ def phs1mvasc(Vth,Zseq,Rf=0,Sbase=1):
     Calculator to evaluate the Short-Circuit MVA of a single-phase fault given the system
     parameters of Vth, Zseq, and an optional Rf. Uses the formula as follows:
     
-    .. math:: MVA_{sc} = \\left|I_1^2\\right|*|Z_1| * Sbase
+    .. math:: MVA_{sc} = \left|I_1^2\right|*|Z_1| * Sbase
     
     where:
     
-    .. math:: I_1 = \\frac{V_{th}}{Z_0+Z_1+Z_2+3*R_f}
+    .. math:: I_1 = \frac{V_{th}}{Z_0+Z_1+Z_2+3*R_f}
     
     Parameters
     ----------
@@ -524,9 +524,9 @@ def ct_saturation(XoR,Imag,Vrated,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
     To perform this evaluation, we must satisfy the equation:
     
     .. math::
-       20\\geq(1+\\frac{X}{R})*\\frac{|I_{mag}|}{I_{rated}*CTR}
-       *\\frac{\\left|R_{burden}+j*\\omega*\\frac{X_{burden}}
-       {\\omega}\\right|*100}{V_{rated}*(1-remnanc)}
+       20\geq(1+\frac{X}{R})*\frac{|I_{mag}|}{I_{rated}*CTR}
+       *\frac{\left|R_{burden}+j*\omega*\frac{X_{burden}}
+       {\omega}\right|*100}{V_{rated}*(1-remnanc)}
     
     Parameters
     ----------
@@ -591,9 +591,9 @@ def ct_cclass(XoR,Imag,Irated,CTR,Rb,Xb,remnance=0,sat_crit=20):
     CT C-Class.
     
     .. math::
-       \\text{Saturation Criteria}=\\frac{(1+\\frac{X}{R})\\cdot
-       \\frac{|I_{mag}|}{I_{rated}\\cdot CTR}\\cdot\\frac{\\left|
-       R_{burden}+j\\cdot X_{burden}\\right|\\cdot100}{V_{rated}}}
+       \text{Saturation Criteria}=\frac{(1+\frac{X}{R})\cdot
+       \frac{|I_{mag}|}{I_{rated}\cdot CTR}\cdot\frac{\left|
+       R_{burden}+j\cdot X_{burden}\right|\cdot100}{V_{rated}}}
        {1-remnance}
     
     For the purposes of this function, the above formula is applied
@@ -601,10 +601,10 @@ def ct_cclass(XoR,Imag,Irated,CTR,Rb,Xb,remnance=0,sat_crit=20):
     saturation criteria defined.
     
     .. math::
-       \\text{CT C-Class}=\\frac{(1+\\frac{X}{R})\\cdot
-       \\frac{|I_{mag}|}{I_{rated}\\cdot CTR}\\cdot\\frac{
-       \\left|R_{burden}+j\\cdot X_{burden}\\right|\\cdot100}
-       {\\text{Saturation Criteria (i.e., 20)}}}{1-remnance}
+       \text{CT C-Class}=\frac{(1+\frac{X}{R})\cdot
+       \frac{|I_{mag}|}{I_{rated}\cdot CTR}\cdot\frac{
+       \left|R_{burden}+j\cdot X_{burden}\right|\cdot100}
+       {\text{Saturation Criteria (i.e., 20)}}}{1-remnance}
     
     Parameters
     ----------
@@ -651,11 +651,11 @@ def ct_satratburden(Inom,VArat=None,ANSIv=None,ALF=20,):
     
     A function to determine the Saturation at rated burden.
     
-    .. math:: V_{saturated}=ALF*\\frac{VA_{rated}}{I_{nominal}}
+    .. math:: V_{saturated}=ALF*\frac{VA_{rated}}{I_{nominal}}
     
     where:
     
-    .. math:: VA_{rated}=I_{nominal}*\\frac{ANSI_{voltage}}{20}
+    .. math:: VA_{rated}=I_{nominal}*\frac{ANSI_{voltage}}{20}
     
     Parameters
     ----------
@@ -691,7 +691,7 @@ def ct_vpeak(Zb,Ip,CTR):
     
     Simple formula to calculate the Peak Voltage of a CT.
     
-    .. math:: \\sqrt{3.5*|Z_burden|*I_{peak}*CTR}
+    .. math:: \sqrt{3.5*|Z_burden|*I_{peak}*CTR}
     
     Parameters
     ----------
@@ -1643,7 +1643,7 @@ def thermaltime(In,Ibase,tbase):
     
     Uses the following formula:
     
-    .. math:: t_n=\\frac{I_{base}^2*t_{base}}{I_n^2}
+    .. math:: t_n=\frac{I_{base}^2*t_{base}}{I_n^2}
     
     Parameters
     ----------
@@ -1676,11 +1676,11 @@ def synmach_Isym(t,Eq,Xd,Xdp,Xdpp,Tdp,Tdpp):
     machine given the machine parameters, the internal voltage,
     and the time for which to calculate.
     
-    .. math:: I_a(t)=\\sqrt{2}\\left|E_q\\right|\\left[
-       \\frac{1}{X_d}+\\left(\\frac{1}{X'_d}-\\frac{1}{X_d}
-       \\right)\\cdot e^{\\frac{-t}{T'_d}}+\\left(\\frac{1}
-       {X"_d}-\\frac{1}{X'_d}\\right)\\cdot e^{\\frac{-t}{T"_d}}
-       \\right]
+    .. math:: I_a(t)=\sqrt{2}\left|E_q\right|\left[
+       \frac{1}{X_d}+\left(\frac{1}{X'_d}-\frac{1}{X_d}
+       \right)\cdot e^{\frac{-t}{T'_d}}+\left(\frac{1}
+       {X"_d}-\frac{1}{X'_d}\right)\cdot e^{\frac{-t}{T"_d}}
+       \right]
     
     Parameters
     ----------
@@ -1723,8 +1723,8 @@ def synmach_Iasym(t,Eq,Xdpp,Xqpp,Ta):
     machine given the machine parameters, the internal voltage,
     and the time for which to calculate.
     
-    .. math:: I_{asym}=\\sqrt{2}\\left|E_q\\right|\\frac{1}{2}
-       \\left(\\frac{1}{X"_d}+\\frac{1}{X"_q}\\right)e^{\\frac{-t}
+    .. math:: I_{asym}=\sqrt{2}\left|E_q\right|\frac{1}{2}
+       \left(\frac{1}{X"_d}+\frac{1}{X"_q}\right)e^{\frac{-t}
        {T_a}}
     
     Parameters
