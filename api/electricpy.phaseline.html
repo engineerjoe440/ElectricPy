@@ -62,13 +62,13 @@ converting delta- to wye-connections and vice-versa.
 Given a voltage of one type, this function will return the
 voltage of the opposite type. The same is true for current.</p>
 <div class="math notranslate nohighlight" id="equation-voltages">
-<span class="eqno">(1)<a class="headerlink" href="#equation-voltages" title="Permalink to this equation">¶</a></span>\[\begin{split}V_{LL} = \\sqrt{3}∠30° * V_{LN}\end{split}\]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-voltages" title="Permalink to this equation">¶</a></span>\[V_{LL} = \sqrt{3}∠30° * V_{LN}\]</div>
 <p>Typical American (United States) standard is to note voltages in
 Line-to-Line values (VLL), and often, the Line-to-Neutral voltage
 is of value, this function uses the voltage <a class="reference internal" href="#equation-voltages">(1)</a> relation
 to evaluate either voltage given the other.</p>
 <div class="math notranslate nohighlight" id="equation-currents">
-<span class="eqno">(2)<a class="headerlink" href="#equation-currents" title="Permalink to this equation">¶</a></span>\[\begin{split}I_{Φ} = \\frac{I_{line}}{\\sqrt{3}∠30°}\end{split}\]</div>
+<span class="eqno">(2)<a class="headerlink" href="#equation-currents" title="Permalink to this equation">¶</a></span>\[I_{Φ} = \frac{I_{line}}{\sqrt{3}∠30°}\]</div>
 <p>Often, the phase current in a delta-connected device is of
 particular interest, and the line-current is provided. This
 function uses the current <a class="reference internal" href="#equation-currents">(2)</a> formula to evaluate

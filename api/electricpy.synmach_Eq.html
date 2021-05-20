@@ -59,19 +59,19 @@
 <p>Given specified parameter set, will calculate
 the internal voltage on the q-axis (Eq).</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}E_q=V_{t_{pu}}-\\left[R_a\\cdot I_{t_{pu}}+
-j\\cdot X_q\\cdot I_{t_{pu}}+j(X_d-X_q)\\cdot I_{ad}\\right]\end{split}\]</div>
+\[E_q=V_{t_{pu}}-\left[R_a\cdot I_{t_{pu}}+
+j\cdot X_q\cdot I_{t_{pu}}+j(X_d-X_q)\cdot I_{ad}\right]\]</div>
 <p>where:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}I_{t_{pu}}=I_{t_{mag}}\\cdot e^{-j(
-\\angle{V_{t_{pu}}}-\\cos^{-1}(PF))}\end{split}\]</div>
+\[I_{t_{pu}}=I_{t_{mag}}\cdot e^{-j(
+\angle{V_{t_{pu}}}-\cos^{-1}(PF))}\]</div>
 <div class="math notranslate nohighlight">
-\[\begin{split}\\theta_q=\\angle{V_{t_{pu}}-\\left(R_a
-I_{t_{pu}}+j\\cdot X_qI_{t_{pu}}\\right)\end{split}\]</div>
+\[\theta_q=\angle{V_{t_{pu}}-\left(R_a
+I_{t_{pu}}+j\cdot X_qI_{t_{pu}}\right)\]</div>
 <div class="math notranslate nohighlight">
-\[\begin{split}I_{ad}=\\left|I_{t_{pu}}\\cdot\\sin(
--\\cos^{-1}(PF)+\\theta_q)\\right|e^{j(\\theta_q
--90°)}\end{split}\]</div>
+\[I_{ad}=\left|I_{t_{pu}}\cdot\sin(
+-\cos^{-1}(PF)+\theta_q)\right|e^{j(\theta_q
+-90°)}\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
