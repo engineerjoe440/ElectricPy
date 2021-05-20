@@ -1,9 +1,11 @@
-###################################################################
-#   CONSTANTS.PY
-#
-#   Defenition of all required constants and matricies for
-#   *electricpy* module.
-###################################################################
+################################################################################
+"""
+`electricpy.constants` - Electrical Engineering Constants.
+
+Defenition of all required constants and matricies for
+*electricpy* module.
+"""
+################################################################################
 
 # Import Supporting Libraries
 import numpy as _np

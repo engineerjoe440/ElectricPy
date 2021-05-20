@@ -1,6 +1,6 @@
 ###################################################################
 """
-`electricpy.sim.py`
+`electricpy.sim`  -  Simulation Module.
 
 >>> from electricpy import sim
 """
@@ -17,8 +17,8 @@ from warnings import warn as _warn
 # Define Digital Filter Simulator Function
 def digifiltersim(fin,filter,freqs,NN=1000,dt=0.01,title="",
                legend=True,xlim=False,xmxscale=None,figsize=None):
-    """
-    Digital Filter Simulator
+    r"""
+    Digital Filter Simulator.
     
     Given an input function and filter parameters (specified in
     the z-domain) this function will plot the input function over
@@ -133,7 +133,7 @@ def step_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
                   resplabel="Step Response",funclabel="Step Function",
                   errlabel="Error",filename=None):
     """
-    Step Function Response Plotter Function
+    Step Function Response Plotter Function.
     
     Given a transfer function, plots the response against step input
     and plots the error for the function.
@@ -217,7 +217,7 @@ def ramp_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
                   resplabel="Ramp Response",funclabel="Ramp Function",
                   errlabel="Error",filename=None):
     """
-    Ramp Function Response Plotter Function
+    Ramp Function Response Plotter Function.
     
     Given a transfer function, plots the response against step input
     and plots the error for the function.
@@ -301,7 +301,7 @@ def parabolic_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
                   resplabel="Parabolic Response",funclabel="Parabolic Function",
                   errlabel="Error",filename=None):
     """
-    Parabolic Function Response Plotter Function
+    Parabolic Function Response Plotter Function.
     
     Given a transfer function, plots the response against step input
     and plots the error for the function.
@@ -384,7 +384,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
                xlim=False,ylim=False,title="",ret=False,plotstate=True,
                plotforcing=None,plotresult=None,filename=None):
     """
-    State-Space Simulation Plotter
+    State-Space Simulation Plotter.
 
     Parameters
     ----------
@@ -697,7 +697,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
 # Define Newton-Raphson Calculator
 def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
     """
-    Newton Raphson Calculator
+    Newton Raphson Calculator.
     
     Solve nonlinear system F=0 by Newton's method.
     J is the Jacobian of F. Both F and J must be functions of x.
@@ -814,7 +814,7 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
 # Define Newton-Raphson P/Q Evaluator
 def nr_pq(Ybus,V_set,P_set,Q_set,extend=True,argshape=False,verbose=False):
     """
-    Newton Raphson Real/Reactive Power Function Generator
+    Newton Raphson Real/Reactive Power Function Generator.
     
     Given specified parameters, will generate the necessary real and reactive
     power functions necessary to compute the system's power flow.
@@ -1055,7 +1055,7 @@ def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0='flatstart',eps=1e-4,
                   mxiter=100,returnct=False,degrees=True,split=False,
                   slackbus=0,lsq_eps=0.25):
     """
-    Multi-Bus Power Flow Calculator
+    Multi-Bus Power Flow Calculator.
     
     Function wrapper to simplify the evaluation of a power flow calculation.
     Determines the function array (F) and the Jacobian array (J) and uses the
