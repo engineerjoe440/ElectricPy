@@ -1,8 +1,8 @@
 #################################################################################
 """
-`electricpy.bode.py`
+`electricpy.bode`  -  Bode Plotting Module.
 
->>> from electricpy import bode as bode
+>>> from electricpy import bode
 """
 #################################################################################
 
@@ -12,6 +12,9 @@ import numpy as _np
 import scipy.signal as _sig
 from numpy import pi as _pi
 from cmath import exp as _exp
+
+# Import Local Dependencies
+from electricpy import convolve
 
 # Define System Conditioning Function
 def _sys_condition(system,feedback):
@@ -46,7 +49,7 @@ def _sys_condition(system,feedback):
 def bode(system,mn=0.001,mx=1000,npts=100,title="",xlim=False,ylim=False,sv=False,
          disp3db=False,lowcut=None,magnitude=True,angle=True,freqaxis="rad"):
     """
-    System Bode Plotting Function
+    System Bode Plotting Function.
     
     A simple function to generate the Bode Plot for magnitude
     and frequency given a transfer function system.
@@ -158,7 +161,7 @@ def bode(system,mn=0.001,mx=1000,npts=100,title="",xlim=False,ylim=False,sv=Fals
 def sbode(f,NN=1000,title="",xlim=False,ylim=False,mn=0,mx=1000,
           disp3db=False,lowcut=None,magnitude=True,angle=True):
     """
-    S-Domain Bode Plotting Function
+    S-Domain Bode Plotting Function.
     
     Parameters
     ----------
@@ -238,7 +241,7 @@ def sbode(f,NN=1000,title="",xlim=False,ylim=False,mn=0,mx=1000,
 def zbode(f,dt=0.01,NN=1000,title="",mn=0,mx=2*_pi,xlim=False,ylim=False,
           approx=False,disp3db=False,lowcut=None,magnitude=True,angle=True):
     """
-    Z-Domain Bode Plotting Function
+    Z-Domain Bode Plotting Function.
     
     Parameters
     ----------

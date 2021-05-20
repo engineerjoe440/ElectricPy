@@ -14,7 +14,7 @@ to aid in scientific calculations.
 
 # Define Module Specific Variables
 _name_ = "electricpy"
-_version_ = "0.2.0"
+_version_ = "0.2.1"
 __version__ = _version_  # Alias Version for User Ease
 
 # Version Breakdown:
@@ -2910,7 +2910,7 @@ def convolve(tuple):
     return one tuple as a numpy array.
 
     Parameters
-    ---------
+    ----------
     tuple:      tuple of numpy.ndarray
                 Tuple of terms to be convolved.
 
@@ -3238,8 +3238,7 @@ def hartleydata(BW, M):
     """
     Hartley Data Function.
 
-    Function to calculate Hartley's Law,
-    the maximum data rate achievable for
+    Function to calculate Hartley's Law, the maximum data rate achievable for
     a given noiseless channel.
 
     Parameters
@@ -3249,8 +3248,8 @@ def hartleydata(BW, M):
     M:          float
                 Number of signal levels.
 
-    Returns:
-    --------
+    Returns
+    -------
     C:          float
                 Capacity of channel (in bits per second)
     """
@@ -3263,10 +3262,8 @@ def shannondata(BW, S, N):
     """
     Shannon Data Function.
 
-    Function to calculate the maximum data
-    rate that may be achieved given a data
-    channel and signal/noise characteristics
-    using Shannon's equation.
+    Function to calculate the maximum data rate that may be achieved given a
+    data channel and signal/noise characteristics using Shannon's equation.
 
     Parameters
     ----------
@@ -3498,8 +3495,7 @@ def kwh_to_btu(kWh):
     r"""
     Killo-Watt-Hours to BTU Function.
 
-    Converts kWh (killo-Watt-hours) to BTU
-    (British Thermal Units).
+    Converts kWh (killo-Watt-hours) to BTU (British Thermal Units).
 
     .. math:: \\text{BTU} = \\text{kWh}\\cdot3412.14
 
@@ -3525,8 +3521,7 @@ def btu_to_kwh(BTU):
     r"""
     BTU to Killo-Watt-Hours Function.
 
-    Converts BTU (British Thermal Units) to
-    kWh (killo-Watt-hours).
+    Converts BTU (British Thermal Units) to kWh (killo-Watt-hours).
 
     .. math:: \\text{kWh} = \\frac{\\text{BTU}}{3412.14}
 
@@ -3553,8 +3548,8 @@ def zpu(S, VLL=None, VLN=None):
     r"""
     Per-Unit Impedance Evaluator.
 
-    Evaluates the per-unit impedance value given the per-unit
-    power and voltage bases.
+    Evaluates the per-unit impedance value given the per-unit power and voltage
+    bases.
 
     .. math:: Z_{pu}=\\frac{V_{LL}^2}{S}
 
@@ -3993,7 +3988,7 @@ def funcfft(func, minfreq=60, maxmult=15, complex=False):
 
 def sampfft(data, dt, minfreq=60.0, complex=False):
     """
-    Sampled Dataset FFT Evaluator.
+    Sample Dataset FFT Evaluator.
 
     Given a data array and the delta-t for the data array, evaluates
     the harmonic composition of the data.
@@ -4381,7 +4376,7 @@ def acpiv(S=None, I=None, VLL=None, VLN=None, V=None, PF=None):
 # Define Primary Ratio Function
 def primary(val, Np, Ns=1, invert=False):
     """
-    Transformer Primary Evaluator.
+    Electrical Transformer Primary Evaluator.
 
     Returns a current or voltage value reflected across
     a transformer with a specified turns ratio Np/Ns.
@@ -4415,7 +4410,7 @@ def primary(val, Np, Ns=1, invert=False):
 # Define Secondary Ratio Function
 def secondary(val, Np, Ns=1, invert=False):
     """
-    Transformer Secondary Evaluator.
+    Electrical Transformer Secondary Evaluator.
 
     Returns a current or voltage value reflected across
     a transformer with a specified turns ratio Np/Ns.
@@ -4481,19 +4476,20 @@ def tap_changing_transformer(Vgen, Vdis, Pload, Qload, R, X):
 
 def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
     r"""
-    Calculate the Voltage of Each Capacitor in a Suspension Insulator Strain
+    Discrete Capacitors Voltage in a Suspension Insulator Strain.
 
+    To perform the calculations described here, the following formulas are
+    satisfied, and used to construct a matrix used to solve for
+    :math:`V_i \\text{i in range(1,n)}`.
 
-    To perform the calculations described here, the following formulas are satisfied, and used
-    to construct a matrix used to solve for :math:`V_i \\text{i in range(1,n)}`.
-
-    .. math:: \\sum_{i=1}^{n-2} V_{i} + V_{n-1} \\cdot (1+m) - V_{n} \\cdot m = 0
+    .. math:: \\sum_{i=1}^{n-2} V_{i} + V_{n-1} \\cdot (1+m) - V_{n} \\cdot m=0
 
     .. math:: \\sum_{i=1}^{n} V_{i} = V_{\\text{transmission line}}
     
     .. image:: /static/SuspensionInuslator.png
     
-    `Additional Information <https://electrical-engineering-portal.com/download-center/books-and-guides/power-substations/insulator-pollution>`_
+    `Additional Information
+    <https://electrical-engineering-portal.com/download-center/books-and-guides/power-substations/insulator-pollution>`_
     
     Parameters
     ----------
@@ -4509,8 +4505,8 @@ def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
     string_efficiency:          float
                                 String efficiency of capacitive disks
     capacitor_disk_voltages:    float
-                                Voltage across each capacitive disk starting from
-                                top to bottom
+                                Voltage across each capacitive disk starting
+                                from top to bottom
     """
     m = _np.zeros((number_capacitors, number_capacitors))
     # Iterate over capacitors
@@ -4765,7 +4761,7 @@ def characterz(R, G, L, C, freq=60):
 #define propagation_constants for long transmission line
 def propagation_constants(z, y, length):
     r"""
-    Transaction Line Propagation Constant Calculator
+    Transaction Line Propagation Constant Calculator.
 
     This function will evaluate the propagation constants for a long transmission
     line whose properties are governed by the differential equation:
@@ -4822,12 +4818,11 @@ def propagation_constants(z, y, length):
 # Define Simple Transformer Phase Shift Function
 def xfmphs(style="DY", shift=30):
     """
-    Simple Transformer Phase-Shift Calculator.
+    Electrical Transformer Phase-Shift Calculator.
 
-    Use with transformer orientation to evaluate
-    the phase-shift across a transformer. For
-    example, find the phase shift for a Delta-Wye
-    transformer as seen from the delta side.
+    Use with transformer orientation to evaluate the phase-shift across a
+    transformer. For example, find the phase shift for a Delta-Wye transformer
+    as seen from the delta side.
 
     Parameters
     ----------
@@ -4869,7 +4864,7 @@ def xfmphs(style="DY", shift=30):
 # Define Simple Radians to Hertz Converter
 def rad_to_hz(radians):
     r"""
-    Simple Radians to Hertz Converter.
+    Radians to Hertz Converter.
 
     Accepts a frequency in radians/sec and calculates
     the hertzian frequency (in Hz).
@@ -4897,7 +4892,7 @@ hertz = rad_to_hz  # Make Duplicate Name
 # Define Simple Hertz to Radians Converter
 def hz_to_rad(hertz):
     r"""
-    Simple Hertz to Radians Converter.
+    Hertz to Radians Converter.
 
     Accepts a frequency in Hertz and calculates
     the frequency in radians/sec.
@@ -6511,6 +6506,7 @@ def wireresistance(length=None,diameter=None,rho=16.8*10**-9,R=None):
                 Default value is copper resistivity: 16.8*10-9 
     R:          [float], optional
                 Wire resistance, unitless.
+
     Returns
     -------
     length:     [float], optional

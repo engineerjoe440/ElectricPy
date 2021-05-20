@@ -7,7 +7,7 @@ Defenition of all required constants and matricies for
 """
 ################################################################################
 
-# Import Supporting Libraries
+# Import Supporting Dependencies
 import numpy as _np
 import cmath as _c
 
