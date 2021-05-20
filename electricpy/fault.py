@@ -1,13 +1,14 @@
-###################################################################
+################################################################################
 """
-`electricpy.fault.py`
+`electricpy.fault` - Electrical Power Engineering Faults Calculations.
 
 >>> from electricpy import fault
 """
-####################################################################
+################################################################################
 
 # Import Necessary Libraries
 import numpy as _np
+import matplotlib.pyplot as _plt
 from scipy.optimize import fsolve as _fsolve
 
 # Import Local Dependencies
@@ -30,8 +31,8 @@ def _phaseroll(M012,reference):
 
 # Define Single Line to Ground Fault Function
 def phs1g(Vth,Zseq,Rf=0,sequence=True,reference='A'):
-    """
-    Single-Phase-to-Ground Fault Calculator
+    r"""
+    Single-Phase-to-Ground Fault Calculator.
     
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a single-line-to-ground fault.
@@ -79,8 +80,8 @@ def phs1g(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     
 # Define Double Line to Ground Fault Current Calculator
 def phs2g(Vth,Zseq,Rf=0,sequence=True,reference='A'):
-    """
-    Double-Line-to-Ground Fault Calculator
+    r"""
+    Double-Line-to-Ground Fault Calculator.
     
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a double-line-to-ground fault.
@@ -129,8 +130,8 @@ def phs2g(Vth,Zseq,Rf=0,sequence=True,reference='A'):
 
 # Define Phase-to-Phase Fault Current Calculator
 def phs2(Vth,Zseq,Rf=0,sequence=True,reference='A'):
-    """
-    Line-to-Line Fault Calculator
+    r"""
+    Line-to-Line Fault Calculator.
     
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a phase-to-phase fault.
@@ -179,8 +180,8 @@ def phs2(Vth,Zseq,Rf=0,sequence=True,reference='A'):
 
 # Define Three-Phase Fault Current Calculator
 def phs3(Vth,Zseq,Rf=0,sequence=True,reference='A'):
-    """
-    Three-Phase Fault Calculator
+    r"""
+    Three-Phase Fault Calculator.
     
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a three-phase fault.
@@ -225,8 +226,8 @@ def phs3(Vth,Zseq,Rf=0,sequence=True,reference='A'):
 
 # Define Single Pole Open Calculator
 def poleopen1(Vth,Zseq,sequence=True,reference='A'):
-    """
-    Single Pole Open Fault Calculator
+    r"""
+    Single Pole Open Fault Calculator.
     
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a single pole open fault.
@@ -273,8 +274,8 @@ def poleopen1(Vth,Zseq,sequence=True,reference='A'):
 
 # Define Double Pole Open Calculator
 def poleopen2(Vth,Zseq,sequence=True,reference='A'):
-    """
-    Single Pole Open Fault Calculator
+    r"""
+    Single Pole Open Fault Calculator.
     
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a single pole open fault.
@@ -321,8 +322,8 @@ def poleopen2(Vth,Zseq,sequence=True,reference='A'):
 
 # Define MVA Short Circuit
 def scMVA(Zth=None,Isc=None,Vth=1):
-    """
-    Simple Short-Circuit MVA Calculator
+    r"""
+    Short-Circuit MVA Calculator.
     
     Function defines a method of interpretively
     calculating the short-circuit MVA value
@@ -377,8 +378,8 @@ def scMVA(Zth=None,Isc=None,Vth=1):
 
 # Define Explicitly 3-Phase MVAsc Calculator
 def phs3mvasc(Vth,Zseq,Rf=0,Sbase=1):
-    """
-    Three-Phase MVA Short-Circuit Calculator
+    r"""
+    Three-Phase MVA Short-Circuit Calculator.
     
     Calculator to evaluate the Short-Circuit MVA of a three-phase fault given the system
     parameters of Vth, Zseq, and an optional Rf. Uses the formula as follows:
@@ -412,8 +413,8 @@ def phs3mvasc(Vth,Zseq,Rf=0,Sbase=1):
     
 # Define Explicitly 1-Phase MVAsc Calculator
 def phs1mvasc(Vth,Zseq,Rf=0,Sbase=1):
-    """
-    Single-Phase MVA Short-Circuit Calculator
+    r"""
+    Single-Phase MVA Short-Circuit Calculator.
     
     Calculator to evaluate the Short-Circuit MVA of a single-phase fault given the system
     parameters of Vth, Zseq, and an optional Rf. Uses the formula as follows:
@@ -459,7 +460,7 @@ def phs1mvasc(Vth,Zseq,Rf=0,Sbase=1):
 # Define Faulted Bus Voltage Calculator
 def busvolt(k,n,Vpf,Z0,Z1,Z2,If,sequence=True,reference='A'):
     """
-    Faulted Bus Voltage Calculator
+    Faulted Bus Voltage Calculator.
     
     This function is designed to calculate the bus voltage(s)
     given a specific set of fault characteristics.
@@ -514,8 +515,8 @@ def busvolt(k,n,Vpf,Z0,Z1,Z2,If,sequence=True,reference='A'):
 
 # Define CT Saturation Function
 def ct_saturation(XoR,Imag,Vrated,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
-    """
-    Current Transformer Saturation Calculator
+    r"""
+    Electrical Current Transformer Saturation Calculator.
     
     A function to determine the saturation value and a boolean indicator
     showing whether or not CT is -in fact- saturated.
@@ -580,8 +581,8 @@ def ct_saturation(XoR,Imag,Vrated,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
 
 # Define C-Class Calculator
 def ct_cclass(XoR,Imag,Irated,CTR,Rb,Xb,remnance=0,sat_crit=20):
-    """
-    Current Transformer (CT) C-Class Function
+    r"""
+    Electrical Current Transformer (CT) C-Class Function.
     
     A function to determine the C-Class rated voltage for a CT.
     The formula shown below demonstrates the standard formula
@@ -645,8 +646,8 @@ def ct_cclass(XoR,Imag,Irated,CTR,Rb,Xb,remnance=0,sat_crit=20):
 
 # Define Saturation Voltage at Rated Burden
 def ct_satratburden(Inom,VArat=None,ANSIv=None,ALF=20,):
-    """
-    Current Transformer (CT) Saturation at Rated Burden Calculator
+    r"""
+    Electrical Current Transformer (CT) Saturation at Rated Burden Calculator.
     
     A function to determine the Saturation at rated burden.
     
@@ -685,8 +686,8 @@ def ct_satratburden(Inom,VArat=None,ANSIv=None,ALF=20,):
 
 # Define CT Vpeak Formula
 def ct_vpeak(Zb,Ip,CTR):
-    """
-    Current Transformer (CT) Peak Voltage Calculator
+    r"""
+    Electrical Current Transformer (CT) Peak Voltage Calculator.
     
     Simple formula to calculate the Peak Voltage of a CT.
     
@@ -711,8 +712,8 @@ def ct_vpeak(Zb,Ip,CTR):
 
 # Define Saturation Time Calculator
 def ct_timetosat(Vknee,XoR,Rb,CTR,Imax,ts=None,npts=100,freq=60,plot=False):
-    """
-    Current Transformer (CT) Time to Saturation Function
+    r"""
+    Electrical Current Transformer (CT) Time to Saturation Function.
     
     Function to determine the "time to saturate" for an underrated C-Class
     CT using three standard curves described by Juergen Holbach.
@@ -757,14 +758,14 @@ def ct_timetosat(Vknee,XoR,Rb,CTR,Imax,ts=None,npts=100,freq=60,plot=False):
     Vsat3 = Imax*Rb*(1-_np.cos(w*ts))
     # If plotting requested
     if plot and isinstance(ts,_np.ndarray):
-        plt.plot(ts,Vsat1,label="Vsat1")
-        plt.plot(ts,Vsat2,label="Vsat2")
-        plt.plot(ts,Vsat3,label="Vsat3")
-        plt.axhline(Vknee,label="V-knee",linestyle='--')
-        plt.title("Saturation Curves")
-        plt.xlabel("Time (ts)")
-        plt.legend()
-        plt.show()
+        _plt.plot(ts,Vsat1,label="Vsat1")
+        _plt.plot(ts,Vsat2,label="Vsat2")
+        _plt.plot(ts,Vsat3,label="Vsat3")
+        _plt.axhline(Vknee,label="V-knee",linestyle='--')
+        _plt.title("Saturation Curves")
+        _plt.xlabel("Time (ts)")
+        _plt.legend()
+        _plt.show()
     elif plot:
         print("Unable to plot a single point, *ts* must be a numpy-array.")
     # Determine the crossover points for each saturation curve
@@ -785,12 +786,11 @@ def ct_timetosat(Vknee,XoR,Rb,CTR,Imax,ts=None,npts=100,freq=60,plot=False):
 # Define Function to Calculate TRV
 def pktransrecvolt(C,L,R=0,VLL=None,VLN=None,freq=60):
     """
-    Peak Transient Recovery Function
+    Peak Transient Recovery Function.
     
-    Peak Transient Recovery Voltage calculation
-    function, evaluates the peak transient
-    recovery voltage (restriking voltage) and
-    the Rate-of-Rise-Recovery Voltage.
+    Peak Transient Recovery Voltage calculation function, evaluates the peak
+    transient recovery voltage (restriking voltage) and the
+    Rate-of-Rise-Recovery Voltage.
     
     Parameters
     ----------
@@ -839,10 +839,9 @@ def pktransrecvolt(C,L,R=0,VLL=None,VLN=None,freq=60):
 # Define TRV Reduction Resistor Function
 def trvresistor(C,L,reduction,Rd0=500,wd0=260e3,tpk0=10e-6):
     """
-    Transient Recovery Voltage (TRV) Reduction Resistor Function
+    Transient Recovery Voltage (TRV) Reduction Resistor Function.
     
-    Function to find the resistor value that
-    will reduce the TRV by a specified
+    Function to find the resistor value that will reduce the TRV by a specified
     percentage.
     
     Parameters
@@ -852,16 +851,13 @@ def trvresistor(C,L,reduction,Rd0=500,wd0=260e3,tpk0=10e-6):
     L:          float
                 Inductance in Henries.
     reduction:  float
-                The percentage that the TRV
-                should be reduced by.
+                The percentage that the TRV should be reduced by.
     Rd0:        float, optional
-                Damping Resistor Evaluation Starting Point
-                default=500
+                Damping Resistor Evaluation Starting Point, default=500
     wd0:        float, optional
                 Omega-d evaluation starting point, default=260*k
     tpk0:       float, optional
-                Time of peak voltage evaluation starting point,
-                default=10*u
+                Time of peak voltage evaluation starting point, default=10*u
     
     Returns
     -------
@@ -889,7 +885,7 @@ def trvresistor(C,L,reduction,Rd0=500,wd0=260e3,tpk0=10e-6):
 # Define Time-Overcurrent Trip Time Function
 def toctriptime(I,Ipickup,TD,curve="U1",CTR=1):
     """
-    Time OverCurrent Trip Time Function
+    Time OverCurrent Trip Time Function.
     
     Time-OverCurrent Trip Time Calculator, evaluates the time
     to trip for a specific TOC (51) element given the curve
@@ -940,7 +936,7 @@ def toctriptime(I,Ipickup,TD,curve="U1",CTR=1):
 # Define Time Overcurrent Reset Time Function
 def tocreset(I,Ipickup,TD,curve="U1",CTR=1):
     """
-    Time OverCurrent Reset Time Function
+    Time OverCurrent Reset Time Function.
     
     Function to calculate the time to reset for a TOC
     (Time-OverCurrent, 51) element.
@@ -980,7 +976,7 @@ def tocreset(I,Ipickup,TD,curve="U1",CTR=1):
 # Define Pickup Current Calculation
 def pickup(Iloadmax,Ifaultmin,scale=0,printout=False,units="A"):
     """
-    Current Pickup Selection Assistant
+    Electrical Current Pickup Selection Assistant.
     
     Used to assist in evaluating an optimal phase-over-current pickup
     setting. Uses maximum load and minimum fault current to provide
@@ -1026,7 +1022,7 @@ def pickup(Iloadmax,Ifaultmin,scale=0,printout=False,units="A"):
 def tdradial(I,CTI,Ipu_up,Ipu_dn=0,TDdn=0,curve="U1",scale=2,freq=60,
                   CTR_up=1,CTR_dn=1,tfixed=None):
     """
-    Radial Time Dial Coordination Function
+    Radial Time Dial Coordination Function.
     
     Function to evaluate the Time-Dial (TD) setting in radial schemes
     where the Coordinating Time Interval (CTI) and the up/downstream
@@ -1113,7 +1109,7 @@ def tdradial(I,CTI,Ipu_up,Ipu_dn=0,TDdn=0,curve="U1",scale=2,freq=60,
 # Define TAP Calculator
 def protectiontap(S,CTR=1,VLN=None,VLL=None):
     """
-    Protection TAP Setting Calculator
+    Protection TAP Setting Calculator.
     
     Evaluates the required TAP setting based on the rated power of
     a transformer (the object being protected) and the voltage
@@ -1153,7 +1149,7 @@ def protectiontap(S,CTR=1,VLN=None,VLL=None):
 # Define Current Correction Calculator
 def correctedcurrents(Ipri,TAP,correction="Y",CTR=1):
     """
-    Transformer Current Correction Function
+    Electrical Transformer Current Correction Function.
     
     Function to evaluate the currents as corrected for microprocessor-
     based relay protection schemes.
@@ -1205,7 +1201,7 @@ def correctedcurrents(Ipri,TAP,correction="Y",CTR=1):
 # Define Iop/Irt Calculator
 def iopirt(IpriHV,IpriLV,TAPHV,TAPLV,corrHV="Y",corrLV="Y",CTRHV=1,CTRLV=1):
     """
-    Operate/Restraint Current Calculator
+    Operate/Restraint Current Calculator.
     
     Calculates the operating current (Iop) and the restraint
     current (Irt) as well as the slope.
@@ -1267,11 +1263,10 @@ def iopirt(IpriHV,IpriLV,TAPHV,TAPLV,corrHV="Y",corrLV="Y",CTRHV=1,CTRLV=1):
 # Define Symmetrical/RMS Current Calculation
 def symrmsfaultcur(V,R,X,t=1/60,freq=60):
     """
-    Symmetrical/RMS Current Calculator
+    Symmetrical/RMS Current Calculator.
     
-    Function to evaluate the time-constant tau,
-    the symmetrical fault current, and the RMS
-    current for a faulted circuit.
+    Function to evaluate the time-constant tau, the symmetrical fault current,
+    and the RMS current for a faulted circuit.
     
     Parameters
     ----------
@@ -1309,10 +1304,9 @@ def symrmsfaultcur(V,R,X,t=1/60,freq=60):
 # Define Relay M Formula
 def faultratio(I,Ipickup,CTR=1):
     """
-    Fault Multiple of Pickup (Ratio) Calculator
+    Fault Multiple of Pickup (Ratio) Calculator.
     
-    Evaluates the CTR-scaled pickup measured to
-    pickup current ratio.
+    Evaluates the CTR-scaled pickup measured to pickup current ratio.
     
     M = meas / pickup
     
@@ -1337,11 +1331,10 @@ def faultratio(I,Ipickup,CTR=1):
 # Define Residual Compensation Factor Function
 def residcomp(z1,z0,linelength=1):
     """
-    Residual Compensation Factor Function
+    Residual Compensation Factor Function.
     
-    Evaluates the residual compensation factor based on
-    the line's positive and zero sequence impedance
-    characteristics.
+    Evaluates the residual compensation factor based on the line's positive and
+    zero sequence impedance characteristics.
     
     Parameters
     ----------
@@ -1375,7 +1368,7 @@ def residcomp(z1,z0,linelength=1):
 # Define Relay Measured Impedance Functon for Distance Elements
 def distmeasz(VLNmeas,If,Ip,Ipp,CTR=1,VTR=1,k0=None,z1=None,z0=None,linelength=1):
     """
-    Distance Element Measured Impedance Function
+    Distance Element Measured Impedance Function.
     
     Function to evaluate the Relay-Measured-Impedance as calculated from
     the measured voltage, current, and line parameters.
@@ -1439,10 +1432,9 @@ def distmeasz(VLNmeas,If,Ip,Ipp,CTR=1,VTR=1,k0=None,z1=None,z0=None,linelength=1
 # Define Transformer Tap Mismatch Function
 def transmismatch(I1,I2,tap1,tap2):
     """
-    Transformer TAP Mismatch Function
+    Electrical Transformer TAP Mismatch Function.
     
-    Function to evaluate the transformer ratio mismatch
-    for protection.
+    Function to evaluate the transformer ratio mismatch for protection.
     
     Parameters
     ----------
@@ -1471,7 +1463,7 @@ def transmismatch(I1,I2,tap1,tap2):
 def highzvpickup(I,RL,Rct,CTR=1,threephase=False,Ks=1.5,
                  Vstd=400,Kd=0.5):
     """
-    High Impedance Pickup Setting Function
+    High Impedance Pickup Setting Function.
     
     Evaluates the voltage pickup setting for a high
     impedance bus protection system.
@@ -1519,7 +1511,7 @@ def highzvpickup(I,RL,Rct,CTR=1,threephase=False,Ks=1.5,
 # Define Minimum Current Pickup for High-Impedance Bus Protection
 def highzmini(N,Ie,Irly=None,Vset=None,Rrly=2000,Imov=0,CTR=1):
     """
-    Minimum Current for High Impedance Protection Calculator
+    Minimum Current for High Impedance Protection Calculator.
     
     Evaluates the minimum pickup current required to cause
     high-impedance bus protection element pickup.
@@ -1566,11 +1558,10 @@ def highzmini(N,Ie,Irly=None,Vset=None,Rrly=2000,Imov=0,CTR=1):
 # Define Instantaneous Overcurrent Pickup Formula
 def instoc(Imin,CTR=1,Ki=0.5):
     """
-    Instantaneous OverCurrent Pickup Calculator
+    Instantaneous OverCurrent Pickup Calculator.
     
-    Using a sensetivity factor and the CTR, evaluates
-    the secondary-level pickup setting for an
-    instantaneous overcurrent element.
+    Using a sensetivity factor and the CTR, evaluates the secondary-level pickup
+    setting for an instantaneous overcurrent element.
     
     Parameters
     ----------
@@ -1594,11 +1585,10 @@ def instoc(Imin,CTR=1,Ki=0.5):
 # Define Generator Loss of Field Element Function
 def genlossfield(Xd,Xpd,Zbase=1,CTR=1,VTR=1):
     """
-    Generator Loss of Field Function
+    Electric Generator Loss of Field Function.
     
-    Generates the Loss-of-Field Element settings
-    for a generator using the Xd value and
-    per-unit base information.
+    Generates the Loss-of-Field Element settings for a generator using the Xd
+    value and per-unit base information.
     
     Parameters
     ----------
@@ -1644,12 +1634,12 @@ def genlossfield(Xd,Xpd,Zbase=1,CTR=1,VTR=1):
 
 # Define Thermal Time Limit Calculator
 def thermaltime(In,Ibase,tbase):
-    """
-    Simple Thermal Time Limit Calculator
+    r"""
+    Thermal Time Limit Calculator.
     
-    Computes the maximum allowable time for a specified
-    current `In` given parameters for a maximum current
-    and time at some other level, (`Ibase`, `tbase`).
+    Computes the maximum allowable time for a specified current `In` given
+    parameters for a maximum current and time at some other level, (`Ibase`,
+    `tbase`).
     
     Uses the following formula:
     
@@ -1679,7 +1669,7 @@ def thermaltime(In,Ibase,tbase):
 
 # Define Synch. Machine Fault Current Calculator
 def synmach_Isym(t,Eq,Xd,Xdp,Xdpp,Tdp,Tdpp):
-    """
+    r"""
     Synch. Machine Symmetrical Fault Current Calc.
     
     Determines the Symmetrical Fault Current of a synchronous
@@ -1726,7 +1716,7 @@ def synmach_Isym(t,Eq,Xd,Xdp,Xdpp,Tdp,Tdpp):
 
 # Define Synch. Machine Asymmetrical Current Calculator
 def synmach_Iasym(t,Eq,Xdpp,Xqpp,Ta):
-    """
+    r"""
     Synch. Machine Asymmetrical Fault Current Calc.
     
     Determines the asymmetrical fault current of a synchronous
@@ -1766,7 +1756,7 @@ def synmach_Iasym(t,Eq,Xdpp,Xqpp,Ta):
 # Define Induction Machine Eigenvalue Calculator
 def indmacheigenvalues(Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60):
     """
-    Induction Machine Eigenvalue Calculator
+    Induction Machine Eigenvalue Calculator.
     
     Calculates the pertinent eigenvalues for an unloaded
     induction machine given a specific set of machine
@@ -1822,11 +1812,10 @@ def indmacheigenvalues(Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60):
 # Define IM 3-Phase SC Current Calculator
 def indmachphs3sc(t,Is0,Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60,real=True):
     """
-    Induction Machine 3-Phase SC Calculator
+    Induction Machine 3-Phase SC Calculator.
     
-    Determines the short-circuit current at
-    a specified time for a three-phase fault
-    on an unloaded induction machine.
+    Determines the short-circuit current at a specified time for a three-phase
+    fault on an unloaded induction machine.
     
     Parameters
     ----------
@@ -1883,10 +1872,10 @@ def indmachphs3sc(t,Is0,Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60,real=True):
 # Define IM Torque Calculation
 def indmachphs3torq(t,Is0,Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60):
     """
-    Induction Machine 3-Phase Torque Calculator
+    Induction Machine 3-Phase Torque Calculator.
     
-    Determines the torque exerted during a
-    three-phase fault on an induction machine.
+    Determines the torque exerted during a three-phase fault on an induction
+    machine.
     
     Parameters
     ----------
@@ -1944,8 +1933,9 @@ def indmachphs3torq(t,Is0,Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60):
 
 # Define Complete Sync. Mach. Fault Current Function
 def synmach_ifault(t,Ea,alpha,Xd,Xdp,Xdpp,Xqpp,Tdp,Tdpp,Ta,freq=60):
+    # noqa: D401   "Synchronous" is intentional descriptor
     """
-    Synchronous Machine Fault Current Calculator
+    Synchronous Machine Fault Current Calculator.
     
     Given machine parameters, fault inception angle, and time at
     which to calculate fault current, this function will identify
