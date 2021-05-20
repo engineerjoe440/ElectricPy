@@ -33,7 +33,7 @@ def digifiltersim(fin,filter,freqs,NN=1000,dt=0.01,title="",
     
     The applied filter should be of the form:
     
-    .. math:: \\frac{b_0+b_1z^{-1}+b_2z^{-2}}{1-a_1z^{-1}-a_2z^{-2}}
+    .. math:: \frac{b_0+b_1z^{-1}+b_2z^{-2}}{1-a_1z^{-1}-a_2z^{-2}}
     
     Where each row corresponds to a 1- or 2-pole filter.
     
