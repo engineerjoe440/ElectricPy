@@ -4,16 +4,17 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>electricpy.indmachzth &#8212; electricpy 0.2.0 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.indmachzth.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
@@ -49,20 +50,20 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="electricpy-indmachzth">
+  <section id="electricpy-indmachzth">
 <h1>electricpy.indmachzth<a class="headerlink" href="#electricpy-indmachzth" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="electricpy.indmachzth">
-<code class="sig-prename descclassname"><span class="pre">electricpy.</span></code><code class="sig-name descname"><span class="pre">indmachzth</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Rs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Llr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calcX</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.indmachzth" title="Permalink to this definition">¶</a></dt>
-<dd><p>Induction Machine Thevenin Impedance Calculator</p>
+<dt class="sig sig-object py" id="electricpy.indmachzth">
+<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">indmachzth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Rs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Llr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calcX</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.indmachzth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Induction Machine Thevenin Impedance Calculator.</p>
 <p>Function to calculate the Thevenin equivalent impedance of an
 induction machine given a specific set of parameters.</p>
 <div class="math notranslate nohighlight">
-\[Z_{th} = \frac{(R_s+j\omega L_{ls})j\omega L_m}
-{R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}\]</div>
+\[\begin{split}Z_{th} = \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}
+{R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}\end{split}\]</div>
 <p>where:</p>
 <div class="math notranslate nohighlight">
-\[\omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}\]</div>
+\[\begin{split}\\omega = \\omega_{es} = 2\\pi\\cdot f_{\\text{electric}}\end{split}\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -108,7 +109,7 @@ machine described.</p>
 </div>
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -170,7 +171,7 @@ machine described.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Joe Stanley.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
     </div>
   </body>
 </html>

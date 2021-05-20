@@ -4,16 +4,17 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>electricpy.propagation_constants &#8212; electricpy 0.2.0 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.propagation_constants.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
@@ -49,26 +50,26 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="electricpy-propagation-constants">
+  <section id="electricpy-propagation-constants">
 <h1>electricpy.propagation_constants<a class="headerlink" href="#electricpy-propagation-constants" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="electricpy.propagation_constants">
-<code class="sig-prename descclassname"><span class="pre">electricpy.</span></code><code class="sig-name descname"><span class="pre">propagation_constants</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.propagation_constants" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="electricpy.propagation_constants">
+<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">propagation_constants</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.propagation_constants" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transaction Line Propagation Constant Calculator</p>
 <p>This function will evaluate the propagation constants for a long transmission
 line whose properties are governed by the differential equation:</p>
 <div class="math notranslate nohighlight">
-\[\frac{d^2V}{dx^2} = \gamma V\]</div>
+\[\begin{split}\\frac{d^2V}{dx^2} = \\gamma V\end{split}\]</div>
 <p>From the above equation, the following formulas are derived to evaluate the
 desired constants.</p>
 <div class="math notranslate nohighlight">
-\[\gamma = \sqrt( z * y )\]</div>
+\[\begin{split}\\gamma = \\sqrt( z * y )\end{split}\]</div>
 <div class="math notranslate nohighlight">
-\[Z_{\text{surge}} = \sqrt( z / y )\]</div>
+\[\begin{split}Z_{\\text{surge}} = \\sqrt( z / y )\end{split}\]</div>
 <div class="math notranslate nohighlight">
-\[\alpha = \Re{ \gamma }\]</div>
+\[\begin{split}\\alpha = \\Re{ \\gamma }\end{split}\]</div>
 <div class="math notranslate nohighlight">
-\[\beta = \Im{ \gamma }\]</div>
+\[\begin{split}\\beta = \\Im{ \\gamma }\end{split}\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -93,7 +94,7 @@ beta:        Imaginary portion of gamma</p>
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -155,7 +156,7 @@ beta:        Imaginary portion of gamma</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Joe Stanley.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
     </div>
   </body>
 </html>

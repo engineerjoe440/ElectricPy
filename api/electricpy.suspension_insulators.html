@@ -4,16 +4,17 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>electricpy.suspension_insulators &#8212; electricpy 0.2.0 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.suspension_insulators.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
@@ -49,18 +50,18 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="electricpy-suspension-insulators">
+  <section id="electricpy-suspension-insulators">
 <h1>electricpy.suspension_insulators<a class="headerlink" href="#electricpy-suspension-insulators" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="electricpy.suspension_insulators">
-<code class="sig-prename descclassname"><span class="pre">electricpy.</span></code><code class="sig-name descname"><span class="pre">suspension_insulators</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number_capacitors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capacitance_ratio</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Voltage</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.suspension_insulators" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="electricpy.suspension_insulators">
+<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">suspension_insulators</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number_capacitors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capacitance_ratio</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Voltage</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.suspension_insulators" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the Voltage of Each Capacitor in a Suspension Insulator Strain</p>
 <p>To perform the calculations described here, the following formulas are satisfied, and used
-to construct a matrix used to solve for <span class="math notranslate nohighlight">\(V_i \text{i in range(1,n)}\)</span>.</p>
+to construct a matrix used to solve for <span class="math notranslate nohighlight">\(V_i \\text{i in range(1,n)}\)</span>.</p>
 <div class="math notranslate nohighlight">
-\[\sum_{i=1}^{n-2} V_{i} + V_{n-1} \cdot (1+m) - V_{n} \cdot m = 0\]</div>
+\[\begin{split}\\sum_{i=1}^{n-2} V_{i} + V_{n-1} \\cdot (1+m) - V_{n} \\cdot m = 0\end{split}\]</div>
 <div class="math notranslate nohighlight">
-\[\sum_{i=1}^{n} V_{i} = V_{\text{transmission line}}\]</div>
+\[\begin{split}\\sum_{i=1}^{n} V_{i} = V_{\\text{transmission line}}\end{split}\]</div>
 <img alt="../_images/SuspensionInuslator.png" src="../_images/SuspensionInuslator.png" />
 <p><a class="reference external" href="https://electrical-engineering-portal.com/download-center/books-and-guides/power-substations/insulator-pollution">Additional Information</a></p>
 <dl class="field-list simple">
@@ -82,7 +83,7 @@ top to bottom</p></li>
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -144,7 +145,7 @@ top to bottom</p></li>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Joe Stanley.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
     </div>
   </body>
 </html>

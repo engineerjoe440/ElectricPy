@@ -4,16 +4,17 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>electricpy.fault.synmach_Iasym &#8212; electricpy 0.2.0 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.fault.synmach_Iasym.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
@@ -49,19 +50,19 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="electricpy-fault-synmach-iasym">
+  <section id="electricpy-fault-synmach-iasym">
 <h1>electricpy.fault.synmach_Iasym<a class="headerlink" href="#electricpy-fault-synmach-iasym" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="electricpy.fault.synmach_Iasym">
-<code class="sig-prename descclassname"><span class="pre">electricpy.fault.</span></code><code class="sig-name descname"><span class="pre">synmach_Iasym</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Eq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xdpp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xqpp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.synmach_Iasym" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="electricpy.fault.synmach_Iasym">
+<span class="sig-prename descclassname"><span class="pre">electricpy.fault.</span></span><span class="sig-name descname"><span class="pre">synmach_Iasym</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Eq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xdpp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xqpp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.synmach_Iasym" title="Permalink to this definition">¶</a></dt>
 <dd><p>Synch. Machine Asymmetrical Fault Current Calc.</p>
 <p>Determines the asymmetrical fault current of a synchronous
 machine given the machine parameters, the internal voltage,
 and the time for which to calculate.</p>
 <div class="math notranslate nohighlight">
-\[I_{asym}=\sqrt{2}\left|E_q\right|\frac{1}{2}
-\left(\frac{1}{X&quot;_d}+\frac{1}{X&quot;_q}\right)e^{\frac{-t}
-{T_a}}\]</div>
+\[\begin{split}I_{asym}=\\sqrt{2}\\left|E_q\\right|\\frac{1}{2}
+\\left(\\frac{1}{X&quot;_d}+\\frac{1}{X&quot;_q}\\right)e^{\\frac{-t}
+{T_a}}\end{split}\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -83,7 +84,7 @@ per-unit-ohms</p></li>
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -145,7 +146,7 @@ per-unit-ohms</p></li>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Joe Stanley.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
     </div>
   </body>
 </html>

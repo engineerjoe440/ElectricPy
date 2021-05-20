@@ -4,16 +4,17 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>electricpy.phasorz &#8212; electricpy 0.2.0 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.phasorz.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
@@ -49,23 +50,23 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="electricpy-phasorz">
+  <section id="electricpy-phasorz">
 <h1>electricpy.phasorz<a class="headerlink" href="#electricpy-phasorz" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="electricpy.phasorz">
-<code class="sig-prename descclassname"><span class="pre">electricpy.</span></code><code class="sig-name descname"><span class="pre">phasorz</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.phasorz" title="Permalink to this definition">¶</a></dt>
-<dd><p>Phasor Impedance Generator</p>
+<dt class="sig sig-object py" id="electricpy.phasorz">
+<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">phasorz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.phasorz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Phasor Impedance Generator.</p>
 <p>This function’s purpose is to generate the phasor-based
 impedance of the specified input given as either the
 capacitance (in Farads) or the inductance (in Henreys).
 The function will return the phasor value (in Ohms).</p>
 <div class="math notranslate nohighlight">
-\[Z = \frac{-j}{\omega*C}\]</div>
+\[\begin{split}Z = \\frac{-j}{\\omega*C}\end{split}\]</div>
 <div class="math notranslate nohighlight">
-\[Z = j*\omega*L\]</div>
+\[\begin{split}Z = j*\\omega*L\end{split}\]</div>
 <p>where:</p>
 <div class="math notranslate nohighlight">
-\[\omega = 2*\pi*freq\]</div>
+\[\begin{split}\\omega = 2*\\pi*freq\end{split}\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -88,7 +89,7 @@ default=True</p></li>
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -150,7 +151,7 @@ default=True</p></li>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Joe Stanley.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
     </div>
   </body>
 </html>

@@ -4,16 +4,17 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>electricpy.sequencez &#8212; electricpy 0.2.0 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.sequencez.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
@@ -49,12 +50,12 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="electricpy-sequencez">
+  <section id="electricpy-sequencez">
 <h1>electricpy.sequencez<a class="headerlink" href="#electricpy-sequencez" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="electricpy.sequencez">
-<code class="sig-prename descclassname"><span class="pre">electricpy.</span></code><code class="sig-name descname"><span class="pre">sequencez</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Zabc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'A'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.sequencez" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sequence Impedance Calculator</p>
+<dt class="sig sig-object py" id="electricpy.sequencez">
+<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">sequencez</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Zabc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'A'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.sequencez" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sequence Impedance Calculator.</p>
 <p>Accepts the phase (ABC-domain) impedances for a
 system and calculates the sequence (012-domain)
 impedances for the same system. If the argument
@@ -62,10 +63,10 @@ impedances for the same system. If the argument
 combine terms into the set of [Z0, Z1, Z2].</p>
 <p>When resolve is False:</p>
 <div class="math notranslate nohighlight">
-\[Z_{\text{012-M}}=A_{\text{012}}^{-1}Z_{\text{ABC}}A_{\text{012}}\]</div>
+\[\begin{split}Z_{\\text{012-M}}=A_{\\text{012}}^{-1}Z_{\\text{ABC}}A_{\\text{012}}\end{split}\]</div>
 <p>When resolve is True:</p>
 <div class="math notranslate nohighlight">
-\[Z_{\text{012}}=A_{\text{012}}Z_{\text{ABC}}A_{\text{012}}^{-1}\]</div>
+\[\begin{split}Z_{\\text{012}}=A_{\\text{012}}Z_{\\text{ABC}}A_{\\text{012}}^{-1}\end{split}\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -104,7 +105,7 @@ in the 012-domain</p>
 </div>
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -166,7 +167,7 @@ in the 012-domain</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Joe Stanley.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
     </div>
   </body>
 </html>

@@ -4,12 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>electricpy.sim &#8212; electricpy 0.2.0 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -47,10 +48,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="electricpy-sim">
+  <section id="electricpy-sim">
 <h1>electricpy.sim<a class="headerlink" href="#electricpy-sim" title="Permalink to this headline">¶</a></h1>
 <p class="rubric">Description</p>
-<span class="target" id="module-electricpy.sim"></span><p><cite>electricpy.sim.py</cite></p>
+<span class="target" id="module-electricpy.sim"></span><p><cite>electricpy.sim</cite>  -  Simulation Module.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">sim</span>
 </pre></div>
 </div>
@@ -62,32 +63,32 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="electricpy.sim.NewtonRaphson.html#electricpy.sim.NewtonRaphson" title="electricpy.sim.NewtonRaphson"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NewtonRaphson</span></code></a>(F, J, X0[, eps, mxiter, lsq_eps])</p></td>
-<td><p>Newton Raphson Calculator</p></td>
+<td><p>Newton Raphson Calculator.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="electricpy.sim.digifiltersim.html#electricpy.sim.digifiltersim" title="electricpy.sim.digifiltersim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">digifiltersim</span></code></a>(fin, filter, freqs[, NN, dt, …])</p></td>
-<td><p>Digital Filter Simulator</p></td>
+<td><p>Digital Filter Simulator.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="electricpy.sim.mbuspowerflow.html#electricpy.sim.mbuspowerflow" title="electricpy.sim.mbuspowerflow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mbuspowerflow</span></code></a>(Ybus, Vknown, Pknown, Qknown)</p></td>
-<td><p>Multi-Bus Power Flow Calculator</p></td>
+<td><p>Multi-Bus Power Flow Calculator.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="electricpy.sim.nr_pq.html#electricpy.sim.nr_pq" title="electricpy.sim.nr_pq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nr_pq</span></code></a>(Ybus, V_set, P_set, Q_set[, extend, …])</p></td>
-<td><p>Newton Raphson Real/Reactive Power Function Generator</p></td>
+<td><p>Newton Raphson Real/Reactive Power Function Generator.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="electricpy.sim.parabolic_response.html#electricpy.sim.parabolic_response" title="electricpy.sim.parabolic_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parabolic_response</span></code></a>(system[, npts, dt, …])</p></td>
-<td><p>Parabolic Function Response Plotter Function</p></td>
+<td><p>Parabolic Function Response Plotter Function.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="electricpy.sim.ramp_response.html#electricpy.sim.ramp_response" title="electricpy.sim.ramp_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ramp_response</span></code></a>(system[, npts, dt, combine, …])</p></td>
-<td><p>Ramp Function Response Plotter Function</p></td>
+<td><p>Ramp Function Response Plotter Function.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="electricpy.sim.statespace.html#electricpy.sim.statespace" title="electricpy.sim.statespace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">statespace</span></code></a>(A, B[, x, func, C, D, simpts, …])</p></td>
-<td><p>State-Space Simulation Plotter</p></td>
+<td><p>State-Space Simulation Plotter.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="electricpy.sim.step_response.html#electricpy.sim.step_response" title="electricpy.sim.step_response"><code class="xref py py-obj docutils literal notranslate"><span class="pre">step_response</span></code></a>(system[, npts, dt, combine, …])</p></td>
-<td><p>Step Function Response Plotter Function</p></td>
+<td><p>Step Function Response Plotter Function.</p></td>
 </tr>
 </tbody>
 </table>
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -148,7 +149,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Joe Stanley.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
     </div>
   </body>
 </html>

@@ -4,16 +4,17 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>electricpy.phaseline &#8212; electricpy 0.2.0 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.phaseline.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
@@ -49,25 +50,25 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="electricpy-phaseline">
+  <section id="electricpy-phaseline">
 <h1>electricpy.phaseline<a class="headerlink" href="#electricpy-phaseline" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="electricpy.phaseline">
-<code class="sig-prename descclassname"><span class="pre">electricpy.</span></code><code class="sig-name descname"><span class="pre">phaseline</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">VLL</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">VLN</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Iline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Iphase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">realonly</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.phaseline" title="Permalink to this definition">¶</a></dt>
-<dd><p>Line-Line to Line-Neutral Converter</p>
+<dt class="sig sig-object py" id="electricpy.phaseline">
+<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">phaseline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">VLL</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">VLN</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Iline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Iphase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">realonly</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.phaseline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Line-Line to Line-Neutral Converter.</p>
 <p>This function is designed to return the phase- or line-equivalent
 of the voltage/current provided. It is designed to be used when
 converting delta- to wye-connections and vice-versa.
 Given a voltage of one type, this function will return the
 voltage of the opposite type. The same is true for current.</p>
 <div class="math notranslate nohighlight" id="equation-voltages">
-<span class="eqno">(1)<a class="headerlink" href="#equation-voltages" title="Permalink to this equation">¶</a></span>\[V_{LL} = \sqrt{3}∠30° * V_{LN}\]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-voltages" title="Permalink to this equation">¶</a></span>\[\begin{split}V_{LL} = \\sqrt{3}∠30° * V_{LN}\end{split}\]</div>
 <p>Typical American (United States) standard is to note voltages in
 Line-to-Line values (VLL), and often, the Line-to-Neutral voltage
 is of value, this function uses the voltage <a class="reference internal" href="#equation-voltages">(1)</a> relation
 to evaluate either voltage given the other.</p>
 <div class="math notranslate nohighlight" id="equation-currents">
-<span class="eqno">(2)<a class="headerlink" href="#equation-currents" title="Permalink to this equation">¶</a></span>\[I_{Φ} = \frac{I_{line}}{\sqrt{3}∠30°}\]</div>
+<span class="eqno">(2)<a class="headerlink" href="#equation-currents" title="Permalink to this equation">¶</a></span>\[\begin{split}I_{Φ} = \\frac{I_{line}}{\\sqrt{3}∠30°}\end{split}\]</div>
 <p>Often, the phase current in a delta-connected device is of
 particular interest, and the line-current is provided. This
 function uses the current <a class="reference internal" href="#equation-currents">(2)</a> formula to evaluate
@@ -88,7 +89,7 @@ value in complex form; default=None</p></li>
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -150,7 +151,7 @@ value in complex form; default=None</p></li>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Joe Stanley.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
     </div>
   </body>
 </html>

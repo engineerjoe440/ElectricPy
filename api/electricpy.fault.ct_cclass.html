@@ -4,16 +4,17 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>electricpy.fault.ct_cclass &#8212; electricpy 0.2.0 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.fault.ct_cclass.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
@@ -49,30 +50,30 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="electricpy-fault-ct-cclass">
+  <section id="electricpy-fault-ct-cclass">
 <h1>electricpy.fault.ct_cclass<a class="headerlink" href="#electricpy-fault-ct-cclass" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="electricpy.fault.ct_cclass">
-<code class="sig-prename descclassname"><span class="pre">electricpy.fault.</span></code><code class="sig-name descname"><span class="pre">ct_cclass</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">XoR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Imag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Irated</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CTR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remnance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sat_crit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.ct_cclass" title="Permalink to this definition">¶</a></dt>
-<dd><p>Current Transformer (CT) C-Class Function</p>
+<dt class="sig sig-object py" id="electricpy.fault.ct_cclass">
+<span class="sig-prename descclassname"><span class="pre">electricpy.fault.</span></span><span class="sig-name descname"><span class="pre">ct_cclass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">XoR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Imag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Irated</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CTR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remnance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sat_crit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.ct_cclass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electrical Current Transformer (CT) C-Class Function.</p>
 <p>A function to determine the C-Class rated voltage for a CT.
 The formula shown below demonstrates the standard formula
 which is normally used to evaluate the saturation criteria.
 Worth noting here, is the fact that <span class="math notranslate nohighlight">\(V_{rated}\)</span> is the
 CT C-Class.</p>
 <div class="math notranslate nohighlight">
-\[\text{Saturation Criteria}=\frac{(1+\frac{X}{R})\cdot
-\frac{|I_{mag}|}{I_{rated}\cdot CTR}\cdot\frac{\left|
-R_{burden}+j\cdot X_{burden}\right|\cdot100}{V_{rated}}}
-{1-remnance}\]</div>
+\[\begin{split}\\text{Saturation Criteria}=\\frac{(1+\\frac{X}{R})\\cdot
+\\frac{|I_{mag}|}{I_{rated}\\cdot CTR}\\cdot\\frac{\\left|
+R_{burden}+j\\cdot X_{burden}\\right|\\cdot100}{V_{rated}}}
+{1-remnance}\end{split}\]</div>
 <p>For the purposes of this function, the above formula is applied
 as follows to evaluate the CT C-Class such as to satisfy the
 saturation criteria defined.</p>
 <div class="math notranslate nohighlight">
-\[\text{CT C-Class}=\frac{(1+\frac{X}{R})\cdot
-\frac{|I_{mag}|}{I_{rated}\cdot CTR}\cdot\frac{
-\left|R_{burden}+j\cdot X_{burden}\right|\cdot100}
-{\text{Saturation Criteria (i.e., 20)}}}{1-remnance}\]</div>
+\[\begin{split}\\text{CT C-Class}=\\frac{(1+\\frac{X}{R})\\cdot
+\\frac{|I_{mag}|}{I_{rated}\\cdot CTR}\\cdot\\frac{
+\\left|R_{burden}+j\\cdot X_{burden}\\right|\\cdot100}
+{\\text{Saturation Criteria (i.e., 20)}}}{1-remnance}\end{split}\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -98,7 +99,7 @@ default=20.</p></li>
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -160,7 +161,7 @@ default=20.</p></li>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Joe Stanley.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
     </div>
   </body>
 </html>

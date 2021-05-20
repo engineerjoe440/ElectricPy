@@ -4,16 +4,17 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>electricpy.dynetz &#8212; electricpy 0.2.0 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.dynetz.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
@@ -49,25 +50,25 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="electricpy-dynetz">
+  <section id="electricpy-dynetz">
 <h1>electricpy.dynetz<a class="headerlink" href="#electricpy-dynetz" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="electricpy.dynetz">
-<code class="sig-prename descclassname"><span class="pre">electricpy.</span></code><code class="sig-name descname"><span class="pre">dynetz</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wye</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.dynetz" title="Permalink to this definition">¶</a></dt>
-<dd><p>Delta-Wye Impedance Converter</p>
+<dt class="sig sig-object py" id="electricpy.dynetz">
+<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">dynetz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wye</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.dynetz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delta-Wye Impedance Converter.</p>
 <p>This function is designed to act as the conversion utility
 to transform delta-connected impedance values to wye-
 connected and vice-versa.</p>
 <div class="math notranslate nohighlight">
-\[Z_{sum} = Z_{1/2} + Z_{2/3} + Z_{3/1}//
-Z_1 = \frac{Z_{1/2}*Z_{3/1}}{Z_{sum}}//
-Z_2 = \frac{Z_{1/2}*Z_{2/3}}{Z_{sum}}//
-Z_3 = \frac{Z_{2/3}*Z_{3/1}}{Z_{sum}}\]</div>
+\[\begin{split}Z_{sum} = Z_{1/2} + Z_{2/3} + Z_{3/1}//
+Z_1 = \\frac{Z_{1/2}*Z_{3/1}}{Z_{sum}}//
+Z_2 = \\frac{Z_{1/2}*Z_{2/3}}{Z_{sum}}//
+Z_3 = \\frac{Z_{2/3}*Z_{3/1}}{Z_{sum}}\end{split}\]</div>
 <div class="math notranslate nohighlight">
-\[Z_{ms} = Z_1*Z_2 + Z_2*Z_3 + Z_3*Z_1//
-Z_{2/3} = \frac{Z_{ms}}{Z_1}//
-Z_{3/1} = \frac{Z_{ms}}{Z_2}//
-Z_{1/2} = \frac{Z_{ms}}{Z_3}\]</div>
+\[\begin{split}Z_{ms} = Z_1*Z_2 + Z_2*Z_3 + Z_3*Z_1//
+Z_{2/3} = \\frac{Z_{ms}}{Z_1}//
+Z_{3/1} = \\frac{Z_{ms}}{Z_2}//
+Z_{1/2} = \\frac{Z_{ms}}{Z_3}\end{split}\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -87,7 +88,7 @@ Z_{1/2} = \frac{Z_{ms}}{Z_3}\]</div>
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -149,7 +150,7 @@ Z_{1/2} = \frac{Z_{ms}}{Z_3}\]</div>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Joe Stanley.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
     </div>
   </body>
 </html>

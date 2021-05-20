@@ -4,16 +4,17 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>electricpy.fault.synmach_Isym &#8212; electricpy 0.2.0 documentation</title>
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.fault.synmach_Isym.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
@@ -49,21 +50,21 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="electricpy-fault-synmach-isym">
+  <section id="electricpy-fault-synmach-isym">
 <h1>electricpy.fault.synmach_Isym<a class="headerlink" href="#electricpy-fault-synmach-isym" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="electricpy.fault.synmach_Isym">
-<code class="sig-prename descclassname"><span class="pre">electricpy.fault.</span></code><code class="sig-name descname"><span class="pre">synmach_Isym</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Eq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xdp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xdpp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tdp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tdpp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.synmach_Isym" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="electricpy.fault.synmach_Isym">
+<span class="sig-prename descclassname"><span class="pre">electricpy.fault.</span></span><span class="sig-name descname"><span class="pre">synmach_Isym</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Eq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xdp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xdpp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tdp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tdpp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.synmach_Isym" title="Permalink to this definition">¶</a></dt>
 <dd><p>Synch. Machine Symmetrical Fault Current Calc.</p>
 <p>Determines the Symmetrical Fault Current of a synchronous
 machine given the machine parameters, the internal voltage,
 and the time for which to calculate.</p>
 <div class="math notranslate nohighlight">
-\[I_a(t)=\sqrt{2}\left|E_q\right|\left[
-\frac{1}{X_d}+\left(\frac{1}{X'_d}-\frac{1}{X_d}
-\right)\cdot e^{\frac{-t}{T'_d}}+\left(\frac{1}
-{X&quot;_d}-\frac{1}{X'_d}\right)\cdot e^{\frac{-t}{T&quot;_d}}
-\right]\]</div>
+\[\begin{split}I_a(t)=\\sqrt{2}\\left|E_q\\right|\\left[
+\\frac{1}{X_d}+\\left(\\frac{1}{X'_d}-\\frac{1}{X_d}
+\\right)\\cdot e^{\\frac{-t}{T'_d}}+\\left(\\frac{1}
+{X&quot;_d}-\\frac{1}{X'_d}\\right)\\cdot e^{\\frac{-t}{T&quot;_d}}
+\\right]\end{split}\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -89,7 +90,7 @@ the machine in seconds</p></li>
 </dl>
 </dd></dl>
 
-</div>
+</section>
 
 
             <div class="clearer"></div>
@@ -151,7 +152,7 @@ the machine in seconds</p></li>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Joe Stanley.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
     </div>
   </body>
 </html>
