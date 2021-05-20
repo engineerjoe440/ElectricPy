@@ -6,13 +6,16 @@
 """
 ###################################################################
 
-# Import Required Libraries
+# Import Required External Dependencies
 import numpy as _np
 import matplotlib.pyplot as _plt
 from numdifftools import Jacobian as jacobian
 from scipy.optimize import newton
+import scipy.signal as _sig
 from warnings import warn as _warn
 
+# Import Local Dependencies
+from electricpy.bode import _sys_condition
 
 # Define Digital Filter Simulator Function
 def digifiltersim(fin,filter,freqs,NN=1000,dt=0.01,title="",
@@ -181,7 +184,7 @@ def step_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
     
     # Simulate Response for each input (step, ramp, parabola)
     # All 'x' values are variables that are considered don't-care
-    x, y1, x = sig.lsim((system),step,TT)
+    x, y1, x = _sig.lsim((system),step,TT)
     
     # Calculate error over all points
     for k in range(npts):
@@ -265,7 +268,7 @@ def ramp_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
     
     # Simulate Response for each input (step, ramp, parabola)
     # All 'x' values are variables that are considered don't-care
-    x, y2, x = sig.lsim((system),ramp,TT)
+    x, y2, x = _sig.lsim((system),ramp,TT)
     
     # Calculate error over all points
     for k in range(npts):
@@ -349,7 +352,7 @@ def parabolic_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
     
     # Simulate Response for each input (step, ramp, parabola)
     # All 'x' values are variables that are considered don't-care
-    x, y3, x = sig.lsim((system),parabola,TT)
+    x, y3, x = _sig.lsim((system),parabola,TT)
     
     # Calculate error over all points
     for k in range(npts):

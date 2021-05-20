@@ -6,7 +6,7 @@
 """
 ################################################################################
 
-# Import Necessary Libraries
+# Import Necessary Dependencies
 import numpy as _np
 import matplotlib.pyplot as _plt
 from scipy.optimize import fsolve as _fsolve
