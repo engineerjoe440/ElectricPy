@@ -4,6 +4,7 @@
 [![](https://img.shields.io/pypi/pyversions/electricpy.svg?color=3776AB&logo=python&logoColor=white)](https://www.python.org/)
 ![Tox Import Test](https://github.com/engineerjoe440/ElectricPy/workflows/Tox%20Tests/badge.svg)
 ![ElectricPy Tests (pytest)](https://github.com/engineerjoe440/ElectricPy/workflows/pytest/badge.svg)
+![ElectricPy Doc Tests (pydocstyle)](https://github.com/engineerjoe440/ElectricPy/workflows/pydocstyle/badge.svg)
 
 [![](https://img.shields.io/pypi/v/electricpy.svg?color=blue&logo=pypi&logoColor=white)](https://pypi.org/project/electricpy/)
 [![](https://pepy.tech/badge/electricpy)](https://pepy.tech/project/electricpy)
