@@ -505,7 +505,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
 
     # Create values for input testing
     if isinstance(func,function): # if f is a function, test as one
-        mF = f(1) # f should return: int, float, tuple, _np.arr, _np.matrix
+        mF = func(1) # f should return: int, float, tuple, _np.arr, _np.matrix
     elif isinstance(func,(tuple,list)): # if f is tupple of arguments
         if isinstance(func[0], function): #if first argument is a function
             c_funcs = c_func_concat(func) # concatinate functions into one
@@ -538,9 +538,9 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
         fn = lambda x: nparr_to_matrix(x, func) # Use conversion function
         rF, cF = fn(1).shape # Prepare for further testing
     elif isinstance(mF,(int,float,_np.float64)): # If function returns int or float or numpy float
-        fn = f # Pass function handle
+        fn = func # Pass function handle
     elif isinstance(mF,_np.matrixlib.defmatrix.matrix): # If function returns matrix
-        fn = f # Pass function handle
+        fn = func # Pass function handle
         rF, cF = fn(1).shape # Prepare for further testing
     elif (mF=="MultiFunctions"): # There are multiple functions in one argument
         fn = c_funcs.func_c # Gather function handle from function concatenation class
@@ -578,7 +578,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
             raise ValueError("'D' matrix dimensions don't match forcing function dimensions.")
 
     # Test for forcing function
-    if (f==None) and (solution!=0):
+    if (func==None) and (solution!=0):
         solution = 0 # Change to Zero-Input calculation
 
     # Start by defining Constants
@@ -598,7 +598,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
         xtim[key] = xtim_init #Create each xtim
 
     # Create a dictionary of function outputs
-    if (mF!=tint) and (mF!=tfloat):
+    if (not isinstance(mF, int)) and (not isinstance(mF, float)):
         fn_arr = {}
         for n in range(rF):
             key = n #Each key should be the iterative variable
@@ -653,7 +653,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
         _plt.grid()
         if filename!=None:
             _plt.savefig('Simulation Forcing Functions.png')
-        if plot:
+        if plotstate:
             _plt.show()
 
     # Plot each state-variable over time
@@ -670,7 +670,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
     _plt.grid()
     if filename!=None:
         _plt.savefig('Simulation Terms.png')
-    if plot:
+    if plotstate:
         _plt.show()
 
     # Plot combined output
@@ -690,7 +690,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
         _plt.grid()
         if filename!=None:
             _plt.savefig('Simulation Combined Output.png')
-        if plot:
+        if plotresult:
             _plt.show()
 
     # Return Variables if asked to
