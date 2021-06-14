@@ -1505,7 +1505,7 @@ def voltdiv(Vin, R1, R2, Rload=None):
     the resistances (or impedances) and the load resistance
     (or impedance) if present.
 
-    .. math:: V_{out} = V_{in} * \frac{R_2}{R_1+R+2}
+    .. math:: V_{out} = V_{in} * \frac{R_2}{R_1+R_2}
 
     .. math:: V_{out}=V_{in}*\frac{R_2||R_{load}}{R_1+(R_2||R_{load})}
 
@@ -1573,7 +1573,8 @@ def curdiv(Ri, Rset, Vin=None, Iin=None, Vout=False, combine=True):
         Rset = (Rset,)  # Set as Tuple
     # Calculate The total impedance
     if combine:
-        Rtot = parallelz(Rset + (Ri,))  # Combine tuples, then calculate total resistance
+        # Combine tuples, then calculate total resistance
+        Rtot = parallelz(Rset + (Ri,))
     else:
         Rtot = parallelz(Rset)
     # Determine Whether Input was given as Voltage or Current
@@ -1589,6 +1590,35 @@ def curdiv(Ri, Rset, Vin=None, Iin=None, Vout=False, combine=True):
         return (Ii, Vi)
     else:
         return (Ii)
+
+
+# Define Function to Evaluate Resistance Needed for LED
+def led_resistor(Vsrc, Vfwd = 2, Ifwd = 20):
+    r"""
+    LED Resistor Calculator.
+
+    This function will evaluate the necessary resistance value for a simple LED
+    circuit with a voltage source, resistor, and LED.
+
+    .. math:: R_\text{LED} = \frac{V_\text{SRC} - V_\text{FWD}}{I_\text{FWD}}
+
+    Parameters
+    ----------
+    Vsrc:   float
+            Source voltage, as measured across both LED and resistor in circuit.
+    Vfwd:   float, optional
+            Forward voltage of LED (or series LEDs if available), default=2
+    Ifwd:   float, optional
+            Forward current of LEDs in milliamps, default=20 (milliamps)
+    
+    Returns
+    -------
+    R:      float
+            The resistance value most appropriate for the LED circuit.
+    """
+    # Calculate and Return!
+    R = (Vsrc - Vfwd) / (Ifwd * 1000)
+    return R
 
 
 # Define Instantaneous Power Calculator
