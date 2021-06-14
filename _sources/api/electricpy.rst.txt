@@ -125,6 +125,8 @@
     
     kwh_to_btu
     
+    led_resistor
+    
     loadedvcapdischarge
     
     machslip
