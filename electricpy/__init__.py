@@ -5264,7 +5264,7 @@ def indmachtem(slip, Rr, p=0, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
         Lls *= w
         Llr *= w
     # Test for Valid Input Set
-    if not any((p, wsync)):
+    if not any((p, wsyn)):
         raise ValueError("Poles or Synchronous Speed must be specified.")
     if Vth == None:
         if not all((Vas, Rs, Lm, Lls)):
@@ -5275,7 +5275,7 @@ def indmachtem(slip, Rr, p=0, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
         if not all((Rs, Llr, Lm, Lls)):
             raise ValueError("Invalid Argument Set, too few provided.")
         # Valid Argument Set, Calculate Zth
-        Zth = indmachzth(Rs, Lm, Lls, Ll, Ls, Lr, freq, calcX)
+        Zth = indmachzth(Rs, Lm, Lls, Llr, Ls, Lr, freq, calcX)
     # Use Terms to Calculate Pem
     Rth = Zth.real
     Xth = Zth.imag
@@ -5359,7 +5359,7 @@ def indmachpkslip(Rr, Zth=None, Rs=0, Lm=0, Lls=0, Llr=0, Ls=None,
         if not all((Rs, Llr, Lm, Lls)):
             raise ValueError("Invalid Argument Set, too few provided.")
         # Valid Argument Set, Calculate Zth
-        Zth = indmachzth(Rs, Lm, Lls, Ll, Ls, Lr, freq, calcX)
+        Zth = indmachzth(Rs, Lm, Lls, Llr, Ls, Lr, freq, calcX)
     # Calculate Peak Slip
     s_peak = Rr / abs(Zth)
     return (s_peak)
@@ -5457,7 +5457,7 @@ def indmachiar(Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
         if not all((Rs, Llr, Lm, Lls)):
             raise ValueError("Invalid Argument Set, too few provided.")
         # Valid Argument Set, Calculate Zth
-        Zth = indmachzth(Rs, Lm, Lls, Ll, Ls, Lr, freq, calcX)
+        Zth = indmachzth(Rs, Lm, Lls, Llr, Ls, Lr, freq, calcX)
     # Calculate Rotor Current
     Iar = Vth / (Zth.real + Zth)
     return (Iar)
@@ -5570,7 +5570,7 @@ def indmachpktorq(Rr, s_pk=None, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0,
         if not all((Rs, Llr, Lm, Lls)):
             raise ValueError("Invalid Argument Set, too few provided.")
         # Valid Argument Set, Calculate Zth
-        Zth = indmachzth(Rs, Lm, Lls, Ll, Ls, Lr, freq, calcX)
+        Zth = indmachzth(Rs, Lm, Lls, Llr, Ls, Lr, freq, calcX)
     if Iar == None:
         if not all((Vth, Zth)):
             raise ValueError("Invalid Argument Set, too few provided.")
@@ -5694,14 +5694,14 @@ def indmachstarttorq(Rr, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0,
         if not all((Rs, Llr, Lm, Lls)):
             raise ValueError("Invalid Argument Set, too few provided.")
         # Valid Argument Set, Calculate Zth
-        Zth = indmachzth(Rs, Lm, Lls, Ll, Ls, Lr, freq, calcX)
+        Zth = indmachzth(Rs, Lm, Lls, Llr, Ls, Lr, freq, calcX)
     if Iar == None:
         if not all((Vth, Zth)):
             raise ValueError("Invalid Argument Set, too few provided.")
         # Valid Argument Set, Calculate Ias
         Iar = Vth / (Rr / slip + Zth)
     # Use Terms to Calculate Peak Torque
-    Tstart = abs(Iar) ** 2 * Rr / s_pk
+    Tstart = abs(Iar) ** 2 * Rr / slip
     return (Tstart)
 
 
