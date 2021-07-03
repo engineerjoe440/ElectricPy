@@ -1,0 +1,8 @@
+{
+    "python.linting.pylintEnabled": false,
+    "python.linting.enabled": true,
+    "python.linting.pydocstyleEnabled": true,
+    "editor.rulers": [
+    80, 120
+    ]
+}
