@@ -13,7 +13,9 @@ import cmath as _c
 
 # Define Electrical Engineering Constants
 pi = _np.pi #: PI Constant 3.14159...
+
 a = _c.rect(1,_np.radians(120)) #: 'A' Operator for Symmetrical Components
+
 p = 1e-12 #: Pico Multiple      (10^-12)
 n = 1e-9 #: Nano Multiple       (10^-9)
 u = 1e-6 #: Micro (mu) Multiple (10^-6)
@@ -21,13 +23,19 @@ m = 1e-3 #: Mili Multiple       (10^-3)
 k = 1e+3 #: Kili Multiple       (10^3)
 M = 1e+6 #: Mega Multiple       (10^6)
 G = 1e+9 #: Giga Multiple       (10^9)
+
 u0 = 4*_np.pi*10**(-7) #: µ0 (mu-not)       4πE-7
 e0 = 8.8541878128e-12  #: ε0 (epsilon-not)  8.854E-12
 carson_r = 9.869e-7 #: Carson's Ristance Constant  8.869E-7
 De0 = 2160 #: De Constant for Use with Transmission Impedance Calculations      2160
+
 NAN = float('nan')
+
 VLLcVLN = _c.rect(_np.sqrt(3),_np.radians(30)) # Conversion Operator
 ILcIP = _c.rect(_np.sqrt(3),_np.radians(30)) # Conversion Operator
+
+watts_per_hp = 745.699872
+kwh_per_btu = 3412.14
 
 # Define Symmetrical Component Matricies
 Aabc = 1/3 * _np.array([[ 1, 1, 1    ],  # Convert ABC to 012
