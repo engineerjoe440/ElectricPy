@@ -14,11 +14,14 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.dynetz.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.farads" href="electricpy.farads.html" />
+    <link rel="prev" title="electricpy.de_calc" href="electricpy.de_calc.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -29,7 +32,15 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.farads.html" title="electricpy.farads"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.de_calc.html" title="electricpy.de_calc"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.dynetz</a></li> 
       </ul>
     </div>  
@@ -41,6 +52,42 @@
             
   <section id="electricpy-dynetz">
 <h1>electricpy.dynetz<a class="headerlink" href="#electricpy-dynetz" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="electricpy.dynetz">
+<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">dynetz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wye</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.dynetz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delta-Wye Impedance Converter.</p>
+<p>This function is designed to act as the conversion utility
+to transform delta-connected impedance values to wye-
+connected and vice-versa.</p>
+<div class="math notranslate nohighlight">
+\[Z_{sum} = Z_{1/2} + Z_{2/3} + Z_{3/1}//
+Z_1 = \frac{Z_{1/2}*Z_{3/1}}{Z_{sum}}//
+Z_2 = \frac{Z_{1/2}*Z_{2/3}}{Z_{sum}}//
+Z_3 = \frac{Z_{2/3}*Z_{3/1}}{Z_{sum}}\]</div>
+<div class="math notranslate nohighlight">
+\[Z_{ms} = Z_1*Z_2 + Z_2*Z_3 + Z_3*Z_1//
+Z_{2/3} = \frac{Z_{ms}}{Z_1}//
+Z_{3/1} = \frac{Z_{ms}}{Z_2}//
+Z_{1/2} = \frac{Z_{ms}}{Z_3}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delta</strong> (<em>tuple of float</em><em>, </em><em>exclusive</em>) – Tuple of the delta-connected impedance values as:
+{ Z12, Z23, Z31 }, default=None</p></li>
+<li><p><strong>wye</strong> (<em>tuple of float</em><em>, </em><em>exclusive</em>) – Tuple of the wye-connected impedance valuse as:
+{ Z1, Z2, Z3 }, default=None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>delta-set</strong> (<em>tuple of float</em>) – Delta-Connected impedance values { Z12, Z23, Z31 }</p></li>
+<li><p><strong>wye-set</strong> (<em>tuple of float</em>) – Wye-Connected impedance values { Z1, Z2, Z3 }</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
@@ -53,6 +100,12 @@
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="electricpy.de_calc.html"
+                        title="previous chapter">electricpy.de_calc</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.farads.html"
+                        title="next chapter">electricpy.farads</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -83,7 +136,15 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.farads.html" title="electricpy.farads"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.de_calc.html" title="electricpy.de_calc"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.dynetz</a></li> 
       </ul>
     </div>

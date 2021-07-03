@@ -1,6 +1,0 @@
-electricpy.convolution\_bargraph
-================================
-
-.. currentmodule:: electricpy
-
-.. autofunction:: convolution_bargraph
