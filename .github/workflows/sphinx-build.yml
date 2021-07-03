@@ -2,7 +2,13 @@
 # https://help.github.com/en/articles/workflow-syntax-for-github-actions
 
 name: sphinx
-on: [push]
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main/master branch
+  push:
+    branches:
+      - main
+        master
 
 # https://gist.github.com/c-bata/ed5e7b7f8015502ee5092a3e77937c99
 jobs:
