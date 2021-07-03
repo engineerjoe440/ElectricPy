@@ -15,33 +15,13 @@
 .. autosummary::
     :toctree: .
     
-    abc_to_seq
-    
     acpiv
-    
-    bridge_impedance
-    
-    btu
-    
-    btu_to_kwh
-    
-    capbacktoback
-    
-    capenergy
-    
-    captransfer
     
     characterz
     
-    clatex
-    
     coldjunction
     
-    compose
-    
-    convbar
-    
-    convolve
+    convolution_bargraph
     
     cosfilt
     
@@ -54,10 +34,6 @@
     curdiv
     
     de_calc
-    
-    dynetz
-    
-    farads
     
     fftplot
     
@@ -79,16 +55,6 @@
     
     hartleydata
     
-    hertz
-    
-    horsepower
-    
-    hp_to_watts
-    
-    hz_to_rad
-    
-    hz_to_rpm
-    
     imfoc_control
     
     indmachfocratings
@@ -109,25 +75,13 @@
     
     indmachzth
     
-    inductorcharge
-    
-    inductordischarge
-    
-    inductorenergy
-    
     instpower
     
     ipu
     
     iscrl
     
-    kwh
-    
-    kwh_to_btu
-    
     led_resistor
-    
-    loadedvcapdischarge
     
     machslip
     
@@ -135,33 +89,19 @@
     
     natfreq
     
-    nlinpf
-    
-    parallelz
+    nonlinear_pf
     
     peak
     
     pfcorrection
     
-    phase
-    
     phaseline
-    
-    phasor
-    
-    phasordata
-    
-    phasorlist
     
     phasorplot
     
     phasorz
     
-    phs
-    
     phs3valpha
-    
-    phs_to_seq
     
     powerflow
     
@@ -183,23 +123,9 @@
     
     puchgbase
     
-    rad_to_hz
-    
-    rad_to_rpm
-    
-    radsec
-    
-    reactance
-    
-    rectifiercap
-    
     rfft
     
     rms
-    
-    rpm_to_hz
-    
-    rpm_to_rad
     
     rtdtemp
     
@@ -209,17 +135,9 @@
     
     secondary
     
-    seq_to_abc
-    
-    seq_to_phs
-    
-    sequencez
-    
     shannondata
     
     sinfilt
-    
-    step
     
     string_to_bits
     
@@ -233,23 +151,13 @@
     
     tcycle
     
-    tflatex
-    
     thermocouple
-    
-    timedischarge
     
     transformertest
     
     transposez
     
     unbalance
-    
-    vcapcharge
-    
-    vcapdischarge
-    
-    vectarray
     
     vipf
     
@@ -259,17 +167,11 @@
     
     vscgains
     
-    watts
-    
-    watts_to_hp
-    
     wireresistance
     
     wrms
     
     xfmphs
-    
-    zdecompose
     
     zperlength
     

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>electricpy.phasorz &#8212; electricpy 0.2.1 documentation</title>
+    <title>electricpy.convolution_bargraph &#8212; electricpy 0.2.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
@@ -14,14 +14,13 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
-    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.phasorz.html" />
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.convolution_bargraph.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.phs3valpha" href="electricpy.phs3valpha.html" />
-    <link rel="prev" title="electricpy.phasorplot" href="electricpy.phasorplot.html" /> 
+    <link rel="next" title="electricpy.cosfilt" href="electricpy.cosfilt.html" />
+    <link rel="prev" title="electricpy.coldjunction" href="electricpy.coldjunction.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -33,15 +32,15 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.phs3valpha.html" title="electricpy.phs3valpha"
+          <a href="electricpy.cosfilt.html" title="electricpy.cosfilt"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="electricpy.phasorplot.html" title="electricpy.phasorplot"
+          <a href="electricpy.coldjunction.html" title="electricpy.coldjunction"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">electricpy.phasorz</a></li> 
+        <li class="nav-item nav-item-this"><a href="">electricpy.convolution_bargraph</a></li> 
       </ul>
     </div>  
 
@@ -50,41 +49,21 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="electricpy-phasorz">
-<h1>electricpy.phasorz<a class="headerlink" href="#electricpy-phasorz" title="Permalink to this headline">¶</a></h1>
+  <section id="electricpy-convolution-bargraph">
+<h1>electricpy.convolution_bargraph<a class="headerlink" href="#electricpy-convolution-bargraph" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="electricpy.phasorz">
-<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">phasorz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.phasorz" title="Permalink to this definition">¶</a></dt>
-<dd><p>Phasor Impedance Generator.</p>
-<p>This function’s purpose is to generate the phasor-based
-impedance of the specified input given as either the
-capacitance (in Farads) or the inductance (in Henreys).
-The function will return the phasor value (in Ohms).</p>
-<div class="math notranslate nohighlight">
-\[Z = \frac{-j}{\omega*C}\]</div>
-<div class="math notranslate nohighlight">
-\[Z = j*\omega*L\]</div>
-<p>where:</p>
-<div class="math notranslate nohighlight">
-\[\omega = 2*\pi*freq\]</div>
+<dt class="sig sig-object py" id="electricpy.convolution_bargraph">
+<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">convolution_bargraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.convolution_bargraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convolution Bar-Graph Plotter Function.</p>
+<p>Generates plots of each of two input arrays as bar-graphs, then
+generates a convolved bar-graph of the two inputs to demonstrate
+and illustrate convolution, typically for an educational purpose.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>C</strong> (<em>float</em><em>, </em><em>optional</em>) – The capacitance value (specified in Farads),
-default=None</p></li>
-<li><p><strong>L</strong> (<em>float</em><em>, </em><em>optional</em>) – The inductance value (specified in Henreys),
-default=None</p></li>
-<li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – The system frequency to be calculated upon, default=60</p></li>
-<li><p><strong>complex</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to specify whether the returned
-value should be returned as a complex value.
-default=True</p></li>
+<li><p><strong>h</strong> (<em>numpy.ndarray</em>) – Impulse Response - Given as Array (Prefferably Numpy Array)</p></li>
+<li><p><strong>x</strong> (<em>numpy.ndarray</em>) – Input Function - Given as Array (Prefferably Numpy Array)</p></li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>Z</strong> – The ohmic impedance of either C or L (respectively).</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>complex</p>
 </dd>
 </dl>
 </dd></dl>
@@ -102,15 +81,15 @@ default=True</p></li>
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="electricpy.phasorplot.html"
-                        title="previous chapter">electricpy.phasorplot</a></p>
+  <p class="topless"><a href="electricpy.coldjunction.html"
+                        title="previous chapter">electricpy.coldjunction</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="electricpy.phs3valpha.html"
-                        title="next chapter">electricpy.phs3valpha</a></p>
+  <p class="topless"><a href="electricpy.cosfilt.html"
+                        title="next chapter">electricpy.cosfilt</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/electricpy.phasorz.rst.txt"
+      <li><a href="../_sources/api/electricpy.convolution_bargraph.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -138,15 +117,15 @@ default=True</p></li>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.phs3valpha.html" title="electricpy.phs3valpha"
+          <a href="electricpy.cosfilt.html" title="electricpy.cosfilt"
              >next</a> |</li>
         <li class="right" >
-          <a href="electricpy.phasorplot.html" title="electricpy.phasorplot"
+          <a href="electricpy.coldjunction.html" title="electricpy.coldjunction"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">electricpy.phasorz</a></li> 
+        <li class="nav-item nav-item-this"><a href="">electricpy.convolution_bargraph</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

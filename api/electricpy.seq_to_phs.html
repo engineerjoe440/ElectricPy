@@ -14,14 +14,11 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.seq_to_phs.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.sequencez" href="electricpy.sequencez.html" />
-    <link rel="prev" title="electricpy.seq_to_abc" href="electricpy.seq_to_abc.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -32,15 +29,7 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="electricpy.sequencez.html" title="electricpy.sequencez"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="electricpy.seq_to_abc.html" title="electricpy.seq_to_abc"
-             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.seq_to_phs</a></li> 
       </ul>
     </div>  
@@ -52,41 +41,6 @@
             
   <section id="electricpy-seq-to-phs">
 <h1>electricpy.seq_to_phs<a class="headerlink" href="#electricpy-seq-to-phs" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="electricpy.seq_to_phs">
-<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">seq_to_phs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M012</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'A'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.seq_to_phs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sequence-System to Phase-System Conversion.</p>
-<p>Converts sequence-based values to phase
-components.</p>
-<div class="math notranslate nohighlight">
-\[M_{\text{ABC}}=A_{\text{012}}^{-1}\cdot M_{\text{012}}\]</div>
-<p>Same as seq_to_phs.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>M012</strong> (<em>list of complex</em>) – Sequence-based values to convert.</p></li>
-<li><p><strong>reference</strong> (<em>{'A'</em><em>, </em><em>'B'</em><em>, </em><em>'C'}</em>) – Single character denoting the reference,
-default=’A’</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>Mabc</strong> – Phase-based values in order of A-B-C</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>numpy.ndarray</p>
-</dd>
-</dl>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><a class="reference internal" href="electricpy.abc_to_seq.html#electricpy.abc_to_seq" title="electricpy.abc_to_seq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">abc_to_seq</span></code></a></dt><dd><p>Phase to Sequence Conversion</p>
-</dd>
-<dt><a class="reference internal" href="electricpy.sequencez.html#electricpy.sequencez" title="electricpy.sequencez"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sequencez</span></code></a></dt><dd><p>Phase Impedance to Sequence Converter</p>
-</dd>
-</dl>
-</div>
-</dd></dl>
-
 </section>
 
 
@@ -99,12 +53,6 @@ default=’A’</p></li>
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="electricpy.seq_to_abc.html"
-                        title="previous chapter">electricpy.seq_to_abc</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="electricpy.sequencez.html"
-                        title="next chapter">electricpy.sequencez</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -135,15 +83,7 @@ default=’A’</p></li>
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="electricpy.sequencez.html" title="electricpy.sequencez"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="electricpy.seq_to_abc.html" title="electricpy.seq_to_abc"
-             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.seq_to_phs</a></li> 
       </ul>
     </div>
