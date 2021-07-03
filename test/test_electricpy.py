@@ -1,8 +1,9 @@
+"""ElectricPy test Module."""
 import pytest
 import numpy as np
 
 def assertAlmostEqual(a,b,abs=1e-6):
-
+    """Local Test Helper Function."""
     if np.isnan(a) or np.isnan(b):
         raise ValueError("nan objects can not be compared")
 
@@ -12,6 +13,7 @@ def assertAlmostEqual(a,b,abs=1e-6):
     assert a==b
 
 def test_phasor():
+    """Test the Phasor Function."""
     from electricpy import phasor
     magnitude = 10
     # basic angles test case 0
@@ -42,6 +44,7 @@ def test_phasor():
     assertAlmostEqual(z0, -1 * z1)
 
 def test_bridge_impedance():
+    """Test the Bridge Impedance Function."""
     # Perfectly Balanced Wheat Stone Bridge
     from electricpy import bridge_impedance
 
@@ -83,23 +86,23 @@ def test_bridge_impedance():
 
     assertAlmostEqual(zeq, zactual)
 
-def test_dynetz():
-
-    from electricpy import dynetz
+def test_delta_wye_netz():
+    """Test the Delta-Wye Network Impedance Function."""
+    from electricpy import delta_wye_netz
     z1 = complex(3, 3)
     z2 = complex(3, 3)
     z3 = complex(3, 3)
 
-    za, zb, zc = dynetz(delta=(z1, z2, z3))
+    za, zb, zc = delta_wye_netz(delta=(z1, z2, z3))
 
     assert (za, zb, zc) == (z1 / 3, z2 / 3, z3 / 3)
 
-    za, zb, zc = dynetz(wye=(z1, z2, z3))
+    za, zb, zc = delta_wye_netz(wye=(z1, z2, z3))
 
     assert (za, zb, zc) == (3 * z1, 3 * z2, 3 * z3)
 
 def test_powerset():
-
+    """Test the Power Set Calculator."""
     from electricpy import powerset
 
     # Test case 0
@@ -139,6 +142,7 @@ def test_powerset():
     # assertAlmostEqual(PF,1/(np.sqrt(2)))
 
 def test_voltdiv():
+    """Test the voltage divider function."""
     from electricpy import voltdiv
     from electricpy import phasor
 
@@ -165,16 +169,11 @@ def test_voltdiv():
     assertAlmostEqual(Vout, Vout_actual)
 
 def test_suspension_insulators():
-    """
-        Electric Power Systems by C.L Wadhwa Overhead Line Insulator example
-    """
-
+    """Electric Power Systems by C.L Wadhwa Overhead Line Insulator example."""
     from electricpy import suspension_insulators
 
     number_capacitors = 5
-
     capacitance_ration = 5
-
     Voltage = 66
 
     _, string_efficiency = suspension_insulators(number_capacitors,
@@ -185,7 +184,7 @@ def test_suspension_insulators():
     assertAlmostEqual(string_efficiency, string_efficiency_actual, abs=1e-2)
 
 def test_propagation_constants():
-
+    """Test the propagation constants function."""
     from electricpy import propagation_constants
     z = complex(0.5, 0.9)
     y = complex(0, 6e-6)
@@ -198,7 +197,7 @@ def test_propagation_constants():
     assertAlmostEqual(params_dict['beta'], beta_cal, abs=1e-4)
 
 def test_funcrms():
-
+    """Test the RMS Function."""
     from electricpy import funcrms
 
     f = lambda x:np.sin(x)
@@ -206,7 +205,7 @@ def test_funcrms():
     assertAlmostEqual(funcrms(f,np.pi), 1/np.sqrt(2))
 
 def test_convolve():
-
+    """Test the convolution function."""
     from electricpy import convolve
     A = (1,1,1)
     B = (1,1,1)

@@ -21,7 +21,11 @@ __version__ = _version_  # Alias Version for User Ease
 # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
 
 # Import Submodules
-from .constants import *
+from electricpy.constants import *
+from electricpy.passives import *
+from electricpy.phasors import *
+from electricpy.latex import *
+from electricpy.math import *
 
 # Import Supporting Modules
 import numpy as _np
@@ -33,497 +37,6 @@ from warnings import showwarning as _showwarning
 from inspect import getframeinfo as _getframeinfo
 from inspect import stack as _stack
 from scipy.integrate import quad as integrate
-import scipy.signal as sig
-
-
-# Define Phase Angle Generator
-def phs(ang):
-    """
-    Complex Phase Angle Generator.
-
-    Generate a complex value given the phase angle
-    for the complex value.
-
-    Same as `phase`.
-
-    Parameters
-    ----------
-    ang:        float
-                The angle (in degrees) for which
-                the value should be calculated.
-
-    See Also
-    --------
-    phasorlist: Phasor Generator for List or Array
-    cprint:     Complex Variable Printing Function
-    phasorz:    Impedance Phasor Generator
-    phasor:     Phasor Generating Function
-    """
-    # Return the Complex Angle Modulator
-    return (_np.exp(1j * _np.radians(ang)))
-
-
-phase = phs  # Create Duplicate Name
-
-
-# Define Phasor Generator
-def phasor(mag, ang=0):
-    """
-    Complex Phasor Generator.
-
-    Generates the standard Pythonic complex representation
-    of a phasor voltage or current when given the magnitude
-    and angle of the specific voltage or current.
-
-    Parameters
-    ----------
-    mag:        float
-                The Magnitude of the Voltage/Current
-    ang:        float
-                The Angle (in degrees) of the Voltage/Current
-
-    Returns
-    -------
-    phasor:     complex
-                Standard Pythonic Complex Representation of
-                the specified voltage or current.
-
-    Examples
-    --------
-    >>> import electricpy as ep
-    >>> ep.phasor(67, 120) # 67 volts at angle 120 degrees
-    (-33.499999999999986+58.02370205355739j)
-
-    See Also
-    --------
-    phasorlist: Phasor Generator for List or Array
-    cprint:     Complex Variable Printing Function
-    phasorz:    Impedance Phasor Generator
-    phs:        Complex Phase Angle Generator
-    """
-    # Test for Tuple/List Arg
-    if isinstance(mag, (tuple, list, _np.ndarray)):
-        ang = mag[1]
-        mag = mag[0]
-    return (_c.rect(mag, _np.radians(ang)))
-
-
-# Define Phasor Array Generator
-def phasorlist(arr):
-    """
-    Complex Phasor Generator for 2-D Array or 2-D List.
-
-    Generates the standard Pythonic complex representation
-    of a phasor voltage or current when given the magnitude
-    and angle of the specific voltage or current for a list
-    or array of values.
-
-    Parameters
-    ----------
-    arr:        array-like
-                2-D array or list of magnitudes and angles.
-                Each item must be set of magnitude and angle
-                in form of: [mag, ang].
-
-    Returns
-    -------
-    phasor:     complex
-                Standard Pythonic Complex Representation of
-                the specified voltage or current.
-
-    Examples
-    --------
-    >>> import numpy as np
-    >>> import electricpy as ep
-    >>> voltages = np.array([[67,0],
-                             [67,-120],
-                             [67,120]])
-    >>> Vset = ep.phasorlist( voltages )
-    >>> print(Vset)
-
-    See Also
-    --------
-    phasor:     Phasor Generating Function
-    vectarray:  Magnitude/Angle Array Pairing Function
-    cprint:     Complex Variable Printing Function
-    phasorz:    Impedance Phasor Generator
-    """
-    # Iteratively Process
-    outarr = _np.array([])
-    for i in arr:
-        outarr = _np.append(outarr, phasor(i))
-    # Return Array
-    return (outarr)
-
-
-# Define Vector Array Generator
-def vectarray(arr, degrees=True, flatarray=False):
-    """
-    Format Complex as Array of Magnitude/Angle Pairs.
-
-    Consume an iterable (list/tuple/ndarray/etc.) of
-    complex numbers and generate an ndarray of magnitude
-    and angle pairs, formatted as a 2-dimension (or
-    optionally 1-dimension) array.
-
-    Parameters
-    ----------
-    arr:        array-like
-                Array or list of complex numbers to be
-                cast to magnitude/angle pairs.
-    degrees:    bool, optional
-                Control option to set the angles in
-                degrees. Defaults to True.
-    flatarray:  bool, optional
-                Control option to set the array return
-                to work as a 1-dimension list. Defaults
-                to False, formatting as a 2-dimension
-                list.
-
-    Returns
-    -------
-    polararr:   ndarray
-                Array of magnitude/angle pairs as a
-                2-dimension array (or optionally
-                1-dimension array).
-
-    See Also
-    --------
-    phasor:     Phasor Generating Function
-    phasorlist: Phasor Generator for List or Array
-    """
-    # Iteratively Append Arrays to the Base
-    polararr = _np.array([])
-    for num in arr:
-        mag, ang_r = _c.polar(num)
-        # Cast to Degrees if Needed
-        if degrees:
-            ang = _np.degrees(ang_r)
-        else:
-            ang = ang_r
-        # Append to the Array
-        polararr = _np.append(polararr, [mag, ang])
-    # Reshape Array if Needed
-    if not flatarray:
-        polararr = _np.reshape(polararr, (-1, 2))
-    return polararr
-
-
-# Define Phasor Data Generator
-def phasordata(mn, mx=None, npts=1000, mag=1, ang=0, freq=60,
-               retstep=False, rettime=False, sine=False):
-    """
-    Complex Phasor Data Generator.
-
-    Generates a sinusoidal data set with minimum, maximum,
-    frequency, magnitude, and phase angle arguments.
-
-    Parameters
-    ----------
-    mn:         float, optional
-                Minimum time (in seconds) to generate data for.
-                default=0
-    mx:         float
-                Maximum time (in seconds) to generate data for.
-    npts:       float, optional
-                Number of data samples. default=1000
-    mag:        float, optional
-                Sinusoid magnitude, default=1
-    ang:        float, optional
-                Sinusoid angle in degrees, default=0
-    freq:       float, optional
-                Sinusoid frequency in Hz
-    retstep:    bool, optional
-                Control argument to request return of time
-                step size (dt) in seconds.
-    sine:       bool, optional
-                Control argument to require data be generated
-                with a sinusoidal function instead of cosine.
-
-    Returns
-    -------
-    data:       numpy.ndarray
-                The resultant data array.
-    """
-    # Test Inputs for Min/Max
-    if mx == None:
-        # No Minimum provided, use Value as Maximum
-        mx = mn
-        mn = 0
-    # Generate Omega
-    w = 2 * _np.pi * freq
-    # Generate Time Array
-    t, dt = _np.linspace(mn, mx, npts, retstep=True)
-    # Generate Data Array
-    if not sine:
-        data = mag * _np.cos(w * t + _np.radians(ang))
-    else:
-        data = mag * _np.sin(w * t + _np.radians(ang))
-    # Generate Return Data Set
-    dataset = [data]
-    if retstep:
-        dataset.append(dt)
-    if rettime:
-        dataset.append(t)
-    # Return Dataset
-    if len(dataset) == 1:
-        return (dataset[0])
-    return (dataset)
-
-
-# Define Complex LaTeX Generator
-def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
-           double=False):
-    """
-    Complex Value Latex Generator.
-
-    Function to generate a LaTeX string of complex value(s)
-    in either polar or rectangular form. May generate both dollar
-    signs.
-
-    Parameters
-    ----------
-    val:        complex
-                The complex value to be printed, if value
-                is a list or numpy array, the result will be
-                demonstrated as a matrix.
-    round:      int, optional
-                Control to specify number of decimal places
-                that should displayed. default=True
-    polar:      bool, optional
-                Control argument to force result into polar
-                coordinates instead of rectangular. default=True
-    predollar:  bool, optional
-                Control argument to enable/disable the dollar
-                sign before the string. default=True
-    postdollar: bool, optional
-                Control argument to enable/disable the dollar
-                sign after the string. default=True
-    double:     bool, optional
-                Control argument to specify whether or not
-                LaTeX dollar signs should be double or single,
-                default=False
-
-    Returns
-    -------
-    latex:      str
-                LaTeX string for the complex value.
-    """
-    # Define Interpretation Functions
-    def polarstring(val, round):
-        mag, ang_r = _c.polar(val)  # Convert to polar form
-        ang = _np.degrees(ang_r)  # Convert to degrees
-        mag = _np.around(mag, round)  # Round
-        ang = _np.around(ang, round)  # Round
-        latex = str(mag) + '∠' + str(ang) + '°'
-        return (latex)
-
-    def rectstring(val, round):
-        real = _np.around(val.real, round)  # Round
-        imag = _np.around(val.imag, round)  # Round
-        if imag > 0:
-            latex = str(real) + "+j" + str(imag)
-        else:
-            latex = str(real) + "-j" + str(abs(imag))
-        return (latex)
-
-    # Interpret as numpy array if simple list
-    if isinstance(val, list):
-        val = _np.asarray(val)  # Ensure that input is array
-    # Find length of the input array
-    if isinstance(val, _np.ndarray):
-        shp = val.shape
-        try:
-            row, col = shp  # Interpret Shape of Object
-        except:
-            row = shp[0]
-            col = 1
-        sz = val.size
-        # Open Matrix
-        latex = r'\begin{bmatrix}'
-        # Iteratively Process Each Item in Array
-        for ri in range(row):
-            if ri != 0:  # Insert Row Separator
-                latex += r'\\'
-            if col > 1:
-                for ci in range(col):
-                    if ci != 0:  # Insert Column Separator
-                        latex += r' & '
-                    # Add Complex Represetation of Value
-                    if polar:
-                        latex += polarstring(val[ri][ci], round)
-                    else:
-                        latex += rectstring(val[ri][ci], round)
-            else:
-                # Add Complex Represetation of Value
-                if polar:
-                    latex += polarstring(val[ri], round)
-                else:
-                    latex += rectstring(val[ri], round)
-        # Close Matrix
-        latex += r'\end{bmatrix}'
-    elif isinstance(val, complex):
-        # Treat as Polar When Directed
-        if polar:
-            latex = polarstring(val, round)
-        else:
-            latex = rectstring(val, round)
-    else:
-        raise ValueError("Invalid Input Type")
-    # Add Dollar Sign pre-post
-    if double:
-        dollar = r'$$'
-    else:
-        dollar = r'$'
-    if predollar:
-        latex = dollar + latex
-    if postdollar:
-        latex = latex + dollar
-    return (latex)
-
-
-# Define Transfer Function LaTeX Generator
-def tflatex(sys, sysp=None, var='s', predollar=True,
-            postdollar=True, double=False, tolerance=1e-8):
-    r"""
-    Transfer Function LaTeX String Generator.
-
-    LaTeX string generating function to create a transfer
-    function string in LaTeX. Particularly useful for
-    demonstrating systems in Interactive Python Notebooks.
-
-    Parameters
-    ----------
-    sys:        list
-                If provided in conjunction with optional
-                parameter `sysp`, the parameter `sys` will
-                act as the numerator set. Otherwise, can be
-                passed as a list containing two sublists,
-                the first being the numerator set, and the
-                second being the denominator set.
-    sysp:       list, optional
-                If provided, this input will act as the
-                denominator of the transfer function.
-    var:        str, optional
-                The variable that should be printed for each
-                term (i.e. 's' or 'j\omega'). default='s'
-    predollar:  bool, optional
-                Control argument to enable/disable the dollar
-                sign before the string. default=True
-    postdollar: bool, optional
-                Control argument to enable/disable the dollar
-                sign after the string. default=True
-    double:     bool, optional
-                Control argument to specify whether or not
-                LaTeX dollar signs should be double or single,
-                default=False
-    tolerance:  float, optional
-                The floating point tolerance cutoff to evaluate
-                each term against. If the absolute value of the
-                particular term is greater than the tolerance,
-                the value will be printed, if not, it will not
-                be printed. default=1e-8
-
-    Returns
-    -------
-    latex:      str
-                LaTeX string for the transfer function.
-    """
-    # Collect Numerator and Denominator Terms
-    if isinstance(sysp, (list, tuple, _np.ndarray)):
-        num = sys
-        den = sysp
-    else:
-        num, den = sys
-
-    # Generate String Function
-    def genstring(val):
-        length = len(val)
-        strg = ''
-        for i, v in enumerate(val):
-            # Add Each Term to String
-            if abs(v) > tolerance:
-                # Add '+' Symbol After Each Term
-                if i != 0:
-                    strg += r'+'
-                strg += str(v)
-                # Determine Exponent
-                xpnt = length - i - 1
-                if xpnt == 1:
-                    strg += var
-                elif xpnt == 0:
-                    pass  # Don't Do Anything
-                else:
-                    strg += var + r'^{' + str(xpnt) + r'}'
-        return (strg)
-
-    # Generate Total TF String
-    latex = r'\frac{' + genstring(num) + r'}{'
-    latex += genstring(den) + r'}'
-    # Add Dollar Sign pre-post
-    if double:
-        dollar = r'$$'
-    else:
-        dollar = r'$'
-    if predollar:
-        latex = dollar + latex
-    if postdollar:
-        latex = latex + dollar
-    return (latex)
-
-
-# Define Complex Composition Function
-def compose(*arr):
-    """
-    Complex Composition Function.
-
-    Accepts a set of real values and generates an array
-    of complex values. Input must be array-like, but can
-    appear in various forms:
-
-    - [ real, imag]
-    - [ [ real1, ..., realn ], [ imag1, ..., imagn ] ]
-    - [ [ real1, imag1 ], ..., [ realn, imagn ] ]
-
-    Will always return values in form:
-
-    [ complex1, ... complexn ]
-
-    Parameters
-    ----------
-    arr:        array_like
-                The input of real and imaginary term(s)
-    """
-    # Condition Input
-    if len(arr) == 1:
-        arr = arr[0]  # Extract 0-th term
-    # Input comes in various forms, we must first detect shape
-    arr = _np.asarray(arr)  # Format as Numpy Array
-    # Gather Shape to Detect Format
-    try:
-        row, col = arr.shape
-        # Passed Test, Valid Shape
-        retarr = _np.array([])  # Empty Return Array
-        # Now, Determine whether is type 2 or 3
-        if col == 2:  # Type 3
-            for i in range(row):  # Iterate over each row
-                item = arr[i][0] + 1j * arr[i][1]
-                retarr = _np.append(retarr, item)
-        elif row == 2:  # Type 2
-            for i in range(col):  # Iterate over each column
-                item = arr[0][i] + 1j * arr[1][i]
-                retarr = _np.append(retarr, item)
-        else:
-            raise ValueError("Invalid Array Shape, must be 2xN or Nx2.")
-        # Successfully Generated Array, Return
-        return (retarr)
-    except:  # 1-Dimension Array
-        length = arr.size
-        # Test for invalid Array Size
-        if length != 2:
-            raise ValueError("Invalid Array Size, Saw Length of " + str(length))
-        # Valid Size, Calculate and Return
-        return (arr[0] + 1j * arr[1])
 
 
 # Define Cycle Time Function
@@ -558,79 +71,6 @@ def tcycle(ncycles=1, freq=60):
         return (time[0])
     else:
         return (time)
-
-
-# Define Reactance Calculator
-def reactance(z, freq=60, sensetivity=1e-12):
-    r"""
-    Capacitance/Inductance from Impedance.
-
-    Calculates the Capacitance or Inductance in Farads or Henreys
-    (respectively) provided the impedance of an element.
-    Will return capacitance (in Farads) if ohmic impedance is
-    negative :eq:`cap`, or inductance (in Henrys) if ohmic impedance is
-    positive :eq:`ind`. If imaginary: calculate with j factor
-    (imaginary number).
-
-    .. math:: C = \frac{1}{\omega*Z}
-       :label: cap
-
-    .. math:: L = \frac{Z}{\omega}
-       :label: ind
-
-    This requires that the radian frequency is found as follows:
-
-    .. math:: \omega = 2*\pi*freq
-
-    where `freq` is the frequency in Hertz.
-
-    .. note::
-       It's worth noting here, that the resistance will be found by
-       extracting the real part of a complex value. That is:
-
-       .. math:: R = Real( R + jX )
-
-
-    Parameters
-    ----------
-    z:              complex
-                    The Impedance Provided, may be complex (R+jI)
-    freq:           float, optional
-                    The Frequency Base for Provided Impedance, default=60
-    sensetivity:    float, optional
-                    The sensetivity used to check if a resistance was
-                    provided, default=1e-12
-
-    Returns
-    -------
-    out:            float
-                    Capacitance or Inductance of Impedance
-    """
-    # Evaluate Omega
-    w = 2 * _np.pi * freq
-    # Input is Complex
-    if isinstance(z, complex):
-        # Test for Resistance
-        if (abs(z.real) > sensetivity):
-            R = z.real
-        else:
-            R = 0
-        if (z.imag > 0):
-            out = z / (w * 1j)
-        else:
-            out = 1 / (w * 1j * z)
-        out = abs(out)
-        # Combine with resistance if present
-        if (R != 0): out = (R, out)
-    else:
-        if (z > 0):
-            out = z / (w)
-        else:
-            out = 1 / (w * z)
-        out = abs(out)
-    # Return Output
-    return (out)
-
 
 # Define display function
 def cprint(val, unit=None, label=None, title=None,
@@ -891,59 +331,6 @@ def phasorz(C=None, L=None, freq=60, complex=True):
         Z *= 1j
     return (Z)
 
-
-# Define Parallel Impedance Adder
-def parallelz(*args):
-    r"""
-    Parallel Impedance Calculator.
-
-    This function is designed to generate the total parallel
-    impedance of a set (tuple) of impedances specified as real
-    or complex values.
-
-    .. math::
-       Z_{eq}=(\frac{1}{Z_1}+\frac{1}{Z_2}+\dots+\frac{1}{Z_n})^{-1}
-
-    Parameters
-    ----------
-    Z:      tuple of complex
-            The tupled input set of impedances, may be a tuple
-            of any size greater than 2. May be real, complex, or
-            a combination of the two.
-
-    Returns
-    -------
-    Zp:     complex
-            The calculated parallel impedance of the input tuple.
-    """
-    # Gather length (number of elements in tuple)
-    L = len(args)
-    if L == 1:
-        Z = args[0]  # Only One Tuple Provided
-        try:
-            L = len(Z)
-            if (L == 1):
-                Zp = Z[0]  # Only one impedance, burried in tuple
-            else:
-                # Inversely add the first two elements in tuple
-                Zp = (1 / Z[0] + 1 / Z[1]) ** (-1)
-                # If there are more than two elements, add them all inversely
-                if (L > 2):
-                    for i in range(2, L):
-                        Zp = (1 / Zp + 1 / Z[i]) ** (-1)
-        except:
-            Zp = Z  # Only one impedance
-    else:
-        Z = args  # Set of Args acts as Tuple
-        # Inversely add the first two elements in tuple
-        Zp = (1 / Z[0] + 1 / Z[1]) ** (-1)
-        # If there are more than two elements, add them all inversely
-        if (L > 2):
-            for i in range(2, L):
-                Zp = (1 / Zp + 1 / Z[i]) ** (-1)
-    return (Zp)
-
-
 # Define Phase/Line Converter
 def phaseline(VLL=None, VLN=None, Iline=None, Iphase=None, realonly=None, **kwargs):
     r"""
@@ -1072,19 +459,19 @@ def powerset(P=None, Q=None, S=None, PF=None, find=''):
         S = _np.sqrt(P ** 2 + Q ** 2)
         PF = P / S
         if Q < 0:
-            PF = -PF
+            PF = -1*PF
     # Given S and PF
     elif (S != None) and (PF != None):
         P = abs(S * PF)
         Q = _np.sqrt(S ** 2 - P ** 2)
         if PF < 0:
-            Q = -Q
+            Q = -1*Q
     # Given P and PF
     elif (P != None) and (PF != None):
         S = P / PF
         Q = _np.sqrt(S ** 2 - P ** 2)
         if PF < 0:
-            Q = -Q
+            Q = -1*Q
     # Given P and S
     elif (P != None) and (S != None):
         Q = _np.sqrt(S ** 2 - P ** 2)
@@ -1417,7 +804,7 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
 
 
 # Define Non-Linear Power Factor Calculator
-def nlinpf(PFtrue=False, PFdist=False, PFdisp=False):
+def nonlinear_pf(PFtrue=False, PFdist=False, PFdisp=False):
     """
     Non-Linear Power Factor Evaluator.
 
@@ -1527,8 +914,8 @@ def iscrl(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
             # Calculate T
             T = X / (2 * _np.pi * f * R)  # seconds
             # Calculate iAC and iDC
-            iAC = _np.sqrt(2) * V / Z * _np.sin(omega * t + alpha - theta)
-            iDC = -_np.sqrt(2) * V / Z * _np.sin(alpha - theta) * _np.exp(-t / T)
+            iAC = _np.sqrt(2)*V / Z * _np.sin(omega * t + alpha - theta)
+            iDC = -_np.sqrt(2)*V / Z * _np.sin(alpha - theta)*_np.exp(-1*t / T)
             i = iAC + iDC
             # Return Values
             return (i, iAC, iDC, T)
@@ -1790,104 +1177,6 @@ def instpower(P, Q, t, freq=60):
     return (Pinst)
 
 
-# Define Delta-Wye Impedance Network Calculator
-def dynetz(delta=None, wye=None, round=None):
-    r"""
-    Delta-Wye Impedance Converter.
-
-    This function is designed to act as the conversion utility
-    to transform delta-connected impedance values to wye-
-    connected and vice-versa.
-
-    .. math::
-       Z_{sum} = Z_{1/2} + Z_{2/3} + Z_{3/1}//
-       Z_1 = \frac{Z_{1/2}*Z_{3/1}}{Z_{sum}}//
-       Z_2 = \frac{Z_{1/2}*Z_{2/3}}{Z_{sum}}//
-       Z_3 = \frac{Z_{2/3}*Z_{3/1}}{Z_{sum}}
-
-    .. math::
-       Z_{ms} = Z_1*Z_2 + Z_2*Z_3 + Z_3*Z_1//
-       Z_{2/3} = \frac{Z_{ms}}{Z_1}//
-       Z_{3/1} = \frac{Z_{ms}}{Z_2}//
-       Z_{1/2} = \frac{Z_{ms}}{Z_3}
-
-    Parameters
-    ----------
-    delta:  tuple of float, exclusive
-            Tuple of the delta-connected impedance values as:
-            { Z12, Z23, Z31 }, default=None
-    wye:    tuple of float, exclusive
-            Tuple of the wye-connected impedance valuse as:
-            { Z1, Z2, Z3 }, default=None
-
-    Returns
-    -------
-    delta-set:  tuple of float
-                Delta-Connected impedance values { Z12, Z23, Z31 }
-    wye-set:    tuple of float
-                Wye-Connected impedance values { Z1, Z2, Z3 }
-    """
-    # Determine which set of impedances was provided
-    if (delta != None and wye == None):
-        Z12, Z23, Z31 = delta  # Gather particular impedances
-        Zsum = Z12 + Z23 + Z31  # Find Sum
-        # Calculate Wye Impedances
-        Z1 = Z12 * Z31 / Zsum
-        Z2 = Z12 * Z23 / Zsum
-        Z3 = Z23 * Z31 / Zsum
-        Zset = (Z1, Z2, Z3)
-        if round != None: Zset = _np.around(Zset, round)
-        return (Zset)  # Return Wye Impedances
-    elif (delta == None and wye != None):
-        Z1, Z2, Z3 = wye  # Gather particular impedances
-        Zmultsum = Z1 * Z2 + Z2 * Z3 + Z3 * Z1
-        Z23 = Zmultsum / Z1
-        Z31 = Zmultsum / Z2
-        Z12 = Zmultsum / Z3
-        Zset = (Z12, Z23, Z31)
-        if round != None: Zset = _np.around(Zset, round)
-        return (Zset)  # Return Delta Impedances
-    else:
-        raise ValueError("ERROR: Either delta or wye impedances must be specified.")
-
-#calculating impedance of bridge network
-def bridge_impedance(z1, z2, z3, z4, z5):
-    r"""
-    Bridge Impedance Calculator.
-    
-    The following condition describing the Wheatstone Bridge is utilized to ensure that current through `z5` will be zero.
-
-    .. math:: z1 \cdot z3 = z2 \cdot z4
-    
-    .. image:: /static/WheatstoneBridgeCircuit.png
-    
-    Parameters
-    ----------
-    z1:     [float, complex]
-            Bridge impedance 1
-    z2:     [float, complex]
-            Bridge impedance 2
-    z3:     [float, complex]
-            Bridge impedance 3
-    z4:     [float, complex]
-            Bridge impedance 4
-    z5:     [float, complex]
-            Detector impedance or impedance between two bridge branches
-
-    Returns
-    -------
-    effective bridge impedance
-
-    """
-    if z1 * z3 == z2 * z4:
-        return (z1 + z2) * (z3 + z4) / (z1 + z2 + z3 + z4)
-    else:
-        za, zb, zc = dynetz(delta = (z1, z5, z4))
-        ze1 = zb + z2
-        ze2 = zc + z3
-        return za + (ze1*ze2)/(ze1+ze2)
-
-
 # Define Single Line Power Flow Calculator
 def powerflow(Vsend, Vrec, Zline):
     r"""
@@ -1996,96 +1285,6 @@ def zsource(S, V, XoR, Sbase=None, Vbase=None, perunit=True):
         Zsource = Zsource_pu * Vbase ** 2 / Sbase
         return (Zsource)
     return (Zsource_pu)
-
-
-# Define Impedance Decomposer
-def zdecompose(Zmag, XoR):
-    """
-    Impedance Decomposition Function.
-
-    A function to decompose the impedance magnitude into its
-    corresponding resistance and reactance using the X/R ratio.
-
-    It is possible to "neglect" R, or make it a very small number;
-    this is done by setting the X/R ratio to a very large number
-    (X being much larger than R).
-
-    Parameters
-    ----------
-    Zmag:       float
-                The magnitude of the impedance.
-    XoR:        float
-                The X/R ratio (reactance over impedance).
-
-    Returns
-    -------
-    R:          float
-                The resistance (in ohms)
-    X:          float
-                The reactance (in ohms)
-    """
-    # Evaluate Resistance
-    R = Zmag / _np.sqrt(XoR ** 2 + 1)
-    # Evaluate Reactance
-    X = R * XoR
-    # Return
-    return (R, X)
-
-
-# Define HP to Watts Calculation
-def hp_to_watts(hp):
-    r"""
-    Horsepower to Watts Formula.
-
-    Calculates the power (in watts) given the
-    horsepower.
-
-    .. math:: P_{\text{watts}}=P_{\text{horsepower}}\cdot745.699872
-
-    Same as `watts`.
-
-    Parameters
-    ----------
-    hp:         float
-                The horspower to compute.
-
-    Returns
-    -------
-    watts:      float
-                The power in watts.
-    """
-    return (hp * 745.699872)
-
-
-watts = hp_to_watts  # Make Duplicate Name
-
-
-# Define Watts to HP Calculation
-def watts_to_hp(watts):
-    r"""
-    Watts to Horsepower Function.
-
-    Calculates the power (in horsepower) given
-    the power in watts.
-
-    .. math:: P_{\text{horsepower}}=\frac{P_{\text{watts}}}{745.699872}
-
-    Same as `horsepower`.
-
-    Parameters
-    ----------
-    watts:      float
-                The wattage to compute.
-
-    Returns
-    -------
-    hp:         float
-                The power in horsepower.
-    """
-    return (watts / 745.699872)
-
-
-horsepower = watts_to_hp  # Make Duplicate Name
 
 
 # Define Power Reactance Calculator
@@ -2531,403 +1730,6 @@ def rtdtemp(RT, rtdtype="PT100", fahrenheit=False, Rref=None, Tref=None,
     temp = _np.around(temp, round)
     return (temp)
 
-
-# Define Capacitor Voltage Discharge Function
-def vcapdischarge(t, Vs, R, C):
-    r"""
-    Discharging Capacitor Function.
-
-    Function to calculate the voltage of a
-    capacitor that is discharging given the time.
-
-    .. math:: V_c=V_s*e^{\frac{-t}{R*C}}
-
-    Parameters
-    ----------
-    t:          float
-                The time at which to calculate the voltage.
-    Vs:         float
-                The starting voltage for the capacitor.
-    R:          float
-                The ohmic value of the resistor being used
-                to discharge.
-    C:          float
-                Capacitive value (in Farads).
-
-    Returns
-    -------
-    Vc:         float
-                The calculated voltage of the capacitor.
-    """
-    Vc = Vs * (_np.exp(-t / (R * C)))
-    return (Vc)
-
-
-# Define Capacitor Voltage Charge Function
-def vcapcharge(t, Vs, R, C):
-    r"""
-    Charging Capacitor Voltage.
-
-    Function to calculate the voltage of a
-    capacitor that is charging given the time.
-
-    .. math:: V_c=V_s*(1-e^{\frac{-t}{R*C}})
-
-    Parameters
-    ----------
-    t:          float
-                The time at which to calculate the voltage.
-    Vs:         float
-                The charging voltage for the capacitor.
-    R:          float
-                The ohmic value of the resistor being used
-                to discharge.
-    C:          float
-                Capacitive value (in Farads).
-
-    Returns
-    -------
-    Vc:         float
-                The calculated voltage of the capacitor.
-    """
-    Vc = Vs * (1 - _np.exp(-t / (R * C)))
-    return (Vc)
-
-
-# Define Capacitive Energy Transfer Function
-def captransfer(t, Vs, R, Cs, Cd):
-    """
-    Capacitor Energy Transfer Function.
-
-    Calculate the voltage across a joining
-    resistor (R) that connects Cs and Cd, the
-    energy-source and -destination capacitors,
-    respectively. Calculate the final voltage
-    across both capacitors.
-
-    Parameters
-    ----------
-    t:          float
-                Time at which to calculate resistor voltage.
-    Vs:         float
-                Initial voltage across source-capacitor (Cs).
-    R:          float
-                Value of resistor that connects capacitors.
-    Cs:         float
-                Source capacitance value in Farads.
-    Cd:         float
-                Destination capacitance value in Farads.
-
-    Returns
-    -------
-    rvolt:      float
-                Voltage across the resistor at time t.
-    vfinal:     float
-                Final voltage that both capacitors settle to.
-    """
-    tau = (R * Cs * Cd) / (Cs + Cd)
-    rvolt = Vs * _np.exp(-t / tau)
-    vfinal = Vs * Cs / (Cs + Cd)
-    return (rvolt, vfinal)
-
-
-# Define Inductor Energy Formula
-def inductorenergy(L, I):
-    r"""
-    Energy Stored in Inductor Formula.
-
-    Function to calculate the energy stored in an inductor
-    given the inductance (in Henries) and the current.
-
-    .. math:: E=\frac{1}{2}*L*I^2
-
-    Parameters
-    ----------
-    L:          float
-                Inductance Value (in Henries)
-    I:          float
-                Current traveling through inductor.
-
-    Returns
-    -------
-    E:          float
-                The energy stored in the inductor (in Joules).
-    """
-    return (1 / 2 * L * I ** 2)
-
-
-# Define Inductor Charge Function
-def inductorcharge(t, Vs, R, L):
-    r"""
-    Charging Inductor Formula.
-
-    Calculates the Voltage and Current of an inductor
-    that is charging/storing energy.
-
-    .. math::
-       V_L = V_s*e^{\frac{-R*t}{L}}//
-       I_L = \frac{V_s}{R}*(1-e^{\frac{-R*t}{L}})
-
-    Parameters
-    ----------
-    t:          float
-                Time at which to calculate voltage and current.
-    Vs:         float
-                Charging voltage across inductor and resistor.
-    R:          float
-                Resistance related to inductor.
-    L:          float
-                Inductance value in Henries.
-
-    Returns
-    -------
-    Vl:         float
-                Voltage across inductor at time t.
-    Il:         float
-                Current through inductor at time t.
-    """
-    Vl = Vs * _np.exp(-R * t / L)
-    Il = Vs / R * (1 - _np.exp(-R * t / L))
-    return (Vl, Il)
-
-
-# Define Capacitive Back-to-Back Switching Formula
-def capbacktoback(C1, C2, Lm, VLN=None, VLL=None):
-    """
-    Back to Back Capacitor Transient Current Calculator.
-
-    Function to calculate the maximum current and the
-    frequency of the inrush current of two capacitors
-    connected in parallel when one (energized) capacitor
-    is switched into another (non-engergized) capacitor.
-
-    .. note:: This formula is only valid for three-phase systems.
-
-    Parameters
-    ----------
-    C1:         float
-                The capacitance of the
-    VLN:        float, exclusive
-                The line-to-neutral voltage experienced by
-                any one of the (three) capacitors in the
-                three-phase capacitor bank.
-    VLL:        float, exclusive
-                The line-to-line voltage experienced by the
-                three-phase capacitor bank.
-
-    Returns
-    -------
-    imax:       float
-                Maximum Current Magnitude during Transient
-    ifreq:      float
-                Transient current frequency
-    """
-    # Evaluate Max Current
-    imax = _np.sqrt(2 / 3) * VLL * _np.sqrt((C1 * C2) / ((C1 + C2) * Lm))
-    # Evaluate Inrush Current Frequency
-    ifreq = 1 / (2 * _np.pi * _np.sqrt(Lm * (C1 * C2) / (C1 + C2)))
-    return (imax, ifreq)
-
-
-# Define Inductor Discharge Function
-def inductordischarge(t, Io, R, L):
-    r"""
-    Discharging Inductor Formula.
-
-    Calculates the Voltage and Current of an inductor
-    that is discharging its stored energy.
-
-    .. math::
-       I_L=I_0*e^{\frac{-R*t}{L}}//
-       V_L=I_0*R*(1-e^{\frac{-R*t}{L}})
-
-    Parameters
-    ----------
-    t:          float
-                Time at which to calculate voltage and current.
-    Io:         float
-                Initial current traveling through inductor.
-    R:          float
-                Resistance being discharged to.
-    L:          float
-                Inductance value in Henries.
-
-    Returns
-    -------
-    Vl:         float
-                Voltage across inductor at time t.
-    Il:         float
-                Current through inductor at time t.
-    """
-    Il = Io * _np.exp(-R * t / L)
-    Vl = Io * R * (1 - _np.exp(-R * t / L))
-    return (Vl, Il)
-
-
-# Define Apparent Power to Farad Conversion
-def farads(VAR, V, freq=60):
-    r"""
-    Capacitance from Apparent Power Formula.
-
-    Function to calculate the required capacitance
-    in Farads to provide the desired power rating
-    (VARs).
-
-    .. math:: C = \frac{VAR}{2*\pi*freq*V^2}
-
-    Parameters
-    ----------
-    VAR:        float
-                The rated power to meet.
-    V:          float
-                The voltage across the capacitor;
-                not described as VLL or VLN, merely
-                the capacitor voltage.
-    freq:       float, optional
-                The System frequency
-
-    Returns
-    -------
-    C:          float
-                The evaluated capacitance (in Farads).
-    """
-    return (VAR / (2 * _np.pi * freq * V ** 2))
-
-
-# Define Capacitor Energy Calculation
-def capenergy(C, V):
-    r"""
-    Capacitor Energy Formula.
-
-    A simple function to calculate the stored voltage (in Joules)
-    in a capacitor with a charged voltage.
-
-    .. math:: E=\frac{1}{2}*C*V^2
-
-    Parameters
-    ----------
-    C:          float
-                Capacitance in Farads.
-    V:          float
-                Voltage across capacitor.
-
-    Returns
-    -------
-    energy:     float
-                Energy stored in capacitor (Joules).
-    """
-    energy = 1 / 2 * C * V ** 2
-    return (energy)
-
-
-# Define Capacitor Voltage Discharge Function
-def loadedvcapdischarge(t, vo, C, P):
-    # noqa: D401    "Loaded" is a valid word for this docstring
-    r"""
-    Loaded Capacitor Discharge Formula.
-
-    Returns the voltage of a discharging capacitor after time (t -
-    seconds) given initial voltage (vo - volts), capacitor size
-    (cap - Farads), and load (P - Watts).
-
-    .. math:: V_t=\sqrt{v_0^2-2*P*\frac{t}{C}}
-
-    Parameters
-    ----------
-    t:          float
-                Time at which to calculate voltage.
-    vo:         float
-                Initial capacitor voltage.
-    C:          float
-                Capacitance (in Farads)
-    P:          float
-                Load power consumption (in Watts).
-
-    Returns
-    -------
-    Vt:         float
-                Voltage of capacitor at time t.
-    """
-    Vt = _np.sqrt(vo ** 2 - 2 * P * t / C)
-    return (Vt)
-
-
-# Define Capacitor Discharge Function
-def timedischarge(Vinit, Vmin, C, P, dt=1e-3, RMS=True, Eremain=False):
-    r"""
-    Capacitor Discharge Time Formula.
-
-    Returns the time to discharge a capacitor to a specified
-    voltage given set of inputs.
-
-    Parameters
-    ----------
-    Vinit:      float
-                Initial Voltage (in volts)
-    Vmin:       float
-                Final Voltage (the minimum allowable voltage) (in volts)
-    C:          float
-                Capacitance (in Farads)
-    P:          float
-                Load Power being consumed (in Watts)
-    dt:         float, optional
-                Time step-size (in seconds) (defaults to 1e-3 | 1ms)
-    RMS:        bool, optional
-                if true converts RMS Vin to peak
-    Eremain:    bool, optional
-                if true: also returns the energy remaining in cap
-
-    Returns
-    -------
-    Returns time to discharge from Vinit to Vmin in seconds.
-    May also return remaining energy in capacitor if Eremain=True
-    """
-    t = 0  # start at time t=0
-    if RMS:
-        vo = Vinit * _np.sqrt(2)  # convert RMS to peak
-    else:
-        vo = Vinit
-    vc = loadedvcapdischarge(t, vo, C, P)  # set initial cap voltage
-    while (vc >= Vmin):
-        t = t + dt  # increment the time
-        vcp = vc  # save previous voltage
-        vc = loadedvcapdischarge(t, vo, C, P)  # calc. new voltage
-    if (Eremain):
-        E = capenergy(C, vcp)  # calc. energy
-        return (t - dt, E)
-    else:
-        return (t - dt)
-
-
-# Define Rectifier Capacitor Calculator
-def rectifiercap(Iload, fswitch, dVout):
-    r"""
-    Rectifier Capacitor Formula.
-
-    Returns the capacitance (in Farads) for a needed capacitor in
-    a rectifier configuration given the system frequency (in Hz),
-    the load (in amps) and the desired voltage ripple.
-
-    .. math:: C=\frac{I_{load}}{f_{switch}*\Delta V_{out}}
-
-    Parameters
-    ----------
-    Iload:      float
-                The load current that must be met.
-    fswitch:    float
-                The switching frequency of the system.
-    dVout:      float
-                Desired delta-V on the output.
-
-    Returns
-    -------
-    C:          float
-                Required capacitance (in Farads) to meet arguments.
-    """
-    C = Iload / (fswitch * dVout)
-    return (C)
-
-
 # Define function to find VDC setpoint
 def vscdcbus(VLL, Zs, P, Q=0, mmax=0.8, debug=False):
     """
@@ -3015,7 +1817,7 @@ def vscgains(Rs, Ls, tau=0.005, freq=60):
 
 
 # Define Convolution Bar-Graph Function:
-def convbar(h, x, outline=True):
+def convolution_bargraph(h, x, outline=True):
     """
     Convolution Bar-Graph Plotter Function.
 
@@ -3065,45 +1867,6 @@ def convbar(h, x, outline=True):
     _plt.grid()
     _plt.title('Convolved Output')
     _plt.show()
-
-
-# Define convolution function
-def convolve(tuple):
-    """
-    Filter Convolution Function.
-
-    Given a tuple of terms, convolves all terms in tuple to
-    return one tuple as a numpy array.
-
-    Parameters
-    ----------
-    tuple:      tuple of numpy.ndarray
-                Tuple of terms to be convolved.
-
-    Returns
-    -------
-    c:          The convolved set of the individual terms.
-                i.e. numpy.ndarray([ x1, x2, x3, ..., xn ])
-    """
-    c = sig.convolve(tuple[0], tuple[1])
-    if (len(tuple) > 2):
-        # Iterate starting with second element and continuing
-        for i in range(2, len(tuple)):
-            c = sig.convolve(c, tuple[i])
-    return (c)
-
-
-# Define Step function
-def step(t):
-    """
-    Step Function [ u(t) ].
-
-    Simple implimentation of numpy.heaviside function
-    to provide standard step-function as specified to
-    be zero at x<0, and one at x>=0.
-    """
-    return (_np.heaviside(t, 1))
-
 
 # Define Peak Calculator
 def peak(val):
@@ -3312,7 +2075,7 @@ def rfft(arr, dt=0.01, absolute=True, resample=True):
     if absolute:
         fourier = abs(_np.fft.rfft(arr))
     else:
-        foruier = _np.fft.rfft(arr)
+        fourier = _np.fft.rfft(arr)
     if resample == True:
         # Evaluate the Downsampling Ratio
         dn = int(dt * len(arr))
@@ -3656,59 +2419,6 @@ def string_to_bits(str):
     return (data)
 
 
-# Define kWh to BTU function and vice-versa
-def kwh_to_btu(kWh):
-    r"""
-    Killo-Watt-Hours to BTU Function.
-
-    Converts kWh (killo-Watt-hours) to BTU (British Thermal Units).
-
-    .. math:: \text{BTU} = \text{kWh}\cdot3412.14
-
-    Same as `btu`.
-
-    Parameters
-    ----------
-    kWh:        float
-                The number of killo-Watt-hours
-
-    Returns
-    -------
-    BTU:        float
-                The number of British Thermal Units
-    """
-    return (kWh * 3412.14)
-
-
-btu = kwh_to_btu  # Make Duplicate Name
-
-
-def btu_to_kwh(BTU):
-    r"""
-    BTU to Killo-Watt-Hours Function.
-
-    Converts BTU (British Thermal Units) to kWh (killo-Watt-hours).
-
-    .. math:: \text{kWh} = \frac{\text{BTU}}{3412.14}
-
-    Same as `kwh`.
-
-    Parameters
-    ----------
-    BTU:        float
-                The number of British Thermal Units
-
-    Returns
-    -------
-    kWh:        float
-                The number of killo-Watt-hours
-    """
-    return (BTU / 3412.14)
-
-
-kwh = btu_to_kwh  # Make Duplicate Name
-
-
 # Define Per-Unit Impedance Formula
 def zpu(S, VLL=None, VLN=None):
     r"""
@@ -3934,176 +2644,6 @@ def geninternalv(I, Zs, Vt, Vgn=None,Zm=None, Zmp=None, Zmpp=None, Ip=None, Ipp=
     return (Ea)
 
 
-# Define Sequence Component Conversion Function
-def abc_to_seq(Mabc, reference='A'):
-    r"""
-    Phase-System to Sequence-System Conversion.
-
-    Converts phase-based values to sequence
-    components.
-
-    .. math:: M_{\text{012}}=A_{\text{012}}\cdot M_{\text{ABC}}
-
-    Same as phs_to_seq.
-
-    Parameters
-    ----------
-    Mabc:       list of complex
-                Phase-based values to be converted.
-    reference:  {'A', 'B', 'C'}
-                Single character denoting the reference,
-                default='A'
-
-    Returns
-    -------
-    M012:       numpy.ndarray
-                Sequence-based values in order of 0-1-2
-
-    See Also
-    --------
-    seq_to_abc: Sequence to Phase Conversion
-    sequencez:  Phase Impedance to Sequence Converter
-    """
-    # Condition Reference:
-    reference = reference.upper()
-    if reference == 'A':
-        M = Aabc
-    elif reference == 'B':
-        M = _np.roll(Aabc, 1, 0)
-    elif reference == 'C':
-        M = _np.roll(Aabc, 2, 0)
-    else:
-        raise ValueError("Invalid Phase Reference.")
-    return (M.dot(Mabc))
-
-
-# Define Second Name for abc_to_seq
-phs_to_seq = abc_to_seq
-
-
-# Define Phase Component Conversion Function
-def seq_to_abc(M012, reference='A'):
-    r"""
-    Sequence-System to Phase-System Conversion.
-
-    Converts sequence-based values to phase
-    components.
-
-    .. math:: M_{\text{ABC}}=A_{\text{012}}^{-1}\cdot M_{\text{012}}
-
-    Same as seq_to_phs.
-
-    Parameters
-    ----------
-    M012:       list of complex
-                Sequence-based values to convert.
-    reference:  {'A', 'B', 'C'}
-                Single character denoting the reference,
-                default='A'
-
-    Returns
-    -------
-    Mabc:       numpy.ndarray
-                Phase-based values in order of A-B-C
-
-    See Also
-    --------
-    abc_to_seq: Phase to Sequence Conversion
-    sequencez:  Phase Impedance to Sequence Converter
-    """
-    # Compute Dot Product
-    M = A012.dot(M012)
-    # Condition Reference:
-    reference = reference.upper()
-    if reference == 'A':
-        pass
-    elif reference == 'B':
-        M = _np.roll(M, 1, 0)
-    elif reference == 'C':
-        M = _np.roll(M, 2, 0)
-    else:
-        raise ValueError("Invalid Phase Reference.")
-    return (M)
-
-
-# Define Second Name for seq_to_abc
-seq_to_phs = seq_to_abc
-
-
-# Define Sequence Impedance Calculator
-def sequencez(Zabc, reference='A', resolve=False, diag=False, round=3):
-    r"""
-    Sequence Impedance Calculator.
-
-    Accepts the phase (ABC-domain) impedances for a
-    system and calculates the sequence (012-domain)
-    impedances for the same system. If the argument
-    `resolve` is set to true, the function will
-    combine terms into the set of [Z0, Z1, Z2].
-
-    When resolve is False:
-
-    .. math:: Z_{\text{012-M}}=A_{\text{012}}^{-1}Z_{\text{ABC}}A_{\text{012}}
-
-    When resolve is True:
-
-    .. math:: Z_{\text{012}}=A_{\text{012}}Z_{\text{ABC}}A_{\text{012}}^{-1}
-
-    Parameters
-    ----------
-    Zabc:       numpy.ndarray of complex
-                2-D (3x3) matrix of complex values
-                representing the phasor impedances
-                in the ABC-domain.
-    reference:  {'A', 'B', 'C'}
-                Single character denoting the reference,
-                default='A'
-    resolve:    bool, optional
-                Control argument to force the function to
-                evaluate the individual sequence impedances
-                [Z0, Z1, Z2], default=False
-    diag:       bool, optional
-                Control argument to force the function to
-                reduce the matrix to its diagonal terms.
-    round:      int, optional
-                Integer denoting number of decimal places
-                resulting matrix should be rounded to.
-                default=3
-
-    Returns
-    -------
-    Z012:       numpy.ndarray of complex
-                2-D (3x3) matrix of complex values
-                representing the sequence impedances
-                in the 012-domain
-
-    See Also
-    --------
-    seq_to_abc: Sequence to Phase Conversion
-    abc_to_seq: Phase to Sequence Conversion
-    """
-    # Condition Reference
-    reference = reference.upper()
-    rollrate = {'A': 0, 'B': 1, 'C': 2}
-    # Test Validity
-    if reference not in rollrate:
-        raise ValueError("Invalad Phase Reference")
-    # Determine Roll Factor
-    roll = rollrate[reference]
-    # Evaluate Matricies
-    M012 = _np.roll(A012, roll, 0)
-    Minv = _np.linalg.inv(M012)
-    # Compute Sequence Impedances
-    if resolve:
-        Z012 = M012.dot(Zabc.dot(Minv))
-    else:
-        Z012 = Minv.dot(Zabc.dot(M012))
-    # Reduce to Diagonal Terms if Needed
-    if diag:
-        Z012 = [Z012[0][0], Z012[1][1], Z012[2][2]]
-    return (_np.around(Z012, round))
-
-
 # FFT Coefficient Calculator Function
 def funcfft(func, minfreq=60, maxmult=15, complex=False):
     """
@@ -4140,7 +2680,7 @@ def funcfft(func, minfreq=60, maxmult=15, complex=False):
     # Determine Time from Fundamental Frequency
     T = 1 / minfreq
     # Generate time range to apply for FFT
-    t, dt = _np.linspace(0, T, NN, endpoint=False, retstep=True)
+    t, _ = _np.linspace(0, T, NN, endpoint=False, retstep=True)
     # Evaluate FFT
     y = _np.fft.rfft(func(t)) / t.size
     # Return Complex Values
@@ -4611,8 +3151,9 @@ def tap_changing_transformer(Vgen, Vdis, Pload, Qload, R, X):
     r"""
     Calculate Turn Ratio of Load Tap Changing Transformer.
 
-    The purpose of a tap changer is to regulate the output voltage of a transformer.
-    It does this by altering the number of turns in one winding and thereby changing the turns ratio of the transformer
+    The purpose of a tap changer is to regulate the output voltage of a
+    transformer. It does this by altering the number of turns in one winding and
+    thereby changing the turns ratio of the transformer
     
     .. math:: \sqrt{\frac{Vgen^2}{Vgen \cdot Vdis - R \cdot P - X \cdot Q}}
 
@@ -5027,62 +3568,6 @@ def xfmphs(style="DY", shift=30):
     return (phase)
 
 
-# Define Simple Radians to Hertz Converter
-def rad_to_hz(radians):
-    r"""
-    Radians to Hertz Converter.
-
-    Accepts a frequency in radians/sec and calculates
-    the hertzian frequency (in Hz).
-
-    .. math:: f_{\text{Hz}} = \frac{f_{\text{rad/sec}}}{2\cdot\pi}
-
-    Same as `hertz`.
-
-    Paramters
-    ---------
-    radians:    float
-                The frequency (represented in radians/sec)
-
-    Returns
-    -------
-    hertz:      float
-                The frequency (represented in Hertz)
-    """
-    return (radians / (2 * _np.pi))  # Evaluate and Return
-
-
-hertz = rad_to_hz  # Make Duplicate Name
-
-
-# Define Simple Hertz to Radians Converter
-def hz_to_rad(hertz):
-    r"""
-    Hertz to Radians Converter.
-
-    Accepts a frequency in Hertz and calculates
-    the frequency in radians/sec.
-
-    .. math:: f_{\text{rad/sec}} = f_{\text{Hz}}\cdot2\cdot\pi
-
-    Same as `radsec`.
-
-    Paramters
-    ---------
-    hertz:      float
-                The frequency (represented in Hertz)
-
-    Returns
-    -------
-    radians:    float
-                The frequency (represented in radians/sec)
-    """
-    return (hertz * (2 * _np.pi))  # Evaluate and Return
-
-
-radsec = hz_to_rad  # Make Duplicate Name
-
-
 # Define Induction Machine Thevenin Voltage Calculator
 def indmachvth(Vas, Rs, Lm, Lls=0, Ls=None, freq=60, calcX=True):
     r"""
@@ -5305,7 +3790,8 @@ def indmachpem(slip, Rr, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
     # Use Terms to Calculate Pem
     Rth = Zth.real
     Xth = Zth.imag
-    Pem = (abs(Vth) ** 2 * Rr / slip) / (((Rr / slip + Rth) ** 2 + Xth ** 2) * w) * (1 - slip)
+    Pem = ((abs(Vth) ** 2 * Rr / slip) /
+        (((Rr / slip + Rth) ** 2 + Xth ** 2) * w) * (1 - slip))
     return (Pem)
 
 
@@ -5415,7 +3901,7 @@ def indmachtem(slip, Rr, p=0, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
     # Use Terms to Calculate Pem
     Rth = Zth.real
     Xth = Zth.imag
-    Tem = 3 * abs(Vth) ** 2 / ((Rr / slip + Rth) ** 2 + Xth) * Rr / (slip * wsyn)
+    Tem = 3 * abs(Vth)**2 / ((Rr / slip + Rth) ** 2 + Xth) * Rr / (slip * wsyn)
     return (Tem)
 
 
@@ -5578,7 +4064,7 @@ def indmachiar(Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
     if Lr != None:  # Use Lr instead of Llr
         Llr = Lr - Lm
     if p != 0:  # Calculate Sync. Speed from Num. Poles
-        wsyn = w / (p / 2)
+        wsyn = w / (p / 2)  # TODO: Unused code? Evaluate use of wsyn
     if calcX:  # Convert Inductances to Reactances
         Lm *= w
         Lls *= w
@@ -5596,7 +4082,7 @@ def indmachiar(Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
         Zth = indmachzth(Rs, Lm, Lls, Llr, Ls, Lr, freq, calcX)
     # Calculate Rotor Current
     Iar = Vth / (Zth.real + Zth)
-    return (Iar)
+    return Iar
 
 
 # Define Induction Machine Peak Torque Calculator
@@ -5691,7 +4177,7 @@ def indmachpktorq(Rr, s_pk=None, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0,
     if Lr != None:  # Use Lr instead of Llr
         Llr = Lr - Lm
     if p != 0:  # Calculate Sync. Speed from Num. Poles
-        wsyn = w / (p / 2)
+        wsyn = w / (p / 2)  # TODO: Unused Code? Evaluate use of wsyn.
     if calcX:  # Convert Inductances to Reactances
         Lm *= w
         Lls *= w
@@ -5813,7 +4299,7 @@ def indmachstarttorq(Rr, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0,
     if Lr != None:  # Use Lr instead of Llr
         Llr = Lr - Lm
     if p != 0:  # Calculate Sync. Speed from Num. Poles
-        wsyn = w / (p / 2)
+        wsyn = w / (p / 2) # TODO: Unused variable - Evaluate value of wsyn
     if calcX:  # Convert Inductances to Reactances
         Lm *= w
         Lls *= w
@@ -6461,94 +4947,6 @@ def vipf(V=None, I=None, PF=1, find=''):
         return (PF)
     else:
         return (V, I, PF)
-
-
-# Define Angular Velocity Conversion Functions
-def rad_to_rpm(rad):
-    """
-    Radians-per-Second to RPM Converter.
-
-    Given the angular velocity in rad/sec, this function will evaluate the
-    velocity in RPM (Revolutions-Per-Minute).
-
-    Parameters
-    ----------
-    rad:        float
-                The angular velocity in radians-per-second
-
-    Returns
-    -------
-    rpm:        float
-                The angular velocity in revolutions-per-minute (RPM)
-    """
-    rpm = 60 / (2 * _np.pi) * rad
-    return (rpm)
-
-
-# Define Angular Velocity Conversion Functions
-def rpm_to_rad(rpm):
-    """
-    RPM to Radians-per-Second Converter.
-
-    Given the angular velocity in RPM (Revolutions-Per-Minute), this function
-    will evaluate the velocity in rad/sec.
-
-    Parameters
-    ----------
-    rpm:        float
-                The angular velocity in revolutions-per-minute (RPM)
-
-    Returns
-    -------
-    rad:        float
-                The angular velocity in radians-per-second
-    """
-    rad = 2 * _np.pi / 60 * rpm
-    return (rad)
-
-
-# Define Angular Velocity Conversion Functions
-def hz_to_rpm(hz):
-    """
-    Hertz to RPM Converter.
-
-    Given the angular velocity in Hertz, this function will evaluate the
-    velocity in RPM (Revolutions-Per-Minute).
-
-    Parameters
-    ----------
-    hz:         float
-                The angular velocity in Hertz
-
-    Returns
-    -------
-    rpm:        float
-                The angular velocity in revolutions-per-minute (RPM)
-    """
-    rpm = hz * 60
-    return (rpm)
-
-
-# Define Angular Velocity Conversion Functions
-def rpm_to_hz(rpm):
-    """
-    RPM to Hertz Converter.
-
-    Given the angular velocity in RPM (Revolutions-Per-Minute), this function
-    will evaluate the velocity in Hertz.
-
-    Parameters
-    ----------
-    rpm:        float
-                The angular velocity in revolutions-per-minute (RPM)
-
-    Returns
-    -------
-    hz:         float
-                The angular velocity in Hertz
-    """
-    hz = rpm / 60
-    return (hz)
 
 
 # Define Synchronous Speed Calculator
