@@ -144,11 +144,8 @@ def test_voltdiv():
 
     # Test case 0 R1 == R2 == Rload
     Vin = 10
-
     R1 = 10
-
     R2 = 10
-
     Rload = 10
 
     Vout = voltdiv(Vin, R1, R2, Rload=Rload)
@@ -159,11 +156,8 @@ def test_voltdiv():
     Vin = phasor(220, 30)
 
     R1 = complex(10, 0)
-
     R2 = complex(10, 10)
-
     Rload = complex(10, -10)
-
     Vout = voltdiv(Vin, R1, R2, Rload=Rload)
 
     Vout_actual = phasor(110, 30)
@@ -183,26 +177,21 @@ def test_suspension_insulators():
 
     Voltage = 66
 
-    capacitor_disk_voltages, string_efficiency = suspension_insulators(number_capacitors,
-                                                                        capacitance_ration, 
-                                                                        Voltage)
+    _, string_efficiency = suspension_insulators(number_capacitors,
+                                                 capacitance_ration, 
+                                                 Voltage)
 
     string_efficiency_actual = 54.16
-
     assertAlmostEqual(string_efficiency, string_efficiency_actual, abs=1e-2)
 
 def test_propagation_constants():
 
     from electricpy import propagation_constants
-
     z = complex(0.5, 0.9)
-
     y = complex(0, 6e-6)
-
     params_dict = propagation_constants(z, y, 520)
 
     alpha_cal = 0.622 * (10 ** -3)
-
     beta_cal = 2.4 * (10 ** -3)
 
     assertAlmostEqual(params_dict['alpha'], alpha_cal, abs=1e-4)
