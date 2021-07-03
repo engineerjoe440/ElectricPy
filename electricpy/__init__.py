@@ -1505,7 +1505,7 @@ def voltdiv(Vin, R1, R2, Rload=None):
     the resistances (or impedances) and the load resistance
     (or impedance) if present.
 
-    .. math:: V_{out} = V_{in} * \frac{R_2}{R_1+R+2}
+    .. math:: V_{out} = V_{in} * \frac{R_2}{R_1+R_2}
 
     .. math:: V_{out}=V_{in}*\frac{R_2||R_{load}}{R_1+(R_2||R_{load})}
 
@@ -1573,7 +1573,8 @@ def curdiv(Ri, Rset, Vin=None, Iin=None, Vout=False, combine=True):
         Rset = (Rset,)  # Set as Tuple
     # Calculate The total impedance
     if combine:
-        Rtot = parallelz(Rset + (Ri,))  # Combine tuples, then calculate total resistance
+        # Combine tuples, then calculate total resistance
+        Rtot = parallelz(Rset + (Ri,))
     else:
         Rtot = parallelz(Rset)
     # Determine Whether Input was given as Voltage or Current
@@ -1589,6 +1590,35 @@ def curdiv(Ri, Rset, Vin=None, Iin=None, Vout=False, combine=True):
         return (Ii, Vi)
     else:
         return (Ii)
+
+
+# Define Function to Evaluate Resistance Needed for LED
+def led_resistor(Vsrc, Vfwd = 2, Ifwd = 20):
+    r"""
+    LED Resistor Calculator.
+
+    This function will evaluate the necessary resistance value for a simple LED
+    circuit with a voltage source, resistor, and LED.
+
+    .. math:: R_\text{LED} = \frac{V_\text{SRC} - V_\text{FWD}}{I_\text{FWD}}
+
+    Parameters
+    ----------
+    Vsrc:   float
+            Source voltage, as measured across both LED and resistor in circuit.
+    Vfwd:   float, optional
+            Forward voltage of LED (or series LEDs if available), default=2
+    Ifwd:   float, optional
+            Forward current of LEDs in milliamps, default=20 (milliamps)
+    
+    Returns
+    -------
+    R:      float
+            The resistance value most appropriate for the LED circuit.
+    """
+    # Calculate and Return!
+    R = (Vsrc - Vfwd) / (Ifwd * 1000)
+    return R
 
 
 # Define Instantaneous Power Calculator
@@ -5234,7 +5264,7 @@ def indmachtem(slip, Rr, p=0, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
         Lls *= w
         Llr *= w
     # Test for Valid Input Set
-    if not any((p, wsync)):
+    if not any((p, wsyn)):
         raise ValueError("Poles or Synchronous Speed must be specified.")
     if Vth == None:
         if not all((Vas, Rs, Lm, Lls)):
@@ -5245,7 +5275,7 @@ def indmachtem(slip, Rr, p=0, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
         if not all((Rs, Llr, Lm, Lls)):
             raise ValueError("Invalid Argument Set, too few provided.")
         # Valid Argument Set, Calculate Zth
-        Zth = indmachzth(Rs, Lm, Lls, Ll, Ls, Lr, freq, calcX)
+        Zth = indmachzth(Rs, Lm, Lls, Llr, Ls, Lr, freq, calcX)
     # Use Terms to Calculate Pem
     Rth = Zth.real
     Xth = Zth.imag
@@ -5329,7 +5359,7 @@ def indmachpkslip(Rr, Zth=None, Rs=0, Lm=0, Lls=0, Llr=0, Ls=None,
         if not all((Rs, Llr, Lm, Lls)):
             raise ValueError("Invalid Argument Set, too few provided.")
         # Valid Argument Set, Calculate Zth
-        Zth = indmachzth(Rs, Lm, Lls, Ll, Ls, Lr, freq, calcX)
+        Zth = indmachzth(Rs, Lm, Lls, Llr, Ls, Lr, freq, calcX)
     # Calculate Peak Slip
     s_peak = Rr / abs(Zth)
     return (s_peak)
@@ -5427,7 +5457,7 @@ def indmachiar(Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
         if not all((Rs, Llr, Lm, Lls)):
             raise ValueError("Invalid Argument Set, too few provided.")
         # Valid Argument Set, Calculate Zth
-        Zth = indmachzth(Rs, Lm, Lls, Ll, Ls, Lr, freq, calcX)
+        Zth = indmachzth(Rs, Lm, Lls, Llr, Ls, Lr, freq, calcX)
     # Calculate Rotor Current
     Iar = Vth / (Zth.real + Zth)
     return (Iar)
@@ -5540,7 +5570,7 @@ def indmachpktorq(Rr, s_pk=None, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0,
         if not all((Rs, Llr, Lm, Lls)):
             raise ValueError("Invalid Argument Set, too few provided.")
         # Valid Argument Set, Calculate Zth
-        Zth = indmachzth(Rs, Lm, Lls, Ll, Ls, Lr, freq, calcX)
+        Zth = indmachzth(Rs, Lm, Lls, Llr, Ls, Lr, freq, calcX)
     if Iar == None:
         if not all((Vth, Zth)):
             raise ValueError("Invalid Argument Set, too few provided.")
@@ -5664,14 +5694,14 @@ def indmachstarttorq(Rr, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0,
         if not all((Rs, Llr, Lm, Lls)):
             raise ValueError("Invalid Argument Set, too few provided.")
         # Valid Argument Set, Calculate Zth
-        Zth = indmachzth(Rs, Lm, Lls, Ll, Ls, Lr, freq, calcX)
+        Zth = indmachzth(Rs, Lm, Lls, Llr, Ls, Lr, freq, calcX)
     if Iar == None:
         if not all((Vth, Zth)):
             raise ValueError("Invalid Argument Set, too few provided.")
         # Valid Argument Set, Calculate Ias
         Iar = Vth / (Rr / slip + Zth)
     # Use Terms to Calculate Peak Torque
-    Tstart = abs(Iar) ** 2 * Rr / s_pk
+    Tstart = abs(Iar) ** 2 * Rr / slip
     return (Tstart)
 
 

@@ -159,7 +159,7 @@ def bode(system,mn=0.001,mx=1000,npts=100,title="",xlim=False,ylim=False,sv=Fals
         _plt.show()
 
 def sbode(f,NN=1000,title="",xlim=False,ylim=False,mn=0,mx=1000,
-          disp3db=False,lowcut=None,magnitude=True,angle=True):
+          sv=False,disp3db=False,lowcut=None,magnitude=True,angle=True):
     """
     S-Domain Bode Plotting Function.
     
@@ -239,7 +239,8 @@ def sbode(f,NN=1000,title="",xlim=False,ylim=False,mn=0,mx=1000,
 
 
 def zbode(f,dt=0.01,NN=1000,title="",mn=0,mx=2*_pi,xlim=False,ylim=False,
-          approx=False,disp3db=False,lowcut=None,magnitude=True,angle=True):
+          approx=False,sv=False,disp3db=False,lowcut=None,magnitude=True,
+          angle=True):
     """
     Z-Domain Bode Plotting Function.
     
