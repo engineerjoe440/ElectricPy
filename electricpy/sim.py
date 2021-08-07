@@ -1,25 +1,27 @@
 ###################################################################
 """
-`electricpy.sim.py`
+`electricpy.sim`  -  Simulation Module.
 
 >>> from electricpy import sim
 """
 ###################################################################
 
-# Import Required Libraries
+# Import Required External Dependencies
 import numpy as _np
 import matplotlib.pyplot as _plt
 from numdifftools import Jacobian as jacobian
 from scipy.optimize import newton
-import scipy.signal as sig
+import scipy.signal as _sig
 from warnings import warn as _warn
 
+# Import Local Dependencies
+from electricpy.bode import _sys_condition
 
 # Define Digital Filter Simulator Function
 def digifiltersim(fin,filter,freqs,NN=1000,dt=0.01,title="",
                legend=True,xlim=False,xmxscale=None,figsize=None):
-    """
-    Digital Filter Simulator
+    r"""
+    Digital Filter Simulator.
     
     Given an input function and filter parameters (specified in
     the z-domain) this function will plot the input function over
@@ -31,7 +33,7 @@ def digifiltersim(fin,filter,freqs,NN=1000,dt=0.01,title="",
     
     The applied filter should be of the form:
     
-    .. math:: \\frac{b_0+b_1z^{-1}+b_2z^{-2}}{1-a_1z^{-1}-a_2z^{-2}}
+    .. math:: \frac{b_0+b_1z^{-1}+b_2z^{-2}}{1-a_1z^{-1}-a_2z^{-2}}
     
     Where each row corresponds to a 1- or 2-pole filter.
     
@@ -134,7 +136,7 @@ def step_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
                   resplabel="Step Response",funclabel="Step Function",
                   errlabel="Error",filename=None):
     """
-    Step Function Response Plotter Function
+    Step Function Response Plotter Function.
     
     Given a transfer function, plots the response against step input
     and plots the error for the function.
@@ -182,7 +184,7 @@ def step_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
     
     # Simulate Response for each input (step, ramp, parabola)
     # All 'x' values are variables that are considered don't-care
-    x, y1, x = sig.lsim((system),step,TT)
+    x, y1, x = _sig.lsim((system),step,TT)
     
     # Calculate error over all points
     for k in range(npts):
@@ -218,7 +220,7 @@ def ramp_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
                   resplabel="Ramp Response",funclabel="Ramp Function",
                   errlabel="Error",filename=None):
     """
-    Ramp Function Response Plotter Function
+    Ramp Function Response Plotter Function.
     
     Given a transfer function, plots the response against step input
     and plots the error for the function.
@@ -266,7 +268,7 @@ def ramp_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
     
     # Simulate Response for each input (step, ramp, parabola)
     # All 'x' values are variables that are considered don't-care
-    x, y2, x = sig.lsim((system),ramp,TT)
+    x, y2, x = _sig.lsim((system),ramp,TT)
     
     # Calculate error over all points
     for k in range(npts):
@@ -302,7 +304,7 @@ def parabolic_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
                   resplabel="Parabolic Response",funclabel="Parabolic Function",
                   errlabel="Error",filename=None):
     """
-    Parabolic Function Response Plotter Function
+    Parabolic Function Response Plotter Function.
     
     Given a transfer function, plots the response against step input
     and plots the error for the function.
@@ -350,7 +352,7 @@ def parabolic_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
     
     # Simulate Response for each input (step, ramp, parabola)
     # All 'x' values are variables that are considered don't-care
-    x, y3, x = sig.lsim((system),parabola,TT)
+    x, y3, x = _sig.lsim((system),parabola,TT)
     
     # Calculate error over all points
     for k in range(npts):
@@ -385,7 +387,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
                xlim=False,ylim=False,title="",ret=False,plotstate=True,
                plotforcing=None,plotresult=None,filename=None):
     """
-    State-Space Simulation Plotter
+    State-Space Simulation Plotter.
 
     Parameters
     ----------
@@ -503,7 +505,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
 
     # Create values for input testing
     if isinstance(func,function): # if f is a function, test as one
-        mF = f(1) # f should return: int, float, tuple, _np.arr, _np.matrix
+        mF = func(1) # f should return: int, float, tuple, _np.arr, _np.matrix
     elif isinstance(func,(tuple,list)): # if f is tupple of arguments
         if isinstance(func[0], function): #if first argument is a function
             c_funcs = c_func_concat(func) # concatinate functions into one
@@ -536,9 +538,9 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
         fn = lambda x: nparr_to_matrix(x, func) # Use conversion function
         rF, cF = fn(1).shape # Prepare for further testing
     elif isinstance(mF,(int,float,_np.float64)): # If function returns int or float or numpy float
-        fn = f # Pass function handle
+        fn = func # Pass function handle
     elif isinstance(mF,_np.matrixlib.defmatrix.matrix): # If function returns matrix
-        fn = f # Pass function handle
+        fn = func # Pass function handle
         rF, cF = fn(1).shape # Prepare for further testing
     elif (mF=="MultiFunctions"): # There are multiple functions in one argument
         fn = c_funcs.func_c # Gather function handle from function concatenation class
@@ -576,7 +578,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
             raise ValueError("'D' matrix dimensions don't match forcing function dimensions.")
 
     # Test for forcing function
-    if (f==None) and (solution!=0):
+    if (func==None) and (solution!=0):
         solution = 0 # Change to Zero-Input calculation
 
     # Start by defining Constants
@@ -596,7 +598,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
         xtim[key] = xtim_init #Create each xtim
 
     # Create a dictionary of function outputs
-    if (mF!=tint) and (mF!=tfloat):
+    if (not isinstance(mF, int)) and (not isinstance(mF, float)):
         fn_arr = {}
         for n in range(rF):
             key = n #Each key should be the iterative variable
@@ -651,7 +653,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
         _plt.grid()
         if filename!=None:
             _plt.savefig('Simulation Forcing Functions.png')
-        if plot:
+        if plotstate:
             _plt.show()
 
     # Plot each state-variable over time
@@ -668,7 +670,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
     _plt.grid()
     if filename!=None:
         _plt.savefig('Simulation Terms.png')
-    if plot:
+    if plotstate:
         _plt.show()
 
     # Plot combined output
@@ -688,7 +690,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
         _plt.grid()
         if filename!=None:
             _plt.savefig('Simulation Combined Output.png')
-        if plot:
+        if plotresult:
             _plt.show()
 
     # Return Variables if asked to
@@ -698,7 +700,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
 # Define Newton-Raphson Calculator
 def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
     """
-    Newton Raphson Calculator
+    Newton Raphson Calculator.
     
     Solve nonlinear system F=0 by Newton's method.
     J is the Jacobian of F. Both F and J must be functions of x.
@@ -815,7 +817,7 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
 # Define Newton-Raphson P/Q Evaluator
 def nr_pq(Ybus,V_set,P_set,Q_set,extend=True,argshape=False,verbose=False):
     """
-    Newton Raphson Real/Reactive Power Function Generator
+    Newton Raphson Real/Reactive Power Function Generator.
     
     Given specified parameters, will generate the necessary real and reactive
     power functions necessary to compute the system's power flow.
@@ -1056,7 +1058,7 @@ def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0='flatstart',eps=1e-4,
                   mxiter=100,returnct=False,degrees=True,split=False,
                   slackbus=0,lsq_eps=0.25):
     """
-    Multi-Bus Power Flow Calculator
+    Multi-Bus Power Flow Calculator.
     
     Function wrapper to simplify the evaluation of a power flow calculation.
     Determines the function array (F) and the Jacobian array (J) and uses the

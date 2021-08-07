@@ -11,7 +11,8 @@ When adding additional functions to the package, we'd love to maintain
 consistency wherever possible, a few of these things to keep in mind include:
 
 **Documentation:** *(a must!)*
-* Format function docstrings according to [NumpyDoc](https://numpydoc.readthedocs.io/en/latest/format.html) standards
+* Format function docstrings according to
+[NumpyDoc](https://numpydoc.readthedocs.io/en/latest/format.html) standards
 * Use the very first line of docstrings to give a brief (one-line) description
 of what the function is used for
 * Whenever possible, use LaTeX `.. math::` blocks to help document the formula(s)

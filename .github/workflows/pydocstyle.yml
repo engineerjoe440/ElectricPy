@@ -1,4 +1,4 @@
-name: pytest
+name: pydocstyle
 
 on: [push, pull_request]
 
@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8]
+        python-version: [3.8]
 
     steps:
     - uses: actions/checkout@v2
@@ -20,9 +20,10 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        if [ -f test/pytestrequires.txt ]; then pip install -r test/pytestrequires.txt; fi
+        pip install pydocstyle
         pip install .
         python3 -c "import electricpy; print('electricpy.__file__')"
-    - name: Test with pytest
+    - name: Test NumpyDoc Style
       run: |
-        pytest
+        cd electricpy
+        pydocstyle --convention=numpy
