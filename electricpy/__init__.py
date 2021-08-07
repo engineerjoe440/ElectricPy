@@ -1,6 +1,6 @@
-###################################################################
+################################################################################
 """
-`electricpy` Package - Main Module
+`electricpy` Package - Main Module.
 
 >>> import electricpy as ep
 
@@ -10,11 +10,11 @@ provide a wide array of capabilities to any electrical engineer.
 Built to support operations similar to Numpy and Scipy, this package is designed
 to aid in scientific calculations.
 """
-###################################################################
+################################################################################
 
 # Define Module Specific Variables
 _name_ = "electricpy"
-_version_ = "0.2.0"
+_version_ = "0.2.1"
 __version__ = _version_  # Alias Version for User Ease
 
 # Version Breakdown:
@@ -39,7 +39,7 @@ import scipy.signal as sig
 # Define Phase Angle Generator
 def phs(ang):
     """
-    Complex Phase Angle Generator
+    Complex Phase Angle Generator.
 
     Generate a complex value given the phase angle
     for the complex value.
@@ -69,7 +69,7 @@ phase = phs  # Create Duplicate Name
 # Define Phasor Generator
 def phasor(mag, ang=0):
     """
-    Complex Phasor Generator
+    Complex Phasor Generator.
 
     Generates the standard Pythonic complex representation
     of a phasor voltage or current when given the magnitude
@@ -111,7 +111,7 @@ def phasor(mag, ang=0):
 # Define Phasor Array Generator
 def phasorlist(arr):
     """
-    Complex Phasor Generator for 2-D Array or 2-D List
+    Complex Phasor Generator for 2-D Array or 2-D List.
 
     Generates the standard Pythonic complex representation
     of a phasor voltage or current when given the magnitude
@@ -159,7 +159,7 @@ def phasorlist(arr):
 # Define Vector Array Generator
 def vectarray(arr, degrees=True, flatarray=False):
     """
-    Format Complex as Array of Magnitude/Angle Pairs
+    Format Complex as Array of Magnitude/Angle Pairs.
 
     Consume an iterable (list/tuple/ndarray/etc.) of
     complex numbers and generate an ndarray of magnitude
@@ -213,7 +213,7 @@ def vectarray(arr, degrees=True, flatarray=False):
 def phasordata(mn, mx=None, npts=1000, mag=1, ang=0, freq=60,
                retstep=False, rettime=False, sine=False):
     """
-    Complex Phasor Data Generator
+    Complex Phasor Data Generator.
 
     Generates a sinusoidal data set with minimum, maximum,
     frequency, magnitude, and phase angle arguments.
@@ -272,9 +272,10 @@ def phasordata(mn, mx=None, npts=1000, mag=1, ang=0, freq=60,
 
 
 # Define Complex LaTeX Generator
-def clatex(val, round=3, polar=True, predollar=True, postdollar=True, double=False):
+def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
+           double=False):
     """
-    Complex Value Latex Generator
+    Complex Value Latex Generator.
 
     Function to generate a LaTeX string of complex value(s)
     in either polar or rectangular form. May generate both dollar
@@ -308,7 +309,6 @@ def clatex(val, round=3, polar=True, predollar=True, postdollar=True, double=Fal
     latex:      str
                 LaTeX string for the complex value.
     """
-
     # Define Interpretation Functions
     def polarstring(val, round):
         mag, ang_r = _c.polar(val)  # Convert to polar form
@@ -385,8 +385,8 @@ def clatex(val, round=3, polar=True, predollar=True, postdollar=True, double=Fal
 # Define Transfer Function LaTeX Generator
 def tflatex(sys, sysp=None, var='s', predollar=True,
             postdollar=True, double=False, tolerance=1e-8):
-    """
-    Transfer Function LaTeX String Generator
+    r"""
+    Transfer Function LaTeX String Generator.
 
     LaTeX string generating function to create a transfer
     function string in LaTeX. Particularly useful for
@@ -406,7 +406,7 @@ def tflatex(sys, sysp=None, var='s', predollar=True,
                 denominator of the transfer function.
     var:        str, optional
                 The variable that should be printed for each
-                term (i.e. 's' or 'j\\omega'). default='s'
+                term (i.e. 's' or 'j\omega'). default='s'
     predollar:  bool, optional
                 Control argument to enable/disable the dollar
                 sign before the string. default=True
@@ -475,7 +475,7 @@ def tflatex(sys, sysp=None, var='s', predollar=True,
 # Define Complex Composition Function
 def compose(*arr):
     """
-    Complex Composition Function
+    Complex Composition Function.
 
     Accepts a set of real values and generates an array
     of complex values. Input must be array-like, but can
@@ -528,13 +528,13 @@ def compose(*arr):
 
 # Define Cycle Time Function
 def tcycle(ncycles=1, freq=60):
-    """
-    Time of Electrical Cycles
+    r"""
+    Time of Electrical Cycles.
 
     Evaluates the time for a number of n
     cycles given the system frequency.
 
-    .. math:: t = \\frac{n_{cycles}}{freq}
+    .. math:: t = \frac{n_{cycles}}{freq}
 
     Parameters
     ----------
@@ -562,8 +562,8 @@ def tcycle(ncycles=1, freq=60):
 
 # Define Reactance Calculator
 def reactance(z, freq=60, sensetivity=1e-12):
-    """
-    Capacitance/Inductance from Impedance
+    r"""
+    Capacitance/Inductance from Impedance.
 
     Calculates the Capacitance or Inductance in Farads or Henreys
     (respectively) provided the impedance of an element.
@@ -572,15 +572,15 @@ def reactance(z, freq=60, sensetivity=1e-12):
     positive :eq:`ind`. If imaginary: calculate with j factor
     (imaginary number).
 
-    .. math:: C = \\frac{1}{\\omega*Z}
+    .. math:: C = \frac{1}{\omega*Z}
        :label: cap
 
-    .. math:: L = \\frac{Z}{\\omega}
+    .. math:: L = \frac{Z}{\omega}
        :label: ind
 
     This requires that the radian frequency is found as follows:
 
-    .. math:: \\omega = 2*\\pi*freq
+    .. math:: \omega = 2*\pi*freq
 
     where `freq` is the frequency in Hertz.
 
@@ -636,7 +636,7 @@ def reactance(z, freq=60, sensetivity=1e-12):
 def cprint(val, unit=None, label=None, title=None,
            pretty=True, printval=True, ret=False, decimals=3, round=3):
     """
-    Phasor (Complex) Printing Function
+    Phasor (Complex) Printing Function.
 
     This function is designed to accept a complex value (val) and print
     the value in the standard electrical engineering notation:
@@ -843,21 +843,21 @@ def cprint(val, unit=None, label=None, title=None,
 
 # Define Impedance Conversion function
 def phasorz(C=None, L=None, freq=60, complex=True):
-    """
-    Phasor Impedance Generator
+    r"""
+    Phasor Impedance Generator.
 
     This function's purpose is to generate the phasor-based
     impedance of the specified input given as either the
     capacitance (in Farads) or the inductance (in Henreys).
     The function will return the phasor value (in Ohms).
 
-    .. math:: Z = \\frac{-j}{\\omega*C}
+    .. math:: Z = \frac{-j}{\omega*C}
 
-    .. math:: Z = j*\\omega*L
+    .. math:: Z = j*\omega*L
 
     where:
 
-    .. math:: \\omega = 2*\\pi*freq
+    .. math:: \omega = 2*\pi*freq
 
     Parameters
     ----------
@@ -894,15 +894,15 @@ def phasorz(C=None, L=None, freq=60, complex=True):
 
 # Define Parallel Impedance Adder
 def parallelz(*args):
-    """
-    Parallel Impedance Calculator
+    r"""
+    Parallel Impedance Calculator.
 
     This function is designed to generate the total parallel
     impedance of a set (tuple) of impedances specified as real
     or complex values.
 
     .. math::
-       Z_{eq}=(\\frac{1}{Z_1}+\\frac{1}{Z_2}+\\dots+\\frac{1}{Z_n})^{-1}
+       Z_{eq}=(\frac{1}{Z_1}+\frac{1}{Z_2}+\dots+\frac{1}{Z_n})^{-1}
 
     Parameters
     ----------
@@ -946,8 +946,8 @@ def parallelz(*args):
 
 # Define Phase/Line Converter
 def phaseline(VLL=None, VLN=None, Iline=None, Iphase=None, realonly=None, **kwargs):
-    """
-    Line-Line to Line-Neutral Converter
+    r"""
+    Line-Line to Line-Neutral Converter.
 
     This function is designed to return the phase- or line-equivalent
     of the voltage/current provided. It is designed to be used when
@@ -955,7 +955,7 @@ def phaseline(VLL=None, VLN=None, Iline=None, Iphase=None, realonly=None, **kwar
     Given a voltage of one type, this function will return the
     voltage of the opposite type. The same is true for current.
 
-    .. math:: V_{LL} = \\sqrt{3}∠30° * V_{LN}
+    .. math:: V_{LL} = \sqrt{3}∠30° * V_{LN}
        :label: voltages
 
     Typical American (United States) standard is to note voltages in
@@ -963,7 +963,7 @@ def phaseline(VLL=None, VLN=None, Iline=None, Iphase=None, realonly=None, **kwar
     is of value, this function uses the voltage :eq:`voltages` relation
     to evaluate either voltage given the other.
 
-    .. math:: I_{Φ} = \\frac{I_{line}}{\\sqrt{3}∠30°}
+    .. math:: I_{Φ} = \frac{I_{line}}{\sqrt{3}∠30°}
        :label: currents
 
     Often, the phase current in a delta-connected device is of
@@ -1031,7 +1031,7 @@ def phaseline(VLL=None, VLN=None, Iline=None, Iphase=None, realonly=None, **kwar
 # Define Power Set Function
 def powerset(P=None, Q=None, S=None, PF=None, find=''):
     """
-    Power Triangle Conversion Function
+    Power Triangle Conversion Function.
 
     This function is designed to calculate all values
     in the set { P, Q, S, PF } when two (2) of the
@@ -1114,7 +1114,7 @@ def powerset(P=None, Q=None, S=None, PF=None, find=''):
 def powertriangle(P=None, Q=None, S=None, PF=None, color="red",
                   text="Power Triangle", printval=False):
     """
-    Power Triangle Plotting Function
+    Power Triangle Plotting Function.
 
     This function is designed to draw a power triangle given
     values for the complex power system.
@@ -1195,7 +1195,7 @@ def powertriangle(P=None, Q=None, S=None, PF=None, color="red",
 def transformertest(Poc=False, Voc=False, Ioc=False, Psc=False, Vsc=False,
                     Isc=False):
     """
-    Transformer Rated Test Evaluator
+    Electrical Transformer Rated Test Evaluator.
 
     This function will determine the non-ideal circuit components of
     a transformer (Req and Xeq, or Rc and Xm) given the test-case
@@ -1264,7 +1264,7 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
                filename=None, plot=True, label=False, labels=False,
                tolerance=None):
     """
-    Phasor Plotting Function
+    Phasor Plotting Function.
 
     This function is designed to plot a phasor-diagram with angles in degrees
     for up to 12 phasor sets. Phasors must be passed as a complex number set,
@@ -1374,7 +1374,7 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
 # Define Non-Linear Power Factor Calculator
 def nlinpf(PFtrue=False, PFdist=False, PFdisp=False):
     """
-    Non-Linear Power Factor Evaluator
+    Non-Linear Power Factor Evaluator.
 
     This function is designed to evaluate one of three unknowns
     given the other two. These particular unknowns are the arguments
@@ -1410,7 +1410,7 @@ def nlinpf(PFtrue=False, PFdist=False, PFdisp=False):
 # Define Short-Circuit RL Current Calculator
 def iscrl(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
     """
-    Short-Circuit-Current (ISC) Calculator
+    Short-Circuit-Current (ISC) Calculator.
 
     The Isc-RL function (Short Circuit Current for RL Circuit)
     is designed to calculate the short-circuit current for an
@@ -1497,17 +1497,17 @@ def iscrl(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
 
 # Define Voltage Divider Calculator
 def voltdiv(Vin, R1, R2, Rload=None):
-    """
-    Voltage Divider Function
+    r"""
+    Electrical Voltage Divider Function.
 
     This function is designed to calculate the output
     voltage of a voltage divider given the input voltage,
     the resistances (or impedances) and the load resistance
     (or impedance) if present.
 
-    .. math:: V_{out} = V_{in} * \\frac{R_2}{R_1+R+2}
+    .. math:: V_{out} = V_{in} * \frac{R_2}{R_1+R_2}
 
-    .. math:: V_{out}=V_{in}*\\frac{R_2||R_{load}}{R_1+(R_2||R_{load})}
+    .. math:: V_{out}=V_{in}*\frac{R_2||R_{load}}{R_1+(R_2||R_{load})}
 
     Parameters
     ----------
@@ -1538,8 +1538,8 @@ def voltdiv(Vin, R1, R2, Rload=None):
 
 # Define Current Divider Calculator
 def curdiv(Ri, Rset, Vin=None, Iin=None, Vout=False, combine=True):
-    """
-    Current Divider Function
+    r"""
+    Electrical Current Divider Function.
 
     This function is disigned to accept the input current, or input
     voltage to a resistor (or impedance) network of parallel resistors
@@ -1573,7 +1573,8 @@ def curdiv(Ri, Rset, Vin=None, Iin=None, Vout=False, combine=True):
         Rset = (Rset,)  # Set as Tuple
     # Calculate The total impedance
     if combine:
-        Rtot = parallelz(Rset + (Ri,))  # Combine tuples, then calculate total resistance
+        # Combine tuples, then calculate total resistance
+        Rtot = parallelz(Rset + (Ri,))
     else:
         Rtot = parallelz(Rset)
     # Determine Whether Input was given as Voltage or Current
@@ -1591,15 +1592,44 @@ def curdiv(Ri, Rset, Vin=None, Iin=None, Vout=False, combine=True):
         return (Ii)
 
 
+# Define Function to Evaluate Resistance Needed for LED
+def led_resistor(Vsrc, Vfwd = 2, Ifwd = 20):
+    r"""
+    LED Resistor Calculator.
+
+    This function will evaluate the necessary resistance value for a simple LED
+    circuit with a voltage source, resistor, and LED.
+
+    .. math:: R_\text{LED} = \frac{V_\text{SRC} - V_\text{FWD}}{I_\text{FWD}}
+
+    Parameters
+    ----------
+    Vsrc:   float
+            Source voltage, as measured across both LED and resistor in circuit.
+    Vfwd:   float, optional
+            Forward voltage of LED (or series LEDs if available), default=2
+    Ifwd:   float, optional
+            Forward current of LEDs in milliamps, default=20 (milliamps)
+    
+    Returns
+    -------
+    R:      float
+            The resistance value most appropriate for the LED circuit.
+    """
+    # Calculate and Return!
+    R = (Vsrc - Vfwd) / (Ifwd * 1000)
+    return R
+
+
 # Define Instantaneous Power Calculator
 def instpower(P, Q, t, freq=60):
-    """
-    Instantaneous Power Function
+    r"""
+    Instantaneous Power Function.
 
     This function is designed to calculate the instantaneous power at a
     specified time t given the magnitudes of P and Q.
 
-    .. math:: P_{inst} = P+P*cos(2*\\omega*t)-Q*sin(2*\\omega*t)
+    .. math:: P_{inst} = P+P*cos(2*\omega*t)-Q*sin(2*\omega*t)
 
     Parameters
     ----------
@@ -1626,8 +1656,8 @@ def instpower(P, Q, t, freq=60):
 
 # Define Delta-Wye Impedance Network Calculator
 def dynetz(delta=None, wye=None, round=None):
-    """
-    Delta-Wye Impedance Converter
+    r"""
+    Delta-Wye Impedance Converter.
 
     This function is designed to act as the conversion utility
     to transform delta-connected impedance values to wye-
@@ -1635,15 +1665,15 @@ def dynetz(delta=None, wye=None, round=None):
 
     .. math::
        Z_{sum} = Z_{1/2} + Z_{2/3} + Z_{3/1}//
-       Z_1 = \\frac{Z_{1/2}*Z_{3/1}}{Z_{sum}}//
-       Z_2 = \\frac{Z_{1/2}*Z_{2/3}}{Z_{sum}}//
-       Z_3 = \\frac{Z_{2/3}*Z_{3/1}}{Z_{sum}}
+       Z_1 = \frac{Z_{1/2}*Z_{3/1}}{Z_{sum}}//
+       Z_2 = \frac{Z_{1/2}*Z_{2/3}}{Z_{sum}}//
+       Z_3 = \frac{Z_{2/3}*Z_{3/1}}{Z_{sum}}
 
     .. math::
        Z_{ms} = Z_1*Z_2 + Z_2*Z_3 + Z_3*Z_1//
-       Z_{2/3} = \\frac{Z_{ms}}{Z_1}//
-       Z_{3/1} = \\frac{Z_{ms}}{Z_2}//
-       Z_{1/2} = \\frac{Z_{ms}}{Z_3}
+       Z_{2/3} = \frac{Z_{ms}}{Z_1}//
+       Z_{3/1} = \frac{Z_{ms}}{Z_2}//
+       Z_{1/2} = \frac{Z_{ms}}{Z_3}
 
     Parameters
     ----------
@@ -1686,12 +1716,12 @@ def dynetz(delta=None, wye=None, round=None):
 
 #calculating impedance of bridge network
 def bridge_impedance(z1, z2, z3, z4, z5):
-    """
-    Bridge Impedance Calculator
+    r"""
+    Bridge Impedance Calculator.
     
     The following condition describing the Wheatstone Bridge is utilized to ensure that current through `z5` will be zero.
 
-    .. math:: z1 \\cdot z3 = z2 \\cdot z4
+    .. math:: z1 \cdot z3 = z2 \cdot z4
     
     .. image:: /static/WheatstoneBridgeCircuit.png
     
@@ -1713,7 +1743,6 @@ def bridge_impedance(z1, z2, z3, z4, z5):
     effective bridge impedance
 
     """
-
     if z1 * z3 == z2 * z4:
         return (z1 + z2) * (z3 + z4) / (z1 + z2 + z3 + z4)
     else:
@@ -1725,8 +1754,8 @@ def bridge_impedance(z1, z2, z3, z4, z5):
 
 # Define Single Line Power Flow Calculator
 def powerflow(Vsend, Vrec, Zline):
-    """
-    Simple Power-Flow Calculator
+    r"""
+    Approximated Power-Flow Calculator.
 
     This function is designed to calculate the ammount of real
     power transferred from the sending end to the recieving end
@@ -1734,8 +1763,8 @@ def powerflow(Vsend, Vrec, Zline):
     the receiving voltage (complex) and the line impedance.
 
     .. math::
-       P_{flow}=\\frac{|V_{send}|*|V_{rec}|}{Z_{line}}*sin(\\theta_{send}
-       -\\theta_{rec})
+       P_{flow}=\frac{|V_{send}|*|V_{rec}|}{Z_{line}}*sin(\theta_{send}
+       -\theta_{rec})
 
     Parameters
     ----------
@@ -1767,7 +1796,7 @@ def powerflow(Vsend, Vrec, Zline):
 # Define Impedance From Power and X/R
 def zsource(S, V, XoR, Sbase=None, Vbase=None, perunit=True):
     """
-    Source Impedance Calculator
+    Source Impedance Calculator.
 
     Used to calculate the source impedance given the apparent power
     magnitude and the X/R ratio.
@@ -1836,7 +1865,7 @@ def zsource(S, V, XoR, Sbase=None, Vbase=None, perunit=True):
 # Define Impedance Decomposer
 def zdecompose(Zmag, XoR):
     """
-    Impedance Decomposition Function
+    Impedance Decomposition Function.
 
     A function to decompose the impedance magnitude into its
     corresponding resistance and reactance using the X/R ratio.
@@ -1869,13 +1898,13 @@ def zdecompose(Zmag, XoR):
 
 # Define HP to Watts Calculation
 def hp_to_watts(hp):
-    """
-    Horsepower to Watts Formula
+    r"""
+    Horsepower to Watts Formula.
 
     Calculates the power (in watts) given the
     horsepower.
 
-    .. math:: P_{\\text{watts}}=P_{\\text{horsepower}}\\cdot745.699872
+    .. math:: P_{\text{watts}}=P_{\text{horsepower}}\cdot745.699872
 
     Same as `watts`.
 
@@ -1897,13 +1926,13 @@ watts = hp_to_watts  # Make Duplicate Name
 
 # Define Watts to HP Calculation
 def watts_to_hp(watts):
-    """
-    Watts to Horsepower Function
+    r"""
+    Watts to Horsepower Function.
 
     Calculates the power (in horsepower) given
     the power in watts.
 
-    .. math:: P_{\\text{horsepower}}=\\frac{P_{\\text{watts}}}{745.699872}
+    .. math:: P_{\text{horsepower}}=\frac{P_{\text{watts}}}{745.699872}
 
     Same as `horsepower`.
 
@@ -1925,19 +1954,19 @@ horsepower = watts_to_hp  # Make Duplicate Name
 
 # Define Power Reactance Calculator
 def powerimpedance(S, V, PF=None, parallel=False, terms=False):
-    """
-    Impedance from Apparent Power Formula
+    r"""
+    Impedance from Apparent Power Formula.
 
     Function to determine the ohmic resistance/reactance
     (impedance) represented by the apparent power (S).
 
-    .. math:: R = \\frac{V^2}{P} \\hspace{2cm} X = \\frac{V^2}{Q}
+    .. math:: R = \frac{V^2}{P} \hspace{2cm} X = \frac{V^2}{Q}
        :label: series
 
-    .. math:: Z = \\left(\\frac{V^2}{S}\\right)^*
+    .. math:: Z = \left(\frac{V^2}{S}\right)^*
        :label: series
 
-    .. math:: Z = \\left(\\frac{V^2}{(3*S)}\\right)^*
+    .. math:: Z = \left(\frac{V^2}{(3*S)}\right)^*
        :label: parallel
 
     This function can evaluate the component values for
@@ -2012,7 +2041,7 @@ def powerimpedance(S, V, PF=None, parallel=False, terms=False):
 def coldjunction(Tcj, coupletype="K", To=None, Vo=None, P1=None, P2=None,
                  P3=None, P4=None, Q1=None, Q2=None, round=None):
     """
-    Thermocouple Cold-Junction Formula
+    Thermocouple Cold-Junction Formula.
 
     Function to calculate the expected cold-junction-voltage given
     the temperature at the cold-junction.
@@ -2067,22 +2096,22 @@ def coldjunction(Tcj, coupletype="K", To=None, Vo=None, P1=None, P2=None,
     index = lookup.index(coupletype)
     # Define Constant Dictionary
     constants = {
-        "To": [4.2000000E+01, 2.5000000E+01, 2.5000000E+01, 2.5000000E+01, 7.0000000E+00, 2.5000000E+01, 2.5000000E+01,
-               2.5000000E+01],
-        "Vo": [3.3933898E-04, 1.4950582E+00, 1.2773432E+00, 1.0003453E+00, 1.8210024E-01, 1.4067016E-01, 1.4269163E-01,
-               9.9198279E-01],
-        "P1": [2.1196684E-04, 6.0958443E-02, 5.1744084E-02, 4.0514854E-02, 2.6228256E-02, 5.9330356E-03, 5.9829057E-03,
-               4.0716564E-02],
-        "P2": [3.3801250E-06, -2.7351789E-04, -5.4138663E-05, -3.8789638E-05, -1.5485539E-04, 2.7736904E-05,
-               4.5292259E-06, 7.1170297E-04],
-        "P3": [-1.4793289E-07, -1.9130146E-05, -2.2895769E-06, -2.8608478E-06, 2.1366031E-06, -1.0819644E-06,
-               -1.3380281E-06, 6.8782631E-07],
-        "P4": [-3.3571424E-09, -1.3948840E-08, -7.7947143E-10, -9.5367041E-10, 9.2047105E-10, -2.3098349E-09,
-               -2.3742577E-09, 4.3295061E-11],
-        "Q1": [-1.0920410E-02, -5.2382378E-03, -1.5173342E-03, -1.3948675E-03, -6.4070932E-03, 2.6146871E-03,
-               -1.0650446E-03, 1.6458102E-02],
-        "Q2": [-4.9782932E-04, -3.0970168E-04, -4.2314514E-05, -6.7976627E-05, 8.2161781E-05, -1.8621487E-04,
-               -2.2042420E-04, 0.0000000E+00]
+        "To": [4.2000000E+01, 2.5000000E+01, 2.5000000E+01, 2.5000000E+01,
+               7.0000000E+00, 2.5000000E+01, 2.5000000E+01, 2.5000000E+01],
+        "Vo": [3.3933898E-04, 1.4950582E+00, 1.2773432E+00, 1.0003453E+00,
+               1.8210024E-01, 1.4067016E-01, 1.4269163E-01, 9.9198279E-01],
+        "P1": [2.1196684E-04, 6.0958443E-02, 5.1744084E-02, 4.0514854E-02,
+               2.6228256E-02, 5.9330356E-03, 5.9829057E-03, 4.0716564E-02],
+        "P2": [3.3801250E-06, -2.7351789E-04, -5.4138663E-05, -3.8789638E-05,
+               -1.5485539E-04, 2.7736904E-05, 4.5292259E-06, 7.1170297E-04],
+        "P3": [-1.4793289E-07, -1.9130146E-05, -2.2895769E-06, -2.8608478E-06,
+               2.1366031E-06, -1.0819644E-06, -1.3380281E-06, 6.8782631E-07],
+        "P4": [-3.3571424E-09, -1.3948840E-08, -7.7947143E-10, -9.5367041E-10,
+               9.2047105E-10, -2.3098349E-09, -2.3742577E-09, 4.3295061E-11],
+        "Q1": [-1.0920410E-02, -5.2382378E-03, -1.5173342E-03, -1.3948675E-03,
+               -6.4070932E-03, 2.6146871E-03, -1.0650446E-03, 1.6458102E-02],
+        "Q2": [-4.9782932E-04, -3.0970168E-04, -4.2314514E-05, -6.7976627E-05,
+               8.2161781E-05, -1.8621487E-04, -2.2042420E-04, 0.0000000E+00]
     }
     # Load Data Into Terms
     if To == None:
@@ -2114,10 +2143,11 @@ def coldjunction(Tcj, coupletype="K", To=None, Vo=None, P1=None, P2=None,
 
 
 # Define Thermocouple Temperature Calculation
-def thermocouple(V, coupletype="K", fahrenheit=False, cjt=None, To=None, Vo=None, P1=None,
-                 P2=None, P3=None, P4=None, Q1=None, Q2=None, Q3=None, round=1):
+def thermocouple(V, coupletype="K", fahrenheit=False, cjt=None, To=None,
+                 Vo=None, P1=None, P2=None, P3=None, P4=None, Q1=None, Q2=None,
+                 Q3=None, round=1):
     """
-    Thermocouple Temperature Calculator
+    Thermocouple Temperature Calculator.
 
     Utilizes polynomial formula to calculate the temperature being monitored
     by a thermocouple. Allows for various thermocouple types (B,E,J,K,N,R,S,T)
@@ -2307,7 +2337,7 @@ def thermocouple(V, coupletype="K", fahrenheit=False, cjt=None, To=None, Vo=None
 def rtdtemp(RT, rtdtype="PT100", fahrenheit=False, Rref=None, Tref=None,
             a=None, round=1):
     """
-    RTD Temperature Calculator
+    RTD Temperature Calculator.
 
     Evaluates the measured temperature based on the measured resistance
     and the RTD type.
@@ -2368,13 +2398,13 @@ def rtdtemp(RT, rtdtype="PT100", fahrenheit=False, Rref=None, Tref=None,
 
 # Define Capacitor Voltage Discharge Function
 def vcapdischarge(t, Vs, R, C):
-    """
-    Discharging Capacitor Function
+    r"""
+    Discharging Capacitor Function.
 
     Function to calculate the voltage of a
     capacitor that is discharging given the time.
 
-    .. math:: V_c=V_s*e^{\\frac{-t}{R*C}}
+    .. math:: V_c=V_s*e^{\frac{-t}{R*C}}
 
     Parameters
     ----------
@@ -2399,13 +2429,13 @@ def vcapdischarge(t, Vs, R, C):
 
 # Define Capacitor Voltage Charge Function
 def vcapcharge(t, Vs, R, C):
-    """
-    Charging Capacitor Voltage
+    r"""
+    Charging Capacitor Voltage.
 
     Function to calculate the voltage of a
     capacitor that is charging given the time.
 
-    .. math:: V_c=V_s*(1-e^{\\frac{-t}{R*C}})
+    .. math:: V_c=V_s*(1-e^{\frac{-t}{R*C}})
 
     Parameters
     ----------
@@ -2431,7 +2461,7 @@ def vcapcharge(t, Vs, R, C):
 # Define Capacitive Energy Transfer Function
 def captransfer(t, Vs, R, Cs, Cd):
     """
-    Capacitor Energy Transfer Function
+    Capacitor Energy Transfer Function.
 
     Calculate the voltage across a joining
     resistor (R) that connects Cs and Cd, the
@@ -2467,13 +2497,13 @@ def captransfer(t, Vs, R, Cs, Cd):
 
 # Define Inductor Energy Formula
 def inductorenergy(L, I):
-    """
-    Energy Stored in Inductor Formula
+    r"""
+    Energy Stored in Inductor Formula.
 
     Function to calculate the energy stored in an inductor
     given the inductance (in Henries) and the current.
 
-    .. math:: E=\\frac{1}{2}*L*I^2
+    .. math:: E=\frac{1}{2}*L*I^2
 
     Parameters
     ----------
@@ -2492,15 +2522,15 @@ def inductorenergy(L, I):
 
 # Define Inductor Charge Function
 def inductorcharge(t, Vs, R, L):
-    """
-    Charging Inductor Formula
+    r"""
+    Charging Inductor Formula.
 
     Calculates the Voltage and Current of an inductor
     that is charging/storing energy.
 
     .. math::
-       V_L = V_s*e^{\\frac{-R*t}{L}}//
-       I_L = \\frac{V_s}{R}*(1-e^{\\frac{-R*t}{L}})
+       V_L = V_s*e^{\frac{-R*t}{L}}//
+       I_L = \frac{V_s}{R}*(1-e^{\frac{-R*t}{L}})
 
     Parameters
     ----------
@@ -2528,7 +2558,7 @@ def inductorcharge(t, Vs, R, L):
 # Define Capacitive Back-to-Back Switching Formula
 def capbacktoback(C1, C2, Lm, VLN=None, VLL=None):
     """
-    Back to Back Capacitor Transient Current Calculator
+    Back to Back Capacitor Transient Current Calculator.
 
     Function to calculate the maximum current and the
     frequency of the inrush current of two capacitors
@@ -2565,15 +2595,15 @@ def capbacktoback(C1, C2, Lm, VLN=None, VLL=None):
 
 # Define Inductor Discharge Function
 def inductordischarge(t, Io, R, L):
-    """
-    Discharging Inductor Formula
+    r"""
+    Discharging Inductor Formula.
 
     Calculates the Voltage and Current of an inductor
     that is discharging its stored energy.
 
     .. math::
-       I_L=I_0*e^{\\frac{-R*t}{L}}//
-       V_L=I_0*R*(1-e^{\\frac{-R*t}{L}})
+       I_L=I_0*e^{\frac{-R*t}{L}}//
+       V_L=I_0*R*(1-e^{\frac{-R*t}{L}})
 
     Parameters
     ----------
@@ -2600,14 +2630,14 @@ def inductordischarge(t, Io, R, L):
 
 # Define Apparent Power to Farad Conversion
 def farads(VAR, V, freq=60):
-    """
-    Capacitance from Apparent Power Formula
+    r"""
+    Capacitance from Apparent Power Formula.
 
     Function to calculate the required capacitance
     in Farads to provide the desired power rating
     (VARs).
 
-    .. math:: C = \\frac{VAR}{2*\\pi*freq*V^2}
+    .. math:: C = \frac{VAR}{2*\pi*freq*V^2}
 
     Parameters
     ----------
@@ -2630,13 +2660,13 @@ def farads(VAR, V, freq=60):
 
 # Define Capacitor Energy Calculation
 def capenergy(C, V):
-    """
-    Capacitor Energy Formula
+    r"""
+    Capacitor Energy Formula.
 
     A simple function to calculate the stored voltage (in Joules)
     in a capacitor with a charged voltage.
 
-    .. math:: E=\\frac{1}{2}*C*V^2
+    .. math:: E=\frac{1}{2}*C*V^2
 
     Parameters
     ----------
@@ -2656,14 +2686,15 @@ def capenergy(C, V):
 
 # Define Capacitor Voltage Discharge Function
 def loadedvcapdischarge(t, vo, C, P):
-    """
-    Loaded Capacitor Discharge Formula
+    # noqa: D401    "Loaded" is a valid word for this docstring
+    r"""
+    Loaded Capacitor Discharge Formula.
 
     Returns the voltage of a discharging capacitor after time (t -
     seconds) given initial voltage (vo - volts), capacitor size
     (cap - Farads), and load (P - Watts).
 
-    .. math:: V_t=\\sqrt{v_0^2-2*P*\\frac{t}{C}}
+    .. math:: V_t=\sqrt{v_0^2-2*P*\frac{t}{C}}
 
     Parameters
     ----------
@@ -2687,8 +2718,8 @@ def loadedvcapdischarge(t, vo, C, P):
 
 # Define Capacitor Discharge Function
 def timedischarge(Vinit, Vmin, C, P, dt=1e-3, RMS=True, Eremain=False):
-    """
-    Capacitor Discharge Time Formula
+    r"""
+    Capacitor Discharge Time Formula.
 
     Returns the time to discharge a capacitor to a specified
     voltage given set of inputs.
@@ -2734,14 +2765,14 @@ def timedischarge(Vinit, Vmin, C, P, dt=1e-3, RMS=True, Eremain=False):
 
 # Define Rectifier Capacitor Calculator
 def rectifiercap(Iload, fswitch, dVout):
-    """
-    Rectifier Capacitor Formula
+    r"""
+    Rectifier Capacitor Formula.
 
     Returns the capacitance (in Farads) for a needed capacitor in
     a rectifier configuration given the system frequency (in Hz),
     the load (in amps) and the desired voltage ripple.
 
-    .. math:: C=\\frac{I_{load}}{f_{switch}*\\Delta V_{out}}
+    .. math:: C=\frac{I_{load}}{f_{switch}*\Delta V_{out}}
 
     Parameters
     ----------
@@ -2764,7 +2795,7 @@ def rectifiercap(Iload, fswitch, dVout):
 # Define function to find VDC setpoint
 def vscdcbus(VLL, Zs, P, Q=0, mmax=0.8, debug=False):
     """
-    Voltage Sourced Converter DC Bus Voltage Function
+    Voltage Sourced Converter DC Bus Voltage Function.
 
     The purpose of this function is to calculate the
     required DC-bus voltage for a Voltage-Sourced-
@@ -2813,7 +2844,7 @@ def vscdcbus(VLL, Zs, P, Q=0, mmax=0.8, debug=False):
 # Define kp/ki/w0L calculating function
 def vscgains(Rs, Ls, tau=0.005, freq=60):
     """
-    Voltage Sourced Converter Gains Calculator
+    Voltage Sourced Converter Gains Calculator.
 
     This function is designed to calculate the kp, ki,
     and omega-not-L values for a Phase-Lock-Loop based VSC.
@@ -2850,7 +2881,7 @@ def vscgains(Rs, Ls, tau=0.005, freq=60):
 # Define Convolution Bar-Graph Function:
 def convbar(h, x, outline=True):
     """
-    Convolution Bar-Graph Plotter Function
+    Convolution Bar-Graph Plotter Function.
 
     Generates plots of each of two input arrays as bar-graphs, then
     generates a convolved bar-graph of the two inputs to demonstrate
@@ -2863,7 +2894,6 @@ def convbar(h, x, outline=True):
     x:      numpy.ndarray
             Input Function - Given as Array (Prefferably Numpy Array)
     """
-
     # The impulse response
     M = len(h)
     t = _np.arange(M)
@@ -2904,13 +2934,13 @@ def convbar(h, x, outline=True):
 # Define convolution function
 def convolve(tuple):
     """
-    Filter Convolution Function
+    Filter Convolution Function.
 
     Given a tuple of terms, convolves all terms in tuple to
     return one tuple as a numpy array.
 
     Parameters
-    ---------
+    ----------
     tuple:      tuple of numpy.ndarray
                 Tuple of terms to be convolved.
 
@@ -2930,7 +2960,7 @@ def convolve(tuple):
 # Define Step function
 def step(t):
     """
-    Step Function [ u(t) ]
+    Step Function [ u(t) ].
 
     Simple implimentation of numpy.heaviside function
     to provide standard step-function as specified to
@@ -2942,7 +2972,7 @@ def step(t):
 # Define Peak Calculator
 def peak(val):
     """
-    Sinusoid RMS to Peak Converter
+    Sinusoid RMS to Peak Converter.
 
     Provides a readable format to convert an
     RMS (Root-Mean-Square) value to its peak
@@ -2955,7 +2985,7 @@ def peak(val):
 # Define RMS Calculator
 def rms(val):
     """
-    Sinusoid Peak to RMS Converter
+    Sinusoid Peak to RMS Converter.
 
     Provides a readable format to convert a peak
     value to its RMS (Root-Mean-Square) representation.
@@ -2966,9 +2996,9 @@ def rms(val):
 
 
 # Arbitrary Waveform RMS Calculating Function
-def funcrms(f, T):
+def funcrms(func, T):
     """
-    Function Root-Mean-Square (RMS) Evaluator
+    Root-Mean-Square (RMS) Evaluator for Callable Functions.
 
     Integral-based RMS calculator, evaluates the RMS value
     of a repetative signal (f) given the signal's specific
@@ -2976,7 +3006,7 @@ def funcrms(f, T):
 
     Parameters
     ----------
-    f:      float
+    func:   float
             The periodic function, a callable like f(t)
     T:      float
             The period of the function f, so that f(0)==f(T)
@@ -2986,8 +3016,8 @@ def funcrms(f, T):
     RMS:    The RMS value of the function (f) over the interval ( 0, T )
 
     """
-    fn = lambda x: f(x) ** 2
-    integral,_ = integrate(fn, 0, T)
+    fn = lambda x: func(x) ** 2
+    integral, _ = integrate(fn, 0, T)
     RMS = _np.sqrt(1 / T * integral)
     return (RMS)
 
@@ -2995,7 +3025,7 @@ def funcrms(f, T):
 # Define Gaussian Function
 def gaussian(x, mu=0, sigma=1):
     """
-    Gaussian Function:
+    Gaussian Function.
 
     This function is designed to generate the gaussian
     distribution curve with configuration mu and sigma.
@@ -3020,7 +3050,7 @@ def gaussian(x, mu=0, sigma=1):
 # Define Gaussian Distribution Function
 def gausdist(x, mu=0, sigma=1):
     """
-    Gaussian Distribution Function:
+    Gaussian Distribution Function.
 
     This function is designed to calculate the generic
     distribution of a gaussian function with controls
@@ -3068,7 +3098,7 @@ def gausdist(x, mu=0, sigma=1):
 # Define Probability Density Function
 def probdensity(func, x, x0=0, scale=True):
     """
-    Probability Density Function:
+    Probability Density Function.
 
     This function uses an integral to compute the probability
     density of a given function.
@@ -3117,7 +3147,7 @@ def probdensity(func, x, x0=0, scale=True):
 # Define Real FFT Evaluation Function
 def rfft(arr, dt=0.01, absolute=True, resample=True):
     """
-    RFFT Function
+    RFFT Function.
 
     This function is designed to evaluat the real FFT
     of a input signal in the form of an array or list.
@@ -3167,7 +3197,7 @@ def rfft(arr, dt=0.01, absolute=True, resample=True):
 def wrms(func, dw=0.1, NN=100, quad=False, plot=True,
          title="Power Density Spectrum", round=3):
     """
-    WRMS Function:
+    WRMS Function.
 
     This function is designed to calculate the RMS
     bandwidth (Wrms) using a numerical process.
@@ -3198,7 +3228,7 @@ def wrms(func, dw=0.1, NN=100, quad=False, plot=True,
                 Calculated RMS Bandwidth (rad/sec)
     """
     # Define omega
-    omega = _np.linspace(0, (NN - 1) * del_w, NN)
+    omega = _np.linspace(0, (NN - 1) * dw, NN)
     # Initialize Fraction Terms
     Stot = Sw2 = 0
     # Power Density Spectrum
@@ -3236,10 +3266,9 @@ def wrms(func, dw=0.1, NN=100, quad=False, plot=True,
 # Define Hartley's Equation for Data Capacity
 def hartleydata(BW, M):
     """
-    Hartley Data Function
+    Hartley Data Function.
 
-    Function to calculate Hartley's Law,
-    the maximum data rate achievable for
+    Function to calculate Hartley's Law, the maximum data rate achievable for
     a given noiseless channel.
 
     Parameters
@@ -3249,8 +3278,8 @@ def hartleydata(BW, M):
     M:          float
                 Number of signal levels.
 
-    Returns:
-    --------
+    Returns
+    -------
     C:          float
                 Capacity of channel (in bits per second)
     """
@@ -3261,12 +3290,10 @@ def hartleydata(BW, M):
 # Define Shannon's Equation For Data Capacity
 def shannondata(BW, S, N):
     """
-    Shannon Data Function
+    Shannon Data Function.
 
-    Function to calculate the maximum data
-    rate that may be achieved given a data
-    channel and signal/noise characteristics
-    using Shannon's equation.
+    Function to calculate the maximum data rate that may be achieved given a
+    data channel and signal/noise characteristics using Shannon's equation.
 
     Parameters
     ----------
@@ -3289,10 +3316,9 @@ def shannondata(BW, S, N):
 # Define CRC Generator (Sender Side)
 def crcsender(data, key):
     """
-    CRC Sender Function
+    CRC Sender Function.
 
-    Function to generate a CRC-embedded
-    message ready for transmission.
+    Function to generate a CRC-embedded message ready for transmission.
 
     Contributing Author Credit:
     Shaurya Uppal
@@ -3311,7 +3337,6 @@ def crcsender(data, key):
                 Bit-string representation of
                 encoded message.
     """
-
     # Define Sub-Functions
     def xor(a, b):
         # initialize result
@@ -3384,10 +3409,9 @@ def crcsender(data, key):
 # Define CRC Generator (Sender Side)
 def crcremainder(data, key):
     """
-    CRC Remainder Function
+    CRC Remainder Function.
 
-    Function to calculate the CRC
-    remainder of a CRC message.
+    Function to calculate the CRC remainder of a CRC message.
 
     Contributing Author Credit:
     Shaurya Uppal
@@ -3406,7 +3430,6 @@ def crcremainder(data, key):
                 Bit-string representation of
                 encoded message.
     """
-
     # Define Sub-Functions
     def xor(a, b):
         # initialize result
@@ -3476,11 +3499,11 @@ def crcremainder(data, key):
 
 # Define String to Bits Function
 def string_to_bits(str):
+    # noqa: D401   "String" is an intended leading word.
     """
-    String to Bits Converter
+    String to Bits Converter.
 
-    Converts a Pythonic string to the string's
-    binary representation.
+    Converts a Pythonic string to the string's binary representation.
 
     Parameters
     ----------
@@ -3499,13 +3522,12 @@ def string_to_bits(str):
 
 # Define kWh to BTU function and vice-versa
 def kwh_to_btu(kWh):
-    """
-    Killo-Watt-Hours to BTU Function:
+    r"""
+    Killo-Watt-Hours to BTU Function.
 
-    Converts kWh (killo-Watt-hours) to BTU
-    (British Thermal Units).
+    Converts kWh (killo-Watt-hours) to BTU (British Thermal Units).
 
-    .. math:: \\text{BTU} = \\text{kWh}\\cdot3412.14
+    .. math:: \text{BTU} = \text{kWh}\cdot3412.14
 
     Same as `btu`.
 
@@ -3526,13 +3548,12 @@ btu = kwh_to_btu  # Make Duplicate Name
 
 
 def btu_to_kwh(BTU):
-    """
-    BTU to Killo-Watt-Hours Function:
+    r"""
+    BTU to Killo-Watt-Hours Function.
 
-    Converts BTU (British Thermal Units) to
-    kWh (killo-Watt-hours).
+    Converts BTU (British Thermal Units) to kWh (killo-Watt-hours).
 
-    .. math:: \\text{kWh} = \\frac{\\text{BTU}}{3412.14}
+    .. math:: \text{kWh} = \frac{\text{BTU}}{3412.14}
 
     Same as `kwh`.
 
@@ -3554,15 +3575,15 @@ kwh = btu_to_kwh  # Make Duplicate Name
 
 # Define Per-Unit Impedance Formula
 def zpu(S, VLL=None, VLN=None):
-    """
-    Per-Unit Impedance Evaluator
+    r"""
+    Per-Unit Impedance Evaluator.
 
-    Evaluates the per-unit impedance value given the per-unit
-    power and voltage bases.
+    Evaluates the per-unit impedance value given the per-unit power and voltage
+    bases.
 
-    .. math:: Z_{pu}=\\frac{V_{LL}^2}{S}
+    .. math:: Z_{pu}=\frac{V_{LL}^2}{S}
 
-    .. math:: Z_{pu}=\\frac{(\\sqrt{3}*V_{LN})^2}{S}
+    .. math:: Z_{pu}=\frac{(\sqrt{3}*V_{LN})^2}{S}
 
     Parameters
     ----------
@@ -3588,15 +3609,15 @@ def zpu(S, VLL=None, VLN=None):
 
 # Define Per-Unit Current Formula
 def ipu(S, VLL=None, VLN=None, V1phs=None):
-    """
-    Per-Unit Current Evaluator
+    r"""
+    Per-Unit Current Evaluator.
 
     Evaluates the per-unit current value given the per-unit
     power and voltage bases.
 
-    .. math:: I_{pu}=\\frac{S}{\\sqrt{3}*V_{LL}}
+    .. math:: I_{pu}=\frac{S}{\sqrt{3}*V_{LL}}
 
-    .. math:: I_{pu}=\\frac{S}{3*V_{LN}}
+    .. math:: I_{pu}=\frac{S}{3*V_{LN}}
 
     Parameters
     ----------
@@ -3626,13 +3647,13 @@ def ipu(S, VLL=None, VLN=None, V1phs=None):
 
 # Define Per-Unit Change of Base Function
 def puchgbase(quantity, puB_old, puB_new):
-    """
-    Per-Unit Change of Base Function
+    r"""
+    Per-Unit Change of Base Function.
 
     Performs a per-unit change of base operation for the given
     value constrained by the old base and new base.
 
-    .. math:: Z_{pu-new}=Z_{pu-old}*\\frac{BASE_{OLD}}{BASE_{NEW}}
+    .. math:: Z_{pu-new}=Z_{pu-old}*\frac{BASE_{OLD}}{BASE_{NEW}}
 
     Parameters
     ----------
@@ -3655,7 +3676,7 @@ def puchgbase(quantity, puB_old, puB_new):
 # Define Recomposition Function
 def zrecompose(z_pu, S3phs, VLL=None, VLN=None):
     """
-    Impedance from Per-Unit System Evaluator
+    Impedance from Per-Unit System Evaluator.
 
     Function to reverse per-unit conversion and return the ohmic value
     of an impedance given its per-unit parameters of R and X (as Z).
@@ -3687,7 +3708,7 @@ def zrecompose(z_pu, S3phs, VLL=None, VLN=None):
 # Define X/R Recomposition Function
 def rxrecompose(x_pu, XoR, S3phs=None, VLL=None, VLN=None):
     """
-    Resistance/Reactance from Per-Unit System Evaluator
+    Resistance/Reactance from Per-Unit System Evaluator.
 
     Function to reverse per-unit conversion and return the ohmic value
     of an impedance given its per-unit parameters of X.
@@ -3730,7 +3751,7 @@ def rxrecompose(x_pu, XoR, S3phs=None, VLL=None, VLN=None):
 # Define Generator Internal Voltage Calculator
 def geninternalv(I, Zs, Vt, Vgn=None,Zm=None, Zmp=None, Zmpp=None, Ip=None, Ipp=None):
     """
-    Generator Internal Voltage Evaluator
+    Electric Generator Internal Voltage Evaluator.
 
     Evaluates the internal voltage for a generator given the
     generator's internal impedance and internal mutual coupling
@@ -3779,13 +3800,13 @@ def geninternalv(I, Zs, Vt, Vgn=None,Zm=None, Zmp=None, Zmpp=None, Ip=None, Ipp=
 
 # Define Sequence Component Conversion Function
 def abc_to_seq(Mabc, reference='A'):
-    """
-    Phase-System to Sequence-System Conversion
+    r"""
+    Phase-System to Sequence-System Conversion.
 
     Converts phase-based values to sequence
     components.
 
-    .. math:: M_{\\text{012}}=A_{\\text{012}}\\cdot M_{\\text{ABC}}
+    .. math:: M_{\text{012}}=A_{\text{012}}\cdot M_{\text{ABC}}
 
     Same as phs_to_seq.
 
@@ -3826,13 +3847,13 @@ phs_to_seq = abc_to_seq
 
 # Define Phase Component Conversion Function
 def seq_to_abc(M012, reference='A'):
-    """
-    Sequence-System to Phase-System Conversion
+    r"""
+    Sequence-System to Phase-System Conversion.
 
     Converts sequence-based values to phase
     components.
 
-    .. math:: M_{\\text{ABC}}=A_{\\text{012}}^{-1}\\cdot M_{\\text{012}}
+    .. math:: M_{\text{ABC}}=A_{\text{012}}^{-1}\cdot M_{\text{012}}
 
     Same as seq_to_phs.
 
@@ -3875,8 +3896,8 @@ seq_to_phs = seq_to_abc
 
 # Define Sequence Impedance Calculator
 def sequencez(Zabc, reference='A', resolve=False, diag=False, round=3):
-    """
-    Sequence Impedance Calculator
+    r"""
+    Sequence Impedance Calculator.
 
     Accepts the phase (ABC-domain) impedances for a
     system and calculates the sequence (012-domain)
@@ -3886,11 +3907,11 @@ def sequencez(Zabc, reference='A', resolve=False, diag=False, round=3):
 
     When resolve is False:
 
-    .. math:: Z_{\\text{012-M}}=A_{\\text{012}}^{-1}Z_{\\text{ABC}}A_{\\text{012}}
+    .. math:: Z_{\text{012-M}}=A_{\text{012}}^{-1}Z_{\text{ABC}}A_{\text{012}}
 
     When resolve is True:
 
-    .. math:: Z_{\\text{012}}=A_{\\text{012}}Z_{\\text{ABC}}A_{\\text{012}}^{-1}
+    .. math:: Z_{\text{012}}=A_{\text{012}}Z_{\text{ABC}}A_{\text{012}}^{-1}
 
     Parameters
     ----------
@@ -3950,7 +3971,7 @@ def sequencez(Zabc, reference='A', resolve=False, diag=False, round=3):
 # FFT Coefficient Calculator Function
 def funcfft(func, minfreq=60, maxmult=15, complex=False):
     """
-    Function FFT Evaluator
+    FFT Evaluator for Callable Functions.
 
     Given the callable function handle for a periodic function,
     evaluates the harmonic components of the function.
@@ -3997,7 +4018,7 @@ def funcfft(func, minfreq=60, maxmult=15, complex=False):
 
 def sampfft(data, dt, minfreq=60.0, complex=False):
     """
-    Sampled Dataset FFT Evaluator
+    Sample Dataset FFT Evaluator.
 
     Given a data array and the delta-t for the data array, evaluates
     the harmonic composition of the data.
@@ -4050,7 +4071,7 @@ def sampfft(data, dt, minfreq=60.0, complex=False):
 # Define FFT Plotting Function
 def fftplot(dc, real, imag=None, title="Fourier Coefficients"):
     """
-    FFT System Plotter
+    FFT System Plotter.
 
     Plotting function for FFT (harmonic) values,
     plots the DC, Real, and Imaginary components.
@@ -4094,7 +4115,7 @@ def fftplot(dc, real, imag=None, title="Fourier Coefficients"):
 def fftsumplot(dc, real, imag=None, freq=60, xrange=None, npts=1000,
                plotall=False, title="Fourier Series Summation"):
     """
-    FFT Summation Plotter
+    FFT Summation Plotter.
 
     Function to generate the plot of the sumed FFT results.
 
@@ -4146,7 +4167,7 @@ def fftsumplot(dc, real, imag=None, freq=60, xrange=None, npts=1000,
 # Define harmonic system generation function
 def harmonics(real, imag=None, dc=0, freq=60, domain=None):
     """
-    Harmonic Function Generator
+    Harmonic Function Generator.
 
     Generate a function or dataset for a harmonic system
     given the real (cosine), imaginary (sine), and DC
@@ -4212,7 +4233,7 @@ def harmonics(real, imag=None, dc=0, freq=60, domain=None):
 # Define Single Phase Motor Startup Capacitor Formula
 def motorstartcap(V, I, freq=60):
     """
-    Single Phase Motor Starting Capacitor Function
+    Single Phase Motor Starting Capacitor Function.
 
     Function to evaluate a reccomended value for the
     startup capacitor associated with a single phase
@@ -4243,7 +4264,7 @@ def motorstartcap(V, I, freq=60):
 # Define Power Factor Correction Function
 def pfcorrection(S, PFold, PFnew, VLL=None, VLN=None, V=None, freq=60):
     """
-    Power Factor Correction Function
+    Power Factor Correction Function.
 
     Function to evaluate the additional reactive power and
     capacitance required to achieve the desired power factor
@@ -4301,7 +4322,7 @@ def pfcorrection(S, PFold, PFnew, VLL=None, VLN=None, V=None, freq=60):
 # Define Apparent Power / Voltage / Current Relation Function
 def acpiv(S=None, I=None, VLL=None, VLN=None, V=None, PF=None):
     """
-    AC Power-Voltage-Current Relation Function
+    AC Power-Voltage-Current Relation Function.
 
     Relationship function to return apparent power, voltage, or
     current in one of various forms.
@@ -4385,7 +4406,7 @@ def acpiv(S=None, I=None, VLL=None, VLN=None, V=None, PF=None):
 # Define Primary Ratio Function
 def primary(val, Np, Ns=1, invert=False):
     """
-    Transformer Primary Evaluator
+    Electrical Transformer Primary Evaluator.
 
     Returns a current or voltage value reflected across
     a transformer with a specified turns ratio Np/Ns.
@@ -4419,7 +4440,7 @@ def primary(val, Np, Ns=1, invert=False):
 # Define Secondary Ratio Function
 def secondary(val, Np, Ns=1, invert=False):
     """
-    Transformer Secondary Evaluator
+    Electrical Transformer Secondary Evaluator.
 
     Returns a current or voltage value reflected across
     a transformer with a specified turns ratio Np/Ns.
@@ -4451,81 +4472,78 @@ def secondary(val, Np, Ns=1, invert=False):
 
 
 def tap_changing_transformer(Vgen, Vdis, Pload, Qload, R, X):
+    r"""
+    Calculate Turn Ratio of Load Tap Changing Transformer.
+
+    The purpose of a tap changer is to regulate the output voltage of a transformer.
+    It does this by altering the number of turns in one winding and thereby changing the turns ratio of the transformer
+    
+    .. math:: \sqrt{\frac{Vgen^2}{Vgen \cdot Vdis - R \cdot P - X \cdot Q}}
+
+    Parameters
+    ----------
+    Vgen:   float
+            Generating station voltage
+    Vdis:   float
+            Distribution network voltage
+    Pload:  float
+            Transmission line load active power in Watt
+    Qload:  float
+            Transmission line load reactive power in VAR
+    R:      float
+            Resistance of transmission line
+    X:      float
+            Reactance of transmission line
+    
+    Returns
+    -------
+    ts:     float
+            Turns ration of transformer
     """
-        Calculate Turn Ratio of Load Tap Changing Transformer
-
-        The purpose of a tap changer is to regulate the output voltage of a transformer.
-        It does this by altering the number of turns in one winding and thereby changing the turns ratio of the transformer
-        
-        .. math:: \\sqrt{\\frac{Vgen^2}{Vgen \\cdot Vdis - R \\cdot P - X \\cdot Q}}
-
-        Parameters
-        ----------
-        Vgen:   float
-                Generating station voltage
-        Vdis:   float
-                Distribution network voltage
-        Pload:  float
-                Transmission line load active power in Watt
-        Qload:  float
-                Transmission line load reactive power in VAR
-        R:      float
-                Resistance of transmission line
-        X:      float
-                Reactance of transmission line
-        
-        Returns
-        -------
-        ts:     float
-                Turns ration of transformer
-        
-        
-    """
-
+    # Evaluate the turns ratio
     ts = (Vgen*Vgen) / (Vgen*Vdis - (R * Pload + X * Qload) )
-
     return pow(ts, 0.5)
 
 def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
+    r"""
+    Discrete Capacitors Voltage in a Suspension Insulator Strain.
+
+    To perform the calculations described here, the following formulas are
+    satisfied, and used to construct a matrix used to solve for
+    :math:`V_i \text{i in range(1,n)}`.
+
+    .. math:: \sum_{i=1}^{n-2} V_{i} + V_{n-1} \cdot (1+m) - V_{n} \cdot m=0
+
+    .. math:: \sum_{i=1}^{n} V_{i} = V_{\text{transmission line}}
+    
+    .. image:: /static/SuspensionInuslator.png
+    
+    `Additional Information
+    <https://electrical-engineering-portal.com/download-center/books-and-guides/power-substations/insulator-pollution>`_
+    
+    Parameters
+    ----------
+    number_capacitors:  int
+                        Number of disk capacitors hung to transmission line
+    capacitance_ratio:  float
+                        Ratio of disk capacitance and pin to pole air capacitance
+    Voltage:            float
+                        Voltage difference between the transmission line and ground
+    
+    Returns
+    -------
+    string_efficiency:          float
+                                String efficiency of capacitive disks
+    capacitor_disk_voltages:    float
+                                Voltage across each capacitive disk starting
+                                from top to bottom
     """
-        Calculate the Voltage of Each Capacitor in a Suspension Insulator Strain
-
-
-        To perform the calculations described here, the following formulas are satisfied, and used
-        to construct a matrix used to solve for :math:`V_i \\text{i in range(1,n)}`.
-
-        .. math:: \\sum_{i=1}^{n-2} V_{i} + V_{n-1} \\cdot (1+m) - V_{n} \\cdot m = 0
-
-        .. math:: \\sum_{i=1}^{n} V_{i} = V_{\\text{transmission line}}
-        
-        .. image:: /static/SuspensionInuslator.png
-        
-        `Additional Information <https://electrical-engineering-portal.com/download-center/books-and-guides/power-substations/insulator-pollution>`_
-        
-        Parameters
-        ----------
-        number_capacitors:  int
-                            Number of disk capacitors hung to transmission line
-        capacitance_ratio:  float
-                            Ratio of disk capacitance and pin to pole air capacitance
-        Voltage:            float
-                            Voltage difference between the transmission line and ground
-        
-        Returns
-        -------
-        string_efficiency:          float
-                                    String efficiency of capacitive disks
-        capacitor_disk_voltages:    float
-                                    Voltage across each capacitive disk starting from
-                                    top to bottom
-    """
-
     m = _np.zeros((number_capacitors, number_capacitors))
-
+    # Iterate over capacitors
     for i in range(number_capacitors - 1):
-
+        # Iterate over capacitors
         for j in range(number_capacitors - 1):
-
+            # If inner iteration is less than outer iteration
             if i >= j:
                 m[i, j] = 1 / capacitance_ratio
 
@@ -4548,14 +4566,14 @@ def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
 
 # Define Natural Frequency/Resonant Frequency Calculator
 def natfreq(C, L, Hz=True):
-    """
-    Natural Frequency Evaluator
+    r"""
+    Natural Frequency Evaluator.
 
     Evaluates the natural frequency (resonant frequency)
     of a circuit given the circuit's C and L values. Defaults
     to returning values in Hz, but may also return in rad/sec.
 
-    .. math:: freq=\\frac{1}{\\sqrt{L*C}*(2*\\pi)}
+    .. math:: freq=\frac{1}{\sqrt{L*C}*(2*\pi)}
 
     Parameters
     ----------
@@ -4585,7 +4603,7 @@ def natfreq(C, L, Hz=True):
 # Define Voltage/Current Unbalance Equation
 def unbalance(A, B, C, all=False):
     """
-    Voltage/Current Unbalance Function
+    Voltage/Current Unbalance Function.
 
     Performs a voltage/current unbalance calculation
     to determine the maximum current/voltage
@@ -4633,7 +4651,7 @@ def unbalance(A, B, C, all=False):
 # Define Cosine Filter Function
 def cosfilt(arr, Srate, domain=False):
     """
-    Cosine Filter Function
+    Cosine Filter Function.
 
     Cosine Filter function for filtering a dataset
     representing a sinusoidal function with or without
@@ -4684,7 +4702,7 @@ def cosfilt(arr, Srate, domain=False):
 # Define Sine Filter Function
 def sinfilt(arr, Srate, domain=False):
     """
-    Sine Filter Function
+    Sine Filter Function.
 
     Sine Filter function for filtering a dataset
     representing a sinusoidal function with or without
@@ -4734,8 +4752,8 @@ def sinfilt(arr, Srate, domain=False):
 
 # Define Characteristic Impedance Calculator
 def characterz(R, G, L, C, freq=60):
-    """
-    Characteristic Impedance Calculator
+    r"""
+    Characteristic Impedance Calculator.
 
     Function to evaluate the characteristic
     impedance of a system with specefied
@@ -4743,7 +4761,7 @@ def characterz(R, G, L, C, freq=60):
     the standard characteristic impedance
     equation :eq:`Zc`.
 
-    .. math:: Z_c = \\sqrt{\\frac{R+j\\omega L}{G+j\\omega C}}
+    .. math:: Z_c = \sqrt{\frac{R+j\omega L}{G+j\omega C}}
        :label: Zc
 
     Parameters
@@ -4772,25 +4790,24 @@ def characterz(R, G, L, C, freq=60):
 
 #define propagation_constants for long transmission line
 def propagation_constants(z, y, length):
-    
-    """
-    Transaction Line Propagation Constant Calculator
+    r"""
+    Transaction Line Propagation Constant Calculator.
 
     This function will evaluate the propagation constants for a long transmission
     line whose properties are governed by the differential equation:
     
-    .. math:: \\frac{d^2V}{dx^2} = \\gamma V
+    .. math:: \frac{d^2V}{dx^2} = \gamma V
     
     From the above equation, the following formulas are derived to evaluate the
     desired constants.
     
-    .. math:: \\gamma = \\sqrt( z * y )
+    .. math:: \gamma = \sqrt( z * y )
     
-    .. math:: Z_{\\text{surge}} = \\sqrt( z / y )
+    .. math:: Z_{\text{surge}} = \sqrt( z / y )
     
-    .. math:: \\alpha = \\Re{ \\gamma }
+    .. math:: \alpha = \Re{ \gamma }
     
-    .. math:: \\beta = \\Im{ \\gamma }
+    .. math:: \beta = \Im{ \gamma }
     
     Parameters
     ----------
@@ -4809,24 +4826,19 @@ def propagation_constants(z, y, length):
                          alpha:      Attenuation constant
                          beta:        Imaginary portion of gamma
     """
-
-    assert length > 500, "Long transmission line length should be grater than 500km"
-
+    # Validate the line length is substantial enough for calculation
+    if not (length > 500):
+        raise ValueError(
+            "Long transmission line length should be grater than 500km"
+        )
     gamma = _np.sqrt(z * y)
-
     alpha = gamma.real
-
     beta = gamma.imag
-
     zc = _np.sqrt(z / y)
-
     params = {
         'gamma': gamma,
-
         'alpha': alpha,
-
         'beta': beta,
-
         'Surge_impedance': zc
     }
 
@@ -4836,12 +4848,11 @@ def propagation_constants(z, y, length):
 # Define Simple Transformer Phase Shift Function
 def xfmphs(style="DY", shift=30):
     """
-    Simple Transformer Phase-Shift Calculator
+    Electrical Transformer Phase-Shift Calculator.
 
-    Use with transformer orientation to evaluate
-    the phase-shift across a transformer. For
-    example, find the phase shift for a Delta-Wye
-    transformer as seen from the delta side.
+    Use with transformer orientation to evaluate the phase-shift across a
+    transformer. For example, find the phase shift for a Delta-Wye transformer
+    as seen from the delta side.
 
     Parameters
     ----------
@@ -4882,13 +4893,13 @@ def xfmphs(style="DY", shift=30):
 
 # Define Simple Radians to Hertz Converter
 def rad_to_hz(radians):
-    """
-    Simple Radians to Hertz Converter
+    r"""
+    Radians to Hertz Converter.
 
     Accepts a frequency in radians/sec and calculates
     the hertzian frequency (in Hz).
 
-    .. math:: f_{\\text{Hz}} = \\frac{f_{\\text{rad/sec}}}{2\\cdot\\pi}
+    .. math:: f_{\text{Hz}} = \frac{f_{\text{rad/sec}}}{2\cdot\pi}
 
     Same as `hertz`.
 
@@ -4910,13 +4921,13 @@ hertz = rad_to_hz  # Make Duplicate Name
 
 # Define Simple Hertz to Radians Converter
 def hz_to_rad(hertz):
-    """
-    Simple Hertz to Radians Converter
+    r"""
+    Hertz to Radians Converter.
 
     Accepts a frequency in Hertz and calculates
     the frequency in radians/sec.
 
-    .. math:: f_{\\text{rad/sec}} = f_{\\text{Hz}}\\cdot2\\cdot\\pi
+    .. math:: f_{\text{rad/sec}} = f_{\text{Hz}}\cdot2\cdot\pi
 
     Same as `radsec`.
 
@@ -4938,17 +4949,17 @@ radsec = hz_to_rad  # Make Duplicate Name
 
 # Define Induction Machine Thevenin Voltage Calculator
 def indmachvth(Vas, Rs, Lm, Lls=0, Ls=None, freq=60, calcX=True):
-    """
-    Induction Machine Thevenin Voltage Calculator
+    r"""
+    Induction Machine Thevenin Voltage Calculator.
 
     Function to calculate the Thevenin equivalent voltage of an
     induction machine given a specific set of parameters.
 
-    .. math:: V_{th}=\\frac{j\\omega L_m}{R_s+j\\omega(L_{ls}+L_m)}V_{as}
+    .. math:: V_{th}=\frac{j\omega L_m}{R_s+j\omega(L_{ls}+L_m)}V_{as}
 
     where:
 
-    .. math:: \\omega = \\omega_{es} = 2\\pi\\cdot f_{\\text{electric}}
+    .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
 
     Parameters
     ----------
@@ -5000,19 +5011,19 @@ def indmachvth(Vas, Rs, Lm, Lls=0, Ls=None, freq=60, calcX=True):
 
 # Define Induction Machine Thevenin Impedance Calculator
 def indmachzth(Rs, Lm, Lls=0, Llr=0, Ls=None, Lr=None, freq=60, calcX=True):
-    """
-    Induction Machine Thevenin Impedance Calculator
+    r"""
+    Induction Machine Thevenin Impedance Calculator.
 
     Function to calculate the Thevenin equivalent impedance of an
     induction machine given a specific set of parameters.
 
     .. math::
-       Z_{th} = \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}
-       {R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}
+       Z_{th} = \frac{(R_s+j\omega L_{ls})j\omega L_m}
+       {R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}
 
     where:
 
-    .. math:: \\omega = \\omega_{es} = 2\\pi\\cdot f_{\\text{electric}}
+    .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
 
     Parameters
     ----------
@@ -5070,16 +5081,16 @@ def indmachzth(Rs, Lm, Lls=0, Llr=0, Ls=None, Lr=None, freq=60, calcX=True):
 # Define Induction Machine Mechancal Power Calculator
 def indmachpem(slip, Rr, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
                Llr=0, Ls=None, Lr=None, freq=60, calcX=True):
-    """
-    Mechanical Power Calculator for Induction Machines
+    r"""
+    Mechanical Power Calculator for Induction Machines.
 
     Function to calculate the mechanical power using the thevenin
     equivalent circuit terms.
 
     .. math::
-       P_{em}=\\frac{|V_{th_{\\text{stator}}}|^2\\cdot\\frac{R_r}{slip}}
-       {\\left[\\left(\\frac{R_r}{slip}+R_{th_{\\text{stator}}}\\right)^2
-       +X_{th_{\\text{stator}}}^2\\right]\\cdot\\omega_{es}}\\cdot(1-slip)
+       P_{em}=\frac{|V_{th_{\text{stator}}}|^2\cdot\frac{R_r}{slip}}
+       {\left[\left(\frac{R_r}{slip}+R_{th_{\text{stator}}}\right)^2
+       +X_{th_{\text{stator}}}^2\right]\cdot\omega_{es}}\cdot(1-slip)
 
     Parameters
     ----------
@@ -5164,23 +5175,23 @@ def indmachpem(slip, Rr, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
 
 # Define Induction Machine Torque Calculator
 def indmachtem(slip, Rr, p=0, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
-               Llr=0, Ls=None, Lr=None, wsync=None, freq=60, calcX=True):
-    """
-    Induction Machine Torque Calculator
+               Llr=0, Ls=None, Lr=None, wsyn=None, freq=60, calcX=True):
+    r"""
+    Induction Machine Torque Calculator.
 
     Calculate the torque generated or consumed by an induction
     machine given the machine parameters of Vth and Zth by use
     of the equation below.
 
     .. math::
-       T_{em}=\\frac{3|V_{th_{\\text{stator}}}|^2}
-       {\\left[\\left(\\frac{R_r}{slip}+R_{th_{\\text{stator}}}\\right)^2
-       +X_{th_{\\text{stator}}}\\right]}\\frac{R_r}{slip*\\omega_{sync}}
+       T_{em}=\frac{3|V_{th_{\text{stator}}}|^2}
+       {\left[\left(\frac{R_r}{slip}+R_{th_{\text{stator}}}\right)^2
+       +X_{th_{\text{stator}}}\right]}\frac{R_r}{slip*\omega_{sync}}
 
     where:
 
     .. math::
-       \\omega_{sync}=\\frac{\\omega_{es}}{\\left(\\frac{poles}{2}\\right)}
+       \omega_{sync}=\frac{\omega_{es}}{\left(\frac{poles}{2}\right)}
 
     Parameters
     ----------
@@ -5253,7 +5264,7 @@ def indmachtem(slip, Rr, p=0, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
         Lls *= w
         Llr *= w
     # Test for Valid Input Set
-    if not any((p, wsync)):
+    if not any((p, wsyn)):
         raise ValueError("Poles or Synchronous Speed must be specified.")
     if Vth == None:
         if not all((Vas, Rs, Lm, Lls)):
@@ -5275,20 +5286,20 @@ def indmachtem(slip, Rr, p=0, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
 # Define Induction Machine Peak Slip Calculator
 def indmachpkslip(Rr, Zth=None, Rs=0, Lm=0, Lls=0, Llr=0, Ls=None,
                   Lr=None, freq=60, calcX=True):
-    """
-    Induction Machine Slip at Peak Torque Calculator
+    r"""
+    Induction Machine Slip at Peak Torque Calculator.
 
     Function to calculate the slip encountered by an induction machine
     with the parameters specified when the machine is generating peak
     torque. Uses formula as shown below.
 
-    .. math:: \\text{slip} = \\frac{R_r}{|Z_{th}|}
+    .. math:: \text{slip} = \frac{R_r}{|Z_{th}|}
 
     where:
 
     .. math::
-       Z_{th} = \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}
-       {R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}
+       Z_{th} = \frac{(R_s+j\omega L_{ls})j\omega L_m}
+       {R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}
 
     Parameters
     ----------
@@ -5357,25 +5368,25 @@ def indmachpkslip(Rr, Zth=None, Rs=0, Lm=0, Lls=0, Llr=0, Ls=None,
 # Define Induction Machine Phase-A, Rotor Current Calculator
 def indmachiar(Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
                Llr=0, Ls=None, Lr=None, freq=60, calcX=True):
-    """
-    Induction Machine Rotor Current Calculator
+    r"""
+    Induction Machine Rotor Current Calculator.
 
     Calculation function to find the phase-A, rotor current for an
     induction machine given the thevenin voltage and impedance.
 
     This current is calculated using the following formulas:
 
-    .. math:: I_{a_{\\text{rotor}}} = \\frac{V_{th}}{|Z_{th}|+Z_{th}}
+    .. math:: I_{a_{\text{rotor}}} = \frac{V_{th}}{|Z_{th}|+Z_{th}}
 
     where:
 
-    .. math:: V_{th}=\\frac{j\\omega L_m}{R_s+j\\omega(L_{ls}+L_m)}V_{as}
+    .. math:: V_{th}=\frac{j\omega L_m}{R_s+j\omega(L_{ls}+L_m)}V_{as}
 
     .. math::
-       Z_{th} = \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}
-       {R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}
+       Z_{th} = \frac{(R_s+j\omega L_{ls})j\omega L_m}
+       {R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}
 
-    .. math:: \\omega = \\omega_{es} = 2\\pi\\cdot f_{\\text{electric}}
+    .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
 
     Parameters
     ----------
@@ -5455,8 +5466,8 @@ def indmachiar(Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
 # Define Induction Machine Peak Torque Calculator
 def indmachpktorq(Rr, s_pk=None, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0,
                   Lm=0, Lls=0, Llr=0, Ls=None, Lr=None, freq=60, calcX=True):
-    """
-    Induction Machine Peak Torque Calculator
+    r"""
+    Induction Machine Peak Torque Calculator.
 
     Calculation function to find the peak torque for an
     induction machine given the thevenin voltage and impedance.
@@ -5464,20 +5475,20 @@ def indmachpktorq(Rr, s_pk=None, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0,
     This current is calculated using the following formulas:
 
     .. math::
-       T_{em}=(|I_{a_{\\text{rotor}}}|)^2\\cdot\\frac{R_r}
-       {\\text{slip}_{\\text{peak}}}
+       T_{em}=(|I_{a_{\text{rotor}}}|)^2\cdot\frac{R_r}
+       {\text{slip}_{\text{peak}}}
 
     where:
 
-    .. math:: I_{a_{\\text{rotor}}} = \\frac{V_{th}}{|Z_{th}|+Z_{th}}
+    .. math:: I_{a_{\text{rotor}}} = \frac{V_{th}}{|Z_{th}|+Z_{th}}
 
-    .. math:: V_{th}=\\frac{j\\omega L_m}{R_s+j\\omega(L_{ls}+L_m)}V_{as}
+    .. math:: V_{th}=\frac{j\omega L_m}{R_s+j\omega(L_{ls}+L_m)}V_{as}
 
     .. math::
-       Z_{th} = \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}
-       {R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}
+       Z_{th} = \frac{(R_s+j\omega L_{ls})j\omega L_m}
+       {R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}
 
-    .. math:: \\omega = \\omega_{es} = 2\\pi\\cdot f_{\\text{electric}}
+    .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
 
     Parameters
     ----------
@@ -5578,8 +5589,8 @@ def indmachpktorq(Rr, s_pk=None, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0,
 # Define Induction Machine Starting Torque Calculator
 def indmachstarttorq(Rr, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0,
                      Lls=0, Llr=0, Ls=None, Lr=None, freq=60, calcX=True):
-    """
-    Induction Machine Starting Torque Calculator
+    r"""
+    Induction Machine Starting Torque Calculator.
 
     Calculation function to find the starting torque for an
     induction machine given the thevenin voltage and impedance.
@@ -5587,23 +5598,23 @@ def indmachstarttorq(Rr, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0,
     This current is calculated using the following formulas:
 
     .. math::
-       T_{em}=(|I_{a_{\\text{rotor}}}|)^2\\cdot\\frac{R_r}
-       {\\text{slip}_{\\text{peak}}}
+       T_{em}=(|I_{a_{\text{rotor}}}|)^2\cdot\frac{R_r}
+       {\text{slip}_{\text{peak}}}
 
     where:
 
-    .. math:: \\text{slip} = 1
+    .. math:: \text{slip} = 1
 
     .. math::
-       I_{a_{\\text{rotor}}} = \\frac{V_{th}}{\\frac{R_r}{\\text{slip}}+Z_{th}}
+       I_{a_{\text{rotor}}} = \frac{V_{th}}{\frac{R_r}{\text{slip}}+Z_{th}}
 
-    .. math:: V_{th}=\\frac{j\\omega L_m}{R_s+j\\omega(L_{ls}+L_m)}V_{as}
+    .. math:: V_{th}=\frac{j\omega L_m}{R_s+j\omega(L_{ls}+L_m)}V_{as}
 
     .. math::
-       Z_{th} = \\frac{(R_s+j\\omega L_{ls})j\\omega L_m}
-       {R_s+j\\omega(L_{ls}+L_m)}+j\\omega L_{lr}
+       Z_{th} = \frac{(R_s+j\omega L_{ls})j\omega L_m}
+       {R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}
 
-    .. math:: \\omega = \\omega_{es} = 2\\pi\\cdot f_{\\text{electric}}
+    .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
 
     Parameters
     ----------
@@ -5690,20 +5701,20 @@ def indmachstarttorq(Rr, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0,
         # Valid Argument Set, Calculate Ias
         Iar = Vth / (Rr / slip + Zth)
     # Use Terms to Calculate Peak Torque
-    Tstart = abs(Iar) ** 2 * Rr / s_pk
+    Tstart = abs(Iar) ** 2 * Rr / slip
     return (Tstart)
 
 
 # Define Induction Machine Stator Torque Calculator
 def pstator(Pem, slip):
-    """
-    Stator Power Calculator for Induction Machine
+    r"""
+    Stator Power Calculator for Induction Machine.
 
     Given the electromechanical power and the slip,
     this function will calculate the power related to the
     stator (provided or consumed).
 
-    .. math:: P_s=\\frac{P_{em}}{1-\\text{slip}}
+    .. math:: P_s=\frac{P_{em}}{1-\text{slip}}
 
     Parameters
     ----------
@@ -5728,14 +5739,14 @@ def pstator(Pem, slip):
 
 # Define Induction Machine Rotor Torque Calculator
 def protor(Pem, slip):
-    """
-    Rotor Power Calculator for Induction Machine
+    r"""
+    Rotor Power Calculator for Induction Machine.
 
     Given the electromechanical power and the slip,
     this function will calculate the power related to the
     rotor (provided or consumed).
 
-    .. math:: P_r=-\\text{slip}\\cdot\\frac{P_{em}}{1-\\text{slip}}
+    .. math:: P_r=-\text{slip}\cdot\frac{P_{em}}{1-\text{slip}}
 
     Parameters
     ----------
@@ -5760,13 +5771,13 @@ def protor(Pem, slip):
 
 # Define De Calculator for Transmission Lines
 def de_calc(rho, freq=60):
-    """
-    Calculator for De Transmission Line Value
+    r"""
+    De Transmission Line Value Calculator.
 
     Simple calculator to find the De value for a line
     with particular earth resistivity (rho).
 
-    .. math:: D_e=D_{e_{\\text{constant}}}\\sqrt{\\frac{\\rho}{freq}}
+    .. math:: D_e=D_{e_{\text{constant}}}\sqrt{\frac{\rho}{freq}}
 
     Parameters
     ----------
@@ -5800,7 +5811,7 @@ def zperlength(Rd=None, Rself=None, Rac=None, Rgwac=None, De=None,
                Dbc=None, Dca=None, Dagw=None, Dbgw=None, Dcgw=None,
                resolve=True, freq=60):
     """
-    Transmission Line Impedance (RL) Calculator
+    Transmission Line Impedance (RL) Calculator.
 
     Simple impedance matrix generator to provide the full
     impedance per length matrix.
@@ -5929,24 +5940,24 @@ def zperlength(Rd=None, Rself=None, Rac=None, Rgwac=None, De=None,
 
 # Define Transposition Matrix Formula
 def transposez(Zeq, fabc=1 / 3, fcab=1 / 3, fbca=1 / 3, linelen=1):
-    """
-    Transmission Matrix Equivalent Transposition Calculator
+    r"""
+    Transmission Matrix Equivalent Transposition Calculator.
 
     Given the impedance matrix and the percent of the line spent
     in each transposition relation (ABC, CAB, and BCA).
 
     .. math::
-       f_{abc}Z_{eq}+f_{cab}R_p^{-1}\\cdot Z_{eq}\\cdot R_p+
-       f_{bca}Z_{eq}R_p\\cdot Z_{eq}\\cdot R_p^{-1}
+       f_{abc}Z_{eq}+f_{cab}R_p^{-1}\cdot Z_{eq}\cdot R_p+
+       f_{bca}Z_{eq}R_p\cdot Z_{eq}\cdot R_p^{-1}
 
     where:
 
     .. math:
-       R_p=\\begin{bmatrix}\\\\
-       0 & 0 & 1 \\\\
-       1 & 0 & 0 \\\\
-       0 & 1 & 0 \\\\
-       \\end{bmatrix}
+       R_p=\begin{bmatrix}\\
+       0 & 0 & 1 \\
+       1 & 0 & 0 \\
+       0 & 1 & 0 \\
+       \end{bmatrix}
 
     Parameters
     ----------
@@ -5980,13 +5991,13 @@ def transposez(Zeq, fabc=1 / 3, fcab=1 / 3, fbca=1 / 3, linelen=1):
 
 # Define GMD Calculator
 def gmd(Ds, *args):
-    """
-    Simple GMD Calculator
+    r"""
+    GMD (Geometric Mean Distance) Calculator.
 
     Calculates the GMD (Geometric Mean Distance) for a system
     with the parameters of a list of arguments.
 
-    .. math:: GMD=(D_s*D_1*\\ddot*D_n)^{\\frac{1}{1+n}}
+    .. math:: GMD=(D_s*D_1*\ddot*D_n)^{\frac{1}{1+n}}
 
     Parameters
     ----------
@@ -6010,8 +6021,8 @@ def gmd(Ds, *args):
 # Define FOC IM Rated Value Calculator
 def indmachfocratings(Rr, Rs, Lm, Llr=0, Lls=0, Lr=None,
                       Ls=None, Vdqs=1, Tem=1, wes=1):
-    """
-    FOC Ind. Machine Rated Operation Calculator
+    r"""
+    FOC Ind. Machine Rated Operation Calculator.
 
     Determines the parameters and characteristics of a Field-
     Oriented-Controlled Induction Machine operating at its
@@ -6113,7 +6124,7 @@ def indmachfocratings(Rr, Rs, Lm, Llr=0, Lls=0, Lr=None,
 def imfoc_control(Tem_cmd, LAMdr_cmd, wr_cmd, Rr, Rs, Lm,
                   Llr=0, Lls=0, Lr=None, Ls=None, s_err=0):
     """
-    FOC Ind. Machine Rated Operation Calculator
+    FOC Ind. Machine Rated Operation Calculator.
 
     Determines the parameters and characteristics of a Field-
     Oriented-Controlled Induction Machine operating at its
@@ -6199,25 +6210,26 @@ def imfoc_control(Tem_cmd, LAMdr_cmd, wr_cmd, Rr, Rs, Lm,
 
 # Define Synch. Machine Eq Calculator
 def synmach_Eq(Vt_pu, Itmag, PF, Ra, Xd, Xq):
-    """
-    Synchronous Machine Eq Calculator
+    # noqa: D401   "Synchronous" is an intentional descriptor
+    r"""
+    Synchronous Machine Eq Calculator.
 
     Given specified parameter set, will calculate
     the internal voltage on the q-axis (Eq).
 
-    .. math:: E_q=V_{t_{pu}}-\\left[R_a\\cdot I_{t_{pu}}+
-       j\\cdot X_q\\cdot I_{t_{pu}}+j(X_d-X_q)\\cdot I_{ad}\\right]
+    .. math:: E_q=V_{t_{pu}}-\left[R_a\cdot I_{t_{pu}}+
+       j\cdot X_q\cdot I_{t_{pu}}+j(X_d-X_q)\cdot I_{ad}\right]
 
     where:
 
-    .. math:: I_{t_{pu}}=I_{t_{mag}}\\cdot e^{-j(
-       \\angle{V_{t_{pu}}}-\\cos^{-1}(PF))}
+    .. math:: I_{t_{pu}}=I_{t_{mag}}\cdot e^{-j(
+       \angle{V_{t_{pu}}}-\cos^{-1}(PF))}
 
-    .. math:: \\theta_q=\\angle{V_{t_{pu}}-\\left(R_a
-       I_{t_{pu}}+j\\cdot X_qI_{t_{pu}}\\right)
+    .. math:: \theta_q=\angle{V_{t_{pu}}-\left(R_a
+       I_{t_{pu}}+j\cdot X_qI_{t_{pu}}\right)
 
-    .. math:: I_{ad}=\\left|I_{t_{pu}}\\cdot\\sin(
-       -\\cos^{-1}(PF)+\\theta_q)\\right|e^{j(\\theta_q
+    .. math:: I_{ad}=\left|I_{t_{pu}}\cdot\sin(
+       -\cos^{-1}(PF)+\theta_q)\right|e^{j(\theta_q
        -90°)}
 
     Parameters
@@ -6258,7 +6270,7 @@ def synmach_Eq(Vt_pu, Itmag, PF, Ra, Xd, Xq):
 # Define Power-Factor Voltage/Current Relation
 def vipf(V=None, I=None, PF=1, find=''):
     """
-    Voltage / Current / Power Factor Solver
+    Voltage / Current / Power Factor Solver.
 
     Given two of the three parameters, will solve for the
     third; beit voltage, current, or power factor.
@@ -6318,23 +6330,20 @@ def vipf(V=None, I=None, PF=1, find=''):
 # Define Angular Velocity Conversion Functions
 def rad_to_rpm(rad):
     """
-    Radians-per-Second to RPM Converter
+    Radians-per-Second to RPM Converter.
 
-    Given the angular velocity in rad/sec, this
-    function will evaluate the velocity in RPM
-    (Revolutions-Per-Minute).
+    Given the angular velocity in rad/sec, this function will evaluate the
+    velocity in RPM (Revolutions-Per-Minute).
 
     Parameters
     ----------
     rad:        float
-                The angular velocity in radians-
-                per-second
+                The angular velocity in radians-per-second
 
     Returns
     -------
     rpm:        float
-                The angular velocity in revolutions-
-                per-minute (RPM)
+                The angular velocity in revolutions-per-minute (RPM)
     """
     rpm = 60 / (2 * _np.pi) * rad
     return (rpm)
@@ -6343,23 +6352,20 @@ def rad_to_rpm(rad):
 # Define Angular Velocity Conversion Functions
 def rpm_to_rad(rpm):
     """
-    RPM to Radians-per-Second Converter
+    RPM to Radians-per-Second Converter.
 
-    Given the angular velocity in RPM (Revolutions-
-    Per-Minute), this function will evaluate the
-    velocity in rad/sec.
+    Given the angular velocity in RPM (Revolutions-Per-Minute), this function
+    will evaluate the velocity in rad/sec.
 
     Parameters
     ----------
     rpm:        float
-                The angular velocity in revolutions-
-                per-minute (RPM)
+                The angular velocity in revolutions-per-minute (RPM)
 
     Returns
     -------
     rad:        float
-                The angular velocity in radians-
-                per-second
+                The angular velocity in radians-per-second
     """
     rad = 2 * _np.pi / 60 * rpm
     return (rad)
@@ -6368,11 +6374,10 @@ def rpm_to_rad(rpm):
 # Define Angular Velocity Conversion Functions
 def hz_to_rpm(hz):
     """
-    Hertz to RPM Converter
+    Hertz to RPM Converter.
 
-    Given the angular velocity in Hertz, this
-    function will evaluate the velocity in RPM
-    (Revolutions-Per-Minute).
+    Given the angular velocity in Hertz, this function will evaluate the
+    velocity in RPM (Revolutions-Per-Minute).
 
     Parameters
     ----------
@@ -6382,8 +6387,7 @@ def hz_to_rpm(hz):
     Returns
     -------
     rpm:        float
-                The angular velocity in revolutions-
-                per-minute (RPM)
+                The angular velocity in revolutions-per-minute (RPM)
     """
     rpm = hz * 60
     return (rpm)
@@ -6392,17 +6396,15 @@ def hz_to_rpm(hz):
 # Define Angular Velocity Conversion Functions
 def rpm_to_hz(rpm):
     """
-    RPM to Hertz Converter
+    RPM to Hertz Converter.
 
-    Given the angular velocity in RPM (Revolutions-
-    Per-Minute), this function will evaluate the
-    velocity in Hertz.
+    Given the angular velocity in RPM (Revolutions-Per-Minute), this function
+    will evaluate the velocity in Hertz.
 
     Parameters
     ----------
     rpm:        float
-                The angular velocity in revolutions-
-                per-minute (RPM)
+                The angular velocity in revolutions-per-minute (RPM)
 
     Returns
     -------
@@ -6415,35 +6417,31 @@ def rpm_to_hz(rpm):
 
 # Define Synchronous Speed Calculator
 def syncspeed(Npol, freq=60, Hz=False):
-    """
-    Synchronous Speed Calculator Function
+    # noqa: D401   "Synchronous" is an intentional descriptor
+    r"""
+    Synchronous Speed Calculator Function.
 
-    Simple method of calculating the synchronous
-    speed of an induction machine given the number
-    of poles in the machine's construction, and
+    Simple method of calculating the synchronous speed of an induction machine
+    given the number of poles in the machine's construction, and
     the machine's operating electrical frequency.
 
-    .. math:: \\omega_{\\text{syn}}=\\frac{2\\pi
-       \\cdot\\text{freq}}{\\frac{N_{\\text{pol}}}{2}}
+    .. math:: \omega_{\text{syn}}=\frac{2\pi
+       \cdot\text{freq}}{\frac{N_{\text{pol}}}{2}}
 
     Parameters
     ----------
     Npol:       int
-                Number of electrical poles in
-                machine's construction.
+                Number of electrical poles in machine's construction.
     freq:       float, optional
-                Frequency of electrical system in
-                Hertz, default=60
+                Frequency of electrical system in Hertz, default=60
     Hz:         bool, optional
-                Boolean control to enable return
-                in Hertz. default=False
+                Boolean control to enable return in Hertz. default=False
 
     Returns
     -------
     wsyn:       float
-                Synchronous Speed of Induction Machine,
-                defaults to units of rad/sec, but may
-                be set to Hertz if `Hz` set to True.
+                Synchronous Speed of Induction Machine, defaults to units of
+                rad/sec, but may be set to Hertz if `Hz` set to True.
     """
     wsyn = 2 * _np.pi * freq / (Npol / 2)
     if Hz:
@@ -6453,25 +6451,22 @@ def syncspeed(Npol, freq=60, Hz=False):
 
 # Define Machine Slip Calculation Function
 def machslip(mech, syn=60):
-    """
-    Machine Slip Calculator
+    r"""
+    Machine Slip Calculator.
 
-    Given the two parameters (mechanical and synchronous
-    speed, or frequency) this function will return the
-    unitless slip of the rotating machine.
+    Given the two parameters (mechanical and synchronous speed, or frequency)
+    this function will return the unitless slip of the rotating machine.
 
-    .. math:: \\text{slip}=\\frac{\\text{syn}-\\text{mech}}
-       {\\text{syn}}
+    .. math:: \text{slip}=\frac{\text{syn}-\text{mech}}
+       {\text{syn}}
 
     Parameters
     ----------
     mech:       float
-                The mechanical frequency (or speed),
-                of the rotating machine.
+                The mechanical frequency (or speed), of the rotating machine.
     syn:        float, optional
-                The synchronous frequency (or speed),
-                defaults as a frequency set to 60Hz,
-                default=60
+                The synchronous frequency (or speed), defaults as a frequency
+                set to 60Hz, default=60
 
     Returns
     -------
@@ -6484,19 +6479,18 @@ def machslip(mech, syn=60):
 
 # Define 3-Phase Valpha Calculator
 def phs3valpha(VA, VB=0, VC=0):
-    """
-    Three-Phase V-Alpha Calculator
+    r"""
+    Three-Phase V-Alpha Calculator.
 
-    Accepts the three-phase voltages for which the
-    accumulated Alpha voltage should be calculated.
+    Accepts the three-phase voltages for which the accumulated Alpha voltage
+    should be calculated.
 
-    .. math:: V_{\\alpha}=V_A-\\frac{V_B}{2}-\\frac{V_C}{2}
+    .. math:: V_{\alpha}=V_A-\frac{V_B}{2}-\frac{V_C}{2}
 
     Parameters
     ----------
     VA:         [float, complex]
-                A-phase voltage, (or tuple/list of
-                voltages), unitless.
+                A-phase voltage, (or tuple/list of voltages), unitless.
     VB:         [float, complex], optional
                 B-phase voltage, unitless.
     VC:         [float, complex], optional
@@ -6505,18 +6499,16 @@ def phs3valpha(VA, VB=0, VC=0):
     Returns
     -------
     Valpha:     [float, complex]
-                Alpha-voltage as calculated from
-                input three-phase voltages. Matches
-                type of inputs.
+                Alpha-voltage as calculated from input three-phase voltages.
+                Matches type of inputs.
     """
     # Handle Combined (list/tuple) Input
-    if (isinstance(VA, (tuple, list)) and
-            VB == 0 and VC == 0):
+    if (isinstance(VA, (tuple, list)) and VB == 0 and VC == 0):
         if len(VA) != 3:
             raise ValueError("Invalid input set, must "
-                             + "be list of three elements, three inputs,"
-                             + " or three array-like objects of equal "
-                             + "length.")
+                             "be list of three elements, three inputs,"
+                             " or three array-like objects of equal "
+                             "length.")
         Valpha = VA[0] - VA[1] / 2 - VA[2] / 2
     # Handle Separated Inputs
     else:
@@ -6525,13 +6517,13 @@ def phs3valpha(VA, VB=0, VC=0):
     return (Valpha)
 
 def wireresistance(length=None,diameter=None,rho=16.8*10**-9,R=None):
-    """
-    Wire Resistance Calculator
+    r"""
+    Wire Resistance Calculator.
 
     Enter three values to calculate the remaing one. Even though every variable
     is unitless, please use the International System of Units.
 
-    .. math:: R = \\frac{\\rho*l}{A}
+    .. math:: R = \frac{\rho*l}{A}
 
     Parameters
     ----------
@@ -6544,6 +6536,7 @@ def wireresistance(length=None,diameter=None,rho=16.8*10**-9,R=None):
                 Default value is copper resistivity: 16.8*10-9 
     R:          [float], optional
                 Wire resistance, unitless.
+
     Returns
     -------
     length:     [float], optional
@@ -6575,43 +6568,31 @@ def wireresistance(length=None,diameter=None,rho=16.8*10**-9,R=None):
         
 def ic_555(mode,R=None,C=None,freq=None,t_high=None,t_low=None):
     """
-    555 Integrated Circuit Calculator 
+    555 Integrated Circuit Calculator.
     
-    Evaluate a number of common attributes related to the common 555 integrated circuit including time period, frequency, duty cycle, time spent low during each cycle, time spent high during each cycle. 
+    Evaluate a number of common attributes related to the common 555 integrated circuit including time period, frequency
+    , duty cycle, time spent low during each cycle, time spent high during each cycle. 
     
     .. math:: <various-math-equations for each output> 
-    
     .. image:: <a-diagram-showing-the-circuit-configuration-for-the-ic> 
     
     Parameters 
     ---------- 
-    
     mode: ['astable', 'monostable'] The operating constraint of the 555 timer. 
-    
     R: list[float, float] or tuple(float, float) optional list of 2 resistor which are need in configuring IC 555
-    
     C: float optional Capacitance between Threshold Pin and ground
-    
     f: float optional Electrical system frequency in Hertz. 
-    
     t_high: float, optional ON time of IC 555 
-    
     t_low: float, optional OFF time of IC 555 
     
     Returns 
     ------- 
-    
     dict: "time_period": Time period of oscillating IC 555 
-    
-    "frequency": frequency of oscilation of IC 555 
-    
-    "duty_cycle": ration between ON time and total time
-    
-    "t_low": ON time of IC 555 
-    
-    "t_high": OFF time of IC 555 
+        "frequency": frequency of oscilation of IC 555 
+        "duty_cycle": ration between ON time and total time
+        "t_low": ON time of IC 555 
+        "t_high": OFF time of IC 555 
     """
-
     if mode == 'ASTABLE':
 
         if R!=None and C!=None:
