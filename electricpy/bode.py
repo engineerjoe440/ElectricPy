@@ -9,6 +9,7 @@
 # Import External Dependencies
 import matplotlib.pyplot as _plt
 import numpy as _np
+from electricpy import convolve
 import scipy.signal as _sig
 from numpy import pi as _pi
 from cmath import exp as _exp
@@ -21,9 +22,9 @@ def _sys_condition(system,feedback):
         den = system[1]
         # Convolve numerator or denominator as needed
         if (str(type(num)) == tuple):
-            num = sig.convolve(num)        # Convolve terms in numerator
+            num = convolve(num)        # Convolve terms in numerator
         if (str(type(den)) == tuple):
-            den = sig.convolve(den)        # Convolve terms in denominator
+            den = convolve(den)        # Convolve terms in denominator
         if feedback: # If asked to add the numerator to the denominator
             ld = len(den) # Length of denominator
             ln = len(num) # Length of numerator
