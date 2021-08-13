@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>electricpy.puchgbase &#8212; electricpy 0.2.1 documentation</title>
+    <title>electricpy.ic_555 &#8212; electricpy 0.2.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
@@ -16,12 +16,12 @@
     <script src="../_static/doctools.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
-    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.puchgbase.html" />
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.ic_555.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.rad_to_hz" href="electricpy.rad_to_hz.html" />
-    <link rel="prev" title="electricpy.pstator" href="electricpy.pstator.html" /> 
+    <link rel="next" title="electricpy.imfoc_control" href="electricpy.imfoc_control.html" />
+    <link rel="prev" title="electricpy.hz_to_rpm" href="electricpy.hz_to_rpm.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -33,15 +33,15 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.rad_to_hz.html" title="electricpy.rad_to_hz"
+          <a href="electricpy.imfoc_control.html" title="electricpy.imfoc_control"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="electricpy.pstator.html" title="electricpy.pstator"
+          <a href="electricpy.hz_to_rpm.html" title="electricpy.hz_to_rpm"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">electricpy.puchgbase</a></li> 
+        <li class="nav-item nav-item-this"><a href="">electricpy.ic_555</a></li> 
       </ul>
     </div>  
 
@@ -50,29 +50,36 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="electricpy-puchgbase">
-<h1>electricpy.puchgbase<a class="headerlink" href="#electricpy-puchgbase" title="Permalink to this headline">¶</a></h1>
+  <section id="electricpy-ic-555">
+<h1>electricpy.ic_555<a class="headerlink" href="#electricpy-ic-555" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="electricpy.puchgbase">
-<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">puchgbase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">puB_old</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">puB_new</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.puchgbase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Per-Unit Change of Base Function.</p>
-<p>Performs a per-unit change of base operation for the given
-value constrained by the old base and new base.</p>
+<dt class="sig sig-object py" id="electricpy.ic_555">
+<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">ic_555</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_high</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_low</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.ic_555" title="Permalink to this definition">¶</a></dt>
+<dd><p>555 Integrated Circuit Calculator.</p>
+<p>Evaluate a number of common attributes related to the common 555 integrated circuit including time period, frequency
+, duty cycle, time spent low during each cycle, time spent high during each cycle.</p>
 <div class="math notranslate nohighlight">
-\[Z_{pu-new}=Z_{pu-old}*\frac{BASE_{OLD}}{BASE_{NEW}}\]</div>
+\[&lt;various-math-equations for each output&gt;\]</div>
+<img alt="api/&lt;a-diagram-showing-the-circuit-configuration-for-the-ic&gt;" src="api/&lt;a-diagram-showing-the-circuit-configuration-for-the-ic&gt;" />
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>quantity</strong> (<em>complex</em>) – Current per-unit value in old base.</p></li>
-<li><p><strong>puB_old</strong> (<em>float</em>) – Old per-unit base.</p></li>
-<li><p><strong>puB_new</strong> (<em>float</em>) – New per-unit base.</p></li>
+<li><p><strong>mode</strong> (<em>[</em><em>'astable'</em><em>, </em><em>'monostable'</em><em>] </em><em>The operating constraint of the 555 timer.</em>) – </p></li>
+<li><p><strong>R</strong> (<em>list</em><em>[</em><em>float</em><em>, </em><em>float</em><em>] or </em><em>tuple</em><em>(</em><em>float</em><em>, </em><em>float</em><em>) </em><em>optional list of 2 resistor which are need in configuring IC 555</em>) – </p></li>
+<li><p><strong>C</strong> (<em>float optional Capacitance between Threshold Pin and ground</em>) – </p></li>
+<li><p><strong>f</strong> (<em>float optional Electrical system frequency in Hertz.</em>) – </p></li>
+<li><p><strong>t_high</strong> (<em>float</em><em>, </em><em>optional ON time of IC 555</em>) – </p></li>
+<li><p><strong>t_low</strong> (<em>float</em><em>, </em><em>optional OFF time of IC 555</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>pu_new</strong> – New per-unit value.</p>
+<dd class="field-even"><p><strong>dict</strong> – “frequency”: frequency of oscilation of IC 555
+“duty_cycle”: ration between ON time and total time
+“t_low”: ON time of IC 555
+“t_high”: OFF time of IC 555</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>complex</p>
+<dd class="field-odd"><p>“time_period”: Time period of oscillating IC 555</p>
 </dd>
 </dl>
 </dd></dl>
@@ -90,15 +97,15 @@ value constrained by the old base and new base.</p>
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="electricpy.pstator.html"
-                        title="previous chapter">electricpy.pstator</a></p>
+  <p class="topless"><a href="electricpy.hz_to_rpm.html"
+                        title="previous chapter">electricpy.hz_to_rpm</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="electricpy.rad_to_hz.html"
-                        title="next chapter">electricpy.rad_to_hz</a></p>
+  <p class="topless"><a href="electricpy.imfoc_control.html"
+                        title="next chapter">electricpy.imfoc_control</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/electricpy.puchgbase.rst.txt"
+      <li><a href="../_sources/api/electricpy.ic_555.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -126,15 +133,15 @@ value constrained by the old base and new base.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.rad_to_hz.html" title="electricpy.rad_to_hz"
+          <a href="electricpy.imfoc_control.html" title="electricpy.imfoc_control"
              >next</a> |</li>
         <li class="right" >
-          <a href="electricpy.pstator.html" title="electricpy.pstator"
+          <a href="electricpy.hz_to_rpm.html" title="electricpy.hz_to_rpm"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">electricpy.puchgbase</a></li> 
+        <li class="nav-item nav-item-this"><a href="">electricpy.ic_555</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
