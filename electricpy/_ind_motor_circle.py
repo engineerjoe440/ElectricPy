@@ -217,11 +217,12 @@ class InductionMotorCircle:
         Determine parametric equation of circle.
 
         Parameters
-        -----------
+        ----------
         center: list[float, float] [x0, y0]
         radius: float
 
         Returns
+        -------
         (x, y): tuple
                 parametric equation of circle
                 (x = x0 + r*cos(theta) ; y = y0 + r*sin(theta))
@@ -290,7 +291,7 @@ class InductionMotorCircle:
         line: list[float, float]
 
         Returns
-        --------:
+        -------
         slope: float
         """
         [[x1, x2], [y1, y2]] = line
