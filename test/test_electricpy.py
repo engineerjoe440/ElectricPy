@@ -213,14 +213,14 @@ def test_convolve():
 
     assert ([1,2,3,2,1] == convolve((A,B))).all()
 
-def test_ic_555():
+def test_ic_555_astable():
 
-    from electricpy import ic_555
+    from electricpy import ic_555_astable
 
     # Astable configuration
     R = [10, 10]
     C = 1e-6
-    result = ic_555('ASTABLE', R, C)
+    result = ic_555_astable(R, C)
 
     for key,value in result.items():
         result[key] = np.round(value, decimals=6)
