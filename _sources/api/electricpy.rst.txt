@@ -89,7 +89,9 @@
     
     hz_to_rpm
     
-    ic_555
+    ic_555_astable
+    
+    ic_555_monostable
     
     imfoc_control
     

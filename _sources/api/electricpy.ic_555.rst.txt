@@ -1,6 +1,0 @@
-electricpy.ic\_555
-==================
-
-.. currentmodule:: electricpy
-
-.. autofunction:: ic_555

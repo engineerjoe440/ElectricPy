@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>electricpy.hz_to_rpm &#8212; electricpy 0.2.1 documentation</title>
+    <title>electricpy.ic_555_monostable &#8212; electricpy 0.2.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
@@ -15,12 +15,12 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     
-    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.hz_to_rpm.html" />
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.ic_555_monostable.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.ic_555_astable" href="electricpy.ic_555_astable.html" />
-    <link rel="prev" title="electricpy.hz_to_rad" href="electricpy.hz_to_rad.html" /> 
+    <link rel="next" title="electricpy.imfoc_control" href="electricpy.imfoc_control.html" />
+    <link rel="prev" title="electricpy.ic_555_astable" href="electricpy.ic_555_astable.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -32,15 +32,15 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.ic_555_astable.html" title="electricpy.ic_555_astable"
+          <a href="electricpy.imfoc_control.html" title="electricpy.imfoc_control"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="electricpy.hz_to_rad.html" title="electricpy.hz_to_rad"
+          <a href="electricpy.ic_555_astable.html" title="electricpy.ic_555_astable"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">electricpy.hz_to_rpm</a></li> 
+        <li class="nav-item nav-item-this"><a href="">electricpy.ic_555_monostable</a></li> 
       </ul>
     </div>  
 
@@ -49,23 +49,34 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="electricpy-hz-to-rpm">
-<h1>electricpy.hz_to_rpm<a class="headerlink" href="#electricpy-hz-to-rpm" title="Permalink to this headline">¶</a></h1>
+  <section id="electricpy-ic-555-monostable">
+<h1>electricpy.ic_555_monostable<a class="headerlink" href="#electricpy-ic-555-monostable" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="electricpy.hz_to_rpm">
-<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">hz_to_rpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hz</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.hz_to_rpm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Hertz to RPM Converter.</p>
-<p>Given the angular velocity in Hertz, this function will evaluate the
-velocity in RPM (Revolutions-Per-Minute).</p>
+<dt class="sig sig-object py" id="electricpy.ic_555_monostable">
+<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">ic_555_monostable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">R</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_high</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_low</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.ic_555_monostable" title="Permalink to this definition">¶</a></dt>
+<dd><p>555 Integrated Circuit Calculator.</p>
+<p>Evaluate a number of common attributes related to the common 555 integrated
+circuit including time period, frequency, duty cycle, time spent low during
+each cycle, time spent high during each cycle.</p>
+<p>TODO: This function should be broken into multiple smaller functions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>hz</strong> (<em>float</em>) – The angular velocity in Hertz</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>R</strong> (<em>list</em><em>[</em><em>float</em><em>, </em><em>float</em><em>] or </em><em>tuple</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em><em>, </em><em>optional</em>) – List of 2 resistor which are need in configuring IC 555.</p></li>
+<li><p><strong>C</strong> (<em>float</em><em>, </em><em>optional</em>) – Capacitance between Threshold Pin and ground</p></li>
+<li><p><strong>f</strong> (<em>float</em><em>, </em><em>optional</em>) – Electrical system frequency in Hertz.</p></li>
+<li><p><strong>t_high</strong> (<em>float</em><em>, </em><em>optional</em>) – ON time of IC 555</p></li>
+<li><p><strong>t_low</strong> (<em>float</em><em>, </em><em>optional</em>) – OFF time of IC 555</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>rpm</strong> – The angular velocity in revolutions-per-minute (RPM)</p>
+<dd class="field-even"><p><strong>dict</strong> – “frequency”: frequency of oscilation of IC 555
+“duty_cycle”: ration between ON time and total time
+“t_low”: ON time of IC 555
+“t_high”: OFF time of IC 555</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>float</p>
+<dd class="field-odd"><p>“time_period”: Time period of oscillating IC 555</p>
 </dd>
 </dl>
 </dd></dl>
@@ -83,15 +94,15 @@ velocity in RPM (Revolutions-Per-Minute).</p>
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="electricpy.hz_to_rad.html"
-                        title="previous chapter">electricpy.hz_to_rad</a></p>
-  <h4>Next topic</h4>
   <p class="topless"><a href="electricpy.ic_555_astable.html"
-                        title="next chapter">electricpy.ic_555_astable</a></p>
+                        title="previous chapter">electricpy.ic_555_astable</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="electricpy.imfoc_control.html"
+                        title="next chapter">electricpy.imfoc_control</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/electricpy.hz_to_rpm.rst.txt"
+      <li><a href="../_sources/api/electricpy.ic_555_monostable.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -119,15 +130,15 @@ velocity in RPM (Revolutions-Per-Minute).</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.ic_555_astable.html" title="electricpy.ic_555_astable"
+          <a href="electricpy.imfoc_control.html" title="electricpy.imfoc_control"
              >next</a> |</li>
         <li class="right" >
-          <a href="electricpy.hz_to_rad.html" title="electricpy.hz_to_rad"
+          <a href="electricpy.ic_555_astable.html" title="electricpy.ic_555_astable"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">electricpy.hz_to_rpm</a></li> 
+        <li class="nav-item nav-item-this"><a href="">electricpy.ic_555_monostable</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
