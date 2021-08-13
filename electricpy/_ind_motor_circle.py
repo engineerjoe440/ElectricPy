@@ -1,42 +1,46 @@
+################################################################################
+"""
+`electricpy._ind_motor_circle` - Support for plotting induction motor circle.
+
+Hidden module.
+"""
+################################################################################
+
 import numpy as _np
 import matplotlib.pyplot as _plt
 
 
 class InductionMotorCircle:
+    """
+    Plot Induction Motor Circle Diagram.
+
+    This class is designed to plot induction motor circle diagram
+    and plot circle diagram to obtain various parameters of induction motor
+
+    Parameters
+    ----------
+    no_load_data:       dict {'V0', 'I0', 'W0'}
+                        V0: no load test voltage
+                        I0: no load current in rotor
+                        W0: No load power(in Watts)
+    blocked_rotor_data: dict {'Vsc','Isc','Wsc'}
+                        Vsc: blocked rotor terminal voltage
+                        Isc: blocked rotor current in rotor
+                        Wsc: Power consumed in blocked rotor test
+    output_power:       int
+                        Desired power output from the induction motor
+    torque_ration:      float
+                        Ration between rotor resitance to stator resistance
+                        (i.e., R2/R1)
+    frequency:          int
+                        AC supply frequency
+    poles:              int
+                        Pole count of induction Motor
+    """
+
     def __init__(self, no_load_data, blocked_rotor_data, output_power, 
                 torque_ration=1, frequency=50, poles=4):
-
-        """
-            Plot Induction Motor Circle Diagram
-
-            This class is designed to plot induction motor circle diagram
-            and plot circle diagram to obtain various parameters of induction motor
-
-            Parameters
-            ----------
-            no_load_data: dict {'V0', 'I0', 'W0'}
-                          V0: no load test voltage
-                          I0: no load current in rotor
-                          W0: No load power(in Watts)
-
-            blocked_rotor_data: dict {'Vsc','Isc','Wsc'}
-                                Vsc: blocked rotor terminal voltage
-                                Isc: blocked rotor current in rotor
-                                Wsc: Power consumed in blocked rotor test
-
-            output_power:   int
-                            Desired power output from the induction motor
-
-            torque_ration:  float
-                            Ration between rotor resitance to stator resistance (r2/r1)
-            
-            frequency:  int
-                        AC supply frequency
-            
-            poles:  int
-                    Pole count of induction Motor
-        """
-
+        """Primary Entrypoint."""
         self.no_load_data = no_load_data
         self.blocked_rotor_data = blocked_rotor_data
         self.f = frequency
@@ -64,14 +68,23 @@ class InductionMotorCircle:
         theta0 = _np.pi / 2 - theta0
         theta_sc = _np.pi / 2 - theta_sc
 
-        # isc is the current at reduced voltage so calculate current at rated voltage
+        # isc is the current at reduced voltage
+        # calculate current at rated voltage
         isc = v0 * isc / vsc
-        self.no_load_line = [[0, i0 * _np.cos(theta0)], [0, i0 * _np.sin(theta0)]]
-        self.full_load_line = [[0, isc * _np.cos(theta_sc)], [0, isc * _np.sin(theta_sc)]]
+        self.no_load_line = [
+            [0, i0 * _np.cos(theta0)],
+            [0, i0 * _np.sin(theta0)]
+        ]
+        self.full_load_line = [
+            [0, isc * _np.cos(theta_sc)],
+            [0, isc * _np.sin(theta_sc)]
+        ]
 
         # secondary current line
-        self.secondary_current_line = [[i0 * _np.cos(theta0), isc * _np.cos(theta_sc)],
-                                       [i0 * _np.sin(theta0), isc * _np.sin(theta_sc)]]
+        self.secondary_current_line = [
+            [i0 * _np.cos(theta0), isc * _np.cos(theta_sc)],
+            [i0 * _np.sin(theta0), isc * _np.sin(theta_sc)]
+        ]
 
         [[x1, x2], [y1, y2]] = self.secondary_current_line
         self.theta = _np.arctan((y2 - y1) / (x2 - x1))
@@ -80,21 +93,28 @@ class InductionMotorCircle:
         self.power_scale = w0 / (i0 * _np.sin(theta0))
         self.center, self.radius = self.compute_circle_params()
         [self.center_x, self.center_y] = self.center
-        self.p_max = self.radius * _np.cos(self.theta) - (self.radius - self.radius * _np.sin(self.theta)) * _np.tan(self.theta)
+        self.p_max = self.radius * _np.cos(self.theta) - (
+            self.radius - self.radius * _np.sin(self.theta)
+        ) * _np.tan(self.theta)
         self.torque_line, self.torque_point = self.get_torque_line()
-        self.torque_max, self.torque_max_x, self.torque_max_y = self.get_torque_max()
-        _, [self.power_x, self.power_y] = self.get_output_power()  # Take low slip point
+        self.torque_max, self.torque_max_x, self.torque_max_y = \
+            self.get_torque_max()
+        # Take low slip point
+        _, [self.power_x, self.power_y] = self.get_output_power()
         self.data = self.compute_efficiency()
 
     def __call__(self):
+        # noqa: D102
+        __doc__ = self.__doc__
         return self.data
 
     def plot(self):
-        """
-            This Method is designed to plot the Induction Motor Circle Diagram
-        """
-
-        [circle_x, circle_y] = InductionMotorCircle.get_circle(self.center, self.radius, semi=True)
+        """Plot the Induction Motor Circle Diagram."""
+        [circle_x, circle_y] = InductionMotorCircle.get_circle(
+            self.center,
+            self.radius,
+            semi=True
+        )
         _plt.plot(circle_x, circle_y)
 
         InductionMotorCircle.plot_line(self.no_load_line)
@@ -102,35 +122,63 @@ class InductionMotorCircle:
         InductionMotorCircle.plot_line(self.full_load_line, ls='-.')
         InductionMotorCircle.plot_line(self.torque_line, ls='-.')
 
-        _plt.plot([self.secondary_current_line[0][1], self.secondary_current_line[0][1]],
-                 [self.secondary_current_line[1][1], self.center_y])  # Full load output
+        # Full load output
+        _plt.plot(
+            [self.secondary_current_line[0][1],
+                self.secondary_current_line[0][1]],
+            [self.secondary_current_line[1][1], self.center_y])
+        # Diameter of the circle
         _plt.plot([self.center_x - self.radius, self.center_x+self.radius],
-                 [self.center_y, self.center_y], ls='-.')  # Diameter of the circle
-        _plt.plot([self.center_x, self.torque_max_x], [self.center_y, self.torque_max_y], ls='-.')  # Max torque line
-        _plt.plot([self.center_x, self.center_x - self.radius * _np.sin(self.theta)],
-                 [self.center_y, self.center_y + self.radius * _np.cos(self.theta)], ls='-.')  # Max Output Power line
-        _plt.plot([0, self.power_x], [0, self.power_y], c='black')  # Operating Point
+                 [self.center_y, self.center_y], ls='-.')
+        # Max torque line  
+        _plt.plot(
+            [self.center_x, self.torque_max_x],
+            [self.center_y, self.torque_max_y], ls='-.')
+        # Max Output Power line
+        _plt.plot(
+            [self.center_x, self.center_x - self.radius * _np.sin(self.theta)],
+            [self.center_y, self.center_y + self.radius * _np.cos(self.theta)],
+            ls='-.'
+        )
+        # Operating Point
+        _plt.plot([0, self.power_x], [0, self.power_y], c='black')
 
 
         _plt.scatter(self.power_x, self.power_y, marker='X', c='red')
-        _plt.scatter(self.center_x, self.center_y, marker='*', c='blue')  # mark the center of the circle
-        _plt.scatter(self.center_x - self.radius * _np.sin(self.theta), self.center_y + self.radius * _np.cos(self.theta),
-                    linewidths=3, c='black', marker='*')
-        _plt.scatter(self.torque_max_x, self.torque_max_y,
-                    linewidths=3, c='black', marker='*')
+        # mark the center of the circle
+        _plt.scatter(self.center_x, self.center_y, marker='*', c='blue')
+        _plt.scatter(
+            self.center_x - self.radius * _np.sin(self.theta),
+            self.center_y + self.radius * _np.cos(self.theta),
+            linewidths=3, c='black', marker='*'
+        )
+        _plt.scatter(
+            self.torque_max_x,
+            self.torque_max_y,
+            linewidths=3,
+            c='black',
+            marker='*'
+        )
 
 
         _plt.title("Induction Motor Circle Diagram")
         _plt.grid()
-        _plt.legend(['I2 locus', 'No Load Current', 'Output Line', 'Blocked Rotor Current', 'Torque line',
-                    'Full Load Losses', 'Diameter', 'Maximum Torque',
-                    'Maximum Output Power', f'Operating Power {self.operating_power}'])
+        _plt.legend([
+            'I2 locus',
+            'No Load Current',
+            'Output Line',
+            'Blocked Rotor Current',
+            'Torque line',
+            'Full Load Losses',
+            'Diameter',
+            'Maximum Torque',
+            'Maximum Output Power',
+            f'Operating Power {self.operating_power}'
+        ])
         _plt.show()
 
     def compute_efficiency(self):
-        """
-            This Method is designed to Compute the output efficiency of induction motor 
-        """
+        """Compute the output efficiency of induction motor."""
         [[_, no_load_x], [_, no_load_y]] = self.no_load_line
         no_load_losses = no_load_y * self.power_scale
 
@@ -166,20 +214,18 @@ class InductionMotorCircle:
     @staticmethod
     def get_circle(center, radius, semi=False):
         """
-            This Static helper method is designed to get parametric equation of circle
+        Determine parametric equation of circle.
 
-            Parameters:
-            -----------
-            center: list[float, float] [x0, y0]
-            radius: float  
+        Parameters:
+        -----------
+        center: list[float, float] [x0, y0]
+        radius: float
 
-            Returns:
-            (x, y): tuple
-                    parametric equation of circle
-                    (x = x0 + r*cos(theta) ; y = y0 + r*sin(theta))
-
+        Returns:
+        (x, y): tuple
+                parametric equation of circle
+                (x = x0 + r*cos(theta) ; y = y0 + r*sin(theta))
         """
-
         [x0, y0] = center
 
         if semi:
@@ -193,9 +239,7 @@ class InductionMotorCircle:
 
     @staticmethod
     def plot_line(line, mark_start=True, mark_end=True, ls='-', marker=None):
-        """
-            This Static helper method is to plot line
-        """
+        """Supporting function to plot a line."""
         [x, y] = line
         [x1, x2] = x
         [y1, y2] = y
@@ -206,9 +250,7 @@ class InductionMotorCircle:
             _plt.scatter(x2, y2, marker=marker)
 
     def compute_circle_params(self):
-        """
-            This helper method is designed to compute the paramters of induction motor circle 
-        """
+        """Compute the paramters of induction motor circle."""
         [[x1, x2], [y1, y2]] = self.secondary_current_line
         theta = _np.arctan((y2 - y1) / (x2 - x1))
         length = _np.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
@@ -218,9 +260,7 @@ class InductionMotorCircle:
         return center, radius
 
     def get_torque_line(self):
-        """
-            This helper method is designed to obatin the torque line of the induction motor
-        """
+        """Obatin the torque line of the induction motor."""
         [[x1, x2], [y1, y2]] = self.secondary_current_line
         y = (self.torque_ratio * y2 + y1) / (self.torque_ratio + 1)
         torque_point = [x2, y]
@@ -228,39 +268,40 @@ class InductionMotorCircle:
         return torque_line, torque_point
 
     def get_torque_max(self):
-        """
-            This helper methods is designed to ompute maximum torque corresponding to given
-            Induction Motor parameters 
-        """
+        """Compute max torque for given Induction Motor parameters."""
         [x, y] = self.torque_line
         [x1, x2] = x
         [y1, y2] = y
         alpha = _np.arctan((y2 - y1) / (x2 - x1))
-        torque_max = self.radius * _np.cos(alpha) - (self.radius - self.radius * _np.sin(alpha)) * _np.tan(alpha)
+        torque_max = self.radius * _np.cos(alpha) - (
+            self.radius - self.radius * _np.sin(alpha)
+        ) * _np.tan(alpha)
         torque_max_x = self.center_x - self.radius * _np.sin(alpha)
         torque_max_y = self.center_y + self.radius * _np.cos(alpha)
         return torque_max, torque_max_x, torque_max_y
 
     @staticmethod
     def compute_slope(line):
-        """ 
-            This static helper method is designed to compute slope of the line
+        """
+        Compute slope of the line.
 
-            Parameters:
-            ----------
-            line: list[float, float]
+        Parameters:
+        ----------
+        line: list[float, float]
 
-            Returns:
-            --------:
-            slope: float
+        Returns:
+        --------:
+        slope: float
         """
         [[x1, x2], [y1, y2]] = line
         return (y2 - y1)/(x2 - x1)
 
     def get_output_power(self):
-        """ 
-            This method is designed to obtain the point on the induction motor circle diagram which 
-            corresponds to the desired output power
+        """
+        Determine induction motor circle desired output power point.
+
+        Obtain the point on the induction motor circle diagram which 
+        corresponds to the desired output power
         """
         [[x1, x2], [y1, y2]] = self.secondary_current_line
         alpha = _np.arctan((y2 - y1) / (x2 - x1))
