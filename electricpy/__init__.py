@@ -6566,101 +6566,131 @@ def wireresistance(length=None,diameter=None,rho=16.8*10**-9,R=None):
         A = rho*length/R
         return _np.sqrt(4*A/pi)
         
-def ic_555(mode,R=None,C=None,freq=None,t_high=None,t_low=None):
+def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
     """
     555 Integrated Circuit Calculator.
     
-    Evaluate a number of common attributes related to the common 555 integrated circuit including time period, frequency
-    , duty cycle, time spent low during each cycle, time spent high during each cycle. 
-    
-    .. math:: <various-math-equations for each output> 
-    .. image:: <a-diagram-showing-the-circuit-configuration-for-the-ic> 
+    Evaluate a number of common attributes related to the common 555 integrated
+    circuit including time period, frequency, duty cycle, time spent low during
+    each cycle, time spent high during each cycle.
+
+    TODO: This function should be broken into multiple smaller functions.
     
     Parameters 
     ---------- 
-    mode: ['astable', 'monostable'] The operating constraint of the 555 timer. 
-    R: list[float, float] or tuple(float, float) optional list of 2 resistor which are need in configuring IC 555
-    C: float optional Capacitance between Threshold Pin and ground
-    f: float optional Electrical system frequency in Hertz. 
-    t_high: float, optional ON time of IC 555 
-    t_low: float, optional OFF time of IC 555 
+    R:      list[float, float] or tuple(float, float), optional
+            List of 2 resistor which are need in configuring IC 555.
+    C:      float, optional
+            Capacitance between Threshold Pin and ground
+    f:      float, optional
+            Electrical system frequency in Hertz. 
+    t_high: float, optional
+            ON time of IC 555 
+    t_low:  float, optional
+            OFF time of IC 555 
     
     Returns 
     ------- 
-    dict: "time_period": Time period of oscillating IC 555 
-        "frequency": frequency of oscilation of IC 555 
-        "duty_cycle": ration between ON time and total time
-        "t_low": ON time of IC 555 
-        "t_high": OFF time of IC 555 
+    dict:   "time_period": Time period of oscillating IC 555 
+            "frequency": frequency of oscilation of IC 555 
+            "duty_cycle": ration between ON time and total time
+            "t_low": ON time of IC 555 
+            "t_high": OFF time of IC 555 
     """
-    if mode == 'ASTABLE':
+    if R!=None and C!=None:
+        if len(R) != 2:
+            raise ValueError(
+                "Monostable 555 IC will have only 2 resitances to be fixed "
+                f"but {len(R)} were given"
+            )
 
-        if R!=None and C!=None:
+        [R1, R2] = R
 
-            if len(R) != 2:
-                raise ValueError(f"ic_555 in {mode} will have only 2 resitances to be fixed but {len(R)} were \
-                                given")
+        T = _np.log(2)*C*(R1+2*R2)
+        freq = 1/T
+        t_low = _np.log(2)*C*R2
+        t_high = _np.log(2)*C*(R1+R2)
+        duty_cycle = t_high*100/T
 
-            [R1, R2] = R
+        return {
+            'time_period':T,
+            'frequency':freq,
+            'duty_cycle':duty_cycle,
+            't_low':t_low,
+            't_high':t_high
+        }
+    
+    elif t_high!=None and t_low!=None and C!=None:
 
-            T = _np.log(2)*C*(R1+2*R2)
-            freq = 1/T
-            t_low = _np.log(2)*C*R2
-            t_high = _np.log(2)*C*(R1+R2)
-            duty_cycle = t_high*100/T
+        x2 = t_low/C*_np.log(2)
+        x1 = t_high/C*_np.log(2)
+        T = t_high+t_low
+        freq = 1/(T)
+        duty_cycle = t_high/(T)
 
-            return {
-                'time_period':T,
-                'frequency':freq,
-                'duty_cycle':duty_cycle,
-                't_low':t_low,
-                't_high':t_high
-            }
-        
-        elif t_high!=None and t_low!=None and C!=None:
-
-            x2 = t_low/C*_np.log(2)
-            x1 = t_high/C*_np.log(2)
-
-            T = t_high+t_low
-
-            freq = 1/(T)
-
-            duty_cycle = t_high/(T)
-
-            return {
-                'time_period':T,
-                'frequency':freq,
-                'duty_cycle':duty_cycle,
-                'R1':x1-x2,
-                'R2':x2
-            }
-        else:
-            raise TypeError("Not enough parqmeters are passed")
+        return {
+            'time_period':T,
+            'frequency':freq,
+            'duty_cycle':duty_cycle,
+            'R1':x1-x2,
+            'R2':x2
+        }
+    else:
+        raise TypeError("Not enough parqmeters are passed")
             
               
-    elif mode=='MONOSTABLE':
-        if R is None:
-            try:
-                assert C!=None and T!=None
-            except AssertionError:
-                raise ValueError("To find Resitance, Capacitance and delay time should be provided")
-            return T/(_np.log(3)*C)
-        elif C is None:
-            try:
-                assert R!=None and T!=None
-            except AssertionError:
-                raise ValueError("To find Capacitance , Resistance and delay time should be provided")
-            return T/(_np.log(3)*R)
+def ic_555_monostable(R=None,C=None,freq=None,t_high=None,t_low=None):
+    """
+    555 Integrated Circuit Calculator.
+    
+    Evaluate a number of common attributes related to the common 555 integrated
+    circuit including time period, frequency, duty cycle, time spent low during
+    each cycle, time spent high during each cycle.
 
-        elif T is None:
+    TODO: This function should be broken into multiple smaller functions.
+    
+    Parameters 
+    ---------- 
+    R:      list[float, float] or tuple(float, float), optional
+            List of 2 resistor which are need in configuring IC 555.
+    C:      float, optional
+            Capacitance between Threshold Pin and ground
+    f:      float, optional
+            Electrical system frequency in Hertz. 
+    t_high: float, optional
+            ON time of IC 555 
+    t_low:  float, optional
+            OFF time of IC 555 
+    
+    Returns 
+    ------- 
+    dict:   "time_period": Time period of oscillating IC 555 
+            "frequency": frequency of oscilation of IC 555 
+            "duty_cycle": ration between ON time and total time
+            "t_low": ON time of IC 555 
+            "t_high": OFF time of IC 555 
+    """
+    T = t_high+t_low
+    if R is None:
+        try:
+            assert C!=None and T!=None
+        except AssertionError:
+            raise ValueError("To find Resitance, Capacitance and delay time should be provided")
+        return T/(_np.log(3)*C)
+    elif C is None:
+        try:
+            assert R!=None and T!=None
+        except AssertionError:
+            raise ValueError("To find Capacitance , Resistance and delay time should be provided")
+        return T/(_np.log(3)*R)
 
-            try:
-                assert R!=None and T!=None
-            except AssertionError:
-                raise ValueError("To find Time delay , Resistance and Capacitance should be provided")
-            return R*C*_np.log(3)
+    elif T is None:
 
-    else:
-        raise ValueError("ic_555 is configured only in `MONOSTABLE` and `ASTABLE` modes")
+        try:
+            assert R!=None and T!=None
+        except AssertionError:
+            raise ValueError("To find Time delay , Resistance and Capacitance should be provided")
+        return R*C*_np.log(3)
+
+
 # END OF FILE
