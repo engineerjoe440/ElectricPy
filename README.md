@@ -1,10 +1,10 @@
 # ElectricPy <img src="https://raw.githubusercontent.com/engineerjoe440/ElectricPy/master/logo/ElectricpyLogo.svg" width="100" alt="logo" align="right">
 *Electrical-Engineering-for-Python*
 
-[![](https://img.shields.io/pypi/pyversions/electricpy.svg?color=3776AB&logo=python&logoColor=white)](https://www.python.org/)
+[![sphinx](https://github.com/engineerjoe440/ElectricPy/actions/workflows/sphinx-build.yml/badge.svg?branch=master)](https://github.com/engineerjoe440/ElectricPy/actions/workflows/sphinx-build.yml)
 ![Tox Import Test](https://github.com/engineerjoe440/ElectricPy/workflows/Tox%20Tests/badge.svg)
-![ElectricPy Tests (pytest)](https://github.com/engineerjoe440/ElectricPy/workflows/pytest/badge.svg)
-![ElectricPy Doc Tests (pydocstyle)](https://github.com/engineerjoe440/ElectricPy/workflows/pydocstyle/badge.svg)
+[![pytest](https://github.com/engineerjoe440/ElectricPy/actions/workflows/pytest.yml/badge.svg?branch=master)](https://github.com/engineerjoe440/ElectricPy/actions/workflows/pytest.yml)
+[![pydocstyle](https://github.com/engineerjoe440/ElectricPy/actions/workflows/pydocstyle.yml/badge.svg?branch=master)](https://github.com/engineerjoe440/ElectricPy/actions/workflows/pydocstyle.yml)
 
 [![](https://img.shields.io/pypi/v/electricpy.svg?color=blue&logo=pypi&logoColor=white)](https://pypi.org/project/electricpy/)
 [![](https://pepy.tech/badge/electricpy)](https://pepy.tech/project/electricpy)
