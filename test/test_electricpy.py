@@ -178,8 +178,8 @@ def test_suspension_insulators():
     Voltage = 66
 
     _, string_efficiency = suspension_insulators(number_capacitors,
-                                                 capacitance_ration, 
-                                                 Voltage)
+                                                capacitance_ration, 
+                                                Voltage)
 
     string_efficiency_actual = 54.16
     assertAlmostEqual(string_efficiency, string_efficiency_actual, abs=1e-2)
@@ -230,6 +230,19 @@ def test_ic_555_astable():
     assertAlmostEqual(result['t_high'], 1.386*10**-5, abs=1e-3)
 
     #test the other way around
+
+def test_slew_rate():
+
+    from electricpy import slew_rate
+
+    SR = slew_rate(V=1, freq=1, find='SR')
+    V = slew_rate(SR=1, freq=1, find='V')
+    freq = slew_rate(V=1, SR=1, find='freq')
+
+    assertAlmostEqual(np.pi*2, SR)
+    assertAlmostEqual(1/(np.pi*2), V)
+    assertAlmostEqual(1/(np.pi*2), freq)
+
 
 def test_induction_motor_circle():
     from electricpy._ind_motor_circle import InductionMotorCircle
