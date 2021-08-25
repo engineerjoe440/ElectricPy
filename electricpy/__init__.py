@@ -1109,6 +1109,51 @@ def powerset(P=None, Q=None, S=None, PF=None, find=''):
     else:
         return (P, Q, S, PF)
 
+def slew_rate(V=None, freq=None, SR=None, find=''):
+    """
+    Slew Rate Calculator.
+
+    This function is designed to calculate slew rate
+    i.e the change of voltage per unit of time`
+
+    Parameters
+    ----------
+    V:      float, optional
+            Voltage, Volts; default=None
+    freq:      float, optional
+            Frequency, Hz; default=None
+    SR:      float, optional
+            Slew Rate, Volts/sec; default=None
+    find:   str, optional
+            Control argument to specify which value
+            should be returned.
+
+    Returns
+    -------
+    V:      float
+            Calculated Volatage
+    freq:   float
+            Calculated frequency
+    SR:     float
+            Calculated slew rate
+    """
+    if V!=None and freq!=None:
+        SR = 2*_np.pi*V*freq
+    elif freq!=None and SR!=None:
+        V = SR/(2*_np.pi*freq)
+    elif V!=None and SR!=None:
+        freq = SR/(2*_np.pi*V)
+    else:
+        raise ValueError("ERROR: Invalid Parameters or too few" +
+                        " parameters given to calculate.")
+    if find == 'V':
+        return (V)
+    elif find == 'freq':
+        return (freq)
+    elif find == 'SR':
+        return (SR)
+    else:
+        return (V, freq, SR)
 
 # Define Power Triangle Function
 def powertriangle(P=None, Q=None, S=None, PF=None, color="red",
