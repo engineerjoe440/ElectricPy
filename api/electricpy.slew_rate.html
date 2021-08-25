@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>electricpy.sinfilt &#8212; electricpy 0.2.1 documentation</title>
+    <title>electricpy.slew_rate &#8212; electricpy 0.2.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
@@ -15,12 +15,12 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     
-    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.sinfilt.html" />
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.slew_rate.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.slew_rate" href="electricpy.slew_rate.html" />
-    <link rel="prev" title="electricpy.shannondata" href="electricpy.shannondata.html" /> 
+    <link rel="next" title="electricpy.step" href="electricpy.step.html" />
+    <link rel="prev" title="electricpy.sinfilt" href="electricpy.sinfilt.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -32,15 +32,15 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.slew_rate.html" title="electricpy.slew_rate"
+          <a href="electricpy.step.html" title="electricpy.step"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="electricpy.shannondata.html" title="electricpy.shannondata"
+          <a href="electricpy.sinfilt.html" title="electricpy.sinfilt"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">electricpy.sinfilt</a></li> 
+        <li class="nav-item nav-item-this"><a href="">electricpy.slew_rate</a></li> 
       </ul>
     </div>  
 
@@ -49,29 +49,29 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="electricpy-sinfilt">
-<h1>electricpy.sinfilt<a class="headerlink" href="#electricpy-sinfilt" title="Permalink to this headline">¶</a></h1>
+  <section id="electricpy-slew-rate">
+<h1>electricpy.slew_rate<a class="headerlink" href="#electricpy-slew-rate" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="electricpy.sinfilt">
-<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">sinfilt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Srate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.sinfilt" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sine Filter Function.</p>
-<p>Sine Filter function for filtering a dataset
-representing a sinusoidal function with or without
-harmonics to evaluate the fundamental value.</p>
+<dt class="sig sig-object py" id="electricpy.slew_rate">
+<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">slew_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">V</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SR</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">find</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.slew_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Slew Rate Calculator.</p>
+<p>This function is designed to calculate slew rate
+i.e the change of voltage per unit of time`</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arr</strong> (<em>numpy.ndarray</em>) – The input data array.</p></li>
-<li><p><strong>Srate</strong> (<em>int</em>) – Sampling rate for dataset, specified in
-number of values per fundamental cycle.</p></li>
-<li><p><strong>domain</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force return of
-x-axis array for the filtered data.</p></li>
+<li><p><strong>V</strong> (<em>float</em><em>, </em><em>optional</em>) – Voltage, Volts; default=None</p></li>
+<li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – Frequency, Hz; default=None</p></li>
+<li><p><strong>SR</strong> (<em>float</em><em>, </em><em>optional</em>) – Slew Rate, Volts/sec; default=None</p></li>
+<li><p><strong>find</strong> (<em>str</em><em>, </em><em>optional</em>) – Control argument to specify which value
+should be returned.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p><strong>sinf</strong> (<em>numpy.ndarray</em>) – Sine-filtered data</p></li>
-<li><p><strong>xarray</strong> (<em>numpy.ndarray</em>) – X-axis array for the filtered data.</p></li>
+<li><p><strong>V</strong> (<em>float</em>) – Calculated Volatage</p></li>
+<li><p><strong>freq</strong> (<em>float</em>) – Calculated frequency</p></li>
+<li><p><strong>SR</strong> (<em>float</em>) – Calculated slew rate</p></li>
 </ul>
 </p>
 </dd>
@@ -91,15 +91,15 @@ x-axis array for the filtered data.</p></li>
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="electricpy.shannondata.html"
-                        title="previous chapter">electricpy.shannondata</a></p>
+  <p class="topless"><a href="electricpy.sinfilt.html"
+                        title="previous chapter">electricpy.sinfilt</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="electricpy.slew_rate.html"
-                        title="next chapter">electricpy.slew_rate</a></p>
+  <p class="topless"><a href="electricpy.step.html"
+                        title="next chapter">electricpy.step</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/electricpy.sinfilt.rst.txt"
+      <li><a href="../_sources/api/electricpy.slew_rate.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -127,15 +127,15 @@ x-axis array for the filtered data.</p></li>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.slew_rate.html" title="electricpy.slew_rate"
+          <a href="electricpy.step.html" title="electricpy.step"
              >next</a> |</li>
         <li class="right" >
-          <a href="electricpy.shannondata.html" title="electricpy.shannondata"
+          <a href="electricpy.sinfilt.html" title="electricpy.sinfilt"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">electricpy.sinfilt</a></li> 
+        <li class="nav-item nav-item-this"><a href="">electricpy.slew_rate</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

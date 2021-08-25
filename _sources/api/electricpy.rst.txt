@@ -223,6 +223,8 @@
     
     sinfilt
     
+    slew_rate
+    
     step
     
     string_to_bits
