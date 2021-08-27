@@ -257,3 +257,24 @@ def test_induction_motor_circle():
                         output_power, torque_ration=ratio, frequency=50, poles=4)
 
     assertAlmostEqual(MotorCircle()['no_load_loss'], open_circuit_test_data['W0'])
+
+def test_t_attenuator():
+    Adb = 1
+    Z0 = 1
+
+    from electricpy import t_attenuator
+
+    R1, R2 = t_attenuator(Adb, Z0)
+
+    assertAlmostEqual(R1,  0.0575, abs=1e-3)
+    assertAlmostEqual(R2, 8.6673, abs=1e-3)
+
+def test_pi_attenuator():
+    Adb = 1
+    Z0 = 1
+
+    from electricpy import pi_attenuator
+
+    R1, R2 = pi_attenuator(Adb, Z0)
+    assertAlmostEqual(R1, 17.39036, abs=1e-3)
+    assertAlmostEqual(R2, 0.11538, abs=1e-3)
