@@ -129,7 +129,7 @@ class InductionMotorCircle:
             [self.secondary_current_line[1][1], self.center_y])
         # Diameter of the circle
         _plt.plot([self.center_x - self.radius, self.center_x+self.radius],
-                 [self.center_y, self.center_y], ls='-.')
+                [self.center_y, self.center_y], ls='-.')
         # Max torque line  
         _plt.plot(
             [self.center_x, self.torque_max_x],

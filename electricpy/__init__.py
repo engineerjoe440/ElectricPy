@@ -6683,7 +6683,6 @@ def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
     else:
         raise TypeError("Not enough parqmeters are passed")
             
-              
 def ic_555_monostable(R=None,C=None,freq=None,t_high=None,t_low=None):
     """
     555 Integrated Circuit Calculator.
@@ -6738,4 +6737,62 @@ def ic_555_monostable(R=None,C=None,freq=None,t_high=None,t_low=None):
         return R*C*_np.log(3)
 
 
+def t_attenuator(Adb, Z0):
+    r"""
+    T attenuator.
+
+    The T attenuator is a type of attenuator that looks like the letter T. 
+    The T attenuator consists of three resistors. Two of these are connected in 
+    series and the other one is connected from between the two other resistors to ground. 
+    The resistors in series often have the same resistance.
+
+    .. math:: R1 = Z0*(\frac{10^{\frac{A_{db}}{20}}-1}{10^{\frac{A_{db}}{20}}+1});
+    .. math:: R2 = Z0*(\frac{10^{\frac{A_{db}}{20}}}{10^{\frac{A_{db}}{10}}-1})
+    .. image:: ./static/t-attenuator-circuit.png
+
+    Parameters 
+    ---------- 
+    Adb: float Attenuation in db
+    Z0: float Impedence
+
+    Returns 
+    ------- 
+    R1: float T attenuator R1
+    R2: float T attenuator R2
+    """
+    x = Adb/20
+
+    R1 = Z0*(_np.power(10, x)-1)/(_np.power(10, x)+1)
+    R2 = 2*Z0*_np.power(10, x)/(_np.power(10, 2*x)-1)
+
+    return R1,R2
+
+def pi_attenuator(Adb, Z0):
+    r"""
+    Pi attenuator.
+
+    The Pi attenuator is a type of attenuator that looks like the Greek letter π.
+    The Pi attenuator consists of three resistors. One of these is connected in series and 
+    the other two are connected in parallel to ground. The parallel resistors often have the same resistance.
+
+    .. math:: R1 = Z0*(\frac{10^{\frac{A_{db}}{20}}+1}{10^{\frac{A_{db}}{20}}-1})
+    .. math:: R2 = \frac{Z0}{2}*(10^{\frac{A_{db}}{20}} - \frac{1}{10^{\frac{A_{db}}{20}}})
+    .. image:: ./static/pi-attenuator-circuit.png
+
+    Parameters 
+    ---------- 
+    Adb: float Attenuation in db
+    Z0: float Impedence
+
+    Returns 
+    ------- 
+    R1: float π attenuator R1
+    R2: float π attenuator R2
+    """
+    x = Adb/20
+
+    R1 = Z0*(_np.power(10, x)+1)/(_np.power(10, x)-1)
+    R2 = (Z0/2)*(_np.power(10, x) - (1/(_np.power(10, x))))
+
+    return R1,R2
 # END OF FILE
