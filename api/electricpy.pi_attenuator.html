@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>electricpy.powerflow &#8212; electricpy 0.2.1 documentation</title>
+    <title>electricpy.pi_attenuator &#8212; electricpy 0.2.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
@@ -16,12 +16,12 @@
     <script src="../_static/doctools.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
-    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.powerflow.html" />
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.pi_attenuator.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.powerimpedance" href="electricpy.powerimpedance.html" />
-    <link rel="prev" title="electricpy.pi_attenuator" href="electricpy.pi_attenuator.html" /> 
+    <link rel="next" title="electricpy.powerflow" href="electricpy.powerflow.html" />
+    <link rel="prev" title="electricpy.phs_to_seq" href="electricpy.phs_to_seq.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -33,15 +33,15 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.powerimpedance.html" title="electricpy.powerimpedance"
+          <a href="electricpy.powerflow.html" title="electricpy.powerflow"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="electricpy.pi_attenuator.html" title="electricpy.pi_attenuator"
+          <a href="electricpy.phs_to_seq.html" title="electricpy.phs_to_seq"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">electricpy.powerflow</a></li> 
+        <li class="nav-item nav-item-this"><a href="">electricpy.pi_attenuator</a></li> 
       </ul>
     </div>  
 
@@ -50,35 +50,33 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="electricpy-powerflow">
-<h1>electricpy.powerflow<a class="headerlink" href="#electricpy-powerflow" title="Permalink to this headline">¶</a></h1>
+  <section id="electricpy-pi-attenuator">
+<h1>electricpy.pi_attenuator<a class="headerlink" href="#electricpy-pi-attenuator" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="electricpy.powerflow">
-<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">powerflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vsend</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vrec</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Zline</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.powerflow" title="Permalink to this definition">¶</a></dt>
-<dd><p>Approximated Power-Flow Calculator.</p>
-<p>This function is designed to calculate the ammount of real
-power transferred from the sending end to the recieving end
-of an electrical line given the sending voltage (complex),
-the receiving voltage (complex) and the line impedance.</p>
+<dt class="sig sig-object py" id="electricpy.pi_attenuator">
+<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">pi_attenuator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Adb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Z0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.pi_attenuator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pi attenuator.</p>
+<p>The Pi attenuator is a type of attenuator that looks like the Greek letter π.
+The Pi attenuator consists of three resistors. One of these is connected in series and
+the other two are connected in parallel to ground. The parallel resistors often have the same resistance.</p>
 <div class="math notranslate nohighlight">
-\[P_{flow}=\frac{|V_{send}|*|V_{rec}|}{Z_{line}}*sin(\theta_{send}
--\theta_{rec})\]</div>
+\[R1 = Z0*(\frac{10^{\frac{A_{db}}{20}}+1}{10^{\frac{A_{db}}{20}}-1})\]</div>
+<div class="math notranslate nohighlight">
+\[R2 = \frac{Z0}{2}*(10^{\frac{A_{db}}{20}} - \frac{1}{10^{\frac{A_{db}}{20}}})\]</div>
+<img alt="api/static/pi-attenuator-circuit.png" src="api/static/pi-attenuator-circuit.png" />
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>Vsend</strong> (<em>complex</em>) – The sending-end voltage, should be complex</p></li>
-<li><p><strong>Vrec</strong> (<em>complex</em>) – The receiving-end voltage, should be complex</p></li>
-<li><p><strong>Zline</strong> (<em>complex</em>) – The line impedance, should be complex</p></li>
+<li><p><strong>Adb</strong> (<em>float Attenuation in db</em>) – </p></li>
+<li><p><strong>Z0</strong> (<em>float Impedence</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>pflow</strong> – The power transferred from sending-end to
-receiving-end, positive values denote power
-flow from send to receive, negative values
-denote vice-versa.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>complex</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>R1</strong> (<em>float π attenuator R1</em>)</p></li>
+<li><p><strong>R2</strong> (<em>float π attenuator R2</em>)</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -96,15 +94,15 @@ denote vice-versa.</p>
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="electricpy.pi_attenuator.html"
-                        title="previous chapter">electricpy.pi_attenuator</a></p>
+  <p class="topless"><a href="electricpy.phs_to_seq.html"
+                        title="previous chapter">electricpy.phs_to_seq</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="electricpy.powerimpedance.html"
-                        title="next chapter">electricpy.powerimpedance</a></p>
+  <p class="topless"><a href="electricpy.powerflow.html"
+                        title="next chapter">electricpy.powerflow</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/electricpy.powerflow.rst.txt"
+      <li><a href="../_sources/api/electricpy.pi_attenuator.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -132,15 +130,15 @@ denote vice-versa.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.powerimpedance.html" title="electricpy.powerimpedance"
+          <a href="electricpy.powerflow.html" title="electricpy.powerflow"
              >next</a> |</li>
         <li class="right" >
-          <a href="electricpy.pi_attenuator.html" title="electricpy.pi_attenuator"
+          <a href="electricpy.phs_to_seq.html" title="electricpy.phs_to_seq"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">electricpy.powerflow</a></li> 
+        <li class="nav-item nav-item-this"><a href="">electricpy.pi_attenuator</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

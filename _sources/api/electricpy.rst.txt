@@ -167,6 +167,8 @@
     
     phs_to_seq
     
+    pi_attenuator
+    
     powerflow
     
     powerimpedance
@@ -234,6 +236,8 @@
     syncspeed
     
     synmach_Eq
+    
+    t_attenuator
     
     tap_changing_transformer
     
