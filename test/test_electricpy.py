@@ -278,3 +278,52 @@ def test_pi_attenuator():
     R1, R2 = pi_attenuator(Adb, Z0)
     assertAlmostEqual(R1, 17.39036, abs=1e-3)
     assertAlmostEqual(R2, 0.11538, abs=1e-3)
+
+def test_inductor_voltdiv():
+
+    from electricpy import inductive_voltdiv
+
+    params = {
+        'Vin':1,
+        'L1':1,
+        'L2':1
+    }
+    Vout = inductive_voltdiv(**params, find='Vout')
+    assert (Vout == params['Vin']/2)
+
+    params = {
+        'Vout':1,
+        'L1':1,
+        'L2':1
+    }
+
+    Vin = inductive_voltdiv(**params, find = 'Vin')
+    assert (Vin == params['Vout']*2)
+
+    params = {
+        'Vout':1,
+        'Vin':2,
+        'L2':1
+    }
+
+    L1 = inductive_voltdiv(**params, find='L1')
+    assert(L1 == 1)
+
+    params = {
+        'Vout':1,
+        'Vin':2,
+        'L1':1
+    }
+    L1 = inductive_voltdiv(**params, find='L1')
+    assert(L1 == 1)
+
+def test_induction_machine_slip():
+    from electricpy import induction_machine_slip
+
+    Nr = 1200
+    freq = 50
+    p = 4
+
+    assert induction_machine_slip(Nr, freq=freq, poles=p) == 0.2
+    assert induction_machine_slip(1500, freq=freq, poles=p) == 0
+    assert induction_machine_slip(1, freq=freq, poles=p) == 1
