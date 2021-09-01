@@ -1705,19 +1705,19 @@ def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
         return (Vin, Vout, L1, L2)
 
 #Induction Machine Slip
-def induction_machine_slip(Nr, freq:int=50, poles:int=4):
-    """
-        Computes the slip of an induction Machine.
+def induction_machine_slip(Nr, freq=50, poles=4):
+    r"""
+    Induction Machine slip calculator.
 
-        Parameters
-        ----------
-        Nr: float, Induction Machine Speed (in rpm)
-        freq: int, Supply AC frequency
-        poles: Number of poles inside Induction Machine
+    Parameters
+    ----------
+    Nr: float, Induction Machine Speed (in rpm)
+    freq: int, Supply AC frequency
+    poles: Number of poles inside Induction Machine
 
-        Returns
-        -------
-        slip: float, Induction Machine forward Slip
+    Returns
+    -------
+    slip: float, Induction Machine forward Slip
     """
     Ns = (120*freq)/poles
     return (Ns - Nr)/(Ns)
