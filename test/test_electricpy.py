@@ -326,4 +326,4 @@ def test_induction_machine_slip():
 
     assert induction_machine_slip(Nr, freq=freq, poles=p) == 0.2
     assert induction_machine_slip(1500, freq=freq, poles=p) == 0
-    assert induction_machine_slip(1, freq=freq, poles=p) == 1
+    assert induction_machine_slip(0, freq=freq, poles=p) == 1
