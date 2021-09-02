@@ -1713,7 +1713,7 @@ def induction_machine_slip(Nr, freq=60, poles=4):
 
     This function is used to calculate the slip of an induction machine.
 
-    .. math:: V_{out} = 1 - \frac{Nr}{120*frac{freq}{poles}}
+    .. math:: slip = 1 - \frac{Nr}{120*frac{freq}{poles}}
 
     Parameters
     ----------
