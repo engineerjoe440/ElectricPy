@@ -1636,6 +1636,97 @@ def curdiv(Ri, Rset, Vin=None, Iin=None, Vout=False, combine=True):
     else:
         return (Ii)
 
+#Define Inductive voltage divider
+def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
+    r"""
+    Inductive voltage divider.
+
+    Inductive voltage divider Inductive voltage dividers are made out of two inductors. 
+    One of the inductors is connected from the input to the output and the other one is connected from the output to ground. 
+    You can also use other components like resistors and inductors.
+
+    .. math:: V_{out} = \frac{V_{in}*L1}{L1+L2}
+
+    .. image:: /static/inductive-voltage-divider-circuit.png
+
+    Parameters
+    ----------
+    Vin:    float, optional 
+            The input voltage for the system, default=None
+
+    Vout:   float, optional
+            The output voltage for the system, default=None
+
+    L1:     float,optional
+            Value of the inductor above the output voltage, default=None
+
+    L2:     float,optional
+            Value of the inductor below the output voltage, default=None
+
+    find:   str, optional
+            Control argument to specify which value
+            should be returned.
+    
+    Returns
+    -------
+    Vin:    float, optional 
+            The input voltage for the system, default=None
+
+    Vout:   float, optional
+            The output voltage for the system, default=None
+
+    L1:     float,optional
+            Value of the inductor above the output voltage, default=None
+
+    L2:     float,optional
+            Value of the inductor below the output voltage
+    """
+    if Vin!=None and L1!=None and L2!=None:
+        Vout = (Vin*L1)/(L1+L2)
+    elif Vout!=None and L1!=None and L2!=None:
+        Vin = (Vout)*(L1+L2)/(L1)
+    elif Vin!=None and Vout!=None and L2!=None:
+        L1 = L2*(Vin -Vout)/(Vout)
+    elif Vin!=None and Vout!=None and L1!=None:
+        L2 = L1*(Vout)/(Vin - Vout)
+    else:
+        raise ValueError("ERROR: Invalid Parameters or too few" +
+                        " parameters given to calculate.")
+
+    find = find.lower()
+    
+    if find == 'vin':
+        return Vin
+    elif find == 'vout':
+        return Vout
+    elif find == 'l1':
+        return L1
+    elif find == 'l2':
+        return L2
+    else:
+        return (Vin, Vout, L1, L2)
+
+#Induction Machine Slip
+def induction_machine_slip(Nr, freq=60, poles=4):
+    r"""
+    Induction Machine slip calculator.
+
+    This function is used to calculate the slip of an induction machine.
+
+    .. math:: slip = 1 - \frac{Nr}{120*frac{freq}{poles}}
+
+    Parameters
+    ----------
+    Nr: float, Induction Machine Speed (in rpm)
+    freq: int, Supply AC frequency, default=60
+    poles: Number of poles inside Induction Machine, default=4
+
+    Returns
+    -------
+    slip: float, Induction Machine forward Slip
+    """
+    Ns = (120*freq)/poles
+    return (Ns - Nr)/(Ns)
 
 # Define Function to Evaluate Resistance Needed for LED
 def led_resistor(Vsrc, Vfwd = 2, Ifwd = 20):
