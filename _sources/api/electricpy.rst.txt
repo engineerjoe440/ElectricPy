@@ -113,6 +113,10 @@
     
     indmachzth
     
+    induction_machine_slip
+    
+    inductive_voltdiv
+    
     inductorcharge
     
     inductordischarge
