@@ -1661,7 +1661,7 @@ def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
             Value of the inductor above the output voltage, default=None
 
     L2:     float,optional
-            Value of the inductor below the output voltage
+            Value of the inductor below the output voltage, default=None
 
     find:   str, optional
             Control argument to specify which value
@@ -1692,28 +1692,34 @@ def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
     else:
         raise ValueError("ERROR: Invalid Parameters or too few" +
                         " parameters given to calculate.")
+
+    find = find.lower()
     
-    if find == 'Vin':
+    if find == 'vin':
         return Vin
-    elif find == 'Vout':
+    elif find == 'vout':
         return Vout
-    elif find == 'L1':
+    elif find == 'l1':
         return L1
-    elif find == 'L2':
+    elif find == 'l2':
         return L2
     else:
         return (Vin, Vout, L1, L2)
 
 #Induction Machine Slip
-def induction_machine_slip(Nr, freq=50, poles=4):
+def induction_machine_slip(Nr, freq=60, poles=4):
     r"""
     Induction Machine slip calculator.
+
+    This function is used to calculate the slip of an induction machine.
+
+    .. math:: V_{out} = 1 - \frac{Nr}{120*frac{freq}{poles}}
 
     Parameters
     ----------
     Nr: float, Induction Machine Speed (in rpm)
-    freq: int, Supply AC frequency
-    poles: Number of poles inside Induction Machine
+    freq: int, Supply AC frequency, default=60
+    poles: Number of poles inside Induction Machine, default=4
 
     Returns
     -------
