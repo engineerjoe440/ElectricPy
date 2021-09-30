@@ -6839,7 +6839,7 @@ def t_attenuator(Adb, Z0):
 
     .. math:: R1 = Z0*(\frac{10^{\frac{A_{db}}{20}}-1}{10^{\frac{A_{db}}{20}}+1});
     .. math:: R2 = Z0*(\frac{10^{\frac{A_{db}}{20}}}{10^{\frac{A_{db}}{10}}-1})
-    .. image:: ./static/t-attenuator-circuit.png
+    .. image:: /static/t-attenuator-circuit.png
 
     Parameters 
     ---------- 
@@ -6868,7 +6868,7 @@ def pi_attenuator(Adb, Z0):
 
     .. math:: R1 = Z0*(\frac{10^{\frac{A_{db}}{20}}+1}{10^{\frac{A_{db}}{20}}-1})
     .. math:: R2 = \frac{Z0}{2}*(10^{\frac{A_{db}}{20}} - \frac{1}{10^{\frac{A_{db}}{20}}})
-    .. image:: ./static/pi-attenuator-circuit.png
+    .. image:: /static/pi-attenuator-circuit.png
 
     Parameters 
     ---------- 
