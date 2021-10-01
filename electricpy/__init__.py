@@ -2097,17 +2097,17 @@ def powerimpedance(S, V, PF=None, parallel=False, terms=False):
     (impedance) represented by the apparent power (S).
 
     .. math:: R = \frac{V^2}{P} \hspace{2cm} X = \frac{V^2}{Q}
-       :label: series
+       :label: series-resistance
 
     .. math:: Z = \left(\frac{V^2}{S}\right)^*
-       :label: series
+       :label: series-impedance
 
     .. math:: Z = \left(\frac{V^2}{(3*S)}\right)^*
        :label: parallel
 
     This function can evaluate the component values for
-    both series :eq:`series` and parallel :eq:`parallel`
-    connected circuits.
+    both series :eq:`series-resistance`/:eq:`series-impedance`
+    and parallel :eq:`parallel` connected circuits.
 
     Parameters
     ----------
