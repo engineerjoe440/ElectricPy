@@ -322,11 +322,3 @@ class InductionMotorCircle:
         p_x_2 = center_x - self.radius * _np.cos(beta_1)
         p_y_2 = center_y + self.radius * _np.sin(beta_1)
         return [p_x_1, p_y_1], [p_x_2, p_y_2]
-
-
-def induction_motor_circle(*args, **kwargs):
-    # noqa: D103
-    imc = InductionMotorCircle(*args, **kwargs)
-    imc.plot()
-
-induction_motor_circle.__doc__ = InductionMotorCircle.__doc__
