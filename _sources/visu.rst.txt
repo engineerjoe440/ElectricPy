@@ -10,4 +10,3 @@
    electricpy.visu
 
 
-.. autoclass:: electricpy.visu.InductionMotorCircle

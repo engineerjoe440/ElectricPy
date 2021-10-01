@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>electricpy.visu &#8212; electricpy 0.2.1 documentation</title>
+    <title>electricpy.visu.induction_motor_circle &#8212; electricpy 0.2.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
@@ -15,12 +15,11 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     
-    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.visu.html" />
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.visu.induction_motor_circle.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.visu.induction_motor_circle" href="electricpy.visu.induction_motor_circle.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="../visu.html" /> 
+    <link rel="prev" title="electricpy.visu" href="electricpy.visu.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -32,14 +31,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.visu.induction_motor_circle.html" title="electricpy.visu.induction_motor_circle"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="../visu.html" title="&lt;no title&gt;"
+          <a href="electricpy.visu.html" title="electricpy.visu"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../visu.html" accesskey="U">&lt;no title&gt;</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">electricpy.visu</a></li> 
+          <li class="nav-item nav-item-1"><a href="../visu.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.visu.html" accesskey="U">electricpy.visu</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.visu.induction_motor_circle</a></li> 
       </ul>
     </div>  
 
@@ -48,24 +45,33 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="electricpy-visu">
-<h1>electricpy.visu<a class="headerlink" href="#electricpy-visu" title="Permalink to this headline">¶</a></h1>
-<p class="rubric">Description</p>
-<span class="target" id="module-electricpy.visu"></span><p><cite>electricpy.visu</cite> - Support for plotting and visualizations.</p>
-<p>Filled with plotting functions and visualization tools for electrical engineers,
-this module is designed to assist engineers visualize their designs.</p>
-<p class="rubric">Functions</p>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.visu.induction_motor_circle.html#electricpy.visu.induction_motor_circle" title="electricpy.visu.induction_motor_circle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">induction_motor_circle</span></code></a>(*args, **kwargs)</p></td>
-<td><p>Plot Induction Motor Circle Diagram.</p></td>
-</tr>
-</tbody>
-</table>
+  <section id="electricpy-visu-induction-motor-circle">
+<h1>electricpy.visu.induction_motor_circle<a class="headerlink" href="#electricpy-visu-induction-motor-circle" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="electricpy.visu.induction_motor_circle">
+<span class="sig-prename descclassname"><span class="pre">electricpy.visu.</span></span><span class="sig-name descname"><span class="pre">induction_motor_circle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.visu.induction_motor_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot Induction Motor Circle Diagram.</p>
+<p>This class is designed to plot induction motor circle diagram
+and plot circle diagram to obtain various parameters of induction motor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>no_load_data</strong> (<em>dict {'V0'</em><em>, </em><em>'I0'</em><em>, </em><em>'W0'}</em>) – V0: no load test voltage
+I0: no load current in rotor
+W0: No load power(in Watts)</p></li>
+<li><p><strong>blocked_rotor_data</strong> (<em>dict {'Vsc'</em><em>,</em><em>'Isc'</em><em>,</em><em>'Wsc'}</em>) – Vsc: blocked rotor terminal voltage
+Isc: blocked rotor current in rotor
+Wsc: Power consumed in blocked rotor test</p></li>
+<li><p><strong>output_power</strong> (<em>int</em>) – Desired power output from the induction motor</p></li>
+<li><p><strong>torque_ration</strong> (<em>float</em>) – Ration between rotor resitance to stator resistance
+(i.e., R2/R1)</p></li>
+<li><p><strong>frequency</strong> (<em>int</em>) – AC supply frequency</p></li>
+<li><p><strong>poles</strong> (<em>int</em>) – Pole count of induction Motor</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
@@ -79,15 +85,12 @@ this module is designed to assist engineers visualize their designs.</p>
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../visu.html"
-                        title="previous chapter">&lt;no title&gt;</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="electricpy.visu.induction_motor_circle.html"
-                        title="next chapter">electricpy.visu.induction_motor_circle</a></p>
+  <p class="topless"><a href="electricpy.visu.html"
+                        title="previous chapter">electricpy.visu</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/electricpy.visu.rst.txt"
+      <li><a href="../_sources/api/electricpy.visu.induction_motor_circle.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -115,14 +118,12 @@ this module is designed to assist engineers visualize their designs.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.visu.induction_motor_circle.html" title="electricpy.visu.induction_motor_circle"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="../visu.html" title="&lt;no title&gt;"
+          <a href="electricpy.visu.html" title="electricpy.visu"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../visu.html" >&lt;no title&gt;</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">electricpy.visu</a></li> 
+          <li class="nav-item nav-item-2"><a href="electricpy.visu.html" >electricpy.visu</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.visu.induction_motor_circle</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
