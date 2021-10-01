@@ -10,11 +10,15 @@
 
 
 
-.. rubric:: Functions
+.. rubric:: Classes
 
 .. autosummary::
     :toctree: .
     
-    induction_motor_circle
+    InductionMotorCircle
     
+
+
+
+
 
