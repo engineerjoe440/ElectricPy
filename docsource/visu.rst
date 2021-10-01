@@ -8,3 +8,6 @@
    :template: module.rst
 
    electricpy.visu
+
+
+.. autoclass:: electricpy.visu.InductionMotorCircle
