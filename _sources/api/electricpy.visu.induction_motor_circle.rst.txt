@@ -1,4 +1,4 @@
-﻿electricpy.visu.induction\_motor\_circle
+electricpy.visu.induction\_motor\_circle
 ========================================
 
 .. currentmodule:: electricpy.visu
