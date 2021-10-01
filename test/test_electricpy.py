@@ -245,7 +245,7 @@ def test_slew_rate():
 
 
 def test_induction_motor_circle():
-    from electricpy._ind_motor_circle import InductionMotorCircle
+    from electricpy.visu import InductionMotorCircle
 
     open_circuit_test_data = {'V0': 400, 'I0': 9, 'W0': 1310}
     blocked_rotor_test_data = {'Vsc': 200, 'Isc': 50, 'Wsc': 7100}
