@@ -1,4 +1,4 @@
-electricpy.bode
+﻿electricpy.bode
 ===============
 
 .. rubric:: Description

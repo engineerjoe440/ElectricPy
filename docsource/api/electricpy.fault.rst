@@ -1,4 +1,4 @@
-electricpy.fault
+﻿electricpy.fault
 ================
 
 .. rubric:: Description
