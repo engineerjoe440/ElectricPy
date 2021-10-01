@@ -1,8 +1,9 @@
 ################################################################################
 """
-`electricpy._ind_motor_circle` - Support for plotting induction motor circle.
+`electricpy.visu` - Support for plotting and visualizations.
 
-Hidden module.
+Filled with plotting functions and visualization tools for electrical engineers,
+this module is designed to assist engineers visualize their designs.
 """
 ################################################################################
 
