@@ -22,6 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          cp logo/ElectricpyLogo.svg docsource/static/ElectricpyLogo.svg
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install -r docsource/sphinxrequires.txt
       - name: Build Sphinx docs
