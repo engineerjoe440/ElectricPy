@@ -1,0 +1,11 @@
+wheel
+sphinx
+numpydoc
+myst-parser
+sphinx-sitemap
+sphinx-git
+numpy
+matplotlib
+scipy
+sympy
+numdifftools
