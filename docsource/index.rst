@@ -32,6 +32,7 @@ to aid in scientific calculations.
    bode
    fault
    sim
+   visu
 
 -------------------------
 ADDITIONAL PROJECT LINKS:
