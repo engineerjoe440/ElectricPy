@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="2in"
    height="2in"
    viewBox="0 0 50.8 50.800001"
    version="1.1"
    id="svg52"
-   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
-   sodipodi:docname="ElectricpyLogo.svg">
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="ElectricpyLogo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
      id="defs46">
     <clipPath
@@ -37,21 +37,22 @@
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1.0"
-     inkscape:pageopacity="0.0"
+     inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.3992686"
-     inkscape:cx="20.695671"
-     inkscape:cy="88.775549"
+     inkscape:zoom="1.6996343"
+     inkscape:cx="30.888998"
+     inkscape:cy="61.483814"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="false"
      units="in"
-     inkscape:window-width="1920"
-     inkscape:window-height="1137"
+     inkscape:window-width="1440"
+     inkscape:window-height="837"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     inkscape:pagecheckerboard="0" />
   <metadata
      id="metadata49">
     <rdf:RDF>
@@ -60,7 +61,6 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -104,7 +104,7 @@
     <path
        d="m 4.5050364,25.192021 c -0.0074,0.524496 0.3728595,0.95147 0.849183,0.953614 l 9.6094896,0.04488 c 0.02014,0.419936 0.05493,0.839244 0.105488,1.257021 0.108387,0.896122 0.363427,2.169858 1.321794,2.881039 1.912691,1.419254 4.443754,0.07206 5.275453,-0.370697 0.156365,-0.08321 0.508754,-0.235022 0.508754,-0.235022 l 5.897107,-0.02804 c 0,0 1.051667,0.461138 1.561443,0.709914 1.536563,0.749859 3.627865,0.802857 4.950549,-0.519496 0.0082,-0.0081 0.01624,-0.01627 0.02424,-0.02447 0.692843,-0.706536 0.967488,-1.672402 1.113857,-2.337507 0.104777,-0.476439 0.177105,-0.959974 0.219194,-1.446008 l 8.071442,0.03175 c 0.476357,0.0018 0.868274,-0.421763 0.875199,-0.946324 0.0036,-0.265382 -0.09204,-0.505661 -0.249174,-0.678641 -0.15333,-0.168793 -0.365313,-0.273377 -0.600571,-0.274352 l -8.091614,-0.03171 c -0.0467,-0.576847 -0.136496,-1.149172 -0.271481,-1.709495 -0.341329,-1.416442 -1.107608,-2.557288 -2.444144,-2.909769 -1.088016,-0.28696 -2.284625,-0.122835 -3.340934,0.269648 -0.670868,0.249321 -1.235563,0.808735 -1.96504,0.814456 -0.462559,0.0036 -5.63922,0.03507 -5.63922,0.03507 -0.209172,-0.114536 -0.523861,-0.286958 -0.523861,-0.286958 -1.461805,-0.800723 -4.608431,-1.705756 -6.05394,0.600766 -0.297211,0.474199 -0.444143,1.031994 -0.541287,1.590037 -0.02865,0.164576 -0.210944,1.709169 -0.191021,1.709311 l -9.5950504,-0.04482 c -0.4763536,-0.0021 -0.8685133,0.421226 -0.8758661,0.945768 z m 12.8613326,3.558037 c -0.293401,-0.217669 -0.485164,-0.732404 -0.586942,-1.574014 -0.164649,-1.360596 -0.145937,-2.739654 0.0557,-4.098757 0.05618,-0.378689 0.130161,-0.764156 0.289762,-1.018819 0.243109,-0.387907 0.661224,-0.575141 1.152081,-0.625671 l -0.03894,7.625793 c -0.338671,-0.02556 -0.628643,-0.128164 -0.871659,-0.308532 z m 6.282002,-1.0281 0.02399,-5.153367 1.993193,-0.01238 -0.02643,5.184089 c -0.738515,-0.01665 -1.410096,-0.0256 -1.990758,-0.01838 z m 5.569369,-5.476406 c 0.36382,-0.202621 0.564298,-0.314328 0.683765,-0.385749 l 0.0018,0.0038 c 1.05075,-0.585339 2.811565,-0.782718 3.507053,-0.160062 0.253028,0.226768 0.442927,0.630576 0.597271,1.271168 0.323093,1.340728 0.336312,2.765827 0.03824,4.121228 -0.147867,0.672277 -0.339226,1.110222 -0.602015,1.378143 -0.706408,0.720326 -2.46958,0.581809 -3.574184,-0.02323 l -0.681622,-0.373339 c -0.341095,-0.186796 -0.723646,-0.284336 -1.106175,-0.281925 -0.173313,0.0011 -0.422103,-0.0034 -0.717723,-0.01055 l 0.02675,-5.239464 0.717885,-0.0044 c 0.382608,-0.0022 0.76609,-0.104517 1.109,-0.295498 z m -7.270571,0.322477 -0.02459,5.278574 c -0.09403,0.01911 -1.656664,0.736719 -1.957658,0.857784 l 0.03591,-7.031759 c 0.352608,0.115721 1.85566,0.881369 1.94635,0.895401 z"
        id="XMLID_639_"
-       style="fill:#000000;fill-opacity:1;stroke:#434343;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <g
        style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        clip-path="url(#clipPath935-6)"

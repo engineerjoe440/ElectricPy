@@ -51,13 +51,15 @@ release = ver
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [  'sphinx.ext.autodoc',
-                'sphinx.ext.napoleon',
-                'sphinx.ext.mathjax',
-                'sphinx.ext.autosummary',
-                'numpydoc',
-                'sphinx_git',
-                'sphinx_sitemap',
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.napoleon',
+    'sphinx.ext.mathjax',
+    'sphinx.ext.autosummary',
+    'numpydoc',
+    'sphinx_git',
+    'myst_parser',
+    'sphinx_sitemap',
 ]
 autosummary_generate = True
 numpydoc_show_class_members = False
@@ -69,6 +71,11 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 templates_path = ["_templates"]
 
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.txt': 'markdown',
+    '.md': 'markdown',
+}
 
 # -- Options for HTML output -------------------------------------------------
 

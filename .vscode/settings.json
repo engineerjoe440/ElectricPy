@@ -2,7 +2,11 @@
     "python.linting.pylintEnabled": false,
     "python.linting.enabled": true,
     "python.linting.pydocstyleEnabled": true,
+    "python.linting.ignorePatterns": [
+        "test/test_*.py",
+    ],
     "editor.rulers": [
     80, 120
-    ]
+    ],
+    "restructuredtext.linter.disabled": true
 }

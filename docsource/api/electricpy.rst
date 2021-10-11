@@ -1,4 +1,4 @@
-electricpy
+﻿electricpy
 ==========
 
 .. rubric:: Description
@@ -6,6 +6,10 @@ electricpy
 .. automodule:: electricpy
 
 .. currentmodule:: electricpy
+
+
+
+
 
 
 
@@ -18,6 +22,8 @@ electricpy
     abc_to_seq
     
     acpiv
+    
+    bridge_impedance
     
     btu
     
@@ -87,6 +93,10 @@ electricpy
     
     hz_to_rpm
     
+    ic_555_astable
+    
+    ic_555_monostable
+    
     imfoc_control
     
     indmachfocratings
@@ -107,6 +117,10 @@ electricpy
     
     indmachzth
     
+    induction_machine_slip
+    
+    inductive_voltdiv
+    
     inductorcharge
     
     inductordischarge
@@ -122,6 +136,8 @@ electricpy
     kwh
     
     kwh_to_btu
+    
+    led_resistor
     
     loadedvcapdischarge
     
@@ -159,6 +175,8 @@ electricpy
     
     phs_to_seq
     
+    pi_attenuator
+    
     powerflow
     
     powerimpedance
@@ -170,6 +188,8 @@ electricpy
     primary
     
     probdensity
+    
+    propagation_constants
     
     protor
     
@@ -213,13 +233,21 @@ electricpy
     
     sinfilt
     
+    slew_rate
+    
     step
     
     string_to_bits
     
+    suspension_insulators
+    
     syncspeed
     
     synmach_Eq
+    
+    t_attenuator
+    
+    tap_changing_transformer
     
     tcycle
     
@@ -252,6 +280,8 @@ electricpy
     watts
     
     watts_to_hp
+    
+    wireresistance
     
     wrms
     

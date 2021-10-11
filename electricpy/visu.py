@@ -1,8 +1,9 @@
 ################################################################################
 """
-`electricpy._ind_motor_circle` - Support for plotting induction motor circle.
+`electricpy.visu` - Support for plotting and visualizations.
 
-Hidden module.
+Filled with plotting functions and visualization tools for electrical engineers,
+this module is designed to assist engineers visualize their designs.
 """
 ################################################################################
 
@@ -320,4 +321,4 @@ class InductionMotorCircle:
         # low slip
         p_x_2 = center_x - self.radius * _np.cos(beta_1)
         p_y_2 = center_y + self.radius * _np.sin(beta_1)
-        return [p_x_1, p_y_1], [p_x_2, p_y_2]    
+        return [p_x_1, p_y_1], [p_x_2, p_y_2]
