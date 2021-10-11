@@ -1942,7 +1942,7 @@ def synmach_ifault(t,Ea,alpha,Xd,Xdp,Xdpp,Xqpp,Tdp,Tdpp,Ta,freq=60):
     the complete (symmetrical, asymmetrical, and double frequency)
     fault current.
     
-    .. image:: synmach_ifault_formula.png
+    .. image:: /static/synmach_ifault_formula.png
     
     Parameters
     ----------

@@ -1,4 +1,4 @@
-electricpy.fault
+﻿electricpy.fault
 ================
 
 .. rubric:: Description
@@ -6,6 +6,10 @@ electricpy.fault
 .. automodule:: electricpy.fault
 
 .. currentmodule:: electricpy.fault
+
+
+
+
 
 
 

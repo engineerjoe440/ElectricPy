@@ -8,6 +8,19 @@
 
 
 
+{% if classes %}
+.. rubric:: Classes
+
+.. autosummary::
+    :toctree: .
+    {% for class in classes %}
+    {{ class }}
+    {% endfor %}
+
+{% endif %}
+
+
+
 {% if functions %}
 .. rubric:: Functions
 

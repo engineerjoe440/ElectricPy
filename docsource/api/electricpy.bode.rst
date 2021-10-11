@@ -1,4 +1,4 @@
-electricpy.bode
+﻿electricpy.bode
 ===============
 
 .. rubric:: Description
@@ -6,6 +6,10 @@ electricpy.bode
 .. automodule:: electricpy.bode
 
 .. currentmodule:: electricpy.bode
+
+
+
+
 
 
 
