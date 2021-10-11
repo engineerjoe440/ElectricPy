@@ -2,6 +2,14 @@
 import setuptools
 import re
 
+def read_dependencies():
+    """Dependencies in requirements.txt are converted into python list."""
+    with open('requirements.txt', 'r') as file:
+        dependencies = file.readlines()
+        for i,line in enumerate(dependencies):
+            dependencies[i] = line.replace('\n', "")
+        return dependencies
+        
 # Load Description Document
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -26,6 +34,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/engineerjoe440/ElectricPy",
     packages=setuptools.find_packages(),
+    install_requires = read_dependencies(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
