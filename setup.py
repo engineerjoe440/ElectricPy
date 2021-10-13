@@ -2,6 +2,17 @@
 import setuptools
 import re
 
+def read_dependencies():
+    """Dependencies in requirements.txt are converted into python list."""
+    dependencies = [
+        "numpy",
+        "matplotlib",
+        "scipy",
+        "sympy",
+        "numdifftools"
+    ]
+    return dependencies
+        
 # Load Description Document
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -26,6 +37,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/engineerjoe440/ElectricPy",
     packages=setuptools.find_packages(),
+    install_requires = read_dependencies(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
