@@ -62,18 +62,8 @@ Dependencies:
 -------------
 INSTALLATION:
 -------------
-
-#. Install required dependencies (NumPy, SciPy, SymPy, NUMDIFFTOOLS, and Matplotlib)
-
-   .. code-block:: bash
-   
-      $> pip install numpy
-      $> pip install scipy
-      $> pip install matplotlib
-      $> pip install sympy
-      $> pip install numdifftools
   
-#. Install ElectricPy
+#. Install ElectricPy with `pip`
 
    .. code-block:: bash
    
