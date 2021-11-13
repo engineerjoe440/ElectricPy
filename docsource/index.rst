@@ -156,7 +156,7 @@ For more information regarding this resource, please contact Joe Stanley
    
    **Special thanks to:**
    
-   * Lakshmikanth Ayyadevara | Student
+   * Lakshmikanth Ayyadevara | Student | NIT Warangal (National Institute of Technology Warangal)
    * Stephen Weeks | Student | University of Idaho
    * Jeremy Perhac | Student | University of Idaho
    * Daniel Allen | Student | Universtiy of Idaho
