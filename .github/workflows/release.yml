@@ -1,0 +1,28 @@
+name: Release
+on:
+  push:
+#    branches:
+#      - release
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # https://github.com/marketplace/actions/setup-python
+      # ^-- This gives info on matrix testing.
+      - name: Install Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.10"
+      - name: Identify Version
+        id: get_version
+        run: |
+          output=$(python release-version.py)
+          echo "::set-output name=version::$output"
+      - name: Tag and Release
+        uses: avakar/tag-and-release@v1
+        with:
+          tag_name: ${{ steps.get_version.outputs.version }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
