@@ -1,0 +1,41 @@
+name: Release
+on:
+  push:
+   branches:
+     - master
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # https://github.com/marketplace/actions/setup-python
+      # ^-- This gives info on matrix testing.
+      - name: Install Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.10"
+      - name: Identify Version
+        id: version
+        run: |
+          python -m pip install requests build --user
+          python -m pip install -r requirements.txt --user
+          output=$(python release-version.py)
+          echo "::set-output name=version::$output"
+      - name: Build Artifacts
+        if: success()
+        id: build
+        run: |
+          python -m build --sdist --wheel --outdir dist/
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.version.outputs.version }}
+          name: Release ${{ steps.version.outputs.version }}
+          body: ${{ steps.tag_version.outputs.changelog }}
+          artifacts: "dist/*"
+      - name: Publish distribution 📦 to PyPI
+        if: success()
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+            password: ${{ secrets.PYPI_API_TOKEN }}
