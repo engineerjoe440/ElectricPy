@@ -12,3 +12,6 @@ build/
 
 # Ignore TOX
 .tox/
+
+# Ignore Swap Files
+*swp
