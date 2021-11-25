@@ -27,13 +27,13 @@ jobs:
         id: build
         run: |
           python -m build --sdist --wheel --outdir dist/
-      - name: Tag Repository
-        if: success()
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v5.6
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          custom_tag: ${{ steps.version.outputs.version }}
+      #- name: Tag Repository
+        #if: success()
+        #id: tag_version
+        #uses: mathieudutour/github-tag-action@v5.6
+        #with:
+          #github_token: ${{ secrets.GITHUB_TOKEN }}
+          #custom_tag: ${{ steps.version.outputs.version }}
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
