@@ -18,6 +18,7 @@ jobs:
       - name: Identify Version
         id: get_version
         run: |
+          python -m pip install requests
           output=$(python release-version.py)
           echo "::set-output name=version::$output"
       - name: Tag and Release
