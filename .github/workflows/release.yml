@@ -1,8 +1,11 @@
 name: Release
 on:
   push:
-#    branches:
-#      - release
+   branches:
+     - master
+  merge:
+   branches:
+     - master
 
 jobs:
   release:
@@ -27,13 +30,6 @@ jobs:
         id: build
         run: |
           python -m build --sdist --wheel --outdir dist/
-      #- name: Tag Repository
-        #if: success()
-        #id: tag_version
-        #uses: mathieudutour/github-tag-action@v5.6
-        #with:
-          #github_token: ${{ secrets.GITHUB_TOKEN }}
-          #custom_tag: ${{ steps.version.outputs.version }}
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
@@ -41,3 +37,8 @@ jobs:
           name: Release ${{ steps.version.outputs.version }}
           body: ${{ steps.tag_version.outputs.changelog }}
           artifacts: "dist/*"
+      - name: Publish distribution 📦 to PyPI
+        if: success()
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+            password: ${{ secrets.PYPI_API_TOKEN }}
