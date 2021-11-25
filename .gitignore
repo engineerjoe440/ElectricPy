@@ -12,3 +12,10 @@ build/
 
 # Ignore TOX
 .tox/
+
+#Ignore PyCharm
+.idea/
+
+#Ignore script.py ans urls.json
+script.py
+urls.json
