@@ -4,13 +4,8 @@ import re
 
 def read_dependencies():
     """Dependencies in requirements.txt are converted into python list."""
-    dependencies = [
-        "numpy",
-        "matplotlib",
-        "scipy",
-        "sympy",
-        "numdifftools"
-    ]
+    with open("requirements.txt", "r") as fh:
+        dependencies = fh.readlines()
     return dependencies
         
 # Load Description Document
