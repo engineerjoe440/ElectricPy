@@ -16,15 +16,28 @@ jobs:
         with:
           python-version: "3.10"
       - name: Identify Version
-        id: get_version
+        id: version
         run: |
-          python -m pip install requests
-          python -m pip install -r requirements.txt
+          python -m pip install requests build --user
+          python -m pip install -r requirements.txt --user
           output=$(python release-version.py)
           echo "::set-output name=version::$output"
-      - name: Tag and Release
-        uses: avakar/tag-and-release@v1
+      - name: Build Artifacts
+        if: success()
+        id: build
+        run: |
+          python -m build --sdist --wheel --outdir dist/
+      - name: Tag Repository
+        if: success()
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.0
         with:
-          tag_name: ${{ steps.get_version.outputs.version }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          custom_tag: ${{ steps.version.outputs.version }}
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.version.outputs.version }}
+          name: Release ${{ steps.version.outputs.version }}
+          body: ${{ steps.tag_version.outputs.changelog }}
+          artifacts: "dist/*"
