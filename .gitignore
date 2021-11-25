@@ -13,9 +13,14 @@ build/
 # Ignore TOX
 .tox/
 
+<<<<<<< HEAD
 #Ignore PyCharm
 .idea/
 
 #Ignore script.py ans urls.json
 script.py
 urls.json
+=======
+# Ignore Swap Files
+*swp
+>>>>>>> 13113faa (added release workflow for testing)
