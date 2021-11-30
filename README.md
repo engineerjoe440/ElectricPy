@@ -1,4 +1,6 @@
-# ElectricPy <img src="https://raw.githubusercontent.com/engineerjoe440/ElectricPy/master/logo/ElectricpyLogo.svg" width="100" alt="logo" align="right">
+<img src="https://raw.githubusercontent.com/engineerjoe440/ElectricPy/master/logo/ElectricpyLogo.svg" width="100" alt="logo" align="right">
+# ElectricPy
+
 *Electrical-Engineering-for-Python*
 
 [![sphinx](https://github.com/engineerjoe440/ElectricPy/actions/workflows/sphinx-build.yml/badge.svg?branch=master)](https://github.com/engineerjoe440/ElectricPy/actions/workflows/sphinx-build.yml)
@@ -10,7 +12,9 @@
 [![](https://pepy.tech/badge/electricpy)](https://pepy.tech/project/electricpy)
 [![](https://img.shields.io/github/stars/engineerjoe440/electricpy?logo=github)](https://github.com/engineerjoe440/electricpy/)
 [![](https://img.shields.io/pypi/l/electricpy.svg?color=blue)](https://github.com/engineerjoe440/electricpy/blob/master/LICENSE.txt)
-[<img align="right" src="https://cdn.buymeacoffee.com/buttons/default-orange.png" width="217px" height="51x">](https://www.buymeacoffee.com/engineerjoe440)
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/engineerjoe440)
+
 
 Python Libraries with functions and constants related to electrical engineering.
 
@@ -20,6 +24,7 @@ for research, development, education, and exploration in the realm of electrical
 Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/
 
 ### Special thanks to:
+
 - Lakshmikanth Ayyadevara | Student - NIT Warangal (National Institute of Technology Warangal)
 - Stephen Weeks | Student - University of Idaho
 - Jeremy Perhac | Student - University of Idaho
@@ -33,6 +38,7 @@ Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/
 
 
 ### Dependencies:
+
 - NUMPY
 - MATPLOTLIB
 - SCIPY
@@ -43,31 +49,33 @@ Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/
 ## INSTALLATION:
 
 ### 1) (option a) Install ElectricPy with Python's Own `pip`
- 1. Install *electricpy*
-    - `pip install electricpy`
+
+Install *electricpy*
+  - `pip install electricpy`
 
 ### 1) (option b) Install ElectricPy from Source
+
 [Python Documentation](https://docs.python.org/3/install/index.html)
   
- 1. Collect Repository and Install
+Collect Repository and Install
     
-    1. Clone/Download Source Code from GitHub [Repository](https://github.com/engineerjoe440/ElectricPy)
-  
-    2. Open Terminal and Navigate to Folder with `cd` Commands:
-        - `cd <path\to\containing\folder>\electricpy`
-
-    3. Use Python to Install Module from `setup.py`:
-        - `python setup.py install`
+1. Clone/Download Source Code from GitHub [Repository](https://github.com/engineerjoe440/ElectricPy)
+2. Open Terminal and Navigate to Folder with `cd` Commands:
+  - `cd <path\to\containing\folder>\electricpy`
+3. Use Python to Install Module from `setup.py`:
+  - `python setup.py install`
   
 ### 2) Verify Installation
- 2. Check installation success in Python environment
 
-   ```python
-   import electricpy
-   electricpy._version_
-   ```
+Check installation success in Python environment
+
+```python
+import electricpy
+electricpy._version_
+```
 
 ## To Do List:
+
 - Add Heat Sink Solver
 - DC/DC Converters
 - DC/AC Converters
@@ -85,21 +93,26 @@ Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/
 - *Develop Testing for All Functions*
 
 ## Get Involved / Contribute
-If you're interested in contributing, we'd love to see your support in a number of ways!
- 1. **Write Tests** - We're really lacking in this area. We've recently added simple GitHub actions to test installation, but that's about it. We hope that someday we can test all functions in this module for verification.
- 2. **Contribute New Electrical Engineering Functions** - If you've got a new function related to electrical engineering that you'd like to see added, we'd love to throw it into this module. Our goal is that this module can become the comprehensive electrical engineering toolkit in Python. Drop us a note, or create a pull request!
- 3. **Report Issues** - We don't want issues to go unnoticed. Please help us track bugs and resolve them!
- 4. **Get the Word Out** - This project is still in its infancy, so please share it with your friends and colleagues. We want to make sure that everyone has the opportunity to take advantage of this project.
 
- #### Check out the *[contribution guide](CONTRIBUTING.md)*
+If you're interested in contributing, we'd love to see your support in a number of ways!
+
+1. **Write Tests** - We're really lacking in this area. We've recently added simple GitHub actions to test installation, but that's about it. We hope that someday we can test all functions in this module for verification.
+2. **Contribute New Electrical Engineering Functions** - If you've got a new function related to electrical engineering that you'd like to see added, we'd love to throw it into this module. Our goal is that this module can become the comprehensive electrical engineering toolkit in Python. Drop us a note, or create a pull request!
+3. **Report Issues** - We don't want issues to go unnoticed. Please help us track bugs and resolve them!
+4. **Get the Word Out** - This project is still in its infancy, so please share it with your friends and colleagues. We want to make sure that everyone has the opportunity to take advantage of this project.
+
+#### Check out the *[contribution guide](https://github.com/engineerjoe440/ElectricPy/blob/master/CONTRIBUTING.md)*
     
 
 ## Contact:
+
 For more information regarding this resource, please contact Joe Stanley
+
 - <stan3926@almuni.uidaho.edu>
 - <joe_stanley@selinc.com>
 
 ## License and Usage:
+
 ElectricPy is licensed under the standard MIT license, and as such, you are permitted
 to use this resource as you see fit. Please feel free to ask questions, suggest edits
 and report bugs or other issues.

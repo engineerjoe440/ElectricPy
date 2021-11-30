@@ -22,12 +22,3 @@
 
 
 
-
-.. rubric:: Functions
-
-.. autosummary::
-    :toctree: .
-    
-    induction_motor_circle
-    
-
