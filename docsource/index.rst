@@ -49,54 +49,7 @@ Recent Changes:
 .. git_changelog::
 
 
--------------
-Dependencies:
--------------
-* NUMPY
-* MATPLOTLIB
-* SCIPY
-* SYMPY
-* NUMDIFFTOOLS
-
-
--------------
-INSTALLATION:
--------------
-  
-#. Install ElectricPy with `pip`
-
-   .. code-block:: bash
-   
-      $> pip install electricpy
-  
-#. Check installation success in Python environment
-
-   .. code-block:: python
-   
-      import electricpy
-      electricpy._version_
-
-----------
-To Do List
-----------
-
-- Add Heat Sink Solver
-- DC/DC Converters
-- DC/AC Converters
-- Stationary and Synchronous Reference Frame conversion Matrices/Constants
-- Induction Machine slip finder
-- Add arc-flash calculators suggested
-- Add Pi Attenuator (https://www.basictables.com/electronics/resistor/pi-attenuator) Formula
-- Add T Attenuator (https://www.basictables.com/electronics/resistor/t-attenuator) Formula
-- Add Simple decibel (https://www.basictables.com/electronics/decibel-dbw) Formulas
-- Add Simple Wheatstone Bridge (https://www.basictables.com/electronics/resistor/wheatstone-bridge) Formulas
-- Add 555 Timer (https://www.basictables.com/electronics/integrated-circuit/555-timer) Formulas
-- Add Inductive Voltage Divider (https://www.basictables.com/electronics/inductor/inductive-voltage-divider) Formula
-- Add Slew Rate (https://www.basictables.com/electronics/slew-rate) Formula(s)
-- Add Simple Battery Discharge Rate (https://www.basictables.com/electronics/battery/battery-discharge-rate) Formula
-- Add Simple Air Core Inductor (https://www.basictables.com/electronics/inductor/air-core-inductor) Formula(s)
-- Add Simple Zener Diode (https://www.basictables.com/electronics/diode/zener-diode) Formulas
-- *Develop Testing for All Functions*
+.. mdinclude:: ../README.md
 
 
 ---------------------
@@ -135,36 +88,5 @@ Electrical Engineering Focus:
     * PowerGAMA: https://bitbucket.org/harald_g_svendsen/powergama/wiki/Home
 
 
--------
-Contact
--------
-
-For more information regarding this resource, please contact Joe Stanley
-
-* <stan3926@alumni.uidaho.edu>
-
-* <joe_stanley@selinc.com>
-
-
-
-
-
-.. note::
-   
-   A great many individuals contributed knowledge, formulas, resources and more!
-   This project certainly would not have been possible without their contributions.
-   
-   **Special thanks to:**
-   
-   * Lakshmikanth Ayyadevara | Student | NIT Warangal (National Institute of Technology Warangal)
-   * Stephen Weeks | Student | University of Idaho
-   * Jeremy Perhac | Student | University of Idaho
-   * Daniel Allen | Student | Universtiy of Idaho
-   * Dr. Dennis Sullivan | Proffessor | University of Idaho
-   * Dr. Brian Johnson | Proffessor | University of Idaho
-   * Dr. Joe Law | Proffessor | University of Idaho
-   * StackOverflow user gg349
-   * Shaurya Uppal | Online Code Contributor
-   * Paul Ortman | Power Quality Engineer | Idaho Power | Instructor | University of Idaho
 
 
