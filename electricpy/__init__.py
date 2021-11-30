@@ -5039,7 +5039,7 @@ def rad_to_hz(radians):
 
     Same as `hertz`.
 
-    Paramters
+    Parameters
     ---------
     radians:    float
                 The frequency (represented in radians/sec)
@@ -5067,7 +5067,7 @@ def hz_to_rad(hertz):
 
     Same as `radsec`.
 
-    Paramters
+    Parameters
     ---------
     hertz:      float
                 The frequency (represented in Hertz)
@@ -6712,7 +6712,7 @@ def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
 
     TODO: This function should be broken into multiple smaller functions.
     
-    Parameters 
+    Parameters
     ---------- 
     R:      list[float, float] or tuple(float, float), optional
             List of 2 resistor which are need in configuring IC 555.
@@ -6784,7 +6784,7 @@ def ic_555_monostable(R=None,C=None,freq=None,t_high=None,t_low=None):
 
     TODO: This function should be broken into multiple smaller functions.
     
-    Parameters 
+    Parameters
     ---------- 
     R:      list[float, float] or tuple(float, float), optional
             List of 2 resistor which are need in configuring IC 555.
@@ -6841,7 +6841,7 @@ def t_attenuator(Adb, Z0):
     .. math:: R2 = Z0*(\frac{10^{\frac{A_{db}}{20}}}{10^{\frac{A_{db}}{10}}-1})
     .. image:: /static/t-attenuator-circuit.png
 
-    Parameters 
+    Parameters
     ---------- 
     Adb: float Attenuation in db
     Z0: float Impedence
@@ -6870,7 +6870,7 @@ def pi_attenuator(Adb, Z0):
     .. math:: R2 = \frac{Z0}{2}*(10^{\frac{A_{db}}{20}} - \frac{1}{10^{\frac{A_{db}}{20}}})
     .. image:: /static/pi-attenuator-circuit.png
 
-    Parameters 
+    Parameters
     ---------- 
     Adb: float Attenuation in db
     Z0: float Impedence
