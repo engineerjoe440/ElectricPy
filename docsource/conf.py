@@ -58,8 +58,8 @@ extensions = [
     'sphinx.ext.autosummary',
     'numpydoc',
     'sphinx_git',
-    'myst_parser',
     'sphinx_sitemap',
+    'm2r2',
 ]
 autosummary_generate = True
 numpydoc_show_class_members = False
@@ -92,6 +92,9 @@ html_extra_path = ['extra']
 html_logo="static/ElectricpyLogo.svg"
 html_favicon="static/ElectricpyLogo.svg"
 html_baseurl="https://engineerjoe440.github.io/ElectricPy/html/"
+html_theme_options = {
+    "sidebarwidth": "350px",
+}
 
 github_repo = "electricpy"
 github_user = "engineerjoe440"
