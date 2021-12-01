@@ -55,7 +55,10 @@ def bode(system,mn=0.001,mx=1000,npts=100,title="",xlim=False,ylim=False,sv=Fals
     
     A simple function to generate the Bode Plot for magnitude
     and frequency given a transfer function system.
-    
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/bode.py#L51>`_
+
     Parameters
     ----------
     system:         transfer function object
@@ -164,7 +167,10 @@ def sbode(f,NN=1000,title="",xlim=False,ylim=False,mn=0,mx=1000,
           sv=False,disp3db=False,lowcut=None,magnitude=True,angle=True):
     """
     S-Domain Bode Plotting Function.
-    
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/bode.py#L166>`_
+
     Parameters
     ----------
     f:              function
@@ -245,7 +251,10 @@ def zbode(f,dt=0.01,NN=1000,title="",mn=0,mx=2*_pi,xlim=False,ylim=False,
           angle=True):
     """
     Z-Domain Bode Plotting Function.
-    
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/bode.py#L249>`_
+
     Parameters
     ----------
     f:              function
