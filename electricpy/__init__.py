@@ -46,6 +46,9 @@ def phs(ang):
 
     Same as `phase`.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L40>`_
+
     Parameters
     ----------
     ang:        float
@@ -74,6 +77,9 @@ def phasor(mag, ang=0):
     Generates the standard Pythonic complex representation
     of a phasor voltage or current when given the magnitude
     and angle of the specific voltage or current.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L73>`_
 
     Parameters
     ----------
@@ -117,6 +123,9 @@ def phasorlist(arr):
     of a phasor voltage or current when given the magnitude
     and angle of the specific voltage or current for a list
     or array of values.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L118>`_
 
     Parameters
     ----------
@@ -165,6 +174,9 @@ def vectarray(arr, degrees=True, flatarray=False):
     complex numbers and generate an ndarray of magnitude
     and angle pairs, formatted as a 2-dimension (or
     optionally 1-dimension) array.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L169>`_
 
     Parameters
     ----------
@@ -217,6 +229,9 @@ def phasordata(mn, mx=None, npts=1000, mag=1, ang=0, freq=60,
 
     Generates a sinusoidal data set with minimum, maximum,
     frequency, magnitude, and phase angle arguments.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L225>`_
 
     Parameters
     ----------
@@ -280,6 +295,9 @@ def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
     Function to generate a LaTeX string of complex value(s)
     in either polar or rectangular form. May generate both dollar
     signs.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L290>`_
 
     Parameters
     ----------
@@ -392,6 +410,9 @@ def tflatex(sys, sysp=None, var='s', predollar=True,
     function string in LaTeX. Particularly useful for
     demonstrating systems in Interactive Python Notebooks.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L404>`_
+
     Parameters
     ----------
     sys:        list
@@ -489,6 +510,9 @@ def compose(*arr):
 
     [ complex1, ... complexn ]
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L497>`_
+
     Parameters
     ----------
     arr:        array_like
@@ -535,6 +559,9 @@ def tcycle(ncycles=1, freq=60):
     cycles given the system frequency.
 
     .. math:: t = \frac{n_{cycles}}{freq}
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L554>`_
 
     Parameters
     ----------
@@ -591,6 +618,9 @@ def reactance(z, freq=60, sensetivity=1e-12):
        .. math:: R = Real( R + jX )
 
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L591>`_
+
     Parameters
     ----------
     z:              complex
@@ -645,6 +675,9 @@ def cprint(val, unit=None, label=None, title=None,
 
     This function will print the magnitude in degrees, and can print
     a unit and label in addition to the value itself.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L666>`_
 
     Parameters
     ----------
@@ -859,6 +892,9 @@ def phasorz(C=None, L=None, freq=60, complex=True):
 
     .. math:: \omega = 2*\pi*freq
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L878>`_
+
     Parameters
     ----------
     C:          float, optional
@@ -903,6 +939,9 @@ def parallelz(*args):
 
     .. math::
        Z_{eq}=(\frac{1}{Z_1}+\frac{1}{Z_2}+\dots+\frac{1}{Z_n})^{-1}
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L932>`_
 
     Parameters
     ----------
@@ -970,6 +1009,9 @@ def phaseline(VLL=None, VLN=None, Iline=None, Iphase=None, realonly=None, **kwar
     particular interest, and the line-current is provided. This
     function uses the current :eq:`currents` formula to evaluate
     phase- and line-current given the opposing term.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L987>`_
 
     Parameters
     ----------
@@ -1039,6 +1081,9 @@ def powerset(P=None, Q=None, S=None, PF=None, find=''):
     function are prepared for AC values, that is:
     real and reactive power, apparent power, and power
     factor.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L1074>`_
 
     Parameters
     ----------
@@ -1116,6 +1161,9 @@ def slew_rate(V=None, freq=None, SR=None, find=''):
     This function is designed to calculate slew rate
     i.e the change of voltage per unit of time`
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L1157>`_
+
     Parameters
     ----------
     V:      float, optional
@@ -1163,6 +1211,9 @@ def powertriangle(P=None, Q=None, S=None, PF=None, color="red",
 
     This function is designed to draw a power triangle given
     values for the complex power system.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L1207>`_
 
     Parameters
     ----------
@@ -1250,6 +1301,9 @@ def transformertest(Poc=False, Voc=False, Ioc=False, Psc=False, Vsc=False,
     All values given must be given as absolute value, not complex.
     All values returned are given with respect to primary.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L1291>`_
+
     Parameters
     ----------
     Poc:    float, optional
@@ -1314,6 +1368,9 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     This function is designed to plot a phasor-diagram with angles in degrees
     for up to 12 phasor sets. Phasors must be passed as a complex number set,
     (e.g. [ m+ja, m+ja, m+ja, ... , m+ja ] ).
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L1361>`_
 
     Parameters
     ----------
@@ -1426,6 +1483,9 @@ def nlinpf(PFtrue=False, PFdist=False, PFdisp=False):
     and as such, they are described in the representative sections
     below.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L1477>`_
+
     Parameters
     ----------
     PFtrue:     float, exclusive
@@ -1460,6 +1520,9 @@ def iscrl(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
     The Isc-RL function (Short Circuit Current for RL Circuit)
     is designed to calculate the short-circuit current for an
     RL circuit.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L1516>`_
 
     Parameters
     ----------
@@ -1554,6 +1617,9 @@ def voltdiv(Vin, R1, R2, Rload=None):
 
     .. math:: V_{out}=V_{in}*\frac{R_2||R_{load}}{R_1+(R_2||R_{load})}
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L1607>`_
+
     Parameters
     ----------
     Vin:    float
@@ -1589,6 +1655,9 @@ def curdiv(Ri, Rset, Vin=None, Iin=None, Vout=False, combine=True):
     This function is disigned to accept the input current, or input
     voltage to a resistor (or impedance) network of parallel resistors
     (impedances) and calculate the current through a particular element.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L1651>`_
 
     Parameters
     ----------
@@ -1648,6 +1717,9 @@ def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
     .. math:: V_{out} = \frac{V_{in}*L1}{L1+L2}
 
     .. image:: /static/inductive-voltage-divider-circuit.png
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L1709>`_
 
     Parameters
     ----------
@@ -1715,6 +1787,9 @@ def induction_machine_slip(Nr, freq=60, poles=4):
 
     .. math:: slip = 1 - \frac{Nr}{120*frac{freq}{poles}}
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L1782>`_
+
     Parameters
     ----------
     Nr: float, Induction Machine Speed (in rpm)
@@ -1737,6 +1812,9 @@ def led_resistor(Vsrc, Vfwd = 2, Ifwd = 20):
     circuit with a voltage source, resistor, and LED.
 
     .. math:: R_\text{LED} = \frac{V_\text{SRC} - V_\text{FWD}}{I_\text{FWD}}
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L1807>`_
 
     Parameters
     ----------
@@ -1766,6 +1844,9 @@ def instpower(P, Q, t, freq=60):
     specified time t given the magnitudes of P and Q.
 
     .. math:: P_{inst} = P+P*cos(2*\omega*t)-Q*sin(2*\omega*t)
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L1839>`_
 
     Parameters
     ----------
@@ -1810,6 +1891,9 @@ def dynetz(delta=None, wye=None, round=None):
        Z_{2/3} = \frac{Z_{ms}}{Z_1}//
        Z_{3/1} = \frac{Z_{ms}}{Z_2}//
        Z_{1/2} = \frac{Z_{ms}}{Z_3}
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L1875>`_
 
     Parameters
     ----------
@@ -1860,7 +1944,10 @@ def bridge_impedance(z1, z2, z3, z4, z5):
     .. math:: z1 \cdot z3 = z2 \cdot z4
     
     .. image:: /static/WheatstoneBridgeCircuit.png
-    
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L1938>`_
+
     Parameters
     ----------
     z1:     [float, complex]
@@ -1902,6 +1989,9 @@ def powerflow(Vsend, Vrec, Zline):
        P_{flow}=\frac{|V_{send}|*|V_{rec}|}{Z_{line}}*sin(\theta_{send}
        -\theta_{rec})
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L1979>`_
+
     Parameters
     ----------
     Vsend:      complex
@@ -1936,6 +2026,9 @@ def zsource(S, V, XoR, Sbase=None, Vbase=None, perunit=True):
 
     Used to calculate the source impedance given the apparent power
     magnitude and the X/R ratio.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L2023>`_
 
     Parameters
     ----------
@@ -2010,6 +2103,9 @@ def zdecompose(Zmag, XoR):
     this is done by setting the X/R ratio to a very large number
     (X being much larger than R).
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L2095>`_
+
     Parameters
     ----------
     Zmag:       float
@@ -2044,6 +2140,9 @@ def hp_to_watts(hp):
 
     Same as `watts`.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L2132>`_
+
     Parameters
     ----------
     hp:         float
@@ -2071,6 +2170,9 @@ def watts_to_hp(watts):
     .. math:: P_{\text{horsepower}}=\frac{P_{\text{watts}}}{745.699872}
 
     Same as `horsepower`.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L2163>`_
 
     Parameters
     ----------
@@ -2108,6 +2210,9 @@ def powerimpedance(S, V, PF=None, parallel=False, terms=False):
     This function can evaluate the component values for
     both series :eq:`series-resistance`/:eq:`series-impedance`
     and parallel :eq:`parallel` connected circuits.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L2194>`_
 
     Parameters
     ----------
@@ -2181,6 +2286,9 @@ def coldjunction(Tcj, coupletype="K", To=None, Vo=None, P1=None, P2=None,
 
     Function to calculate the expected cold-junction-voltage given
     the temperature at the cold-junction.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L2282>`_
 
     Parameters
     ----------
@@ -2288,6 +2396,9 @@ def thermocouple(V, coupletype="K", fahrenheit=False, cjt=None, To=None,
     Utilizes polynomial formula to calculate the temperature being monitored
     by a thermocouple. Allows for various thermocouple types (B,E,J,K,N,R,S,T)
     and various cold-junction-temperatures.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L2390>`_
 
     Parameters
     ----------
@@ -2478,6 +2589,9 @@ def rtdtemp(RT, rtdtype="PT100", fahrenheit=False, Rref=None, Tref=None,
     Evaluates the measured temperature based on the measured resistance
     and the RTD type.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L2584>`_
+
     Parameters
     ----------
     RT:         float
@@ -2542,6 +2656,9 @@ def vcapdischarge(t, Vs, R, C):
 
     .. math:: V_c=V_s*e^{\frac{-t}{R*C}}
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L2650>`_
+
     Parameters
     ----------
     t:          float
@@ -2572,6 +2689,9 @@ def vcapcharge(t, Vs, R, C):
     capacitor that is charging given the time.
 
     .. math:: V_c=V_s*(1-e^{\frac{-t}{R*C}})
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L2684>`_
 
     Parameters
     ----------
@@ -2604,6 +2724,9 @@ def captransfer(t, Vs, R, Cs, Cd):
     energy-source and -destination capacitors,
     respectively. Calculate the final voltage
     across both capacitors.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L2718>`_
 
     Parameters
     ----------
@@ -2641,6 +2764,9 @@ def inductorenergy(L, I):
 
     .. math:: E=\frac{1}{2}*L*I^2
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L2758>`_
+
     Parameters
     ----------
     L:          float
@@ -2667,6 +2793,9 @@ def inductorcharge(t, Vs, R, L):
     .. math::
        V_L = V_s*e^{\frac{-R*t}{L}}//
        I_L = \frac{V_s}{R}*(1-e^{\frac{-R*t}{L}})
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L2786>`_
 
     Parameters
     ----------
@@ -2702,6 +2831,9 @@ def capbacktoback(C1, C2, Lm, VLN=None, VLL=None):
     is switched into another (non-engergized) capacitor.
 
     .. note:: This formula is only valid for three-phase systems.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L2824>`_
 
     Parameters
     ----------
@@ -2741,6 +2873,9 @@ def inductordischarge(t, Io, R, L):
        I_L=I_0*e^{\frac{-R*t}{L}}//
        V_L=I_0*R*(1-e^{\frac{-R*t}{L}})
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L2865>`_
+
     Parameters
     ----------
     t:          float
@@ -2775,6 +2910,9 @@ def farads(VAR, V, freq=60):
 
     .. math:: C = \frac{VAR}{2*\pi*freq*V^2}
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L2903>`_
+
     Parameters
     ----------
     VAR:        float
@@ -2804,6 +2942,9 @@ def capenergy(C, V):
 
     .. math:: E=\frac{1}{2}*C*V^2
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L2936>`_
+
     Parameters
     ----------
     C:          float
@@ -2832,6 +2973,9 @@ def loadedvcapdischarge(t, vo, C, P):
 
     .. math:: V_t=\sqrt{v_0^2-2*P*\frac{t}{C}}
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L2965>`_
+
     Parameters
     ----------
     t:          float
@@ -2859,6 +3003,9 @@ def timedischarge(Vinit, Vmin, C, P, dt=1e-3, RMS=True, Eremain=False):
 
     Returns the time to discharge a capacitor to a specified
     voltage given set of inputs.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3000>`_
 
     Parameters
     ----------
@@ -2910,6 +3057,9 @@ def rectifiercap(Iload, fswitch, dVout):
 
     .. math:: C=\frac{I_{load}}{f_{switch}*\Delta V_{out}}
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3050>`_
+
     Parameters
     ----------
     Iload:      float
@@ -2937,6 +3087,9 @@ def vscdcbus(VLL, Zs, P, Q=0, mmax=0.8, debug=False):
     required DC-bus voltage for a Voltage-Sourced-
     Converter (VSC) given the desired P/Q parameters
     and the known source impedance (Vs) of the VSC.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3082>`_
 
     Parameters
     ----------
@@ -2985,6 +3138,9 @@ def vscgains(Rs, Ls, tau=0.005, freq=60):
     This function is designed to calculate the kp, ki,
     and omega-not-L values for a Phase-Lock-Loop based VSC.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3134>`_
+
     Parameters
     ----------
     Rs:     float
@@ -3022,6 +3178,9 @@ def convbar(h, x, outline=True):
     Generates plots of each of two input arrays as bar-graphs, then
     generates a convolved bar-graph of the two inputs to demonstrate
     and illustrate convolution, typically for an educational purpose.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3174>`_
 
     Parameters
     ----------
@@ -3074,6 +3233,9 @@ def convolve(tuple):
 
     Given a tuple of terms, convolves all terms in tuple to
     return one tuple as a numpy array.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3230>`_
 
     Parameters
     ----------
@@ -3140,6 +3302,9 @@ def funcrms(func, T):
     of a repetative signal (f) given the signal's specific
     period (T)
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3297>`_
+
     Parameters
     ----------
     func:   float
@@ -3166,6 +3331,9 @@ def gaussian(x, mu=0, sigma=1):
     This function is designed to generate the gaussian
     distribution curve with configuration mu and sigma.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3327>`_
+
     Parameters
     ----------
     x:      float
@@ -3191,6 +3359,9 @@ def gausdist(x, mu=0, sigma=1):
     This function is designed to calculate the generic
     distribution of a gaussian function with controls
     for mu and sigma.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3355>`_
 
     Parameters
     ----------
@@ -3238,6 +3409,9 @@ def probdensity(func, x, x0=0, scale=True):
 
     This function uses an integral to compute the probability
     density of a given function.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3406>`_
 
     Parameters
     ----------
@@ -3288,6 +3462,9 @@ def rfft(arr, dt=0.01, absolute=True, resample=True):
     This function is designed to evaluat the real FFT
     of a input signal in the form of an array or list.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3458>`_
+
     Parameters
     ----------
     arr:        numpy.ndarray
@@ -3337,6 +3514,9 @@ def wrms(func, dw=0.1, NN=100, quad=False, plot=True,
 
     This function is designed to calculate the RMS
     bandwidth (Wrms) using a numerical process.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3510>`_
 
     Parameters
     ----------
@@ -3407,6 +3587,9 @@ def hartleydata(BW, M):
     Function to calculate Hartley's Law, the maximum data rate achievable for
     a given noiseless channel.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3583>`_
+
     Parameters
     ----------
     BW:         float
@@ -3430,6 +3613,9 @@ def shannondata(BW, S, N):
 
     Function to calculate the maximum data rate that may be achieved given a
     data channel and signal/noise characteristics using Shannon's equation.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3610>`_
 
     Parameters
     ----------
@@ -3459,6 +3645,9 @@ def crcsender(data, key):
     Contributing Author Credit:
     Shaurya Uppal
     Available from: geeksforgeeks.org
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3639>`_
 
     Parameters
     ----------
@@ -3553,6 +3742,9 @@ def crcremainder(data, key):
     Shaurya Uppal
     Available from: geeksforgeeks.org
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3735>`_
+
     Parameters
     ----------
     data:       string of bits
@@ -3641,6 +3833,9 @@ def string_to_bits(str):
 
     Converts a Pythonic string to the string's binary representation.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3829>`_
+
     Parameters
     ----------
     str:        string
@@ -3667,6 +3862,9 @@ def kwh_to_btu(kWh):
 
     Same as `btu`.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3855>`_
+
     Parameters
     ----------
     kWh:        float
@@ -3692,6 +3890,9 @@ def btu_to_kwh(BTU):
     .. math:: \text{kWh} = \frac{\text{BTU}}{3412.14}
 
     Same as `kwh`.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3884>`_
 
     Parameters
     ----------
@@ -3720,6 +3921,9 @@ def zpu(S, VLL=None, VLN=None):
     .. math:: Z_{pu}=\frac{V_{LL}^2}{S}
 
     .. math:: Z_{pu}=\frac{(\sqrt{3}*V_{LN})^2}{S}
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3914>`_
 
     Parameters
     ----------
@@ -3754,6 +3958,9 @@ def ipu(S, VLL=None, VLN=None, V1phs=None):
     .. math:: I_{pu}=\frac{S}{\sqrt{3}*V_{LL}}
 
     .. math:: I_{pu}=\frac{S}{3*V_{LN}}
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3951>`_
 
     Parameters
     ----------
@@ -3791,6 +3998,9 @@ def puchgbase(quantity, puB_old, puB_new):
 
     .. math:: Z_{pu-new}=Z_{pu-old}*\frac{BASE_{OLD}}{BASE_{NEW}}
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L3992>`_
+
     Parameters
     ----------
     quantity:   complex
@@ -3816,6 +4026,9 @@ def zrecompose(z_pu, S3phs, VLL=None, VLN=None):
 
     Function to reverse per-unit conversion and return the ohmic value
     of an impedance given its per-unit parameters of R and X (as Z).
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L4023>`_
 
     Parameters
     ----------
@@ -3848,6 +4061,9 @@ def rxrecompose(x_pu, XoR, S3phs=None, VLL=None, VLN=None):
 
     Function to reverse per-unit conversion and return the ohmic value
     of an impedance given its per-unit parameters of X.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L4058>`_
 
     Parameters
     ----------
@@ -3892,6 +4108,9 @@ def geninternalv(I, Zs, Vt, Vgn=None,Zm=None, Zmp=None, Zmpp=None, Ip=None, Ipp=
     Evaluates the internal voltage for a generator given the
     generator's internal impedance and internal mutual coupling
     impedance values.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L4104>`_
 
     Parameters
     ----------
@@ -3946,6 +4165,9 @@ def abc_to_seq(Mabc, reference='A'):
 
     Same as phs_to_seq.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L4157>`_
+
     Parameters
     ----------
     Mabc:       list of complex
@@ -3992,6 +4214,9 @@ def seq_to_abc(M012, reference='A'):
     .. math:: M_{\text{ABC}}=A_{\text{012}}^{-1}\cdot M_{\text{012}}
 
     Same as seq_to_phs.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L4207>`_
 
     Parameters
     ----------
@@ -4048,6 +4273,9 @@ def sequencez(Zabc, reference='A', resolve=False, diag=False, round=3):
     When resolve is True:
 
     .. math:: Z_{\text{012}}=A_{\text{012}}Z_{\text{ABC}}A_{\text{012}}^{-1}
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L4259>`_
 
     Parameters
     ----------
@@ -4112,6 +4340,9 @@ def funcfft(func, minfreq=60, maxmult=15, complex=False):
     Given the callable function handle for a periodic function,
     evaluates the harmonic components of the function.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L4336>`_
+
     Parameters
     ----------
     func:       function
@@ -4158,6 +4389,9 @@ def sampfft(data, dt, minfreq=60.0, complex=False):
 
     Given a data array and the delta-t for the data array, evaluates
     the harmonic composition of the data.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L4386>`_
 
     Parameters
     ----------
@@ -4212,6 +4446,9 @@ def fftplot(dc, real, imag=None, title="Fourier Coefficients"):
     Plotting function for FFT (harmonic) values,
     plots the DC, Real, and Imaginary components.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L4442>`_
+
     Parameters
     ----------
     dc:         float
@@ -4254,6 +4491,9 @@ def fftsumplot(dc, real, imag=None, freq=60, xrange=None, npts=1000,
     FFT Summation Plotter.
 
     Function to generate the plot of the sumed FFT results.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L4488>`_
 
     Parameters
     ----------
@@ -4308,6 +4548,9 @@ def harmonics(real, imag=None, dc=0, freq=60, domain=None):
     Generate a function or dataset for a harmonic system
     given the real (cosine), imaginary (sine), and DC
     components of the system.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L4544>`_
 
     Parameters
     ----------
@@ -4375,6 +4618,9 @@ def motorstartcap(V, I, freq=60):
     startup capacitor associated with a single phase
     motor.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L4613>`_
+
     Parameters
     ----------
     V:          float
@@ -4405,6 +4651,9 @@ def pfcorrection(S, PFold, PFnew, VLL=None, VLN=None, V=None, freq=60):
     Function to evaluate the additional reactive power and
     capacitance required to achieve the desired power factor
     given the old power factor and new power factor.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L4647>`_
 
     Parameters
     ----------
@@ -4462,6 +4711,9 @@ def acpiv(S=None, I=None, VLL=None, VLN=None, V=None, PF=None):
 
     Relationship function to return apparent power, voltage, or
     current in one of various forms.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L4708>`_
 
     Parameters
     ----------
@@ -4548,6 +4800,9 @@ def primary(val, Np, Ns=1, invert=False):
     a transformer with a specified turns ratio Np/Ns.
     Converts to the primary side.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L4795>`_
+
     Parameters
     ----------
     val:        complex
@@ -4582,6 +4837,9 @@ def secondary(val, Np, Ns=1, invert=False):
     a transformer with a specified turns ratio Np/Ns.
     Converts to the secondary side.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L4832>`_
+
     Parameters
     ----------
     val:        complex
@@ -4615,6 +4873,9 @@ def tap_changing_transformer(Vgen, Vdis, Pload, Qload, R, X):
     It does this by altering the number of turns in one winding and thereby changing the turns ratio of the transformer
     
     .. math:: \sqrt{\frac{Vgen^2}{Vgen \cdot Vdis - R \cdot P - X \cdot Q}}
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L4868>`_
 
     Parameters
     ----------
@@ -4656,7 +4917,10 @@ def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
     
     `Additional Information
     <https://electrical-engineering-portal.com/download-center/books-and-guides/power-substations/insulator-pollution>`_
-    
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L4904>`_
+
     Parameters
     ----------
     number_capacitors:  int
@@ -4711,6 +4975,9 @@ def natfreq(C, L, Hz=True):
 
     .. math:: freq=\frac{1}{\sqrt{L*C}*(2*\pi)}
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L4968>`_
+
     Parameters
     ----------
     C:          float
@@ -4744,6 +5011,9 @@ def unbalance(A, B, C, all=False):
     Performs a voltage/current unbalance calculation
     to determine the maximum current/voltage
     unbalance. Returns result as a decimal percentage.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L5007>`_
 
     Parameters
     ----------
@@ -4792,6 +5062,9 @@ def cosfilt(arr, Srate, domain=False):
     Cosine Filter function for filtering a dataset
     representing a sinusoidal function with or without
     harmonics to evaluate the fundamental value.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L5058>`_
 
     Parameters
     ----------
@@ -4843,6 +5116,9 @@ def sinfilt(arr, Srate, domain=False):
     Sine Filter function for filtering a dataset
     representing a sinusoidal function with or without
     harmonics to evaluate the fundamental value.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L5112>`_
 
     Parameters
     ----------
@@ -4900,6 +5176,9 @@ def characterz(R, G, L, C, freq=60):
     .. math:: Z_c = \sqrt{\frac{R+j\omega L}{G+j\omega C}}
        :label: Zc
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L5166>`_
+
     Parameters
     ----------
     R:          float
@@ -4944,7 +5223,10 @@ def propagation_constants(z, y, length):
     .. math:: \alpha = \Re{ \gamma }
     
     .. math:: \beta = \Im{ \gamma }
-    
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L5207>`_
+
     Parameters
     ----------
     z:              complex
@@ -4989,6 +5271,9 @@ def xfmphs(style="DY", shift=30):
     Use with transformer orientation to evaluate the phase-shift across a
     transformer. For example, find the phase shift for a Delta-Wye transformer
     as seen from the delta side.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L5267>`_
 
     Parameters
     ----------
@@ -5039,6 +5324,9 @@ def rad_to_hz(radians):
 
     Same as `hertz`.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L5316>`_
+
     Parameters
     ---------
     radians:    float
@@ -5066,6 +5354,9 @@ def hz_to_rad(hertz):
     .. math:: f_{\text{rad/sec}} = f_{\text{Hz}}\cdot2\cdot\pi
 
     Same as `radsec`.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L5347>`_
 
     Parameters
     ---------
@@ -5096,6 +5387,9 @@ def indmachvth(Vas, Rs, Lm, Lls=0, Ls=None, freq=60, calcX=True):
     where:
 
     .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L5378>`_
 
     Parameters
     ----------
@@ -5160,6 +5454,9 @@ def indmachzth(Rs, Lm, Lls=0, Llr=0, Ls=None, Lr=None, freq=60, calcX=True):
     where:
 
     .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L5443>`_
 
     Parameters
     ----------
@@ -5227,6 +5524,9 @@ def indmachpem(slip, Rr, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
        P_{em}=\frac{|V_{th_{\text{stator}}}|^2\cdot\frac{R_r}{slip}}
        {\left[\left(\frac{R_r}{slip}+R_{th_{\text{stator}}}\right)^2
        +X_{th_{\text{stator}}}^2\right]\cdot\omega_{es}}\cdot(1-slip)
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L5515>`_
 
     Parameters
     ----------
@@ -5328,6 +5628,9 @@ def indmachtem(slip, Rr, p=0, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
 
     .. math::
        \omega_{sync}=\frac{\omega_{es}}{\left(\frac{poles}{2}\right)}
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L5613>`_
 
     Parameters
     ----------
@@ -5437,6 +5740,9 @@ def indmachpkslip(Rr, Zth=None, Rs=0, Lm=0, Lls=0, Llr=0, Ls=None,
        Z_{th} = \frac{(R_s+j\omega L_{ls})j\omega L_m}
        {R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L5726>`_
+
     Parameters
     ----------
     Rr:         float
@@ -5523,6 +5829,9 @@ def indmachiar(Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
        {R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}
 
     .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L5811>`_
 
     Parameters
     ----------
@@ -5625,6 +5934,9 @@ def indmachpktorq(Rr, s_pk=None, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0,
        {R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}
 
     .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L5912>`_
 
     Parameters
     ----------
@@ -5752,6 +6064,9 @@ def indmachstarttorq(Rr, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0,
 
     .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L6038>`_
+
     Parameters
     ----------
     Rr:         float
@@ -5852,6 +6167,9 @@ def pstator(Pem, slip):
 
     .. math:: P_s=\frac{P_{em}}{1-\text{slip}}
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L6160>`_
+
     Parameters
     ----------
     Pem:        float
@@ -5884,6 +6202,9 @@ def protor(Pem, slip):
 
     .. math:: P_r=-\text{slip}\cdot\frac{P_{em}}{1-\text{slip}}
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L6195>`_
+
     Parameters
     ----------
     Pem:        float
@@ -5914,6 +6235,9 @@ def de_calc(rho, freq=60):
     with particular earth resistivity (rho).
 
     .. math:: D_e=D_{e_{\text{constant}}}\sqrt{\frac{\rho}{freq}}
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L6230>`_
 
     Parameters
     ----------
@@ -5951,6 +6275,9 @@ def zperlength(Rd=None, Rself=None, Rac=None, Rgwac=None, De=None,
 
     Simple impedance matrix generator to provide the full
     impedance per length matrix.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L6269>`_
 
     Parameters
     ----------
@@ -6095,6 +6422,9 @@ def transposez(Zeq, fabc=1 / 3, fcab=1 / 3, fbca=1 / 3, linelen=1):
        0 & 1 & 0 \\
        \end{bmatrix}
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L6405>`_
+
     Parameters
     ----------
     Zeq:        array_like
@@ -6135,6 +6465,9 @@ def gmd(Ds, *args):
 
     .. math:: GMD=(D_s*D_1*\ddot*D_n)^{\frac{1}{1+n}}
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L6459>`_
+
     Parameters
     ----------
     Ds:         float
@@ -6163,6 +6496,9 @@ def indmachfocratings(Rr, Rs, Lm, Llr=0, Lls=0, Lr=None,
     Determines the parameters and characteristics of a Field-
     Oriented-Controlled Induction Machine operating at its
     rated limits.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L6491>`_
 
     Parameters
     ----------
@@ -6266,6 +6602,9 @@ def imfoc_control(Tem_cmd, LAMdr_cmd, wr_cmd, Rr, Rs, Lm,
     Oriented-Controlled Induction Machine operating at its
     rated limits.
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L6596>`_
+
     Parameters
     ----------
     Tem_cmd:    float
@@ -6368,6 +6707,9 @@ def synmach_Eq(Vt_pu, Itmag, PF, Ra, Xd, Xq):
        -\cos^{-1}(PF)+\theta_q)\right|e^{j(\theta_q
        -90°)}
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L6687>`_
+
     Parameters
     ----------
     Vt_pu:      complex
@@ -6410,6 +6752,9 @@ def vipf(V=None, I=None, PF=1, find=''):
 
     Given two of the three parameters, will solve for the
     third; beit voltage, current, or power factor.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L6749>`_
 
     Parameters
     ----------
@@ -6471,6 +6816,9 @@ def rad_to_rpm(rad):
     Given the angular velocity in rad/sec, this function will evaluate the
     velocity in RPM (Revolutions-Per-Minute).
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L6812>`_
+
     Parameters
     ----------
     rad:        float
@@ -6492,6 +6840,9 @@ def rpm_to_rad(rpm):
 
     Given the angular velocity in RPM (Revolutions-Per-Minute), this function
     will evaluate the velocity in rad/sec.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L6837>`_
 
     Parameters
     ----------
@@ -6515,6 +6866,9 @@ def hz_to_rpm(hz):
     Given the angular velocity in Hertz, this function will evaluate the
     velocity in RPM (Revolutions-Per-Minute).
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L6862>`_
+
     Parameters
     ----------
     hz:         float
@@ -6536,6 +6890,9 @@ def rpm_to_hz(rpm):
 
     Given the angular velocity in RPM (Revolutions-Per-Minute), this function
     will evaluate the velocity in Hertz.
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L6887>`_
 
     Parameters
     ----------
@@ -6563,6 +6920,9 @@ def syncspeed(Npol, freq=60, Hz=False):
 
     .. math:: \omega_{\text{syn}}=\frac{2\pi
        \cdot\text{freq}}{\frac{N_{\text{pol}}}{2}}
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L6912>`_
 
     Parameters
     ----------
@@ -6596,6 +6956,9 @@ def machslip(mech, syn=60):
     .. math:: \text{slip}=\frac{\text{syn}-\text{mech}}
        {\text{syn}}
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L6949>`_
+
     Parameters
     ----------
     mech:       float
@@ -6622,6 +6985,9 @@ def phs3valpha(VA, VB=0, VC=0):
     should be calculated.
 
     .. math:: V_{\alpha}=V_A-\frac{V_B}{2}-\frac{V_C}{2}
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L6980>`_
 
     Parameters
     ----------
@@ -6660,6 +7026,9 @@ def wireresistance(length=None,diameter=None,rho=16.8*10**-9,R=None):
     is unitless, please use the International System of Units.
 
     .. math:: R = \frac{\rho*l}{A}
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L7021>`_
 
     Parameters
     ----------
@@ -6711,7 +7080,10 @@ def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
     each cycle, time spent high during each cycle.
 
     TODO: This function should be broken into multiple smaller functions.
-    
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L7074>`_
+
     Parameters
     ---------- 
     R:      list[float, float] or tuple(float, float), optional
@@ -6783,7 +7155,10 @@ def ic_555_monostable(R=None,C=None,freq=None,t_high=None,t_low=None):
     each cycle, time spent high during each cycle.
 
     TODO: This function should be broken into multiple smaller functions.
-    
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L7149>`_
+
     Parameters
     ---------- 
     R:      list[float, float] or tuple(float, float), optional
@@ -6841,6 +7216,9 @@ def t_attenuator(Adb, Z0):
     .. math:: R2 = Z0*(\frac{10^{\frac{A_{db}}{20}}}{10^{\frac{A_{db}}{10}}-1})
     .. image:: /static/t-attenuator-circuit.png
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L7206>`_
+
     Parameters
     ---------- 
     Adb: float Attenuation in db
@@ -6869,6 +7247,9 @@ def pi_attenuator(Adb, Z0):
     .. math:: R1 = Z0*(\frac{10^{\frac{A_{db}}{20}}+1}{10^{\frac{A_{db}}{20}}-1})
     .. math:: R2 = \frac{Z0}{2}*(10^{\frac{A_{db}}{20}} - \frac{1}{10^{\frac{A_{db}}{20}}})
     .. image:: /static/pi-attenuator-circuit.png
+
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L7239>`_
 
     Parameters
     ---------- 

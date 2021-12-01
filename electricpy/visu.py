@@ -18,6 +18,9 @@ class InductionMotorCircle:
     This class is designed to plot induction motor circle diagram
     and plot circle diagram to obtain various parameters of induction motor
 
+    `Source
+    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/visu.py#L14>`_
+
     Parameters
     ----------
     no_load_data:       dict {'V0', 'I0', 'W0'}
@@ -217,6 +220,9 @@ class InductionMotorCircle:
         """
         Determine parametric equation of circle.
 
+        `Source
+        <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/visu.py#L219>`_
+
         Parameters
         ----------
         center: list[float, float] [x0, y0]
@@ -286,6 +292,9 @@ class InductionMotorCircle:
     def compute_slope(line):
         """
         Compute slope of the line.
+
+        `Source
+        <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/visu.py#L292>`_
 
         Parameters
         ----------
