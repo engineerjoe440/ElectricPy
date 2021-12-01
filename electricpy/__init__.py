@@ -5328,7 +5328,7 @@ def rad_to_hz(radians):
     <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L5316>`_
 
     Parameters
-    ---------
+    ----------
     radians:    float
                 The frequency (represented in radians/sec)
 
@@ -5359,7 +5359,7 @@ def hz_to_rad(hertz):
     <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/__init__.py#L5347>`_
 
     Parameters
-    ---------
+    ----------
     hertz:      float
                 The frequency (represented in Hertz)
 
