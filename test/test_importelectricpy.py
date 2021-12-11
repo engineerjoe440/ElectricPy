@@ -43,3 +43,11 @@ def test_import_sim():
         assert True
     except:
         assert False
+
+# Test importing the `visu` module
+def test_import_visu():
+    try:
+        from electricpy import visu
+        assert True
+    except:
+        assert False
