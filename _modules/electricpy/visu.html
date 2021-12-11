@@ -1,0 +1,413 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>electricpy.visu &#8212; electricpy 0.2.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_modules/electricpy/visu.html" />
+    <link rel="shortcut icon" href="../../_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../electricpy.html" accesskey="U">electricpy</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.visu</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for electricpy.visu</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">`electricpy.visu` - Support for plotting and visualizations.</span>
+
+<span class="sd">Filled with plotting functions and visualization tools for electrical engineers,</span>
+<span class="sd">this module is designed to assist engineers visualize their designs.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1">################################################################################</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">_np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">_plt</span>
+
+
+<div class="viewcode-block" id="InductionMotorCircle"><a class="viewcode-back" href="../../api/electricpy.visu.InductionMotorCircle.html#electricpy.visu.InductionMotorCircle">[docs]</a><span class="k">class</span> <span class="nc">InductionMotorCircle</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot Induction Motor Circle Diagram.</span>
+
+<span class="sd">    This class is designed to plot induction motor circle diagram</span>
+<span class="sd">    and plot circle diagram to obtain various parameters of induction motor</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    no_load_data:       dict {&#39;V0&#39;, &#39;I0&#39;, &#39;W0&#39;}</span>
+<span class="sd">                        V0: no load test voltage</span>
+<span class="sd">                        I0: no load current in rotor</span>
+<span class="sd">                        W0: No load power(in Watts)</span>
+<span class="sd">    blocked_rotor_data: dict {&#39;Vsc&#39;,&#39;Isc&#39;,&#39;Wsc&#39;}</span>
+<span class="sd">                        Vsc: blocked rotor terminal voltage</span>
+<span class="sd">                        Isc: blocked rotor current in rotor</span>
+<span class="sd">                        Wsc: Power consumed in blocked rotor test</span>
+<span class="sd">    output_power:       int</span>
+<span class="sd">                        Desired power output from the induction motor</span>
+<span class="sd">    torque_ration:      float</span>
+<span class="sd">                        Ration between rotor resitance to stator resistance</span>
+<span class="sd">                        (i.e., R2/R1)</span>
+<span class="sd">    frequency:          int</span>
+<span class="sd">                        AC supply frequency</span>
+<span class="sd">    poles:              int</span>
+<span class="sd">                        Pole count of induction Motor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="InductionMotorCircle.__init__"><a class="viewcode-back" href="../../api/electricpy.visu.InductionMotorCircle.html#electricpy.visu.InductionMotorCircle.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">no_load_data</span><span class="p">,</span> <span class="n">blocked_rotor_data</span><span class="p">,</span> <span class="n">output_power</span><span class="p">,</span> 
+                <span class="n">torque_ration</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">poles</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Primary Entrypoint.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">no_load_data</span> <span class="o">=</span> <span class="n">no_load_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocked_rotor_data</span> <span class="o">=</span> <span class="n">blocked_rotor_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">frequency</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operating_power</span> <span class="o">=</span> <span class="n">output_power</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">torque_ratio</span> <span class="o">=</span> <span class="n">torque_ration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poles</span> <span class="o">=</span> <span class="n">poles</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sync_speed</span> <span class="o">=</span> <span class="mi">120</span><span class="o">*</span><span class="n">frequency</span><span class="o">/</span><span class="n">poles</span> <span class="c1">#rpm</span>
+
+        <span class="n">v0</span> <span class="o">=</span> <span class="n">no_load_data</span><span class="p">[</span><span class="s1">&#39;V0&#39;</span><span class="p">]</span>
+        <span class="n">i0</span> <span class="o">=</span> <span class="n">no_load_data</span><span class="p">[</span><span class="s1">&#39;I0&#39;</span><span class="p">]</span>
+        <span class="n">w0</span> <span class="o">=</span> <span class="n">no_load_data</span><span class="p">[</span><span class="s1">&#39;W0&#39;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">no_load_pf</span> <span class="o">=</span> <span class="n">w0</span> <span class="o">/</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">v0</span> <span class="o">*</span> <span class="n">i0</span><span class="p">)</span>
+        <span class="n">theta0</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">no_load_pf</span><span class="p">)</span>
+
+        <span class="c1"># get short circuit power factor and Current at slip=1</span>
+        <span class="n">vsc</span> <span class="o">=</span> <span class="n">blocked_rotor_data</span><span class="p">[</span><span class="s1">&#39;Vsc&#39;</span><span class="p">]</span>
+        <span class="n">isc</span> <span class="o">=</span> <span class="n">blocked_rotor_data</span><span class="p">[</span><span class="s1">&#39;Isc&#39;</span><span class="p">]</span>
+        <span class="n">wsc</span> <span class="o">=</span> <span class="n">blocked_rotor_data</span><span class="p">[</span><span class="s1">&#39;Wsc&#39;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">blocked_rotor_pf</span> <span class="o">=</span> <span class="n">wsc</span> <span class="o">/</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">vsc</span> <span class="o">*</span> <span class="n">isc</span><span class="p">)</span>
+        <span class="n">theta_sc</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blocked_rotor_pf</span><span class="p">)</span>
+
+        <span class="c1"># because V is on Y axis</span>
+        <span class="n">theta0</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">theta0</span>
+        <span class="n">theta_sc</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">theta_sc</span>
+
+        <span class="c1"># isc is the current at reduced voltage</span>
+        <span class="c1"># calculate current at rated voltage</span>
+        <span class="n">isc</span> <span class="o">=</span> <span class="n">v0</span> <span class="o">*</span> <span class="n">isc</span> <span class="o">/</span> <span class="n">vsc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">no_load_line</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i0</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta0</span><span class="p">)],</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i0</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta0</span><span class="p">)]</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">full_load_line</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">isc</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta_sc</span><span class="p">)],</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">isc</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta_sc</span><span class="p">)]</span>
+        <span class="p">]</span>
+
+        <span class="c1"># secondary current line</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span><span class="n">i0</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta0</span><span class="p">),</span> <span class="n">isc</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta_sc</span><span class="p">)],</span>
+            <span class="p">[</span><span class="n">i0</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta0</span><span class="p">),</span> <span class="n">isc</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta_sc</span><span class="p">)]</span>
+        <span class="p">]</span>
+
+        <span class="p">[[</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">],</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">theta</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">arctan</span><span class="p">((</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">))</span>
+
+        <span class="c1"># get the induction motor circle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">power_scale</span> <span class="o">=</span> <span class="n">w0</span> <span class="o">/</span> <span class="p">(</span><span class="n">i0</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta0</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_circle_params</span><span class="p">()</span>
+        <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">p_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">)</span>
+        <span class="p">)</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">torque_line</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">torque_point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_torque_line</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">torque_max</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">torque_max_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">torque_max_y</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_torque_max</span><span class="p">()</span>
+        <span class="c1"># Take low slip point</span>
+        <span class="n">_</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">power_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_y</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_output_power</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_efficiency</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># noqa: D102</span>
+        <span class="vm">__doc__</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__doc__</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Plot the Induction Motor Circle Diagram.&quot;&quot;&quot;</span>
+        <span class="p">[</span><span class="n">circle_x</span><span class="p">,</span> <span class="n">circle_y</span><span class="p">]</span> <span class="o">=</span> <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">get_circle</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span>
+            <span class="n">semi</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">circle_x</span><span class="p">,</span> <span class="n">circle_y</span><span class="p">)</span>
+
+        <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">plot_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">no_load_line</span><span class="p">)</span>
+        <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">plot_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span><span class="p">)</span>
+        <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">plot_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">full_load_line</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-.&#39;</span><span class="p">)</span>
+        <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">plot_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">torque_line</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-.&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Full load output</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]],</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">])</span>
+        <span class="c1"># Diameter of the circle</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_x</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">],</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-.&#39;</span><span class="p">)</span>
+        <span class="c1"># Max torque line  </span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">torque_max_x</span><span class="p">],</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">torque_max_y</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-.&#39;</span><span class="p">)</span>
+        <span class="c1"># Max Output Power line</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">)],</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">)],</span>
+            <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-.&#39;</span>
+        <span class="p">)</span>
+        <span class="c1"># Operating Point</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_x</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_y</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+
+        <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">power_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+        <span class="c1"># mark the center of the circle</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">),</span>
+            <span class="n">linewidths</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span>
+        <span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">torque_max_x</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">torque_max_y</span><span class="p">,</span>
+            <span class="n">linewidths</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">c</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span>
+        <span class="p">)</span>
+
+
+        <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Induction Motor Circle Diagram&quot;</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span>
+            <span class="s1">&#39;I2 locus&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;No Load Current&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Output Line&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Blocked Rotor Current&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Torque line&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Full Load Losses&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Diameter&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Maximum Torque&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Maximum Output Power&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;Operating Power </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">operating_power</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="p">])</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">compute_efficiency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute the output efficiency of induction motor.&quot;&quot;&quot;</span>
+        <span class="p">[[</span><span class="n">_</span><span class="p">,</span> <span class="n">no_load_x</span><span class="p">],</span> <span class="p">[</span><span class="n">_</span><span class="p">,</span> <span class="n">no_load_y</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">no_load_line</span>
+        <span class="n">no_load_losses</span> <span class="o">=</span> <span class="n">no_load_y</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_scale</span>
+
+        <span class="n">compute_slope</span> <span class="o">=</span> <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">compute_slope</span>
+
+        <span class="n">torque_slope</span> <span class="o">=</span> <span class="n">compute_slope</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">torque_line</span><span class="p">)</span>
+        <span class="n">stator_cu_loss</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">power_x</span> <span class="o">-</span> <span class="n">no_load_x</span><span class="p">)</span> <span class="o">*</span> <span class="n">torque_slope</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_scale</span>
+
+        <span class="n">rotor_current_slope</span> <span class="o">=</span> <span class="n">compute_slope</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span><span class="p">)</span>
+        <span class="n">total_cu_loss</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">power_x</span> <span class="o">-</span> <span class="n">no_load_x</span><span class="p">)</span> <span class="o">*</span> <span class="n">rotor_current_slope</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_scale</span>
+
+        <span class="n">rotor_cu_loss</span> <span class="o">=</span> <span class="n">total_cu_loss</span> <span class="o">-</span> <span class="n">stator_cu_loss</span>
+
+        <span class="n">rotor_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_y</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_scale</span> <span class="o">-</span> <span class="p">(</span><span class="n">rotor_cu_loss</span> <span class="o">+</span> <span class="n">stator_cu_loss</span> <span class="o">+</span> <span class="n">no_load_losses</span><span class="p">)</span>
+
+        <span class="n">slip</span> <span class="o">=</span> <span class="n">rotor_cu_loss</span> <span class="o">/</span> <span class="n">rotor_output</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">rotor_speed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sync_speed</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">slip</span><span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;no_load_loss&#39;</span><span class="p">:</span> <span class="n">no_load_losses</span><span class="p">,</span>
+            <span class="s1">&#39;rotor_copper_loss&#39;</span><span class="p">:</span> <span class="n">rotor_cu_loss</span><span class="p">,</span>
+            <span class="s1">&#39;stator_copper_loss&#39;</span><span class="p">:</span> <span class="n">stator_cu_loss</span><span class="p">,</span>
+            <span class="s1">&#39;rotor_output&#39;</span><span class="p">:</span> <span class="n">rotor_output</span><span class="p">,</span>
+            <span class="s1">&#39;slip&#39;</span><span class="p">:</span> <span class="n">slip</span><span class="p">,</span>
+            <span class="s1">&#39;stator_rmf_speed (RPM)&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">sync_speed</span><span class="p">,</span>
+            <span class="s1">&#39;rotor_speed (RMP)&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">rotor_speed</span><span class="p">,</span>
+            <span class="s1">&#39;power_factor&#39;</span><span class="p">:</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">power_y</span> <span class="o">/</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">power_x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_y</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)),</span>
+            <span class="s1">&#39;efficiency&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">rotor_output</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">power_y</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_scale</span><span class="p">)</span><span class="si">}</span><span class="s2"> %&quot;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">data</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_circle</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">semi</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Determine parametric equation of circle.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        center: list[float, float] [x0, y0]</span>
+<span class="sd">        radius: float</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        (x, y): tuple</span>
+<span class="sd">                parametric equation of circle</span>
+<span class="sd">                (x = x0 + r*cos(theta) ; y = y0 + r*sin(theta))</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">[</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">]</span> <span class="o">=</span> <span class="n">center</span>
+
+        <span class="k">if</span> <span class="n">semi</span><span class="p">:</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span> <span class="o">+</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y0</span> <span class="o">+</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">plot_line</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">mark_start</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mark_end</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Supporting function to plot a line.&quot;&quot;&quot;</span>
+        <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span>
+        <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="n">ls</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mark_start</span><span class="p">:</span>
+            <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mark_end</span><span class="p">:</span>
+            <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">compute_circle_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute the paramters of induction motor circle.&quot;&quot;&quot;</span>
+        <span class="p">[[</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">],</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">arctan</span><span class="p">((</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">))</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">radius</span> <span class="o">=</span> <span class="n">length</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="p">[</span><span class="n">radius</span> <span class="o">+</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">center</span><span class="p">,</span> <span class="n">radius</span>
+
+    <span class="k">def</span> <span class="nf">get_torque_line</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Obatin the torque line of the induction motor.&quot;&quot;&quot;</span>
+        <span class="p">[[</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">],</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">torque_ratio</span> <span class="o">*</span> <span class="n">y2</span> <span class="o">+</span> <span class="n">y1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">torque_ratio</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">torque_point</span> <span class="o">=</span> <span class="p">[</span><span class="n">x2</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span>
+        <span class="n">torque_line</span> <span class="o">=</span> <span class="p">[[</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">],</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="n">torque_line</span><span class="p">,</span> <span class="n">torque_point</span>
+
+    <span class="k">def</span> <span class="nf">get_torque_max</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute max torque for given Induction Motor parameters.&quot;&quot;&quot;</span>
+        <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">torque_line</span>
+        <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">arctan</span><span class="p">((</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">))</span>
+        <span class="n">torque_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+        <span class="p">)</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+        <span class="n">torque_max_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+        <span class="n">torque_max_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">torque_max</span><span class="p">,</span> <span class="n">torque_max_x</span><span class="p">,</span> <span class="n">torque_max_y</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">compute_slope</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute slope of the line.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        line: list[float, float]</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        slope: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">[[</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">],</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">]]</span> <span class="o">=</span> <span class="n">line</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_output_power</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Determine induction motor circle desired output power point.</span>
+
+<span class="sd">        Obtain the point on the induction motor circle diagram which </span>
+<span class="sd">        corresponds to the desired output power</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">[[</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">],</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">arctan</span><span class="p">((</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">))</span>
+        <span class="p">[</span><span class="n">center_x</span><span class="p">,</span> <span class="n">center_y</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span>
+
+        <span class="p">[[</span><span class="n">_</span><span class="p">,</span> <span class="n">no_load_x</span><span class="p">],</span> <span class="p">[</span><span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">no_load_line</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">operating_power</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_scale</span> <span class="o">+</span> <span class="p">(</span><span class="n">center_x</span> <span class="o">-</span> <span class="n">no_load_x</span><span class="p">)</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">alpha</span><span class="p">))</span> <span class="o">*</span>
+            <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span>
+        <span class="n">beta_0</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span>
+        <span class="n">beta_1</span> <span class="o">=</span> <span class="o">-</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span>
+        <span class="c1"># high slip</span>
+        <span class="n">p_x_1</span> <span class="o">=</span> <span class="n">center_x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">beta_0</span><span class="p">)</span>
+        <span class="n">p_y_1</span> <span class="o">=</span> <span class="n">center_y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">beta_0</span><span class="p">)</span>
+        <span class="c1"># low slip</span>
+        <span class="n">p_x_2</span> <span class="o">=</span> <span class="n">center_x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">beta_1</span><span class="p">)</span>
+        <span class="n">p_y_2</span> <span class="o">=</span> <span class="n">center_y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">beta_1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">p_x_1</span><span class="p">,</span> <span class="n">p_y_1</span><span class="p">],</span> <span class="p">[</span><span class="n">p_x_2</span><span class="p">,</span> <span class="n">p_y_2</span><span class="p">]</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../electricpy.html" >electricpy</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.visu</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Joe Stanley.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+    </div>
+  </body>
+</html>
