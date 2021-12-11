@@ -1,5 +1,6 @@
 import pytest
 import numpy as np
+import cmath
 
 def assertAlmostEqual(a,b,abs=1e-6):
 
@@ -243,6 +244,30 @@ def test_slew_rate():
     assertAlmostEqual(1/(np.pi*2), V)
     assertAlmostEqual(1/(np.pi*2), freq)
 
+def test_phs():
+    from electricpy import phs
+    def test_0():
+        
+
+        inputs = [0, 90, 180, 270, 360]
+
+        outputs = [phs(x) for x in inputs]
+        actual_outputs = [1, 1j, -1, -1j, 1]
+
+        for x,y in zip(outputs, actual_outputs):
+            assertAlmostEqual(x, y)
+
+    def test_1():
+        inputs = [30, 45, 60, 135]
+
+        outputs = [phs(x) for x in inputs]
+        actual_outputs = [0.866025+0.5j, 0.707106+0.707106j, 0.5+0.866025j, -0.707106+0.707106j]
+
+        for x,y in zip(outputs, actual_outputs):
+            assertAlmostEqual(x, y, abs=1e-3)
+
+    test_0()
+    test_1()
 
 def test_induction_motor_circle():
     from electricpy.visu import InductionMotorCircle
@@ -324,6 +349,40 @@ def test_induction_machine_slip():
     freq = 50
     p = 4
 
+    # Test case 1
+    assert induction_machine_slip(0) == 1
+    assert induction_machine_slip(1800) == 0
+
+    # Test case 2
+    assert induction_machine_slip(1000) == 4/9
+    assert induction_machine_slip(1200) == 1/3
+
+    # Test case 3
     assert induction_machine_slip(Nr, freq=freq, poles=p) == 0.2
     assert induction_machine_slip(1500, freq=freq, poles=p) == 0
     assert induction_machine_slip(0, freq=freq, poles=p) == 1
+
+def test_abc_to_seq():
+
+    from electricpy import abc_to_seq
+    a = cmath.rect(1, np.radians(120))
+
+    def test_0():
+        np.testing.assert_array_almost_equal(abc_to_seq([1, 1, 1]), [1+0j, 0j, 0j])
+        np.testing.assert_array_almost_equal(abc_to_seq([1, 0, 0]), [1/3+0j, 1/3+0j, 1/3+0j])
+        np.testing.assert_array_almost_equal(abc_to_seq([0, 1, 0]), [1/3+0j, a/3+0j, a*a/3+0j])
+        np.testing.assert_array_almost_equal(abc_to_seq([0, 0, 1]), [1/3+0j, a*a/3, a/3])
+
+    test_0()
+
+def test_seq_to_abc():
+    from electricpy import seq_to_abc
+    a = cmath.rect(1, np.radians(120))    
+
+    def test_0():
+        np.testing.assert_array_almost_equal(seq_to_abc([1, 1, 1]), [3+0j, 0j, 0j])
+        np.testing.assert_array_almost_equal(seq_to_abc([1, 0, 0]), [1+0j, 1+0j, 1+0j])
+        np.testing.assert_array_almost_equal(seq_to_abc([0, 1, 0]), [1+0j, a*a+0j, a+0j])
+        np.testing.assert_array_almost_equal(seq_to_abc([0, 0, 1]), [1+0j, a, a*a])
+
+    test_0()

@@ -4924,7 +4924,7 @@ def characterz(R, G, L, C, freq=60):
     Zc = _np.sqrt((R + 1j * w * L) / (G + 1j * w * C))
     return (Zc)
 
-#define propagation_constants for long transmission line
+# Define propagation_constants for long transmission line
 def propagation_constants(z, y, length):
     r"""
     Transaction Line Propagation Constant Calculator.
