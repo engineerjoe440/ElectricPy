@@ -42,10 +42,7 @@ def phs1g(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     .. math:: I_2 = I_1
     
     .. math:: I_0 = I_1
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L33>`_
-
+    
     Parameters
     ----------
     Vth:        complex
@@ -94,10 +91,7 @@ def phs2g(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     .. math:: I_2 = -\frac{V_{th}-Z_1*I_1}{X_2}
     
     .. math:: I_0 = -\frac{V_{th}-Z_1*I_1}{X_0+3*R_f}
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L85>`_
-
+    
     Parameters
     ----------
     Vth:        complex
@@ -147,10 +141,7 @@ def phs2(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     .. math:: I_2 = -I_1
     
     .. math:: I_0 = 0
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L138>`_
-
+    
     Parameters
     ----------
     Vth:        complex
@@ -200,10 +191,7 @@ def phs3(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     .. math:: I_2 = 0
     
     .. math:: I_0 = 0
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L191>`_
-
+    
     Parameters
     ----------
     Vth:        complex
@@ -249,10 +237,7 @@ def poleopen1(Vth,Zseq,sequence=True,reference='A'):
     .. math:: I_2 = -I_1 * \frac{Z_0}{Z_2+Z_0}
     
     .. math:: I_0 = -I_1 * \frac{Z_2}{Z_2+Z_0}
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L240>`_
-
+    
     Parameters
     ----------
     Vth:        complex
@@ -300,10 +285,7 @@ def poleopen2(Vth,Zseq,sequence=True,reference='A'):
     .. math:: I_2 = I_1
     
     .. math:: I_0 = I_1
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L291>`_
-
+    
     Parameters
     ----------
     Vth:        complex
@@ -351,10 +333,7 @@ def scMVA(Zth=None,Isc=None,Vth=1):
     .. math:: MVA_{sc} = V_{th}*I_{sc}
     
     .. math:: V_{th} = I_{sc}*Z_{th}
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L342>`_
-
+    
     Parameters
     ----------
     Zth:        float
@@ -406,10 +385,7 @@ def phs3mvasc(Vth,Zseq,Rf=0,Sbase=1):
     parameters of Vth, Zseq, and an optional Rf. Uses the formula as follows:
     
     .. math:: MVA_{sc} = \frac{\left|V_{th}^2\right|}{|Z_1|} * Sbase
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L401>`_
-
+    
     Parameters
     ----------
     Vth:        complex
@@ -448,10 +424,7 @@ def phs1mvasc(Vth,Zseq,Rf=0,Sbase=1):
     where:
     
     .. math:: I_1 = \frac{V_{th}}{Z_0+Z_1+Z_2+3*R_f}
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L439>`_
-
+    
     Parameters
     ----------
     Vth:        complex
@@ -491,10 +464,7 @@ def busvolt(k,n,Vpf,Z0,Z1,Z2,If,sequence=True,reference='A'):
     
     This function is designed to calculate the bus voltage(s)
     given a specific set of fault characteristics.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L488>`_
-
+    
     Parameters
     ----------
     k:          float
@@ -557,10 +527,7 @@ def ct_saturation(XoR,Imag,Vrated,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
        20\geq(1+\frac{X}{R})*\frac{|I_{mag}|}{I_{rated}*CTR}
        *\frac{\left|R_{burden}+j*\omega*\frac{X_{burden}}
        {\omega}\right|*100}{V_{rated}*(1-remnanc)}
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L547>`_
-
+    
     Parameters
     ----------
     XoR:        float
@@ -638,10 +605,7 @@ def ct_cclass(XoR,Imag,Irated,CTR,Rb,Xb,remnance=0,sat_crit=20):
        \frac{|I_{mag}|}{I_{rated}\cdot CTR}\cdot\frac{
        \left|R_{burden}+j\cdot X_{burden}\right|\cdot100}
        {\text{Saturation Criteria (i.e., 20)}}}{1-remnance}
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L616>`_
-
+    
     Parameters
     ----------
     XoR:        float
@@ -692,10 +656,7 @@ def ct_satratburden(Inom,VArat=None,ANSIv=None,ALF=20,):
     where:
     
     .. math:: VA_{rated}=I_{nominal}*\frac{ANSI_{voltage}}{20}
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L684>`_
-
+    
     Parameters
     ----------
     Inom:       float
@@ -731,10 +692,7 @@ def ct_vpeak(Zb,Ip,CTR):
     Simple formula to calculate the Peak Voltage of a CT.
     
     .. math:: \sqrt{3.5*|Z_burden|*I_{peak}*CTR}
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L727>`_
-
+    
     Parameters
     ----------
     Zb:         float
@@ -759,10 +717,7 @@ def ct_timetosat(Vknee,XoR,Rb,CTR,Imax,ts=None,npts=100,freq=60,plot=False):
     
     Function to determine the "time to saturate" for an underrated C-Class
     CT using three standard curves described by Juergen Holbach.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L756>`_
-
+    
     Parameters
     ----------
     Vknee:      float
@@ -836,10 +791,7 @@ def pktransrecvolt(C,L,R=0,VLL=None,VLN=None,freq=60):
     Peak Transient Recovery Voltage calculation function, evaluates the peak
     transient recovery voltage (restriking voltage) and the
     Rate-of-Rise-Recovery Voltage.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L832>`_
-
+    
     Parameters
     ----------
     C:          float
@@ -891,10 +843,7 @@ def trvresistor(C,L,reduction,Rd0=500,wd0=260e3,tpk0=10e-6):
     
     Function to find the resistor value that will reduce the TRV by a specified
     percentage.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L888>`_
-
+    
     Parameters
     ----------
     C:          float
@@ -941,10 +890,7 @@ def toctriptime(I,Ipickup,TD,curve="U1",CTR=1):
     Time-OverCurrent Trip Time Calculator, evaluates the time
     to trip for a specific TOC (51) element given the curve
     type, current characteristics and time-dial setting.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L937>`_
-
+    
     Parameters
     ----------
     I:          float
@@ -994,10 +940,7 @@ def tocreset(I,Ipickup,TD,curve="U1",CTR=1):
     
     Function to calculate the time to reset for a TOC
     (Time-OverCurrent, 51) element.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L991>`_
-
+    
     Parameters
     ----------
     I:          float
@@ -1038,10 +981,7 @@ def pickup(Iloadmax,Ifaultmin,scale=0,printout=False,units="A"):
     Used to assist in evaluating an optimal phase-over-current pickup
     setting. Uses maximum load and minimum fault current to provide
     user assistance.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1034>`_
-
+    
     Parameters
     ----------
     Iloadmax:   float
@@ -1088,10 +1028,7 @@ def tdradial(I,CTI,Ipu_up,Ipu_dn=0,TDdn=0,curve="U1",scale=2,freq=60,
     where the Coordinating Time Interval (CTI) and the up/downstream
     pickup settings are known along with the TD setting for the
     downstream protection.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1082>`_
-
+    
     Parameters
     ----------
     I:          float
@@ -1179,10 +1116,7 @@ def protectiontap(S,CTR=1,VLN=None,VLL=None):
     (either primary or secondary) in conjunction with the CTR
     (current transformer ratio) for the side in question (primary/
     secondary).
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1173>`_
-
+    
     Parameters
     ----------
     CTR:        float
@@ -1219,10 +1153,7 @@ def correctedcurrents(Ipri,TAP,correction="Y",CTR=1):
     
     Function to evaluate the currents as corrected for microprocessor-
     based relay protection schemes.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1216>`_
-
+    
     Parameters
     ----------
     Ipri:       list of complex
@@ -1274,10 +1205,7 @@ def iopirt(IpriHV,IpriLV,TAPHV,TAPLV,corrHV="Y",corrLV="Y",CTRHV=1,CTRLV=1):
     
     Calculates the operating current (Iop) and the restraint
     current (Irt) as well as the slope.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1271>`_
-
+    
     Parameters
     ----------
     IpriHV:     list of complex
@@ -1339,10 +1267,7 @@ def symrmsfaultcur(V,R,X,t=1/60,freq=60):
     
     Function to evaluate the time-constant tau, the symmetrical fault current,
     and the RMS current for a faulted circuit.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1336>`_
-
+    
     Parameters
     ----------
     V:          float
@@ -1384,10 +1309,7 @@ def faultratio(I,Ipickup,CTR=1):
     Evaluates the CTR-scaled pickup measured to pickup current ratio.
     
     M = meas / pickup
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1380>`_
-
+    
     Parameters
     ----------
     I:          float
@@ -1413,10 +1335,7 @@ def residcomp(z1,z0,linelength=1):
     
     Evaluates the residual compensation factor based on the line's positive and
     zero sequence impedance characteristics.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1410>`_
-
+    
     Parameters
     ----------
     z1:         complex
@@ -1453,10 +1372,7 @@ def distmeasz(VLNmeas,If,Ip,Ipp,CTR=1,VTR=1,k0=None,z1=None,z0=None,linelength=1
     
     Function to evaluate the Relay-Measured-Impedance as calculated from
     the measured voltage, current, and line parameters.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1450>`_
-
+    
     Parameters
     ----------
     VLNmeas:    complex
@@ -1519,10 +1435,7 @@ def transmismatch(I1,I2,tap1,tap2):
     Electrical Transformer TAP Mismatch Function.
     
     Function to evaluate the transformer ratio mismatch for protection.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1517>`_
-
+    
     Parameters
     ----------
     I1:         complex
@@ -1554,10 +1467,7 @@ def highzvpickup(I,RL,Rct,CTR=1,threephase=False,Ks=1.5,
     
     Evaluates the voltage pickup setting for a high
     impedance bus protection system.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1550>`_
-
+    
     Parameters
     ----------
     I:          float
@@ -1605,10 +1515,7 @@ def highzmini(N,Ie,Irly=None,Vset=None,Rrly=2000,Imov=0,CTR=1):
     
     Evaluates the minimum pickup current required to cause
     high-impedance bus protection element pickup.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1602>`_
-
+    
     Parameters
     ----------
     N:          int
@@ -1655,10 +1562,7 @@ def instoc(Imin,CTR=1,Ki=0.5):
     
     Using a sensetivity factor and the CTR, evaluates the secondary-level pickup
     setting for an instantaneous overcurrent element.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1652>`_
-
+    
     Parameters
     ----------
     Imin:       float
@@ -1685,10 +1589,7 @@ def genlossfield(Xd,Xpd,Zbase=1,CTR=1,VTR=1):
     
     Generates the Loss-of-Field Element settings for a generator using the Xd
     value and per-unit base information.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1682>`_
-
+    
     Parameters
     ----------
     Xd:         float
@@ -1743,10 +1644,7 @@ def thermaltime(In,Ibase,tbase):
     Uses the following formula:
     
     .. math:: t_n=\frac{I_{base}^2*t_{base}}{I_n^2}
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1735>`_
-
+    
     Parameters
     ----------
     In:         float
@@ -1783,10 +1681,7 @@ def synmach_Isym(t,Eq,Xd,Xdp,Xdpp,Tdp,Tdpp):
        \right)\cdot e^{\frac{-t}{T'_d}}+\left(\frac{1}
        {X"_d}-\frac{1}{X'_d}\right)\cdot e^{\frac{-t}{T"_d}}
        \right]
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1773>`_
-
+    
     Parameters
     ----------
     t:          float
@@ -1831,10 +1726,7 @@ def synmach_Iasym(t,Eq,Xdpp,Xqpp,Ta):
     .. math:: I_{asym}=\sqrt{2}\left|E_q\right|\frac{1}{2}
        \left(\frac{1}{X"_d}+\frac{1}{X"_q}\right)e^{\frac{-t}
        {T_a}}
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1823>`_
-
+    
     Parameters
     ----------
     t:          float
@@ -1869,10 +1761,7 @@ def indmacheigenvalues(Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60):
     Calculates the pertinent eigenvalues for an unloaded
     induction machine given a specific set of machine
     parameters.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1865>`_
-
+    
     Parameters
     ----------
     Lr:         float
@@ -1927,10 +1816,7 @@ def indmachphs3sc(t,Is0,Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60,real=True):
     
     Determines the short-circuit current at a specified time for a three-phase
     fault on an unloaded induction machine.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1924>`_
-
+    
     Parameters
     ----------
     t:          array_like
@@ -1990,10 +1876,7 @@ def indmachphs3torq(t,Is0,Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60):
     
     Determines the torque exerted during a three-phase fault on an induction
     machine.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L1987>`_
-
+    
     Parameters
     ----------
     t:          array_like
@@ -2060,10 +1943,7 @@ def synmach_ifault(t,Ea,alpha,Xd,Xdp,Xdpp,Xqpp,Tdp,Tdpp,Ta,freq=60):
     fault current.
     
     .. image:: /static/synmach_ifault_formula.png
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/fault.py#L2052>`_
-
+    
     Parameters
     ----------
     t:          float

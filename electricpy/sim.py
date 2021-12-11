@@ -36,10 +36,7 @@ def digifiltersim(fin,filter,freqs,NN=1000,dt=0.01,title="",
     .. math:: \frac{b_0+b_1z^{-1}+b_2z^{-2}}{1-a_1z^{-1}-a_2z^{-2}}
     
     Where each row corresponds to a 1- or 2-pole filter.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/sim.py#L21>`_
-
+    
     Parameters
     ----------
     fin:        function
@@ -143,10 +140,7 @@ def step_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
     
     Given a transfer function, plots the response against step input
     and plots the error for the function.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/sim.py#L137>`_
-
+    
     Parameters
     ----------
     system:     array_like
@@ -230,10 +224,7 @@ def ramp_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
     
     Given a transfer function, plots the response against step input
     and plots the error for the function.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/sim.py#L224>`_
-
+    
     Parameters
     ----------
     system:     array_like
@@ -317,10 +308,7 @@ def parabolic_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
     
     Given a transfer function, plots the response against step input
     and plots the error for the function.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/sim.py#L311>`_
-
+    
     Parameters
     ----------
     system:     array_like
@@ -400,9 +388,6 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
                plotforcing=None,plotresult=None,filename=None):
     """
     State-Space Simulation Plotter.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/sim.py#L398>`_
 
     Parameters
     ----------
@@ -721,10 +706,7 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
     J is the Jacobian of F. Both F and J must be functions of x.
     At input, x holds the start value. The iteration continues
     until ||F|| < eps.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/sim.py#L716>`_
-
+    
     Parameters
     ----------
     F:          array_like
@@ -839,10 +821,7 @@ def nr_pq(Ybus,V_set,P_set,Q_set,extend=True,argshape=False,verbose=False):
     
     Given specified parameters, will generate the necessary real and reactive
     power functions necessary to compute the system's power flow.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/sim.py#L836>`_
-
+    
     Parameters
     ----------
     Ybus:       array_like
@@ -1085,10 +1064,7 @@ def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0='flatstart',eps=1e-4,
     Determines the function array (F) and the Jacobian array (J) and uses the
     Newton-Raphson method to iteratively evaluate the system to converge to a
     solution.
-
-    `Source
-    <https://github.com/engineerjoe440/ElectricPy/blob/master/electricpy/sim.py#L1078>`_
-
+    
     Parameters
     ----------
     Ybus:       array_like
