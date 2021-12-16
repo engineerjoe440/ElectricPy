@@ -9,7 +9,11 @@ this module is designed to assist engineers visualize their designs.
 
 import numpy as _np
 import matplotlib.pyplot as _plt
-
+import cmath
+import Geometry
+from Geometry import Point
+from Geometry import circle
+from Geometry.circle import Circle
 
 class InductionMotorCircle:
     """
@@ -39,7 +43,7 @@ class InductionMotorCircle:
                         Pole count of induction Motor
     """
 
-    def __init__(self, no_load_data, blocked_rotor_data, output_power, 
+    def __init__(self, no_load_data, blocked_rotor_data, output_power,
                 torque_ration=1, frequency=50, poles=4):
         """Primary Entrypoint."""
         self.no_load_data = no_load_data
@@ -48,7 +52,7 @@ class InductionMotorCircle:
         self.operating_power = output_power
         self.torque_ratio = torque_ration
         self.poles = poles
-        self.sync_speed = 120*frequency/poles #rpm
+        self.sync_speed = 120 * frequency / poles  # rpm
 
         v0 = no_load_data['V0']
         i0 = no_load_data['I0']
@@ -95,7 +99,7 @@ class InductionMotorCircle:
         self.center, self.radius = self.compute_circle_params()
         [self.center_x, self.center_y] = self.center
         self.p_max = self.radius * _np.cos(self.theta) - (
-            self.radius - self.radius * _np.sin(self.theta)
+                self.radius - self.radius * _np.sin(self.theta)
         ) * _np.tan(self.theta)
         self.torque_line, self.torque_point = self.get_torque_line()
         self.torque_max, self.torque_max_x, self.torque_max_y = \
@@ -126,12 +130,12 @@ class InductionMotorCircle:
         # Full load output
         _plt.plot(
             [self.secondary_current_line[0][1],
-                self.secondary_current_line[0][1]],
+            self.secondary_current_line[0][1]],
             [self.secondary_current_line[1][1], self.center_y])
         # Diameter of the circle
-        _plt.plot([self.center_x - self.radius, self.center_x+self.radius],
+        _plt.plot([self.center_x - self.radius, self.center_x + self.radius],
                 [self.center_y, self.center_y], ls='-.')
-        # Max torque line  
+        # Max torque line
         _plt.plot(
             [self.center_x, self.torque_max_x],
             [self.center_y, self.torque_max_y], ls='-.')
@@ -143,7 +147,6 @@ class InductionMotorCircle:
         )
         # Operating Point
         _plt.plot([0, self.power_x], [0, self.power_y], c='black')
-
 
         _plt.scatter(self.power_x, self.power_y, marker='X', c='red')
         # mark the center of the circle
@@ -160,7 +163,6 @@ class InductionMotorCircle:
             c='black',
             marker='*'
         )
-
 
         _plt.title("Induction Motor Circle Diagram")
         _plt.grid()
@@ -186,18 +188,21 @@ class InductionMotorCircle:
         compute_slope = InductionMotorCircle.compute_slope
 
         torque_slope = compute_slope(self.torque_line)
-        stator_cu_loss = (self.power_x - no_load_x) * torque_slope * self.power_scale
+        stator_cu_loss = (self.power_x - no_load_x) * \
+                         torque_slope * self.power_scale
 
         rotor_current_slope = compute_slope(self.secondary_current_line)
-        total_cu_loss = (self.power_x - no_load_x) * rotor_current_slope * self.power_scale
+        total_cu_loss = (self.power_x - no_load_x) * \
+                        rotor_current_slope * self.power_scale
 
         rotor_cu_loss = total_cu_loss - stator_cu_loss
 
-        rotor_output = self.power_y * self.power_scale - (rotor_cu_loss + stator_cu_loss + no_load_losses)
+        rotor_output = self.power_y * self.power_scale - \
+                    (rotor_cu_loss + stator_cu_loss + no_load_losses)
 
         slip = rotor_cu_loss / rotor_output
 
-        self.rotor_speed = self.sync_speed*(1-slip)
+        self.rotor_speed = self.sync_speed * (1 - slip)
 
         data = {
             'no_load_loss': no_load_losses,
@@ -205,8 +210,8 @@ class InductionMotorCircle:
             'stator_copper_loss': stator_cu_loss,
             'rotor_output': rotor_output,
             'slip': slip,
-            'stator_rmf_speed (RPM)':self.sync_speed,
-            'rotor_speed (RMP)':self.rotor_speed,
+            'stator_rmf_speed (RPM)': self.sync_speed,
+            'rotor_speed (RMP)': self.rotor_speed,
             'power_factor': (self.power_y / _np.sqrt(self.power_x ** 2 + self.power_y ** 2)),
             'efficiency': f"{rotor_output * 100 / (self.power_y * self.power_scale)} %"
         }
@@ -252,7 +257,7 @@ class InductionMotorCircle:
             _plt.scatter(x2, y2, marker=marker)
 
     def compute_circle_params(self):
-        """Compute the paramters of induction motor circle."""
+        """Compute the parameters of induction motor circle."""
         [[x1, x2], [y1, y2]] = self.secondary_current_line
         theta = _np.arctan((y2 - y1) / (x2 - x1))
         length = _np.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
@@ -262,7 +267,7 @@ class InductionMotorCircle:
         return center, radius
 
     def get_torque_line(self):
-        """Obatin the torque line of the induction motor."""
+        """Obtain the torque line of the induction motor."""
         [[x1, x2], [y1, y2]] = self.secondary_current_line
         y = (self.torque_ratio * y2 + y1) / (self.torque_ratio + 1)
         torque_point = [x2, y]
@@ -276,7 +281,7 @@ class InductionMotorCircle:
         [y1, y2] = y
         alpha = _np.arctan((y2 - y1) / (x2 - x1))
         torque_max = self.radius * _np.cos(alpha) - (
-            self.radius - self.radius * _np.sin(alpha)
+                self.radius - self.radius * _np.sin(alpha)
         ) * _np.tan(alpha)
         torque_max_x = self.center_x - self.radius * _np.sin(alpha)
         torque_max_y = self.center_y + self.radius * _np.cos(alpha)
@@ -296,7 +301,7 @@ class InductionMotorCircle:
         slope: float
         """
         [[x1, x2], [y1, y2]] = line
-        return (y2 - y1)/(x2 - x1)
+        return (y2 - y1) / (x2 - x1)
 
     def get_output_power(self):
         """
@@ -322,3 +327,208 @@ class InductionMotorCircle:
         p_x_2 = center_x - self.radius * _np.cos(beta_1)
         p_y_2 = center_y + self.radius * _np.sin(beta_1)
         return [p_x_1, p_y_1], [p_x_2, p_y_2]
+
+class PowerCircle:
+    r"""
+    Plot Induction Motor Circle Diagram.
+
+    This class is designed to plot induction motor circle diagram
+    and plot circle diagram to obtain various parameters of induction motor
+
+    Parameters
+    ----------
+    type: str "sending" or "receiving"
+
+    Vr: complex Receiving End Voltage
+
+    Vs: complex Sending End Voltage
+
+    power_factor: float Power Factor
+
+    Pr: float Receiving End Real Power
+
+    Qr: float Receiving End Reactive Power
+
+    Sr: float Receiving End Total Power
+
+    Ps: float Sending End Real Power
+
+    Qs: float Sending End Reactive Power
+
+    Ss: float Sending End Total Power
+
+    power_factor: float Power Factor
+
+    A: float ABCD Matrix
+    
+    B: float ABCD Matrix
+    
+    C: float ABCD Matrix
+    
+    D: float ABCD Matrix
+
+    """
+
+    def __init__(self, type, Vr: complex = None, Vs: complex = None, power_factor: float = None,
+                Pr: float = None, Qr: float = None, Sr: complex = None,
+                Ps: float = None, Qs: float = None, Ss: complex = None,
+                A: complex = None, B: complex = None, C: complex = None,
+                D: complex = None) -> None:
+        r"""Initialize the class."""
+        if type == "receiving":
+
+            if A != None and B != None and Vr != None:
+                self.radius, self.center, self.operating_point = PowerCircle._build_circle(A, B, "receiving_end", Vr, 
+                Pr, Qr, Sr, power_factor, Vs)
+            else:
+                raise AttributeError("Not enough attributes to build circle")
+
+        elif type == "sending":
+            
+            if B != None and D != None and Vs != None:
+                self.radius, self.center, self.operating_point = PowerCircle._build_circle(D, B, "sending_end", Vs, 
+                Ps, Qs, Ss, power_factor, Vr)
+            else:
+                raise AttributeError("Not enough attributes to build circle")
+
+        else:
+            raise ValueError("Invalid type")
+
+        self.circle = Circle(self.center, self.radius)
+        self.parameters = locals()
+
+    @staticmethod
+    def _build_circle(a1, a2, circle_type, V, P = None, Q = None, S = None, power_factor = None, V_ref = None):
+
+        k = (abs(V)**2)*abs(a1)/abs(a2)
+        alpha = cmath.phase(a1)
+        beta = cmath.phase(a2)
+        
+        if circle_type == "receiving_end":
+            center = Point(-k*cmath.cos(alpha - beta), -k*cmath.sin(alpha - beta))
+
+        elif circle_type == "sending_end":
+            center = Point(k*cmath.cos(alpha -beta), -k*cmath.sin(alpha - beta))
+
+        if V_ref != None and P != None and Q != None:
+            radius = abs(V)*abs(V_ref)/(abs(a2))
+            operation_point = Point(P, Q)
+
+        elif V_ref != None and S != None:
+            radius = abs(V)*abs(V_ref)/(abs(a2))
+            operation_point = Point(S.real, S.imag)
+
+        elif V_ref != None:
+            radius = abs(V)*abs(V_ref)/(abs(a2))
+            operation_point = None
+
+        elif P != None and Q != None:
+            radius = Geometry.distance(center, Point(P, Q))
+            operation_point = Point(P, Q)
+
+        elif S != None:
+            radius = Geometry.distance(center, Point(S.real, S.imag))
+            operation_point = Point(S.real, S.imag)
+
+        elif P != None and power_factor != None:
+
+            Q = P*cmath.sqrt(1/power_factor**2 - 1).real
+
+            if power_factor < 0:
+                Q = -Q
+
+            radius = Geometry.distance(center, Point(P, Q))
+            operation_point = Point(P, Q)
+
+        elif Q != None and power_factor != None:
+            P = Q/cmath.sqrt(1/power_factor**2 - 1).real
+            radius = Geometry.distance(center, Point(P, Q))
+            operation_point = Point(P, Q)
+
+        else:
+            raise AttributeError("Enought attributes to calculate not found")
+
+        return radius, center, operation_point
+
+    def _cal_parameters(self, type1, type2):
+        
+        if self.parameters['V'+type2] == None:
+            self.parameters['V' + type2] = abs(self.parameters['B'])*self.radius/self.parameters['V' + type1]
+
+        if self.parameters['P'+type1] == None:
+            self.parameters['P' + type1] = self.operating_point.x
+
+        if self.parameters['Q'+type1] == None:
+            self.parameters['Q' + type1] = self.operating_point.y
+
+        if self.parameters['S'+type1] == None:
+            self.parameters['S' + type1] = self.operating_point.x + 1j*self.operating_point.y
+
+        if self.parameters['power_factor'] == None:
+            self.parameters['power_factor'] = self.operating_point.y/self.operating_point.x
+
+        if type1 == 'r' and type2 == 's':
+            self.parameters["Vs"] = self.parameters['B']*self.parameters["Sr"] + self.parameters["A"] * abs(self.parameters["Vr"])**2
+            self.parameters["Vs"] = self.parameters["Vs"]/self.parameters["Vr"].conjugate()
+
+        elif type1 == 's' and type2 == 'r':
+            self.parameters["Vr"] = -self.parameters['B']*self.parameters["Ss"] + self.parameters["D"] * abs(self.parameters["Vs"])**2
+            self.parameters["Vr"] = self.parameters["Vr"]/self.parameters["Vs"].conjugate()
+
+    def print_data(self):
+        r"""Print the data of the circle."""
+        if self.operating_point == None:
+            return self.center, self.radius
+
+        if self.parameters["type"] == "receiving":
+
+            self._cal_parameters("r", "s")
+
+        if self.parameters["type"] == "sending":
+            
+            self._cal_parameters("s", "r")
+
+        for key, value in self.parameters.items():
+            print(key, " => ", value)
+
+    def __call__(self) -> dict:
+        r"""Return the data of the circle."""
+        if self.parameters["type"] == "receiving":
+
+            self._cal_parameters("r", "s")
+
+        if self.parameters["type"] == "sending":
+
+            self._cal_parameters("s", "r")
+
+        return self.parameters
+
+    def plot(self):
+        r"""Plot the circle."""
+        circle_x = []
+        circle_y = []
+        
+        for data in self.circle.parametric_equation(theta_resolution=1e-5):
+            [x, y] = data
+            circle_x.append(x)
+            circle_y.append(y)        
+
+        c_x = self.center.x
+        c_y = self.center.y
+
+        op_x = self.operating_point.x
+        op_y = self.operating_point.y
+
+        #plot Circle and Diameter
+        _plt.plot(circle_x, circle_y)
+        _plt.plot([c_x - self.radius, c_x + self.radius], [c_y, c_y], 'g--')
+        _plt.plot([c_x, c_x], [c_y - self.radius, c_y + self.radius], 'g--')
+
+        _plt.plot([c_x, op_x], [c_y, op_y], 'y*-.')
+        _plt.plot([op_x, op_x], [op_y, c_y], 'b*-.') 
+        _plt.scatter(op_x, op_y, marker='*', color='r')
+        _plt.title(f"{self.parameters['type']} Power Circle")
+        _plt.xlabel("Active Power")
+        _plt.ylabel("Reactive Power")
+        _plt.grid()
+        _plt.show()
