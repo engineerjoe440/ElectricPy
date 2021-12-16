@@ -4,7 +4,9 @@
     "python.linting.pydocstyleEnabled": true,
     "python.linting.ignorePatterns": [
         "test/test_*.py",
-        "script.py"
+        "test/__init__.py",
+        "script.py",
+        "Geometry/*",
     ],
     "editor.rulers": [
     80, 120
