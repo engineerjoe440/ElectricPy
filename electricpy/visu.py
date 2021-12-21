@@ -330,10 +330,10 @@ class InductionMotorCircle:
 
 class PowerCircle:
     r"""
-    Plot Induction Motor Circle Diagram.
+    Plot Power Circle Diagram of Transmission System.
 
-    This class is designed to plot induction motor circle diagram
-    and plot circle diagram to obtain various parameters of induction motor
+    This class is designed to plot the power circle diagram of a transmission
+    system both sending and reciving ends.
 
     Parameters
     ----------
