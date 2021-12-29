@@ -18,5 +18,28 @@ def compare_lines(l1: Line, l2: Line) -> bool:
         assert_almost_equal(l1.c / l2.c , l1.a / l2.a)
     except AssertionError:
         return False
-    return True
+    except ZeroDivisionError:
+        if l1.a == 0 and l2.a == 0:
+            try:
+                assert_almost_equal(l1.c / l2.c , l1.b / l2.b)
+            except ZeroDivisionError:
+                return False
+            except AssertionError:
+                return False
+        if l1.b == 0 and l2.b == 0:
+            try:
+                assert_almost_equal(l1.c / l2.c , l1.a / l2.a)
+            except ZeroDivisionError:
+                return False
+            except AssertionError:
+                return False
+        if l1.c == 0 and l2.c == 0:
+            try:
+                assert_almost_equal(l1.a / l2.a , l1.b / l2.b)
+            except ZeroDivisionError:
+                return False
+            except AssertionError:
+                return False
+    finally:
+        return True
     
