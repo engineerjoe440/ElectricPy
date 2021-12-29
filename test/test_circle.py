@@ -82,12 +82,14 @@ def test_normal():
 
     def test_1():
 
+        from test import compare_lines
+
         c = Circle((0, 0), 1)
         p0 = Point(cmath.cos(cmath.pi/4), cmath.sin(cmath.pi/4))
         p1 = Point(-cmath.cos(cmath.pi/4), cmath.sin(cmath.pi/4))
 
-        assert c.normal(p0) == Line(1, -1, 0)
-        assert c.normal(p1) == Line(1, 1, 0)
+        assert compare_lines(c.normal(p0), Line(1, -1, 0))
+        assert compare_lines(c.normal(p1), Line(1, 1, 0))
 
     for i in range(2):
         exec("test_{}()".format(i))
