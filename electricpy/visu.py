@@ -12,7 +12,6 @@ import matplotlib.pyplot as _plt
 import cmath
 import Geometry
 from Geometry import Point
-from Geometry import circle
 from Geometry.circle import Circle
 
 class InductionMotorCircle:
