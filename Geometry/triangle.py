@@ -51,17 +51,9 @@ class Triangle:
         return alt_1.intersection(alt_2)
 
     def circum_center(self):
-        d1 = Geometry.midpoint(self.points[0], self.points[1])
-        try:
-            pb_1 = Geometry.slope_point_line(-1 / self.l1.slope(), d1)
-        except ZeroDivisionError:
-            pb_1 = Line(1, 0, -d1.x)
 
-        d2 = Geometry.midpoint(self.points[1], self.points[2])
-        try:
-            pb_2 = Geometry.slope_point_line(-1 / self.l2.slope(), d2)
-        except ZeroDivisionError:
-            pb_2 = Line(1, 0, -d2.x)
+        pb_1 = Geometry.perpendicular_bisector(self.points[0], self.points[1])
+        pb_2 = Geometry.perpendicular_bisector(self.points[1], self.points[2])
 
         return pb_1.intersection(pb_2)
 

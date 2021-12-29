@@ -163,3 +163,59 @@ def test_foot_perpendicular():
 
     for i in range(2):
         exec("test_{}()".format(i))
+
+def test_perpendicular_bisector():
+
+    from Geometry import  perpendicular_bisector
+    
+    def test_0():
+        p1 = Point(3, 0)
+        p2 = Point(0, 3)
+        l = perpendicular_bisector(p1, p2)
+        assert l == Line(1, -1, 0)
+
+    def test_1():
+        p1 = Point(-3, 0)
+        p2 = Point(0, 3)
+        l = perpendicular_bisector(p1, p2)
+        assert l == Line(1, 1, 0)
+
+    def test_2():
+        p1 = Point(3, 0)
+        p2 = Point(5, 0)
+        l = perpendicular_bisector(p1, p2)
+        assert l == Line(1, 0, -4)
+
+    def test_3():
+        p1 = Point(0, 3)
+        p2 = Point(0, 5)
+        l = perpendicular_bisector(p1, p2)
+        assert l == Line(0, 1, -4)
+
+
+    for i in range(4):
+        exec("test_{}()".format(i))
+
+def test_colinear():
+
+    def test_0():
+        p1 = Point(1, 2)
+        p2 = Point(3, 4)
+        p3 = Point(5, 6)
+        assert Geometry.colinear(p1, p2, p3)
+
+    def test_1():
+        p1 = Point(1, 2)
+        p2 = Point(3, 4)
+        p3 = Point(5, 7)
+        assert not Geometry.colinear(p1, p2, p3)
+    
+    def test_2():
+        p1 = Point(1, 0)
+        p2 = Point(2, 0)
+        p3 = Point(3, 0)
+        assert Geometry.colinear(p1, p2, p3)
+
+    for i in range(3):
+        exec("test_{}()".format(i))
+    
