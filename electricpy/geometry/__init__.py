@@ -1,43 +1,81 @@
+################################################################################
+"""
+`electricpy.geometry`  Geometry Sub Module.
+
+>>> import electricpy.geometry as geometry
+
+This Package help to handle coordinate geometry calculatios which are required for plotting various
+graphs in electrical engineering. 
+
+Built to support operations similar to Numpy and Scipy, this package is designed
+to aid in scientific calculations.
+"""
+################################################################################
 import cmath
 from typing import Tuple, Union
 from typing import Tuple
 
 
 class Point:
-    """A point in 2D space."""
+    """A point in 2D space.
+    
+    Parameters
+    ----------
+    x : float
+        The x coordinate of the point
+    y : float
+        The y coordinate of the point
+    """
 
     def __init__(self, x: float, y: float):
+        """Initialize the point."""
         self.x = x
         self.y = y
 
     def __iter__(self) -> float:
+        """Return an iterator for the point."""
         yield self.x
         yield self.y
 
     def __call__(self) -> Tuple:
+        """Return the coordinates of the point."""
         return (self.x, self.y)
 
     def __ne__(self, other):
+        """Return true if the points are not equal."""
         return not self == other
 
     def __eq__(self, __o: object) -> bool:
+        """Return true if the points are equal."""
         if isinstance(__o, Point):
             return self.x == __o.x and self.y == __o.y
         else:
             return False
 
     def __repr__(self) -> str:
+        """Return the representation of the point."""
         return f"Point({self.x}, {self.y})"
 
     def __str__(self) -> str:
+        """Return the string representation of the point."""
         return f"({self.x}, {self.y})"
 
 
 class Line:
-    """A line in 2D space in the form ax+by+c == 0."""
+    """A line in 2D space in the form ax+by+c == 0.
+    
+    Parameters
+    ----------
+    a : float
+        The a coefficient of the line
+    b : float
+        The b coefficient of the line
+    c : float
+        The c coefficient of the line
+    """
 
     def __init__(self, a: float, b: float, c: float):
-
+        """Initialize the line."""
         self.a = a
         self.b = b
         self.c = c
@@ -47,6 +85,7 @@ class Line:
             raise AssertionError("line can not have all co-efficients zeros")
 
     def ordinate(self, x):
+        """Return the ordinate of the line at the given x value."""
         try:
             return -1*(self.a * x + self.c)/self.b
         except ZeroDivisionError:
@@ -55,13 +94,15 @@ class Line:
 
     @staticmethod
     def construct(p1: Point, p2: Point):
+        """Construct a line from two points."""
         return line_equation(p1, p2)
 
     def __call__(self, p: Point) -> float:
+        """Return the value of the point when subsituted in a line."""
         return self.a * p.x + self.b * p.y + self.c
 
     def __str__(self):
-
+        """Return the string representation of the line."""
         if self.a == 0:
             return f"y = {-self.c/self.b}"
         elif self.b == 0:
@@ -77,15 +118,18 @@ class Line:
             return f"{self.a}x + {self.b}y + {self.c} = 0"
 
     def __repr__(self) -> str:
+        """Return the representation of the line."""
         return f"Line({self.a}, {self.b}, {self.c})"
 
     def slope(self):
+        """Return the slope of the line."""
         try:
             return -self.a / self.b
         except ZeroDivisionError:
             raise ZeroDivisionError("slope is not defined for vertical lines")
 
     def intercepts(self):
+        """Return the intercepts of the line."""
         data = dict()
         try:
             data['x'] = -self.c / self.a
@@ -98,7 +142,7 @@ class Line:
         return data
 
     def __eq__(self, __o: object) -> bool:
-
+        """Return true if the lines are equal."""
         if self.a == 0 and __o.a == 0:
             if self.c == 0 and __o.c == 0:
                 return True
@@ -128,15 +172,19 @@ class Line:
             return False
 
     def distance(self, p: Point) -> float:
+        """Return the distance of the point from the line."""
         return line_distance(p, self)
 
     def foot_perpendicular(self, p: Point) -> Point:
+        """Return the foot of the perpendicular from a point to line."""
         return foot_perpendicular(p, self)
 
     def image(self, p: Point) -> Point:
+        """Return the image of a point with respect to line."""
         return point_image(p, self)
 
-    def intersection(self, l1) -> Union[Point, None]:
+    def intersection(self, l1: object) -> Union[Point, None]:
+        """Return the intersection of two lines."""
         return line_intersection(self, l1)
 
 
@@ -165,7 +213,6 @@ def distance(p1: Point, p2: Point) -> float:
 
 def section(p1: Point, p2: Point, ratio: Union[Tuple, float]) -> Point:
     """Calculate the point on a line section."""
-
     if isinstance(ratio, float):
         return Point(p1.x + ratio * (p2.x - p1.x), p1.y + ratio * (p2.y - p1.y))
     else:
@@ -212,10 +259,12 @@ def slope_point_line(slope: float, p: Point) -> Line:
 
 
 def line_distance(p: Point, line: Line) -> float:
+    """Calculate the distance between a point and a line."""
     return abs(line(p)) / (line.a ** 2 + line.b ** 2) ** 0.5
 
 
 def foot_perpendicular(p: Point, line: Line) -> Point:
+    """Calculate the foot perpendicular from a point to a line."""
     d = -line(p)/(line.a**2+line.b**2)
     x = p.x + line.a * d
     y = p.y + line.b * d
@@ -223,13 +272,13 @@ def foot_perpendicular(p: Point, line: Line) -> Point:
 
 
 def point_image(p: Point, line: Line) -> Point:
+    """Calculate the image of a point when a line is acting like a mirror."""
     p1: Point = foot_perpendicular(p, line)
     return Point(2*p1.x - p.x, 2*p1.y - p.y)
 
 
 def perpendicular_bisector(p1: Point, p2: Point) -> Line:
     """Calculate the perpendicular bisector of two points."""
-
     try:
         m = slope(p1, p2)
     except ZeroDivisionError:
