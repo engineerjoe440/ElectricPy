@@ -1,26 +1,3 @@
-# test all imports in Gemotry folder
-
-def test_Geometry():
-    try:
-        import electricpy.geometry
-        assert True
-    except ImportError:
-        assert False
-
-def test_circle():
-    try:
-        from electricpy.geometry.circle import Circle
-        assert True
-    except ImportError:
-        assert False
-
-def test_triangle():
-    try:
-        from electricpy.geometry.triangle import Triangle
-        assert True
-    except ImportError:
-        assert False
-
 # Import ElectricPy modules just to make sure they load correctly
 
 # Test importing the package itself
@@ -71,4 +48,29 @@ def test_import_visu():
     except:
         assert False
 
+# Testing Imports of geometry submodule
+
+# Testing geometry import
+def test_Geometry():
+    try:
+        import electricpy.geometry
+        assert True
+    except ImportError:
+        assert False
+
+# Testing circle import from electricpy.geometry
+def test_circle():
+    try:
+        from electricpy.geometry.circle import Circle
+        assert True
+    except ImportError:
+        assert False
+
+# Testing triangle import from electricpy.geometry
+def test_triangle():
+    try:
+        from electricpy.geometry.triangle import Triangle
+        assert True
+    except ImportError:
+        assert False
 

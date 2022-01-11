@@ -336,45 +336,45 @@ class PowerCircle:
 
     Parameters
     ----------
-    type: str "sending" or "receiving"
-
-    Vr: complex Receiving End Voltage
-
-    Vs: complex Sending End Voltage
-
-    power_factor: float Power Factor
-
-    Pr: float Receiving End Real Power
-
-    Qr: float Receiving End Reactive Power
-
-    Sr: float Receiving End Total Power
-
-    Ps: float Sending End Real Power
-
-    Qs: float Sending End Reactive Power
-
-    Ss: float Sending End Total Power
-
-    power_factor: float Power Factor
-
-    A: float ABCD Matrix
-    
-    B: float ABCD Matrix
-    
-    C: float ABCD Matrix
-    
-    D: float ABCD Matrix
-
+    power_circle_type: str ["sending", "receiving"]
+    Vr: complex 
+        Receiving End Voltage
+    Vs: complex
+        Sending End Voltage
+    power_factor: float, default = 0.8 
+        Power Factor of the transmission system
+    Pr: float, default = None
+        Receiving End Real Power
+    Qr: float, default = None
+        Receiving End Reactive Power
+    Sr: complex, default = None
+        Receiving End Total Complex Power
+    Ps: float, default = None
+        Sending End Real Power
+    Qs: float, default = None
+        Sending End Reactive Power
+    Ss: complex, default = None
+        Sending End Total Complex Power
+    A: float 
+        Transmission System ABCD Parameters, A, default = None     
+    B: float 
+        Transmission System ABCD Parameters, B, default = None         
+    C: float 
+        Transmission System ABCD Parameters, C, default = None     
+    D: float 
+        Transmission System ABCD Parameters, D, default = None 
     """
 
-    def __init__(self, type, Vr: complex = None, Vs: complex = None, power_factor: float = None,
+    def __init__(self, power_circle_type: str, power_factor: float = 0.8, Vr: complex = None, Vs: complex = None,
                 Pr: float = None, Qr: float = None, Sr: complex = None,
                 Ps: float = None, Qs: float = None, Ss: complex = None,
                 A: complex = None, B: complex = None, C: complex = None,
                 D: complex = None) -> None:
         r"""Initialize the class."""
-        if type == "receiving":
+        if C is not None:
+            assert abs(A*D - B*C - 1) < 1e-6, "ABCD Matrix is not a valid ABCD Matrix"
+
+        if power_circle_type == "receiving":
 
             if A != None and B != None and Vr != None:
                 self.radius, self.center, self.operating_point = PowerCircle._build_circle(A, B, "receiving_end", Vr, 
@@ -382,16 +382,16 @@ class PowerCircle:
             else:
                 raise AttributeError("Not enough attributes to build circle")
 
-        elif type == "sending":
+        elif power_circle_type == "sending":
             
             if B != None and D != None and Vs != None:
                 self.radius, self.center, self.operating_point = PowerCircle._build_circle(D, B, "sending_end", Vs, 
                 Ps, Qs, Ss, power_factor, Vr)
             else:
-                raise AttributeError("Not enough attributes to build circle")
+                raise AttributeError("Not enough attributes to build power circle")
 
         else:
-            raise ValueError("Invalid type")
+            raise ValueError("Invalid power circle type")
 
         self.circle = Circle(self.center, self.radius)
         self.parameters = locals()
@@ -479,11 +479,11 @@ class PowerCircle:
         if self.operating_point == None:
             return self.center, self.radius
 
-        if self.parameters["type"] == "receiving":
+        if self.parameters["power_circle_type"] == "receiving":
 
             self._cal_parameters("r", "s")
 
-        if self.parameters["type"] == "sending":
+        if self.parameters["power_circle_type"] == "sending":
             
             self._cal_parameters("s", "r")
 
@@ -492,11 +492,11 @@ class PowerCircle:
 
     def __call__(self) -> dict:
         r"""Return the data of the circle."""
-        if self.parameters["type"] == "receiving":
+        if self.parameters["power_circle_type"] == "receiving":
 
             self._cal_parameters("r", "s")
 
-        if self.parameters["type"] == "sending":
+        if self.parameters["power_circle_type"] == "sending":
 
             self._cal_parameters("s", "r")
 
@@ -526,7 +526,7 @@ class PowerCircle:
         _plt.plot([c_x, op_x], [c_y, op_y], 'y*-.')
         _plt.plot([op_x, op_x], [op_y, c_y], 'b*-.') 
         _plt.scatter(op_x, op_y, marker='*', color='r')
-        _plt.title(f"{self.parameters['type']} Power Circle")
+        _plt.title(f"{self.parameters['power_circle_type'].capitalize()} Power Circle")
         _plt.xlabel("Active Power")
         _plt.ylabel("Reactive Power")
         _plt.grid()
