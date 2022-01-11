@@ -6,7 +6,6 @@
         "test/test_*.py",
         "test/__init__.py",
         "script.py",
-        "Geometry/*",
     ],
     "editor.rulers": [
     80, 120

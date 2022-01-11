@@ -1,5 +1,5 @@
-from Geometry.circle import Circle
-from Geometry import Line, Point
+from electricpy.geometry.circle import Circle
+from electricpy.geometry import Line, Point
 import cmath
 
 def test_area():

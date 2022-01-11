@@ -1,8 +1,8 @@
 from typing import List
 
-from Geometry import Point
-from Geometry import Line
-import Geometry
+from electricpy.geometry import Point
+from electricpy.geometry import Line
+import electricpy.geometry as geometry
 
 #Type cast complex to float
 
@@ -13,13 +13,13 @@ class Triangle:
         if len(points) != 3:
             raise ValueError('Triangle must have 3 points')
 
-        self.a = Geometry.distance(points[0], points[1])
-        self.b = Geometry.distance(points[1], points[2])
-        self.c = Geometry.distance(points[0], points[2])
+        self.a = geometry.distance(points[0], points[1])
+        self.b = geometry.distance(points[1], points[2])
+        self.c = geometry.distance(points[0], points[2])
 
-        self.l1 = Geometry.line_equation(points[0], points[1])
-        self.l2 = Geometry.line_equation(points[1], points[2])
-        self.l3 = Geometry.line_equation(points[0], points[2])
+        self.l1 = geometry.line_equation(points[0], points[1])
+        self.l2 = geometry.line_equation(points[1], points[2])
+        self.l3 = geometry.line_equation(points[0], points[2])
 
         if not self.is_valid():
             raise ValueError("Invalid triangle")
@@ -52,8 +52,8 @@ class Triangle:
 
     def circum_center(self):
 
-        pb_1 = Geometry.perpendicular_bisector(self.points[0], self.points[1])
-        pb_2 = Geometry.perpendicular_bisector(self.points[1], self.points[2])
+        pb_1 = geometry.perpendicular_bisector(self.points[0], self.points[1])
+        pb_2 = geometry.perpendicular_bisector(self.points[1], self.points[2])
 
         return pb_1.intersection(pb_2)
 

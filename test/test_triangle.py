@@ -1,5 +1,5 @@
-from Geometry import triangle
-from Geometry import Point
+from electricpy.geometry import triangle
+from electricpy.geometry import Point
 from test import compare_points
 import cmath
 

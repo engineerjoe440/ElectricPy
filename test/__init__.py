@@ -1,5 +1,5 @@
-from Geometry import Point
-from Geometry import Line
+from electricpy.geometry import Point
+from electricpy.geometry import Line
 import numpy as np
 from numpy.testing import assert_almost_equal
 
