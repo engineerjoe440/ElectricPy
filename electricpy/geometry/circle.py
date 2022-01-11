@@ -1,7 +1,7 @@
 from typing import Union
-import Geometry
-from Geometry import Line
-from Geometry import Point
+import electricpy.geometry as geometry
+from electricpy.geometry import Line
+from electricpy.geometry import Point
 import cmath
 
 class Circle:
@@ -40,7 +40,7 @@ class Circle:
         return Line.construct(p, self.center)
 
     def power(self, p: Point) -> float:
-        return Geometry.distance(self.center, p) ** 2 - self.radius ** 2
+        return geometry.distance(self.center, p) ** 2 - self.radius ** 2
 
     def is_tangent(self, l: Line) -> bool:
         return l.distance(self.center) == self.radius
@@ -75,10 +75,10 @@ class Circle:
             c1 = self.center
             c2 = other.center
 
-            m = Geometry.slope(c1, c2)
+            m = geometry.slope(c1, c2)
             theta = cmath.atan(m)
 
-            d = Geometry.distance(c1, c2)
+            d = geometry.distance(c1, c2)
 
             if d == self.radius + other.radius:
                 """Two circles are touching each other"""
@@ -128,14 +128,14 @@ class Circle:
 def construct(p0: Point, p1: Point, p2: Point) -> Circle:
 
     try:
-        assert not Geometry.colinear(p0, p1, p2)
+        assert not geometry.colinear(p0, p1, p2)
     except AssertionError:
         raise AssertionError("Circle can not be constructed from three points that are colinear")
     
-    l1 = Geometry.perpendicular_bisector(p0, p1)
-    l2 = Geometry.perpendicular_bisector(p1, p2)
+    l1 = geometry.perpendicular_bisector(p0, p1)
+    l2 = geometry.perpendicular_bisector(p1, p2)
 
     center = l1.intersection(l2)
-    radius = Geometry.distance(center, p0)
+    radius = geometry.distance(center, p0)
 
     return Circle(center, radius)

@@ -10,9 +10,9 @@ this module is designed to assist engineers visualize their designs.
 import numpy as _np
 import matplotlib.pyplot as _plt
 import cmath
-import Geometry
-from Geometry import Point
-from Geometry.circle import Circle
+import electricpy.geometry as geometry
+from electricpy.geometry import Point
+from electricpy.geometry.circle import Circle
 
 class InductionMotorCircle:
     """
@@ -422,11 +422,11 @@ class PowerCircle:
             operation_point = None
 
         elif P != None and Q != None:
-            radius = Geometry.distance(center, Point(P, Q))
+            radius = geometry.distance(center, Point(P, Q))
             operation_point = Point(P, Q)
 
         elif S != None:
-            radius = Geometry.distance(center, Point(S.real, S.imag))
+            radius = geometry.distance(center, Point(S.real, S.imag))
             operation_point = Point(S.real, S.imag)
 
         elif P != None and power_factor != None:
@@ -436,12 +436,12 @@ class PowerCircle:
             if power_factor < 0:
                 Q = -Q
 
-            radius = Geometry.distance(center, Point(P, Q))
+            radius = geometry.distance(center, Point(P, Q))
             operation_point = Point(P, Q)
 
         elif Q != None and power_factor != None:
             P = Q/cmath.sqrt(1/power_factor**2 - 1).real
-            radius = Geometry.distance(center, Point(P, Q))
+            radius = geometry.distance(center, Point(P, Q))
             operation_point = Point(P, Q)
 
         else:

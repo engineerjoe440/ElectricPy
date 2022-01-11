@@ -2,21 +2,21 @@
 
 def test_Geometry():
     try:
-        import Geometry
+        import electricpy.geometry
         assert True
     except ImportError:
         assert False
 
 def test_circle():
     try:
-        from Geometry.circle import Circle
+        from electricpy.geometry.circle import Circle
         assert True
     except ImportError:
         assert False
 
 def test_triangle():
     try:
-        from Geometry.triangle import Triangle
+        from electricpy.geometry.triangle import Triangle
         assert True
     except ImportError:
         assert False
