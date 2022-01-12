@@ -4,8 +4,8 @@
 
 >>> import electricpy.geometry as geometry
 
-This Package help to handle coordinate geometry calculatios which are required for plotting various
-graphs in electrical engineering. 
+This Package help to handle coordinate geometry calculatios which are required 
+for plotting various graphs in electrical engineering. 
 
 Built to support operations similar to Numpy and Scipy, this package is designed
 to aid in scientific calculations.
@@ -62,7 +62,9 @@ class Point:
 
 
 class Line:
-    """A line in 2D space in the form ax+by+c == 0.
+    """A line in 2D space in the form .
+
+    math:: ax + by + c = 0
     
     Parameters
     ----------

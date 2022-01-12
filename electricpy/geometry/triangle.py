@@ -1,11 +1,12 @@
 ################################################################################
 """
-`electricpy.geometry.triangle` - Collection of methods which operate on cartesial Triangle.
+`electricpy.geometry.triangle` - Collection of methods which operate on \
+cartesial Triangle.
 
 >>> import electricpy.geometry.triangle as triangle
 
-This sub package help to handle coordinate geometry calculatios on triangle which are required 
-for plotting various graphs in electrical engineering. 
+This sub package help to handle coordinate geometry calculatios on triangle 
+which are required for plotting various graphs in electrical engineering. 
 """
 ################################################################################
 from typing import List
