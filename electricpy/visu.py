@@ -10,7 +10,7 @@ this module is designed to assist engineers visualize their designs.
 import numpy as _np
 import matplotlib.pyplot as _plt
 import cmath
-import electricpy.geometry as geometry
+from electricpy import geometry
 from electricpy.geometry import Point
 from electricpy.geometry.circle import Circle
 

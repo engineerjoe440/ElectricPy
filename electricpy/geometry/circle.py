@@ -9,7 +9,7 @@ for plotting various graphs in electrical engineering.
 """
 ################################################################################
 from typing import Union
-import electricpy.geometry as geometry
+from electricpy import geometry
 from electricpy.geometry import Line
 from electricpy.geometry import Point
 import cmath

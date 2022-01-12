@@ -11,7 +11,7 @@ for plotting various graphs in electrical engineering.
 from typing import List
 from electricpy.geometry import Point
 from electricpy.geometry import Line
-import electricpy.geometry as geometry
+from electricpy import geometry
 
 #Type cast complex to float
 
