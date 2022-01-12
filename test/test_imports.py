@@ -53,7 +53,7 @@ def test_import_visu():
 # Testing geometry import
 def test_Geometry():
     try:
-        import electricpy.geometry
+        from electricpy import geometry
         assert True
     except ImportError:
         assert False

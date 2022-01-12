@@ -1,4 +1,4 @@
-import electricpy.geometry as geometry
+from electricpy import geometry
 from electricpy.geometry import Point
 from electricpy.geometry import Line
 from numpy.testing import assert_array_almost_equal
