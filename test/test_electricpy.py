@@ -21,7 +21,7 @@ class Test_visualization:
         assert_almost_equal(MotorCircle()['no_load_loss'], open_circuit_test_data['W0'])
 
     def test_power_circle(self):
-        from electricpy.visu import PowerCircle
+        from electricpy.visu import receiving_end_power_circle
         data = {
             "A" : cmath.rect(0.895, math.radians(1.4)),
             "B" : cmath.rect(182.5, math.radians(78.6)),
@@ -30,7 +30,7 @@ class Test_visualization:
             "power_factor": -0.9,
         }
 
-        power_circle = PowerCircle("receiving", **data)
+        power_circle = receiving_end_power_circle(**data)
 
         assert_almost_equal(abs(power_circle()['Vs']), 224.909, decimal = 3)
 
