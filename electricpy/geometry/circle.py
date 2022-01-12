@@ -1,11 +1,12 @@
 ################################################################################
 """
-`electricpy.geometry.circle` - Collection of methods which operate on cartesial Circle.
+`electricpy.geometry.circle` - Collection of methods which operate on \
+cartesial Circle.
 
 >>> import electricpy.geometry.circle as circle
 
-This sub package help to handle coordinate geometry calculatios on circles which are required 
-for plotting various graphs in electrical engineering. 
+This sub package help to handle coordinate geometry calculatios on circles 
+which are required for plotting various graphs in electrical engineering. 
 """
 ################################################################################
 from typing import Union
