@@ -3,7 +3,6 @@ import numpy as np
 import cmath
 import math
 from numpy.testing import assert_almost_equal
-
 class Test_visualization:
 
     def test_induction_motor_circle(self):
@@ -408,3 +407,28 @@ def test_seq_to_abc():
         np.testing.assert_array_almost_equal(seq_to_abc([0, 0, 1]), [1+0j, a, a*a])
 
     test_0()
+
+def test_air_core_inductor():
+
+    from electricpy import air_core_inductor
+
+    def test_0():
+
+        coil_diameter = 1e-3
+        coil_length = 1e-3
+        turn = 1000
+
+        assert_almost_equal(air_core_inductor(coil_diameter, coil_length, turn), 0.67864, decimal = 5)
+
+
+    def test_1():
+        
+        coil_diameter = 1e-2
+        coil_length = 1e-2
+        turn = 251
+
+        assert_almost_equal(air_core_inductor(coil_diameter, coil_length, turn), 0.42755, decimal = 5)
+
+
+    for i in range(2):
+        exec("test_{}()".format(i))
