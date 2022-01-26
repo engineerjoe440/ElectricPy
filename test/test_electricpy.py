@@ -3,35 +3,6 @@ import numpy as np
 import cmath
 import math
 from numpy.testing import assert_almost_equal
-class Test_visualization:
-
-    def test_induction_motor_circle(self):
-        from electricpy.visu import InductionMotorCircle
-
-        open_circuit_test_data = {'V0': 400, 'I0': 9, 'W0': 1310}
-        blocked_rotor_test_data = {'Vsc': 200, 'Isc': 50, 'Wsc': 7100}
-        ratio = 1  # stator copper loss/ rotor copper loss
-        output_power = 15000
-        # InductionMotorCircle(open_circuit_test_data, blocked_rotor_test_data, output_power, torque_ration=ratio)
-        #
-        MotorCircle = InductionMotorCircle(open_circuit_test_data, blocked_rotor_test_data,
-                            output_power, torque_ration=ratio, frequency=50, poles=4)
-
-        assert_almost_equal(MotorCircle()['no_load_loss'], open_circuit_test_data['W0'])
-
-    def test_power_circle(self):
-        from electricpy.visu import receiving_end_power_circle
-        data = {
-            "A" : cmath.rect(0.895, math.radians(1.4)),
-            "B" : cmath.rect(182.5, math.radians(78.6)),
-            "Vr" : cmath.rect(215, 0),
-            "Pr": 50,
-            "power_factor": -0.9,
-        }
-
-        power_circle = receiving_end_power_circle(**data)
-
-        assert_almost_equal(abs(power_circle()['Vs']), 224.909, decimal = 3)
 
 def test_phasor():
     from electricpy import phasor
@@ -408,27 +379,60 @@ def test_seq_to_abc():
 
     test_0()
 
-def test_air_core_inductor():
+class Test_air_core_inductor:
 
-    from electricpy import air_core_inductor
+    def invoke(test_case):
+        def wrapper(self):
+            from electricpy import air_core_inductor
+            expected_result = test_case(self)
+            computed_result = air_core_inductor(self.coil_diameter, self.coil_length, self.turn)            
+            assert_almost_equal(computed_result, expected_result, decimal = 3)
+        return wrapper
 
-    def test_0():
-
-        coil_diameter = 1e-3
-        coil_length = 1e-3
-        turn = 1000
-
-        assert_almost_equal(air_core_inductor(coil_diameter, coil_length, turn), 0.67864, decimal = 5)
-
-
-    def test_1():
+    @invoke
+    def test_0(self):
         
-        coil_diameter = 1e-2
-        coil_length = 1e-2
-        turn = 251
+        self.coil_diameter = 1e-3
+        self.coil_length = 1e-3
+        self.turn = 1000
 
-        assert_almost_equal(air_core_inductor(coil_diameter, coil_length, turn), 0.42755, decimal = 5)
+        return 0.678640
 
+    @invoke
+    def test_1(self):
 
-    for i in range(2):
-        exec("test_{}()".format(i))
+        self.coil_diameter = 1e-2
+        self.coil_length = 1e-2
+        self.turn = 251
+
+        return 0.42755
+
+class Test_visualization:
+
+    def test_induction_motor_circle(self):
+        from electricpy.visu import InductionMotorCircle
+
+        open_circuit_test_data = {'V0': 400, 'I0': 9, 'W0': 1310}
+        blocked_rotor_test_data = {'Vsc': 200, 'Isc': 50, 'Wsc': 7100}
+        ratio = 1  # stator copper loss/ rotor copper loss
+        output_power = 15000
+        # InductionMotorCircle(open_circuit_test_data, blocked_rotor_test_data, output_power, torque_ration=ratio)
+        #
+        MotorCircle = InductionMotorCircle(open_circuit_test_data, blocked_rotor_test_data,
+                            output_power, torque_ration=ratio, frequency=50, poles=4)
+
+        assert_almost_equal(MotorCircle()['no_load_loss'], open_circuit_test_data['W0'])
+
+    def test_power_circle(self):
+        from electricpy.visu import receiving_end_power_circle
+        data = {
+            "A" : cmath.rect(0.895, math.radians(1.4)),
+            "B" : cmath.rect(182.5, math.radians(78.6)),
+            "Vr" : cmath.rect(215, 0),
+            "Pr": 50,
+            "power_factor": -0.9,
+        }
+
+        power_circle = receiving_end_power_circle(**data)
+
+        assert_almost_equal(abs(power_circle()['Vs']), 224.909, decimal = 3)
