@@ -4924,7 +4924,7 @@ def characterz(R, G, L, C, freq=60):
     Zc = _np.sqrt((R + 1j * w * L) / (G + 1j * w * C))
     return (Zc)
 
-#define propagation_constants for long transmission line
+# Define propagation_constants for long transmission line
 def propagation_constants(z, y, length):
     r"""
     Transaction Line Propagation Constant Calculator.
@@ -5039,8 +5039,8 @@ def rad_to_hz(radians):
 
     Same as `hertz`.
 
-    Paramters
-    ---------
+    Parameters
+    ----------
     radians:    float
                 The frequency (represented in radians/sec)
 
@@ -5067,8 +5067,8 @@ def hz_to_rad(hertz):
 
     Same as `radsec`.
 
-    Paramters
-    ---------
+    Parameters
+    ----------
     hertz:      float
                 The frequency (represented in Hertz)
 
@@ -6712,7 +6712,7 @@ def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
 
     TODO: This function should be broken into multiple smaller functions.
     
-    Parameters 
+    Parameters
     ---------- 
     R:      list[float, float] or tuple(float, float), optional
             List of 2 resistor which are need in configuring IC 555.
@@ -6784,7 +6784,7 @@ def ic_555_monostable(R=None,C=None,freq=None,t_high=None,t_low=None):
 
     TODO: This function should be broken into multiple smaller functions.
     
-    Parameters 
+    Parameters
     ---------- 
     R:      list[float, float] or tuple(float, float), optional
             List of 2 resistor which are need in configuring IC 555.
@@ -6841,7 +6841,7 @@ def t_attenuator(Adb, Z0):
     .. math:: R2 = Z0*(\frac{10^{\frac{A_{db}}{20}}}{10^{\frac{A_{db}}{10}}-1})
     .. image:: /static/t-attenuator-circuit.png
 
-    Parameters 
+    Parameters
     ---------- 
     Adb: float Attenuation in db
     Z0: float Impedence
@@ -6870,7 +6870,7 @@ def pi_attenuator(Adb, Z0):
     .. math:: R2 = \frac{Z0}{2}*(10^{\frac{A_{db}}{20}} - \frac{1}{10^{\frac{A_{db}}{20}}})
     .. image:: /static/pi-attenuator-circuit.png
 
-    Parameters 
+    Parameters
     ---------- 
     Adb: float Attenuation in db
     Z0: float Impedence
@@ -6886,4 +6886,23 @@ def pi_attenuator(Adb, Z0):
     R2 = (Z0/2)*(_np.power(10, x) - (1/(_np.power(10, x))))
 
     return R1,R2
+
+def air_core_inductor(coil_diameter: float, coil_length: float, turns: int):
+    r"""
+    Compute Inductance of Air Core Inductor.
+
+    Air core inductors that consist of a coil of conducting wire with no core.
+    They are used in all sorts of electronic devices like radios and computers.
+
+    Parameters
+    ---------- 
+    coil_diameter: float in meters
+    coil_length: float in meters
+    turns: int inductor turns
+
+    Returns 
+    ------- 
+    L: float Inductance of air core inductor in (mH)
+    """
+    return (1000*coil_diameter*coil_diameter) * (turns*turns) / ((457418*coil_diameter) + (1016127*coil_length))
 # END OF FILE
