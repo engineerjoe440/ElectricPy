@@ -336,11 +336,12 @@ class PowerCircle:
 
     Parameters
     ----------
-    power_circle_type: str ["sending", "receiving"]
+    power_circle_type: str ["sending", "receiving"] 
+        Type of power circle diagram to plot. 
     Vr: complex 
-        Receiving End Voltage
+        Transmission Line Receiving End Voltage (phasor complex value)
     Vs: complex
-        Sending End Voltage
+        Transmission Line Sending End Voltage (phasor complex value)
     power_factor: float
         Power Factor of the transmission system, default = None 
     Pr: float
