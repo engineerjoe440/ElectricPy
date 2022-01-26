@@ -1,0 +1,6 @@
+electricpy.air\_core\_inductor
+==============================
+
+.. currentmodule:: electricpy
+
+.. autofunction:: air_core_inductor

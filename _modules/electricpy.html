@@ -4966,7 +4966,7 @@
     <span class="n">Zc</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">R</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">w</span> <span class="o">*</span> <span class="n">L</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">G</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">w</span> <span class="o">*</span> <span class="n">C</span><span class="p">))</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">Zc</span><span class="p">)</span></div>
 
-<span class="c1">#define propagation_constants for long transmission line</span>
+<span class="c1"># Define propagation_constants for long transmission line</span>
 <div class="viewcode-block" id="propagation_constants"><a class="viewcode-back" href="../api/electricpy.propagation_constants.html#electricpy.propagation_constants">[docs]</a><span class="k">def</span> <span class="nf">propagation_constants</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Transaction Line Propagation Constant Calculator.</span>
@@ -5081,8 +5081,8 @@
 
 <span class="sd">    Same as `hertz`.</span>
 
-<span class="sd">    Paramters</span>
-<span class="sd">    ---------</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
 <span class="sd">    radians:    float</span>
 <span class="sd">                The frequency (represented in radians/sec)</span>
 
@@ -5109,8 +5109,8 @@
 
 <span class="sd">    Same as `radsec`.</span>
 
-<span class="sd">    Paramters</span>
-<span class="sd">    ---------</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
 <span class="sd">    hertz:      float</span>
 <span class="sd">                The frequency (represented in Hertz)</span>
 
@@ -6754,7 +6754,7 @@
 
 <span class="sd">    TODO: This function should be broken into multiple smaller functions.</span>
 <span class="sd">    </span>
-<span class="sd">    Parameters </span>
+<span class="sd">    Parameters</span>
 <span class="sd">    ---------- </span>
 <span class="sd">    R:      list[float, float] or tuple(float, float), optional</span>
 <span class="sd">            List of 2 resistor which are need in configuring IC 555.</span>
@@ -6826,7 +6826,7 @@
 
 <span class="sd">    TODO: This function should be broken into multiple smaller functions.</span>
 <span class="sd">    </span>
-<span class="sd">    Parameters </span>
+<span class="sd">    Parameters</span>
 <span class="sd">    ---------- </span>
 <span class="sd">    R:      list[float, float] or tuple(float, float), optional</span>
 <span class="sd">            List of 2 resistor which are need in configuring IC 555.</span>
@@ -6883,7 +6883,7 @@
 <span class="sd">    .. math:: R2 = Z0*(\frac{10^{\frac{A_{db}}{20}}}{10^{\frac{A_{db}}{10}}-1})</span>
 <span class="sd">    .. image:: /static/t-attenuator-circuit.png</span>
 
-<span class="sd">    Parameters </span>
+<span class="sd">    Parameters</span>
 <span class="sd">    ---------- </span>
 <span class="sd">    Adb: float Attenuation in db</span>
 <span class="sd">    Z0: float Impedence</span>
@@ -6912,7 +6912,7 @@
 <span class="sd">    .. math:: R2 = \frac{Z0}{2}*(10^{\frac{A_{db}}{20}} - \frac{1}{10^{\frac{A_{db}}{20}}})</span>
 <span class="sd">    .. image:: /static/pi-attenuator-circuit.png</span>
 
-<span class="sd">    Parameters </span>
+<span class="sd">    Parameters</span>
 <span class="sd">    ---------- </span>
 <span class="sd">    Adb: float Attenuation in db</span>
 <span class="sd">    Z0: float Impedence</span>
@@ -6928,6 +6928,25 @@
     <span class="n">R2</span> <span class="o">=</span> <span class="p">(</span><span class="n">Z0</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">x</span><span class="p">))))</span>
 
     <span class="k">return</span> <span class="n">R1</span><span class="p">,</span><span class="n">R2</span></div>
+
+<div class="viewcode-block" id="air_core_inductor"><a class="viewcode-back" href="../api/electricpy.air_core_inductor.html#electricpy.air_core_inductor">[docs]</a><span class="k">def</span> <span class="nf">air_core_inductor</span><span class="p">(</span><span class="n">coil_diameter</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">coil_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">turns</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute Inductance of Air Core Inductor.</span>
+
+<span class="sd">    Air core inductors that consist of a coil of conducting wire with no core.</span>
+<span class="sd">    They are used in all sorts of electronic devices like radios and computers.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ---------- </span>
+<span class="sd">    coil_diameter: float in meters</span>
+<span class="sd">    coil_length: float in meters</span>
+<span class="sd">    turns: int inductor turns</span>
+
+<span class="sd">    Returns </span>
+<span class="sd">    ------- </span>
+<span class="sd">    L: float Inductance of air core inductor in (mH)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="n">coil_diameter</span><span class="o">*</span><span class="n">coil_diameter</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">turns</span><span class="o">*</span><span class="n">turns</span><span class="p">)</span> <span class="o">/</span> <span class="p">((</span><span class="mi">457418</span><span class="o">*</span><span class="n">coil_diameter</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1016127</span><span class="o">*</span><span class="n">coil_length</span><span class="p">))</span></div>
 <span class="c1"># END OF FILE</span>
 </pre></div>
 
@@ -6970,7 +6989,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Joe Stanley.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
     </div>
   </body>
 </html>

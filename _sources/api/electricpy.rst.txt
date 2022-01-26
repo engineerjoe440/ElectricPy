@@ -23,6 +23,8 @@
     
     acpiv
     
+    air_core_inductor
+    
     bridge_impedance
     
     btu
