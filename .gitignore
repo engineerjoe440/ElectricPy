@@ -13,6 +13,9 @@ build/
 # Ignore TOX
 .tox/
 
+# Ignore .venv
+.venv/
+
 #Ignore PyCharm
 .idea/
 

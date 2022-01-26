@@ -1,9 +1,5 @@
 # Import ElectricPy modules just to make sure they load correctly
 
-import os
-import sys
-import pytest
-
 # Test importing the package itself
 def test_import_by_name():
     try:
@@ -43,3 +39,38 @@ def test_import_sim():
         assert True
     except:
         assert False
+
+# Test importing the `visu` module
+def test_import_visu():
+    try:
+        from electricpy import visu
+        assert True
+    except:
+        assert False
+
+# Testing Imports of geometry submodule
+
+# Testing geometry import
+def test_Geometry():
+    try:
+        from electricpy import geometry
+        assert True
+    except ImportError:
+        assert False
+
+# Testing circle import from electricpy.geometry
+def test_circle():
+    try:
+        from electricpy.geometry.circle import Circle
+        assert True
+    except ImportError:
+        assert False
+
+# Testing triangle import from electricpy.geometry
+def test_triangle():
+    try:
+        from electricpy.geometry.triangle import Triangle
+        assert True
+    except ImportError:
+        assert False
+
