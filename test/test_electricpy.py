@@ -411,7 +411,7 @@ def test_vectarray():
 
         B_test = [[np.abs(x), np.degrees(np.angle(x))] for x in A]
 
-        assert (B == B_test).all()
+        np.testing.assert_array_almost_equal(B, B_test)
 
     def test_1():
 
@@ -419,13 +419,13 @@ def test_vectarray():
         B = vectarray(A)
 
         B_test = [[np.abs(x), 0] for x in A]
-        assert (B == B_test).all()
+        np.testing.assert_array_almost_equal(B, B_test)
 
         A = np.random.random(size = 16)*1j
         B = vectarray(A)
 
         B_test = [[np.abs(x), 90] for x in A]
-        assert (B == B_test).all()
+        np.testing.assert_array_almost_equal(B, B_test)
 
     for i in range(2):
         exec('test_{}()'.format(i))
