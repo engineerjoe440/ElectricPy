@@ -223,6 +223,27 @@ def test_ic_555_astable():
     assert_almost_equal(result['t_high'], 1.386*10**-5, decimal = 3)
 
     #test the other way around
+def test_powerflow():
+    from electricpy import powerflow, phasor
+    
+    def test_0():
+        Vsend = phasor(1.01, 30)
+        Vrecv = phasor(1, 0)
+        Xline = 0.2
+
+        ans = powerflow(Vsend, Vrecv, Xline)
+        assert_almost_equal(ans, 2.525)
+
+    def test_1():
+        Vsend = 1.01
+        Vrecv = 1
+        Xline = 0.2
+
+        ans = powerflow(Vsend, Vrecv, Xline)
+        assert ans == 0
+
+    for i in range(2):
+        exec(f"test_{i}()")
 
 def test_slew_rate():
 
@@ -379,6 +400,35 @@ def test_seq_to_abc():
 
     test_0()
 
+def test_vectarray():
+
+    from electricpy import vectarray
+
+    def test_0():
+        
+        A = [2+3j, 4+5j, 6+7j, 8+9j]
+        B = vectarray(A)
+
+        B_test = [[np.abs(x), np.degrees(np.angle(x))] for x in A]
+
+        assert (B == B_test).all()
+
+    def test_1():
+
+        A = np.random.random(size = 16)
+        B = vectarray(A)
+
+        B_test = [[np.abs(x), 0] for x in A]
+        assert (B == B_test).all()
+
+        A = np.random.random(size = 16)*1j
+        B = vectarray(A)
+
+        B_test = [[np.abs(x), 90] for x in A]
+        assert (B == B_test).all()
+
+    for i in range(2):
+        exec('test_{}()'.format(i))
 class Test_air_core_inductor:
 
     def invoke(test_case):
