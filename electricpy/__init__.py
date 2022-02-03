@@ -148,12 +148,10 @@ def phasorlist(arr):
     cprint:     Complex Variable Printing Function
     phasorz:    Impedance Phasor Generator
     """
-    # Iteratively Process
-    outarr = _np.array([])
-    for i in arr:
-        outarr = _np.append(outarr, phasor(i))
+    # Use List Comprehension to Process
+
     # Return Array
-    return (outarr)
+    return _np.array([phasor(i) for i in arr])
 
 
 # Define Vector Array Generator
@@ -193,16 +191,16 @@ def vectarray(arr, degrees=True, flatarray=False):
     phasorlist: Phasor Generator for List or Array
     """
     # Iteratively Append Arrays to the Base
-    polararr = _np.array([])
-    for num in arr:
-        mag, ang_r = _c.polar(num)
-        # Cast to Degrees if Needed
+
+    def vector_cast(num):
+        mag, ang = _c.polar(num)
+
         if degrees:
-            ang = _np.degrees(ang_r)
-        else:
-            ang = ang_r
-        # Append to the Array
-        polararr = _np.append(polararr, [mag, ang])
+            ang = _np.degrees(ang)
+
+        return [mag, ang]
+
+    polararr = _np.array([vector_cast(num) for num in arr])
     # Reshape Array if Needed
     if not flatarray:
         polararr = _np.reshape(polararr, (-1, 2))
@@ -1889,7 +1887,7 @@ def bridge_impedance(z1, z2, z3, z4, z5):
 
 
 # Define Single Line Power Flow Calculator
-def powerflow(Vsend, Vrec, Zline):
+def powerflow(Vsend, Vrec, Xline):
     r"""
     Approximated Power-Flow Calculator.
 
@@ -1899,7 +1897,7 @@ def powerflow(Vsend, Vrec, Zline):
     the receiving voltage (complex) and the line impedance.
 
     .. math::
-       P_{flow}=\frac{|V_{send}|*|V_{rec}|}{Z_{line}}*sin(\theta_{send}
+       P_{flow}=\frac{|V_{send}|*|V_{rec}|}{X_{line}}*sin(\theta_{send}
        -\theta_{rec})
 
     Parameters
@@ -1908,13 +1906,13 @@ def powerflow(Vsend, Vrec, Zline):
                 The sending-end voltage, should be complex
     Vrec:       complex
                 The receiving-end voltage, should be complex
-    Zline:      complex
-                The line impedance, should be complex
+    Xline:      float
+                The line admitance, should be float
 
     Returns
     -------
-    pflow:      complex
-                The power transferred from sending-end to
+    pflow:      float
+                The Real power transferred from sending-end to
                 receiving-end, positive values denote power
                 flow from send to receive, negative values
                 denote vice-versa.
@@ -1925,7 +1923,7 @@ def powerflow(Vsend, Vrec, Zline):
     Vr = abs(Vrec)
     dr = _c.phase(Vrec)
     # Calculate Power Flow
-    pflow = (Vs * Vr) / (Zline) * _np.sin(ds - dr)
+    pflow = (Vs * Vr) / (Xline) * _np.sin(ds - dr)
     return (pflow)
 
 
@@ -2559,6 +2557,14 @@ def vcapdischarge(t, Vs, R, C):
     Vc:         float
                 The calculated voltage of the capacitor.
     """
+    try:
+        assert t>=0
+    except AssertionError:
+        raise ValueError("Time must be greater than or equal to zero.")
+    try:
+        assert R*C != 0
+    except AssertionError:
+        raise ValueError("Resistance and Capacitance must be non-zero.")
     Vc = Vs * (_np.exp(-t / (R * C)))
     return (Vc)
 
@@ -2590,6 +2596,14 @@ def vcapcharge(t, Vs, R, C):
     Vc:         float
                 The calculated voltage of the capacitor.
     """
+    try:
+        assert t>=0
+    except AssertionError:
+        raise ValueError("Time must be greater than or equal to zero.")
+    try:
+        assert R*C != 0
+    except AssertionError:
+        raise ValueError("Resistance and Capacitance must be non-zero.")
     Vc = Vs * (1 - _np.exp(-t / (R * C)))
     return (Vc)
 
@@ -3154,8 +3168,7 @@ def funcrms(func, T):
     """
     fn = lambda x: func(x) ** 2
     integral, _ = integrate(fn, 0, T)
-    RMS = _np.sqrt(1 / T * integral)
-    return (RMS)
+    return _np.sqrt(1 / T * integral)
 
 
 # Define Gaussian Function
@@ -6904,5 +6917,7 @@ def air_core_inductor(coil_diameter: float, coil_length: float, turns: int):
     ------- 
     L: float Inductance of air core inductor in (mH)
     """
-    return (1000*coil_diameter*coil_diameter) * (turns*turns) / ((457418*coil_diameter) + (1016127*coil_length))
+    k1 = (1000*coil_diameter*coil_diameter) * (turns*turns)
+    k2 = (457418*coil_diameter) + (1016127*coil_length)
+    return  k1/k2
 # END OF FILE
