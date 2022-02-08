@@ -109,7 +109,7 @@
 
 
 <span class="c1"># Define Phasor Generator</span>
-<div class="viewcode-block" id="phasor"><a class="viewcode-back" href="../api/electricpy.phasor.html#electricpy.phasor">[docs]</a><span class="k">def</span> <span class="nf">phasor</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">ang</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">phasor</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">ang</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Complex Phasor Generator.</span>
 
@@ -147,7 +147,7 @@
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
         <span class="n">ang</span> <span class="o">=</span> <span class="n">mag</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">mag</span> <span class="o">=</span> <span class="n">mag</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">_c</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">ang</span><span class="p">)))</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">_c</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">ang</span><span class="p">)))</span>
 
 
 <span class="c1"># Define Phasor Array Generator</span>
@@ -190,12 +190,10 @@
 <span class="sd">    cprint:     Complex Variable Printing Function</span>
 <span class="sd">    phasorz:    Impedance Phasor Generator</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Iteratively Process</span>
-    <span class="n">outarr</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
-        <span class="n">outarr</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">outarr</span><span class="p">,</span> <span class="n">phasor</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="c1"># Use List Comprehension to Process</span>
+
     <span class="c1"># Return Array</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">outarr</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">phasor</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">])</span></div>
 
 
 <span class="c1"># Define Vector Array Generator</span>
@@ -235,16 +233,16 @@
 <span class="sd">    phasorlist: Phasor Generator for List or Array</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Iteratively Append Arrays to the Base</span>
-    <span class="n">polararr</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
-    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
-        <span class="n">mag</span><span class="p">,</span> <span class="n">ang_r</span> <span class="o">=</span> <span class="n">_c</span><span class="o">.</span><span class="n">polar</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
-        <span class="c1"># Cast to Degrees if Needed</span>
+
+    <span class="k">def</span> <span class="nf">vector_cast</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+        <span class="n">mag</span><span class="p">,</span> <span class="n">ang</span> <span class="o">=</span> <span class="n">_c</span><span class="o">.</span><span class="n">polar</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="n">degrees</span><span class="p">:</span>
-            <span class="n">ang</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ang_r</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">ang</span> <span class="o">=</span> <span class="n">ang_r</span>
-        <span class="c1"># Append to the Array</span>
-        <span class="n">polararr</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">polararr</span><span class="p">,</span> <span class="p">[</span><span class="n">mag</span><span class="p">,</span> <span class="n">ang</span><span class="p">])</span>
+            <span class="n">ang</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ang</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">mag</span><span class="p">,</span> <span class="n">ang</span><span class="p">]</span>
+
+    <span class="n">polararr</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">vector_cast</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">])</span>
     <span class="c1"># Reshape Array if Needed</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">flatarray</span><span class="p">:</span>
         <span class="n">polararr</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">polararr</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
@@ -1678,76 +1676,6 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">Ii</span><span class="p">)</span></div>
 
-<span class="c1">#Define Inductive voltage divider</span>
-<div class="viewcode-block" id="inductive_voltdiv"><a class="viewcode-back" href="../api/electricpy.inductive_voltdiv.html#electricpy.inductive_voltdiv">[docs]</a><span class="k">def</span> <span class="nf">inductive_voltdiv</span><span class="p">(</span><span class="n">Vin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Vout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">find</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Inductive voltage divider.</span>
-
-<span class="sd">    Inductive voltage divider Inductive voltage dividers are made out of two inductors. </span>
-<span class="sd">    One of the inductors is connected from the input to the output and the other one is connected from the output to ground. </span>
-<span class="sd">    You can also use other components like resistors and inductors.</span>
-
-<span class="sd">    .. math:: V_{out} = \frac{V_{in}*L1}{L1+L2}</span>
-
-<span class="sd">    .. image:: /static/inductive-voltage-divider-circuit.png</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    Vin:    float, optional </span>
-<span class="sd">            The input voltage for the system, default=None</span>
-
-<span class="sd">    Vout:   float, optional</span>
-<span class="sd">            The output voltage for the system, default=None</span>
-
-<span class="sd">    L1:     float,optional</span>
-<span class="sd">            Value of the inductor above the output voltage, default=None</span>
-
-<span class="sd">    L2:     float,optional</span>
-<span class="sd">            Value of the inductor below the output voltage, default=None</span>
-
-<span class="sd">    find:   str, optional</span>
-<span class="sd">            Control argument to specify which value</span>
-<span class="sd">            should be returned.</span>
-<span class="sd">    </span>
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    Vin:    float, optional </span>
-<span class="sd">            The input voltage for the system, default=None</span>
-
-<span class="sd">    Vout:   float, optional</span>
-<span class="sd">            The output voltage for the system, default=None</span>
-
-<span class="sd">    L1:     float,optional</span>
-<span class="sd">            Value of the inductor above the output voltage, default=None</span>
-
-<span class="sd">    L2:     float,optional</span>
-<span class="sd">            Value of the inductor below the output voltage</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">Vin</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">L1</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">L2</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
-        <span class="n">Vout</span> <span class="o">=</span> <span class="p">(</span><span class="n">Vin</span><span class="o">*</span><span class="n">L1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">L1</span><span class="o">+</span><span class="n">L2</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">Vout</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">L1</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">L2</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
-        <span class="n">Vin</span> <span class="o">=</span> <span class="p">(</span><span class="n">Vout</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">L1</span><span class="o">+</span><span class="n">L2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">L1</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">Vin</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">Vout</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">L2</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
-        <span class="n">L1</span> <span class="o">=</span> <span class="n">L2</span><span class="o">*</span><span class="p">(</span><span class="n">Vin</span> <span class="o">-</span><span class="n">Vout</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">Vout</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">Vin</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">Vout</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">L1</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
-        <span class="n">L2</span> <span class="o">=</span> <span class="n">L1</span><span class="o">*</span><span class="p">(</span><span class="n">Vout</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">Vin</span> <span class="o">-</span> <span class="n">Vout</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ERROR: Invalid Parameters or too few&quot;</span> <span class="o">+</span>
-                        <span class="s2">&quot; parameters given to calculate.&quot;</span><span class="p">)</span>
-
-    <span class="n">find</span> <span class="o">=</span> <span class="n">find</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-    
-    <span class="k">if</span> <span class="n">find</span> <span class="o">==</span> <span class="s1">&#39;vin&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">Vin</span>
-    <span class="k">elif</span> <span class="n">find</span> <span class="o">==</span> <span class="s1">&#39;vout&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">Vout</span>
-    <span class="k">elif</span> <span class="n">find</span> <span class="o">==</span> <span class="s1">&#39;l1&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">L1</span>
-    <span class="k">elif</span> <span class="n">find</span> <span class="o">==</span> <span class="s1">&#39;l2&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">L2</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">Vin</span><span class="p">,</span> <span class="n">Vout</span><span class="p">,</span> <span class="n">L1</span><span class="p">,</span> <span class="n">L2</span><span class="p">)</span></div>
-
 <span class="c1">#Induction Machine Slip</span>
 <div class="viewcode-block" id="induction_machine_slip"><a class="viewcode-back" href="../api/electricpy.induction_machine_slip.html#electricpy.induction_machine_slip">[docs]</a><span class="k">def</span> <span class="nf">induction_machine_slip</span><span class="p">(</span><span class="n">Nr</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">poles</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
@@ -1931,7 +1859,7 @@
 
 
 <span class="c1"># Define Single Line Power Flow Calculator</span>
-<div class="viewcode-block" id="powerflow"><a class="viewcode-back" href="../api/electricpy.powerflow.html#electricpy.powerflow">[docs]</a><span class="k">def</span> <span class="nf">powerflow</span><span class="p">(</span><span class="n">Vsend</span><span class="p">,</span> <span class="n">Vrec</span><span class="p">,</span> <span class="n">Zline</span><span class="p">):</span>
+<div class="viewcode-block" id="powerflow"><a class="viewcode-back" href="../api/electricpy.powerflow.html#electricpy.powerflow">[docs]</a><span class="k">def</span> <span class="nf">powerflow</span><span class="p">(</span><span class="n">Vsend</span><span class="p">,</span> <span class="n">Vrec</span><span class="p">,</span> <span class="n">Xline</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Approximated Power-Flow Calculator.</span>
 
@@ -1941,7 +1869,7 @@
 <span class="sd">    the receiving voltage (complex) and the line impedance.</span>
 
 <span class="sd">    .. math::</span>
-<span class="sd">       P_{flow}=\frac{|V_{send}|*|V_{rec}|}{Z_{line}}*sin(\theta_{send}</span>
+<span class="sd">       P_{flow}=\frac{|V_{send}|*|V_{rec}|}{X_{line}}*sin(\theta_{send}</span>
 <span class="sd">       -\theta_{rec})</span>
 
 <span class="sd">    Parameters</span>
@@ -1950,13 +1878,13 @@
 <span class="sd">                The sending-end voltage, should be complex</span>
 <span class="sd">    Vrec:       complex</span>
 <span class="sd">                The receiving-end voltage, should be complex</span>
-<span class="sd">    Zline:      complex</span>
-<span class="sd">                The line impedance, should be complex</span>
+<span class="sd">    Xline:      float</span>
+<span class="sd">                The line admitance, should be float</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    pflow:      complex</span>
-<span class="sd">                The power transferred from sending-end to</span>
+<span class="sd">    pflow:      float</span>
+<span class="sd">                The Real power transferred from sending-end to</span>
 <span class="sd">                receiving-end, positive values denote power</span>
 <span class="sd">                flow from send to receive, negative values</span>
 <span class="sd">                denote vice-versa.</span>
@@ -1967,7 +1895,7 @@
     <span class="n">Vr</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Vrec</span><span class="p">)</span>
     <span class="n">dr</span> <span class="o">=</span> <span class="n">_c</span><span class="o">.</span><span class="n">phase</span><span class="p">(</span><span class="n">Vrec</span><span class="p">)</span>
     <span class="c1"># Calculate Power Flow</span>
-    <span class="n">pflow</span> <span class="o">=</span> <span class="p">(</span><span class="n">Vs</span> <span class="o">*</span> <span class="n">Vr</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">Zline</span><span class="p">)</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">ds</span> <span class="o">-</span> <span class="n">dr</span><span class="p">)</span>
+    <span class="n">pflow</span> <span class="o">=</span> <span class="p">(</span><span class="n">Vs</span> <span class="o">*</span> <span class="n">Vr</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">Xline</span><span class="p">)</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">ds</span> <span class="o">-</span> <span class="n">dr</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">pflow</span><span class="p">)</span></div>
 
 
@@ -2601,6 +2529,14 @@
 <span class="sd">    Vc:         float</span>
 <span class="sd">                The calculated voltage of the capacitor.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">t</span><span class="o">&gt;=</span><span class="mi">0</span>
+    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Time must be greater than or equal to zero.&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">R</span><span class="o">*</span><span class="n">C</span> <span class="o">!=</span> <span class="mi">0</span>
+    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Resistance and Capacitance must be non-zero.&quot;</span><span class="p">)</span>
     <span class="n">Vc</span> <span class="o">=</span> <span class="n">Vs</span> <span class="o">*</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">C</span><span class="p">)))</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">Vc</span><span class="p">)</span></div>
 
@@ -2632,6 +2568,14 @@
 <span class="sd">    Vc:         float</span>
 <span class="sd">                The calculated voltage of the capacitor.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">t</span><span class="o">&gt;=</span><span class="mi">0</span>
+    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Time must be greater than or equal to zero.&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">R</span><span class="o">*</span><span class="n">C</span> <span class="o">!=</span> <span class="mi">0</span>
+    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Resistance and Capacitance must be non-zero.&quot;</span><span class="p">)</span>
     <span class="n">Vc</span> <span class="o">=</span> <span class="n">Vs</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">C</span><span class="p">)))</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">Vc</span><span class="p">)</span></div>
 
@@ -3196,8 +3140,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
     <span class="n">integral</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
-    <span class="n">RMS</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">T</span> <span class="o">*</span> <span class="n">integral</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">RMS</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">T</span> <span class="o">*</span> <span class="n">integral</span><span class="p">)</span></div>
 
 
 <span class="c1"># Define Gaussian Function</span>
@@ -6928,25 +6871,6 @@
     <span class="n">R2</span> <span class="o">=</span> <span class="p">(</span><span class="n">Z0</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">x</span><span class="p">))))</span>
 
     <span class="k">return</span> <span class="n">R1</span><span class="p">,</span><span class="n">R2</span></div>
-
-<div class="viewcode-block" id="air_core_inductor"><a class="viewcode-back" href="../api/electricpy.air_core_inductor.html#electricpy.air_core_inductor">[docs]</a><span class="k">def</span> <span class="nf">air_core_inductor</span><span class="p">(</span><span class="n">coil_diameter</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">coil_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">turns</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compute Inductance of Air Core Inductor.</span>
-
-<span class="sd">    Air core inductors that consist of a coil of conducting wire with no core.</span>
-<span class="sd">    They are used in all sorts of electronic devices like radios and computers.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ---------- </span>
-<span class="sd">    coil_diameter: float in meters</span>
-<span class="sd">    coil_length: float in meters</span>
-<span class="sd">    turns: int inductor turns</span>
-
-<span class="sd">    Returns </span>
-<span class="sd">    ------- </span>
-<span class="sd">    L: float Inductance of air core inductor in (mH)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="n">coil_diameter</span><span class="o">*</span><span class="n">coil_diameter</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">turns</span><span class="o">*</span><span class="n">turns</span><span class="p">)</span> <span class="o">/</span> <span class="p">((</span><span class="mi">457418</span><span class="o">*</span><span class="n">coil_diameter</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1016127</span><span class="o">*</span><span class="n">coil_length</span><span class="p">))</span></div>
 <span class="c1"># END OF FILE</span>
 </pre></div>
 

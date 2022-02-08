@@ -49,51 +49,50 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="electricpy-phasor">
-<h1>electricpy.phasor<a class="headerlink" href="#electricpy-phasor" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="electricpy.phasor">
-<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">phasor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy.html#phasor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.phasor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Complex Phasor Generator.</p>
-<p>Generates the standard Pythonic complex representation
-of a phasor voltage or current when given the magnitude
-and angle of the specific voltage or current.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>mag</strong> (<em>float</em>) – The Magnitude of the Voltage/Current</p></li>
-<li><p><strong>ang</strong> (<em>float</em>) – The Angle (in degrees) of the Voltage/Current</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>phasor</strong> – Standard Pythonic Complex Representation of
-the specified voltage or current.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>complex</p>
-</dd>
-</dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">electricpy</span> <span class="k">as</span> <span class="nn">ep</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">phasor</span><span class="p">(</span><span class="mi">67</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span> <span class="c1"># 67 volts at angle 120 degrees</span>
-<span class="go">(-33.499999999999986+58.02370205355739j)</span>
+  <section id="module-electricpy.phasor">
+<span id="electricpy-phasor"></span><h1>electricpy.phasor<a class="headerlink" href="#module-electricpy.phasor" title="Permalink to this headline">¶</a></h1>
+<p><cite>electricpy</cite> Package - <cite>phasors</cite> Module.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">phasors</span>
 </pre></div>
 </div>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><a class="reference internal" href="electricpy.phasorlist.html#electricpy.phasorlist" title="electricpy.phasorlist"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasorlist</span></code></a></dt><dd><p>Phasor Generator for List or Array</p>
-</dd>
-<dt><a class="reference internal" href="electricpy.cprint.html#electricpy.cprint" title="electricpy.cprint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cprint</span></code></a></dt><dd><p>Complex Variable Printing Function</p>
-</dd>
-<dt><a class="reference internal" href="electricpy.phasorz.html#electricpy.phasorz" title="electricpy.phasorz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasorz</span></code></a></dt><dd><p>Impedance Phasor Generator</p>
-</dd>
-<dt><a class="reference internal" href="electricpy.phs.html#electricpy.phs" title="electricpy.phs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phs</span></code></a></dt><dd><p>Complex Phase Angle Generator</p>
-</dd>
-</dl>
-</div>
-</dd></dl>
-
+<p>Filled with calculators, evaluators, and plotting functions related to
+electrical phasors, this package will provide a wide array of capabilities to
+any electrical engineer.</p>
+<p>Built to support operations similar to Numpy and Scipy, this package is designed
+to aid in scientific calculations.</p>
+<p class="rubric">Functions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compose</span></code>(*arr)</p></td>
+<td><p>Complex Composition Function.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">parallelz</span></code>(*args)</p></td>
+<td><p>Parallel Impedance Calculator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phase</span></code>(ang)</p></td>
+<td><p>Complex Phase Angle Generator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasor</span></code>(mag[, ang])</p></td>
+<td><p>Complex Phasor Generator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasordata</span></code>(mn[, mx, npts, mag, ang, freq, ...])</p></td>
+<td><p>Complex Phasor Data Generator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasorlist</span></code>(arr)</p></td>
+<td><p>Complex Phasor Generator for 2-D Array or 2-D List.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">phs</span></code>(ang)</p></td>
+<td><p>Complex Phase Angle Generator.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">vectarray</span></code>(arr[, degrees, flatarray])</p></td>
+<td><p>Format Complex as Array of Magnitude/Angle Pairs.</p></td>
+</tr>
+</tbody>
+</table>
 </section>
 
 

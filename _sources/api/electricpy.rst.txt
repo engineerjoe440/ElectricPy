@@ -23,8 +23,6 @@
     
     acpiv
     
-    air_core_inductor
-    
     bridge_impedance
     
     btu
@@ -120,8 +118,6 @@
     indmachzth
     
     induction_machine_slip
-    
-    inductive_voltdiv
     
     inductorcharge
     
