@@ -4,6 +4,7 @@ numpydoc
 m2r2
 sphinx-sitemap
 sphinx-git
+coverage-badge
 numpy
 matplotlib
 scipy
