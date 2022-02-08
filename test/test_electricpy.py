@@ -319,7 +319,7 @@ def test_pi_attenuator():
 
 def test_inductor_voltdiv():
 
-    from electricpy import inductive_voltdiv
+    from electricpy.passive import inductive_voltdiv
 
     params = {
         'Vin':1,
@@ -433,7 +433,7 @@ class Test_air_core_inductor:
 
     def invoke(test_case):
         def wrapper(self):
-            from electricpy import air_core_inductor
+            from electricpy.passive import air_core_inductor
             expected_result = test_case(self)
             computed_result = air_core_inductor(self.coil_diameter, self.coil_length, self.turn)            
             assert_almost_equal(computed_result, expected_result, decimal = 3)

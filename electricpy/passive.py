@@ -32,13 +32,9 @@ def vcapdischarge(t, Vs, R, C):
     Vc:         float
                 The calculated voltage of the capacitor.
     """
-    try:
-        assert t>=0
-    except AssertionError:
+    if t<0:
         raise ValueError("Time must be greater than or equal to zero.")
-    try:
-        assert R*C != 0
-    except AssertionError:
+    if R*C == 0:
         raise ValueError("Resistance and Capacitance must be non-zero.")
     Vc = Vs * (_np.exp(-t / (R * C)))
     return (Vc)
@@ -69,13 +65,9 @@ def vcapcharge(t, Vs, R, C):
     Vc:         float
                 The calculated voltage of the capacitor.
     """
-    try:
-        assert t>=0
-    except AssertionError:
+    if t<0:
         raise ValueError("Time must be greater than or equal to zero.")
-    try:
-        assert R*C != 0
-    except AssertionError:
+    if R*C == 0:
         raise ValueError("Resistance and Capacitance must be non-zero.")
     Vc = Vs * (1 - _np.exp(-t / (R * C)))
     return (Vc)
@@ -110,8 +102,13 @@ def captransfer(t, Vs, R, Cs, Cd):
     vfinal:     float
                 Final voltage that both capacitors settle to.
     """
-    tau = (R * Cs * Cd) / (Cs + Cd)
-    rvolt = Vs * _np.exp(-t / tau)
+    if t<0:
+        raise ValueError("Time must be greater than zero.")
+    try:
+        tau = (R * Cs * Cd) / (Cs + Cd)
+        rvolt = Vs * _np.exp(-t / tau)
+    except ZeroDivisionError:
+        raise ZeroDivisionError("Sum of Source and Destination Capacitance must be non-zero.")
     vfinal = Vs * Cs / (Cs + Cd)
     return (rvolt, vfinal)
 
@@ -314,3 +311,183 @@ def rectifiercap(Iload, fswitch, dVout):
     """
     C = Iload / (fswitch * dVout)
     return (C)
+# Define Inductor Energy Formula
+def inductorenergy(L, I):
+    r"""
+    Energy Stored in Inductor Formula.
+
+    Function to calculate the energy stored in an inductor
+    given the inductance (in Henries) and the current.
+
+    .. math:: E=\frac{1}{2}*L*I^2
+
+    Parameters
+    ----------
+    L:          float
+                Inductance Value (in Henries)
+    I:          float
+                Current traveling through inductor.
+
+    Returns
+    -------
+    E:          float
+                The energy stored in the inductor (in Joules).
+    """
+    return (1 / 2 * L * I ** 2)
+
+def inductorcharge(t, Vs, R, L):
+    r"""
+    Charging Inductor Formula.
+
+    Calculates the Voltage and Current of an inductor
+    that is charging/storing energy.
+
+    .. math::
+       V_L = V_s*e^{\frac{-R*t}{L}}//
+       I_L = \frac{V_s}{R}*(1-e^{\frac{-R*t}{L}})
+
+    Parameters
+    ----------
+    t:          float
+                Time at which to calculate voltage and current.
+    Vs:         float
+                Charging voltage across inductor and resistor.
+    R:          float
+                Resistance related to inductor.
+    L:          float
+                Inductance value in Henries.
+
+    Returns
+    -------
+    Vl:         float
+                Voltage across inductor at time t.
+    Il:         float
+                Current through inductor at time t.
+    """
+    Vl = Vs * _np.exp(-R * t / L)
+    Il = Vs / R * (1 - _np.exp(-R * t / L))
+    return (Vl, Il)
+
+# Define Inductor Discharge Function
+def inductordischarge(t, Io, R, L):
+    r"""
+    Discharging Inductor Formula.
+
+    Calculates the Voltage and Current of an inductor
+    that is discharging its stored energy.
+
+    .. math::
+       I_L=I_0*e^{\frac{-R*t}{L}}//
+       V_L=I_0*R*(1-e^{\frac{-R*t}{L}})
+
+    Parameters
+    ----------
+    t:          float
+                Time at which to calculate voltage and current.
+    Io:         float
+                Initial current traveling through inductor.
+    R:          float
+                Resistance being discharged to.
+    L:          float
+                Inductance value in Henries.
+
+    Returns
+    -------
+    Vl:         float
+                Voltage across inductor at time t.
+    Il:         float
+                Current through inductor at time t.
+    """
+    Il = Io * _np.exp(-R * t / L)
+    Vl = Io * R * (1 - _np.exp(-R * t / L))
+    return (Vl, Il)
+
+def air_core_inductor(coil_diameter: float, coil_length: float, turns: int):
+    r"""
+    Compute Inductance of Air Core Inductor.
+
+    Air core inductors that consist of a coil of conducting wire with no core.
+    They are used in all sorts of electronic devices like radios and computers.
+
+    Parameters
+    ---------- 
+    coil_diameter: float in meters
+    coil_length: float in meters
+    turns: int inductor turns
+
+    Returns 
+    ------- 
+    L: float Inductance of air core inductor in (mH)
+    """
+    k1 = (1000*coil_diameter*coil_diameter) * (turns*turns)
+    k2 = (457418*coil_diameter) + (1016127*coil_length)
+    return  k1/k2
+
+def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
+    r"""
+    Inductive voltage divider.
+
+    Inductive voltage divider Inductive voltage dividers are made out of two inductors. 
+    One of the inductors is connected from the input to the output and the other one is connected from the output to ground. 
+    You can also use other components like resistors and inductors.
+
+    .. math:: V_{out} = \frac{V_{in}*L1}{L1+L2}
+
+    .. image:: /static/inductive-voltage-divider-circuit.png
+
+    Parameters
+    ----------
+    Vin:    float, optional 
+            The input voltage for the system, default=None
+
+    Vout:   float, optional
+            The output voltage for the system, default=None
+
+    L1:     float,optional
+            Value of the inductor above the output voltage, default=None
+
+    L2:     float,optional
+            Value of the inductor below the output voltage, default=None
+
+    find:   str, optional
+            Control argument to specify which value
+            should be returned.
+    
+    Returns
+    -------
+    Vin:    float, optional 
+            The input voltage for the system, default=None
+
+    Vout:   float, optional
+            The output voltage for the system, default=None
+
+    L1:     float,optional
+            Value of the inductor above the output voltage, default=None
+
+    L2:     float,optional
+            Value of the inductor below the output voltage
+    """
+    if Vin!=None and L1!=None and L2!=None:
+        Vout = (Vin*L1)/(L1+L2)
+    elif Vout!=None and L1!=None and L2!=None:
+        Vin = (Vout)*(L1+L2)/(L1)
+    elif Vin!=None and Vout!=None and L2!=None:
+        L1 = L2*(Vin -Vout)/(Vout)
+    elif Vin!=None and Vout!=None and L1!=None:
+        L2 = L1*(Vout)/(Vin - Vout)
+    else:
+        raise ValueError("ERROR: Invalid Parameters or too few" +
+                        " parameters given to calculate.")
+
+    find = find.lower()
+    
+    if find == 'vin':
+        return Vin
+    elif find == 'vout':
+        return Vout
+    elif find == 'l1':
+        return L1
+    elif find == 'l2':
+        return L2
+    else:
+        return (Vin, Vout, L1, L2)
