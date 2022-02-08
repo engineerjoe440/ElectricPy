@@ -148,12 +148,10 @@ def phasorlist(arr):
     cprint:     Complex Variable Printing Function
     phasorz:    Impedance Phasor Generator
     """
-    # Iteratively Process
-    outarr = _np.array([])
-    for i in arr:
-        outarr = _np.append(outarr, phasor(i))
+    # Use List Comprehension to Process
+
     # Return Array
-    return (outarr)
+    return _np.array([phasor(i) for i in arr])
 
 
 # Define Vector Array Generator
@@ -193,16 +191,16 @@ def vectarray(arr, degrees=True, flatarray=False):
     phasorlist: Phasor Generator for List or Array
     """
     # Iteratively Append Arrays to the Base
-    polararr = _np.array([])
-    for num in arr:
-        mag, ang_r = _c.polar(num)
-        # Cast to Degrees if Needed
+
+    def vector_cast(num):
+        mag, ang = _c.polar(num)
+
         if degrees:
-            ang = _np.degrees(ang_r)
-        else:
-            ang = ang_r
-        # Append to the Array
-        polararr = _np.append(polararr, [mag, ang])
+            ang = _np.degrees(ang)
+
+        return [mag, ang]
+
+    polararr = _np.array([vector_cast(num) for num in arr])
     # Reshape Array if Needed
     if not flatarray:
         polararr = _np.reshape(polararr, (-1, 2))
@@ -1636,76 +1634,6 @@ def curdiv(Ri, Rset, Vin=None, Iin=None, Vout=False, combine=True):
     else:
         return (Ii)
 
-#Define Inductive voltage divider
-def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
-    r"""
-    Inductive voltage divider.
-
-    Inductive voltage divider Inductive voltage dividers are made out of two inductors. 
-    One of the inductors is connected from the input to the output and the other one is connected from the output to ground. 
-    You can also use other components like resistors and inductors.
-
-    .. math:: V_{out} = \frac{V_{in}*L1}{L1+L2}
-
-    .. image:: /static/inductive-voltage-divider-circuit.png
-
-    Parameters
-    ----------
-    Vin:    float, optional 
-            The input voltage for the system, default=None
-
-    Vout:   float, optional
-            The output voltage for the system, default=None
-
-    L1:     float,optional
-            Value of the inductor above the output voltage, default=None
-
-    L2:     float,optional
-            Value of the inductor below the output voltage, default=None
-
-    find:   str, optional
-            Control argument to specify which value
-            should be returned.
-    
-    Returns
-    -------
-    Vin:    float, optional 
-            The input voltage for the system, default=None
-
-    Vout:   float, optional
-            The output voltage for the system, default=None
-
-    L1:     float,optional
-            Value of the inductor above the output voltage, default=None
-
-    L2:     float,optional
-            Value of the inductor below the output voltage
-    """
-    if Vin!=None and L1!=None and L2!=None:
-        Vout = (Vin*L1)/(L1+L2)
-    elif Vout!=None and L1!=None and L2!=None:
-        Vin = (Vout)*(L1+L2)/(L1)
-    elif Vin!=None and Vout!=None and L2!=None:
-        L1 = L2*(Vin -Vout)/(Vout)
-    elif Vin!=None and Vout!=None and L1!=None:
-        L2 = L1*(Vout)/(Vin - Vout)
-    else:
-        raise ValueError("ERROR: Invalid Parameters or too few" +
-                        " parameters given to calculate.")
-
-    find = find.lower()
-    
-    if find == 'vin':
-        return Vin
-    elif find == 'vout':
-        return Vout
-    elif find == 'l1':
-        return L1
-    elif find == 'l2':
-        return L2
-    else:
-        return (Vin, Vout, L1, L2)
-
 #Induction Machine Slip
 def induction_machine_slip(Nr, freq=60, poles=4):
     r"""
@@ -1889,7 +1817,7 @@ def bridge_impedance(z1, z2, z3, z4, z5):
 
 
 # Define Single Line Power Flow Calculator
-def powerflow(Vsend, Vrec, Zline):
+def powerflow(Vsend, Vrec, Xline):
     r"""
     Approximated Power-Flow Calculator.
 
@@ -1899,7 +1827,7 @@ def powerflow(Vsend, Vrec, Zline):
     the receiving voltage (complex) and the line impedance.
 
     .. math::
-       P_{flow}=\frac{|V_{send}|*|V_{rec}|}{Z_{line}}*sin(\theta_{send}
+       P_{flow}=\frac{|V_{send}|*|V_{rec}|}{X_{line}}*sin(\theta_{send}
        -\theta_{rec})
 
     Parameters
@@ -1908,13 +1836,13 @@ def powerflow(Vsend, Vrec, Zline):
                 The sending-end voltage, should be complex
     Vrec:       complex
                 The receiving-end voltage, should be complex
-    Zline:      complex
-                The line impedance, should be complex
+    Xline:      float
+                The line admitance, should be float
 
     Returns
     -------
-    pflow:      complex
-                The power transferred from sending-end to
+    pflow:      float
+                The Real power transferred from sending-end to
                 receiving-end, positive values denote power
                 flow from send to receive, negative values
                 denote vice-versa.
@@ -1925,7 +1853,7 @@ def powerflow(Vsend, Vrec, Zline):
     Vr = abs(Vrec)
     dr = _c.phase(Vrec)
     # Calculate Power Flow
-    pflow = (Vs * Vr) / (Zline) * _np.sin(ds - dr)
+    pflow = (Vs * Vr) / (Xline) * _np.sin(ds - dr)
     return (pflow)
 
 
@@ -2559,6 +2487,14 @@ def vcapdischarge(t, Vs, R, C):
     Vc:         float
                 The calculated voltage of the capacitor.
     """
+    try:
+        assert t>=0
+    except AssertionError:
+        raise ValueError("Time must be greater than or equal to zero.")
+    try:
+        assert R*C != 0
+    except AssertionError:
+        raise ValueError("Resistance and Capacitance must be non-zero.")
     Vc = Vs * (_np.exp(-t / (R * C)))
     return (Vc)
 
@@ -2590,6 +2526,14 @@ def vcapcharge(t, Vs, R, C):
     Vc:         float
                 The calculated voltage of the capacitor.
     """
+    try:
+        assert t>=0
+    except AssertionError:
+        raise ValueError("Time must be greater than or equal to zero.")
+    try:
+        assert R*C != 0
+    except AssertionError:
+        raise ValueError("Resistance and Capacitance must be non-zero.")
     Vc = Vs * (1 - _np.exp(-t / (R * C)))
     return (Vc)
 
@@ -3154,8 +3098,7 @@ def funcrms(func, T):
     """
     fn = lambda x: func(x) ** 2
     integral, _ = integrate(fn, 0, T)
-    RMS = _np.sqrt(1 / T * integral)
-    return (RMS)
+    return _np.sqrt(1 / T * integral)
 
 
 # Define Gaussian Function
@@ -6886,23 +6829,4 @@ def pi_attenuator(Adb, Z0):
     R2 = (Z0/2)*(_np.power(10, x) - (1/(_np.power(10, x))))
 
     return R1,R2
-
-def air_core_inductor(coil_diameter: float, coil_length: float, turns: int):
-    r"""
-    Compute Inductance of Air Core Inductor.
-
-    Air core inductors that consist of a coil of conducting wire with no core.
-    They are used in all sorts of electronic devices like radios and computers.
-
-    Parameters
-    ---------- 
-    coil_diameter: float in meters
-    coil_length: float in meters
-    turns: int inductor turns
-
-    Returns 
-    ------- 
-    L: float Inductance of air core inductor in (mH)
-    """
-    return (1000*coil_diameter*coil_diameter) * (turns*turns) / ((457418*coil_diameter) + (1016127*coil_length))
 # END OF FILE
