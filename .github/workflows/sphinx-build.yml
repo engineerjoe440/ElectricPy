@@ -32,7 +32,10 @@ jobs:
           sphinx-build -M html docsource docs
       - name: Generate Coverage Badge
         if: success()
-        run: coverage-badge -o docs/html/coverage.svg
+        run: |
+          pip install -r test/pytestrequires.txt
+          coverage run -m pytest
+          coverage-badge -o docs/html/coverage.svg
 
       # https://github.com/marketplace/actions/github-pages
       #- if: success()
