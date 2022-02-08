@@ -30,6 +30,9 @@ jobs:
           pip install .
           python3 -c "import electricpy; print('electricpy.__file__')"
           sphinx-build -M html docsource docs
+      - name: Generate Coverage Badge
+        if: success()
+        run: coverage-badge -o docs/html/coverage.svg
 
       # https://github.com/marketplace/actions/github-pages
       #- if: success()
