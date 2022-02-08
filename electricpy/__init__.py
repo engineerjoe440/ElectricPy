@@ -1634,76 +1634,6 @@ def curdiv(Ri, Rset, Vin=None, Iin=None, Vout=False, combine=True):
     else:
         return (Ii)
 
-#Define Inductive voltage divider
-def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
-    r"""
-    Inductive voltage divider.
-
-    Inductive voltage divider Inductive voltage dividers are made out of two inductors. 
-    One of the inductors is connected from the input to the output and the other one is connected from the output to ground. 
-    You can also use other components like resistors and inductors.
-
-    .. math:: V_{out} = \frac{V_{in}*L1}{L1+L2}
-
-    .. image:: /static/inductive-voltage-divider-circuit.png
-
-    Parameters
-    ----------
-    Vin:    float, optional 
-            The input voltage for the system, default=None
-
-    Vout:   float, optional
-            The output voltage for the system, default=None
-
-    L1:     float,optional
-            Value of the inductor above the output voltage, default=None
-
-    L2:     float,optional
-            Value of the inductor below the output voltage, default=None
-
-    find:   str, optional
-            Control argument to specify which value
-            should be returned.
-    
-    Returns
-    -------
-    Vin:    float, optional 
-            The input voltage for the system, default=None
-
-    Vout:   float, optional
-            The output voltage for the system, default=None
-
-    L1:     float,optional
-            Value of the inductor above the output voltage, default=None
-
-    L2:     float,optional
-            Value of the inductor below the output voltage
-    """
-    if Vin!=None and L1!=None and L2!=None:
-        Vout = (Vin*L1)/(L1+L2)
-    elif Vout!=None and L1!=None and L2!=None:
-        Vin = (Vout)*(L1+L2)/(L1)
-    elif Vin!=None and Vout!=None and L2!=None:
-        L1 = L2*(Vin -Vout)/(Vout)
-    elif Vin!=None and Vout!=None and L1!=None:
-        L2 = L1*(Vout)/(Vin - Vout)
-    else:
-        raise ValueError("ERROR: Invalid Parameters or too few" +
-                        " parameters given to calculate.")
-
-    find = find.lower()
-    
-    if find == 'vin':
-        return Vin
-    elif find == 'vout':
-        return Vout
-    elif find == 'l1':
-        return L1
-    elif find == 'l2':
-        return L2
-    else:
-        return (Vin, Vout, L1, L2)
-
 #Induction Machine Slip
 def induction_machine_slip(Nr, freq=60, poles=4):
     r"""
@@ -6899,25 +6829,4 @@ def pi_attenuator(Adb, Z0):
     R2 = (Z0/2)*(_np.power(10, x) - (1/(_np.power(10, x))))
 
     return R1,R2
-
-def air_core_inductor(coil_diameter: float, coil_length: float, turns: int):
-    r"""
-    Compute Inductance of Air Core Inductor.
-
-    Air core inductors that consist of a coil of conducting wire with no core.
-    They are used in all sorts of electronic devices like radios and computers.
-
-    Parameters
-    ---------- 
-    coil_diameter: float in meters
-    coil_length: float in meters
-    turns: int inductor turns
-
-    Returns 
-    ------- 
-    L: float Inductance of air core inductor in (mH)
-    """
-    k1 = (1000*coil_diameter*coil_diameter) * (turns*turns)
-    k2 = (457418*coil_diameter) + (1016127*coil_length)
-    return  k1/k2
 # END OF FILE
