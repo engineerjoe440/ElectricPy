@@ -28,8 +28,8 @@ De0 = 2160 #: De Constant for Use with Transmission Impedance Calculations      
 NAN = float('nan')
 VLLcVLN = _c.rect(_np.sqrt(3),_np.radians(30)) # Conversion Operator
 ILcIP = _c.rect(_np.sqrt(3),_np.radians(30)) # Conversion Operator
-watts_per_hp = 745.699872
-kwh_per_btu = 3412.14
+WATTS_PER_HP = 745.699872
+KWH_PER_BTU = 3412.14
 
 # Define Symmetrical Component Matricies
 Aabc = 1/3 * _np.array([[ 1, 1, 1    ],  # Convert ABC to 012
@@ -184,6 +184,7 @@ THERMO_COUPLE_DATA = {
         [-4.5209805E-01, -1.0774995E-02, 0.0, 0.0]
     ]
 }
+THERMO_COUPLE_KEYS = ['To', 'Vo', 'P1', 'P2', 'P3', 'P4', 'Q1', 'Q2', 'Q3']
 
 COLD_JUNCTION_DATA = {
     "To": [4.2000000E+01, 2.5000000E+01, 2.5000000E+01, 2.5000000E+01, 7.0000000E+00, 2.5000000E+01, 2.5000000E+01, 2.5000000E+01],
@@ -195,4 +196,5 @@ COLD_JUNCTION_DATA = {
     "Q1": [-1.0920410E-02, -5.2382378E-03, -1.5173342E-03, -1.3948675E-03, -6.4070932E-03, 2.6146871E-03, -1.0650446E-03, 1.6458102E-02],
     "Q2": [-4.9782932E-04, -3.0970168E-04, -4.2314514E-05, -6.7976627E-05, 8.2161781E-05, -1.8621487E-04, -2.2042420E-04, 0.0000000E+00]
 }
+COLD_JUNCTION_KEYS = ["To", "Vo", "P1", "P2", "P3", "P4", "Q1", "Q2"]
 # END OF FILE
