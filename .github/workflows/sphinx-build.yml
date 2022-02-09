@@ -34,7 +34,7 @@ jobs:
         if: success()
         run: |
           pip install -r test/pytestrequires.txt
-          coverage run -m pytest
+          coverage run --source=./electricpy -m pytest
           coverage-badge -o docs/html/coverage.svg
 
       # https://github.com/marketplace/actions/github-pages

@@ -17,5 +17,6 @@
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
-    "python.testing.cwd":"${workspaceRoot}"
+    "python.testing.cwd": "${workspaceRoot}",
+    "python.formatting.provider": "autopep8"
 }
