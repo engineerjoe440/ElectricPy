@@ -28,6 +28,8 @@ De0 = 2160 #: De Constant for Use with Transmission Impedance Calculations      
 NAN = float('nan')
 VLLcVLN = _c.rect(_np.sqrt(3),_np.radians(30)) # Conversion Operator
 ILcIP = _c.rect(_np.sqrt(3),_np.radians(30)) # Conversion Operator
+watts_per_hp = 745.699872
+kwh_per_btu = 3412.14
 
 # Define Symmetrical Component Matricies
 Aabc = 1/3 * _np.array([[ 1, 1, 1    ],  # Convert ABC to 012
