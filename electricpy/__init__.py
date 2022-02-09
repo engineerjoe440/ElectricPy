@@ -1450,8 +1450,10 @@ def coldjunction(Tcj, coupletype="K", To=None, Vo=None, P1=None, P2=None,
     index = lookup.index(coupletype)
     # Define Constant Dictionary
     # Load Data Into Terms
-    for var in ['To', 'Vo', 'P1', 'P2', 'P3', 'P4', 'Q1', 'Q2']:
-        exec(f"{var} = {var} or COLD_JUNCTION_DATA['{var}'][index]")
+    parameters = {}
+    for var in COLD_JUNCTION_DATA.keys():
+        parameters[var] = parameters.get(var, None) or COLD_JUNCTION_DATA[var][index]
+    To, Vo, P1, P2, P3, P4, Q1, Q2 = [parameters[key] for key in COLD_JUNCTION_KEYS]
     # Define Formula Terms
     tx = (Tcj - To)
     num = tx * (P1 + tx * (P2 + tx * (P3 + P4 * tx)))
@@ -1553,9 +1555,10 @@ def thermocouple(V, coupletype="K", fahrenheit=False, cjt=None, To=None,
     else:
         raise ValueError("Internal Error!")
     # Load Data Into Terms
-    var_list = ['To', 'Vo', 'P1', 'P2', 'P3', 'P4', 'Q1', 'Q2', 'Q3']
-    for i in range(9):
-        exec(f'{var_list[i]} = {var_list[i]} or {THERMO_COUPLE_DATA[coupletype][i][select]}')
+    parameters = {}
+    for i, key in enumerate(THERMO_COUPLE_KEYS):
+        parameters[key] = parameters.get(key, None) or THERMO_COUPLE_DATA[coupletype][i][select]
+    Vo, To, P1, P2, P3, P4, Q1, Q2, Q3 = [parameters[key] for key in THERMO_COUPLE_KEYS]
     # Calculate Temperature in Degrees C
     num = (V - Vo) * (P1 + (V - Vo) * (P2 + (V - Vo) * (P3 + P4 * (V - Vo))))
     den = 1 + (V - Vo) * (Q1 + (V - Vo) * (Q2 + Q3 * (V - Vo)))

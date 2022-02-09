@@ -13,7 +13,7 @@ to aid in scientific calculations.
 ################################################################################
 
 # Import Local Requirements
-from electricpy.constants import watts_per_hp, Aabc, A012, kwh_per_btu
+from electricpy.constants import WATTS_PER_HP, Aabc, A012, KWH_PER_BTU
 
 # Import Required Packages
 import numpy as _np
@@ -41,7 +41,7 @@ def hp_to_watts(hp):
     watts:      float
                 The power in watts.
     """
-    return (hp * watts_per_hp)
+    return (hp * WATTS_PER_HP)
 
 
 watts = hp_to_watts  # Make Duplicate Name
@@ -69,7 +69,7 @@ def watts_to_hp(watts):
     hp:         float
                 The power in horsepower.
     """
-    return (watts / watts_per_hp)
+    return (watts / WATTS_PER_HP)
 
 
 horsepower = watts_to_hp  # Make Duplicate Name
@@ -96,7 +96,7 @@ def kwh_to_btu(kWh):
     BTU:        float
                 The number of British Thermal Units
     """
-    return (kWh * kwh_per_btu)
+    return (kWh * KWH_PER_BTU)
 
 
 btu = kwh_to_btu  # Make Duplicate Name
@@ -122,7 +122,7 @@ def btu_to_kwh(BTU):
     kWh:        float
                 The number of killo-Watt-hours
     """
-    return (BTU / kwh_per_btu)
+    return (BTU / KWH_PER_BTU)
 
 
 kwh = btu_to_kwh  # Make Duplicate Name
