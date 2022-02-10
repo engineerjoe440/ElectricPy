@@ -5,7 +5,7 @@ import math
 from numpy.testing import assert_almost_equal
 
 def test_phasor():
-    from electricpy import phasor
+    from electricpy.phasor import phasor
     magnitude = 10
     # basic angles test case 0
     z1 = phasor(magnitude, 0)
@@ -133,7 +133,7 @@ def test_powerset():
 
 def test_voltdiv():
     from electricpy import voltdiv
-    from electricpy import phasor
+    from electricpy.phasor import phasor
 
     # Test case 0 R1 == R2 == Rload
     Vin = 10
@@ -192,7 +192,7 @@ def test_propagation_constants():
 
 def test_funcrms():
 
-    from electricpy import funcrms
+    from electricpy.math import funcrms
 
     f = lambda x:np.sin(x)
 
@@ -200,7 +200,7 @@ def test_funcrms():
 
 def test_convolve():
 
-    from electricpy import convolve
+    from electricpy.math import convolve
     A = (1,1,1)
     B = (1,1,1)
 
@@ -224,7 +224,8 @@ def test_ic_555_astable():
 
     #test the other way around
 def test_powerflow():
-    from electricpy import powerflow, phasor
+    from electricpy import powerflow
+    from electricpy.phasor import phasor
     
     def test_0():
         Vsend = phasor(1.01, 30)
@@ -258,7 +259,7 @@ def test_slew_rate():
     assert_almost_equal(1/(np.pi*2), freq)
 
 def test_phs():
-    from electricpy import phs
+    from electricpy.phasor import phs
     def test_0():
         
 
@@ -377,7 +378,7 @@ def test_induction_machine_slip():
 
 def test_abc_to_seq():
 
-    from electricpy import abc_to_seq
+    from electricpy.convertions import abc_to_seq
     a = cmath.rect(1, np.radians(120))
 
     def test_0():
@@ -389,7 +390,7 @@ def test_abc_to_seq():
     test_0()
 
 def test_seq_to_abc():
-    from electricpy import seq_to_abc
+    from electricpy.convertions import seq_to_abc
     a = cmath.rect(1, np.radians(120))    
 
     def test_0():
@@ -402,7 +403,7 @@ def test_seq_to_abc():
 
 def test_vectarray():
 
-    from electricpy import vectarray
+    from electricpy.phasor import vectarray
 
     def test_0():
         

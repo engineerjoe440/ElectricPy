@@ -9,14 +9,13 @@
 # Import External Dependencies
 import matplotlib.pyplot as _plt
 import numpy as _np
-from electricpy import convolve
 import scipy.signal as _sig
 from numpy import pi as _pi
 from cmath import exp as _exp
 import scipy.signal as sig
 
 # Import Local Dependencies
-from electricpy import convolve
+from electricpy.math import convolve
 
 # Define System Conditioning Function
 def _sys_condition(system,feedback):
