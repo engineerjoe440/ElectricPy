@@ -128,24 +128,22 @@ def gausdist(x, mu=0, sigma=1):
             Computed distribution of the gausian function at the
             points specified by (array) x
     """
-    F = _np.array([])
+    # Define Integrand
+    def integrand(sq):
+        return (_np.exp(-sq ** 2 / 2))
     try:
         lx = len(x)  # Find length of Input
     except:
         lx = 1  # Length 1
         x = [x]  # Pack into list
+    F = _np.zeros(lx, dtype=_np.float64)
     for i in range(lx):
         x_tmp = x[i]
         # Evaluate X (altered by mu and sigma)
         X = (x_tmp - mu) / sigma
-
-        # Define Integrand
-        def integrand(sq):
-            return (_np.exp(-sq ** 2 / 2))
-
         integral = integrate(integrand, _np.NINF, X)  # Integrate
         result = 1 / _np.sqrt(2 * _np.pi) * integral[0]  # Evaluate Result
-        F = _np.append(F, result)  # Append to output list
+        F[i] = result
     # Return only the 0-th value if there's only 1 value available
     if (len(F) == 1):
         F = F[0]
@@ -231,7 +229,7 @@ def rfft(arr, dt=0.01, absolute=True, resample=True):
     if absolute:
         fourier = abs(_np.fft.rfft(arr))
     else:
-        foruier = _np.fft.rfft(arr)
+        fourier = _np.fft.rfft(arr)
     if resample == True:
         # Evaluate the Downsampling Ratio
         dn = int(dt * len(arr))
