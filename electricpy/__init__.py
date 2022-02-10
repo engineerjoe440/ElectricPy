@@ -1527,17 +1527,8 @@ def thermocouple(V, coupletype="K", fahrenheit=False, cjt=None, To=None,
     lookup = ["B", "E", "J", "K", "N", "R", "S", "T"]
     if not (coupletype in lookup):
         raise ValueError("Invalid Thermocouple Type")
-    # Define Voltage Ranges
-    voltages = {"J": [-8.095, 0, 21.840, 45.494, 57.953, 69.553],
-                "K": [-6.404, -3.554, 4.096, 16.397, 33.275, 69.553],
-                "B": [0.291, 2.431, 13.820, None, None, None],
-                "E": [-9.835, -5.237, 0.591, 24.964, 53.112, 76.373],
-                "N": [-4.313, 0, 20.613, 47.513, None, None],
-                "R": [-0.226, 1.469, 7.461, 14.277, 21.101, None],
-                "S": [-0.236, 1.441, 6.913, 12.856, 18.693, None],
-                "T": [-6.18, -4.648, 0, 9.288, 20.872, None]}
     # Determine Array Selection
-    vset = voltages[coupletype]
+    vset = THERMO_COUPLE_VOLTAGES[coupletype]
     if V < vset[0] * m:
         raise ValueError("Voltage Below Lower Bound")
     elif vset[0] <= V < vset[1]:
@@ -1607,21 +1598,13 @@ def rtdtemp(RT, rtdtype="PT100", fahrenheit=False, Rref=None, Tref=None,
     temp:       float
                 Calculated temperature, defaults to degrees Celsius.
     """
-    # Define list of available builtin RTD Types
-    types = {"PT100": [100, 0.00385],
-             "PT1000": [1000, 0.00385],
-             "CU100": [100, 0.00427],
-             "NI100": [100, 0.00618],
-             "NI120": [120, 0.00672],
-             "NIFE": [604, 0.00518]
-             }
     # Load Variables
     if Rref == None:
-        Rref = types[rtdtype][0]
+        Rref = RTD_TYPES[rtdtype][0]
     if Tref == None:
         Tref = 0
     if a == None:
-        a = types[rtdtype][1]
+        a = RTD_TYPES[rtdtype][1]
     # Define Terms
     num = RT - Rref + Rref * a * Tref
     den = Rref * a
@@ -4117,15 +4100,11 @@ def de_calc(rho, freq=60):
     # If Descriptive String Provided, Use to Determine Rho
     if isinstance(rho, str):
         rho = rho.upper()
-        rho = {'SEA': 0.01,
-               'SWAMP': 10,
-               'AVG': 100,
-               'AVERAGE': 100,
-               'DAMP': 100,
-               'DRY': 1000,
-               'SAND': 1E9,
-               'SANDSTONE': 1E9,
-               }[rho]
+        try:
+            rho = RHO_VALUES[rho]
+        except KeyError:
+            raise ValueError("Invalid Earth Resistivity string try to select \
+            from set of (SEA, SWAMP, AVG, AVERAGE, DAMP, DRY, SAND, SANDSTONE")
     # Calculate De
     De = De0 * _np.sqrt(rho / freq)
     return (De)
