@@ -1,4 +1,4 @@
-electricpy.phasor
+﻿electricpy.phasor
 =================
 
 .. automodule:: electricpy.phasor
@@ -19,6 +19,7 @@ electricpy.phasor
       phasor
       phasordata
       phasorlist
+      phasorplot
       phs
       vectarray
    

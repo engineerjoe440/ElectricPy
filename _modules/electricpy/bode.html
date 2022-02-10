@@ -52,14 +52,13 @@
 <span class="c1"># Import External Dependencies</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">_plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">_np</span>
-<span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">convolve</span>
 <span class="kn">import</span> <span class="nn">scipy.signal</span> <span class="k">as</span> <span class="nn">_sig</span>
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">pi</span> <span class="k">as</span> <span class="n">_pi</span>
 <span class="kn">from</span> <span class="nn">cmath</span> <span class="kn">import</span> <span class="n">exp</span> <span class="k">as</span> <span class="n">_exp</span>
 <span class="kn">import</span> <span class="nn">scipy.signal</span> <span class="k">as</span> <span class="nn">sig</span>
 
 <span class="c1"># Import Local Dependencies</span>
-<span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">convolve</span>
+<span class="kn">from</span> <span class="nn">electricpy.math</span> <span class="kn">import</span> <span class="n">convolve</span>
 
 <span class="c1"># Define System Conditioning Function</span>
 <span class="k">def</span> <span class="nf">_sys_condition</span><span class="p">(</span><span class="n">system</span><span class="p">,</span><span class="n">feedback</span><span class="p">):</span>

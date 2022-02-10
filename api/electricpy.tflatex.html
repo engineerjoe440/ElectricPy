@@ -18,9 +18,7 @@
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.tflatex.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.thermocouple" href="electricpy.thermocouple.html" />
-    <link rel="prev" title="electricpy.tcycle" href="electricpy.tcycle.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -31,15 +29,7 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="electricpy.thermocouple.html" title="electricpy.thermocouple"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="electricpy.tcycle.html" title="electricpy.tcycle"
-             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.tflatex</a></li> 
       </ul>
     </div>  
@@ -51,49 +41,6 @@
             
   <section id="electricpy-tflatex">
 <h1>electricpy.tflatex<a class="headerlink" href="#electricpy-tflatex" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="electricpy.tflatex">
-<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">tflatex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sys</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sysp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predollar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">postdollar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">double</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-08</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy.html#tflatex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.tflatex" title="Permalink to this definition">¶</a></dt>
-<dd><p>Transfer Function LaTeX String Generator.</p>
-<p>LaTeX string generating function to create a transfer
-function string in LaTeX. Particularly useful for
-demonstrating systems in Interactive Python Notebooks.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sys</strong> (<em>list</em>) – If provided in conjunction with optional
-parameter <cite>sysp</cite>, the parameter <cite>sys</cite> will
-act as the numerator set. Otherwise, can be
-passed as a list containing two sublists,
-the first being the numerator set, and the
-second being the denominator set.</p></li>
-<li><p><strong>sysp</strong> (<em>list</em><em>, </em><em>optional</em>) – If provided, this input will act as the
-denominator of the transfer function.</p></li>
-<li><p><strong>var</strong> (<em>str</em><em>, </em><em>optional</em>) – The variable that should be printed for each
-term (i.e. ‘s’ or ‘jomega’). default=’s’</p></li>
-<li><p><strong>predollar</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to enable/disable the dollar
-sign before the string. default=True</p></li>
-<li><p><strong>postdollar</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to enable/disable the dollar
-sign after the string. default=True</p></li>
-<li><p><strong>double</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to specify whether or not
-LaTeX dollar signs should be double or single,
-default=False</p></li>
-<li><p><strong>tolerance</strong> (<em>float</em><em>, </em><em>optional</em>) – The floating point tolerance cutoff to evaluate
-each term against. If the absolute value of the
-particular term is greater than the tolerance,
-the value will be printed, if not, it will not
-be printed. default=1e-8</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>latex</strong> – LaTeX string for the transfer function.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
 
 
@@ -106,16 +53,6 @@ be printed. default=1e-8</p></li>
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="electricpy.tcycle.html"
-                          title="previous chapter">electricpy.tcycle</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="electricpy.thermocouple.html"
-                          title="next chapter">electricpy.thermocouple</a></p>
-  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -146,15 +83,7 @@ be printed. default=1e-8</p></li>
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="electricpy.thermocouple.html" title="electricpy.thermocouple"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="electricpy.tcycle.html" title="electricpy.tcycle"
-             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.tflatex</a></li> 
       </ul>
     </div>

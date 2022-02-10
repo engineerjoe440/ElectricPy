@@ -18,9 +18,7 @@
     <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.phasorplot.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.phasorz" href="electricpy.phasorz.html" />
-    <link rel="prev" title="electricpy.phasorlist" href="electricpy.phasorlist.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -31,15 +29,7 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="electricpy.phasorz.html" title="electricpy.phasorz"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="electricpy.phasorlist.html" title="electricpy.phasorlist"
-             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.phasorplot</a></li> 
       </ul>
     </div>  
@@ -51,37 +41,6 @@
             
   <section id="electricpy-phasorplot">
 <h1>electricpy.phasorplot<a class="headerlink" href="#electricpy-phasorplot" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="electricpy.phasorplot">
-<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">phasorplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phasor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Phasor</span> <span class="pre">Diagram'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linewidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy.html#phasorplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.phasorplot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Phasor Plotting Function.</p>
-<p>This function is designed to plot a phasor-diagram with angles in degrees
-for up to 12 phasor sets. Phasors must be passed as a complex number set,
-(e.g. [ m+ja, m+ja, m+ja, … , m+ja ] ).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>phasor</strong> (<em>list of complex</em>) – The set of phasors to be plotted.</p></li>
-<li><p><strong>title</strong> (<em>string</em><em>, </em><em>optional</em>) – The Plot Title, default=”Phasor Diagram”</p></li>
-<li><p><strong>legend</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to enable displaying the legend, must be passed
-as an array or list of strings. <cite>label</cite> and <cite>labels</cite> are mimic-
-arguments and will perform similar operation, default=False</p></li>
-<li><p><strong>bg</strong> (<em>string</em><em>, </em><em>optional</em>) – Background-Color control, default=”#d5de9c”</p></li>
-<li><p><strong>radius</strong> (<em>float</em><em>, </em><em>optional</em>) – The diagram radius, unless specified, automatically scales</p></li>
-<li><p><strong>colors</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of hexidecimal color strings denoting the line colors to use.</p></li>
-<li><p><strong>filename</strong> (<em>string</em><em>, </em><em>optional</em>) – String of filename, if set, will force function to save image.</p></li>
-<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to disable plotting. default=True</p></li>
-<li><p><strong>size</strong> (<em>float</em><em>, </em><em>optional</em>) – Control argument for figure size. default=None</p></li>
-<li><p><strong>linewidth</strong> (<em>float</em><em>, </em><em>optional</em>) – Control argument to declare the line thickness. default=None</p></li>
-<li><p><strong>tolerance</strong> (<em>float</em><em>, </em><em>optional</em>) – Minimum magnitude to plot, anything less than tolerance will be
-plotted as a single point at the origin, by default, the tolerance
-is scaled to be 1/25-th the maximum radius. To disable the tolerance,
-simply provide either False or -1.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
 
 
@@ -94,16 +53,6 @@ simply provide either False or -1.</p></li>
             <p class="logo"><a href="../index.html">
               <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
             </a></p>
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="electricpy.phasorlist.html"
-                          title="previous chapter">electricpy.phasorlist</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="electricpy.phasorz.html"
-                          title="next chapter">electricpy.phasorz</a></p>
-  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -134,15 +83,7 @@ simply provide either False or -1.</p></li>
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="electricpy.phasorz.html" title="electricpy.phasorz"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="electricpy.phasorlist.html" title="electricpy.phasorlist"
-             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">electricpy.phasorplot</a></li> 
       </ul>
     </div>

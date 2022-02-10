@@ -1,0 +1,558 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>electricpy.phasor &#8212; electricpy 0.2.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_modules/electricpy/phasor.html" />
+    <link rel="shortcut icon" href="../../_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../electricpy.html" accesskey="U">electricpy</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.phasor</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for electricpy.phasor</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">`electricpy` Package - `phasors` Module.</span>
+
+<span class="sd">&gt;&gt;&gt; from electricpy import phasors</span>
+
+<span class="sd">Filled with calculators, evaluators, and plotting functions related to</span>
+<span class="sd">electrical phasors, this package will provide a wide array of capabilities to</span>
+<span class="sd">any electrical engineer.</span>
+
+<span class="sd">Built to support operations similar to Numpy and Scipy, this package is designed</span>
+<span class="sd">to aid in scientific calculations.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1">################################################################################</span>
+
+<span class="c1"># Import Required Packages</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">_np</span>
+<span class="kn">import</span> <span class="nn">cmath</span> <span class="k">as</span> <span class="nn">_c</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">_matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">_plt</span>
+
+
+<span class="c1"># Define Phase Angle Generator</span>
+<span class="k">def</span> <span class="nf">phs</span><span class="p">(</span><span class="n">ang</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Complex Phase Angle Generator.</span>
+
+<span class="sd">    Generate a complex value given the phase angle</span>
+<span class="sd">    for the complex value.</span>
+
+<span class="sd">    Same as `phase`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ang:        float</span>
+<span class="sd">                The angle (in degrees) for which</span>
+<span class="sd">                the value should be calculated.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    phasorlist: Phasor Generator for List or Array</span>
+<span class="sd">    cprint:     Complex Variable Printing Function</span>
+<span class="sd">    phasorz:    Impedance Phasor Generator</span>
+<span class="sd">    phasor:     Phasor Generating Function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Return the Complex Angle Modulator</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">ang</span><span class="p">)))</span>
+
+
+<span class="n">phase</span> <span class="o">=</span> <span class="n">phs</span>  <span class="c1"># Create Duplicate Name</span>
+
+
+<span class="c1"># Define Phasor Generator</span>
+<span class="k">def</span> <span class="nf">phasor</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">ang</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Complex Phasor Generator.</span>
+
+<span class="sd">    Generates the standard Pythonic complex representation</span>
+<span class="sd">    of a phasor voltage or current when given the magnitude</span>
+<span class="sd">    and angle of the specific voltage or current.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mag:        float</span>
+<span class="sd">                The Magnitude of the Voltage/Current</span>
+<span class="sd">    ang:        float</span>
+<span class="sd">                The Angle (in degrees) of the Voltage/Current</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    phasor:     complex</span>
+<span class="sd">                Standard Pythonic Complex Representation of</span>
+<span class="sd">                the specified voltage or current.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
+<span class="sd">    &gt;&gt;&gt; ep.phasor(67, 120) # 67 volts at angle 120 degrees</span>
+<span class="sd">    (-33.499999999999986+58.02370205355739j)</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    phasorlist: Phasor Generator for List or Array</span>
+<span class="sd">    cprint:     Complex Variable Printing Function</span>
+<span class="sd">    phasorz:    Impedance Phasor Generator</span>
+<span class="sd">    phs:        Complex Phase Angle Generator</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Test for Tuple/List Arg</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
+        <span class="n">ang</span> <span class="o">=</span> <span class="n">mag</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">mag</span> <span class="o">=</span> <span class="n">mag</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">_c</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">ang</span><span class="p">)))</span>
+
+
+<span class="c1"># Define Phasor Array Generator</span>
+<span class="k">def</span> <span class="nf">phasorlist</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Complex Phasor Generator for 2-D Array or 2-D List.</span>
+
+<span class="sd">    Generates the standard Pythonic complex representation</span>
+<span class="sd">    of a phasor voltage or current when given the magnitude</span>
+<span class="sd">    and angle of the specific voltage or current for a list</span>
+<span class="sd">    or array of values.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    arr:        array-like</span>
+<span class="sd">                2-D array or list of magnitudes and angles.</span>
+<span class="sd">                Each item must be set of magnitude and angle</span>
+<span class="sd">                in form of: [mag, ang].</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    phasor:     complex</span>
+<span class="sd">                Standard Pythonic Complex Representation of</span>
+<span class="sd">                the specified voltage or current.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
+<span class="sd">    &gt;&gt;&gt; voltages = np.array([[67,0],</span>
+<span class="sd">                             [67,-120],</span>
+<span class="sd">                             [67,120]])</span>
+<span class="sd">    &gt;&gt;&gt; Vset = ep.phasorlist( voltages )</span>
+<span class="sd">    &gt;&gt;&gt; print(Vset)</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    phasor:     Phasor Generating Function</span>
+<span class="sd">    vectarray:  Magnitude/Angle Array Pairing Function</span>
+<span class="sd">    cprint:     Complex Variable Printing Function</span>
+<span class="sd">    phasorz:    Impedance Phasor Generator</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Use List Comprehension to Process</span>
+
+    <span class="c1"># Return Array</span>
+    <span class="k">return</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">phasor</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">])</span>
+
+<span class="c1"># Define Vector Array Generator</span>
+<span class="k">def</span> <span class="nf">vectarray</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">flatarray</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Format Complex as Array of Magnitude/Angle Pairs.</span>
+
+<span class="sd">    Consume an iterable (list/tuple/ndarray/etc.) of</span>
+<span class="sd">    complex numbers and generate an ndarray of magnitude</span>
+<span class="sd">    and angle pairs, formatted as a 2-dimension (or</span>
+<span class="sd">    optionally 1-dimension) array.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    arr:        array-like</span>
+<span class="sd">                Array or list of complex numbers to be</span>
+<span class="sd">                cast to magnitude/angle pairs.</span>
+<span class="sd">    degrees:    bool, optional</span>
+<span class="sd">                Control option to set the angles in</span>
+<span class="sd">                degrees. Defaults to True.</span>
+<span class="sd">    flatarray:  bool, optional</span>
+<span class="sd">                Control option to set the array return</span>
+<span class="sd">                to work as a 1-dimension list. Defaults</span>
+<span class="sd">                to False, formatting as a 2-dimension</span>
+<span class="sd">                list.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    polararr:   ndarray</span>
+<span class="sd">                Array of magnitude/angle pairs as a</span>
+<span class="sd">                2-dimension array (or optionally</span>
+<span class="sd">                1-dimension array).</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    phasor:     Phasor Generating Function</span>
+<span class="sd">    phasorlist: Phasor Generator for List or Array</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Iteratively Append Arrays to the Base</span>
+
+    <span class="k">def</span> <span class="nf">vector_cast</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+        <span class="n">mag</span><span class="p">,</span> <span class="n">ang</span> <span class="o">=</span> <span class="n">_c</span><span class="o">.</span><span class="n">polar</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">degrees</span><span class="p">:</span>
+            <span class="n">ang</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ang</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">mag</span><span class="p">,</span> <span class="n">ang</span><span class="p">]</span>
+
+    <span class="n">polararr</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">vector_cast</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">])</span>
+    <span class="c1"># Reshape Array if Needed</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">flatarray</span><span class="p">:</span>
+        <span class="n">polararr</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">polararr</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">polararr</span>
+
+<span class="c1"># Define Phasor Data Generator</span>
+<span class="k">def</span> <span class="nf">phasordata</span><span class="p">(</span><span class="n">mn</span><span class="p">,</span> <span class="n">mx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">mag</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ang</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+               <span class="n">retstep</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rettime</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sine</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Complex Phasor Data Generator.</span>
+
+<span class="sd">    Generates a sinusoidal data set with minimum, maximum,</span>
+<span class="sd">    frequency, magnitude, and phase angle arguments.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mn:         float, optional</span>
+<span class="sd">                Minimum time (in seconds) to generate data for.</span>
+<span class="sd">                default=0</span>
+<span class="sd">    mx:         float</span>
+<span class="sd">                Maximum time (in seconds) to generate data for.</span>
+<span class="sd">    npts:       float, optional</span>
+<span class="sd">                Number of data samples. default=1000</span>
+<span class="sd">    mag:        float, optional</span>
+<span class="sd">                Sinusoid magnitude, default=1</span>
+<span class="sd">    ang:        float, optional</span>
+<span class="sd">                Sinusoid angle in degrees, default=0</span>
+<span class="sd">    freq:       float, optional</span>
+<span class="sd">                Sinusoid frequency in Hz</span>
+<span class="sd">    retstep:    bool, optional</span>
+<span class="sd">                Control argument to request return of time</span>
+<span class="sd">                step size (dt) in seconds.</span>
+<span class="sd">    sine:       bool, optional</span>
+<span class="sd">                Control argument to require data be generated</span>
+<span class="sd">                with a sinusoidal function instead of cosine.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    data:       numpy.ndarray</span>
+<span class="sd">                The resultant data array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Test Inputs for Min/Max</span>
+    <span class="k">if</span> <span class="n">mx</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># No Minimum provided, use Value as Maximum</span>
+        <span class="n">mx</span> <span class="o">=</span> <span class="n">mn</span>
+        <span class="n">mn</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Generate Omega</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span>
+    <span class="c1"># Generate Time Array</span>
+    <span class="n">t</span><span class="p">,</span> <span class="n">dt</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mn</span><span class="p">,</span> <span class="n">mx</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">retstep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># Generate Data Array</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">sine</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">mag</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="n">_np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">ang</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">mag</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="n">_np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">ang</span><span class="p">))</span>
+    <span class="c1"># Generate Return Data Set</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="p">[</span><span class="n">data</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">retstep</span><span class="p">:</span>
+        <span class="n">dataset</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">rettime</span><span class="p">:</span>
+        <span class="n">dataset</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="c1"># Return Dataset</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+
+<span class="c1"># Define Complex Composition Function</span>
+<div class="viewcode-block" id="compose"><a class="viewcode-back" href="../../api/electricpy.compose.html#electricpy.compose">[docs]</a><span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="o">*</span><span class="n">arr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Complex Composition Function.</span>
+
+<span class="sd">    Accepts a set of real values and generates an array</span>
+<span class="sd">    of complex values. Input must be array-like, but can</span>
+<span class="sd">    appear in various forms:</span>
+
+<span class="sd">    - [ real, imag]</span>
+<span class="sd">    - [ [ real1, ..., realn ], [ imag1, ..., imagn ] ]</span>
+<span class="sd">    - [ [ real1, imag1 ], ..., [ realn, imagn ] ]</span>
+
+<span class="sd">    Will always return values in form:</span>
+
+<span class="sd">    [ complex1, ... complexn ]</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    arr:        array_like</span>
+<span class="sd">                The input of real and imaginary term(s)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Condition Input</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Extract 0-th term</span>
+    <span class="c1"># Input comes in various forms, we must first detect shape</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>  <span class="c1"># Format as Numpy Array</span>
+    <span class="c1"># Gather Shape to Detect Format</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span>
+        <span class="c1"># Passed Test, Valid Shape</span>
+        <span class="n">retarr</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>  <span class="c1"># Empty Return Array</span>
+        <span class="c1"># Now, Determine whether is type 2 or 3</span>
+        <span class="k">if</span> <span class="n">col</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># Type 3</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>  <span class="c1"># Iterate over each row</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">retarr</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">retarr</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">row</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># Type 2</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>  <span class="c1"># Iterate over each column</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">retarr</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">retarr</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid Array Shape, must be 2xN or Nx2.&quot;</span><span class="p">)</span>
+        <span class="c1"># Successfully Generated Array, Return</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">retarr</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>  <span class="c1"># 1-Dimension Array</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">size</span>
+        <span class="c1"># Test for invalid Array Size</span>
+        <span class="k">if</span> <span class="n">length</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid Array Size, Saw Length of &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
+        <span class="c1"># Valid Size, Calculate and Return</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
+
+
+<span class="c1"># Define Parallel Impedance Adder</span>
+<div class="viewcode-block" id="parallelz"><a class="viewcode-back" href="../../api/electricpy.parallelz.html#electricpy.parallelz">[docs]</a><span class="k">def</span> <span class="nf">parallelz</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parallel Impedance Calculator.</span>
+
+<span class="sd">    This function is designed to generate the total parallel</span>
+<span class="sd">    impedance of a set (tuple) of impedances specified as real</span>
+<span class="sd">    or complex values.</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">       Z_{eq}=(\frac{1}{Z_1}+\frac{1}{Z_2}+\dots+\frac{1}{Z_n})^{-1}</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Z:      tuple of complex</span>
+<span class="sd">            The tupled input set of impedances, may be a tuple</span>
+<span class="sd">            of any size greater than 2. May be real, complex, or</span>
+<span class="sd">            a combination of the two.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Zp:     complex</span>
+<span class="sd">            The calculated parallel impedance of the input tuple.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Gather length (number of elements in tuple)</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">L</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">Z</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Only One Tuple Provided</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">L</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">L</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">Zp</span> <span class="o">=</span> <span class="n">Z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Only one impedance, burried in tuple</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Inversely add the first two elements in tuple</span>
+                <span class="n">Zp</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Z</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="c1"># If there are more than two elements, add them all inversely</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">L</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
+                        <span class="n">Zp</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Zp</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">Zp</span> <span class="o">=</span> <span class="n">Z</span>  <span class="c1"># Only one impedance</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">Z</span> <span class="o">=</span> <span class="n">args</span>  <span class="c1"># Set of Args acts as Tuple</span>
+        <span class="c1"># Inversely add the first two elements in tuple</span>
+        <span class="n">Zp</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Z</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># If there are more than two elements, add them all inversely</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">L</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
+                <span class="n">Zp</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Zp</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">Zp</span><span class="p">)</span></div>
+
+<span class="c1"># Define Phasor Plot Generator</span>
+<span class="k">def</span> <span class="nf">phasorplot</span><span class="p">(</span><span class="n">phasor</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Phasor Diagram&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Phasor Plotting Function.</span>
+
+<span class="sd">    This function is designed to plot a phasor-diagram with angles in degrees</span>
+<span class="sd">    for up to 12 phasor sets. Phasors must be passed as a complex number set,</span>
+<span class="sd">    (e.g. [ m+ja, m+ja, m+ja, ... , m+ja ] ).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    phasor:     list of complex</span>
+<span class="sd">                The set of phasors to be plotted.</span>
+<span class="sd">    title:      string, optional</span>
+<span class="sd">                The Plot Title, default=&quot;Phasor Diagram&quot;</span>
+<span class="sd">    legend:     bool, optional</span>
+<span class="sd">                Control argument to enable displaying the legend, must be passed</span>
+<span class="sd">                as an array or list of strings. `label` and `labels` are mimic-</span>
+<span class="sd">                arguments and will perform similar operation, default=False</span>
+<span class="sd">    bg:         string, optional</span>
+<span class="sd">                Background-Color control, default=&quot;#d5de9c&quot;</span>
+<span class="sd">    radius:     float, optional</span>
+<span class="sd">                The diagram radius, unless specified, automatically scales</span>
+<span class="sd">    colors:     list of str, optional</span>
+<span class="sd">                List of hexidecimal color strings denoting the line colors to use.</span>
+<span class="sd">    filename:   string, optional</span>
+<span class="sd">                String of filename, if set, will force function to save image.</span>
+<span class="sd">    plot:       bool, optional</span>
+<span class="sd">                Control argument to disable plotting. default=True</span>
+<span class="sd">    size:       float, optional</span>
+<span class="sd">                Control argument for figure size. default=None</span>
+<span class="sd">    linewidth:  float, optional</span>
+<span class="sd">                Control argument to declare the line thickness. default=None</span>
+<span class="sd">    tolerance:  float, optional</span>
+<span class="sd">                Minimum magnitude to plot, anything less than tolerance will be</span>
+<span class="sd">                plotted as a single point at the origin, by default, the tolerance</span>
+<span class="sd">                is scaled to be 1/25-th the maximum radius. To disable the tolerance,</span>
+<span class="sd">                simply provide either False or -1.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Load Complex Values if Necessary</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">phasor</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="n">phasor</span> <span class="o">=</span> <span class="p">[</span><span class="n">phasor</span><span class="p">]</span>
+    <span class="c1"># Manage Colors</span>
+    <span class="k">if</span> <span class="n">colors</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;#FF0000&quot;</span><span class="p">,</span> <span class="s2">&quot;#800000&quot;</span><span class="p">,</span> <span class="s2">&quot;#FFFF00&quot;</span><span class="p">,</span> <span class="s2">&quot;#808000&quot;</span><span class="p">,</span> <span class="s2">&quot;#00ff00&quot;</span><span class="p">,</span> <span class="s2">&quot;#008000&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;#00ffff&quot;</span><span class="p">,</span> <span class="s2">&quot;#008080&quot;</span><span class="p">,</span> <span class="s2">&quot;#0000ff&quot;</span><span class="p">,</span> <span class="s2">&quot;#000080&quot;</span><span class="p">,</span> <span class="s2">&quot;#ff00ff&quot;</span><span class="p">,</span> <span class="s2">&quot;#800080&quot;</span><span class="p">]</span>
+    <span class="c1"># Scale Radius</span>
+    <span class="k">if</span> <span class="n">radius</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">radius</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">phasor</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="c1"># Set Tolerance</span>
+    <span class="k">if</span> <span class="n">tolerance</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">tolerance</span> <span class="o">=</span> <span class="n">radius</span> <span class="o">/</span> <span class="mi">25</span>
+    <span class="k">elif</span> <span class="n">tolerance</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">tolerance</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="c1"># Set Background Color</span>
+    <span class="k">if</span> <span class="n">bg</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">bg</span> <span class="o">=</span> <span class="s2">&quot;#FFFFFF&quot;</span>
+    <span class="c1"># Load labels if handled in other argument</span>
+    <span class="k">if</span> <span class="n">label</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">legend</span> <span class="o">=</span> <span class="n">label</span>
+    <span class="k">if</span> <span class="n">labels</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">legend</span> <span class="o">=</span> <span class="n">labels</span>
+    <span class="c1"># Check for more phasors than colors</span>
+    <span class="n">numphs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">phasor</span><span class="p">)</span>
+    <span class="n">numclr</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">numphs</span> <span class="o">&gt;</span> <span class="n">numclr</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ERROR: Too many phasors provided. Specify more line colors.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">size</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Force square figure and square axes</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">_matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+    <span class="c1"># Make a square figure</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">_plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span> <span class="n">polar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">bg</span><span class="p">)</span>
+    <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Plot the diagram</span>
+    <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">handles</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>  <span class="c1"># Empty array for plot handles</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numphs</span><span class="p">):</span>
+        <span class="n">mag</span><span class="p">,</span> <span class="n">ang_r</span> <span class="o">=</span> <span class="n">_c</span><span class="o">.</span><span class="n">polar</span><span class="p">(</span><span class="n">phasor</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="c1"># Plot with labels</span>
+        <span class="k">if</span> <span class="n">legend</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">mag</span> <span class="o">&gt;</span> <span class="n">tolerance</span><span class="p">:</span>
+                <span class="n">hand</span> <span class="o">=</span> <span class="n">_plt</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ang_r</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                                <span class="n">label</span><span class="o">=</span><span class="n">legend</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">linewidth</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">hand</span> <span class="o">=</span> <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="n">linewidth</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span>
+                                <span class="n">label</span><span class="o">=</span><span class="n">legend</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">handles</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="p">[</span><span class="n">hand</span><span class="p">])</span>
+        <span class="c1"># Plot without labels</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_plt</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ang_r</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">linewidth</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">legend</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span> <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="n">handles</span><span class="p">),</span> <span class="n">legend</span><span class="p">)</span>
+    <span class="c1"># Set Minimum and Maximum Radius Terms</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_rmax</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_rmin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">filename</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">sub</span> <span class="ow">in</span> <span class="n">filename</span> <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;.png&#39;</span><span class="p">,</span> <span class="s1">&#39;.jpg&#39;</span><span class="p">]):</span>
+            <span class="n">filename</span> <span class="o">+=</span> <span class="s1">&#39;.png&#39;</span>  <span class="c1"># Add File Extension</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="c1"># END</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../electricpy.html" >electricpy</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.phasor</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Joe Stanley.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+    </div>
+  </body>
+</html>
