@@ -85,8 +85,6 @@ electricpy._version_
 - Add arc-flash calculators suggested
 - Add Simple [decibel](https://www.basictables.com/electronics/decibel-dbw) Formulas
 - Add Simple [Battery Discharge Rate](https://www.basictables.com/electronics/battery/battery-discharge-rate) Formula
-- Add Simple [Air Core Inductor](https://www.basictables.com/electronics/inductor/air-core-inductor) Formula(s)
-- Add Simple [Zener Diode](https://www.basictables.com/electronics/diode/zener-diode) Formulas
 - *Develop Testing for All Functions*
 
 ## Get Involved / Contribute

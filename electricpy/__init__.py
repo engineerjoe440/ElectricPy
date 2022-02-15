@@ -4783,7 +4783,7 @@ def wireresistance(length=None,diameter=None,rho=16.8*10**-9,R=None):
         A = rho*length/R
         return _np.sqrt(4*A/pi)
         
-def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
+def ic_555_astable(R = None, C = None, freq = None, t_high = None, t_low = None):
     """
     555 Integrated Circuit Calculator.
     
@@ -4855,7 +4855,7 @@ def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
     else:
         raise TypeError("Not enough parqmeters are passed")
             
-def ic_555_monostable(R=None,C=None,freq=None,t_high=None,t_low=None):
+def ic_555_monostable(R = None, C = None, delay_time = None):
     """
     555 Integrated Circuit Calculator.
     
@@ -4867,46 +4867,40 @@ def ic_555_monostable(R=None,C=None,freq=None,t_high=None,t_low=None):
     
     Parameters
     ---------- 
-    R:      list[float, float] or tuple(float, float), optional
-            List of 2 resistor which are need in configuring IC 555.
+    R:      Resitance Between Discharge pin and Reset Pin
     C:      float, optional
             Capacitance between Threshold Pin and ground
     f:      float, optional
             Electrical system frequency in Hertz. 
-    t_high: float, optional
-            ON time of IC 555 
-    t_low:  float, optional
-            OFF time of IC 555 
+    delay_time: float, optional
+            delay time of IC 555 in mono stable mode
     
     Returns 
     ------- 
-    dict:   "time_period": Time period of oscillating IC 555 
-            "frequency": frequency of oscilation of IC 555 
-            "duty_cycle": ration between ON time and total time
-            "t_low": ON time of IC 555 
-            "t_high": OFF time of IC 555 
+    dict:   "delay_time": delay time of IC 555 in mono stable mode
+            "Resistance": Resitance Between Discharge pin and Reset Pin
+            "Capacitance": Capacitance between Threshold Pin and ground
     """
-    T = t_high+t_low
     if R is None:
         try:
-            assert C!=None and T!=None
+            assert C!=None and delay_time!=None
         except AssertionError:
             raise ValueError("To find Resitance, Capacitance and delay time should be provided")
-        return T/(_np.log(3)*C)
+        R = delay_time/(_np.log(3)*C)
     elif C is None:
         try:
-            assert R!=None and T!=None
+            assert R!=None and delay_time!=None
         except AssertionError:
             raise ValueError("To find Capacitance , Resistance and delay time should be provided")
-        return T/(_np.log(3)*R)
-
-    elif T is None:
-
+        C = delay_time/(_np.log(3)*R)
+    elif delay_time is None:
         try:
-            assert R!=None and T!=None
+            assert R!=None and delay_time!=None
         except AssertionError:
             raise ValueError("To find Time delay , Resistance and Capacitance should be provided")
-        return R*C*_np.log(3)
+        delay_time = R*C*_np.log(3)
+
+    return {'resistance':R, 'capacitance':C, 'time_delay':delay_time}
 
 
 def t_attenuator(Adb, Z0):
@@ -4967,4 +4961,35 @@ def pi_attenuator(Adb, Z0):
     R2 = (Z0/2)*(_np.power(10, x) - (1/(_np.power(10, x))))
 
     return R1,R2
+
+def zener_diode(Vin_min: float, Vin_max: float, Vout: float, load_current:float):
+    r"""
+    Zener Dioded Resitance & Power Calculator.
+
+    A zener diode also allows the current to flow in the opposite direction
+    when the zener voltage is reached instead of exclusively letting flow from
+    the anode to the cathode. Zener diodes are used to supply reference voltages
+    and to prevent overvoltage.
+
+    The following formulas can be used to calculate the resistance,the power of
+    the resistor and the power of the zener diode.
+
+    Parameters
+    ----------
+    Vin_min: float Minimum input voltage in (volts)
+    Vin_max: float Maximum input voltage in (volts)
+    Vout: float Output voltage in (volts)
+    load_current: float Load current in (amps)
+
+    Returns
+    -------
+    R: float Resitance of the zener diode
+    P_zener: float Power of the zener diode
+    P_resistor: float Power of the resistor
+    """
+    resistance = (Vin_min-Vout)/(load_current + 0.01)
+    P_zener = (Vout - Vin_max)**2/resistance
+    P_resistor = (Vin_max - Vout)*Vout/resistance
+
+    return resistance,P_zener,P_resistor
 # END OF FILE
