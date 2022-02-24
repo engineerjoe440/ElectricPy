@@ -44,7 +44,7 @@ def phs(ang):
     phasor:     Phasor Generating Function
     """
     # Return the Complex Angle Modulator
-    return (_np.exp(1j * _np.radians(ang)))
+    return _np.exp(1j * _np.radians(ang))
 
 
 phase = phs  # Create Duplicate Name
@@ -89,7 +89,7 @@ def phasor(mag, ang=0):
     if isinstance(mag, (tuple, list, _np.ndarray)):
         ang = mag[1]
         mag = mag[0]
-    return (_c.rect(mag, _np.radians(ang)))
+    return _c.rect(mag, _np.radians(ang))
 
 
 # Define Phasor Array Generator
@@ -136,6 +136,7 @@ def phasorlist(arr):
 
     # Return Array
     return _np.array([phasor(i) for i in arr])
+
 
 # Define Vector Array Generator
 def vectarray(arr, degrees=True, flatarray=False):
@@ -189,9 +190,19 @@ def vectarray(arr, degrees=True, flatarray=False):
         polararr = _np.reshape(polararr, (-1, 2))
     return polararr
 
+
 # Define Phasor Data Generator
-def phasordata(mn, mx=None, npts=1000, mag=1, ang=0, freq=60,
-               retstep=False, rettime=False, sine=False):
+def phasordata(
+    mn,
+    mx=None,
+    npts=1000,
+    mag=1,
+    ang=0,
+    freq=60,
+    retstep=False,
+    rettime=False,
+    sine=False,
+):
     """
     Complex Phasor Data Generator.
 
@@ -247,8 +258,9 @@ def phasordata(mn, mx=None, npts=1000, mag=1, ang=0, freq=60,
         dataset.append(t)
     # Return Dataset
     if len(dataset) == 1:
-        return (dataset[0])
-    return (dataset)
+        return dataset[0]
+    return dataset
+
 
 # Define Complex Composition Function
 def compose(*arr):
@@ -294,14 +306,14 @@ def compose(*arr):
         else:
             raise ValueError("Invalid Array Shape, must be 2xN or Nx2.")
         # Successfully Generated Array, Return
-        return (retarr)
+        return retarr
     except:  # 1-Dimension Array
         length = arr.size
         # Test for invalid Array Size
         if length != 2:
             raise ValueError("Invalid Array Size, Saw Length of " + str(length))
         # Valid Size, Calculate and Return
-        return (arr[0] + 1j * arr[1])
+        return arr[0] + 1j * arr[1]
 
 
 # Define Parallel Impedance Adder
@@ -334,13 +346,13 @@ def parallelz(*args):
         Z = args[0]  # Only One Tuple Provided
         try:
             L = len(Z)
-            if (L == 1):
+            if L == 1:
                 Zp = Z[0]  # Only one impedance, burried in tuple
             else:
                 # Inversely add the first two elements in tuple
                 Zp = (1 / Z[0] + 1 / Z[1]) ** (-1)
                 # If there are more than two elements, add them all inversely
-                if (L > 2):
+                if L > 2:
                     for i in range(2, L):
                         Zp = (1 / Zp + 1 / Z[i]) ** (-1)
         except:
@@ -350,16 +362,28 @@ def parallelz(*args):
         # Inversely add the first two elements in tuple
         Zp = (1 / Z[0] + 1 / Z[1]) ** (-1)
         # If there are more than two elements, add them all inversely
-        if (L > 2):
+        if L > 2:
             for i in range(2, L):
                 Zp = (1 / Zp + 1 / Z[i]) ** (-1)
-    return (Zp)
+    return Zp
+
 
 # Define Phasor Plot Generator
-def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
-            colors=None, radius=None, linewidth=None, size=None,
-            filename=None, plot=True, label=False, labels=False,
-            tolerance=None):
+def phasorplot(
+    phasor,
+    title="Phasor Diagram",
+    legend=False,
+    bg=None,
+    colors=None,
+    radius=None,
+    linewidth=None,
+    size=None,
+    filename=None,
+    plot=True,
+    label=False,
+    labels=False,
+    tolerance=None,
+):
     """
     Phasor Plotting Function.
 
@@ -404,8 +428,20 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
         phasor = [phasor]
     # Manage Colors
     if colors == None:
-        colors = ["#FF0000", "#800000", "#FFFF00", "#808000", "#00ff00", "#008000",
-                "#00ffff", "#008080", "#0000ff", "#000080", "#ff00ff", "#800080"]
+        colors = [
+            "#FF0000",
+            "#800000",
+            "#FFFF00",
+            "#808000",
+            "#00ff00",
+            "#008000",
+            "#00ffff",
+            "#008080",
+            "#0000ff",
+            "#000080",
+            "#ff00ff",
+            "#800080",
+        ]
     # Scale Radius
     if radius == None:
         radius = _np.abs(phasor).max()
@@ -430,7 +466,7 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
 
     if size == None:
         # Force square figure and square axes
-        width, height = _matplotlib.rcParams['figure.figsize']
+        width, height = _matplotlib.rcParams["figure.figsize"]
         size = min(width, height)
     # Make a square figure
     fig = _plt.figure(figsize=(size, size))
@@ -445,25 +481,41 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
         # Plot with labels
         if legend != False:
             if mag > tolerance:
-                hand = _plt.arrow(0, 0, ang_r, mag, color=colors[i],
-                                label=legend[i], linewidth=linewidth)
+                hand = _plt.arrow(
+                    0,
+                    0,
+                    ang_r,
+                    mag,
+                    color=colors[i],
+                    label=legend[i],
+                    linewidth=linewidth,
+                )
             else:
-                hand = _plt.plot(0, 0, 'o', markersize=linewidth * 3,
-                                label=legend[i], color=colors[i])
+                hand = _plt.plot(
+                    0,
+                    0,
+                    "o",
+                    markersize=linewidth * 3,
+                    label=legend[i],
+                    color=colors[i],
+                )
             handles = _np.append(handles, [hand])
         # Plot without labels
         else:
             _plt.arrow(0, 0, ang_r, mag, color=colors[i], linewidth=linewidth)
-    if legend != False: _plt.legend((handles), legend)
+    if legend != False:
+        _plt.legend((handles), legend)
     # Set Minimum and Maximum Radius Terms
     ax.set_rmax(radius)
     ax.set_rmin(0)
     if filename != None:
-        if not any(sub in filename for sub in ['.png', '.jpg']):
-            filename += '.png'  # Add File Extension
+        if not any(sub in filename for sub in [".png", ".jpg"]):
+            filename += ".png"  # Add File Extension
         _plt.savefig(filename)
     if plot:
         _plt.show()
     else:
         _plt.close()
+
+
 # END

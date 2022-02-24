@@ -6,6 +6,8 @@ Filled with methods related capacitors.
 """
 ################################################################################
 import numpy as _np
+
+
 def vcapdischarge(t, Vs, R, C):
     r"""
     Discharging Capacitor Function.
@@ -32,12 +34,13 @@ def vcapdischarge(t, Vs, R, C):
     Vc:         float
                 The calculated voltage of the capacitor.
     """
-    if t<0:
+    if t < 0:
         raise ValueError("Time must be greater than or equal to zero.")
-    if R*C == 0:
+    if R * C == 0:
         raise ValueError("Resistance and Capacitance must be non-zero.")
     Vc = Vs * (_np.exp(-t / (R * C)))
-    return (Vc)
+    return Vc
+
 
 def vcapcharge(t, Vs, R, C):
     r"""
@@ -65,12 +68,13 @@ def vcapcharge(t, Vs, R, C):
     Vc:         float
                 The calculated voltage of the capacitor.
     """
-    if t<0:
+    if t < 0:
         raise ValueError("Time must be greater than or equal to zero.")
-    if R*C == 0:
+    if R * C == 0:
         raise ValueError("Resistance and Capacitance must be non-zero.")
     Vc = Vs * (1 - _np.exp(-t / (R * C)))
-    return (Vc)
+    return Vc
+
 
 def captransfer(t, Vs, R, Cs, Cd):
     """
@@ -102,15 +106,18 @@ def captransfer(t, Vs, R, Cs, Cd):
     vfinal:     float
                 Final voltage that both capacitors settle to.
     """
-    if t<0:
+    if t < 0:
         raise ValueError("Time must be greater than zero.")
     try:
         tau = (R * Cs * Cd) / (Cs + Cd)
         rvolt = Vs * _np.exp(-t / tau)
     except ZeroDivisionError:
-        raise ZeroDivisionError("Sum of Source and Destination Capacitance must be non-zero.")
+        raise ZeroDivisionError(
+            "Sum of Source and Destination Capacitance must be non-zero."
+        )
     vfinal = Vs * Cs / (Cs + Cd)
     return (rvolt, vfinal)
+
 
 # Define Capacitive Back-to-Back Switching Formula
 def capbacktoback(C1, C2, Lm, VLN=None, VLL=None):
@@ -149,6 +156,7 @@ def capbacktoback(C1, C2, Lm, VLN=None, VLL=None):
     ifreq = 1 / (2 * _np.pi * _np.sqrt(Lm * (C1 * C2) / (C1 + C2)))
     return (imax, ifreq)
 
+
 # Define Apparent Power to Farad Conversion
 def farads(VAR, V, freq=60):
     r"""
@@ -176,7 +184,7 @@ def farads(VAR, V, freq=60):
     C:          float
                 The evaluated capacitance (in Farads).
     """
-    return (VAR / (2 * _np.pi * freq * V ** 2))
+    return VAR / (2 * _np.pi * freq * V**2)
 
 
 # Define Capacitor Energy Calculation
@@ -201,8 +209,8 @@ def capenergy(C, V):
     energy:     float
                 Energy stored in capacitor (Joules).
     """
-    energy = 1 / 2 * C * V ** 2
-    return (energy)
+    energy = 1 / 2 * C * V**2
+    return energy
 
 
 # Define Capacitor Voltage Discharge Function
@@ -233,8 +241,8 @@ def loadedvcapdischarge(t, vo, C, P):
     Vt:         float
                 Voltage of capacitor at time t.
     """
-    Vt = _np.sqrt(vo ** 2 - 2 * P * t / C)
-    return (Vt)
+    Vt = _np.sqrt(vo**2 - 2 * P * t / C)
+    return Vt
 
 
 # Define Capacitor Discharge Function
@@ -273,15 +281,15 @@ def timedischarge(Vinit, Vmin, C, P, dt=1e-3, RMS=True, Eremain=False):
     else:
         vo = Vinit
     vc = loadedvcapdischarge(t, vo, C, P)  # set initial cap voltage
-    while (vc >= Vmin):
+    while vc >= Vmin:
         t = t + dt  # increment the time
         vcp = vc  # save previous voltage
         vc = loadedvcapdischarge(t, vo, C, P)  # calc. new voltage
-    if (Eremain):
+    if Eremain:
         E = capenergy(C, vcp)  # calc. energy
         return (t - dt, E)
     else:
-        return (t - dt)
+        return t - dt
 
 
 # Define Rectifier Capacitor Calculator
@@ -310,7 +318,9 @@ def rectifiercap(Iload, fswitch, dVout):
                 Required capacitance (in Farads) to meet arguments.
     """
     C = Iload / (fswitch * dVout)
-    return (C)
+    return C
+
+
 # Define Inductor Energy Formula
 def inductorenergy(L, I):
     r"""
@@ -333,7 +343,8 @@ def inductorenergy(L, I):
     E:          float
                 The energy stored in the inductor (in Joules).
     """
-    return (1 / 2 * L * I ** 2)
+    return 1 / 2 * L * I**2
+
 
 def inductorcharge(t, Vs, R, L):
     r"""
@@ -367,6 +378,7 @@ def inductorcharge(t, Vs, R, L):
     Vl = Vs * _np.exp(-R * t / L)
     Il = Vs / R * (1 - _np.exp(-R * t / L))
     return (Vl, Il)
+
 
 # Define Inductor Discharge Function
 def inductordischarge(t, Io, R, L):
@@ -402,6 +414,7 @@ def inductordischarge(t, Io, R, L):
     Vl = Io * R * (1 - _np.exp(-R * t / L))
     return (Vl, Il)
 
+
 def air_core_inductor(coil_diameter: float, coil_length: float, turns: int):
     r"""
     Compute Inductance of Air Core Inductor.
@@ -410,25 +423,26 @@ def air_core_inductor(coil_diameter: float, coil_length: float, turns: int):
     They are used in all sorts of electronic devices like radios and computers.
 
     Parameters
-    ---------- 
+    ----------
     coil_diameter: float in meters
     coil_length: float in meters
     turns: int inductor turns
 
-    Returns 
-    ------- 
+    Returns
+    -------
     L: float Inductance of air core inductor in (mH)
     """
-    k1 = (1000*coil_diameter*coil_diameter) * (turns*turns)
-    k2 = (457418*coil_diameter) + (1016127*coil_length)
-    return  k1/k2
+    k1 = (1000 * coil_diameter * coil_diameter) * (turns * turns)
+    k2 = (457418 * coil_diameter) + (1016127 * coil_length)
+    return k1 / k2
 
-def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
+
+def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=""):
     r"""
     Inductive voltage divider.
 
-    Inductive voltage divider Inductive voltage dividers are made out of two inductors. 
-    One of the inductors is connected from the input to the output and the other one is connected from the output to ground. 
+    Inductive voltage divider Inductive voltage dividers are made out of two inductors.
+    One of the inductors is connected from the input to the output and the other one is connected from the output to ground.
     You can also use other components like resistors and inductors.
 
     .. math:: V_{out} = \frac{V_{in}*L1}{L1+L2}
@@ -437,7 +451,7 @@ def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
 
     Parameters
     ----------
-    Vin:    float, optional 
+    Vin:    float, optional
             The input voltage for the system, default=None
 
     Vout:   float, optional
@@ -452,10 +466,10 @@ def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
     find:   str, optional
             Control argument to specify which value
             should be returned.
-    
+
     Returns
     -------
-    Vin:    float, optional 
+    Vin:    float, optional
             The input voltage for the system, default=None
 
     Vout:   float, optional
@@ -467,27 +481,28 @@ def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
     L2:     float,optional
             Value of the inductor below the output voltage
     """
-    if Vin!=None and L1!=None and L2!=None:
-        Vout = (Vin*L1)/(L1+L2)
-    elif Vout!=None and L1!=None and L2!=None:
-        Vin = (Vout)*(L1+L2)/(L1)
-    elif Vin!=None and Vout!=None and L2!=None:
-        L1 = L2*(Vin -Vout)/(Vout)
-    elif Vin!=None and Vout!=None and L1!=None:
-        L2 = L1*(Vout)/(Vin - Vout)
+    if Vin != None and L1 != None and L2 != None:
+        Vout = (Vin * L1) / (L1 + L2)
+    elif Vout != None and L1 != None and L2 != None:
+        Vin = (Vout) * (L1 + L2) / (L1)
+    elif Vin != None and Vout != None and L2 != None:
+        L1 = L2 * (Vin - Vout) / (Vout)
+    elif Vin != None and Vout != None and L1 != None:
+        L2 = L1 * (Vout) / (Vin - Vout)
     else:
-        raise ValueError("ERROR: Invalid Parameters or too few" +
-                        " parameters given to calculate.")
+        raise ValueError(
+            "ERROR: Invalid Parameters or too few" + " parameters given to calculate."
+        )
 
     find = find.lower()
-    
-    if find == 'vin':
+
+    if find == "vin":
         return Vin
-    elif find == 'vout':
+    elif find == "vout":
         return Vout
-    elif find == 'l1':
+    elif find == "l1":
         return L1
-    elif find == 'l2':
+    elif find == "l2":
         return L2
     else:
         return (Vin, Vout, L1, L2)

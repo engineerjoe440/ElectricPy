@@ -14,7 +14,8 @@ from electricpy.geometry import Point
 from electricpy.geometry import Line
 from electricpy import geometry
 
-#Type cast complex to float
+# Type cast complex to float
+
 
 class Triangle:
     r"""
@@ -29,7 +30,7 @@ class Triangle:
     def __init__(self, *points: List[Point]):
         """Initialize the triangle."""
         if len(points) != 3:
-            raise ValueError('Triangle must have 3 points')
+            raise ValueError("Triangle must have 3 points")
 
         self.a = geometry.distance(points[0], points[1])
         self.b = geometry.distance(points[1], points[2])
@@ -53,13 +54,20 @@ class Triangle:
     def in_center(self):
         """Return the inCenter of the triangle."""
         s = self.perimeters()
-        i = (self.a * self.points[2].x + self.b * self.points[0].x + self.c * self.points[1].x) / s, \
-                (self.a * self.points[2].y + self.b * self.points[0].y + self.c * self.points[1].y) / s
+        i = (
+            self.a * self.points[2].x
+            + self.b * self.points[0].x
+            + self.c * self.points[1].x
+        ) / s, (
+            self.a * self.points[2].y
+            + self.b * self.points[0].y
+            + self.c * self.points[1].y
+        ) / s
         return Point(i[0], i[1])
 
     def in_radius(self):
         """Return the inRadius of the triangle."""
-        return self.area() / (self.perimeters()/2)
+        return self.area() / (self.perimeters() / 2)
 
     def ortho_center(self):
         """Return the orthoCenter of the triangle."""
@@ -80,7 +88,7 @@ class Triangle:
 
     def circum_radius(self):
         """Return the circumRadius of the triangle."""
-        return (self.a*self.b*self.c) / (4 * self.area())
+        return (self.a * self.b * self.c) / (4 * self.area())
 
     def area(self):
         """Return the area of the triangle."""
@@ -92,4 +100,8 @@ class Triangle:
         return self.a + self.b + self.c
 
     def __is_valid(self):
-        return (self.a + self.b > self.c) and (self.a + self.c > self.b) and (self.b + self.c > self.a)
+        return (
+            (self.a + self.b > self.c)
+            and (self.a + self.c > self.b)
+            and (self.b + self.c > self.a)
+        )

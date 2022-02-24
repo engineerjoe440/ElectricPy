@@ -37,11 +37,11 @@ def convolve(tuple):
                 i.e. numpy.ndarray([ x1, x2, x3, ..., xn ])
     """
     c = _sig.convolve(tuple[0], tuple[1])
-    if (len(tuple) > 2):
+    if len(tuple) > 2:
         # Iterate starting with second element and continuing
         for i in range(2, len(tuple)):
             c = _sig.convolve(c, tuple[i])
-    return (c)
+    return c
 
 
 # Define Step function
@@ -53,7 +53,8 @@ def step(t):
     to provide standard step-function as specified to
     be zero at x<0, and one at x>=0.
     """
-    return (_np.heaviside(t, 1))
+    return _np.heaviside(t, 1)
+
 
 # Arbitrary Waveform RMS Calculating Function
 def funcrms(func, T):
@@ -80,6 +81,7 @@ def funcrms(func, T):
     integral, _ = integrate(fn, 0, T)
     return _np.sqrt(1 / T * integral)
 
+
 # Define Gaussian Function
 def gaussian(x, mu=0, sigma=1):
     """
@@ -101,8 +103,12 @@ def gaussian(x, mu=0, sigma=1):
     -------
     Computed gaussian (numpy.ndarray) of the input x
     """
-    return (1 / (sigma * _np.sqrt(2 * _np.pi)) *
-            _np.exp(-(x - mu) ** 2 / (2 * sigma ** 2)))
+    return (
+        1
+        / (sigma * _np.sqrt(2 * _np.pi))
+        * _np.exp(-((x - mu) ** 2) / (2 * sigma**2))
+    )
+
 
 # Define Gaussian Distribution Function
 def gausdist(x, mu=0, sigma=1):
@@ -130,7 +136,8 @@ def gausdist(x, mu=0, sigma=1):
     """
     # Define Integrand
     def integrand(sq):
-        return (_np.exp(-sq ** 2 / 2))
+        return _np.exp(-(sq**2) / 2)
+
     try:
         lx = len(x)  # Find length of Input
     except:
@@ -145,9 +152,10 @@ def gausdist(x, mu=0, sigma=1):
         result = 1 / _np.sqrt(2 * _np.pi) * integral[0]  # Evaluate Result
         F[i] = result
     # Return only the 0-th value if there's only 1 value available
-    if (len(F) == 1):
+    if len(F) == 1:
         F = F[0]
-    return (F)
+    return F
+
 
 # Define Probability Density Function
 def probdensity(func, x, x0=0, scale=True):
@@ -187,15 +195,16 @@ def probdensity(func, x, x0=0, scale=True):
     for i in range(lx):
         sumx = _np.append(sumx, integrate(func, x0, x[i])[0])
     # Return only the 0-th value if there's only 1 value available
-    if (len(sumx) == 1):
+    if len(sumx) == 1:
         sumx = sumx[0]
     else:
-        if (scale == True):
+        if scale == True:
             mx = sumx.max()
             sumx /= mx
-        elif (scale != False):
+        elif scale != False:
             sumx /= scale
-    return (sumx)
+    return sumx
+
 
 # Define Real FFT Evaluation Function
 def rfft(arr, dt=0.01, absolute=True, resample=True):
@@ -235,12 +244,12 @@ def rfft(arr, dt=0.01, absolute=True, resample=True):
         dn = int(dt * len(arr))
         # Downsample to remove unnecessary points
         fixedfft = filter.dnsample(fourier, dn)
-        return (fixedfft)
+        return fixedfft
     elif resample == False:
-        return (fourier)
+        return fourier
     else:
         # Condition Resample Value
         resample = int(resample)
         # Downsample to remove unnecessary points
         fixedfft = filter.dnsample(fourier, resample)
-        return (fixedfft)
+        return fixedfft

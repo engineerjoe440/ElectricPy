@@ -18,10 +18,8 @@ import numpy as _np
 import cmath as _c
 
 
-
 # Define Complex LaTeX Generator
-def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
-           double=False):
+def clatex(val, round=3, polar=True, predollar=True, postdollar=True, double=False):
     """
     Complex Value Latex Generator.
 
@@ -63,8 +61,8 @@ def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
         ang = _np.degrees(ang_r)  # Convert to degrees
         mag = _np.around(mag, round)  # Round
         ang = _np.around(ang, round)  # Round
-        latex = str(mag) + '∠' + str(ang) + '°'
-        return (latex)
+        latex = str(mag) + "∠" + str(ang) + "°"
+        return latex
 
     def rectstring(val, round):
         real = _np.around(val.real, round)  # Round
@@ -73,7 +71,7 @@ def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
             latex = str(real) + "+j" + str(imag)
         else:
             latex = str(real) + "-j" + str(abs(imag))
-        return (latex)
+        return latex
 
     # Interpret as numpy array if simple list
     if isinstance(val, list):
@@ -88,15 +86,15 @@ def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
             col = 1
         _ = val.size
         # Open Matrix
-        latex = r'\begin{bmatrix}'
+        latex = r"\begin{bmatrix}"
         # Iteratively Process Each Item in Array
         for ri in range(row):
             if ri != 0:  # Insert Row Separator
-                latex += r'\\'
+                latex += r"\\"
             if col > 1:
                 for ci in range(col):
                     if ci != 0:  # Insert Column Separator
-                        latex += r' & '
+                        latex += r" & "
                     # Add Complex Represetation of Value
                     if polar:
                         latex += polarstring(val[ri][ci], round)
@@ -109,7 +107,7 @@ def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
                 else:
                     latex += rectstring(val[ri], round)
         # Close Matrix
-        latex += r'\end{bmatrix}'
+        latex += r"\end{bmatrix}"
     elif isinstance(val, complex):
         # Treat as Polar When Directed
         if polar:
@@ -120,9 +118,9 @@ def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
         raise ValueError("Invalid Input Type")
     # Add Dollar Sign pre-post
     if double:
-        dollar = r'$$'
+        dollar = r"$$"
     else:
-        dollar = r'$'
+        dollar = r"$"
     if predollar:
         latex = dollar + latex
     if postdollar:
@@ -131,8 +129,15 @@ def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
 
 
 # Define Transfer Function LaTeX Generator
-def tflatex(sys, sysp=None, var='s', predollar=True,
-            postdollar=True, double=False, tolerance=1e-8):
+def tflatex(
+    sys,
+    sysp=None,
+    var="s",
+    predollar=True,
+    postdollar=True,
+    double=False,
+    tolerance=1e-8,
+):
     r"""
     Transfer Function LaTeX String Generator.
 
@@ -187,13 +192,13 @@ def tflatex(sys, sysp=None, var='s', predollar=True,
     # Generate String Function
     def genstring(val):
         length = len(val)
-        strg = ''
+        strg = ""
         for i, v in enumerate(val):
             # Add Each Term to String
             if abs(v) > tolerance:
                 # Add '+' Symbol After Each Term
                 if i != 0:
-                    strg += r'+'
+                    strg += r"+"
                 strg += str(v)
                 # Determine Exponent
                 xpnt = length - i - 1
@@ -202,19 +207,19 @@ def tflatex(sys, sysp=None, var='s', predollar=True,
                 elif xpnt == 0:
                     pass  # Don't Do Anything
                 else:
-                    strg += var + r'^{' + str(xpnt) + r'}'
-        return (strg)
+                    strg += var + r"^{" + str(xpnt) + r"}"
+        return strg
 
     # Generate Total TF String
-    latex = r'\frac{' + genstring(num) + r'}{'
-    latex += genstring(den) + r'}'
+    latex = r"\frac{" + genstring(num) + r"}{"
+    latex += genstring(den) + r"}"
     # Add Dollar Sign pre-post
     if double:
-        dollar = r'$$'
+        dollar = r"$$"
     else:
-        dollar = r'$'
+        dollar = r"$"
     if predollar:
         latex = dollar + latex
     if postdollar:
         latex = latex + dollar
-    return (latex)
+    return latex

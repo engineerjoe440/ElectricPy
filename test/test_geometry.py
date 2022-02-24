@@ -3,22 +3,22 @@ from electricpy.geometry import Point
 from electricpy.geometry import Line
 from numpy.testing import assert_array_almost_equal
 
+
 def test_distance():
-    
     def test_0():
         p1 = Point(1, 2)
         p2 = Point(3, 4)
-        assert geometry.distance(p1, p2) == 2*(2**0.5)
+        assert geometry.distance(p1, p2) == 2 * (2**0.5)
 
         p1 = Point(4, -6)
         p2 = Point(-2, -5)
-        assert geometry.distance(p2, p1) ==  (37**0.5)
+        assert geometry.distance(p2, p1) == (37**0.5)
 
         p1 = Point(1.3, 2.3)
         p2 = Point(1.4, 2.4)
 
         d_output = geometry.distance(p1, p2)
-        d_actual = 0.1*(2**0.5)
+        d_actual = 0.1 * (2**0.5)
 
         assert_array_almost_equal(d_output, d_actual, decimal=6)
 
@@ -34,8 +34,8 @@ def test_distance():
     for i in range(2):
         exec("test_{}()".format(i))
 
-def test_slope():
 
+def test_slope():
     def test_0():
         p1 = Point(1, 2)
         p2 = Point(3, 4)
@@ -43,7 +43,7 @@ def test_slope():
 
         p1 = Point(4, -6)
         p2 = Point(-2, -5)
-        assert geometry.slope(p2, p1) == -1/6
+        assert geometry.slope(p2, p1) == -1 / 6
 
     def test_1():
 
@@ -62,8 +62,8 @@ def test_slope():
     for i in range(2):
         exec("test_{}()".format(i))
 
+
 def test_section():
-        
     def test_0():
         p1 = Point(1, 2)
         p2 = Point(3, 4)
@@ -76,15 +76,15 @@ def test_section():
         p2 = Point(1, -3)
 
         p_computed = geometry.section(p1, p2, (2, 3))
-        p_actual = Point(-1/5, 3/5)
+        p_actual = Point(-1 / 5, 3 / 5)
 
         assert_array_almost_equal(p_computed(), p_actual(), decimal=6)
-    
+
     for i in range(2):
         exec("test_{}()".format(i))
 
+
 def test_line_equaltion():
-    
     def test_0():
         p1 = Point(1, 2)
         p2 = Point(3, 4)
@@ -111,14 +111,14 @@ def test_line_equaltion():
     for i in range(3):
         exec("test_{}()".format(i))
 
-def test_line_distance():
 
+def test_line_distance():
     def test_0():
         p1 = Point(1, 2)
         p2 = Point(3, 4)
         l = Line.construct(p1, p2)
         assert geometry.line_distance(p1, l) == 0
-        assert geometry.line_distance(p2, l) ==  0
+        assert geometry.line_distance(p2, l) == 0
 
     def test_1():
         p1 = Point(2, 0)
@@ -134,8 +134,8 @@ def test_line_distance():
     for i in range(2):
         exec("test_{}()".format(i))
 
+
 def test_foot_perpendicular():
-    
     def test_0():
         p1 = Point(1, 2)
         p2 = Point(3, 4)
@@ -153,18 +153,19 @@ def test_foot_perpendicular():
         p_actual = l.foot_perpendicular(p)
         p_image = l.image(p)
 
-        p_desired = Point(68/25, -49/25)
+        p_desired = Point(68 / 25, -49 / 25)
 
         assert_array_almost_equal(p_actual(), p_desired(), decimal=6)
-        assert geometry.midpoint(p, p_image) == p_actual 
+        assert geometry.midpoint(p, p_image) == p_actual
 
     for i in range(2):
         exec("test_{}()".format(i))
 
+
 def test_perpendicular_bisector():
 
     from electricpy.geometry import perpendicular_bisector
-    
+
     def test_0():
         p1 = Point(3, 0)
         p2 = Point(0, 3)
@@ -189,12 +190,11 @@ def test_perpendicular_bisector():
         l = perpendicular_bisector(p1, p2)
         assert l == Line(0, 1, -4)
 
-
     for i in range(4):
         exec("test_{}()".format(i))
 
-def test_colinear():
 
+def test_colinear():
     def test_0():
         p1 = Point(1, 2)
         p2 = Point(3, 4)
@@ -206,7 +206,7 @@ def test_colinear():
         p2 = Point(3, 4)
         p3 = Point(5, 7)
         assert not geometry.colinear(p1, p2, p3)
-    
+
     def test_2():
         p1 = Point(1, 0)
         p2 = Point(2, 0)
@@ -215,4 +215,3 @@ def test_colinear():
 
     for i in range(3):
         exec("test_{}()".format(i))
-    

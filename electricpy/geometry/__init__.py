@@ -17,7 +17,7 @@ from typing import Tuple
 
 class Point:
     """A point in 2D space.
-    
+
     Parameters
     ----------
     x : float
@@ -64,7 +64,7 @@ class Line:
     """A line in 2D space in the form .
 
     math:: ax + by + c = 0
-    
+
     Parameters
     ----------
     a : float
@@ -88,10 +88,9 @@ class Line:
     def ordinate(self, x):
         """Return the ordinate of the line at the given x value."""
         try:
-            return -1*(self.a * x + self.c)/self.b
+            return -1 * (self.a * x + self.c) / self.b
         except ZeroDivisionError:
-            raise ZeroDivisionError(
-                "ordinate is not defined for vertical lines")
+            raise ZeroDivisionError("ordinate is not defined for vertical lines")
 
     @staticmethod
     def construct(p1: Point, p2: Point):
@@ -110,11 +109,11 @@ class Line:
             return f"x = {-self.c/self.a}"
         elif self.c == 0:
             if self.a < 0:
-                return f'{-self.a}x + {-self.b}y = 0'
+                return f"{-self.a}x + {-self.b}y = 0"
             else:
                 return f"{self.a}x + {self.b}y = 0"
         elif self.a < 0:
-            return f'{-self.a}x + {-self.b}y + {-self.c} = 0'
+            return f"{-self.a}x + {-self.b}y + {-self.c} = 0"
         else:
             return f"{self.a}x + {self.b}y + {self.c} = 0"
 
@@ -133,13 +132,13 @@ class Line:
         """Return the intercepts of the line."""
         data = dict()
         try:
-            data['x'] = -self.c / self.a
+            data["x"] = -self.c / self.a
         except ZeroDivisionError:
-            data['x'] = None
+            data["x"] = None
         try:
-            data['y'] = -self.c / self.b
+            data["y"] = -self.c / self.b
         except ZeroDivisionError:
-            data['y'] = None
+            data["y"] = None
         return data
 
     def __eq__(self, __o: object) -> bool:
@@ -195,8 +194,8 @@ def line_intersection(l1: Line, l2: Line) -> Point:
     a2, b2, c2 = l2.a, l2.b, -l2.c
 
     try:
-        x = (b2*c1 - b1*c2) / (a1*b2 - a2*b1)
-        y = (a1*c2 - a2*c1) / (a1*b2 - a2*b1)
+        x = (b2 * c1 - b1 * c2) / (a1 * b2 - a2 * b1)
+        y = (a1 * c2 - a2 * c1) / (a1 * b2 - a2 * b1)
     except ZeroDivisionError:
         raise ZeroDivisionError("lines are parallel")
     return Point(x, y)
@@ -220,7 +219,7 @@ def section(p1: Point, p2: Point, ratio: Union[Tuple, float]) -> Point:
         (x, y) = ratio
         m = x / (x + y)
         n = y / (x + y)
-        return Point(n*p1.x + m*p2.x, n*p1.y + m*p2.y)
+        return Point(n * p1.x + m * p2.x, n * p1.y + m * p2.y)
 
 
 def midpoint(p1: Point, p2: Point) -> Point:
@@ -248,7 +247,7 @@ def line_equation(p1: Point, p2: Point) -> Line:
     # b = -1
     # c = p1.y - a * p1.x
     # return Line(a, b, c)
-    return Line(p2.y - p1.y, p1.x - p2.x, p1.x*(p1.y - p2.y) + p1.y*(p2.x - p1.x))
+    return Line(p2.y - p1.y, p1.x - p2.x, p1.x * (p1.y - p2.y) + p1.y * (p2.x - p1.x))
 
 
 def slope_point_line(slope: float, p: Point) -> Line:
@@ -261,12 +260,12 @@ def slope_point_line(slope: float, p: Point) -> Line:
 
 def line_distance(p: Point, line: Line) -> float:
     """Calculate the distance between a point and a line."""
-    return abs(line(p)) / (line.a ** 2 + line.b ** 2) ** 0.5
+    return abs(line(p)) / (line.a**2 + line.b**2) ** 0.5
 
 
 def foot_perpendicular(p: Point, line: Line) -> Point:
     """Calculate the foot perpendicular from a point to a line."""
-    d = -line(p)/(line.a**2+line.b**2)
+    d = -line(p) / (line.a**2 + line.b**2)
     x = p.x + line.a * d
     y = p.y + line.b * d
     return Point(x, y)
@@ -275,7 +274,7 @@ def foot_perpendicular(p: Point, line: Line) -> Point:
 def point_image(p: Point, line: Line) -> Point:
     """Calculate the image of a point when a line is acting like a mirror."""
     p1: Point = foot_perpendicular(p, line)
-    return Point(2*p1.x - p.x, 2*p1.y - p.y)
+    return Point(2 * p1.x - p.x, 2 * p1.y - p.y)
 
 
 def perpendicular_bisector(p1: Point, p2: Point) -> Line:
@@ -290,7 +289,9 @@ def perpendicular_bisector(p1: Point, p2: Point) -> Line:
     else:
         x1, x2 = p1.x, p2.x
         y1, y2 = p1.y, p2.y
-        return Line(2*(x2 - x1), 2*(y2 - y1), -x1**2 + -y1**2 + x2**2 + y2**2)
+        return Line(
+            2 * (x2 - x1), 2 * (y2 - y1), -(x1**2) + -(y1**2) + x2**2 + y2**2
+        )
 
 
 def colinear(p1: Point, p2: Point, p3: Point) -> bool:
