@@ -3,8 +3,7 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  build:
-
+  Lint, Format Checks:
     runs-on: ubuntu-latest
     strategy:
       matrix:
