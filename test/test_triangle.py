@@ -31,7 +31,8 @@ def test_in_center():
         p3 = Point(0, 0)
         t = triangle.Triangle(p1, p2, p3)
         assert compare_points(
-            t.in_center(), Point(1 / (2 + cmath.sqrt(2)), 1 / (2 + cmath.sqrt(2)))
+            t.in_center(),
+            Point(1 / (2 + cmath.sqrt(2)), 1 / (2 + cmath.sqrt(2))),
         )
 
     def test_1():

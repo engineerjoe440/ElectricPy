@@ -462,7 +462,9 @@ def phasorplot(
     numphs = len(phasor)
     numclr = len(colors)
     if numphs > numclr:
-        raise ValueError("ERROR: Too many phasors provided. Specify more line colors.")
+        raise ValueError(
+            "ERROR: Too many phasors provided. Specify more line colors."
+        )
 
     if size == None:
         # Force square figure and square axes

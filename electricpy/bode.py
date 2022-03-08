@@ -31,9 +31,13 @@ def _sys_condition(system, feedback):
             ld = len(den)  # Length of denominator
             ln = len(num)  # Length of numerator
             if ld > ln:
-                num = _np.append(_np.zeros(ld - ln), num)  # Pad beginning with zeros
+                num = _np.append(
+                    _np.zeros(ld - ln), num
+                )  # Pad beginning with zeros
             if ld < ln:
-                den = _np.append(_np.zeros(ln - ld), den)  # Pad beginning with zeros
+                den = _np.append(
+                    _np.zeros(ln - ld), den
+                )  # Pad beginning with zeros
             den = den + num  # Add numerator and denominator
         for i in range(len(num)):
             if num[i] != 0:

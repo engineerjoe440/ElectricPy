@@ -529,17 +529,25 @@ def statespace(
     # Define Function Concatinator Class
     class c_func_concat:
         def __init__(self, funcs):  # Initialize class with tupple of functions
-            self.nfuncs = len(funcs)  # Determine how many functions are in tuple
+            self.nfuncs = len(
+                funcs
+            )  # Determine how many functions are in tuple
             self.func_reg = {}  # Create empty keyed list of function handles
             for key in range(self.nfuncs):  # Iterate adding to key
-                self.func_reg[key] = funcs[key]  # Fill keyed list with functions
+                self.func_reg[key] = funcs[
+                    key
+                ]  # Fill keyed list with functions
 
         def func_c(self, x):  # Concatenated Function
-            rets = _np.array([])  # Create blank numpy array to store function outputs
+            rets = _np.array(
+                []
+            )  # Create blank numpy array to store function outputs
             for i in range(self.nfuncs):
                 y = self.func_reg[i](x)  # Calculate each function at value x
                 rets = _np.append(rets, y)  # Add value to return array
-            rets = _np.asmatrix(rets).T  # Convert array to matrix, then transpose
+            rets = _np.asmatrix(
+                rets
+            ).T  # Convert array to matrix, then transpose
             return rets
 
     # Condition Inputs
@@ -615,11 +623,15 @@ def statespace(
         mF, (int, float, _np.float64)
     ):  # If function returns int or float or numpy float
         fn = func  # Pass function handle
-    elif isinstance(mF, _np.matrixlib.defmatrix.matrix):  # If function returns matrix
+    elif isinstance(
+        mF, _np.matrixlib.defmatrix.matrix
+    ):  # If function returns matrix
         fn = func  # Pass function handle
         rF, cF = fn(1).shape  # Prepare for further testing
     elif mF == "MultiFunctions":  # There are multiple functions in one argument
-        fn = c_funcs.func_c  # Gather function handle from function concatenation class
+        fn = (
+            c_funcs.func_c
+        )  # Gather function handle from function concatenation class
         rF, cF = fn(1).shape  # Prepare for further testing
     elif mF == "NA":  # Function doesn't meet requirements
         raise ValueError(
@@ -637,14 +649,20 @@ def statespace(
             _warn("WARNING: Reshaping 'B' matrix to match 'A' matrix.")
             B = _np.matrix.reshape(B, (rA, int(B.size / rA)))  # Reshape Matrix
         else:
-            raise ValueError("'A' matrix dimensions don't match 'B' matrix dimensions.")
+            raise ValueError(
+                "'A' matrix dimensions don't match 'B' matrix dimensions."
+            )
     elif rA != rx:  # A and x matricies don't have same number of rows
         if (x.size % rA) == 0:  # Elements in x divisible by rows in A
             _warn("WARNING: Reshaping 'x' matrix to match 'A' matrix.")
             x = _np.matrix.reshape(x, (rA, 1))  # Reshape Matrix
         else:
-            raise ValueError("'A' matrix dimensions don't match 'B' matrix dimensions.")
-    elif (cB != rF) or (cF != 1):  # Forcing Function matrix doesn't match B matrix
+            raise ValueError(
+                "'A' matrix dimensions don't match 'B' matrix dimensions."
+            )
+    elif (cB != rF) or (
+        cF != 1
+    ):  # Forcing Function matrix doesn't match B matrix
         raise ValueError(
             "'B' matrix dimensions don't match forcing function dimensions."
         )
@@ -712,7 +730,9 @@ def statespace(
     # Finite-Difference Simulation
     for i in range(0, simpts):
         for n in range(xtim_len):
-            xtim[n][i] = x[n]  # xtim[state-variable][domain] = x[state-variable]
+            xtim[n][i] = x[
+                n
+            ]  # xtim[state-variable][domain] = x[state-variable]
         # Create Forcing Function output
 
         if fnc > 1:  # More than one forcing function
@@ -773,8 +793,12 @@ def statespace(
         cofig = _plt.figure("Combined Output")
         C = _np.asarray(C)  # convert back to array for operation
         for i in range(cC):
-            yout = yout + xtim[i] * C[0][i]  # Sum all st-space var mult. by their coeff
-        yout = _np.asarray(yout)  # convert output to array for plotting purposes
+            yout = (
+                yout + xtim[i] * C[0][i]
+            )  # Sum all st-space var mult. by their coeff
+        yout = _np.asarray(
+            yout
+        )  # convert output to array for plotting purposes
         _plt.plot(TT, yout[0])
         if xlim != False:
             _plt.xlim(xlim)
@@ -861,7 +885,9 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
     """
     # Test for one-variable inputs
     if isinstance(F(X0), (int, float, _np.float64)):  # System is size-1
-        if not isinstance(J(X0), (int, float, _np.float64)):  # Jacobian isn't size-1
+        if not isinstance(
+            J(X0), (int, float, _np.float64)
+        ):  # Jacobian isn't size-1
             raise ValueError("ERROR: The Jacobian isn't size-1.")
         return newton(F, X0, J)
 
@@ -918,7 +944,9 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
 
 
 # Define Newton-Raphson P/Q Evaluator
-def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False):
+def nr_pq(
+    Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False
+):
     """
     Newton Raphson Real/Reactive Power Function Generator.
 
@@ -1019,13 +1047,19 @@ def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False)
     # Define Function Concatinator Class
     class c_func_concat:
         def __init__(self, funcs):  # Initialize class with tupple of functions
-            self.nfuncs = len(funcs)  # Determine how many functions are in tuple
+            self.nfuncs = len(
+                funcs
+            )  # Determine how many functions are in tuple
             self.func_reg = {}  # Create empty keyed list of function handles
             for key in range(self.nfuncs):  # Iterate adding to key
-                self.func_reg[key] = funcs[key]  # Fill keyed list with functions
+                self.func_reg[key] = funcs[
+                    key
+                ]  # Fill keyed list with functions
 
         def func_c(self, x):  # Concatenated Function
-            rets = _np.array([])  # Create blank numpy array to store function outputs
+            rets = _np.array(
+                []
+            )  # Create blank numpy array to store function outputs
             for i in range(self.nfuncs):
                 y = self.func_reg[i](x)  # Calculate each function at value x
                 rets = _np.append(rets, y)  # Add value to return array
@@ -1055,7 +1089,9 @@ def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False)
     ## 3:  Vj angle
     ## 4:  [k][j] (for Y-Bus)
     ## 5:  Qgen Term
-    Pstr = "{0}*{2}*(YBUS{4}.real*_np.cos({1}-{3})+YBUS{4}.imag*_np.sin({1}-{3}))"
+    Pstr = (
+        "{0}*{2}*(YBUS{4}.real*_np.cos({1}-{3})+YBUS{4}.imag*_np.sin({1}-{3}))"
+    )
     Qstr = "{0}*{2}*(YBUS{4}.real*_np.sin({1}-{3})-YBUS{4}.imag*_np.cos({1}-{3})){5}"
     # Iteratively Identify Vector Length Terms
     ang_len = 0

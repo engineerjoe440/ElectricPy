@@ -491,7 +491,8 @@ def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=""):
         L2 = L1 * (Vout) / (Vin - Vout)
     else:
         raise ValueError(
-            "ERROR: Invalid Parameters or too few" + " parameters given to calculate."
+            "ERROR: Invalid Parameters or too few"
+            + " parameters given to calculate."
         )
 
     find = find.lower()

@@ -60,7 +60,9 @@ class Circle:
         x, y = p.x, p.y
         c_x, c_y = -self.center.x, -self.center.y
         return Line(
-            x + c_x, y + c_y, x * c_x + y * c_y + c_x**2 + c_y**2 - self.radius**2
+            x + c_x,
+            y + c_y,
+            x * c_x + y * c_y + c_x**2 + c_y**2 - self.radius**2,
         )
 
     def normal(self, p: Point) -> Line:

@@ -541,7 +541,9 @@ def busvolt(k, n, Vpf, Z0, Z1, Z2, If, sequence=True, reference="A"):
 
 
 # Define CT Saturation Function
-def ct_saturation(XoR, Imag, Vrated, Irated, CTR, Rb, Xb, remnance=0, freq=60, ALF=20):
+def ct_saturation(
+    XoR, Imag, Vrated, Irated, CTR, Rb, Xb, remnance=0, freq=60, ALF=20
+):
     r"""
     Electrical Current Transformer Saturation Calculator.
 
@@ -743,7 +745,9 @@ def ct_vpeak(Zb, Ip, CTR):
 
 
 # Define Saturation Time Calculator
-def ct_timetosat(Vknee, XoR, Rb, CTR, Imax, ts=None, npts=100, freq=60, plot=False):
+def ct_timetosat(
+    Vknee, XoR, Rb, CTR, Imax, ts=None, npts=100, freq=60, plot=False
+):
     r"""
     Electrical Current Transformer (CT) Time to Saturation Function.
 
@@ -1259,7 +1263,9 @@ def correctedcurrents(Ipri, TAP, correction="Y", CTR=1):
 
 
 # Define Iop/Irt Calculator
-def iopirt(IpriHV, IpriLV, TAPHV, TAPLV, corrHV="Y", corrLV="Y", CTRHV=1, CTRLV=1):
+def iopirt(
+    IpriHV, IpriLV, TAPHV, TAPLV, corrHV="Y", corrLV="Y", CTRHV=1, CTRLV=1
+):
     """
     Operate/Restraint Current Calculator.
 

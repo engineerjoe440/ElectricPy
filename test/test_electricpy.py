@@ -18,13 +18,17 @@ def test_phasor():
 
     assert_almost_equal(z1, complex(magnitude, 0))
     assert_almost_equal(z2, complex(magnitude * np.sqrt(3) / 2, magnitude / 2))
-    assert_almost_equal(z3, complex(magnitude / np.sqrt(2), magnitude / np.sqrt(2)))
+    assert_almost_equal(
+        z3, complex(magnitude / np.sqrt(2), magnitude / np.sqrt(2))
+    )
     assert_almost_equal(z4, complex(magnitude / 2, magnitude * np.sqrt(3) / 2))
     assert_almost_equal(z5, complex(0, magnitude))
 
     # z(theta) = z(theta+360) test case 1
     theta = np.random.randint(360)
-    assert_almost_equal(phasor(magnitude, theta), phasor(magnitude, theta + 360))
+    assert_almost_equal(
+        phasor(magnitude, theta), phasor(magnitude, theta + 360)
+    )
 
     # z(-theta)*z(theta) == abs(z)^2 test case 2.
     z0 = phasor(magnitude, theta)
@@ -325,7 +329,9 @@ def test_induction_motor_circle():
         poles=4,
     )
 
-    assert_almost_equal(MotorCircle()["no_load_loss"], open_circuit_test_data["W0"])
+    assert_almost_equal(
+        MotorCircle()["no_load_loss"], open_circuit_test_data["W0"]
+    )
 
 
 def test_t_attenuator():
@@ -402,7 +408,9 @@ def test_abc_to_seq():
     a = cmath.rect(1, np.radians(120))
 
     def test_0():
-        np.testing.assert_array_almost_equal(abc_to_seq([1, 1, 1]), [1 + 0j, 0j, 0j])
+        np.testing.assert_array_almost_equal(
+            abc_to_seq([1, 1, 1]), [1 + 0j, 0j, 0j]
+        )
         np.testing.assert_array_almost_equal(
             abc_to_seq([1, 0, 0]), [1 / 3 + 0j, 1 / 3 + 0j, 1 / 3 + 0j]
         )
@@ -422,14 +430,18 @@ def test_seq_to_abc():
     a = cmath.rect(1, np.radians(120))
 
     def test_0():
-        np.testing.assert_array_almost_equal(seq_to_abc([1, 1, 1]), [3 + 0j, 0j, 0j])
+        np.testing.assert_array_almost_equal(
+            seq_to_abc([1, 1, 1]), [3 + 0j, 0j, 0j]
+        )
         np.testing.assert_array_almost_equal(
             seq_to_abc([1, 0, 0]), [1 + 0j, 1 + 0j, 1 + 0j]
         )
         np.testing.assert_array_almost_equal(
             seq_to_abc([0, 1, 0]), [1 + 0j, a * a + 0j, a + 0j]
         )
-        np.testing.assert_array_almost_equal(seq_to_abc([0, 0, 1]), [1 + 0j, a, a * a])
+        np.testing.assert_array_almost_equal(
+            seq_to_abc([0, 0, 1]), [1 + 0j, a, a * a]
+        )
 
     test_0()
 
@@ -516,7 +528,9 @@ class Test_visualization:
             poles=4,
         )
 
-        assert_almost_equal(MotorCircle()["no_load_loss"], open_circuit_test_data["W0"])
+        assert_almost_equal(
+            MotorCircle()["no_load_loss"], open_circuit_test_data["W0"]
+        )
 
     def test_power_circle(self):
         from electricpy.visu import receiving_end_power_circle

@@ -83,7 +83,10 @@ class InductionMotorCircle:
         # isc is the current at reduced voltage
         # calculate current at rated voltage
         isc = v0 * isc / vsc
-        self.no_load_line = [[0, i0 * _np.cos(theta0)], [0, i0 * _np.sin(theta0)]]
+        self.no_load_line = [
+            [0, i0 * _np.cos(theta0)],
+            [0, i0 * _np.sin(theta0)],
+        ]
         self.full_load_line = [
             [0, isc * _np.cos(theta_sc)],
             [0, isc * _np.sin(theta_sc)],
@@ -106,7 +109,11 @@ class InductionMotorCircle:
             self.radius - self.radius * _np.sin(self.theta)
         ) * _np.tan(self.theta)
         self.torque_line, self.torque_point = self.get_torque_line()
-        self.torque_max, self.torque_max_x, self.torque_max_y = self.get_torque_max()
+        (
+            self.torque_max,
+            self.torque_max_x,
+            self.torque_max_y,
+        ) = self.get_torque_max()
         # Take low slip point
         _, [self.power_x, self.power_y] = self.get_output_power()
         self.data = self.compute_efficiency()
@@ -130,7 +137,10 @@ class InductionMotorCircle:
 
         # Full load output
         _plt.plot(
-            [self.secondary_current_line[0][1], self.secondary_current_line[0][1]],
+            [
+                self.secondary_current_line[0][1],
+                self.secondary_current_line[0][1],
+            ],
             [self.secondary_current_line[1][1], self.center_y],
         )
         # Diameter of the circle
@@ -165,7 +175,11 @@ class InductionMotorCircle:
             marker="*",
         )
         _plt.scatter(
-            self.torque_max_x, self.torque_max_y, linewidths=3, c="black", marker="*"
+            self.torque_max_x,
+            self.torque_max_y,
+            linewidths=3,
+            c="black",
+            marker="*",
         )
 
         _plt.title("Induction Motor Circle Diagram")
@@ -194,7 +208,9 @@ class InductionMotorCircle:
         compute_slope = InductionMotorCircle.compute_slope
 
         torque_slope = compute_slope(self.torque_line)
-        stator_cu_loss = (self.power_x - no_load_x) * torque_slope * self.power_scale
+        stator_cu_loss = (
+            (self.power_x - no_load_x) * torque_slope * self.power_scale
+        )
 
         rotor_current_slope = compute_slope(self.secondary_current_line)
         total_cu_loss = (
@@ -439,7 +455,15 @@ class PowerCircle:
 
     @staticmethod
     def _build_circle(
-        a1, a2, circle_type, V, P=None, Q=None, S=None, power_factor=None, V_ref=None
+        a1,
+        a2,
+        circle_type,
+        V,
+        P=None,
+        Q=None,
+        S=None,
+        power_factor=None,
+        V_ref=None,
     ):
 
         k = (abs(V) ** 2) * abs(a1) / abs(a2)
@@ -447,10 +471,14 @@ class PowerCircle:
         beta = cmath.phase(a2)
 
         if circle_type == "receiving_end":
-            center = Point(-k * cmath.cos(alpha - beta), -k * cmath.sin(alpha - beta))
+            center = Point(
+                -k * cmath.cos(alpha - beta), -k * cmath.sin(alpha - beta)
+            )
 
         elif circle_type == "sending_end":
-            center = Point(k * cmath.cos(alpha - beta), -k * cmath.sin(alpha - beta))
+            center = Point(
+                k * cmath.cos(alpha - beta), -k * cmath.sin(alpha - beta)
+            )
 
         if V_ref != None and P != None and Q != None:
             radius = abs(V) * abs(V_ref) / (abs(a2))
@@ -492,7 +520,9 @@ class PowerCircle:
 
         if self.parameters["V" + type2] == None:
             self.parameters["V" + type2] = (
-                abs(self.parameters["B"]) * self.radius / self.parameters["V" + type1]
+                abs(self.parameters["B"])
+                * self.radius
+                / self.parameters["V" + type1]
             )
 
         if self.parameters["P" + type1] == None:
@@ -581,7 +611,9 @@ class PowerCircle:
         _plt.plot([c_x, op_x], [c_y, op_y], "y*-.")
         _plt.plot([op_x, op_x], [op_y, c_y], "b*-.")
         _plt.scatter(op_x, op_y, marker="*", color="r")
-        _plt.title(f"{self.parameters['power_circle_type'].capitalize()} Power Circle")
+        _plt.title(
+            f"{self.parameters['power_circle_type'].capitalize()} Power Circle"
+        )
         _plt.xlabel("Active Power")
         _plt.ylabel("Reactive Power")
         _plt.grid()
@@ -633,7 +665,9 @@ def receiving_end_power_circle(
         )
 
     try:
-        flag_1 = (Pr != None and Qr != None) or (Sr != None and power_factor != None)
+        flag_1 = (Pr != None and Qr != None) or (
+            Sr != None and power_factor != None
+        )
         flag_2 = (Pr != None and power_factor != None) or (
             Qr != None and power_factor != None
         )
@@ -703,7 +737,9 @@ def sending_end_power_circle(
         )
 
     try:
-        flag_1 = (Ps != None and Qs != None) or (Ss != None and power_factor != None)
+        flag_1 = (Ps != None and Qs != None) or (
+            Ss != None and power_factor != None
+        )
         flag_2 = (Ps != None and power_factor != None) or (
             Qs != None and power_factor != None
         )

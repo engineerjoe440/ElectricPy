@@ -19,7 +19,9 @@ import cmath as _c
 
 
 # Define Complex LaTeX Generator
-def clatex(val, round=3, polar=True, predollar=True, postdollar=True, double=False):
+def clatex(
+    val, round=3, polar=True, predollar=True, postdollar=True, double=False
+):
     """
     Complex Value Latex Generator.
 

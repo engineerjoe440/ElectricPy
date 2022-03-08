@@ -90,7 +90,9 @@ class Line:
         try:
             return -1 * (self.a * x + self.c) / self.b
         except ZeroDivisionError:
-            raise ZeroDivisionError("ordinate is not defined for vertical lines")
+            raise ZeroDivisionError(
+                "ordinate is not defined for vertical lines"
+            )
 
     @staticmethod
     def construct(p1: Point, p2: Point):
@@ -247,7 +249,9 @@ def line_equation(p1: Point, p2: Point) -> Line:
     # b = -1
     # c = p1.y - a * p1.x
     # return Line(a, b, c)
-    return Line(p2.y - p1.y, p1.x - p2.x, p1.x * (p1.y - p2.y) + p1.y * (p2.x - p1.x))
+    return Line(
+        p2.y - p1.y, p1.x - p2.x, p1.x * (p1.y - p2.y) + p1.y * (p2.x - p1.x)
+    )
 
 
 def slope_point_line(slope: float, p: Point) -> Line:
@@ -290,7 +294,9 @@ def perpendicular_bisector(p1: Point, p2: Point) -> Line:
         x1, x2 = p1.x, p2.x
         y1, y2 = p1.y, p2.y
         return Line(
-            2 * (x2 - x1), 2 * (y2 - y1), -(x1**2) + -(y1**2) + x2**2 + y2**2
+            2 * (x2 - x1),
+            2 * (y2 - y1),
+            -(x1**2) + -(y1**2) + x2**2 + y2**2,
         )
 
 

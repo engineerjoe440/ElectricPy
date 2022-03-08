@@ -30,7 +30,8 @@ except Exception:
 version = f"v{ep._version_}"
 if version <= latest:
     raise ValueError(
-        f"Module version ({version}) is not newer than previous release " f"({latest})!"
+        f"Module version ({version}) is not newer than previous release "
+        f"({latest})!"
     )
 else:
     print(version)

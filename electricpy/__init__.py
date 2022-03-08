@@ -418,7 +418,9 @@ def phasorz(C=None, L=None, freq=60, complex=True):
 
 
 # Define Phase/Line Converter
-def phaseline(VLL=None, VLN=None, Iline=None, Iphase=None, realonly=None, **kwargs):
+def phaseline(
+    VLL=None, VLN=None, Iline=None, Iphase=None, realonly=None, **kwargs
+):
     r"""
     Line-Line to Line-Neutral Converter.
 
@@ -570,7 +572,8 @@ def powerset(P=None, Q=None, S=None, PF=None, find=""):
         PF = P / S
     else:
         raise ValueError(
-            "ERROR: Invalid Parameters or too few" + " parameters given to calculate."
+            "ERROR: Invalid Parameters or too few"
+            + " parameters given to calculate."
         )
     # Return
     find = find.upper()
@@ -622,7 +625,8 @@ def slew_rate(V=None, freq=None, SR=None, find=""):
         freq = SR / (2 * _np.pi * V)
     else:
         raise ValueError(
-            "ERROR: Invalid Parameters or too few" + " parameters given to calculate."
+            "ERROR: Invalid Parameters or too few"
+            + " parameters given to calculate."
         )
     if find == "V":
         return V
@@ -636,7 +640,13 @@ def slew_rate(V=None, freq=None, SR=None, find=""):
 
 # Define Power Triangle Function
 def powertriangle(
-    P=None, Q=None, S=None, PF=None, color="red", text="Power Triangle", printval=False
+    P=None,
+    Q=None,
+    S=None,
+    PF=None,
+    color="red",
+    text="Power Triangle",
+    printval=False,
 ):
     """
     Power Triangle Plotting Function.
@@ -717,7 +727,9 @@ def powertriangle(
 
 
 # Define Transformer Short-Circuit/Open-Circuit Function
-def transformertest(Poc=False, Voc=False, Ioc=False, Psc=False, Vsc=False, Isc=False):
+def transformertest(
+    Poc=False, Voc=False, Ioc=False, Psc=False, Vsc=False, Isc=False
+):
     """
     Electrical Transformer Rated Test Evaluator.
 
@@ -778,7 +790,10 @@ def transformertest(Poc=False, Voc=False, Ioc=False, Psc=False, Vsc=False, Isc=F
     elif SC:
         return (Req, Xeq)
     else:
-        print("An Error Was Encountered.\n" + "Not enough arguments were provided.")
+        print(
+            "An Error Was Encountered.\n"
+            + "Not enough arguments were provided."
+        )
 
 
 # Define Non-Linear Power Factor Calculator
@@ -895,7 +910,9 @@ def iscrl(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
             T = X / (2 * _np.pi * f * R)  # seconds
             # Calculate iAC and iDC
             iAC = _np.sqrt(2) * V / Z * _np.sin(omega * t + alpha - theta)
-            iDC = -_np.sqrt(2) * V / Z * _np.sin(alpha - theta) * _np.exp(-t / T)
+            iDC = (
+                -_np.sqrt(2) * V / Z * _np.sin(alpha - theta) * _np.exp(-t / T)
+            )
             i = iAC + iDC
             # Return Values
             return (i, iAC, iDC, T)
@@ -1151,7 +1168,9 @@ def dynetz(delta=None, wye=None, round=None):
             Zset = _np.around(Zset, round)
         return Zset  # Return Delta Impedances
     else:
-        raise ValueError("ERROR: Either delta or wye impedances must be specified.")
+        raise ValueError(
+            "ERROR: Either delta or wye impedances must be specified."
+        )
 
 
 # calculating impedance of bridge network
@@ -1491,8 +1510,12 @@ def coldjunction(
     # Load Data Into Terms
     parameters = {}
     for var in COLD_JUNCTION_DATA.keys():
-        parameters[var] = parameters.get(var, None) or COLD_JUNCTION_DATA[var][index]
-    To, Vo, P1, P2, P3, P4, Q1, Q2 = [parameters[key] for key in COLD_JUNCTION_KEYS]
+        parameters[var] = (
+            parameters.get(var, None) or COLD_JUNCTION_DATA[var][index]
+        )
+    To, Vo, P1, P2, P3, P4, Q1, Q2 = [
+        parameters[key] for key in COLD_JUNCTION_KEYS
+    ]
     # Define Formula Terms
     tx = Tcj - To
     num = tx * (P1 + tx * (P2 + tx * (P3 + P4 * tx)))
@@ -1573,7 +1596,9 @@ def thermocouple(
     V = V / m  # Scale volts to milivolts
     # Determine Cold-Junction-Voltage
     if cjt != None:
-        Vcj = coldjunction(cjt, coupletype, To, Vo, P1, P2, P3, P4, Q1, Q2, round)
+        Vcj = coldjunction(
+            cjt, coupletype, To, Vo, P1, P2, P3, P4, Q1, Q2, round
+        )
         V += Vcj / m
     # Define Constant Lookup System
     lookup = ["B", "E", "J", "K", "N", "R", "S", "T"]
@@ -1601,9 +1626,12 @@ def thermocouple(
     parameters = {}
     for i, key in enumerate(THERMO_COUPLE_KEYS):
         parameters[key] = (
-            parameters.get(key, None) or THERMO_COUPLE_DATA[coupletype][i][select]
+            parameters.get(key, None)
+            or THERMO_COUPLE_DATA[coupletype][i][select]
         )
-    Vo, To, P1, P2, P3, P4, Q1, Q2, Q3 = [parameters[key] for key in THERMO_COUPLE_KEYS]
+    Vo, To, P1, P2, P3, P4, Q1, Q2, Q3 = [
+        parameters[key] for key in THERMO_COUPLE_KEYS
+    ]
     # Calculate Temperature in Degrees C
     num = (V - Vo) * (P1 + (V - Vo) * (P2 + (V - Vo) * (P3 + P4 * (V - Vo))))
     den = 1 + (V - Vo) * (Q1 + (V - Vo) * (Q2 + Q3 * (V - Vo)))
@@ -1841,7 +1869,13 @@ def rms(val):
 
 # Define Normalized Power Spectrum Function
 def wrms(
-    func, dw=0.1, NN=100, quad=False, plot=True, title="Power Density Spectrum", round=3
+    func,
+    dw=0.1,
+    NN=100,
+    quad=False,
+    plot=True,
+    title="Power Density Spectrum",
+    round=3,
 ):
     """
     WRMS Function.
@@ -2344,7 +2378,9 @@ def rxrecompose(x_pu, XoR, S3phs=None, VLL=None, VLN=None):
 
 
 # Define Generator Internal Voltage Calculator
-def geninternalv(I, Zs, Vt, Vgn=None, Zm=None, Zmp=None, Zmpp=None, Ip=None, Ipp=None):
+def geninternalv(
+    I, Zs, Vt, Vgn=None, Zm=None, Zmp=None, Zmpp=None, Ip=None, Ipp=None
+):
     """
     Electric Generator Internal Voltage Evaluator.
 
@@ -2524,12 +2560,19 @@ def fftplot(dc, real, imag=None, title="Fourier Coefficients"):
     # Plot
     _plt.title(title)
     _plt.plot(a0x, a0y, "g", label="DC-Term")
-    _plt.stem(rng, real, "r", "ro", label="Real-Terms", use_line_collection=True)
+    _plt.stem(
+        rng, real, "r", "ro", label="Real-Terms", use_line_collection=True
+    )
     try:
         imag != None
     except ValueError:
         _plt.stem(
-            rng, imag, "b", "bo", label="Imaginary-Terms", use_line_collection=True
+            rng,
+            imag,
+            "b",
+            "bo",
+            label="Imaginary-Terms",
+            use_line_collection=True,
         )
     _plt.xlabel("Harmonics (Multiple of Fundamental)")
     _plt.ylabel("Harmonic Magnitude")
@@ -3270,12 +3313,19 @@ def propagation_constants(z, y, length):
     """
     # Validate the line length is substantial enough for calculation
     if not (length > 500):
-        raise ValueError("Long transmission line length should be grater than 500km")
+        raise ValueError(
+            "Long transmission line length should be grater than 500km"
+        )
     gamma = _np.sqrt(z * y)
     alpha = gamma.real
     beta = gamma.imag
     zc = _np.sqrt(z / y)
-    params = {"gamma": gamma, "alpha": alpha, "beta": beta, "Surge_impedance": zc}
+    params = {
+        "gamma": gamma,
+        "alpha": alpha,
+        "beta": beta,
+        "Surge_impedance": zc,
+    }
 
     return params
 
@@ -3690,13 +3740,24 @@ def indmachtem(
     # Use Terms to Calculate Pem
     Rth = Zth.real
     Xth = Zth.imag
-    Tem = 3 * abs(Vth) ** 2 / ((Rr / slip + Rth) ** 2 + Xth) * Rr / (slip * wsyn)
+    Tem = (
+        3 * abs(Vth) ** 2 / ((Rr / slip + Rth) ** 2 + Xth) * Rr / (slip * wsyn)
+    )
     return Tem
 
 
 # Define Induction Machine Peak Slip Calculator
 def indmachpkslip(
-    Rr, Zth=None, Rs=0, Lm=0, Lls=0, Llr=0, Ls=None, Lr=None, freq=60, calcX=True
+    Rr,
+    Zth=None,
+    Rs=0,
+    Lm=0,
+    Lls=0,
+    Llr=0,
+    Ls=None,
+    Lr=None,
+    freq=60,
+    calcX=True,
 ):
     r"""
     Induction Machine Slip at Peak Torque Calculator.
@@ -4377,7 +4438,11 @@ def zperlength(
             # Append Right-Most Column
             Lperlen = _np.append(
                 Lperlen,
-                [[_np.log(De / Dagw)], [_np.log(De / Dbgw)], [_np.log(De / Dcgw)]],
+                [
+                    [_np.log(De / Dagw)],
+                    [_np.log(De / Dbgw)],
+                    [_np.log(De / Dcgw)],
+                ],
                 axis=1,
             )
             # Append New Row
@@ -4450,7 +4515,11 @@ def transposez(Zeq, fabc=1 / 3, fcab=1 / 3, fbca=1 / 3, linelen=1):
     Rp = _np.array([[0, 0, 1], [1, 0, 0], [0, 1, 0]])
     # Define Inverse Rp Array
     _Rp = _np.linalg.inv(Rp)
-    Zeq = fabc * Zeq + fcab * (_Rp.dot(Zeq.dot(Rp))) + fbca * (Rp.dot(Zeq.dot(_Rp)))
+    Zeq = (
+        fabc * Zeq
+        + fcab * (_Rp.dot(Zeq.dot(Rp)))
+        + fbca * (Rp.dot(Zeq.dot(_Rp)))
+    )
     Zeq = Zeq * linelen
     return Zeq
 
@@ -4485,7 +4554,9 @@ def gmd(Ds, *args):
 
 
 # Define FOC IM Rated Value Calculator
-def indmachfocratings(Rr, Rs, Lm, Llr=0, Lls=0, Lr=None, Ls=None, Vdqs=1, Tem=1, wes=1):
+def indmachfocratings(
+    Rr, Rs, Lm, Llr=0, Lls=0, Lr=None, Ls=None, Vdqs=1, Tem=1, wes=1
+):
     r"""
     FOC Ind. Machine Rated Operation Calculator.
 
@@ -4588,7 +4659,17 @@ def indmachfocratings(Rr, Rs, Lm, Llr=0, Lls=0, Lr=None, Ls=None, Vdqs=1, Tem=1,
 
 # Define FOC IM Control Equation Evaluation Function
 def imfoc_control(
-    Tem_cmd, LAMdr_cmd, wr_cmd, Rr, Rs, Lm, Llr=0, Lls=0, Lr=None, Ls=None, s_err=0
+    Tem_cmd,
+    LAMdr_cmd,
+    wr_cmd,
+    Rr,
+    Rs,
+    Lm,
+    Llr=0,
+    Lls=0,
+    Lr=None,
+    Ls=None,
+    s_err=0,
 ):
     """
     FOC Ind. Machine Rated Operation Calculator.
@@ -5137,7 +5218,9 @@ def pi_attenuator(Adb, Z0):
     return R1, R2
 
 
-def zener_diode(Vin_min: float, Vin_max: float, Vout: float, load_current: float):
+def zener_diode(
+    Vin_min: float, Vin_max: float, Vout: float, load_current: float
+):
     r"""
     Zener Dioded Resitance & Power Calculator.
 
