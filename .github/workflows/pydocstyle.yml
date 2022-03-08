@@ -1,4 +1,4 @@
-name: CI
+name: Pydocstyle
 
 on: [push, pull_request]
 
@@ -25,7 +25,3 @@ jobs:
       run: |
         cd electricpy
         pydocstyle --convention=numpy
-    - name: Test Black Code Format
-      run: |
-        pip install black
-        black --check .
