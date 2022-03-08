@@ -10,7 +10,6 @@
     "editor.rulers": [
     80, 120
     ],
-    "restructuredtext.linter.disabled": true,
     "python.testing.pytestArgs": [
         "-m",
         "test"

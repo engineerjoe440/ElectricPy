@@ -791,8 +791,7 @@ def transformertest(
         return (Req, Xeq)
     else:
         print(
-            "An Error Was Encountered.\n"
-            + "Not enough arguments were provided."
+            "An Error Was Encountered.\n" "Not enough arguments were provided."
         )
 
 
