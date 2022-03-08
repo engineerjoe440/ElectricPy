@@ -22,6 +22,8 @@ class InductionMotorCircle:
     This class is designed to plot induction motor circle diagram
     and plot circle diagram to obtain various parameters of induction motor
 
+    .. image:: /static/induction_motor.png
+
     Parameters
     ----------
     no_load_data:       dict {'V0', 'I0', 'W0'}
@@ -164,15 +166,24 @@ class InductionMotorCircle:
         # Operating Point
         _plt.plot([0, self.power_x], [0, self.power_y], c="black")
 
-        _plt.scatter(self.power_x, self.power_y, marker="X", c="red")
+        _plt.scatter(
+            self.power_x, self.power_y, marker="X", c="red", label="_nolegend_"
+        )
         # mark the center of the circle
-        _plt.scatter(self.center_x, self.center_y, marker="*", c="blue")
+        _plt.scatter(
+            self.center_x,
+            self.center_y,
+            marker="*",
+            c="blue",
+            label="_nolegend_",
+        )
         _plt.scatter(
             self.center_x - self.radius * _np.sin(self.theta),
             self.center_y + self.radius * _np.cos(self.theta),
             linewidths=3,
             c="black",
             marker="*",
+            label="_nolegend_",
         )
         _plt.scatter(
             self.torque_max_x,
@@ -180,6 +191,7 @@ class InductionMotorCircle:
             linewidths=3,
             c="black",
             marker="*",
+            label="_nolegend_",
         )
 
         _plt.title("Induction Motor Circle Diagram")
@@ -277,9 +289,9 @@ class InductionMotorCircle:
         [y1, y2] = y
         _plt.plot(x, y, ls=ls)
         if mark_start:
-            _plt.scatter(x1, y1, marker=marker)
+            _plt.scatter(x1, y1, marker=marker, label="_nolegend_")
         if mark_end:
-            _plt.scatter(x2, y2, marker=marker)
+            _plt.scatter(x2, y2, marker=marker, label="_nolegend_")
 
     def compute_circle_params(self):
         """Compute the parameters of induction motor circle."""
