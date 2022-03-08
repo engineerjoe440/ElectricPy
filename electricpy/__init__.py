@@ -494,7 +494,7 @@ def phaseline(
         output = Iphase
     # None given, error encountered
     else:
-        print("ERROR: No value given" + "or innapropriate value" + "given.")
+        print("ERROR: No value given or innapropriate value given.")
         return 0
     # Auto-detect Complex Values
     if isinstance(output, complex) and realonly == None:
@@ -573,7 +573,7 @@ def powerset(P=None, Q=None, S=None, PF=None, find=""):
     else:
         raise ValueError(
             "ERROR: Invalid Parameters or too few"
-            + " parameters given to calculate."
+            " parameters given to calculate."
         )
     # Return
     find = find.upper()
@@ -626,7 +626,7 @@ def slew_rate(V=None, freq=None, SR=None, find=""):
     else:
         raise ValueError(
             "ERROR: Invalid Parameters or too few"
-            + " parameters given to calculate."
+            " parameters given to calculate."
         )
     if find == "V":
         return V
@@ -884,7 +884,7 @@ def iscrl(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
     elif mxcurrent and alpha != None:
         raise ValueError(
             "ERROR: Inappropriate Arguments Provided.\n"
-            + "Not both mxcurrent and alpha can be provided."
+            "Not both mxcurrent and alpha can be provided."
         )
 
     # Calculate Asymmetrical (total) Current if t != None
@@ -919,7 +919,7 @@ def iscrl(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
     elif (t != None and f == None) or (t == None and f != None):
         raise ValueError(
             "ERROR: Inappropriate Arguments Provided.\n"
-            + "Must provide both t and f or neither."
+            "Must provide both t and f or neither."
         )
     else:
         Iac = abs(V / Z)
@@ -4306,8 +4306,8 @@ def de_calc(rho, freq=60):
             rho = RHO_VALUES[rho]
         except KeyError:
             raise ValueError(
-                "Invalid Earth Resistivity string try to select \
-            from set of (SEA, SWAMP, AVG, AVERAGE, DAMP, DRY, SAND, SANDSTONE"
+                "Invalid Earth Resistivity string try to select"
+                "from set of (SEA, SWAMP, AVG, AVERAGE, DAMP, DRY, SAND, SANDSTONE"
             )
     # Calculate De
     De = De0 * _np.sqrt(rho / freq)
