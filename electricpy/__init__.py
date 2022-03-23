@@ -4800,6 +4800,7 @@ def parallel_plate_capacitance(A=None, d=None, e=e0, C=None):
         Distance between the plates, unitless.
     e:  [float]
         Permitivity of the dielectric, unitless.
+        Default value is the permittivity of free space: 8.854E-12
     C:  [float]
         Capacitance, unitless.
     Returns
@@ -4845,6 +4846,7 @@ def solenoid_inductance(A=None, l=None, N=None, u=u0, L=None):
         Number of turns, unitless.
     u:  [float]
         Core permeability, unitless.
+        Default value is the permeability of free space: 4πE-7
     L:  [float]
         Inductance, unitless.
 
