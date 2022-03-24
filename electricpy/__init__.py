@@ -4790,29 +4790,29 @@ def parallel_plate_capacitance(A=None, d=None, e=e0, C=None):
     Enter three values to calculate the remaing one. Even though every variable
     is unitless, please use the International System of Units.
 
-    .. math:: C =\frac{\varepsilon A}{d}
+    .. math:: C = \frac{\varepsilon \cdot A}{d}
 
     Parameters
     ----------
-    A:  [float]
+    A:  float, optional
         Area of the plate, unitless.
-    d:  [float]
+    d:  float, optional
         Distance between the plates, unitless.
-    e:  [float]
+    e:  float, optional
         Permitivity of the dielectric, unitless.
         Default value is the permittivity of free space: 8.854E-12
-    C:  [float]
+    C:  float, optional
         Capacitance, unitless.
     Returns
     -------
-    A:  [float]
+    A:  float, optional
         Area of the plate, unitless.
-    d:  [float]
+    d:  float, optional
         Distance between the plates, unitless.
-    e:  [float]
+    e:  float, optional
         Permitivity of the dielectric, unitless.
         Default value is the permittivity of free space: 8.854E-12
-    C:  [float]
+    C:  float, optional
         Capacitance, unitless.
     """
     if C == A == d == None:
@@ -4834,34 +4834,34 @@ def solenoid_inductance(A=None, l=None, N=None, u=u0, L=None):
     Enter four values to calculate the remaing one. Even though every variable
     is unitless, please use the International System of Units.
 
-    .. math:: L = \frac{\mu N^2 A}{l}
+    .. math:: L = \frac{\mu \cdot N^2 \cdot A}{l}
 
     Parameters
     ----------
-    A:  [float]
+    A:  float, optional
         Cross sectional area, unitless.
-    l:  [float]
+    l:  float, optional
         Length, unitless.
-    N:  [float]
+    N:  float, optional
         Number of turns, unitless.
-    u:  [float]
+    u:  float, optional
         Core permeability, unitless.
         Default value is the permeability of free space: 4πE-7
-    L:  [float]
+    L:  float, optional
         Inductance, unitless.
 
     Returns
     -------
-    A:  [float]
+    A:  float, optional
         Cross sectional area, unitless.
-    l:  [float]
+    l:  float, optional
         Length, unitless.
-    N:  [float]
+    N:  float, optional
         Number of turns, unitless.
-    u:  [float]
+    u:  float, optional
         Core permeability, unitless.
         Default value is the permeability of free space: 4πE-7
-    L:  [float]
+    L:  float, optional
         Inductance, unitless.
     """
     if L == A == l == N == None:
