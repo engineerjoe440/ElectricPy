@@ -1,3 +1,4 @@
+from unicodedata import decimal
 import pytest
 import numpy as np
 import cmath
@@ -430,6 +431,73 @@ def test_vectarray():
 
     for i in range(2):
         exec('test_{}()'.format(i))
+
+def test_parallel_plate_capacitance():
+    from electricpy import parallel_plate_capacitance
+
+    # Test 1: In the free space (by default e=e0=8.8542E-12)
+
+    A1 = 100e-4
+    d1 = 8.8542e-2
+    C1 = 1e-12
+
+    # Test capacitance given area and distance
+    assert_almost_equal(parallel_plate_capacitance(A=A1, d=d1), C1)
+    # Test area given capacitance and distance
+    assert_almost_equal(parallel_plate_capacitance(C=C1, d=d1), A1)
+    # Test distance given capacitance and area
+    assert_almost_equal(parallel_plate_capacitance(C=C1, A=A1), d1)
+
+    # Test 2: Not in the free space (e≠8.8542E-12)
+
+    A2 = 100e-4
+    d2 = 8.8542e-2
+    e2 = 17.7084e-12
+    C2 = 2e-12
+
+    # Test capacitance given area, distance and permitivity
+    assert_almost_equal(parallel_plate_capacitance(A=A2, d=d2, e=e2), C2)
+    # Test area given capacitance, distance and permitivity
+    assert_almost_equal(parallel_plate_capacitance(C=C2, d=d2, e=e2), A2)
+    # Test distance given capacitance, area and permitivity
+    assert_almost_equal(parallel_plate_capacitance(C=C2, A=A2, e=e2), d2)
+
+def test_solenoid_inductance():
+    from electricpy import solenoid_inductance
+
+    # Test 1: In the free space (by default u=u0=4πE-7)
+
+    A1 = 2e-3
+    N1 = 550
+    l1 = 20e-2*np.pi
+    L1 = 1.21e-3
+
+    # Test inductance given area, number of turns and length
+    assert_almost_equal(solenoid_inductance(A=A1, N=N1, l=l1), L1)
+    # Test area given inductance, number of turns and length
+    assert_almost_equal(solenoid_inductance(L=L1, N=N1, l=l1), A1)
+    # Test number of turns given inductance, area and length
+    assert_almost_equal(solenoid_inductance(L=L1, A=A1, l=l1), N1)
+    # Test length given inductance, area and number of turns
+    assert_almost_equal(solenoid_inductance(L=L1, A=A1, N=N1), l1)
+
+    # Test 2: Not the free space (u≠4πE-7)
+
+    A2 = 2e-3
+    N2 = 550
+    l2 = 20e-2*np.pi
+    u2 = 100*4e-7*np.pi # Iron permeability
+    L2 = 0.121
+
+    # Test inductance given area, number of turns, length and permeability
+    assert_almost_equal(solenoid_inductance(A=A2, N=N2, l=l2, u=u2), L2)
+    # Test area given inductance, number of turns, length and permeability
+    assert_almost_equal(solenoid_inductance(L=L2, N=N2, l=l2, u=u2), A2)
+    # Test number of turns given inductance, area, length and permeability
+    assert_almost_equal(solenoid_inductance(L=L2, A=A2, l=l2, u=u2), N2)
+    # Test length given inductance, area, number of turns and permeability
+    assert_almost_equal(solenoid_inductance(L=L2, A=A2, N=N2, u=u2), l2)
+
 class Test_air_core_inductor:
 
     def invoke(test_case):
