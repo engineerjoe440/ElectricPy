@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>electricpy.string_to_bits &#8212; electricpy 0.2.1 documentation</title>
+    <title>electricpy.parallel_plate_capacitance &#8212; electricpy 0.2.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
     
@@ -14,13 +14,14 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
-    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.string_to_bits.html" />
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.parallel_plate_capacitance.html" />
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.suspension_insulators" href="electricpy.suspension_insulators.html" />
-    <link rel="prev" title="electricpy.solenoid_inductance" href="electricpy.solenoid_inductance.html" /> 
+    <link rel="next" title="electricpy.peak" href="electricpy.peak.html" />
+    <link rel="prev" title="electricpy.nlinpf" href="electricpy.nlinpf.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -32,15 +33,15 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.suspension_insulators.html" title="electricpy.suspension_insulators"
+          <a href="electricpy.peak.html" title="electricpy.peak"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="electricpy.solenoid_inductance.html" title="electricpy.solenoid_inductance"
+          <a href="electricpy.nlinpf.html" title="electricpy.nlinpf"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="electricpy.html" accesskey="U">electricpy</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">electricpy.string_to_bits</a></li> 
+        <li class="nav-item nav-item-this"><a href="">electricpy.parallel_plate_capacitance</a></li> 
       </ul>
     </div>  
 
@@ -49,23 +50,35 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="electricpy-string-to-bits">
-<h1>electricpy.string_to_bits<a class="headerlink" href="#electricpy-string-to-bits" title="Permalink to this headline">¶</a></h1>
+  <section id="electricpy-parallel-plate-capacitance">
+<h1>electricpy.parallel_plate_capacitance<a class="headerlink" href="#electricpy-parallel-plate-capacitance" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="electricpy.string_to_bits">
-<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">string_to_bits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy.html#string_to_bits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.string_to_bits" title="Permalink to this definition">¶</a></dt>
-<dd><p>String to Bits Converter.</p>
-<p>Converts a Pythonic string to the string’s binary representation.</p>
+<dt class="sig sig-object py" id="electricpy.parallel_plate_capacitance">
+<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">parallel_plate_capacitance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8.8541878128e-12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy.html#parallel_plate_capacitance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.parallel_plate_capacitance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parallel-Plate Capacitance Calculator.</p>
+<p>Enter three values to calculate the remaing one. Even though every variable
+is unitless, please use the International System of Units.</p>
+<div class="math notranslate nohighlight">
+\[C = \frac{\varepsilon \cdot A}{d}\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>str</strong> (<em>string</em>) – The string to be converted.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> (<em>float</em><em>, </em><em>optional</em>) – Area of the plate, unitless.</p></li>
+<li><p><strong>d</strong> (<em>float</em><em>, </em><em>optional</em>) – Distance between the plates, unitless.</p></li>
+<li><p><strong>e</strong> (<em>float</em><em>, </em><em>optional</em>) – Permitivity of the dielectric, unitless.
+Default value is the permittivity of free space: 8.854E-12</p></li>
+<li><p><strong>C</strong> (<em>float</em><em>, </em><em>optional</em>) – Capacitance, unitless.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>data</strong> – The binary representation of the
-input string.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>string</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>A</strong> (<em>float, optional</em>) – Area of the plate, unitless.</p></li>
+<li><p><strong>d</strong> (<em>float, optional</em>) – Distance between the plates, unitless.</p></li>
+<li><p><strong>e</strong> (<em>float, optional</em>) – Permitivity of the dielectric, unitless.
+Default value is the permittivity of free space: 8.854E-12</p></li>
+<li><p><strong>C</strong> (<em>float, optional</em>) – Capacitance, unitless.</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -84,18 +97,18 @@ input string.</p>
             </a></p>
   <div>
     <h4>Previous topic</h4>
-    <p class="topless"><a href="electricpy.solenoid_inductance.html"
-                          title="previous chapter">electricpy.solenoid_inductance</a></p>
+    <p class="topless"><a href="electricpy.nlinpf.html"
+                          title="previous chapter">electricpy.nlinpf</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="electricpy.suspension_insulators.html"
-                          title="next chapter">electricpy.suspension_insulators</a></p>
+    <p class="topless"><a href="electricpy.peak.html"
+                          title="next chapter">electricpy.peak</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/api/electricpy.string_to_bits.rst.txt"
+      <li><a href="../_sources/api/electricpy.parallel_plate_capacitance.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -123,15 +136,15 @@ input string.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="electricpy.suspension_insulators.html" title="electricpy.suspension_insulators"
+          <a href="electricpy.peak.html" title="electricpy.peak"
              >next</a> |</li>
         <li class="right" >
-          <a href="electricpy.solenoid_inductance.html" title="electricpy.solenoid_inductance"
+          <a href="electricpy.nlinpf.html" title="electricpy.nlinpf"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../electricpy.html" >&lt;no title&gt;</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="electricpy.html" >electricpy</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">electricpy.string_to_bits</a></li> 
+        <li class="nav-item nav-item-this"><a href="">electricpy.parallel_plate_capacitance</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

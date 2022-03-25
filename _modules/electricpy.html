@@ -4824,6 +4824,103 @@
     <span class="k">elif</span> <span class="n">R</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">length</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">A</span> <span class="o">=</span> <span class="n">rho</span><span class="o">*</span><span class="n">length</span><span class="o">/</span><span class="n">R</span>
         <span class="k">return</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">A</span><span class="o">/</span><span class="n">pi</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="parallel_plate_capacitance"><a class="viewcode-back" href="../api/electricpy.parallel_plate_capacitance.html#electricpy.parallel_plate_capacitance">[docs]</a><span class="k">def</span> <span class="nf">parallel_plate_capacitance</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="n">e0</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parallel-Plate Capacitance Calculator.</span>
+
+<span class="sd">    Enter three values to calculate the remaing one. Even though every variable</span>
+<span class="sd">    is unitless, please use the International System of Units.</span>
+
+<span class="sd">    .. math:: C = \frac{\varepsilon \cdot A}{d}</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A:  float, optional</span>
+<span class="sd">        Area of the plate, unitless.</span>
+<span class="sd">    d:  float, optional</span>
+<span class="sd">        Distance between the plates, unitless.</span>
+<span class="sd">    e:  float, optional</span>
+<span class="sd">        Permitivity of the dielectric, unitless.</span>
+<span class="sd">        Default value is the permittivity of free space: 8.854E-12</span>
+<span class="sd">    C:  float, optional</span>
+<span class="sd">        Capacitance, unitless.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A:  float, optional</span>
+<span class="sd">        Area of the plate, unitless.</span>
+<span class="sd">    d:  float, optional</span>
+<span class="sd">        Distance between the plates, unitless.</span>
+<span class="sd">    e:  float, optional</span>
+<span class="sd">        Permitivity of the dielectric, unitless.</span>
+<span class="sd">        Default value is the permittivity of free space: 8.854E-12</span>
+<span class="sd">    C:  float, optional</span>
+<span class="sd">        Capacitance, unitless.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">C</span> <span class="o">==</span> <span class="n">A</span> <span class="o">==</span> <span class="n">d</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;To few arguments.&quot;</span><span class="p">)</span>
+    <span class="c1"># Given area and distance</span>
+    <span class="k">if</span> <span class="n">A</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">d</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">e</span><span class="o">*</span><span class="n">A</span><span class="o">/</span><span class="n">d</span>
+    <span class="c1"># Given capacitance and distance</span>
+    <span class="k">elif</span> <span class="n">C</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">d</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">d</span><span class="o">*</span><span class="n">C</span><span class="o">/</span><span class="n">e</span>
+    <span class="c1"># Given capacitance and area</span>
+    <span class="k">elif</span> <span class="n">C</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">A</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">e</span><span class="o">*</span><span class="n">A</span><span class="o">/</span><span class="n">C</span></div>
+
+<div class="viewcode-block" id="solenoid_inductance"><a class="viewcode-back" href="../api/electricpy.solenoid_inductance.html#electricpy.solenoid_inductance">[docs]</a><span class="k">def</span> <span class="nf">solenoid_inductance</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">l</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="n">u0</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solenoid Inductance Calculator.</span>
+
+<span class="sd">    Enter four values to calculate the remaing one. Even though every variable</span>
+<span class="sd">    is unitless, please use the International System of Units.</span>
+
+<span class="sd">    .. math:: L = \frac{\mu \cdot N^2 \cdot A}{l}</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A:  float, optional</span>
+<span class="sd">        Cross sectional area, unitless.</span>
+<span class="sd">    l:  float, optional</span>
+<span class="sd">        Length, unitless.</span>
+<span class="sd">    N:  float, optional</span>
+<span class="sd">        Number of turns, unitless.</span>
+<span class="sd">    u:  float, optional</span>
+<span class="sd">        Core permeability, unitless.</span>
+<span class="sd">        Default value is the permeability of free space: 4πE-7</span>
+<span class="sd">    L:  float, optional</span>
+<span class="sd">        Inductance, unitless.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    A:  float, optional</span>
+<span class="sd">        Cross sectional area, unitless.</span>
+<span class="sd">    l:  float, optional</span>
+<span class="sd">        Length, unitless.</span>
+<span class="sd">    N:  float, optional</span>
+<span class="sd">        Number of turns, unitless.</span>
+<span class="sd">    u:  float, optional</span>
+<span class="sd">        Core permeability, unitless.</span>
+<span class="sd">        Default value is the permeability of free space: 4πE-7</span>
+<span class="sd">    L:  float, optional</span>
+<span class="sd">        Inductance, unitless.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">L</span> <span class="o">==</span> <span class="n">A</span> <span class="o">==</span> <span class="n">l</span> <span class="o">==</span> <span class="n">N</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;To few arguments.&quot;</span><span class="p">)</span>
+    <span class="c1"># Given area, length and number of turns</span>
+    <span class="k">if</span> <span class="n">A</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">l</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">N</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">N</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">u</span><span class="o">*</span><span class="n">A</span><span class="o">/</span><span class="n">l</span>
+    <span class="c1"># Given inductance, length and number of turns</span>
+    <span class="k">elif</span> <span class="n">L</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">l</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">N</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">L</span><span class="o">*</span><span class="n">l</span><span class="o">/</span><span class="p">(</span><span class="n">N</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">u</span><span class="p">)</span>
+    <span class="c1"># Given inductance, area and number of turns</span>
+    <span class="k">elif</span> <span class="n">L</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">A</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">N</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">N</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">u</span><span class="o">*</span><span class="n">A</span><span class="o">/</span><span class="n">L</span>
+    <span class="c1"># Given inductance, area and length</span>
+    <span class="k">elif</span> <span class="n">L</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">A</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">l</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">l</span><span class="o">/</span><span class="p">(</span><span class="n">u</span><span class="o">*</span><span class="n">A</span><span class="p">))</span></div>
         
 <div class="viewcode-block" id="ic_555_astable"><a class="viewcode-back" href="../api/electricpy.ic_555_astable.html#electricpy.ic_555_astable">[docs]</a><span class="k">def</span> <span class="nf">ic_555_astable</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">C</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">t_high</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">t_low</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>

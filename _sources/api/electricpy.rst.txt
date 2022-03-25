@@ -99,6 +99,8 @@
     
     nlinpf
     
+    parallel_plate_capacitance
+    
     peak
     
     pfcorrection
@@ -146,6 +148,8 @@
     sinfilt
     
     slew_rate
+    
+    solenoid_inductance
     
     string_to_bits
     
