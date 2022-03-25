@@ -4803,6 +4803,7 @@ def parallel_plate_capacitance(A=None, d=None, e=e0, C=None):
         Default value is the permittivity of free space: 8.854E-12
     C:  float, optional
         Capacitance, unitless.
+
     Returns
     -------
     A:  float, optional
