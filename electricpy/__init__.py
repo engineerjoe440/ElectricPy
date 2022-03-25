@@ -4782,6 +4782,103 @@ def wireresistance(length=None,diameter=None,rho=16.8*10**-9,R=None):
     elif R != None and length != None:
         A = rho*length/R
         return _np.sqrt(4*A/pi)
+
+def parallel_plate_capacitance(A=None, d=None, e=e0, C=None):
+    r"""
+    Parallel-Plate Capacitance Calculator.
+
+    Enter three values to calculate the remaing one. Even though every variable
+    is unitless, please use the International System of Units.
+
+    .. math:: C = \frac{\varepsilon \cdot A}{d}
+
+    Parameters
+    ----------
+    A:  float, optional
+        Area of the plate, unitless.
+    d:  float, optional
+        Distance between the plates, unitless.
+    e:  float, optional
+        Permitivity of the dielectric, unitless.
+        Default value is the permittivity of free space: 8.854E-12
+    C:  float, optional
+        Capacitance, unitless.
+
+    Returns
+    -------
+    A:  float, optional
+        Area of the plate, unitless.
+    d:  float, optional
+        Distance between the plates, unitless.
+    e:  float, optional
+        Permitivity of the dielectric, unitless.
+        Default value is the permittivity of free space: 8.854E-12
+    C:  float, optional
+        Capacitance, unitless.
+    """
+    if C == A == d == None:
+        raise ValueError("To few arguments.")
+    # Given area and distance
+    if A != None and d != None:
+        return e*A/d
+    # Given capacitance and distance
+    elif C != None and d != None:
+        return d*C/e
+    # Given capacitance and area
+    elif C != None and A != None:
+        return e*A/C
+
+def solenoid_inductance(A=None, l=None, N=None, u=u0, L=None):
+    r"""
+    Solenoid Inductance Calculator.
+
+    Enter four values to calculate the remaing one. Even though every variable
+    is unitless, please use the International System of Units.
+
+    .. math:: L = \frac{\mu \cdot N^2 \cdot A}{l}
+
+    Parameters
+    ----------
+    A:  float, optional
+        Cross sectional area, unitless.
+    l:  float, optional
+        Length, unitless.
+    N:  float, optional
+        Number of turns, unitless.
+    u:  float, optional
+        Core permeability, unitless.
+        Default value is the permeability of free space: 4πE-7
+    L:  float, optional
+        Inductance, unitless.
+
+    Returns
+    -------
+    A:  float, optional
+        Cross sectional area, unitless.
+    l:  float, optional
+        Length, unitless.
+    N:  float, optional
+        Number of turns, unitless.
+    u:  float, optional
+        Core permeability, unitless.
+        Default value is the permeability of free space: 4πE-7
+    L:  float, optional
+        Inductance, unitless.
+    """
+    if L == A == l == N == None:
+        raise ValueError("To few arguments.")
+    # Given area, length and number of turns
+    if A != None and l != None and N != None:
+        return N**2*u*A/l
+    # Given inductance, length and number of turns
+    elif L != None and l != None and N != None:
+        return L*l/(N**2*u)
+    # Given inductance, area and number of turns
+    elif L != None and A != None and N != None:
+        return N**2*u*A/L
+    # Given inductance, area and length
+    elif L != None and A != None and l != None:
+        return _np.sqrt(L*l/(u*A))
         
 def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
     """
