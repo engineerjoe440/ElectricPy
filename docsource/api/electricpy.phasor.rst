@@ -1,6 +1,37 @@
-electricpy.phasor
+﻿electricpy.phasor
 =================
 
-.. currentmodule:: electricpy
+.. automodule:: electricpy.phasor
 
-.. autofunction:: phasor
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      compose
+      parallelz
+      phase
+      phasor
+      phasordata
+      phasorlist
+      phasorplot
+      phs
+      vectarray
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
