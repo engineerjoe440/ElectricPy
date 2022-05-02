@@ -1,37 +1,40 @@
 ﻿electricpy.phasor
 =================
 
+.. rubric:: Description
+
 .. automodule:: electricpy.phasor
 
-   
-   
-   
-
-   
-   
-   .. rubric:: Functions
-
-   .. autosummary::
-   
-      compose
-      parallelz
-      phase
-      phasor
-      phasordata
-      phasorlist
-      phasorplot
-      phs
-      vectarray
-   
-   
-
-   
-   
-   
-
-   
-   
-   
+.. currentmodule:: electricpy.phasor
 
 
+
+
+
+
+
+
+.. rubric:: Functions
+
+.. autosummary::
+    :toctree: .
+    
+    compose
+    
+    parallelz
+    
+    phase
+    
+    phasor
+    
+    phasordata
+    
+    phasorlist
+    
+    phasorplot
+    
+    phs
+    
+    vectarray
+    
 
