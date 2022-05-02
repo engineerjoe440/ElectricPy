@@ -378,7 +378,7 @@ def test_induction_machine_slip():
 
 def test_abc_to_seq():
 
-    from electricpy.convertions import abc_to_seq
+    from electricpy.conversions import abc_to_seq
     a = cmath.rect(1, np.radians(120))
 
     def test_0():
@@ -390,7 +390,7 @@ def test_abc_to_seq():
     test_0()
 
 def test_seq_to_abc():
-    from electricpy.convertions import seq_to_abc
+    from electricpy.conversions import seq_to_abc
     a = cmath.rect(1, np.radians(120))    
 
     def test_0():
