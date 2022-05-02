@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>electricpy.passive &#8212; electricpy 0.2.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.passive.html" />
+    <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.passive.air_core_inductor" href="electricpy.passive.air_core_inductor.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="../passive.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.passive.air_core_inductor.html" title="electricpy.passive.air_core_inductor"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../passive.html" title="&lt;no title&gt;"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../passive.html" accesskey="U">&lt;no title&gt;</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.passive</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="electricpy-passive">
+<h1>electricpy.passive<a class="headerlink" href="#electricpy-passive" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Description</p>
+<span class="target" id="module-electricpy.passive"></span><p><cite>electricpy.capacitor</cite> Package - Capacitor Specific Methods.</p>
+<p>Filled with methods related capacitors.</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.passive.air_core_inductor.html#electricpy.passive.air_core_inductor" title="electricpy.passive.air_core_inductor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">air_core_inductor</span></code></a>(coil_diameter, ...)</p></td>
+<td><p>Compute Inductance of Air Core Inductor.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.passive.capbacktoback.html#electricpy.passive.capbacktoback" title="electricpy.passive.capbacktoback"><code class="xref py py-obj docutils literal notranslate"><span class="pre">capbacktoback</span></code></a>(C1, C2, Lm[, VLN, VLL])</p></td>
+<td><p>Back to Back Capacitor Transient Current Calculator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.passive.capenergy.html#electricpy.passive.capenergy" title="electricpy.passive.capenergy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">capenergy</span></code></a>(C, V)</p></td>
+<td><p>Capacitor Energy Formula.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.passive.captransfer.html#electricpy.passive.captransfer" title="electricpy.passive.captransfer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">captransfer</span></code></a>(t, Vs, R, Cs, Cd)</p></td>
+<td><p>Capacitor Energy Transfer Function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.passive.farads.html#electricpy.passive.farads" title="electricpy.passive.farads"><code class="xref py py-obj docutils literal notranslate"><span class="pre">farads</span></code></a>(VAR, V[, freq])</p></td>
+<td><p>Capacitance from Apparent Power Formula.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.passive.inductive_voltdiv.html#electricpy.passive.inductive_voltdiv" title="electricpy.passive.inductive_voltdiv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inductive_voltdiv</span></code></a>([Vin, Vout, L1, L2, find])</p></td>
+<td><p>Inductive voltage divider.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.passive.inductorcharge.html#electricpy.passive.inductorcharge" title="electricpy.passive.inductorcharge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inductorcharge</span></code></a>(t, Vs, R, L)</p></td>
+<td><p>Charging Inductor Formula.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.passive.inductordischarge.html#electricpy.passive.inductordischarge" title="electricpy.passive.inductordischarge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inductordischarge</span></code></a>(t, Io, R, L)</p></td>
+<td><p>Discharging Inductor Formula.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.passive.inductorenergy.html#electricpy.passive.inductorenergy" title="electricpy.passive.inductorenergy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inductorenergy</span></code></a>(L, I)</p></td>
+<td><p>Energy Stored in Inductor Formula.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.passive.loadedvcapdischarge.html#electricpy.passive.loadedvcapdischarge" title="electricpy.passive.loadedvcapdischarge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">loadedvcapdischarge</span></code></a>(t, vo, C, P)</p></td>
+<td><p>Loaded Capacitor Discharge Formula.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.passive.rectifiercap.html#electricpy.passive.rectifiercap" title="electricpy.passive.rectifiercap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rectifiercap</span></code></a>(Iload, fswitch, dVout)</p></td>
+<td><p>Rectifier Capacitor Formula.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.passive.timedischarge.html#electricpy.passive.timedischarge" title="electricpy.passive.timedischarge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timedischarge</span></code></a>(Vinit, Vmin, C, P[, dt, RMS, ...])</p></td>
+<td><p>Capacitor Discharge Time Formula.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.passive.vcapcharge.html#electricpy.passive.vcapcharge" title="electricpy.passive.vcapcharge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vcapcharge</span></code></a>(t, Vs, R, C)</p></td>
+<td><p>Charging Capacitor Voltage.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.passive.vcapdischarge.html#electricpy.passive.vcapdischarge" title="electricpy.passive.vcapdischarge"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vcapdischarge</span></code></a>(t, Vs, R, C)</p></td>
+<td><p>Discharging Capacitor Function.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../passive.html"
+                          title="previous chapter">&lt;no title&gt;</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="electricpy.passive.air_core_inductor.html"
+                          title="next chapter">electricpy.passive.air_core_inductor</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/electricpy.passive.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.passive.air_core_inductor.html" title="electricpy.passive.air_core_inductor"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../passive.html" title="&lt;no title&gt;"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../passive.html" >&lt;no title&gt;</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.passive</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Joe Stanley.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>

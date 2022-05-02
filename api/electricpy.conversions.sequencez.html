@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>electricpy.conversions.sequencez &#8212; electricpy 0.2.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.conversions.sequencez.html" />
+    <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.conversions.watts" href="electricpy.conversions.watts.html" />
+    <link rel="prev" title="electricpy.conversions.seq_to_phs" href="electricpy.conversions.seq_to_phs.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.conversions.watts.html" title="electricpy.conversions.watts"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.conversions.seq_to_phs.html" title="electricpy.conversions.seq_to_phs"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../conversions.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.conversions.html" accesskey="U">electricpy.conversions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.conversions.sequencez</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="electricpy-conversions-sequencez">
+<h1>electricpy.conversions.sequencez<a class="headerlink" href="#electricpy-conversions-sequencez" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="electricpy.conversions.sequencez">
+<span class="sig-prename descclassname"><span class="pre">electricpy.conversions.</span></span><span class="sig-name descname"><span class="pre">sequencez</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Zabc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'A'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/conversions.html#sequencez"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.conversions.sequencez" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sequence Impedance Calculator.</p>
+<p>Accepts the phase (ABC-domain) impedances for a
+system and calculates the sequence (012-domain)
+impedances for the same system. If the argument
+<cite>resolve</cite> is set to true, the function will
+combine terms into the set of [Z0, Z1, Z2].</p>
+<p>When resolve is False:</p>
+<div class="math notranslate nohighlight">
+\[Z_{\text{012-M}}=A_{\text{012}}^{-1}Z_{\text{ABC}}A_{\text{012}}\]</div>
+<p>When resolve is True:</p>
+<div class="math notranslate nohighlight">
+\[Z_{\text{012}}=A_{\text{012}}Z_{\text{ABC}}A_{\text{012}}^{-1}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Zabc</strong> (<em>numpy.ndarray of complex</em>) – 2-D (3x3) matrix of complex values
+representing the phasor impedances
+in the ABC-domain.</p></li>
+<li><p><strong>reference</strong> (<em>{'A'</em><em>, </em><em>'B'</em><em>, </em><em>'C'}</em>) – Single character denoting the reference,
+default=’A’</p></li>
+<li><p><strong>resolve</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force the function to
+evaluate the individual sequence impedances
+[Z0, Z1, Z2], default=False</p></li>
+<li><p><strong>diag</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force the function to
+reduce the matrix to its diagonal terms.</p></li>
+<li><p><strong>round</strong> (<em>int</em><em>, </em><em>optional</em>) – Integer denoting number of decimal places
+resulting matrix should be rounded to.
+default=3</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Z012</strong> – 2-D (3x3) matrix of complex values
+representing the sequence impedances
+in the 012-domain</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray of complex</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="electricpy.conversions.seq_to_abc.html#electricpy.conversions.seq_to_abc" title="electricpy.conversions.seq_to_abc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seq_to_abc</span></code></a></dt><dd><p>Sequence to Phase Conversion</p>
+</dd>
+<dt><a class="reference internal" href="electricpy.conversions.abc_to_seq.html#electricpy.conversions.abc_to_seq" title="electricpy.conversions.abc_to_seq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">abc_to_seq</span></code></a></dt><dd><p>Phase to Sequence Conversion</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="electricpy.conversions.seq_to_phs.html"
+                          title="previous chapter">electricpy.conversions.seq_to_phs</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="electricpy.conversions.watts.html"
+                          title="next chapter">electricpy.conversions.watts</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/electricpy.conversions.sequencez.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.conversions.watts.html" title="electricpy.conversions.watts"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.conversions.seq_to_phs.html" title="electricpy.conversions.seq_to_phs"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../conversions.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.conversions.html" >electricpy.conversions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.conversions.sequencez</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Joe Stanley.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>

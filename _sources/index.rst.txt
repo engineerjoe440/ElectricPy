@@ -29,9 +29,13 @@ to aid in scientific calculations.
    :maxdepth: 1
    
    electricpy
+   phasor
+   passive
+   conversions
    bode
    fault
    sim
+   latex
    visu
 
 -------------------------

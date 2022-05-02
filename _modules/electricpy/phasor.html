@@ -64,7 +64,7 @@
 
 
 <span class="c1"># Define Phase Angle Generator</span>
-<span class="k">def</span> <span class="nf">phs</span><span class="p">(</span><span class="n">ang</span><span class="p">):</span>
+<div class="viewcode-block" id="phs"><a class="viewcode-back" href="../../api/electricpy.phasor.phs.html#electricpy.phasor.phs">[docs]</a><span class="k">def</span> <span class="nf">phs</span><span class="p">(</span><span class="n">ang</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Complex Phase Angle Generator.</span>
 
@@ -87,14 +87,14 @@
 <span class="sd">    phasor:     Phasor Generating Function</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Return the Complex Angle Modulator</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">ang</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">ang</span><span class="p">)))</span></div>
 
 
 <span class="n">phase</span> <span class="o">=</span> <span class="n">phs</span>  <span class="c1"># Create Duplicate Name</span>
 
 
 <span class="c1"># Define Phasor Generator</span>
-<span class="k">def</span> <span class="nf">phasor</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">ang</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="phasor"><a class="viewcode-back" href="../../api/electricpy.phasor.phasor.html#electricpy.phasor.phasor">[docs]</a><span class="k">def</span> <span class="nf">phasor</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">ang</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Complex Phasor Generator.</span>
 
@@ -132,11 +132,11 @@
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
         <span class="n">ang</span> <span class="o">=</span> <span class="n">mag</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">mag</span> <span class="o">=</span> <span class="n">mag</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">_c</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">ang</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">_c</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">ang</span><span class="p">)))</span></div>
 
 
 <span class="c1"># Define Phasor Array Generator</span>
-<span class="k">def</span> <span class="nf">phasorlist</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+<div class="viewcode-block" id="phasorlist"><a class="viewcode-back" href="../../api/electricpy.phasor.phasorlist.html#electricpy.phasor.phasorlist">[docs]</a><span class="k">def</span> <span class="nf">phasorlist</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Complex Phasor Generator for 2-D Array or 2-D List.</span>
 
@@ -178,10 +178,10 @@
     <span class="c1"># Use List Comprehension to Process</span>
 
     <span class="c1"># Return Array</span>
-    <span class="k">return</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">phasor</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">phasor</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">])</span></div>
 
 <span class="c1"># Define Vector Array Generator</span>
-<span class="k">def</span> <span class="nf">vectarray</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">flatarray</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="vectarray"><a class="viewcode-back" href="../../api/electricpy.phasor.vectarray.html#electricpy.phasor.vectarray">[docs]</a><span class="k">def</span> <span class="nf">vectarray</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">flatarray</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Format Complex as Array of Magnitude/Angle Pairs.</span>
 
@@ -230,10 +230,10 @@
     <span class="c1"># Reshape Array if Needed</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">flatarray</span><span class="p">:</span>
         <span class="n">polararr</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">polararr</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">polararr</span>
+    <span class="k">return</span> <span class="n">polararr</span></div>
 
 <span class="c1"># Define Phasor Data Generator</span>
-<span class="k">def</span> <span class="nf">phasordata</span><span class="p">(</span><span class="n">mn</span><span class="p">,</span> <span class="n">mx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">mag</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ang</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+<div class="viewcode-block" id="phasordata"><a class="viewcode-back" href="../../api/electricpy.phasor.phasordata.html#electricpy.phasor.phasordata">[docs]</a><span class="k">def</span> <span class="nf">phasordata</span><span class="p">(</span><span class="n">mn</span><span class="p">,</span> <span class="n">mx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">mag</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ang</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
                <span class="n">retstep</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rettime</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sine</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Complex Phasor Data Generator.</span>
@@ -291,10 +291,10 @@
     <span class="c1"># Return Dataset</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">dataset</span><span class="p">)</span></div>
 
 <span class="c1"># Define Complex Composition Function</span>
-<div class="viewcode-block" id="compose"><a class="viewcode-back" href="../../api/electricpy.compose.html#electricpy.compose">[docs]</a><span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="o">*</span><span class="n">arr</span><span class="p">):</span>
+<div class="viewcode-block" id="compose"><a class="viewcode-back" href="../../api/electricpy.phasor.compose.html#electricpy.phasor.compose">[docs]</a><span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="o">*</span><span class="n">arr</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Complex Composition Function.</span>
 
@@ -348,7 +348,7 @@
 
 
 <span class="c1"># Define Parallel Impedance Adder</span>
-<div class="viewcode-block" id="parallelz"><a class="viewcode-back" href="../../api/electricpy.parallelz.html#electricpy.parallelz">[docs]</a><span class="k">def</span> <span class="nf">parallelz</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<div class="viewcode-block" id="parallelz"><a class="viewcode-back" href="../../api/electricpy.phasor.parallelz.html#electricpy.phasor.parallelz">[docs]</a><span class="k">def</span> <span class="nf">parallelz</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parallel Impedance Calculator.</span>
 
@@ -399,7 +399,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">Zp</span><span class="p">)</span></div>
 
 <span class="c1"># Define Phasor Plot Generator</span>
-<span class="k">def</span> <span class="nf">phasorplot</span><span class="p">(</span><span class="n">phasor</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Phasor Diagram&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="phasorplot"><a class="viewcode-back" href="../../api/electricpy.phasor.phasorplot.html#electricpy.phasor.phasorplot">[docs]</a><span class="k">def</span> <span class="nf">phasorplot</span><span class="p">(</span><span class="n">phasor</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Phasor Diagram&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
             <span class="n">tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -508,7 +508,7 @@
     <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 <span class="c1"># END</span>
 </pre></div>
 

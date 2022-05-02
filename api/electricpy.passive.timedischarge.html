@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>electricpy.passive.timedischarge &#8212; electricpy 0.2.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.passive.timedischarge.html" />
+    <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.passive.vcapcharge" href="electricpy.passive.vcapcharge.html" />
+    <link rel="prev" title="electricpy.passive.rectifiercap" href="electricpy.passive.rectifiercap.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.passive.vcapcharge.html" title="electricpy.passive.vcapcharge"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.passive.rectifiercap.html" title="electricpy.passive.rectifiercap"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../passive.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.passive.html" accesskey="U">electricpy.passive</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.passive.timedischarge</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="electricpy-passive-timedischarge">
+<h1>electricpy.passive.timedischarge<a class="headerlink" href="#electricpy-passive-timedischarge" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="electricpy.passive.timedischarge">
+<span class="sig-prename descclassname"><span class="pre">electricpy.passive.</span></span><span class="sig-name descname"><span class="pre">timedischarge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vinit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">RMS</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Eremain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/passive.html#timedischarge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.passive.timedischarge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Capacitor Discharge Time Formula.</p>
+<p>Returns the time to discharge a capacitor to a specified
+voltage given set of inputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Vinit</strong> (<em>float</em>) – Initial Voltage (in volts)</p></li>
+<li><p><strong>Vmin</strong> (<em>float</em>) – Final Voltage (the minimum allowable voltage) (in volts)</p></li>
+<li><p><strong>C</strong> (<em>float</em>) – Capacitance (in Farads)</p></li>
+<li><p><strong>P</strong> (<em>float</em>) – Load Power being consumed (in Watts)</p></li>
+<li><p><strong>dt</strong> (<em>float</em><em>, </em><em>optional</em>) – Time step-size (in seconds) (defaults to 1e-3 | 1ms)</p></li>
+<li><p><strong>RMS</strong> (<em>bool</em><em>, </em><em>optional</em>) – if true converts RMS Vin to peak</p></li>
+<li><p><strong>Eremain</strong> (<em>bool</em><em>, </em><em>optional</em>) – if true: also returns the energy remaining in cap</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>Returns time to discharge from Vinit to Vmin in seconds.</em></p></li>
+<li><p><em>May also return remaining energy in capacitor if Eremain=True</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="electricpy.passive.rectifiercap.html"
+                          title="previous chapter">electricpy.passive.rectifiercap</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="electricpy.passive.vcapcharge.html"
+                          title="next chapter">electricpy.passive.vcapcharge</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/electricpy.passive.timedischarge.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.passive.vcapcharge.html" title="electricpy.passive.vcapcharge"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.passive.rectifiercap.html" title="electricpy.passive.rectifiercap"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../passive.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.passive.html" >electricpy.passive</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.passive.timedischarge</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Joe Stanley.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>

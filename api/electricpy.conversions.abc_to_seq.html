@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>electricpy.conversions.abc_to_seq &#8212; electricpy 0.2.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.conversions.abc_to_seq.html" />
+    <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.conversions.btu" href="electricpy.conversions.btu.html" />
+    <link rel="prev" title="electricpy.conversions" href="electricpy.conversions.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.conversions.btu.html" title="electricpy.conversions.btu"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.conversions.html" title="electricpy.conversions"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../conversions.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.conversions.html" accesskey="U">electricpy.conversions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.conversions.abc_to_seq</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="electricpy-conversions-abc-to-seq">
+<h1>electricpy.conversions.abc_to_seq<a class="headerlink" href="#electricpy-conversions-abc-to-seq" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="electricpy.conversions.abc_to_seq">
+<span class="sig-prename descclassname"><span class="pre">electricpy.conversions.</span></span><span class="sig-name descname"><span class="pre">abc_to_seq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Mabc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'A'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/conversions.html#abc_to_seq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.conversions.abc_to_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Phase-System to Sequence-System Conversion.</p>
+<p>Converts phase-based values to sequence
+components.</p>
+<div class="math notranslate nohighlight">
+\[M_{\text{012}}=A_{\text{012}}\cdot M_{\text{ABC}}\]</div>
+<p>Same as phs_to_seq.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Mabc</strong> (<em>list of complex</em>) – Phase-based values to be converted.</p></li>
+<li><p><strong>reference</strong> (<em>{'A'</em><em>, </em><em>'B'</em><em>, </em><em>'C'}</em>) – Single character denoting the reference,
+default=’A’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>M012</strong> – Sequence-based values in order of 0-1-2</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="electricpy.conversions.seq_to_abc.html#electricpy.conversions.seq_to_abc" title="electricpy.conversions.seq_to_abc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seq_to_abc</span></code></a></dt><dd><p>Sequence to Phase Conversion</p>
+</dd>
+<dt><a class="reference internal" href="electricpy.conversions.sequencez.html#electricpy.conversions.sequencez" title="electricpy.conversions.sequencez"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sequencez</span></code></a></dt><dd><p>Phase Impedance to Sequence Converter</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="electricpy.conversions.html"
+                          title="previous chapter">electricpy.conversions</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="electricpy.conversions.btu.html"
+                          title="next chapter">electricpy.conversions.btu</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/electricpy.conversions.abc_to_seq.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.conversions.btu.html" title="electricpy.conversions.btu"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.conversions.html" title="electricpy.conversions"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../conversions.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.conversions.html" >electricpy.conversions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.conversions.abc_to_seq</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Joe Stanley.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>

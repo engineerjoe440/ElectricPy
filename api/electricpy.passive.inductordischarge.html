@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>electricpy.passive.inductordischarge &#8212; electricpy 0.2.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/api/electricpy.passive.inductordischarge.html" />
+    <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="electricpy.passive.inductorenergy" href="electricpy.passive.inductorenergy.html" />
+    <link rel="prev" title="electricpy.passive.inductorcharge" href="electricpy.passive.inductorcharge.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.passive.inductorenergy.html" title="electricpy.passive.inductorenergy"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.passive.inductorcharge.html" title="electricpy.passive.inductorcharge"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../passive.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.passive.html" accesskey="U">electricpy.passive</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.passive.inductordischarge</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="electricpy-passive-inductordischarge">
+<h1>electricpy.passive.inductordischarge<a class="headerlink" href="#electricpy-passive-inductordischarge" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="electricpy.passive.inductordischarge">
+<span class="sig-prename descclassname"><span class="pre">electricpy.passive.</span></span><span class="sig-name descname"><span class="pre">inductordischarge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Io</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/passive.html#inductordischarge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.passive.inductordischarge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Discharging Inductor Formula.</p>
+<p>Calculates the Voltage and Current of an inductor
+that is discharging its stored energy.</p>
+<div class="math notranslate nohighlight">
+\[I_L=I_0*e^{\frac{-R*t}{L}}//
+V_L=I_0*R*(1-e^{\frac{-R*t}{L}})\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<em>float</em>) – Time at which to calculate voltage and current.</p></li>
+<li><p><strong>Io</strong> (<em>float</em>) – Initial current traveling through inductor.</p></li>
+<li><p><strong>R</strong> (<em>float</em>) – Resistance being discharged to.</p></li>
+<li><p><strong>L</strong> (<em>float</em>) – Inductance value in Henries.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>Vl</strong> (<em>float</em>) – Voltage across inductor at time t.</p></li>
+<li><p><strong>Il</strong> (<em>float</em>) – Current through inductor at time t.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="electricpy.passive.inductorcharge.html"
+                          title="previous chapter">electricpy.passive.inductorcharge</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="electricpy.passive.inductorenergy.html"
+                          title="next chapter">electricpy.passive.inductorenergy</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/electricpy.passive.inductordischarge.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="electricpy.passive.inductorenergy.html" title="electricpy.passive.inductorenergy"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="electricpy.passive.inductorcharge.html" title="electricpy.passive.inductorcharge"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../passive.html" >&lt;no title&gt;</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="electricpy.passive.html" >electricpy.passive</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.passive.inductordischarge</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Joe Stanley.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>

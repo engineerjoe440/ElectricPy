@@ -1,0 +1,533 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>electricpy.conversions &#8212; electricpy 0.2.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_modules/electricpy/conversions.html" />
+    <link rel="shortcut icon" href="../../_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../electricpy.html" accesskey="U">electricpy</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.conversions</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for electricpy.conversions</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">`electricpy` Package - `conversions` Module.</span>
+
+<span class="sd">&gt;&gt;&gt; from electricpy import conversions</span>
+
+<span class="sd">Filled with simple conversion functions to help manage unit conversions and the</span>
+<span class="sd">like, this module is very helpful to electrical engineers.</span>
+
+<span class="sd">Built to support operations similar to Numpy and Scipy, this package is designed</span>
+<span class="sd">to aid in scientific calculations.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1">################################################################################</span>
+
+<span class="c1"># Import Local Requirements</span>
+<span class="kn">from</span> <span class="nn">electricpy.constants</span> <span class="kn">import</span> <span class="n">WATTS_PER_HP</span><span class="p">,</span> <span class="n">Aabc</span><span class="p">,</span> <span class="n">A012</span><span class="p">,</span> <span class="n">KWH_PER_BTU</span>
+
+<span class="c1"># Import Required Packages</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">_np</span>
+
+
+<span class="c1"># Define HP to Watts Calculation</span>
+<div class="viewcode-block" id="hp_to_watts"><a class="viewcode-back" href="../../api/electricpy.conversions.hp_to_watts.html#electricpy.conversions.hp_to_watts">[docs]</a><span class="k">def</span> <span class="nf">hp_to_watts</span><span class="p">(</span><span class="n">hp</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Horsepower to Watts Formula.</span>
+
+<span class="sd">    Calculates the power (in watts) given the</span>
+<span class="sd">    horsepower.</span>
+
+<span class="sd">    .. math:: P_{\text{watts}}=P_{\text{horsepower}}\cdot745.699872</span>
+
+<span class="sd">    Same as `watts`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    hp:         float</span>
+<span class="sd">                The horspower to compute.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    watts:      float</span>
+<span class="sd">                The power in watts.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">hp</span> <span class="o">*</span> <span class="n">WATTS_PER_HP</span><span class="p">)</span></div>
+
+
+<span class="n">watts</span> <span class="o">=</span> <span class="n">hp_to_watts</span>  <span class="c1"># Make Duplicate Name</span>
+
+
+<span class="c1"># Define Watts to HP Calculation</span>
+<div class="viewcode-block" id="watts_to_hp"><a class="viewcode-back" href="../../api/electricpy.conversions.watts_to_hp.html#electricpy.conversions.watts_to_hp">[docs]</a><span class="k">def</span> <span class="nf">watts_to_hp</span><span class="p">(</span><span class="n">watts</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Watts to Horsepower Function.</span>
+
+<span class="sd">    Calculates the power (in horsepower) given</span>
+<span class="sd">    the power in watts.</span>
+
+<span class="sd">    .. math:: P_{\text{horsepower}}=\frac{P_{\text{watts}}}{745.699872}</span>
+
+<span class="sd">    Same as `horsepower`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    watts:      float</span>
+<span class="sd">                The wattage to compute.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    hp:         float</span>
+<span class="sd">                The power in horsepower.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">watts</span> <span class="o">/</span> <span class="n">WATTS_PER_HP</span><span class="p">)</span></div>
+
+
+<span class="n">horsepower</span> <span class="o">=</span> <span class="n">watts_to_hp</span>  <span class="c1"># Make Duplicate Name</span>
+
+
+<span class="c1"># Define kWh to BTU function and vice-versa</span>
+<div class="viewcode-block" id="kwh_to_btu"><a class="viewcode-back" href="../../api/electricpy.conversions.kwh_to_btu.html#electricpy.conversions.kwh_to_btu">[docs]</a><span class="k">def</span> <span class="nf">kwh_to_btu</span><span class="p">(</span><span class="n">kWh</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Killo-Watt-Hours to BTU Function.</span>
+
+<span class="sd">    Converts kWh (killo-Watt-hours) to BTU (British Thermal Units).</span>
+
+<span class="sd">    .. math:: \text{BTU} = \text{kWh}\cdot3412.14</span>
+
+<span class="sd">    Same as `btu`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    kWh:        float</span>
+<span class="sd">                The number of killo-Watt-hours</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    BTU:        float</span>
+<span class="sd">                The number of British Thermal Units</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">kWh</span> <span class="o">*</span> <span class="n">KWH_PER_BTU</span><span class="p">)</span></div>
+
+
+<span class="n">btu</span> <span class="o">=</span> <span class="n">kwh_to_btu</span>  <span class="c1"># Make Duplicate Name</span>
+
+
+<div class="viewcode-block" id="btu_to_kwh"><a class="viewcode-back" href="../../api/electricpy.conversions.btu_to_kwh.html#electricpy.conversions.btu_to_kwh">[docs]</a><span class="k">def</span> <span class="nf">btu_to_kwh</span><span class="p">(</span><span class="n">BTU</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    BTU to Killo-Watt-Hours Function.</span>
+
+<span class="sd">    Converts BTU (British Thermal Units) to kWh (killo-Watt-hours).</span>
+
+<span class="sd">    .. math:: \text{kWh} = \frac{\text{BTU}}{3412.14}</span>
+
+<span class="sd">    Same as `kwh`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    BTU:        float</span>
+<span class="sd">                The number of British Thermal Units</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    kWh:        float</span>
+<span class="sd">                The number of killo-Watt-hours</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">BTU</span> <span class="o">/</span> <span class="n">KWH_PER_BTU</span><span class="p">)</span></div>
+
+
+<span class="n">kwh</span> <span class="o">=</span> <span class="n">btu_to_kwh</span>  <span class="c1"># Make Duplicate Name</span>
+
+
+<span class="c1"># Define Simple Radians to Hertz Converter</span>
+<div class="viewcode-block" id="rad_to_hz"><a class="viewcode-back" href="../../api/electricpy.conversions.rad_to_hz.html#electricpy.conversions.rad_to_hz">[docs]</a><span class="k">def</span> <span class="nf">rad_to_hz</span><span class="p">(</span><span class="n">radians</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Radians to Hertz Converter.</span>
+
+<span class="sd">    Accepts a frequency in radians/sec and calculates</span>
+<span class="sd">    the hertzian frequency (in Hz).</span>
+
+<span class="sd">    .. math:: f_{\text{Hz}} = \frac{f_{\text{rad/sec}}}{2\cdot\pi}</span>
+
+<span class="sd">    Same as `hertz`.</span>
+
+<span class="sd">    Paramters</span>
+<span class="sd">    ---------</span>
+<span class="sd">    radians:    float</span>
+<span class="sd">                The frequency (represented in radians/sec)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    hertz:      float</span>
+<span class="sd">                The frequency (represented in Hertz)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">radians</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>  <span class="c1"># Evaluate and Return</span></div>
+
+
+<span class="n">hertz</span> <span class="o">=</span> <span class="n">rad_to_hz</span>  <span class="c1"># Make Duplicate Name</span>
+
+
+<span class="c1"># Define Simple Hertz to Radians Converter</span>
+<div class="viewcode-block" id="hz_to_rad"><a class="viewcode-back" href="../../api/electricpy.conversions.hz_to_rad.html#electricpy.conversions.hz_to_rad">[docs]</a><span class="k">def</span> <span class="nf">hz_to_rad</span><span class="p">(</span><span class="n">hertz</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Hertz to Radians Converter.</span>
+
+<span class="sd">    Accepts a frequency in Hertz and calculates</span>
+<span class="sd">    the frequency in radians/sec.</span>
+
+<span class="sd">    .. math:: f_{\text{rad/sec}} = f_{\text{Hz}}\cdot2\cdot\pi</span>
+
+<span class="sd">    Same as `radsec`.</span>
+
+<span class="sd">    Paramters</span>
+<span class="sd">    ---------</span>
+<span class="sd">    hertz:      float</span>
+<span class="sd">                The frequency (represented in Hertz)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    radians:    float</span>
+<span class="sd">                The frequency (represented in radians/sec)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">hertz</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>  <span class="c1"># Evaluate and Return</span></div>
+
+
+<span class="n">radsec</span> <span class="o">=</span> <span class="n">hz_to_rad</span>  <span class="c1"># Make Duplicate Name</span>
+
+
+<span class="c1"># Define Sequence Component Conversion Function</span>
+<div class="viewcode-block" id="abc_to_seq"><a class="viewcode-back" href="../../api/electricpy.conversions.abc_to_seq.html#electricpy.conversions.abc_to_seq">[docs]</a><span class="k">def</span> <span class="nf">abc_to_seq</span><span class="p">(</span><span class="n">Mabc</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Phase-System to Sequence-System Conversion.</span>
+
+<span class="sd">    Converts phase-based values to sequence</span>
+<span class="sd">    components.</span>
+
+<span class="sd">    .. math:: M_{\text{012}}=A_{\text{012}}\cdot M_{\text{ABC}}</span>
+
+<span class="sd">    Same as phs_to_seq.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Mabc:       list of complex</span>
+<span class="sd">                Phase-based values to be converted.</span>
+<span class="sd">    reference:  {&#39;A&#39;, &#39;B&#39;, &#39;C&#39;}</span>
+<span class="sd">                Single character denoting the reference,</span>
+<span class="sd">                default=&#39;A&#39;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    M012:       numpy.ndarray</span>
+<span class="sd">                Sequence-based values in order of 0-1-2</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    seq_to_abc: Sequence to Phase Conversion</span>
+<span class="sd">    sequencez:  Phase Impedance to Sequence Converter</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Condition Reference:</span>
+    <span class="n">reference</span> <span class="o">=</span> <span class="n">reference</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">reference</span> <span class="o">==</span> <span class="s1">&#39;A&#39;</span><span class="p">:</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">Aabc</span>
+    <span class="k">elif</span> <span class="n">reference</span> <span class="o">==</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">Aabc</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">reference</span> <span class="o">==</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">Aabc</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid Phase Reference.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Mabc</span><span class="p">))</span></div>
+
+
+<span class="c1"># Define Second Name for abc_to_seq</span>
+<span class="n">phs_to_seq</span> <span class="o">=</span> <span class="n">abc_to_seq</span>
+
+
+<span class="c1"># Define Phase Component Conversion Function</span>
+<div class="viewcode-block" id="seq_to_abc"><a class="viewcode-back" href="../../api/electricpy.conversions.seq_to_abc.html#electricpy.conversions.seq_to_abc">[docs]</a><span class="k">def</span> <span class="nf">seq_to_abc</span><span class="p">(</span><span class="n">M012</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sequence-System to Phase-System Conversion.</span>
+
+<span class="sd">    Converts sequence-based values to phase</span>
+<span class="sd">    components.</span>
+
+<span class="sd">    .. math:: M_{\text{ABC}}=A_{\text{012}}^{-1}\cdot M_{\text{012}}</span>
+
+<span class="sd">    Same as seq_to_phs.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    M012:       list of complex</span>
+<span class="sd">                Sequence-based values to convert.</span>
+<span class="sd">    reference:  {&#39;A&#39;, &#39;B&#39;, &#39;C&#39;}</span>
+<span class="sd">                Single character denoting the reference,</span>
+<span class="sd">                default=&#39;A&#39;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Mabc:       numpy.ndarray</span>
+<span class="sd">                Phase-based values in order of A-B-C</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    abc_to_seq: Phase to Sequence Conversion</span>
+<span class="sd">    sequencez:  Phase Impedance to Sequence Converter</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Compute Dot Product</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">A012</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M012</span><span class="p">)</span>
+    <span class="c1"># Condition Reference:</span>
+    <span class="n">reference</span> <span class="o">=</span> <span class="n">reference</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">reference</span> <span class="o">==</span> <span class="s1">&#39;A&#39;</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">elif</span> <span class="n">reference</span> <span class="o">==</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">reference</span> <span class="o">==</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid Phase Reference.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">M</span><span class="p">)</span></div>
+
+
+<span class="c1"># Define Second Name for seq_to_abc</span>
+<span class="n">seq_to_phs</span> <span class="o">=</span> <span class="n">seq_to_abc</span>
+
+
+<span class="c1"># Define Sequence Impedance Calculator</span>
+<div class="viewcode-block" id="sequencez"><a class="viewcode-back" href="../../api/electricpy.conversions.sequencez.html#electricpy.conversions.sequencez">[docs]</a><span class="k">def</span> <span class="nf">sequencez</span><span class="p">(</span><span class="n">Zabc</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">resolve</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">diag</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="nb">round</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sequence Impedance Calculator.</span>
+
+<span class="sd">    Accepts the phase (ABC-domain) impedances for a</span>
+<span class="sd">    system and calculates the sequence (012-domain)</span>
+<span class="sd">    impedances for the same system. If the argument</span>
+<span class="sd">    `resolve` is set to true, the function will</span>
+<span class="sd">    combine terms into the set of [Z0, Z1, Z2].</span>
+
+<span class="sd">    When resolve is False:</span>
+
+<span class="sd">    .. math:: Z_{\text{012-M}}=A_{\text{012}}^{-1}Z_{\text{ABC}}A_{\text{012}}</span>
+
+<span class="sd">    When resolve is True:</span>
+
+<span class="sd">    .. math:: Z_{\text{012}}=A_{\text{012}}Z_{\text{ABC}}A_{\text{012}}^{-1}</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Zabc:       numpy.ndarray of complex</span>
+<span class="sd">                2-D (3x3) matrix of complex values</span>
+<span class="sd">                representing the phasor impedances</span>
+<span class="sd">                in the ABC-domain.</span>
+<span class="sd">    reference:  {&#39;A&#39;, &#39;B&#39;, &#39;C&#39;}</span>
+<span class="sd">                Single character denoting the reference,</span>
+<span class="sd">                default=&#39;A&#39;</span>
+<span class="sd">    resolve:    bool, optional</span>
+<span class="sd">                Control argument to force the function to</span>
+<span class="sd">                evaluate the individual sequence impedances</span>
+<span class="sd">                [Z0, Z1, Z2], default=False</span>
+<span class="sd">    diag:       bool, optional</span>
+<span class="sd">                Control argument to force the function to</span>
+<span class="sd">                reduce the matrix to its diagonal terms.</span>
+<span class="sd">    round:      int, optional</span>
+<span class="sd">                Integer denoting number of decimal places</span>
+<span class="sd">                resulting matrix should be rounded to.</span>
+<span class="sd">                default=3</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Z012:       numpy.ndarray of complex</span>
+<span class="sd">                2-D (3x3) matrix of complex values</span>
+<span class="sd">                representing the sequence impedances</span>
+<span class="sd">                in the 012-domain</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    seq_to_abc: Sequence to Phase Conversion</span>
+<span class="sd">    abc_to_seq: Phase to Sequence Conversion</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Condition Reference</span>
+    <span class="n">reference</span> <span class="o">=</span> <span class="n">reference</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="n">rollrate</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+    <span class="c1"># Test Validity</span>
+    <span class="k">if</span> <span class="n">reference</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">rollrate</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalad Phase Reference&quot;</span><span class="p">)</span>
+    <span class="c1"># Determine Roll Factor</span>
+    <span class="n">roll</span> <span class="o">=</span> <span class="n">rollrate</span><span class="p">[</span><span class="n">reference</span><span class="p">]</span>
+    <span class="c1"># Evaluate Matricies</span>
+    <span class="n">M012</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">A012</span><span class="p">,</span> <span class="n">roll</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">Minv</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">M012</span><span class="p">)</span>
+    <span class="c1"># Compute Sequence Impedances</span>
+    <span class="k">if</span> <span class="n">resolve</span><span class="p">:</span>
+        <span class="n">Z012</span> <span class="o">=</span> <span class="n">M012</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Zabc</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Minv</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">Z012</span> <span class="o">=</span> <span class="n">Minv</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Zabc</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M012</span><span class="p">))</span>
+    <span class="c1"># Reduce to Diagonal Terms if Needed</span>
+    <span class="k">if</span> <span class="n">diag</span><span class="p">:</span>
+        <span class="n">Z012</span> <span class="o">=</span> <span class="p">[</span><span class="n">Z012</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">Z012</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">Z012</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">Z012</span><span class="p">,</span> <span class="nb">round</span><span class="p">))</span></div>
+
+
+<span class="c1"># Define Angular Velocity Conversion Functions</span>
+<div class="viewcode-block" id="rad_to_rpm"><a class="viewcode-back" href="../../api/electricpy.conversions.rad_to_rpm.html#electricpy.conversions.rad_to_rpm">[docs]</a><span class="k">def</span> <span class="nf">rad_to_rpm</span><span class="p">(</span><span class="n">rad</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Radians-per-Second to RPM Converter.</span>
+
+<span class="sd">    Given the angular velocity in rad/sec, this function will evaluate the</span>
+<span class="sd">    velocity in RPM (Revolutions-Per-Minute).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    rad:        float</span>
+<span class="sd">                The angular velocity in radians-per-second</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    rpm:        float</span>
+<span class="sd">                The angular velocity in revolutions-per-minute (RPM)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rpm</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">rad</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">rpm</span><span class="p">)</span></div>
+
+
+<span class="c1"># Define Angular Velocity Conversion Functions</span>
+<div class="viewcode-block" id="rpm_to_rad"><a class="viewcode-back" href="../../api/electricpy.conversions.rpm_to_rad.html#electricpy.conversions.rpm_to_rad">[docs]</a><span class="k">def</span> <span class="nf">rpm_to_rad</span><span class="p">(</span><span class="n">rpm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    RPM to Radians-per-Second Converter.</span>
+
+<span class="sd">    Given the angular velocity in RPM (Revolutions-Per-Minute), this function</span>
+<span class="sd">    will evaluate the velocity in rad/sec.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    rpm:        float</span>
+<span class="sd">                The angular velocity in revolutions-per-minute (RPM)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    rad:        float</span>
+<span class="sd">                The angular velocity in radians-per-second</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rad</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">60</span> <span class="o">*</span> <span class="n">rpm</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">rad</span><span class="p">)</span></div>
+
+
+<span class="c1"># Define Angular Velocity Conversion Functions</span>
+<div class="viewcode-block" id="hz_to_rpm"><a class="viewcode-back" href="../../api/electricpy.conversions.hz_to_rpm.html#electricpy.conversions.hz_to_rpm">[docs]</a><span class="k">def</span> <span class="nf">hz_to_rpm</span><span class="p">(</span><span class="n">hz</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Hertz to RPM Converter.</span>
+
+<span class="sd">    Given the angular velocity in Hertz, this function will evaluate the</span>
+<span class="sd">    velocity in RPM (Revolutions-Per-Minute).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    hz:         float</span>
+<span class="sd">                The angular velocity in Hertz</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    rpm:        float</span>
+<span class="sd">                The angular velocity in revolutions-per-minute (RPM)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rpm</span> <span class="o">=</span> <span class="n">hz</span> <span class="o">*</span> <span class="mi">60</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">rpm</span><span class="p">)</span></div>
+
+
+<span class="c1"># Define Angular Velocity Conversion Functions</span>
+<div class="viewcode-block" id="rpm_to_hz"><a class="viewcode-back" href="../../api/electricpy.conversions.rpm_to_hz.html#electricpy.conversions.rpm_to_hz">[docs]</a><span class="k">def</span> <span class="nf">rpm_to_hz</span><span class="p">(</span><span class="n">rpm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    RPM to Hertz Converter.</span>
+
+<span class="sd">    Given the angular velocity in RPM (Revolutions-Per-Minute), this function</span>
+<span class="sd">    will evaluate the velocity in Hertz.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    rpm:        float</span>
+<span class="sd">                The angular velocity in revolutions-per-minute (RPM)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    hz:         float</span>
+<span class="sd">                The angular velocity in Hertz</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">hz</span> <span class="o">=</span> <span class="n">rpm</span> <span class="o">/</span> <span class="mi">60</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">hz</span><span class="p">)</span></div>
+
+<span class="c1"># END</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../electricpy.html" >electricpy</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.conversions</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Joe Stanley.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>

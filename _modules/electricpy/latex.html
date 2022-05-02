@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>electricpy.latex &#8212; electricpy 0.2.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_modules/electricpy/latex.html" />
+    <link rel="shortcut icon" href="../../_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../electricpy.html" accesskey="U">electricpy</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.latex</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for electricpy.latex</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">`electricpy` Package - `latex` Module.</span>
+
+<span class="sd">&gt;&gt;&gt; from electricpy import latex</span>
+
+<span class="sd">This module is specifically designed to help create strings that represent LaTeX</span>
+<span class="sd">formatted formulas, functions, and more for easy printing in tools such as</span>
+<span class="sd">Jupyter Notebooks.</span>
+
+<span class="sd">Built to support operations similar to Numpy and Scipy, this package is designed</span>
+<span class="sd">to aid in scientific calculations.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1">################################################################################</span>
+
+<span class="c1"># Import Required Packages</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">_np</span>
+<span class="kn">import</span> <span class="nn">cmath</span> <span class="k">as</span> <span class="nn">_c</span>
+
+
+
+<span class="c1"># Define Complex LaTeX Generator</span>
+<div class="viewcode-block" id="clatex"><a class="viewcode-back" href="../../api/electricpy.latex.clatex.html#electricpy.latex.clatex">[docs]</a><span class="k">def</span> <span class="nf">clatex</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">round</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">polar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">predollar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">postdollar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+           <span class="n">double</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Complex Value Latex Generator.</span>
+
+<span class="sd">    Function to generate a LaTeX string of complex value(s)</span>
+<span class="sd">    in either polar or rectangular form. May generate both dollar</span>
+<span class="sd">    signs.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    val:        complex</span>
+<span class="sd">                The complex value to be printed, if value</span>
+<span class="sd">                is a list or numpy array, the result will be</span>
+<span class="sd">                demonstrated as a matrix.</span>
+<span class="sd">    round:      int, optional</span>
+<span class="sd">                Control to specify number of decimal places</span>
+<span class="sd">                that should displayed. default=True</span>
+<span class="sd">    polar:      bool, optional</span>
+<span class="sd">                Control argument to force result into polar</span>
+<span class="sd">                coordinates instead of rectangular. default=True</span>
+<span class="sd">    predollar:  bool, optional</span>
+<span class="sd">                Control argument to enable/disable the dollar</span>
+<span class="sd">                sign before the string. default=True</span>
+<span class="sd">    postdollar: bool, optional</span>
+<span class="sd">                Control argument to enable/disable the dollar</span>
+<span class="sd">                sign after the string. default=True</span>
+<span class="sd">    double:     bool, optional</span>
+<span class="sd">                Control argument to specify whether or not</span>
+<span class="sd">                LaTeX dollar signs should be double or single,</span>
+<span class="sd">                default=False</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    latex:      str</span>
+<span class="sd">                LaTeX string for the complex value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Define Interpretation Functions</span>
+    <span class="k">def</span> <span class="nf">polarstring</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">round</span><span class="p">):</span>
+        <span class="n">mag</span><span class="p">,</span> <span class="n">ang_r</span> <span class="o">=</span> <span class="n">_c</span><span class="o">.</span><span class="n">polar</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>  <span class="c1"># Convert to polar form</span>
+        <span class="n">ang</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ang_r</span><span class="p">)</span>  <span class="c1"># Convert to degrees</span>
+        <span class="n">mag</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="nb">round</span><span class="p">)</span>  <span class="c1"># Round</span>
+        <span class="n">ang</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">ang</span><span class="p">,</span> <span class="nb">round</span><span class="p">)</span>  <span class="c1"># Round</span>
+        <span class="n">latex</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">mag</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;∠&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ang</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;°&#39;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">latex</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">rectstring</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">round</span><span class="p">):</span>
+        <span class="n">real</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="nb">round</span><span class="p">)</span>  <span class="c1"># Round</span>
+        <span class="n">imag</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="nb">round</span><span class="p">)</span>  <span class="c1"># Round</span>
+        <span class="k">if</span> <span class="n">imag</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">latex</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">real</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;+j&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">imag</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">latex</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">real</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;-j&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">imag</span><span class="p">))</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">latex</span><span class="p">)</span>
+
+    <span class="c1"># Interpret as numpy array if simple list</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>  <span class="c1"># Ensure that input is array</span>
+    <span class="c1"># Find length of the input array</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="n">shp</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">shp</span>  <span class="c1"># Interpret Shape of Object</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="n">shp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">size</span>
+        <span class="c1"># Open Matrix</span>
+        <span class="n">latex</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\begin</span><span class="si">{bmatrix}</span><span class="s1">&#39;</span>
+        <span class="c1"># Iteratively Process Each Item in Array</span>
+        <span class="k">for</span> <span class="n">ri</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">ri</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Insert Row Separator</span>
+                <span class="n">latex</span> <span class="o">+=</span> <span class="sa">r</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span>
+            <span class="k">if</span> <span class="n">col</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">ci</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">ci</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Insert Column Separator</span>
+                        <span class="n">latex</span> <span class="o">+=</span> <span class="sa">r</span><span class="s1">&#39; &amp; &#39;</span>
+                    <span class="c1"># Add Complex Represetation of Value</span>
+                    <span class="k">if</span> <span class="n">polar</span><span class="p">:</span>
+                        <span class="n">latex</span> <span class="o">+=</span> <span class="n">polarstring</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">ri</span><span class="p">][</span><span class="n">ci</span><span class="p">],</span> <span class="nb">round</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">latex</span> <span class="o">+=</span> <span class="n">rectstring</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">ri</span><span class="p">][</span><span class="n">ci</span><span class="p">],</span> <span class="nb">round</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Add Complex Represetation of Value</span>
+                <span class="k">if</span> <span class="n">polar</span><span class="p">:</span>
+                    <span class="n">latex</span> <span class="o">+=</span> <span class="n">polarstring</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">ri</span><span class="p">],</span> <span class="nb">round</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">latex</span> <span class="o">+=</span> <span class="n">rectstring</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">ri</span><span class="p">],</span> <span class="nb">round</span><span class="p">)</span>
+        <span class="c1"># Close Matrix</span>
+        <span class="n">latex</span> <span class="o">+=</span> <span class="sa">r</span><span class="s1">&#39;\end</span><span class="si">{bmatrix}</span><span class="s1">&#39;</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">complex</span><span class="p">):</span>
+        <span class="c1"># Treat as Polar When Directed</span>
+        <span class="k">if</span> <span class="n">polar</span><span class="p">:</span>
+            <span class="n">latex</span> <span class="o">=</span> <span class="n">polarstring</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">round</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">latex</span> <span class="o">=</span> <span class="n">rectstring</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">round</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid Input Type&quot;</span><span class="p">)</span>
+    <span class="c1"># Add Dollar Sign pre-post</span>
+    <span class="k">if</span> <span class="n">double</span><span class="p">:</span>
+        <span class="n">dollar</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$$&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dollar</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$&#39;</span>
+    <span class="k">if</span> <span class="n">predollar</span><span class="p">:</span>
+        <span class="n">latex</span> <span class="o">=</span> <span class="n">dollar</span> <span class="o">+</span> <span class="n">latex</span>
+    <span class="k">if</span> <span class="n">postdollar</span><span class="p">:</span>
+        <span class="n">latex</span> <span class="o">=</span> <span class="n">latex</span> <span class="o">+</span> <span class="n">dollar</span>
+    <span class="k">return</span> <span class="n">latex</span></div>
+
+
+<span class="c1"># Define Transfer Function LaTeX Generator</span>
+<div class="viewcode-block" id="tflatex"><a class="viewcode-back" href="../../api/electricpy.latex.tflatex.html#electricpy.latex.tflatex">[docs]</a><span class="k">def</span> <span class="nf">tflatex</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="n">sysp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">predollar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">postdollar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">double</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transfer Function LaTeX String Generator.</span>
+
+<span class="sd">    LaTeX string generating function to create a transfer</span>
+<span class="sd">    function string in LaTeX. Particularly useful for</span>
+<span class="sd">    demonstrating systems in Interactive Python Notebooks.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    sys:        list</span>
+<span class="sd">                If provided in conjunction with optional</span>
+<span class="sd">                parameter `sysp`, the parameter `sys` will</span>
+<span class="sd">                act as the numerator set. Otherwise, can be</span>
+<span class="sd">                passed as a list containing two sublists,</span>
+<span class="sd">                the first being the numerator set, and the</span>
+<span class="sd">                second being the denominator set.</span>
+<span class="sd">    sysp:       list, optional</span>
+<span class="sd">                If provided, this input will act as the</span>
+<span class="sd">                denominator of the transfer function.</span>
+<span class="sd">    var:        str, optional</span>
+<span class="sd">                The variable that should be printed for each</span>
+<span class="sd">                term (i.e. &#39;s&#39; or &#39;j\omega&#39;). default=&#39;s&#39;</span>
+<span class="sd">    predollar:  bool, optional</span>
+<span class="sd">                Control argument to enable/disable the dollar</span>
+<span class="sd">                sign before the string. default=True</span>
+<span class="sd">    postdollar: bool, optional</span>
+<span class="sd">                Control argument to enable/disable the dollar</span>
+<span class="sd">                sign after the string. default=True</span>
+<span class="sd">    double:     bool, optional</span>
+<span class="sd">                Control argument to specify whether or not</span>
+<span class="sd">                LaTeX dollar signs should be double or single,</span>
+<span class="sd">                default=False</span>
+<span class="sd">    tolerance:  float, optional</span>
+<span class="sd">                The floating point tolerance cutoff to evaluate</span>
+<span class="sd">                each term against. If the absolute value of the</span>
+<span class="sd">                particular term is greater than the tolerance,</span>
+<span class="sd">                the value will be printed, if not, it will not</span>
+<span class="sd">                be printed. default=1e-8</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    latex:      str</span>
+<span class="sd">                LaTeX string for the transfer function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Collect Numerator and Denominator Terms</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sysp</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">sys</span>
+        <span class="n">den</span> <span class="o">=</span> <span class="n">sysp</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">num</span><span class="p">,</span> <span class="n">den</span> <span class="o">=</span> <span class="n">sys</span>
+
+    <span class="c1"># Generate String Function</span>
+    <span class="k">def</span> <span class="nf">genstring</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">strg</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+            <span class="c1"># Add Each Term to String</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">tolerance</span><span class="p">:</span>
+                <span class="c1"># Add &#39;+&#39; Symbol After Each Term</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">strg</span> <span class="o">+=</span> <span class="sa">r</span><span class="s1">&#39;+&#39;</span>
+                <span class="n">strg</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                <span class="c1"># Determine Exponent</span>
+                <span class="n">xpnt</span> <span class="o">=</span> <span class="n">length</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">xpnt</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">strg</span> <span class="o">+=</span> <span class="n">var</span>
+                <span class="k">elif</span> <span class="n">xpnt</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">pass</span>  <span class="c1"># Don&#39;t Do Anything</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">strg</span> <span class="o">+=</span> <span class="n">var</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;^{&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">xpnt</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;}&#39;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">strg</span><span class="p">)</span>
+
+    <span class="c1"># Generate Total TF String</span>
+    <span class="n">latex</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\frac{&#39;</span> <span class="o">+</span> <span class="n">genstring</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;}{&#39;</span>
+    <span class="n">latex</span> <span class="o">+=</span> <span class="n">genstring</span><span class="p">(</span><span class="n">den</span><span class="p">)</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;}&#39;</span>
+    <span class="c1"># Add Dollar Sign pre-post</span>
+    <span class="k">if</span> <span class="n">double</span><span class="p">:</span>
+        <span class="n">dollar</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$$&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dollar</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$&#39;</span>
+    <span class="k">if</span> <span class="n">predollar</span><span class="p">:</span>
+        <span class="n">latex</span> <span class="o">=</span> <span class="n">dollar</span> <span class="o">+</span> <span class="n">latex</span>
+    <span class="k">if</span> <span class="n">postdollar</span><span class="p">:</span>
+        <span class="n">latex</span> <span class="o">=</span> <span class="n">latex</span> <span class="o">+</span> <span class="n">dollar</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">latex</span><span class="p">)</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../electricpy.html" >electricpy</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.latex</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Joe Stanley.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,582 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>electricpy.passive &#8212; electricpy 0.2.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    
+    <link rel="canonical" href="https://engineerjoe440.github.io/ElectricPy/html/_modules/electricpy/passive.html" />
+    <link rel="shortcut icon" href="../../_static/ElectricpyLogo.svg"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../electricpy.html" accesskey="U">electricpy</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.passive</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for electricpy.passive</h1><div class="highlight"><pre>
+<span></span><span class="c1">################################################################################</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">`electricpy.capacitor` Package - Capacitor Specific Methods.</span>
+
+<span class="sd">Filled with methods related capacitors.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1">################################################################################</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">_np</span>
+<div class="viewcode-block" id="vcapdischarge"><a class="viewcode-back" href="../../api/electricpy.passive.vcapdischarge.html#electricpy.passive.vcapdischarge">[docs]</a><span class="k">def</span> <span class="nf">vcapdischarge</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Vs</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Discharging Capacitor Function.</span>
+
+<span class="sd">    Function to calculate the voltage of a</span>
+<span class="sd">    capacitor that is discharging given the time.</span>
+
+<span class="sd">    .. math:: V_c=V_s*e^{\frac{-t}{R*C}}</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t:          float</span>
+<span class="sd">                The time at which to calculate the voltage.</span>
+<span class="sd">    Vs:         float</span>
+<span class="sd">                The starting voltage for the capacitor.</span>
+<span class="sd">    R:          float</span>
+<span class="sd">                The ohmic value of the resistor being used</span>
+<span class="sd">                to discharge.</span>
+<span class="sd">    C:          float</span>
+<span class="sd">                Capacitive value (in Farads).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Vc:         float</span>
+<span class="sd">                The calculated voltage of the capacitor.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">t</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Time must be greater than or equal to zero.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">R</span><span class="o">*</span><span class="n">C</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Resistance and Capacitance must be non-zero.&quot;</span><span class="p">)</span>
+    <span class="n">Vc</span> <span class="o">=</span> <span class="n">Vs</span> <span class="o">*</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">C</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">Vc</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="vcapcharge"><a class="viewcode-back" href="../../api/electricpy.passive.vcapcharge.html#electricpy.passive.vcapcharge">[docs]</a><span class="k">def</span> <span class="nf">vcapcharge</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Vs</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Charging Capacitor Voltage.</span>
+
+<span class="sd">    Function to calculate the voltage of a</span>
+<span class="sd">    capacitor that is charging given the time.</span>
+
+<span class="sd">    .. math:: V_c=V_s*(1-e^{\frac{-t}{R*C}})</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t:          float</span>
+<span class="sd">                The time at which to calculate the voltage.</span>
+<span class="sd">    Vs:         float</span>
+<span class="sd">                The charging voltage for the capacitor.</span>
+<span class="sd">    R:          float</span>
+<span class="sd">                The ohmic value of the resistor being used</span>
+<span class="sd">                to discharge.</span>
+<span class="sd">    C:          float</span>
+<span class="sd">                Capacitive value (in Farads).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Vc:         float</span>
+<span class="sd">                The calculated voltage of the capacitor.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">t</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Time must be greater than or equal to zero.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">R</span><span class="o">*</span><span class="n">C</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Resistance and Capacitance must be non-zero.&quot;</span><span class="p">)</span>
+    <span class="n">Vc</span> <span class="o">=</span> <span class="n">Vs</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">C</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">Vc</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="captransfer"><a class="viewcode-back" href="../../api/electricpy.passive.captransfer.html#electricpy.passive.captransfer">[docs]</a><span class="k">def</span> <span class="nf">captransfer</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Vs</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">Cs</span><span class="p">,</span> <span class="n">Cd</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Capacitor Energy Transfer Function.</span>
+
+<span class="sd">    Calculate the voltage across a joining</span>
+<span class="sd">    resistor (R) that connects Cs and Cd, the</span>
+<span class="sd">    energy-source and -destination capacitors,</span>
+<span class="sd">    respectively. Calculate the final voltage</span>
+<span class="sd">    across both capacitors.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t:          float</span>
+<span class="sd">                Time at which to calculate resistor voltage.</span>
+<span class="sd">    Vs:         float</span>
+<span class="sd">                Initial voltage across source-capacitor (Cs).</span>
+<span class="sd">    R:          float</span>
+<span class="sd">                Value of resistor that connects capacitors.</span>
+<span class="sd">    Cs:         float</span>
+<span class="sd">                Source capacitance value in Farads.</span>
+<span class="sd">    Cd:         float</span>
+<span class="sd">                Destination capacitance value in Farads.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    rvolt:      float</span>
+<span class="sd">                Voltage across the resistor at time t.</span>
+<span class="sd">    vfinal:     float</span>
+<span class="sd">                Final voltage that both capacitors settle to.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">t</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Time must be greater than zero.&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">tau</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">Cs</span> <span class="o">*</span> <span class="n">Cd</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">Cs</span> <span class="o">+</span> <span class="n">Cd</span><span class="p">)</span>
+        <span class="n">rvolt</span> <span class="o">=</span> <span class="n">Vs</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="n">tau</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">&quot;Sum of Source and Destination Capacitance must be non-zero.&quot;</span><span class="p">)</span>
+    <span class="n">vfinal</span> <span class="o">=</span> <span class="n">Vs</span> <span class="o">*</span> <span class="n">Cs</span> <span class="o">/</span> <span class="p">(</span><span class="n">Cs</span> <span class="o">+</span> <span class="n">Cd</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">rvolt</span><span class="p">,</span> <span class="n">vfinal</span><span class="p">)</span></div>
+
+<span class="c1"># Define Capacitive Back-to-Back Switching Formula</span>
+<div class="viewcode-block" id="capbacktoback"><a class="viewcode-back" href="../../api/electricpy.passive.capbacktoback.html#electricpy.passive.capbacktoback">[docs]</a><span class="k">def</span> <span class="nf">capbacktoback</span><span class="p">(</span><span class="n">C1</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">Lm</span><span class="p">,</span> <span class="n">VLN</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">VLL</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Back to Back Capacitor Transient Current Calculator.</span>
+
+<span class="sd">    Function to calculate the maximum current and the</span>
+<span class="sd">    frequency of the inrush current of two capacitors</span>
+<span class="sd">    connected in parallel when one (energized) capacitor</span>
+<span class="sd">    is switched into another (non-engergized) capacitor.</span>
+
+<span class="sd">    .. note:: This formula is only valid for three-phase systems.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    C1:         float</span>
+<span class="sd">                The capacitance of the</span>
+<span class="sd">    VLN:        float, exclusive</span>
+<span class="sd">                The line-to-neutral voltage experienced by</span>
+<span class="sd">                any one of the (three) capacitors in the</span>
+<span class="sd">                three-phase capacitor bank.</span>
+<span class="sd">    VLL:        float, exclusive</span>
+<span class="sd">                The line-to-line voltage experienced by the</span>
+<span class="sd">                three-phase capacitor bank.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    imax:       float</span>
+<span class="sd">                Maximum Current Magnitude during Transient</span>
+<span class="sd">    ifreq:      float</span>
+<span class="sd">                Transient current frequency</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Evaluate Max Current</span>
+    <span class="n">imax</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">VLL</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">C1</span> <span class="o">*</span> <span class="n">C2</span><span class="p">)</span> <span class="o">/</span> <span class="p">((</span><span class="n">C1</span> <span class="o">+</span> <span class="n">C2</span><span class="p">)</span> <span class="o">*</span> <span class="n">Lm</span><span class="p">))</span>
+    <span class="c1"># Evaluate Inrush Current Frequency</span>
+    <span class="n">ifreq</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Lm</span> <span class="o">*</span> <span class="p">(</span><span class="n">C1</span> <span class="o">*</span> <span class="n">C2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">C1</span> <span class="o">+</span> <span class="n">C2</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">imax</span><span class="p">,</span> <span class="n">ifreq</span><span class="p">)</span></div>
+
+<span class="c1"># Define Apparent Power to Farad Conversion</span>
+<div class="viewcode-block" id="farads"><a class="viewcode-back" href="../../api/electricpy.passive.farads.html#electricpy.passive.farads">[docs]</a><span class="k">def</span> <span class="nf">farads</span><span class="p">(</span><span class="n">VAR</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Capacitance from Apparent Power Formula.</span>
+
+<span class="sd">    Function to calculate the required capacitance</span>
+<span class="sd">    in Farads to provide the desired power rating</span>
+<span class="sd">    (VARs).</span>
+
+<span class="sd">    .. math:: C = \frac{VAR}{2*\pi*freq*V^2}</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    VAR:        float</span>
+<span class="sd">                The rated power to meet.</span>
+<span class="sd">    V:          float</span>
+<span class="sd">                The voltage across the capacitor;</span>
+<span class="sd">                not described as VLL or VLN, merely</span>
+<span class="sd">                the capacitor voltage.</span>
+<span class="sd">    freq:       float, optional</span>
+<span class="sd">                The System frequency</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    C:          float</span>
+<span class="sd">                The evaluated capacitance (in Farads).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">VAR</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span> <span class="o">*</span> <span class="n">V</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span></div>
+
+
+<span class="c1"># Define Capacitor Energy Calculation</span>
+<div class="viewcode-block" id="capenergy"><a class="viewcode-back" href="../../api/electricpy.passive.capenergy.html#electricpy.passive.capenergy">[docs]</a><span class="k">def</span> <span class="nf">capenergy</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">V</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Capacitor Energy Formula.</span>
+
+<span class="sd">    A simple function to calculate the stored voltage (in Joules)</span>
+<span class="sd">    in a capacitor with a charged voltage.</span>
+
+<span class="sd">    .. math:: E=\frac{1}{2}*C*V^2</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    C:          float</span>
+<span class="sd">                Capacitance in Farads.</span>
+<span class="sd">    V:          float</span>
+<span class="sd">                Voltage across capacitor.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    energy:     float</span>
+<span class="sd">                Energy stored in capacitor (Joules).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">C</span> <span class="o">*</span> <span class="n">V</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">energy</span><span class="p">)</span></div>
+
+
+<span class="c1"># Define Capacitor Voltage Discharge Function</span>
+<div class="viewcode-block" id="loadedvcapdischarge"><a class="viewcode-back" href="../../api/electricpy.passive.loadedvcapdischarge.html#electricpy.passive.loadedvcapdischarge">[docs]</a><span class="k">def</span> <span class="nf">loadedvcapdischarge</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">vo</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
+    <span class="c1"># noqa: D401    &quot;Loaded&quot; is a valid word for this docstring</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Loaded Capacitor Discharge Formula.</span>
+
+<span class="sd">    Returns the voltage of a discharging capacitor after time (t -</span>
+<span class="sd">    seconds) given initial voltage (vo - volts), capacitor size</span>
+<span class="sd">    (cap - Farads), and load (P - Watts).</span>
+
+<span class="sd">    .. math:: V_t=\sqrt{v_0^2-2*P*\frac{t}{C}}</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t:          float</span>
+<span class="sd">                Time at which to calculate voltage.</span>
+<span class="sd">    vo:         float</span>
+<span class="sd">                Initial capacitor voltage.</span>
+<span class="sd">    C:          float</span>
+<span class="sd">                Capacitance (in Farads)</span>
+<span class="sd">    P:          float</span>
+<span class="sd">                Load power consumption (in Watts).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Vt:         float</span>
+<span class="sd">                Voltage of capacitor at time t.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Vt</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">vo</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">P</span> <span class="o">*</span> <span class="n">t</span> <span class="o">/</span> <span class="n">C</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">Vt</span><span class="p">)</span></div>
+
+
+<span class="c1"># Define Capacitor Discharge Function</span>
+<div class="viewcode-block" id="timedischarge"><a class="viewcode-back" href="../../api/electricpy.passive.timedischarge.html#electricpy.passive.timedischarge">[docs]</a><span class="k">def</span> <span class="nf">timedischarge</span><span class="p">(</span><span class="n">Vinit</span><span class="p">,</span> <span class="n">Vmin</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">RMS</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">Eremain</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Capacitor Discharge Time Formula.</span>
+
+<span class="sd">    Returns the time to discharge a capacitor to a specified</span>
+<span class="sd">    voltage given set of inputs.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Vinit:      float</span>
+<span class="sd">                Initial Voltage (in volts)</span>
+<span class="sd">    Vmin:       float</span>
+<span class="sd">                Final Voltage (the minimum allowable voltage) (in volts)</span>
+<span class="sd">    C:          float</span>
+<span class="sd">                Capacitance (in Farads)</span>
+<span class="sd">    P:          float</span>
+<span class="sd">                Load Power being consumed (in Watts)</span>
+<span class="sd">    dt:         float, optional</span>
+<span class="sd">                Time step-size (in seconds) (defaults to 1e-3 | 1ms)</span>
+<span class="sd">    RMS:        bool, optional</span>
+<span class="sd">                if true converts RMS Vin to peak</span>
+<span class="sd">    Eremain:    bool, optional</span>
+<span class="sd">                if true: also returns the energy remaining in cap</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Returns time to discharge from Vinit to Vmin in seconds.</span>
+<span class="sd">    May also return remaining energy in capacitor if Eremain=True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># start at time t=0</span>
+    <span class="k">if</span> <span class="n">RMS</span><span class="p">:</span>
+        <span class="n">vo</span> <span class="o">=</span> <span class="n">Vinit</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># convert RMS to peak</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">vo</span> <span class="o">=</span> <span class="n">Vinit</span>
+    <span class="n">vc</span> <span class="o">=</span> <span class="n">loadedvcapdischarge</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">vo</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>  <span class="c1"># set initial cap voltage</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">vc</span> <span class="o">&gt;=</span> <span class="n">Vmin</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">dt</span>  <span class="c1"># increment the time</span>
+        <span class="n">vcp</span> <span class="o">=</span> <span class="n">vc</span>  <span class="c1"># save previous voltage</span>
+        <span class="n">vc</span> <span class="o">=</span> <span class="n">loadedvcapdischarge</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">vo</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>  <span class="c1"># calc. new voltage</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">Eremain</span><span class="p">):</span>
+        <span class="n">E</span> <span class="o">=</span> <span class="n">capenergy</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">vcp</span><span class="p">)</span>  <span class="c1"># calc. energy</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">dt</span><span class="p">,</span> <span class="n">E</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">dt</span><span class="p">)</span></div>
+
+
+<span class="c1"># Define Rectifier Capacitor Calculator</span>
+<div class="viewcode-block" id="rectifiercap"><a class="viewcode-back" href="../../api/electricpy.passive.rectifiercap.html#electricpy.passive.rectifiercap">[docs]</a><span class="k">def</span> <span class="nf">rectifiercap</span><span class="p">(</span><span class="n">Iload</span><span class="p">,</span> <span class="n">fswitch</span><span class="p">,</span> <span class="n">dVout</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Rectifier Capacitor Formula.</span>
+
+<span class="sd">    Returns the capacitance (in Farads) for a needed capacitor in</span>
+<span class="sd">    a rectifier configuration given the system frequency (in Hz),</span>
+<span class="sd">    the load (in amps) and the desired voltage ripple.</span>
+
+<span class="sd">    .. math:: C=\frac{I_{load}}{f_{switch}*\Delta V_{out}}</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Iload:      float</span>
+<span class="sd">                The load current that must be met.</span>
+<span class="sd">    fswitch:    float</span>
+<span class="sd">                The switching frequency of the system.</span>
+<span class="sd">    dVout:      float</span>
+<span class="sd">                Desired delta-V on the output.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    C:          float</span>
+<span class="sd">                Required capacitance (in Farads) to meet arguments.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">Iload</span> <span class="o">/</span> <span class="p">(</span><span class="n">fswitch</span> <span class="o">*</span> <span class="n">dVout</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span></div>
+<span class="c1"># Define Inductor Energy Formula</span>
+<div class="viewcode-block" id="inductorenergy"><a class="viewcode-back" href="../../api/electricpy.passive.inductorenergy.html#electricpy.passive.inductorenergy">[docs]</a><span class="k">def</span> <span class="nf">inductorenergy</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">I</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Energy Stored in Inductor Formula.</span>
+
+<span class="sd">    Function to calculate the energy stored in an inductor</span>
+<span class="sd">    given the inductance (in Henries) and the current.</span>
+
+<span class="sd">    .. math:: E=\frac{1}{2}*L*I^2</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    L:          float</span>
+<span class="sd">                Inductance Value (in Henries)</span>
+<span class="sd">    I:          float</span>
+<span class="sd">                Current traveling through inductor.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    E:          float</span>
+<span class="sd">                The energy stored in the inductor (in Joules).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">L</span> <span class="o">*</span> <span class="n">I</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="inductorcharge"><a class="viewcode-back" href="../../api/electricpy.passive.inductorcharge.html#electricpy.passive.inductorcharge">[docs]</a><span class="k">def</span> <span class="nf">inductorcharge</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Vs</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Charging Inductor Formula.</span>
+
+<span class="sd">    Calculates the Voltage and Current of an inductor</span>
+<span class="sd">    that is charging/storing energy.</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">       V_L = V_s*e^{\frac{-R*t}{L}}//</span>
+<span class="sd">       I_L = \frac{V_s}{R}*(1-e^{\frac{-R*t}{L}})</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t:          float</span>
+<span class="sd">                Time at which to calculate voltage and current.</span>
+<span class="sd">    Vs:         float</span>
+<span class="sd">                Charging voltage across inductor and resistor.</span>
+<span class="sd">    R:          float</span>
+<span class="sd">                Resistance related to inductor.</span>
+<span class="sd">    L:          float</span>
+<span class="sd">                Inductance value in Henries.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Vl:         float</span>
+<span class="sd">                Voltage across inductor at time t.</span>
+<span class="sd">    Il:         float</span>
+<span class="sd">                Current through inductor at time t.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Vl</span> <span class="o">=</span> <span class="n">Vs</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">R</span> <span class="o">*</span> <span class="n">t</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span>
+    <span class="n">Il</span> <span class="o">=</span> <span class="n">Vs</span> <span class="o">/</span> <span class="n">R</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">R</span> <span class="o">*</span> <span class="n">t</span> <span class="o">/</span> <span class="n">L</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">Vl</span><span class="p">,</span> <span class="n">Il</span><span class="p">)</span></div>
+
+<span class="c1"># Define Inductor Discharge Function</span>
+<div class="viewcode-block" id="inductordischarge"><a class="viewcode-back" href="../../api/electricpy.passive.inductordischarge.html#electricpy.passive.inductordischarge">[docs]</a><span class="k">def</span> <span class="nf">inductordischarge</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Io</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Discharging Inductor Formula.</span>
+
+<span class="sd">    Calculates the Voltage and Current of an inductor</span>
+<span class="sd">    that is discharging its stored energy.</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">       I_L=I_0*e^{\frac{-R*t}{L}}//</span>
+<span class="sd">       V_L=I_0*R*(1-e^{\frac{-R*t}{L}})</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t:          float</span>
+<span class="sd">                Time at which to calculate voltage and current.</span>
+<span class="sd">    Io:         float</span>
+<span class="sd">                Initial current traveling through inductor.</span>
+<span class="sd">    R:          float</span>
+<span class="sd">                Resistance being discharged to.</span>
+<span class="sd">    L:          float</span>
+<span class="sd">                Inductance value in Henries.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Vl:         float</span>
+<span class="sd">                Voltage across inductor at time t.</span>
+<span class="sd">    Il:         float</span>
+<span class="sd">                Current through inductor at time t.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Il</span> <span class="o">=</span> <span class="n">Io</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">R</span> <span class="o">*</span> <span class="n">t</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span>
+    <span class="n">Vl</span> <span class="o">=</span> <span class="n">Io</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">R</span> <span class="o">*</span> <span class="n">t</span> <span class="o">/</span> <span class="n">L</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">Vl</span><span class="p">,</span> <span class="n">Il</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="air_core_inductor"><a class="viewcode-back" href="../../api/electricpy.passive.air_core_inductor.html#electricpy.passive.air_core_inductor">[docs]</a><span class="k">def</span> <span class="nf">air_core_inductor</span><span class="p">(</span><span class="n">coil_diameter</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">coil_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">turns</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute Inductance of Air Core Inductor.</span>
+
+<span class="sd">    Air core inductors that consist of a coil of conducting wire with no core.</span>
+<span class="sd">    They are used in all sorts of electronic devices like radios and computers.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ---------- </span>
+<span class="sd">    coil_diameter: float in meters</span>
+<span class="sd">    coil_length: float in meters</span>
+<span class="sd">    turns: int inductor turns</span>
+
+<span class="sd">    Returns </span>
+<span class="sd">    ------- </span>
+<span class="sd">    L: float Inductance of air core inductor in (mH)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">k1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="n">coil_diameter</span><span class="o">*</span><span class="n">coil_diameter</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">turns</span><span class="o">*</span><span class="n">turns</span><span class="p">)</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">457418</span><span class="o">*</span><span class="n">coil_diameter</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1016127</span><span class="o">*</span><span class="n">coil_length</span><span class="p">)</span>
+    <span class="k">return</span>  <span class="n">k1</span><span class="o">/</span><span class="n">k2</span></div>
+
+<div class="viewcode-block" id="inductive_voltdiv"><a class="viewcode-back" href="../../api/electricpy.passive.inductive_voltdiv.html#electricpy.passive.inductive_voltdiv">[docs]</a><span class="k">def</span> <span class="nf">inductive_voltdiv</span><span class="p">(</span><span class="n">Vin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Vout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">find</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Inductive voltage divider.</span>
+
+<span class="sd">    Inductive voltage divider Inductive voltage dividers are made out of two inductors. </span>
+<span class="sd">    One of the inductors is connected from the input to the output and the other one is connected from the output to ground. </span>
+<span class="sd">    You can also use other components like resistors and inductors.</span>
+
+<span class="sd">    .. math:: V_{out} = \frac{V_{in}*L1}{L1+L2}</span>
+
+<span class="sd">    .. image:: /static/inductive-voltage-divider-circuit.png</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Vin:    float, optional </span>
+<span class="sd">            The input voltage for the system, default=None</span>
+
+<span class="sd">    Vout:   float, optional</span>
+<span class="sd">            The output voltage for the system, default=None</span>
+
+<span class="sd">    L1:     float,optional</span>
+<span class="sd">            Value of the inductor above the output voltage, default=None</span>
+
+<span class="sd">    L2:     float,optional</span>
+<span class="sd">            Value of the inductor below the output voltage, default=None</span>
+
+<span class="sd">    find:   str, optional</span>
+<span class="sd">            Control argument to specify which value</span>
+<span class="sd">            should be returned.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Vin:    float, optional </span>
+<span class="sd">            The input voltage for the system, default=None</span>
+
+<span class="sd">    Vout:   float, optional</span>
+<span class="sd">            The output voltage for the system, default=None</span>
+
+<span class="sd">    L1:     float,optional</span>
+<span class="sd">            Value of the inductor above the output voltage, default=None</span>
+
+<span class="sd">    L2:     float,optional</span>
+<span class="sd">            Value of the inductor below the output voltage</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">Vin</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">L1</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">L2</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
+        <span class="n">Vout</span> <span class="o">=</span> <span class="p">(</span><span class="n">Vin</span><span class="o">*</span><span class="n">L1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">L1</span><span class="o">+</span><span class="n">L2</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">Vout</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">L1</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">L2</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
+        <span class="n">Vin</span> <span class="o">=</span> <span class="p">(</span><span class="n">Vout</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">L1</span><span class="o">+</span><span class="n">L2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">L1</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">Vin</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">Vout</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">L2</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
+        <span class="n">L1</span> <span class="o">=</span> <span class="n">L2</span><span class="o">*</span><span class="p">(</span><span class="n">Vin</span> <span class="o">-</span><span class="n">Vout</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">Vout</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">Vin</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">Vout</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">L1</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
+        <span class="n">L2</span> <span class="o">=</span> <span class="n">L1</span><span class="o">*</span><span class="p">(</span><span class="n">Vout</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">Vin</span> <span class="o">-</span> <span class="n">Vout</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ERROR: Invalid Parameters or too few&quot;</span> <span class="o">+</span>
+                        <span class="s2">&quot; parameters given to calculate.&quot;</span><span class="p">)</span>
+
+    <span class="n">find</span> <span class="o">=</span> <span class="n">find</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="n">find</span> <span class="o">==</span> <span class="s1">&#39;vin&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Vin</span>
+    <span class="k">elif</span> <span class="n">find</span> <span class="o">==</span> <span class="s1">&#39;vout&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Vout</span>
+    <span class="k">elif</span> <span class="n">find</span> <span class="o">==</span> <span class="s1">&#39;l1&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">L1</span>
+    <span class="k">elif</span> <span class="n">find</span> <span class="o">==</span> <span class="s1">&#39;l2&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">L2</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">Vin</span><span class="p">,</span> <span class="n">Vout</span><span class="p">,</span> <span class="n">L1</span><span class="p">,</span> <span class="n">L2</span><span class="p">)</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/ElectricpyLogo.svg" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">electricpy 0.2.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../electricpy.html" >electricpy</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">electricpy.passive</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Joe Stanley.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    </div>
+  </body>
+</html>
