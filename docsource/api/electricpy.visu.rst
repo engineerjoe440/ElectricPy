@@ -17,8 +17,21 @@
     
     InductionMotorCircle
     
+    PowerCircle
+    
 
 
 
 
+
+
+.. rubric:: Functions
+
+.. autosummary::
+    :toctree: .
+    
+    receiving_end_power_circle
+    
+    sending_end_power_circle
+    
 

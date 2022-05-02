@@ -19,33 +19,15 @@
 .. autosummary::
     :toctree: .
     
-    abc_to_seq
-    
     acpiv
     
     bridge_impedance
     
-    btu
-    
-    btu_to_kwh
-    
-    capbacktoback
-    
-    capenergy
-    
-    captransfer
-    
     characterz
-    
-    clatex
     
     coldjunction
     
-    compose
-    
     convbar
-    
-    convolve
     
     cosfilt
     
@@ -61,19 +43,11 @@
     
     dynetz
     
-    farads
-    
     fftplot
     
     fftsumplot
     
     funcfft
-    
-    funcrms
-    
-    gausdist
-    
-    gaussian
     
     geninternalv
     
@@ -82,16 +56,6 @@
     harmonics
     
     hartleydata
-    
-    hertz
-    
-    horsepower
-    
-    hp_to_watts
-    
-    hz_to_rad
-    
-    hz_to_rpm
     
     ic_555_astable
     
@@ -119,27 +83,13 @@
     
     induction_machine_slip
     
-    inductive_voltdiv
-    
-    inductorcharge
-    
-    inductordischarge
-    
-    inductorenergy
-    
     instpower
     
     ipu
     
     iscrl
     
-    kwh
-    
-    kwh_to_btu
-    
     led_resistor
-    
-    loadedvcapdischarge
     
     machslip
     
@@ -149,31 +99,17 @@
     
     nlinpf
     
-    parallelz
+    parallel_plate_capacitance
     
     peak
     
     pfcorrection
     
-    phase
-    
     phaseline
-    
-    phasor
-    
-    phasordata
-    
-    phasorlist
-    
-    phasorplot
     
     phasorz
     
-    phs
-    
     phs3valpha
-    
-    phs_to_seq
     
     pi_attenuator
     
@@ -187,8 +123,6 @@
     
     primary
     
-    probdensity
-    
     propagation_constants
     
     protor
@@ -197,23 +131,9 @@
     
     puchgbase
     
-    rad_to_hz
-    
-    rad_to_rpm
-    
-    radsec
-    
     reactance
     
-    rectifiercap
-    
-    rfft
-    
     rms
-    
-    rpm_to_hz
-    
-    rpm_to_rad
     
     rtdtemp
     
@@ -223,19 +143,13 @@
     
     secondary
     
-    seq_to_abc
-    
-    seq_to_phs
-    
-    sequencez
-    
     shannondata
     
     sinfilt
     
     slew_rate
     
-    step
+    solenoid_inductance
     
     string_to_bits
     
@@ -251,23 +165,13 @@
     
     tcycle
     
-    tflatex
-    
     thermocouple
-    
-    timedischarge
     
     transformertest
     
     transposez
     
     unbalance
-    
-    vcapcharge
-    
-    vcapdischarge
-    
-    vectarray
     
     vipf
     
@@ -276,10 +180,6 @@
     vscdcbus
     
     vscgains
-    
-    watts
-    
-    watts_to_hp
     
     wireresistance
     
