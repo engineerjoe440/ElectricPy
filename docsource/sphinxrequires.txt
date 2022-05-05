@@ -4,6 +4,7 @@ numpydoc
 m2r2
 sphinx-sitemap
 sphinx-git
+sphinx-material
 coverage-badge
 numpy
 matplotlib

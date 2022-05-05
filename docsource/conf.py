@@ -39,7 +39,7 @@ except:
 # -- Project information -----------------------------------------------------
 
 project = 'electricpy'
-copyright = '2020, Joe Stanley'
+copyright = '2022, Joe Stanley'
 author = 'Joe Stanley'
 
 # The full version, including alpha/beta/rc tags
@@ -83,7 +83,7 @@ source_suffix = {
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'classic'
+html_theme = 'sphinx_material'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -92,11 +92,46 @@ html_static_path = ['static']
 html_extra_path = ['extra']
 html_logo="static/ElectricpyLogo.svg"
 html_favicon="static/ElectricpyLogo.svg"
-html_baseurl="https://engineerjoe440.github.io/ElectricPy/html/"
-html_theme_options = {
-    "sidebarwidth": "350px",
+# html_baseurl="https://engineerjoe440.github.io/ElectricPy/html/"
+# html_theme_options = {
+#     "sidebarwidth": "350px",
+# }
+html_sidebars = {
+    "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
 }
 
-github_repo = "electricpy"
-github_user = "engineerjoe440"
-github_button = True
+# github_repo = "electricpy"
+# github_user = "engineerjoe440"
+# github_button = True
+
+# Material theme options (see theme.conf for more information)
+html_theme_options = {
+
+    # Set the name of the project to appear in the navigation.
+    'nav_title': 'ElectricPy',
+
+    # Specify a base_url used to generate sitemap.xml. If not
+    # specified, then no sitemap will be built.
+    'base_url': 'https://engineerjoe440.github.io/ElectricPy/html/',
+
+    # Set the color and the accent color
+    'color_primary': 'blue',
+    'color_accent': 'light-blue',
+
+    # Set the repo location to get a badge with stats
+    'repo_url': 'https://github.com/engineerjoe440/ElectricPy/',
+    'repo_name': 'ElectricPy',
+
+    # Set the leading text at the top of the index page and others
+    "heroes": {
+        "index": "<b><i>Electrical Engineering for Python</i></b>",
+        "electricpyapi": "Python functions and constants related to electrical engineering.",
+    },
+
+    # Visible levels of the global TOC; -1 means unlimited
+    'globaltoc_depth': 2,
+    # If False, expand all TOC entries
+    'globaltoc_collapse': False,
+    # If True, show hidden TOC entries
+    'globaltoc_includehidden': False,
+}
