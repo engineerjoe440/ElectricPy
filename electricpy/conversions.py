@@ -140,8 +140,8 @@ def rad_to_hz(radians):
 
     Same as `hertz`.
 
-    Paramters
-    ---------
+    Parameters
+    ----------
     radians:    float
                 The frequency (represented in radians/sec)
 
@@ -168,8 +168,8 @@ def hz_to_rad(hertz):
 
     Same as `radsec`.
 
-    Paramters
-    ---------
+    Parameters
+    ----------
     hertz:      float
                 The frequency (represented in Hertz)
 

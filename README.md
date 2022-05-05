@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/engineerjoe440/ElectricPy/master/logo/ElectricpyLogo.svg" width="100" alt="logo" align="right">
+<img src="https://raw.githubusercontent.com/engineerjoe440/ElectricPy/master/logo/ElectricpyLogo.svg" width="200" alt="logo" align="right">
 
 # ElectricPy
 
@@ -76,7 +76,7 @@ import electricpy
 electricpy._version_
 ```
 
-## To Do List:
+## To Do List
 
 - Add Heat Sink Solver
 - DC/DC Converters
@@ -98,17 +98,17 @@ If you're interested in contributing, we'd love to see your support in a number 
 3. **Report Issues** - We don't want issues to go unnoticed. Please help us track bugs and resolve them!
 4. **Get the Word Out** - This project is still in its infancy, so please share it with your friends and colleagues. We want to make sure that everyone has the opportunity to take advantage of this project.
 
-#### Check out the *[contribution guide](https://github.com/engineerjoe440/ElectricPy/blob/master/CONTRIBUTING.md)*
+#### Check out the [contribution guide](https://github.com/engineerjoe440/ElectricPy/blob/master/CONTRIBUTING.md)
     
 
-## Contact:
+## Contact
 
 For more information regarding this resource, please contact Joe Stanley
 
 - <stan3926@almuni.uidaho.edu>
 - <joe_stanley@selinc.com>
 
-## License and Usage:
+## License and Usage
 
 ElectricPy is licensed under the standard MIT license, and as such, you are permitted
 to use this resource as you see fit. Please feel free to ask questions, suggest edits
