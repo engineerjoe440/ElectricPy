@@ -1644,8 +1644,8 @@ def vscdcbus(VLL, Zs, P, Q=0, mmax=0.8, debug=False):
             Control value to enable printing stages of
             the calculation, default=False
 
-    Return
-    ------
+    Returns
+    -------
     VDC:    float
             The DC bus voltage.
     """

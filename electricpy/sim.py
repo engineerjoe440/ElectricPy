@@ -427,9 +427,9 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
     plotresult: bool, optional
                 Control value to enable plotting of the final (combined) result.
 
-    Figures:
-    --------
-    Forcing Functions:        The plot of forcing functions, only provided if plotforcing is true.
+    **Figures**
+    
+    Forcing Functions:      The plot of forcing functions, only provided if plotforcing is true.
     State Variables:        The plot of state variables, always provided if plot is true.
     Combined Output:        The plot of the combined terms in the output, provided if C and D are not False.
 

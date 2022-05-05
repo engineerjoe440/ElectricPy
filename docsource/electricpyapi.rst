@@ -1,11 +1,7 @@
-.. _electricpy_home:
+ElectricPy API
+================================================================================
 
-==========
-ElectricPy
-==========
-
-
-*Electrical-Engineering-for-Python*
+.. _electricpy.py:
 
 Python functions and constants related to electrical engineering.
 
@@ -25,19 +21,21 @@ provide a wide array of capabilities to any electrical engineer.
 Built to support operations similar to Numpy and Scipy, this package is designed
 to aid in scientific calculations.
 
+.. rubric:: Modules
 
--------------------------
-CONTENTS:
--------------------------
+.. autosummary::
+   :recursive:
+   :toctree: api
+   :template: module.rst
 
-.. toctree::
-   :maxdepth: 1
-   
-   additionalresources
-   electricpyapi
-   changes
-   Github <https://github.com/engineerjoe440/ElectricPy>
-   PyPI <https://pypi.org/project/electricpy>
-
-
-.. mdinclude:: ../README.md
+   electricpy
+   electricpy.bode
+   electricpy.constants
+   electricpy.conversions
+   electricpy.fault
+   electricpy.latex
+   electricpy.math
+   electricpy.passive
+   electricpy.phasor
+   electricpy.sim
+   electricpy.visu
