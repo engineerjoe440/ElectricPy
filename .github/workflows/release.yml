@@ -1,8 +1,9 @@
 name: Release
 on:
   push:
-   branches:
-     - master
+    branches: [ master ]
+  paths:
+    - 'release-version.py'
 
 jobs:
   release:
