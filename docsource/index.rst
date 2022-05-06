@@ -27,7 +27,7 @@ to aid in scientific calculations.
 
 
 -------------------------
-CONTENTS:
+Contents:
 -------------------------
 
 .. toctree::
