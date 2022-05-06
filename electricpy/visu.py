@@ -19,7 +19,25 @@ class InductionMotorCircle:
     Plot Induction Motor Circle Diagram.
 
     This class is designed to plot induction motor circle diagram
-    and plot circle diagram to obtain various parameters of induction motor
+    and plot circle diagram to obtain various parameters of induction motor.
+
+    Examples
+    --------
+    >>> from electricpy.visu import InductionMotorCircle
+    >>> open_circuit_test_data = {'V0': 400, 'I0': 9, 'W0': 1310}
+    >>> blocked_rotor_test_data = {'Vsc': 200, 'Isc': 50, 'Wsc': 7100}
+    >>> ratio = 1  # stator copper loss/ rotor copper loss
+    >>> output_power = 15000
+    >>> InductionMotorCircle(
+    ...     no_load_data=open_circuit_test_data,
+    ...     blocked_rotor_data=blocked_rotor_test_data,
+    ...     output_power=output_power,
+    ...     torque_ration=ratio,
+    ...     frequency=50, 
+    ...     poles=4
+    ... )
+
+    .. image:: /static/InductionMotorCircleExample.png
 
     Parameters
     ----------
@@ -177,7 +195,7 @@ class InductionMotorCircle:
             'Maximum Output Power',
             f'Operating Power {self.operating_power}'
         ])
-        _plt.show()
+        return _plt
 
     def compute_efficiency(self):
         """Compute the output efficiency of induction motor."""
@@ -336,41 +354,44 @@ class PowerCircle:
 
     Parameters
     ----------
-    power_circle_type: str ["sending", "receiving"] 
-        Type of power circle diagram to plot. 
-    Vr: complex 
-        Transmission Line Receiving End Voltage (phasor complex value)
-    Vs: complex
-        Transmission Line Sending End Voltage (phasor complex value)
-    power_factor: float
-        Power Factor of the transmission system, default = None 
-    Pr: float
-        Receiving End Real Power, default = None
-    Qr: float
-        Receiving End Reactive Power, default = None
-    Sr: complex
-        Receiving End Total Complex Power, default = None
-    Ps: float
-        Sending End Real Power, default = None
-    Qs: float
-        Sending End Reactive Power, default = None
-    Ss: complex
-        Sending End Total Complex Power, default = None
-    A: float 
-        Transmission System ABCD Parameters, A, default = None     
-    B: float 
-        Transmission System ABCD Parameters, B, default = None         
-    C: float 
-        Transmission System ABCD Parameters, C, default = None     
-    D: float 
-        Transmission System ABCD Parameters, D, default = None 
+    power_circle_type:  ["sending", "receiving"] 
+                        Type of power circle diagram to plot. 
+    Vr:                 complex 
+                        Transmission Line Receiving End Voltage (phasor complex
+                        value)
+    Vs:                 complex
+                        Transmission Line Sending End Voltage (phasor complex
+                        value)
+    power_factor:       float
+                        Power Factor of the transmission system, default = None 
+    Pr:                 float
+                        Receiving End Real Power, default = None
+    Qr:                 float
+                        Receiving End Reactive Power, default = None
+    Sr:                 complex
+                        Receiving End Total Complex Power, default = None
+    Ps:                 float
+                        Sending End Real Power, default = None
+    Qs:                 float
+                        Sending End Reactive Power, default = None
+    Ss:                 complex
+                        Sending End Total Complex Power, default = None
+    A:                  float 
+                        Transmission System ABCD Parameters, A, default = None     
+    B:                  float 
+                        Transmission System ABCD Parameters, B, default = None         
+    C:                  float 
+                        Transmission System ABCD Parameters, C, default = None     
+    D:                  float 
+                        Transmission System ABCD Parameters, D, default = None 
     """
 
-    def __init__(self, power_circle_type: str, power_factor: float = None, Vr: complex = None, Vs: complex = None,
-                Pr: float = None, Qr: float = None, Sr: complex = None,
-                Ps: float = None, Qs: float = None, Ss: complex = None,
-                A: complex = None, B: complex = None, C: complex = None,
-                D: complex = None) -> None:
+    def __init__(self, power_circle_type: str, power_factor: float = None,
+                 Vr: complex = None, Vs: complex = None,
+                 Pr: float = None, Qr: float = None, Sr: complex = None,
+                 Ps: float = None, Qs: float = None, Ss: complex = None,
+                 A: complex = None, B: complex = None, C: complex = None,
+                 D: complex = None) -> None:
         r"""Initialize the class."""
         if C is not None:
             assert abs(A*D - B*C - 1) < 1e-6, "ABCD Matrix is not a valid ABCD Matrix"
@@ -523,36 +544,54 @@ class PowerCircle:
         _plt.plot([c_x, op_x], [c_y, op_y], 'y*-.')
         _plt.plot([op_x, op_x], [op_y, c_y], 'b*-.') 
         _plt.scatter(op_x, op_y, marker='*', color='r')
-        _plt.title(f"{self.parameters['power_circle_type'].capitalize()} Power Circle")
+        _plt.title(
+            f"{self.parameters['power_circle_type'].capitalize()} Power Circle"
+        )
         _plt.xlabel("Active Power")
         _plt.ylabel("Reactive Power")
         _plt.grid()
-        _plt.show()
+        return _plt
 
-def receiving_end_power_circle(Vr: complex = None, A: complex = None, B: complex = None, Pr:float = None,
-                            Qr:float = None, Sr: complex = None, power_factor: float = None,
-                            Vs: complex = None) -> PowerCircle :
+def receiving_end_power_circle(Vr: complex = None, A: complex = None,
+                               B: complex = None, Pr:float = None,
+                               Qr: float = None, Sr: complex = None,
+                               power_factor: float = None, Vs: complex = None
+                            ) -> PowerCircle :
     """
     Construct Receiving End Power Circle.
 
+    Examples
+    --------
+    >>> import math, cmath
+    >>> from electricpy import visu
+    >>> visu.receiving_end_power_circle(
+    ...     A=cmath.rect(0.895, math.radians(1.4)),
+    ...     B=cmath.rect(182.5, math.radians(78.6)),
+    ...     Vr=cmath.rect(215, 0),
+    ...     Pr=50,
+    ...     power_factor=-0.9
+    ... )
+
+    .. image:: /static/ReceivingEndPowerCircleExample.png
+
     Parameters
     ----------
-    Vr: complex    
-        Receiving End Voltage, default = None.
-    A: complex     
-        Transmission System ABCD Parameters, A, default = None.
-    B: complex,     
-        Transmission System ABCD Parameters, B, default = None.
-    Pr: float, optional
-        Receiving End Real Power, default = None
-    Qr: float, optional
-        Receiving End Reactive Power, default = None
-    Sr: complex, optional
-        Receiving End Apparent Power, default = None
-    power_factor: float, optional
-        System End Power Factor, default = None
-    Vs: complex, optional
-        Sending End Voltage, default = None
+    Vr:             complex    
+                    Receiving End Voltage, default = None.
+    A:              complex     
+                    Transmission System ABCD Parameters, A, default = None.
+    B:              complex,     
+                    Transmission System ABCD Parameters, B, default = None.
+    Pr:             float, optional
+                    Receiving End Real Power, default = None
+    Qr:             float, optional
+                    Receiving End Reactive Power, default = None
+    Sr:             complex, optional
+                    Receiving End Apparent Power, default = None
+    power_factor:   float, optional
+                    System End Power Factor, default = None
+    Vs:             complex, optional
+                    Sending End Voltage, default = None
 
     Returns
     -------
@@ -561,82 +600,98 @@ def receiving_end_power_circle(Vr: complex = None, A: complex = None, B: complex
     try:
         assert Vr != None and A != None and B != None
     except AssertionError:
-        raise ValueError("Not enough attributes to build Receiving end power circle \
-        at least provide `Vr`, `A`, `B`")
+        raise ValueError(
+            "Not enough attributes to build Receiving end power circle at least"
+            " provide `Vr`, `A`, `B`"
+        )
 
-    try:
-        flag_1 = (Pr != None and Qr != None) or (Sr != None and power_factor != None)
-        flag_2 = (Pr != None and power_factor != None) or (Qr != None and power_factor != None)
-        assert flag_1 or flag_2
-    except AssertionError:
-        raise ValueError("Not enough attributes for marking an operating point on \
-        Receiving End Power Circle")
+    if not (
+        ((Pr != None and Qr != None) or (Sr != None and power_factor != None))
+        or
+        (
+            (Pr != None and power_factor != None) or
+            (Qr != None and power_factor != None)
+        )):
+        raise ValueError(
+            "Not enough attributes for marking an operating point on Receiving "
+            "End Power Circle"
+        )
 
-    data = {
-        'Vr': Vr,
-        'A': A,
-        'B': B,
-        'Pr': Pr,
-        'Qr': Qr,
-        'Sr': Sr,
-        'Vs': Vs,
-        'power_factor': power_factor
-    }
+    return PowerCircle(
+        "receiving",
+        **{
+            'Vr': Vr,
+            'A': A,
+            'B': B,
+            'Pr': Pr,
+            'Qr': Qr,
+            'Sr': Sr,
+            'Vs': Vs,
+            'power_factor': power_factor
+        }
+    )
 
-    return PowerCircle("receiving", **data)
-
-def sending_end_power_circle(Vs: complex = None, B: complex = None, D: complex = None, Ps:float = None,
-                            Qs:float = None, Ss: complex = None, power_factor: float = None,
-                            Vr: complex = None) -> PowerCircle:
+def sending_end_power_circle(Vs: complex = None, B: complex = None,
+                             D: complex = None, Ps:float = None,
+                             Qs:float = None, Ss: complex = None,
+                             power_factor: float = None, Vr: complex = None
+                            ) -> PowerCircle:
     """
     Construct Receiving End Power Circle.
 
     Parameters
     ----------
-    Vs: complex 
-        Sending End Voltage
-    B: complex
-        Transmission System ABCD Parameters, A
-    D: complex
-        Transmission System ABCD Parameters, B
-    Ps: float, optional
-        Sending End Real Power, default = None
-    Qs: float, optional
-        Sending End Reactive Power, default = None
-    Ss: complex, optional
-        Sending End Apparent Power, default = None
-    power_factor: float, optional
-        System Power Factor, default = None
-    Vr: complex, optional
-        Receiving End Voltage, default = None
+    Vs:             complex 
+                    Sending End Voltage
+    B:              complex
+                    Transmission System ABCD Parameters, A
+    D:              complex
+                    Transmission System ABCD Parameters, B
+    Ps:             float, optional
+                    Sending End Real Power, default = None
+    Qs:             float, optional
+                    Sending End Reactive Power, default = None
+    Ss:             complex, optional
+                    Sending End Apparent Power, default = None
+    power_factor:   float, optional
+                    System Power Factor, default = None
+    Vr:             complex, optional
+                    Receiving End Voltage, default = None
 
     Returns
     -------
     Sending End Power Circle: PowerCircle
     """
-    try:
-        assert Vs != None and B != None and D != None
-    except AssertionError:
-        raise ValueError("Not enough attributes to build Sending end power circle \
-        at least provide `Vs`, `B`, `D`")
+    if not (Vs != None and B != None and D != None):
+        raise ValueError(
+            "Not enough attributes to build Sending end power circle at least "
+            "provide `Vs`, `B`, `D`"
+        )
 
-    try:
-        flag_1 = (Ps != None and Qs != None) or (Ss != None and power_factor != None)
-        flag_2 = (Ps != None and power_factor != None) or (Qs != None and power_factor != None)
-        assert flag_1 or flag_2
-    except AssertionError:
-        raise ValueError("Not enough attributes for marking an operating point on \
-        Sending End Power Circle")
+    if not (
+        ((Ps != None and Qs != None) or (Ss != None and power_factor != None))
+        or
+        (
+            (Ps != None and power_factor != None) or
+            (Qs != None and power_factor != None)
+        )):
+        raise ValueError(
+            "Not enough attributes for marking an operating point on Sending "
+            "End Power Circle"
+        )
 
-    data = {
-        'Vr': Vr,
-        'B': B,
-        'D': D,
-        'Ps': Ps,
-        'Qs': Qs,
-        'Ss': Ss,
-        'Vs': Vs,
-        'power_factor': power_factor
-    }
+    return PowerCircle(
+        "sending",
+        **{
+            'Vr': Vr,
+            'B': B,
+            'D': D,
+            'Ps': Ps,
+            'Qs': Qs,
+            'Ss': Ss,
+            'Vs': Vs,
+            'power_factor': power_factor
+        }
+    )
 
-    return PowerCircle("sending", **data)
+# END

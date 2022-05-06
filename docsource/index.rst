@@ -33,9 +33,9 @@ CONTENTS:
 .. toctree::
    :maxdepth: 1
    
-   additionalresources
    electricpyapi
    constants
+   additionalresources
    changes
    Github <https://github.com/engineerjoe440/ElectricPy>
    PyPI <https://pypi.org/project/electricpy>
