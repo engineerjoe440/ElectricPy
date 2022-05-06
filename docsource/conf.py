@@ -1,23 +1,17 @@
-# Configuration file for the Sphinx documentation builder.
+################################################################################
+"""Configuration file for the Sphinx documentation builder."""
+################################################################################
 
-# This file only contains a selection of the most common options. For a full
-# list see the documentation:
-# https://www.sphinx-doc.org/en/master/usage/configuration.html
-
-# -- Path setup --------------------------------------------------------------
-
-# If extensions (or modules to document with autodoc) are in another directory,
-# add these directories to sys.path here. If the directory is relative to the
-# documentation root, use os.path.abspath to make it absolute, like shown here.
-#
 import os
 import re
 import sys
+
 print("Build with:", sys.version)
 parent_dir = os.path.dirname(os.getcwd())
 initfile = os.path.join(parent_dir,'electricpy','__init__.py')
 sys.path.insert(0,parent_dir)
 print(parent_dir)
+
 # Gather Version Information from Python File
 with open(initfile) as fh:
     file_str = fh.read()
@@ -92,10 +86,6 @@ html_static_path = ['static']
 html_extra_path = ['extra']
 html_logo="static/ElectricpyLogo.svg"
 html_favicon="static/ElectricpyLogo.svg"
-# html_baseurl="https://engineerjoe440.github.io/ElectricPy/html/"
-# html_theme_options = {
-#     "sidebarwidth": "350px",
-# }
 html_sidebars = {
     "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
 }

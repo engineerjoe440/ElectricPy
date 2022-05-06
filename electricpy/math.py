@@ -46,12 +46,12 @@ def convolve(tuple):
 
 # Define Step function
 def step(t):
-    """
+    r"""
     Step Function [ u(t) ].
 
-    Simple implimentation of numpy.heaviside function
-    to provide standard step-function as specified to
-    be zero at x<0, and one at x>=0.
+    Simple implimentation of numpy.heaviside function to provide standard
+    step-function as specified to be zero at :math:`x < 0`, and one at
+    :math:`x \geq 0`.
     """
     return (_np.heaviside(t, 1))
 
@@ -74,7 +74,6 @@ def funcrms(func, T):
     Returns
     -------
     RMS:    The RMS value of the function (f) over the interval ( 0, T )
-
     """
     fn = lambda x: func(x) ** 2
     integral, _ = integrate(fn, 0, T)

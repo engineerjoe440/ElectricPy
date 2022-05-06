@@ -80,10 +80,10 @@ def phasor(mag, ang=0):
 
     See Also
     --------
-    phasor.phasorlist:  Phasor Generator for List or Array
-    phasor.cprint:      Complex Variable Printing Function
-    phasor.phasorz:     Impedance Phasor Generator
-    phasor.phs:         Complex Phase Angle Generator
+    electricpy.phasor.phasorlist:   Phasor Generator for List or Array
+    electricpy.phasor.cprint:       Complex Variable Printing Function
+    electricpy.phasor.phasorz:      Impedance Phasor Generator
+    electricpy.phasor.phs:          Complex Phase Angle Generator
     """
     # Test for Tuple/List Arg
     if isinstance(mag, (tuple, list, _np.ndarray)):
@@ -129,10 +129,10 @@ def phasorlist(arr):
 
     See Also
     --------
-    phasor.phasor:      Phasor Generating Function
-    phasor.vectarray:   Magnitude/Angle Array Pairing Function
-    phasor.cprint:      Complex Variable Printing Function
-    phasor.phasorz:     Impedance Phasor Generator
+    electricpy.phasor.phasor:       Phasor Generating Function
+    electricpy.phasor.vectarray:    Magnitude/Angle Array Pairing Function
+    electricpy.phasor.cprint:       Complex Variable Printing Function
+    electricpy.phasor.phasorz:      Impedance Phasor Generator
     """
     # Use List Comprehension to Process
 
@@ -172,8 +172,8 @@ def vectarray(arr, degrees=True, flatarray=False):
 
     See Also
     --------
-    phasor.phasor:      Phasor Generating Function
-    phasor.phasorlist:  Phasor Generator for List or Array
+    electricpy.phasor.phasor:       Phasor Generating Function
+    electricpy.phasor.phasorlist:   Phasor Generator for List or Array
     """
     # Iteratively Append Arrays to the Base
 
