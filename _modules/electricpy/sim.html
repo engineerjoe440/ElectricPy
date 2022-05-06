@@ -490,7 +490,7 @@
         <span class="k">elif</span> <span class="n">xmxscale</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span> <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="n">xmxscale</span><span class="o">/</span><span class="p">(</span><span class="n">freq</span><span class="o">*</span><span class="n">dt</span><span class="p">)))</span>
         
     <span class="n">_plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+    <span class="k">return</span> <span class="n">_plt</span></div>
 
 <span class="c1"># Define Step Response Simulator Function</span>
 <div class="viewcode-block" id="step_response"><a class="viewcode-back" href="../../api/electricpy.sim.step_response.html#electricpy.sim.step_response">[docs]</a><span class="k">def</span> <span class="nf">step_response</span><span class="p">(</span><span class="n">system</span><span class="p">,</span><span class="n">npts</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">combine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">xlim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -574,7 +574,7 @@
     <span class="n">_plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">filename</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+    <span class="k">return</span> <span class="n">_plt</span></div>
 
 <span class="c1"># Define Ramp Response Simulator Function</span>
 <div class="viewcode-block" id="ramp_response"><a class="viewcode-back" href="../../api/electricpy.sim.ramp_response.html#electricpy.sim.ramp_response">[docs]</a><span class="k">def</span> <span class="nf">ramp_response</span><span class="p">(</span><span class="n">system</span><span class="p">,</span><span class="n">npts</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">combine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">xlim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -658,7 +658,7 @@
     <span class="n">_plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">filename</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+    <span class="k">return</span> <span class="n">_plt</span></div>
     
 <span class="c1"># Define Parabolic Response Simulator Function</span>
 <div class="viewcode-block" id="parabolic_response"><a class="viewcode-back" href="../../api/electricpy.sim.parabolic_response.html#electricpy.sim.parabolic_response">[docs]</a><span class="k">def</span> <span class="nf">parabolic_response</span><span class="p">(</span><span class="n">system</span><span class="p">,</span><span class="n">npts</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">combine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">xlim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -742,7 +742,7 @@
     <span class="n">_plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">filename</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+    <span class="k">return</span> <span class="n">_plt</span></div>
 
 <span class="c1"># Define State Space Simulator</span>
 <div class="viewcode-block" id="statespace"><a class="viewcode-back" href="../../api/electricpy.sim.statespace.html#electricpy.sim.statespace">[docs]</a><span class="k">def</span> <span class="nf">statespace</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">C</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">D</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">simpts</span><span class="o">=</span><span class="mi">9999</span><span class="p">,</span><span class="n">NN</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
