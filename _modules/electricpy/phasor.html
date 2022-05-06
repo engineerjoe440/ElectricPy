@@ -210,27 +210,6 @@
     <li class="md-nav__item">
     
     
-      <a href="../../additionalresources.html" class="md-nav__link">Additional Resources</a>
-      <ul class="md-nav__list"> 
-    <li class="md-nav__item">
-    
-    
-      <a href="../../additionalresources.html#generic-and-data-science" class="md-nav__link">Generic and Data Science</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="../../additionalresources.html#electrical-engineering-focus" class="md-nav__link">Electrical Engineering Focus</a>
-      
-    
-    </li></ul>
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
       <a href="../../electricpyapi.html" class="md-nav__link">ElectricPy API</a>
       <ul class="md-nav__list"> 
     <li class="md-nav__item">
@@ -310,6 +289,27 @@
     
       <a href="../../constants.html" class="md-nav__link">Constants</a>
       
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../../additionalresources.html" class="md-nav__link">Additional Resources</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../../additionalresources.html#generic-and-data-science" class="md-nav__link">Generic and Data Science</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../../additionalresources.html#electrical-engineering-focus" class="md-nav__link">Electrical Engineering Focus</a>
+      
+    
+    </li></ul>
     
     </li>
     <li class="md-nav__item">
@@ -400,10 +400,10 @@
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
-<span class="sd">    phasorlist: Phasor Generator for List or Array</span>
-<span class="sd">    cprint:     Complex Variable Printing Function</span>
-<span class="sd">    phasorz:    Impedance Phasor Generator</span>
-<span class="sd">    phasor:     Phasor Generating Function</span>
+<span class="sd">    cprint:                        Complex Variable Printing Function</span>
+<span class="sd">    electricpy.phasor.phasorlist:  Phasor Generator for List or Array</span>
+<span class="sd">    electricpy.phasor.phasorz:     Impedance Phasor Generator</span>
+<span class="sd">    electricpy.phasor.phasor:      Phasor Generating Function</span>
 <span class="sd">    """</span>
     <span class="c1"># Return the Complex Angle Modulator</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">ang</span><span class="p">)))</span></div>
@@ -442,8 +442,8 @@
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
+<span class="sd">    cprint:                         Complex Variable Printing Function</span>
 <span class="sd">    electricpy.phasor.phasorlist:   Phasor Generator for List or Array</span>
-<span class="sd">    electricpy.phasor.cprint:       Complex Variable Printing Function</span>
 <span class="sd">    electricpy.phasor.phasorz:      Impedance Phasor Generator</span>
 <span class="sd">    electricpy.phasor.phs:          Complex Phase Angle Generator</span>
 <span class="sd">    """</span>
@@ -452,6 +452,57 @@
         <span class="n">ang</span> <span class="o">=</span> <span class="n">mag</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">mag</span> <span class="o">=</span> <span class="n">mag</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">_c</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">ang</span><span class="p">)))</span></div>
+
+
+<span class="c1"># Define Impedance Conversion function</span>
+<div class="viewcode-block" id="phasorz"><a class="viewcode-back" href="../../api/electricpy.phasor.phasorz.html#electricpy.phasor.phasorz">[docs]</a><span class="k">def</span> <span class="nf">phasorz</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="nb">complex</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Phasor Impedance Generator.</span>
+
+<span class="sd">    This function's purpose is to generate the phasor-based</span>
+<span class="sd">    impedance of the specified input given as either the</span>
+<span class="sd">    capacitance (in Farads) or the inductance (in Henreys).</span>
+<span class="sd">    The function will return the phasor value (in Ohms).</span>
+
+<span class="sd">    .. math:: Z = \frac{-j}{\omega*C}</span>
+
+<span class="sd">    .. math:: Z = j*\omega*L</span>
+
+<span class="sd">    where:</span>
+
+<span class="sd">    .. math:: \omega = 2*\pi*freq</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    C:          float, optional</span>
+<span class="sd">                The capacitance value (specified in Farads),</span>
+<span class="sd">                default=None</span>
+<span class="sd">    L:          float, optional</span>
+<span class="sd">                The inductance value (specified in Henreys),</span>
+<span class="sd">                default=None</span>
+<span class="sd">    freq:       float, optional</span>
+<span class="sd">                The system frequency to be calculated upon, default=60</span>
+<span class="sd">    complex:    bool, optional</span>
+<span class="sd">                Control argument to specify whether the returned</span>
+<span class="sd">                value should be returned as a complex value.</span>
+<span class="sd">                default=True</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Z:      complex</span>
+<span class="sd">            The ohmic impedance of either C or L (respectively).</span>
+<span class="sd">    """</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span>
+    <span class="c1"># C Given in ohms, return as Z</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">C</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">Z</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">C</span><span class="p">)</span>
+    <span class="c1"># L Given in ohms, return as Z</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">L</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">Z</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">L</span>
+    <span class="c1"># If asked for imaginary number</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">complex</span><span class="p">):</span>
+        <span class="n">Z</span> <span class="o">*=</span> <span class="mi">1</span><span class="n">j</span>
+    <span class="k">return</span> <span class="n">Z</span></div>
 
 
 <span class="c1"># Define Phasor Array Generator</span>
@@ -491,9 +542,9 @@
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
+<span class="sd">    cprint:                         Complex Variable Printing Function</span>
 <span class="sd">    electricpy.phasor.phasor:       Phasor Generating Function</span>
 <span class="sd">    electricpy.phasor.vectarray:    Magnitude/Angle Array Pairing Function</span>
-<span class="sd">    electricpy.phasor.cprint:       Complex Variable Printing Function</span>
 <span class="sd">    electricpy.phasor.phasorz:      Impedance Phasor Generator</span>
 <span class="sd">    """</span>
     <span class="c1"># Use List Comprehension to Process</span>

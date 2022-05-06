@@ -54,12 +54,9 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.phs3valpha" href="electricpy.phs3valpha.html" />
-    <link rel="prev" title="electricpy.phaseline" href="electricpy.phaseline.html" />
   
    
 
@@ -171,8 +168,6 @@
     <div class="md-tabs__inner md-grid">
       <ul class="md-tabs__list">
           <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">electricpy 0.2.1 documentation</a></li>
-          <li class="md-tabs__item"><a href="../electricpyapi.html" class="md-tabs__link">ElectricPy API</a></li>
-          <li class="md-tabs__item"><a href="electricpy.html" class="md-tabs__link">electricpy</a></li>
       </ul>
     </div>
   </nav>
@@ -211,27 +206,6 @@
 
   
   <ul class="md-nav__list">
-    <li class="md-nav__item">
-    
-    
-      <a href="../additionalresources.html" class="md-nav__link">Additional Resources</a>
-      <ul class="md-nav__list"> 
-    <li class="md-nav__item">
-    
-    
-      <a href="../additionalresources.html#generic-and-data-science" class="md-nav__link">Generic and Data Science</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="../additionalresources.html#electrical-engineering-focus" class="md-nav__link">Electrical Engineering Focus</a>
-      
-    
-    </li></ul>
-    
-    </li>
     <li class="md-nav__item">
     
     
@@ -319,6 +293,27 @@
     <li class="md-nav__item">
     
     
+      <a href="../additionalresources.html" class="md-nav__link">Additional Resources</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../additionalresources.html#generic-and-data-science" class="md-nav__link">Generic and Data Science</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../additionalresources.html#electrical-engineering-focus" class="md-nav__link">Electrical Engineering Focus</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
       <a href="../changes.html" class="md-nav__link">Recent Changes</a>
       
     
@@ -366,42 +361,6 @@
             
   <section id="electricpy-phasorz">
 <h1 id="api-electricpy-phasorz--page-root">electricpy.phasorz<a class="headerlink" href="#api-electricpy-phasorz--page-root" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="electricpy.phasorz">
-<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">phasorz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy.html#phasorz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.phasorz" title="Permalink to this definition">¶</a></dt>
-<dd><p>Phasor Impedance Generator.</p>
-<p>This function’s purpose is to generate the phasor-based
-impedance of the specified input given as either the
-capacitance (in Farads) or the inductance (in Henreys).
-The function will return the phasor value (in Ohms).</p>
-<div class="math notranslate nohighlight">
-\[Z = \frac{-j}{\omega*C}\]</div>
-<div class="math notranslate nohighlight">
-\[Z = j*\omega*L\]</div>
-<p>where:</p>
-<div class="math notranslate nohighlight">
-\[\omega = 2*\pi*freq\]</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>C</strong> (<em>float</em><em>, </em><em>optional</em>) – The capacitance value (specified in Farads),
-default=None</p></li>
-<li><p><strong>L</strong> (<em>float</em><em>, </em><em>optional</em>) – The inductance value (specified in Henreys),
-default=None</p></li>
-<li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – The system frequency to be calculated upon, default=60</p></li>
-<li><p><strong>complex</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to specify whether the returned
-value should be returned as a complex value.
-default=True</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>Z</strong> – The ohmic impedance of either C or L (respectively).</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>complex</p>
-</dd>
-</dl>
-</dd></dl>
 </section>
 
 
@@ -414,30 +373,6 @@ default=True</p></li>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
           
-            <a href="electricpy.phaseline.html" title="electricpy.phaseline"
-               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
-               rel="prev">
-              <div class="md-flex__cell md-flex__cell--shrink">
-                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-              </div>
-              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-                <span class="md-flex__ellipsis">
-                  <span
-                      class="md-footer-nav__direction"> Previous </span> electricpy.phaseline </span>
-              </div>
-            </a>
-          
-          
-            <a href="electricpy.phs3valpha.html" title="electricpy.phs3valpha"
-               class="md-flex md-footer-nav__link md-footer-nav__link--next"
-               rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
-                class="md-flex__ellipsis"> <span
-                class="md-footer-nav__direction"> Next </span> electricpy.phs3valpha </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink"><i
-                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
           
         </a>
         

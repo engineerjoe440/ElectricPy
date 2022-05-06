@@ -209,27 +209,6 @@
     <li class="md-nav__item">
     
     
-      <a href="../additionalresources.html" class="md-nav__link">Additional Resources</a>
-      <ul class="md-nav__list"> 
-    <li class="md-nav__item">
-    
-    
-      <a href="../additionalresources.html#generic-and-data-science" class="md-nav__link">Generic and Data Science</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="../additionalresources.html#electrical-engineering-focus" class="md-nav__link">Electrical Engineering Focus</a>
-      
-    
-    </li></ul>
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
       <a href="../electricpyapi.html" class="md-nav__link">ElectricPy API</a>
       <ul class="md-nav__list"> 
     <li class="md-nav__item">
@@ -314,6 +293,27 @@
     <li class="md-nav__item">
     
     
+      <a href="../additionalresources.html" class="md-nav__link">Additional Resources</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../additionalresources.html#generic-and-data-science" class="md-nav__link">Generic and Data Science</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../additionalresources.html#electrical-engineering-focus" class="md-nav__link">Electrical Engineering Focus</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
       <a href="../changes.html" class="md-nav__link">Recent Changes</a>
       
     
@@ -384,6 +384,7 @@
 <span class="c1"># Import Submodules</span>
 <span class="kn">from</span> <span class="nn">.constants</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">.phasor</span> <span class="kn">import</span> <span class="n">compose</span><span class="p">,</span> <span class="n">parallelz</span>
+<span class="kn">from</span> <span class="nn">.phasor</span> <span class="kn">import</span> <span class="n">phasorz</span> <span class="k">as</span> <span class="n">impedance</span>
 
 <span class="c1"># Import Supporting Modules</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">_np</span>
@@ -574,9 +575,9 @@
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
-<span class="sd">    phasor:     Phasor Generating Function</span>
-<span class="sd">    phasorlist: Phasor Generating Function for Lists or Arrays</span>
-<span class="sd">    phasorz:    Impedance Phasor Generator</span>
+<span class="sd">    electricpy.phasor.phasor:       Phasor Generating Function</span>
+<span class="sd">    electricpy.phasor.phasorlist:   Phasor Generating Function for Lists/Arrays</span>
+<span class="sd">    electricpy.phasor.phasorz:      Impedance Phasor Generator</span>
 <span class="sd">    """</span>
     <span class="c1"># Use depricated `round`</span>
     <span class="k">if</span> <span class="nb">round</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
@@ -711,57 +712,6 @@
             <span class="k">return</span> <span class="p">([</span><span class="n">mag</span><span class="p">,</span> <span class="n">ang</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid Input Type"</span><span class="p">)</span></div>
-
-
-<span class="c1"># Define Impedance Conversion function</span>
-<div class="viewcode-block" id="phasorz"><a class="viewcode-back" href="../api/electricpy.phasorz.html#electricpy.phasorz">[docs]</a><span class="k">def</span> <span class="nf">phasorz</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="nb">complex</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">"""</span>
-<span class="sd">    Phasor Impedance Generator.</span>
-
-<span class="sd">    This function's purpose is to generate the phasor-based</span>
-<span class="sd">    impedance of the specified input given as either the</span>
-<span class="sd">    capacitance (in Farads) or the inductance (in Henreys).</span>
-<span class="sd">    The function will return the phasor value (in Ohms).</span>
-
-<span class="sd">    .. math:: Z = \frac{-j}{\omega*C}</span>
-
-<span class="sd">    .. math:: Z = j*\omega*L</span>
-
-<span class="sd">    where:</span>
-
-<span class="sd">    .. math:: \omega = 2*\pi*freq</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    C:          float, optional</span>
-<span class="sd">                The capacitance value (specified in Farads),</span>
-<span class="sd">                default=None</span>
-<span class="sd">    L:          float, optional</span>
-<span class="sd">                The inductance value (specified in Henreys),</span>
-<span class="sd">                default=None</span>
-<span class="sd">    freq:       float, optional</span>
-<span class="sd">                The system frequency to be calculated upon, default=60</span>
-<span class="sd">    complex:    bool, optional</span>
-<span class="sd">                Control argument to specify whether the returned</span>
-<span class="sd">                value should be returned as a complex value.</span>
-<span class="sd">                default=True</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    Z:      complex</span>
-<span class="sd">            The ohmic impedance of either C or L (respectively).</span>
-<span class="sd">    """</span>
-    <span class="n">w</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span>
-    <span class="c1"># C Given in ohms, return as Z</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">C</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="n">Z</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">C</span><span class="p">)</span>
-    <span class="c1"># L Given in ohms, return as Z</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">L</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="n">Z</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">L</span>
-    <span class="c1"># If asked for imaginary number</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nb">complex</span><span class="p">):</span>
-        <span class="n">Z</span> <span class="o">*=</span> <span class="mi">1</span><span class="n">j</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">Z</span><span class="p">)</span></div>
 
 
 <span class="c1"># Define Phase/Line Converter</span>
@@ -1488,14 +1438,17 @@
         <span class="k">if</span> <span class="nb">round</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span> <span class="n">Zset</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">Zset</span><span class="p">,</span> <span class="nb">round</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">Zset</span><span class="p">)</span>  <span class="c1"># Return Delta Impedances</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"ERROR: Either delta or wye impedances must be specified."</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"ERROR: Either delta or wye impedances must be specified."</span>
+        <span class="p">)</span></div>
 
 <span class="c1">#calculating impedance of bridge network</span>
 <div class="viewcode-block" id="bridge_impedance"><a class="viewcode-back" href="../api/electricpy.bridge_impedance.html#electricpy.bridge_impedance">[docs]</a><span class="k">def</span> <span class="nf">bridge_impedance</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="n">z2</span><span class="p">,</span> <span class="n">z3</span><span class="p">,</span> <span class="n">z4</span><span class="p">,</span> <span class="n">z5</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Bridge Impedance Calculator.</span>
 <span class="sd">    </span>
-<span class="sd">    The following condition describing the Wheatstone Bridge is utilized to ensure that current through `z5` will be zero.</span>
+<span class="sd">    The following condition describing the Wheatstone Bridge is utilized to</span>
+<span class="sd">    ensure that current through `z5` will be zero.</span>
 
 <span class="sd">    .. math:: z1 \cdot z3 = z2 \cdot z4</span>
 <span class="sd">    </span>
@@ -2779,7 +2732,10 @@
     <span class="n">NN</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">//</span> <span class="p">(</span><span class="n">dt</span> <span class="o">*</span> <span class="n">minfreq</span><span class="p">)</span>
     <span class="c1"># Test for Invalid System</span>
     <span class="k">if</span> <span class="n">FR</span> <span class="o">&gt;</span> <span class="n">minfreq</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Too few data samples to evaluate FFT at specified minimum frequency."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"Too few data samples to evaluate FFT at specified minimum "</span>
+            <span class="s2">"frequency."</span>
+        <span class="p">)</span>
     <span class="k">elif</span> <span class="n">FR</span> <span class="o">==</span> <span class="n">minfreq</span><span class="p">:</span>
         <span class="c1"># Evaluate FFT</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -2802,8 +2758,8 @@
     <span class="sd">"""</span>
 <span class="sd">    FFT System Plotter.</span>
 
-<span class="sd">    Plotting function for FFT (harmonic) values,</span>
-<span class="sd">    plots the DC, Real, and Imaginary components.</span>
+<span class="sd">    Plotting function for FFT (harmonic) values, plots the DC, Real, and</span>
+<span class="sd">    Imaginary components.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -2816,6 +2772,11 @@
 <span class="sd">    title:      str, optional</span>
 <span class="sd">                String appended to plot title,</span>
 <span class="sd">                default="Fourier Coefficients"</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    matplotlib.pyplot:  Plotting object to be used for additional configuration</span>
+<span class="sd">                        or plotting.</span>
 <span class="sd">    """</span>
     <span class="c1"># Define Range values for plots</span>
     <span class="n">rng</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">real</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -2826,18 +2787,30 @@
     <span class="c1"># Plot</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a0x</span><span class="p">,</span> <span class="n">a0y</span><span class="p">,</span> <span class="s1">'g'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"DC-Term"</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="n">real</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">,</span> <span class="s1">'ro'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Real-Terms"</span><span class="p">,</span> <span class="n">use_line_collection</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">imag</span> <span class="o">!=</span> <span class="kc">None</span>
-    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">rng</span><span class="p">,</span> <span class="n">imag</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'bo'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Imaginary-Terms"</span><span class="p">,</span> <span class="n">use_line_collection</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">_plt</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span>
+        <span class="n">rng</span><span class="p">,</span>
+        <span class="n">real</span><span class="p">,</span>
+        <span class="n">linefmt</span><span class="o">=</span><span class="s1">'r'</span><span class="p">,</span>
+        <span class="n">markerfmt</span><span class="o">=</span><span class="s1">'ro'</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">"Real-Terms"</span><span class="p">,</span>
+        <span class="n">use_line_collection</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">imag</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span>
+            <span class="n">rng</span><span class="p">,</span>
+            <span class="n">imag</span><span class="p">,</span>
+            <span class="n">linefmt</span><span class="o">=</span><span class="s1">'b'</span><span class="p">,</span>
+            <span class="n">markerfmt</span><span class="o">=</span><span class="s1">'bo'</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">"Imaginary-Terms"</span><span class="p">,</span>
+            <span class="n">use_line_collection</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Harmonics (Multiple of Fundamental)"</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Harmonic Magnitude"</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'k'</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xtic</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">):</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">xtic</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+    <span class="k">return</span> <span class="n">_plt</span></div>
 
 
 <span class="c1"># Define FFT Composition Plotting Function</span>
@@ -2867,6 +2840,11 @@
 <span class="sd">    title:      str, optional</span>
 <span class="sd">                String appended to plot title,</span>
 <span class="sd">                default="Fourier Series Summation"</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    matplotlib.pyplot:  Plotting object to be used for additional configuration</span>
+<span class="sd">                        or plotting.</span>
 <span class="sd">    """</span>
     <span class="c1"># Determine the number (N) of terms</span>
     <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">real</span><span class="p">)</span>
@@ -2890,7 +2868,7 @@
     <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Time (seconds)"</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Magnitude"</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+    <span class="k">return</span> <span class="n">_plt</span></div>
 
 
 <span class="c1"># Define harmonic system generation function</span>
@@ -2953,10 +2931,9 @@
         <span class="k">return</span> <span class="p">(</span><span class="n">out</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">domain</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">system</span> <span class="o">=</span> <span class="n">_harmonic_</span>
+        <span class="k">return</span> <span class="n">_harmonic_</span> <span class="c1"># Return as callable for external use</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">system</span> <span class="o">=</span> <span class="n">_harmonic_</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">system</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">_harmonic_</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span></div>
 
 
 <span class="c1"># Define Single Phase Motor Startup Capacitor Formula</span>
@@ -2986,8 +2963,7 @@
     <span class="n">I</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
     <span class="n">V</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
     <span class="c1"># Calculate Capacitance</span>
-    <span class="n">C</span> <span class="o">=</span> <span class="n">I</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span> <span class="o">*</span> <span class="n">V</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">I</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span> <span class="o">*</span> <span class="n">V</span><span class="p">)</span></div>
 
 
 <span class="c1"># Define Power Factor Correction Function</span>
@@ -3204,8 +3180,9 @@
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Calculate Turn Ratio of Load Tap Changing Transformer.</span>
 
-<span class="sd">    The purpose of a tap changer is to regulate the output voltage of a transformer.</span>
-<span class="sd">    It does this by altering the number of turns in one winding and thereby changing the turns ratio of the transformer</span>
+<span class="sd">    The purpose of a tap changer is to regulate the output voltage of a</span>
+<span class="sd">    transformer. It does this by altering the number of turns in one winding and</span>
+<span class="sd">    thereby changing the turns ratio of the transformer</span>
 <span class="sd">    </span>
 <span class="sd">    .. math:: \sqrt{\frac{Vgen^2}{Vgen \cdot Vdis - R \cdot P - X \cdot Q}}</span>
 
@@ -3298,9 +3275,9 @@
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Natural Frequency Evaluator.</span>
 
-<span class="sd">    Evaluates the natural frequency (resonant frequency)</span>
-<span class="sd">    of a circuit given the circuit's C and L values. Defaults</span>
-<span class="sd">    to returning values in Hz, but may also return in rad/sec.</span>
+<span class="sd">    Evaluates the natural frequency (resonant frequency) of a circuit given the</span>
+<span class="sd">    circuit's C and L values. Defaults to returning values in Hz, but may also</span>
+<span class="sd">    return in rad/sec.</span>
 
 <span class="sd">    .. math:: freq=\frac{1}{\sqrt{L*C}*(2*\pi)}</span>
 
@@ -5352,13 +5329,19 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">assert</span> <span class="n">C</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">T</span><span class="o">!=</span><span class="kc">None</span>
         <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"To find Resitance, Capacitance and delay time should be provided"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"To find Resitance, Capacitance and delay time should be "</span>
+                <span class="s2">"provided"</span>
+            <span class="p">)</span>
         <span class="k">return</span> <span class="n">T</span><span class="o">/</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">C</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">C</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">assert</span> <span class="n">R</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">T</span><span class="o">!=</span><span class="kc">None</span>
         <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"To find Capacitance , Resistance and delay time should be provided"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"To find Capacitance , Resistance and delay time should be "</span>
+                <span class="s2">"provided"</span>
+            <span class="p">)</span>
         <span class="k">return</span> <span class="n">T</span><span class="o">/</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">R</span><span class="p">)</span>
 
     <span class="k">elif</span> <span class="n">T</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -5366,7 +5349,10 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">assert</span> <span class="n">R</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">T</span><span class="o">!=</span><span class="kc">None</span>
         <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"To find Time delay , Resistance and Capacitance should be provided"</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">"To find Time delay , Resistance and Capacitance should be "</span>
+                <span class="s2">"provided"</span>
+            <span class="p">)</span>
         <span class="k">return</span> <span class="n">R</span><span class="o">*</span><span class="n">C</span><span class="o">*</span><span class="n">_np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span></div>
 
 
@@ -5376,11 +5362,12 @@
 
 <span class="sd">    The T attenuator is a type of attenuator that looks like the letter T. </span>
 <span class="sd">    The T attenuator consists of three resistors. Two of these are connected in </span>
-<span class="sd">    series and the other one is connected from between the two other resistors to ground. </span>
-<span class="sd">    The resistors in series often have the same resistance.</span>
+<span class="sd">    series and the other one is connected from between the two other resistors</span>
+<span class="sd">    to ground. The resistors in series often have the same resistance.</span>
 
 <span class="sd">    .. math:: R1 = Z0*(\frac{10^{\frac{A_{db}}{20}}-1}{10^{\frac{A_{db}}{20}}+1});</span>
 <span class="sd">    .. math:: R2 = Z0*(\frac{10^{\frac{A_{db}}{20}}}{10^{\frac{A_{db}}{10}}-1})</span>
+
 <span class="sd">    .. image:: /static/t-attenuator-circuit.png</span>
 
 <span class="sd">    Parameters</span>

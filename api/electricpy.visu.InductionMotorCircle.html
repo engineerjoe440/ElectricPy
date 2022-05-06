@@ -213,27 +213,6 @@
     <li class="md-nav__item">
     
     
-      <a href="../additionalresources.html" class="md-nav__link">Additional Resources</a>
-      <ul class="md-nav__list"> 
-    <li class="md-nav__item">
-    
-    
-      <a href="../additionalresources.html#generic-and-data-science" class="md-nav__link">Generic and Data Science</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="../additionalresources.html#electrical-engineering-focus" class="md-nav__link">Electrical Engineering Focus</a>
-      
-    
-    </li></ul>
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
       <a href="../electricpyapi.html" class="md-nav__link">ElectricPy API</a>
       <ul class="md-nav__list"> 
     <li class="md-nav__item">
@@ -318,6 +297,27 @@
     <li class="md-nav__item">
     
     
+      <a href="../additionalresources.html" class="md-nav__link">Additional Resources</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../additionalresources.html#generic-and-data-science" class="md-nav__link">Generic and Data Science</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../additionalresources.html#electrical-engineering-focus" class="md-nav__link">Electrical Engineering Focus</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
       <a href="../changes.html" class="md-nav__link">Recent Changes</a>
       
     
@@ -370,7 +370,24 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">electricpy.visu.</span></span><span class="sig-name descname"><span class="pre">InductionMotorCircle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">no_load_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blocked_rotor_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_power</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">torque_ration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/visu.html#InductionMotorCircle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.visu.InductionMotorCircle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plot Induction Motor Circle Diagram.</p>
 <p>This class is designed to plot induction motor circle diagram
-and plot circle diagram to obtain various parameters of induction motor</p>
+and plot circle diagram to obtain various parameters of induction motor.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy.visu</span> <span class="kn">import</span> <span class="n">InductionMotorCircle</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">open_circuit_test_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'V0'</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span> <span class="s1">'I0'</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s1">'W0'</span><span class="p">:</span> <span class="mi">1310</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blocked_rotor_test_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Vsc'</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="s1">'Isc'</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s1">'Wsc'</span><span class="p">:</span> <span class="mi">7100</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ratio</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># stator copper loss/ rotor copper loss</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output_power</span> <span class="o">=</span> <span class="mi">15000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">InductionMotorCircle</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">no_load_data</span><span class="o">=</span><span class="n">open_circuit_test_data</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">blocked_rotor_data</span><span class="o">=</span><span class="n">blocked_rotor_test_data</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">output_power</span><span class="o">=</span><span class="n">output_power</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">torque_ration</span><span class="o">=</span><span class="n">ratio</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">frequency</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">poles</span><span class="o">=</span><span class="mi">4</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/InductionMotorCircleExample.png" src="../_images/InductionMotorCircleExample.png"/>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">

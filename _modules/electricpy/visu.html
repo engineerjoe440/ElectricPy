@@ -210,27 +210,6 @@
     <li class="md-nav__item">
     
     
-      <a href="../../additionalresources.html" class="md-nav__link">Additional Resources</a>
-      <ul class="md-nav__list"> 
-    <li class="md-nav__item">
-    
-    
-      <a href="../../additionalresources.html#generic-and-data-science" class="md-nav__link">Generic and Data Science</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="../../additionalresources.html#electrical-engineering-focus" class="md-nav__link">Electrical Engineering Focus</a>
-      
-    
-    </li></ul>
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
       <a href="../../electricpyapi.html" class="md-nav__link">ElectricPy API</a>
       <ul class="md-nav__list"> 
     <li class="md-nav__item">
@@ -315,6 +294,27 @@
     <li class="md-nav__item">
     
     
+      <a href="../../additionalresources.html" class="md-nav__link">Additional Resources</a>
+      <ul class="md-nav__list"> 
+    <li class="md-nav__item">
+    
+    
+      <a href="../../additionalresources.html#generic-and-data-science" class="md-nav__link">Generic and Data Science</a>
+      
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
+      <a href="../../additionalresources.html#electrical-engineering-focus" class="md-nav__link">Electrical Engineering Focus</a>
+      
+    
+    </li></ul>
+    
+    </li>
+    <li class="md-nav__item">
+    
+    
       <a href="../../changes.html" class="md-nav__link">Recent Changes</a>
       
     
@@ -381,7 +381,25 @@
 <span class="sd">    Plot Induction Motor Circle Diagram.</span>
 
 <span class="sd">    This class is designed to plot induction motor circle diagram</span>
-<span class="sd">    and plot circle diagram to obtain various parameters of induction motor</span>
+<span class="sd">    and plot circle diagram to obtain various parameters of induction motor.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy.visu import InductionMotorCircle</span>
+<span class="sd">    &gt;&gt;&gt; open_circuit_test_data = {'V0': 400, 'I0': 9, 'W0': 1310}</span>
+<span class="sd">    &gt;&gt;&gt; blocked_rotor_test_data = {'Vsc': 200, 'Isc': 50, 'Wsc': 7100}</span>
+<span class="sd">    &gt;&gt;&gt; ratio = 1  # stator copper loss/ rotor copper loss</span>
+<span class="sd">    &gt;&gt;&gt; output_power = 15000</span>
+<span class="sd">    &gt;&gt;&gt; InductionMotorCircle(</span>
+<span class="sd">    ...     no_load_data=open_circuit_test_data,</span>
+<span class="sd">    ...     blocked_rotor_data=blocked_rotor_test_data,</span>
+<span class="sd">    ...     output_power=output_power,</span>
+<span class="sd">    ...     torque_ration=ratio,</span>
+<span class="sd">    ...     frequency=50, </span>
+<span class="sd">    ...     poles=4</span>
+<span class="sd">    ... )</span>
+
+<span class="sd">    .. image:: /static/InductionMotorCircleExample.png</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -539,7 +557,7 @@
             <span class="s1">'Maximum Output Power'</span><span class="p">,</span>
             <span class="sa">f</span><span class="s1">'Operating Power </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">operating_power</span><span class="si">}</span><span class="s1">'</span>
         <span class="p">])</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">_plt</span>
 
     <span class="k">def</span> <span class="nf">compute_efficiency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">"""Compute the output efficiency of induction motor."""</span>
@@ -698,41 +716,44 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    power_circle_type: str ["sending", "receiving"] </span>
-<span class="sd">        Type of power circle diagram to plot. </span>
-<span class="sd">    Vr: complex </span>
-<span class="sd">        Transmission Line Receiving End Voltage (phasor complex value)</span>
-<span class="sd">    Vs: complex</span>
-<span class="sd">        Transmission Line Sending End Voltage (phasor complex value)</span>
-<span class="sd">    power_factor: float</span>
-<span class="sd">        Power Factor of the transmission system, default = None </span>
-<span class="sd">    Pr: float</span>
-<span class="sd">        Receiving End Real Power, default = None</span>
-<span class="sd">    Qr: float</span>
-<span class="sd">        Receiving End Reactive Power, default = None</span>
-<span class="sd">    Sr: complex</span>
-<span class="sd">        Receiving End Total Complex Power, default = None</span>
-<span class="sd">    Ps: float</span>
-<span class="sd">        Sending End Real Power, default = None</span>
-<span class="sd">    Qs: float</span>
-<span class="sd">        Sending End Reactive Power, default = None</span>
-<span class="sd">    Ss: complex</span>
-<span class="sd">        Sending End Total Complex Power, default = None</span>
-<span class="sd">    A: float </span>
-<span class="sd">        Transmission System ABCD Parameters, A, default = None     </span>
-<span class="sd">    B: float </span>
-<span class="sd">        Transmission System ABCD Parameters, B, default = None         </span>
-<span class="sd">    C: float </span>
-<span class="sd">        Transmission System ABCD Parameters, C, default = None     </span>
-<span class="sd">    D: float </span>
-<span class="sd">        Transmission System ABCD Parameters, D, default = None </span>
+<span class="sd">    power_circle_type:  ["sending", "receiving"] </span>
+<span class="sd">                        Type of power circle diagram to plot. </span>
+<span class="sd">    Vr:                 complex </span>
+<span class="sd">                        Transmission Line Receiving End Voltage (phasor complex</span>
+<span class="sd">                        value)</span>
+<span class="sd">    Vs:                 complex</span>
+<span class="sd">                        Transmission Line Sending End Voltage (phasor complex</span>
+<span class="sd">                        value)</span>
+<span class="sd">    power_factor:       float</span>
+<span class="sd">                        Power Factor of the transmission system, default = None </span>
+<span class="sd">    Pr:                 float</span>
+<span class="sd">                        Receiving End Real Power, default = None</span>
+<span class="sd">    Qr:                 float</span>
+<span class="sd">                        Receiving End Reactive Power, default = None</span>
+<span class="sd">    Sr:                 complex</span>
+<span class="sd">                        Receiving End Total Complex Power, default = None</span>
+<span class="sd">    Ps:                 float</span>
+<span class="sd">                        Sending End Real Power, default = None</span>
+<span class="sd">    Qs:                 float</span>
+<span class="sd">                        Sending End Reactive Power, default = None</span>
+<span class="sd">    Ss:                 complex</span>
+<span class="sd">                        Sending End Total Complex Power, default = None</span>
+<span class="sd">    A:                  float </span>
+<span class="sd">                        Transmission System ABCD Parameters, A, default = None     </span>
+<span class="sd">    B:                  float </span>
+<span class="sd">                        Transmission System ABCD Parameters, B, default = None         </span>
+<span class="sd">    C:                  float </span>
+<span class="sd">                        Transmission System ABCD Parameters, C, default = None     </span>
+<span class="sd">    D:                  float </span>
+<span class="sd">                        Transmission System ABCD Parameters, D, default = None </span>
 <span class="sd">    """</span>
 
-<div class="viewcode-block" id="PowerCircle.__init__"><a class="viewcode-back" href="../../api/electricpy.visu.PowerCircle.html#electricpy.visu.PowerCircle.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">power_circle_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">Pr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Qr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Sr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">Ps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Qs</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Ss</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">A</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">C</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                <span class="n">D</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="PowerCircle.__init__"><a class="viewcode-back" href="../../api/electricpy.visu.PowerCircle.html#electricpy.visu.PowerCircle.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">power_circle_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">Pr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Qr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Sr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">Ps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Qs</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Ss</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">A</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">C</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">D</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">"""Initialize the class."""</span>
         <span class="k">if</span> <span class="n">C</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">D</span> <span class="o">-</span> <span class="n">B</span><span class="o">*</span><span class="n">C</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="s2">"ABCD Matrix is not a valid ABCD Matrix"</span>
@@ -885,36 +906,54 @@
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">c_x</span><span class="p">,</span> <span class="n">op_x</span><span class="p">],</span> <span class="p">[</span><span class="n">c_y</span><span class="p">,</span> <span class="n">op_y</span><span class="p">],</span> <span class="s1">'y*-.'</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">op_x</span><span class="p">,</span> <span class="n">op_x</span><span class="p">],</span> <span class="p">[</span><span class="n">op_y</span><span class="p">,</span> <span class="n">c_y</span><span class="p">],</span> <span class="s1">'b*-.'</span><span class="p">)</span> 
         <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">op_x</span><span class="p">,</span> <span class="n">op_y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'*'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'r'</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'power_circle_type'</span><span class="p">]</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2"> Power Circle"</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'power_circle_type'</span><span class="p">]</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2"> Power Circle"</span>
+        <span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Active Power"</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Reactive Power"</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+        <span class="k">return</span> <span class="n">_plt</span></div>
 
-<div class="viewcode-block" id="receiving_end_power_circle"><a class="viewcode-back" href="../../api/electricpy.visu.receiving_end_power_circle.html#electricpy.visu.receiving_end_power_circle">[docs]</a><span class="k">def</span> <span class="nf">receiving_end_power_circle</span><span class="p">(</span><span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">A</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Pr</span><span class="p">:</span><span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                            <span class="n">Qr</span><span class="p">:</span><span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Sr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                            <span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PowerCircle</span> <span class="p">:</span>
+<div class="viewcode-block" id="receiving_end_power_circle"><a class="viewcode-back" href="../../api/electricpy.visu.receiving_end_power_circle.html#electricpy.visu.receiving_end_power_circle">[docs]</a><span class="k">def</span> <span class="nf">receiving_end_power_circle</span><span class="p">(</span><span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">A</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                               <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Pr</span><span class="p">:</span><span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                               <span class="n">Qr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Sr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                               <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span>
+                            <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PowerCircle</span> <span class="p">:</span>
     <span class="sd">"""</span>
 <span class="sd">    Construct Receiving End Power Circle.</span>
 
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import math, cmath</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy import visu</span>
+<span class="sd">    &gt;&gt;&gt; visu.receiving_end_power_circle(</span>
+<span class="sd">    ...     A=cmath.rect(0.895, math.radians(1.4)),</span>
+<span class="sd">    ...     B=cmath.rect(182.5, math.radians(78.6)),</span>
+<span class="sd">    ...     Vr=cmath.rect(215, 0),</span>
+<span class="sd">    ...     Pr=50,</span>
+<span class="sd">    ...     power_factor=-0.9</span>
+<span class="sd">    ... )</span>
+
+<span class="sd">    .. image:: /static/ReceivingEndPowerCircleExample.png</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    Vr: complex    </span>
-<span class="sd">        Receiving End Voltage, default = None.</span>
-<span class="sd">    A: complex     </span>
-<span class="sd">        Transmission System ABCD Parameters, A, default = None.</span>
-<span class="sd">    B: complex,     </span>
-<span class="sd">        Transmission System ABCD Parameters, B, default = None.</span>
-<span class="sd">    Pr: float, optional</span>
-<span class="sd">        Receiving End Real Power, default = None</span>
-<span class="sd">    Qr: float, optional</span>
-<span class="sd">        Receiving End Reactive Power, default = None</span>
-<span class="sd">    Sr: complex, optional</span>
-<span class="sd">        Receiving End Apparent Power, default = None</span>
-<span class="sd">    power_factor: float, optional</span>
-<span class="sd">        System End Power Factor, default = None</span>
-<span class="sd">    Vs: complex, optional</span>
-<span class="sd">        Sending End Voltage, default = None</span>
+<span class="sd">    Vr:             complex    </span>
+<span class="sd">                    Receiving End Voltage, default = None.</span>
+<span class="sd">    A:              complex     </span>
+<span class="sd">                    Transmission System ABCD Parameters, A, default = None.</span>
+<span class="sd">    B:              complex,     </span>
+<span class="sd">                    Transmission System ABCD Parameters, B, default = None.</span>
+<span class="sd">    Pr:             float, optional</span>
+<span class="sd">                    Receiving End Real Power, default = None</span>
+<span class="sd">    Qr:             float, optional</span>
+<span class="sd">                    Receiving End Reactive Power, default = None</span>
+<span class="sd">    Sr:             complex, optional</span>
+<span class="sd">                    Receiving End Apparent Power, default = None</span>
+<span class="sd">    power_factor:   float, optional</span>
+<span class="sd">                    System End Power Factor, default = None</span>
+<span class="sd">    Vs:             complex, optional</span>
+<span class="sd">                    Sending End Voltage, default = None</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -923,85 +962,101 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="k">assert</span> <span class="n">Vr</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">A</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">B</span> <span class="o">!=</span> <span class="kc">None</span>
     <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Not enough attributes to build Receiving end power circle </span><span class="se">\</span>
-<span class="s2">        at least provide `Vr`, `A`, `B`"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"Not enough attributes to build Receiving end power circle at least"</span>
+            <span class="s2">" provide `Vr`, `A`, `B`"</span>
+        <span class="p">)</span>
 
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">flag_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">Pr</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Qr</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">Sr</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="n">flag_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">Pr</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">Qr</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="n">flag_1</span> <span class="ow">or</span> <span class="n">flag_2</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Not enough attributes for marking an operating point on </span><span class="se">\</span>
-<span class="s2">        Receiving End Power Circle"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span>
+        <span class="p">((</span><span class="n">Pr</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Qr</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">Sr</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="ow">or</span>
+        <span class="p">(</span>
+            <span class="p">(</span><span class="n">Pr</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span>
+            <span class="p">(</span><span class="n">Qr</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"Not enough attributes for marking an operating point on Receiving "</span>
+            <span class="s2">"End Power Circle"</span>
+        <span class="p">)</span>
 
-    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">'Vr'</span><span class="p">:</span> <span class="n">Vr</span><span class="p">,</span>
-        <span class="s1">'A'</span><span class="p">:</span> <span class="n">A</span><span class="p">,</span>
-        <span class="s1">'B'</span><span class="p">:</span> <span class="n">B</span><span class="p">,</span>
-        <span class="s1">'Pr'</span><span class="p">:</span> <span class="n">Pr</span><span class="p">,</span>
-        <span class="s1">'Qr'</span><span class="p">:</span> <span class="n">Qr</span><span class="p">,</span>
-        <span class="s1">'Sr'</span><span class="p">:</span> <span class="n">Sr</span><span class="p">,</span>
-        <span class="s1">'Vs'</span><span class="p">:</span> <span class="n">Vs</span><span class="p">,</span>
-        <span class="s1">'power_factor'</span><span class="p">:</span> <span class="n">power_factor</span>
-    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">PowerCircle</span><span class="p">(</span>
+        <span class="s2">"receiving"</span><span class="p">,</span>
+        <span class="o">**</span><span class="p">{</span>
+            <span class="s1">'Vr'</span><span class="p">:</span> <span class="n">Vr</span><span class="p">,</span>
+            <span class="s1">'A'</span><span class="p">:</span> <span class="n">A</span><span class="p">,</span>
+            <span class="s1">'B'</span><span class="p">:</span> <span class="n">B</span><span class="p">,</span>
+            <span class="s1">'Pr'</span><span class="p">:</span> <span class="n">Pr</span><span class="p">,</span>
+            <span class="s1">'Qr'</span><span class="p">:</span> <span class="n">Qr</span><span class="p">,</span>
+            <span class="s1">'Sr'</span><span class="p">:</span> <span class="n">Sr</span><span class="p">,</span>
+            <span class="s1">'Vs'</span><span class="p">:</span> <span class="n">Vs</span><span class="p">,</span>
+            <span class="s1">'power_factor'</span><span class="p">:</span> <span class="n">power_factor</span>
+        <span class="p">}</span>
+    <span class="p">)</span></div>
 
-    <span class="k">return</span> <span class="n">PowerCircle</span><span class="p">(</span><span class="s2">"receiving"</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="sending_end_power_circle"><a class="viewcode-back" href="../../api/electricpy.visu.sending_end_power_circle.html#electricpy.visu.sending_end_power_circle">[docs]</a><span class="k">def</span> <span class="nf">sending_end_power_circle</span><span class="p">(</span><span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">D</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Ps</span><span class="p">:</span><span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                            <span class="n">Qs</span><span class="p">:</span><span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Ss</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                            <span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PowerCircle</span><span class="p">:</span>
+<div class="viewcode-block" id="sending_end_power_circle"><a class="viewcode-back" href="../../api/electricpy.visu.sending_end_power_circle.html#electricpy.visu.sending_end_power_circle">[docs]</a><span class="k">def</span> <span class="nf">sending_end_power_circle</span><span class="p">(</span><span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                             <span class="n">D</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Ps</span><span class="p">:</span><span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                             <span class="n">Qs</span><span class="p">:</span><span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Ss</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                             <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span>
+                            <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PowerCircle</span><span class="p">:</span>
     <span class="sd">"""</span>
 <span class="sd">    Construct Receiving End Power Circle.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    Vs: complex </span>
-<span class="sd">        Sending End Voltage</span>
-<span class="sd">    B: complex</span>
-<span class="sd">        Transmission System ABCD Parameters, A</span>
-<span class="sd">    D: complex</span>
-<span class="sd">        Transmission System ABCD Parameters, B</span>
-<span class="sd">    Ps: float, optional</span>
-<span class="sd">        Sending End Real Power, default = None</span>
-<span class="sd">    Qs: float, optional</span>
-<span class="sd">        Sending End Reactive Power, default = None</span>
-<span class="sd">    Ss: complex, optional</span>
-<span class="sd">        Sending End Apparent Power, default = None</span>
-<span class="sd">    power_factor: float, optional</span>
-<span class="sd">        System Power Factor, default = None</span>
-<span class="sd">    Vr: complex, optional</span>
-<span class="sd">        Receiving End Voltage, default = None</span>
+<span class="sd">    Vs:             complex </span>
+<span class="sd">                    Sending End Voltage</span>
+<span class="sd">    B:              complex</span>
+<span class="sd">                    Transmission System ABCD Parameters, A</span>
+<span class="sd">    D:              complex</span>
+<span class="sd">                    Transmission System ABCD Parameters, B</span>
+<span class="sd">    Ps:             float, optional</span>
+<span class="sd">                    Sending End Real Power, default = None</span>
+<span class="sd">    Qs:             float, optional</span>
+<span class="sd">                    Sending End Reactive Power, default = None</span>
+<span class="sd">    Ss:             complex, optional</span>
+<span class="sd">                    Sending End Apparent Power, default = None</span>
+<span class="sd">    power_factor:   float, optional</span>
+<span class="sd">                    System Power Factor, default = None</span>
+<span class="sd">    Vr:             complex, optional</span>
+<span class="sd">                    Receiving End Voltage, default = None</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Sending End Power Circle: PowerCircle</span>
 <span class="sd">    """</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">assert</span> <span class="n">Vs</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">B</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">D</span> <span class="o">!=</span> <span class="kc">None</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Not enough attributes to build Sending end power circle </span><span class="se">\</span>
-<span class="s2">        at least provide `Vs`, `B`, `D`"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">Vs</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">B</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">D</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"Not enough attributes to build Sending end power circle at least "</span>
+            <span class="s2">"provide `Vs`, `B`, `D`"</span>
+        <span class="p">)</span>
 
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">flag_1</span> <span class="o">=</span> <span class="p">(</span><span class="n">Ps</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Qs</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">Ss</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="n">flag_2</span> <span class="o">=</span> <span class="p">(</span><span class="n">Ps</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">Qs</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="n">flag_1</span> <span class="ow">or</span> <span class="n">flag_2</span>
-    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Not enough attributes for marking an operating point on </span><span class="se">\</span>
-<span class="s2">        Sending End Power Circle"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span>
+        <span class="p">((</span><span class="n">Ps</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Qs</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">Ss</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="ow">or</span>
+        <span class="p">(</span>
+            <span class="p">(</span><span class="n">Ps</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span>
+            <span class="p">(</span><span class="n">Qs</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"Not enough attributes for marking an operating point on Sending "</span>
+            <span class="s2">"End Power Circle"</span>
+        <span class="p">)</span>
 
-    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">'Vr'</span><span class="p">:</span> <span class="n">Vr</span><span class="p">,</span>
-        <span class="s1">'B'</span><span class="p">:</span> <span class="n">B</span><span class="p">,</span>
-        <span class="s1">'D'</span><span class="p">:</span> <span class="n">D</span><span class="p">,</span>
-        <span class="s1">'Ps'</span><span class="p">:</span> <span class="n">Ps</span><span class="p">,</span>
-        <span class="s1">'Qs'</span><span class="p">:</span> <span class="n">Qs</span><span class="p">,</span>
-        <span class="s1">'Ss'</span><span class="p">:</span> <span class="n">Ss</span><span class="p">,</span>
-        <span class="s1">'Vs'</span><span class="p">:</span> <span class="n">Vs</span><span class="p">,</span>
-        <span class="s1">'power_factor'</span><span class="p">:</span> <span class="n">power_factor</span>
-    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">PowerCircle</span><span class="p">(</span>
+        <span class="s2">"sending"</span><span class="p">,</span>
+        <span class="o">**</span><span class="p">{</span>
+            <span class="s1">'Vr'</span><span class="p">:</span> <span class="n">Vr</span><span class="p">,</span>
+            <span class="s1">'B'</span><span class="p">:</span> <span class="n">B</span><span class="p">,</span>
+            <span class="s1">'D'</span><span class="p">:</span> <span class="n">D</span><span class="p">,</span>
+            <span class="s1">'Ps'</span><span class="p">:</span> <span class="n">Ps</span><span class="p">,</span>
+            <span class="s1">'Qs'</span><span class="p">:</span> <span class="n">Qs</span><span class="p">,</span>
+            <span class="s1">'Ss'</span><span class="p">:</span> <span class="n">Ss</span><span class="p">,</span>
+            <span class="s1">'Vs'</span><span class="p">:</span> <span class="n">Vs</span><span class="p">,</span>
+            <span class="s1">'power_factor'</span><span class="p">:</span> <span class="n">power_factor</span>
+        <span class="p">}</span>
+    <span class="p">)</span></div>
 
-    <span class="k">return</span> <span class="n">PowerCircle</span><span class="p">(</span><span class="s2">"sending"</span><span class="p">,</span> <span class="o">**</span><span class="n">data</span><span class="p">)</span></div>
+<span class="c1"># END</span>
 </pre></div>
 
           </article>
