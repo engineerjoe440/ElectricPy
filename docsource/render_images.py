@@ -9,7 +9,7 @@ import electricpy as ep
 def render_power_triangle():
     """Render the Power Triangle Function."""
     plt = ep.powertriangle(400, 200)
-    plt.savefig("./static/PowerTriangle.png")
+    plt.savefig("docsource/static/PowerTriangle.png")
 
 
 
