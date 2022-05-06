@@ -388,7 +388,6 @@
 
 <span class="c1"># Import Supporting Modules</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">_np</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">_matplotlib</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">_plt</span>
 <span class="kn">import</span> <span class="nn">cmath</span> <span class="k">as</span> <span class="nn">_c</span>
 <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">fsolve</span> <span class="k">as</span> <span class="n">_fsolve</span>
@@ -396,7 +395,6 @@
 <span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">getframeinfo</span> <span class="k">as</span> <span class="n">_getframeinfo</span>
 <span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">stack</span> <span class="k">as</span> <span class="n">_stack</span>
 <span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span> <span class="k">as</span> <span class="n">integrate</span>
-<span class="kn">import</span> <span class="nn">scipy.signal</span> <span class="k">as</span> <span class="nn">sig</span>
 
 
 <span class="c1"># Define Cycle Time Function</span>
@@ -715,7 +713,8 @@
 
 
 <span class="c1"># Define Phase/Line Converter</span>
-<div class="viewcode-block" id="phaseline"><a class="viewcode-back" href="../api/electricpy.phaseline.html#electricpy.phaseline">[docs]</a><span class="k">def</span> <span class="nf">phaseline</span><span class="p">(</span><span class="n">VLL</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">VLN</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Iline</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Iphase</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">realonly</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="phaseline"><a class="viewcode-back" href="../api/electricpy.phaseline.html#electricpy.phaseline">[docs]</a><span class="k">def</span> <span class="nf">phaseline</span><span class="p">(</span><span class="n">VLL</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">VLN</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Iline</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Iphase</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">realonly</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Line-Line to Line-Neutral Converter.</span>
 
@@ -1097,8 +1096,8 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    {unknown}:  This function will return the unknown variable from</span>
-<span class="sd">                the previously described set of variables.</span>
+<span class="sd">    float:  This function will return the unknown variable from the previously</span>
+<span class="sd">            described set of variables.</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">PFtrue</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">PFdist</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">PFdisp</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"ERROR: Too many constraints, no solution."</span><span class="p">)</span>
@@ -2028,6 +2027,16 @@
 <span class="sd">    generates a convolved bar-graph of the two inputs to demonstrate</span>
 <span class="sd">    and illustrate convolution, typically for an educational purpose.</span>
 
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
+<span class="sd">    &gt;&gt;&gt; h = np.array([0, 1, 1, 1, 0])</span>
+<span class="sd">    &gt;&gt;&gt; x = np.array([0, 1, 1, 1, 0])</span>
+<span class="sd">    &gt;&gt;&gt; ep.convbar(h, x)</span>
+<span class="sd">    </span>
+<span class="sd">    .. image:: /static/convbar-example.png</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    h:      numpy.ndarray</span>
@@ -2069,31 +2078,45 @@
     <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'y'</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Convolved Output'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+    <span class="k">return</span> <span class="n">_plt</span></div>
 
 
 <span class="c1"># Define Peak Calculator</span>
 <div class="viewcode-block" id="peak"><a class="viewcode-back" href="../api/electricpy.peak.html#electricpy.peak">[docs]</a><span class="k">def</span> <span class="nf">peak</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
-    <span class="sd">"""</span>
+    <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Sinusoid RMS to Peak Converter.</span>
 
-<span class="sd">    Provides a readable format to convert an</span>
-<span class="sd">    RMS (Root-Mean-Square) value to its peak</span>
-<span class="sd">    representation. Performs a simple multiplication</span>
-<span class="sd">    with the square-root of two.</span>
+<span class="sd">    Provides a readable format to convert an RMS (Root-Mean-Square) value to its</span>
+<span class="sd">    peak representation. Performs a simple multiplication with the square-root</span>
+<span class="sd">    of two.</span>
+
+<span class="sd">    .. math:: V_{\text{peak}} = \sqrt{2} \cdot V_{\text{RMS}}</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
+<span class="sd">    &gt;&gt;&gt; ep.peak(120)</span>
+<span class="sd">    169.7056274847714</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">val</span><span class="p">)</span></div>
 
 
 <span class="c1"># Define RMS Calculator</span>
 <div class="viewcode-block" id="rms"><a class="viewcode-back" href="../api/electricpy.rms.html#electricpy.rms">[docs]</a><span class="k">def</span> <span class="nf">rms</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
-    <span class="sd">"""</span>
+    <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Sinusoid Peak to RMS Converter.</span>
 
-<span class="sd">    Provides a readable format to convert a peak</span>
-<span class="sd">    value to its RMS (Root-Mean-Square) representation.</span>
-<span class="sd">    Performs a simple division by the square-root of</span>
-<span class="sd">    two.</span>
+<span class="sd">    Provides a readable format to convert a peak value to its RMS</span>
+<span class="sd">    (Root-Mean-Square) representation. Performs a simple division by the</span>
+<span class="sd">    square-root of two.</span>
+
+<span class="sd">    .. math:: V_{\text{RMS}} = \frac{V_{\text{peak}}}{\sqrt{2}}</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
+<span class="sd">    &gt;&gt;&gt; ep.rms(169.7)</span>
+<span class="sd">    119.99602076735711</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">val</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span></div>
 
@@ -2104,8 +2127,8 @@
     <span class="sd">"""</span>
 <span class="sd">    WRMS Function.</span>
 
-<span class="sd">    This function is designed to calculate the RMS</span>
-<span class="sd">    bandwidth (Wrms) using a numerical process.</span>
+<span class="sd">    This function is designed to calculate the RMS bandwidth (Wrms) using a</span>
+<span class="sd">    numerical process.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>

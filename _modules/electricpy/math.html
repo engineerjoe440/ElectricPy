@@ -414,6 +414,19 @@
 <span class="sd">    Simple implimentation of numpy.heaviside function to provide standard</span>
 <span class="sd">    step-function as specified to be zero at :math:`x &lt; 0`, and one at</span>
 <span class="sd">    :math:`x \geq 0`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy.math import step</span>
+<span class="sd">    &gt;&gt;&gt; t = np.array([-10, -8, -5, -3, 0, 1, 2, 5, 7, 15])</span>
+<span class="sd">    &gt;&gt;&gt; x = step(t)</span>
+<span class="sd">    array([0, 0, 0, 0, 1, 1, 1, 1, 1, 1])</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t:  arraylike</span>
+<span class="sd">        Time samples for which the step response should be generated.</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span></div>
 

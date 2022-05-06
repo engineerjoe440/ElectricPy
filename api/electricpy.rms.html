@@ -54,6 +54,7 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -369,10 +370,17 @@
 <dt class="sig sig-object py" id="electricpy.rms">
 <span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">rms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy.html#rms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.rms" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sinusoid Peak to RMS Converter.</p>
-<p>Provides a readable format to convert a peak
-value to its RMS (Root-Mean-Square) representation.
-Performs a simple division by the square-root of
-two.</p>
+<p>Provides a readable format to convert a peak value to its RMS
+(Root-Mean-Square) representation. Performs a simple division by the
+square-root of two.</p>
+<div class="math notranslate nohighlight">
+\[V_{\text{RMS}} = \frac{V_{\text{peak}}}{\sqrt{2}}\]</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">electricpy</span> <span class="k">as</span> <span class="nn">ep</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">rms</span><span class="p">(</span><span class="mf">169.7</span><span class="p">)</span>
+<span class="go">119.99602076735711</span>
+</pre></div>
+</div>
 </dd></dl>
 </section>
 
