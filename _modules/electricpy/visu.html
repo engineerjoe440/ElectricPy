@@ -494,17 +494,17 @@
 
     <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">"""Plot the Induction Motor Circle Diagram."""</span>
-        <span class="p">[</span><span class="n">circle_x</span><span class="p">,</span> <span class="n">circle_y</span><span class="p">]</span> <span class="o">=</span> <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">get_circle</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">circle_x</span><span class="p">,</span> <span class="n">circle_y</span><span class="p">]</span> <span class="o">=</span> <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">__get_circle</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span>
             <span class="n">semi</span><span class="o">=</span><span class="kc">True</span>
         <span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">circle_x</span><span class="p">,</span> <span class="n">circle_y</span><span class="p">)</span>
 
-        <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">plot_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">no_load_line</span><span class="p">)</span>
-        <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">plot_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span><span class="p">)</span>
-        <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">plot_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">full_load_line</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">'-.'</span><span class="p">)</span>
-        <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">plot_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">torque_line</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">'-.'</span><span class="p">)</span>
+        <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">__plot_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">no_load_line</span><span class="p">)</span>
+        <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">__plot_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span><span class="p">)</span>
+        <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">__plot_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">full_load_line</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">'-.'</span><span class="p">)</span>
+        <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">__plot_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">torque_line</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">'-.'</span><span class="p">)</span>
 
         <span class="c1"># Full load output</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
@@ -597,7 +597,7 @@
         <span class="k">return</span> <span class="n">data</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_circle</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">semi</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__get_circle</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">semi</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">"""</span>
 <span class="sd">        Determine parametric equation of circle.</span>
 
@@ -624,7 +624,7 @@
         <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">plot_line</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">mark_start</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mark_end</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">'-'</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__plot_line</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">mark_start</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mark_end</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">'-'</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">"""Supporting function to plot a line."""</span>
         <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span>
         <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
@@ -713,6 +713,21 @@
 
 <span class="sd">    This class is designed to plot the power circle diagram of a transmission</span>
 <span class="sd">    system both sending and reciving ends.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import math, cmath</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy import visu</span>
+<span class="sd">    &gt;&gt;&gt; visu.PowerCircle(</span>
+<span class="sd">    ...     power_circle_type="receiving",</span>
+<span class="sd">    ...     A=cmath.rect(0.895, math.radians(1.4)),</span>
+<span class="sd">    ...     B=cmath.rect(182.5, math.radians(78.6)),</span>
+<span class="sd">    ...     Vr=cmath.rect(215, 0),</span>
+<span class="sd">    ...     Pr=50,</span>
+<span class="sd">    ...     power_factor=-0.9</span>
+<span class="sd">    ... )</span>
+
+<span class="sd">    .. image:: /static/ReceivingPowerCircleExample.png</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>

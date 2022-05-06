@@ -371,6 +371,20 @@
 <dd><p>Plot Power Circle Diagram of Transmission System.</p>
 <p>This class is designed to plot the power circle diagram of a transmission
 system both sending and reciving ends.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">math</span><span class="o">,</span> <span class="nn">cmath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">visu</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">visu</span><span class="o">.</span><span class="n">PowerCircle</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">power_circle_type</span><span class="o">=</span><span class="s2">"receiving"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">A</span><span class="o">=</span><span class="n">cmath</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="mf">0.895</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mf">1.4</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="n">B</span><span class="o">=</span><span class="n">cmath</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="mf">182.5</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mf">78.6</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="n">Vr</span><span class="o">=</span><span class="n">cmath</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="mi">215</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">Pr</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">power_factor</span><span class="o">=-</span><span class="mf">0.9</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/ReceivingPowerCircleExample.png" src="../_images/ReceivingPowerCircleExample.png"/>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
