@@ -158,10 +158,7 @@ def test_voltdiv():
     assert_almost_equal(Vout, Vout_actual)
 
 def test_suspension_insulators():
-    """
-        Electric Power Systems by C.L Wadhwa Overhead Line Insulator example
-    """
-
+    """Electric Power Systems by C.L Wadhwa Overhead Line Insulator example."""
     from electricpy import suspension_insulators
 
     number_capacitors = 5
@@ -428,8 +425,8 @@ def test_vectarray():
         B_test = [[np.abs(x), 90] for x in A]
         np.testing.assert_array_almost_equal(B, B_test)
 
-    for i in range(2):
-        exec('test_{}()'.format(i))
+    test_0()
+    test_1()
 
 def test_parallel_plate_capacitance():
     from electricpy import parallel_plate_capacitance

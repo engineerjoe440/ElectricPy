@@ -33,6 +33,8 @@
     
     phasorplot
     
+    phasorz
+    
     phs
     
     vectarray
