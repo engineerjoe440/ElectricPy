@@ -38,10 +38,10 @@ def phs(ang):
 
     See Also
     --------
-    phasorlist: Phasor Generator for List or Array
-    cprint:     Complex Variable Printing Function
-    phasorz:    Impedance Phasor Generator
-    phasor:     Phasor Generating Function
+    cprint:                        Complex Variable Printing Function
+    electricpy.phasor.phasorlist:  Phasor Generator for List or Array
+    electricpy.phasor.phasorz:     Impedance Phasor Generator
+    electricpy.phasor.phasor:      Phasor Generating Function
     """
     # Return the Complex Angle Modulator
     return (_np.exp(1j * _np.radians(ang)))
@@ -80,8 +80,8 @@ def phasor(mag, ang=0):
 
     See Also
     --------
+    cprint:                         Complex Variable Printing Function
     electricpy.phasor.phasorlist:   Phasor Generator for List or Array
-    electricpy.phasor.cprint:       Complex Variable Printing Function
     electricpy.phasor.phasorz:      Impedance Phasor Generator
     electricpy.phasor.phs:          Complex Phase Angle Generator
     """
@@ -90,6 +90,57 @@ def phasor(mag, ang=0):
         ang = mag[1]
         mag = mag[0]
     return (_c.rect(mag, _np.radians(ang)))
+
+
+# Define Impedance Conversion function
+def phasorz(C=None, L=None, freq=60, complex=True):
+    r"""
+    Phasor Impedance Generator.
+
+    This function's purpose is to generate the phasor-based
+    impedance of the specified input given as either the
+    capacitance (in Farads) or the inductance (in Henreys).
+    The function will return the phasor value (in Ohms).
+
+    .. math:: Z = \frac{-j}{\omega*C}
+
+    .. math:: Z = j*\omega*L
+
+    where:
+
+    .. math:: \omega = 2*\pi*freq
+
+    Parameters
+    ----------
+    C:          float, optional
+                The capacitance value (specified in Farads),
+                default=None
+    L:          float, optional
+                The inductance value (specified in Henreys),
+                default=None
+    freq:       float, optional
+                The system frequency to be calculated upon, default=60
+    complex:    bool, optional
+                Control argument to specify whether the returned
+                value should be returned as a complex value.
+                default=True
+
+    Returns
+    -------
+    Z:      complex
+            The ohmic impedance of either C or L (respectively).
+    """
+    w = 2 * _np.pi * freq
+    # C Given in ohms, return as Z
+    if (C != None):
+        Z = -1 / (w * C)
+    # L Given in ohms, return as Z
+    if (L != None):
+        Z = w * L
+    # If asked for imaginary number
+    if (complex):
+        Z *= 1j
+    return Z
 
 
 # Define Phasor Array Generator
@@ -129,9 +180,9 @@ def phasorlist(arr):
 
     See Also
     --------
+    cprint:                         Complex Variable Printing Function
     electricpy.phasor.phasor:       Phasor Generating Function
     electricpy.phasor.vectarray:    Magnitude/Angle Array Pairing Function
-    electricpy.phasor.cprint:       Complex Variable Printing Function
     electricpy.phasor.phasorz:      Impedance Phasor Generator
     """
     # Use List Comprehension to Process
