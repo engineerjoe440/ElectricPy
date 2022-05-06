@@ -27,6 +27,7 @@ Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/
 
 ### Special thanks to:
 
+- Soham Ratnaparkhi | Student - Vishwakarma Institute of Technology
 - Lakshmikanth Ayyadevara | Student - NIT Warangal (National Institute of Technology Warangal)
 - Stephen Weeks | Student - University of Idaho
 - Jeremy Perhac | Student - University of Idaho
