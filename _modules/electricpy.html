@@ -989,25 +989,26 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    P:          float</span>
-<span class="sd">                Real Power, unitless; default=None</span>
+<span class="sd">                Real Power, unitless, default=None</span>
 <span class="sd">    Q:          float</span>
-<span class="sd">                Reactive Power, unitless; default=None</span>
+<span class="sd">                Reactive Power, unitless, default=None</span>
 <span class="sd">    S:          float</span>
-<span class="sd">                Apparent Power, unitless; default=None</span>
+<span class="sd">                Apparent Power, unitless, default=None</span>
 <span class="sd">    PF:         float</span>
-<span class="sd">                Power Factor, unitless, provided as a</span>
-<span class="sd">                decimal value, lagging is positive,</span>
-<span class="sd">                leading is negative; default=None</span>
+<span class="sd">                Power Factor, unitless, provided as a decimal value, lagging is</span>
+<span class="sd">                positive, leading is negative; default=None</span>
 <span class="sd">    color:      string, optional</span>
-<span class="sd">                The color of the power triangle lines;</span>
-<span class="sd">                default="red"</span>
+<span class="sd">                The color of the power triangle lines, default="red"</span>
 <span class="sd">    text:       string, optional</span>
-<span class="sd">                The title of the power triangle plot,</span>
-<span class="sd">                default="Power Triangle"</span>
+<span class="sd">                The title of the power triangle plot, default="Power Triangle"</span>
 <span class="sd">    printval:   bool, optional</span>
-<span class="sd">                Control argument to allow the numeric</span>
-<span class="sd">                values to be printed on the plot,</span>
-<span class="sd">                default="False"</span>
+<span class="sd">                Control argument to allow the numeric values to be printed on</span>
+<span class="sd">                the plot, default="False"</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    matplotlib.pyplot:  Plotting object to be used for additional configuration</span>
+<span class="sd">                        or plotting.</span>
 <span class="sd">    """</span>
     <span class="c1"># Calculate all values if not all are provided</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">P</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">Q</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">S</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">PF</span> <span class="o">==</span> <span class="kc">None</span><span class="p">):</span>

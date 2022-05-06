@@ -442,10 +442,10 @@
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
-<span class="sd">    phasorlist: Phasor Generator for List or Array</span>
-<span class="sd">    cprint:     Complex Variable Printing Function</span>
-<span class="sd">    phasorz:    Impedance Phasor Generator</span>
-<span class="sd">    phs:        Complex Phase Angle Generator</span>
+<span class="sd">    phasor.phasorlist:  Phasor Generator for List or Array</span>
+<span class="sd">    phasor.cprint:      Complex Variable Printing Function</span>
+<span class="sd">    phasor.phasorz:     Impedance Phasor Generator</span>
+<span class="sd">    phasor.phs:         Complex Phase Angle Generator</span>
 <span class="sd">    """</span>
     <span class="c1"># Test for Tuple/List Arg</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
@@ -480,19 +480,21 @@
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
-<span class="sd">    &gt;&gt;&gt; voltages = np.array([[67,0],</span>
-<span class="sd">                             [67,-120],</span>
-<span class="sd">                             [67,120]])</span>
-<span class="sd">    &gt;&gt;&gt; Vset = ep.phasorlist( voltages )</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy import phasor</span>
+<span class="sd">    &gt;&gt;&gt; voltages = np.array([</span>
+<span class="sd">    ...     [67,0],</span>
+<span class="sd">    ...     [67,-120],</span>
+<span class="sd">    ...     [67,120]</span>
+<span class="sd">    ... ])</span>
+<span class="sd">    &gt;&gt;&gt; Vset = phasor.phasorlist( voltages )</span>
 <span class="sd">    &gt;&gt;&gt; print(Vset)</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
-<span class="sd">    phasor:     Phasor Generating Function</span>
-<span class="sd">    vectarray:  Magnitude/Angle Array Pairing Function</span>
-<span class="sd">    cprint:     Complex Variable Printing Function</span>
-<span class="sd">    phasorz:    Impedance Phasor Generator</span>
+<span class="sd">    phasor.phasor:      Phasor Generating Function</span>
+<span class="sd">    phasor.vectarray:   Magnitude/Angle Array Pairing Function</span>
+<span class="sd">    phasor.cprint:      Complex Variable Printing Function</span>
+<span class="sd">    phasor.phasorz:     Impedance Phasor Generator</span>
 <span class="sd">    """</span>
     <span class="c1"># Use List Comprehension to Process</span>
 
@@ -532,8 +534,8 @@
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
-<span class="sd">    phasor:     Phasor Generating Function</span>
-<span class="sd">    phasorlist: Phasor Generator for List or Array</span>
+<span class="sd">    phasor.phasor:      Phasor Generating Function</span>
+<span class="sd">    phasor.phasorlist:  Phasor Generator for List or Array</span>
 <span class="sd">    """</span>
     <span class="c1"># Iteratively Append Arrays to the Base</span>
 
@@ -720,14 +722,28 @@
 <span class="c1"># Define Phasor Plot Generator</span>
 <div class="viewcode-block" id="phasorplot"><a class="viewcode-back" href="../../api/electricpy.phasor.phasorplot.html#electricpy.phasor.phasorplot">[docs]</a><span class="k">def</span> <span class="nf">phasorplot</span><span class="p">(</span><span class="n">phasor</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Phasor Diagram"</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-            <span class="n">tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+            <span class="n">label</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Phasor Plotting Function.</span>
 
 <span class="sd">    This function is designed to plot a phasor-diagram with angles in degrees</span>
-<span class="sd">    for up to 12 phasor sets. Phasors must be passed as a complex number set,</span>
-<span class="sd">    (e.g. [ m+ja, m+ja, m+ja, ... , m+ja ] ).</span>
+<span class="sd">    for up to 12 phasor sets (more may be used if additional colors are set).</span>
+<span class="sd">    Phasors must be passed as a complex number set, (e.g.</span>
+<span class="sd">    [ m+ja, m+ja, m+ja, ... , m+ja ] ).</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy import phasor</span>
+<span class="sd">    &gt;&gt;&gt; voltages = np.array([</span>
+<span class="sd">    ...     [67,0],</span>
+<span class="sd">    ...     [45,-120],</span>
+<span class="sd">    ...     [52,120]</span>
+<span class="sd">    ... ])</span>
+<span class="sd">    &gt;&gt;&gt; plt = phasor.phasorlist( voltages )</span>
+<span class="sd">    &gt;&gt;&gt; plt.show()</span>
+
+<span class="sd">    .. image:: /static/PhasorPlot.png</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -744,20 +760,22 @@
 <span class="sd">    radius:     float, optional</span>
 <span class="sd">                The diagram radius, unless specified, automatically scales</span>
 <span class="sd">    colors:     list of str, optional</span>
-<span class="sd">                List of hexidecimal color strings denoting the line colors to use.</span>
-<span class="sd">    filename:   string, optional</span>
-<span class="sd">                String of filename, if set, will force function to save image.</span>
-<span class="sd">    plot:       bool, optional</span>
-<span class="sd">                Control argument to disable plotting. default=True</span>
+<span class="sd">                List of hexidecimal color strings denoting the line colors to</span>
+<span class="sd">                use.</span>
 <span class="sd">    size:       float, optional</span>
 <span class="sd">                Control argument for figure size. default=None</span>
 <span class="sd">    linewidth:  float, optional</span>
 <span class="sd">                Control argument to declare the line thickness. default=None</span>
 <span class="sd">    tolerance:  float, optional</span>
 <span class="sd">                Minimum magnitude to plot, anything less than tolerance will be</span>
-<span class="sd">                plotted as a single point at the origin, by default, the tolerance</span>
-<span class="sd">                is scaled to be 1/25-th the maximum radius. To disable the tolerance,</span>
-<span class="sd">                simply provide either False or -1.</span>
+<span class="sd">                plotted as a single point at the origin, by default, the</span>
+<span class="sd">                tolerance is scaled to be 1/25-th the maximum radius. To disable</span>
+<span class="sd">                the tolerance, simply provide either False or -1.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    matplotlib.pyplot:  Plotting object to be used for additional configuration</span>
+<span class="sd">                        or plotting.</span>
 <span class="sd">    """</span>
     <span class="c1"># Load Complex Values if Necessary</span>
     <span class="k">try</span><span class="p">:</span>
@@ -766,8 +784,10 @@
         <span class="n">phasor</span> <span class="o">=</span> <span class="p">[</span><span class="n">phasor</span><span class="p">]</span>
     <span class="c1"># Manage Colors</span>
     <span class="k">if</span> <span class="n">colors</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"#FF0000"</span><span class="p">,</span> <span class="s2">"#800000"</span><span class="p">,</span> <span class="s2">"#FFFF00"</span><span class="p">,</span> <span class="s2">"#808000"</span><span class="p">,</span> <span class="s2">"#00ff00"</span><span class="p">,</span> <span class="s2">"#008000"</span><span class="p">,</span>
-                <span class="s2">"#00ffff"</span><span class="p">,</span> <span class="s2">"#008080"</span><span class="p">,</span> <span class="s2">"#0000ff"</span><span class="p">,</span> <span class="s2">"#000080"</span><span class="p">,</span> <span class="s2">"#ff00ff"</span><span class="p">,</span> <span class="s2">"#800080"</span><span class="p">]</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">"#FF0000"</span><span class="p">,</span> <span class="s2">"#800000"</span><span class="p">,</span> <span class="s2">"#FFFF00"</span><span class="p">,</span> <span class="s2">"#808000"</span><span class="p">,</span> <span class="s2">"#00ff00"</span><span class="p">,</span><span class="s2">"#008000"</span><span class="p">,</span>
+            <span class="s2">"#00ffff"</span><span class="p">,</span> <span class="s2">"#008080"</span><span class="p">,</span> <span class="s2">"#0000ff"</span><span class="p">,</span> <span class="s2">"#000080"</span><span class="p">,</span> <span class="s2">"#ff00ff"</span><span class="p">,</span> <span class="s2">"#800080"</span>
+        <span class="p">]</span>
     <span class="c1"># Scale Radius</span>
     <span class="k">if</span> <span class="n">radius</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">radius</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">phasor</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
@@ -788,7 +808,9 @@
     <span class="n">numphs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">phasor</span><span class="p">)</span>
     <span class="n">numclr</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">numphs</span> <span class="o">&gt;</span> <span class="n">numclr</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"ERROR: Too many phasors provided. Specify more line colors."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"ERROR: Too many phasors provided. Specify more line colors."</span>
+        <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">size</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># Force square figure and square axes</span>
@@ -820,14 +842,8 @@
     <span class="c1"># Set Minimum and Maximum Radius Terms</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_rmax</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_rmin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">filename</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">sub</span> <span class="ow">in</span> <span class="n">filename</span> <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'.png'</span><span class="p">,</span> <span class="s1">'.jpg'</span><span class="p">]):</span>
-            <span class="n">filename</span> <span class="o">+=</span> <span class="s1">'.png'</span>  <span class="c1"># Add File Extension</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+    <span class="k">return</span> <span class="n">_plt</span></div>
+
 <span class="c1"># END</span>
 </pre></div>
 

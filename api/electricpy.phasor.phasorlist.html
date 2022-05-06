@@ -389,24 +389,26 @@ the specified voltage or current.</p>
 </dl>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">electricpy</span> <span class="k">as</span> <span class="nn">ep</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">voltages</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">67</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
-<span class="go">                         [67,-120],</span>
-<span class="go">                         [67,120]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Vset</span> <span class="o">=</span> <span class="n">ep</span><span class="o">.</span><span class="n">phasorlist</span><span class="p">(</span> <span class="n">voltages</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">phasor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">voltages</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">67</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">67</span><span class="p">,</span><span class="o">-</span><span class="mi">120</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">67</span><span class="p">,</span><span class="mi">120</span><span class="p">]</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Vset</span> <span class="o">=</span> <span class="n">phasor</span><span class="o">.</span><span class="n">phasorlist</span><span class="p">(</span> <span class="n">voltages</span> <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Vset</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="electricpy.phasor.phasor.html#electricpy.phasor.phasor" title="electricpy.phasor.phasor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasor</span></code></a></dt><dd><p>Phasor Generating Function</p>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasor.phasor</span></code></dt><dd><p>Phasor Generating Function</p>
 </dd>
-<dt><a class="reference internal" href="electricpy.phasor.vectarray.html#electricpy.phasor.vectarray" title="electricpy.phasor.vectarray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vectarray</span></code></a></dt><dd><p>Magnitude/Angle Array Pairing Function</p>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasor.vectarray</span></code></dt><dd><p>Magnitude/Angle Array Pairing Function</p>
 </dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">cprint</span></code></dt><dd><p>Complex Variable Printing Function</p>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasor.cprint</span></code></dt><dd><p>Complex Variable Printing Function</p>
 </dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasorz</span></code></dt><dd><p>Impedance Phasor Generator</p>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasor.phasorz</span></code></dt><dd><p>Impedance Phasor Generator</p>
 </dd>
 </dl>
 </div>

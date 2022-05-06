@@ -367,11 +367,25 @@
 <h1 id="api-electricpy-phasor-phasorplot--page-root">electricpy.phasor.phasorplot<a class="headerlink" href="#api-electricpy-phasor-phasorplot--page-root" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="electricpy.phasor.phasorplot">
-<span class="sig-prename descclassname"><span class="pre">electricpy.phasor.</span></span><span class="sig-name descname"><span class="pre">phasorplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phasor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Phasor</span> <span class="pre">Diagram'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linewidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/phasor.html#phasorplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.phasor.phasorplot" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">electricpy.phasor.</span></span><span class="sig-name descname"><span class="pre">phasorplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phasor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Phasor</span> <span class="pre">Diagram'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linewidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/phasor.html#phasorplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.phasor.phasorplot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Phasor Plotting Function.</p>
 <p>This function is designed to plot a phasor-diagram with angles in degrees
-for up to 12 phasor sets. Phasors must be passed as a complex number set,
-(e.g. [ m+ja, m+ja, m+ja, … , m+ja ] ).</p>
+for up to 12 phasor sets (more may be used if additional colors are set).
+Phasors must be passed as a complex number set, (e.g.
+[ m+ja, m+ja, m+ja, … , m+ja ] ).</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">phasor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">voltages</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">67</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">45</span><span class="p">,</span><span class="o">-</span><span class="mi">120</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="mi">52</span><span class="p">,</span><span class="mi">120</span><span class="p">]</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span> <span class="o">=</span> <span class="n">phasor</span><span class="o">.</span><span class="n">phasorlist</span><span class="p">(</span> <span class="n">voltages</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/PhasorPlot.png" src="../_images/PhasorPlot.png"/>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -382,16 +396,21 @@ as an array or list of strings. <cite>label</cite> and <cite>labels</cite> are m
 arguments and will perform similar operation, default=False</p></li>
 <li><p><strong>bg</strong> (<em>string</em><em>, </em><em>optional</em>) – Background-Color control, default=”#d5de9c”</p></li>
 <li><p><strong>radius</strong> (<em>float</em><em>, </em><em>optional</em>) – The diagram radius, unless specified, automatically scales</p></li>
-<li><p><strong>colors</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of hexidecimal color strings denoting the line colors to use.</p></li>
-<li><p><strong>filename</strong> (<em>string</em><em>, </em><em>optional</em>) – String of filename, if set, will force function to save image.</p></li>
-<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to disable plotting. default=True</p></li>
+<li><p><strong>colors</strong> (<em>list of str</em><em>, </em><em>optional</em>) – List of hexidecimal color strings denoting the line colors to
+use.</p></li>
 <li><p><strong>size</strong> (<em>float</em><em>, </em><em>optional</em>) – Control argument for figure size. default=None</p></li>
 <li><p><strong>linewidth</strong> (<em>float</em><em>, </em><em>optional</em>) – Control argument to declare the line thickness. default=None</p></li>
 <li><p><strong>tolerance</strong> (<em>float</em><em>, </em><em>optional</em>) – Minimum magnitude to plot, anything less than tolerance will be
-plotted as a single point at the origin, by default, the tolerance
-is scaled to be 1/25-th the maximum radius. To disable the tolerance,
-simply provide either False or -1.</p></li>
+plotted as a single point at the origin, by default, the
+tolerance is scaled to be 1/25-th the maximum radius. To disable
+the tolerance, simply provide either False or -1.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>matplotlib.pyplot</strong> – or plotting.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Plotting object to be used for additional configuration</p>
 </dd>
 </dl>
 </dd></dl>
