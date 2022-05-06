@@ -27,7 +27,6 @@ from .phasor import phasorz as impedance
 
 # Import Supporting Modules
 import numpy as _np
-import matplotlib as _matplotlib
 import matplotlib.pyplot as _plt
 import cmath as _c
 from scipy.optimize import fsolve as _fsolve
@@ -35,7 +34,6 @@ from warnings import showwarning as _showwarning
 from inspect import getframeinfo as _getframeinfo
 from inspect import stack as _stack
 from scipy.integrate import quad as integrate
-import scipy.signal as sig
 
 
 # Define Cycle Time Function
@@ -354,7 +352,8 @@ def cprint(val, unit=None, label=None, title=None,
 
 
 # Define Phase/Line Converter
-def phaseline(VLL=None, VLN=None, Iline=None, Iphase=None, realonly=None, **kwargs):
+def phaseline(VLL=None, VLN=None, Iline=None, Iphase=None, realonly=None,
+              **kwargs):
     r"""
     Line-Line to Line-Neutral Converter.
 
@@ -736,8 +735,8 @@ def nlinpf(PFtrue=False, PFdist=False, PFdisp=False):
 
     Returns
     -------
-    {unknown}:  This function will return the unknown variable from
-                the previously described set of variables.
+    float:  This function will return the unknown variable from the previously
+            described set of variables.
     """
     if (PFtrue != None and PFdist != None and PFdisp != None):
         raise ValueError("ERROR: Too many constraints, no solution.")
@@ -1667,6 +1666,16 @@ def convbar(h, x, outline=True):
     generates a convolved bar-graph of the two inputs to demonstrate
     and illustrate convolution, typically for an educational purpose.
 
+    Examples
+    --------
+    >>> import numpy as np
+    >>> import electricpy as ep
+    >>> h = np.array([0, 1, 1, 1, 0])
+    >>> x = np.array([0, 1, 1, 1, 0])
+    >>> ep.convbar(h, x)
+    
+    .. image:: /static/convbar-example.png
+
     Parameters
     ----------
     h:      numpy.ndarray
@@ -1708,31 +1717,45 @@ def convbar(h, x, outline=True):
     _plt.ylabel('y')
     _plt.grid()
     _plt.title('Convolved Output')
-    _plt.show()
+    return _plt
 
 
 # Define Peak Calculator
 def peak(val):
-    """
+    r"""
     Sinusoid RMS to Peak Converter.
 
-    Provides a readable format to convert an
-    RMS (Root-Mean-Square) value to its peak
-    representation. Performs a simple multiplication
-    with the square-root of two.
+    Provides a readable format to convert an RMS (Root-Mean-Square) value to its
+    peak representation. Performs a simple multiplication with the square-root
+    of two.
+
+    .. math:: V_{\text{peak}} = \sqrt{2} \cdot V_{\text{RMS}}
+
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> ep.peak(120)
+    169.7056274847714
     """
     return (_np.sqrt(2) * val)
 
 
 # Define RMS Calculator
 def rms(val):
-    """
+    r"""
     Sinusoid Peak to RMS Converter.
 
-    Provides a readable format to convert a peak
-    value to its RMS (Root-Mean-Square) representation.
-    Performs a simple division by the square-root of
-    two.
+    Provides a readable format to convert a peak value to its RMS
+    (Root-Mean-Square) representation. Performs a simple division by the
+    square-root of two.
+
+    .. math:: V_{\text{RMS}} = \frac{V_{\text{peak}}}{\sqrt{2}}
+
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> ep.rms(169.7)
+    119.99602076735711
     """
     return (val * _np.sqrt(0.5))
 
@@ -1743,8 +1766,8 @@ def wrms(func, dw=0.1, NN=100, quad=False, plot=True,
     """
     WRMS Function.
 
-    This function is designed to calculate the RMS
-    bandwidth (Wrms) using a numerical process.
+    This function is designed to calculate the RMS bandwidth (Wrms) using a
+    numerical process.
 
     Parameters
     ----------
