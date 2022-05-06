@@ -27,8 +27,6 @@ Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/
 
 ### Special thanks to:
 
-- Soham Ratnaparkhi | Student - Vishwakarma Institute of Technology
-- Lakshmikanth Ayyadevara | Student - NIT Warangal (National Institute of Technology Warangal)
 - Stephen Weeks | Student - University of Idaho
 - Jeremy Perhac | Student - University of Idaho
 - Daniel Allen | Student - Universtiy of Idaho
@@ -38,6 +36,12 @@ Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/
 - StackOverflow user gg349
 - Shaurya Uppal | Online Code Contributor
 - Paul Ortman | Power Quality Engineer - Idaho Power | Instructor - University of Idaho
+
+  and
+
+  <a href="https://github.com/engineerjoe440/electricpy/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=engineerjoe440/electricpy" />
+  </a>
 
 
 ### Dependencies:
