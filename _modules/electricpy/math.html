@@ -408,12 +408,12 @@
 
 <span class="c1"># Define Step function</span>
 <div class="viewcode-block" id="step"><a class="viewcode-back" href="../../api/electricpy.math.step.html#electricpy.math.step">[docs]</a><span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-    <span class="sd">"""</span>
+    <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Step Function [ u(t) ].</span>
 
-<span class="sd">    Simple implimentation of numpy.heaviside function</span>
-<span class="sd">    to provide standard step-function as specified to</span>
-<span class="sd">    be zero at x&lt;0, and one at x&gt;=0.</span>
+<span class="sd">    Simple implimentation of numpy.heaviside function to provide standard</span>
+<span class="sd">    step-function as specified to be zero at :math:`x &lt; 0`, and one at</span>
+<span class="sd">    :math:`x \geq 0`.</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span></div>
 
@@ -436,7 +436,6 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    RMS:    The RMS value of the function (f) over the interval ( 0, T )</span>
-
 <span class="sd">    """</span>
     <span class="n">fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
     <span class="n">integral</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
