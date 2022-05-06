@@ -623,6 +623,8 @@ def powertriangle(P=None, Q=None, S=None, PF=None, color="red",
     This function is designed to draw a power triangle given
     values for the complex power system.
 
+    .. image:: /static/PowerTriangle.png
+
     Parameters
     ----------
     P:          float
@@ -692,7 +694,7 @@ def powertriangle(P=None, Q=None, S=None, PF=None, color="red",
     # Print all values if asked to
     if printval:
         _plt.text(x / 20, y * 4 / 5, text, color=color)
-    _plt.show()
+    return _plt
 
 
 # Define Transformer Short-Circuit/Open-Circuit Function
