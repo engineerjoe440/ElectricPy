@@ -1,7 +1,5 @@
 ################################################################################
-"""
-Render images as needed using the various ElectricPy functions for docs.
-"""
+"""Render images as needed using the various ElectricPy functions for docs."""
 ################################################################################
 
 import electricpy as ep
@@ -18,7 +16,7 @@ def render_phasor_plot():
         [45,-120],
         [52,120]
     ])
-    plt = ep.phasor.phasorplot(phasor=phasors)
+    plt = ep.phasor.phasorplot(phasor=phasors, colors=["red", "green", "blue"])
     plt.savefig("docsource/static/PhasorPlot.png")
 
 
