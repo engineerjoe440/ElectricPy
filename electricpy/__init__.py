@@ -628,25 +628,26 @@ def powertriangle(P=None, Q=None, S=None, PF=None, color="red",
     Parameters
     ----------
     P:          float
-                Real Power, unitless; default=None
+                Real Power, unitless, default=None
     Q:          float
-                Reactive Power, unitless; default=None
+                Reactive Power, unitless, default=None
     S:          float
-                Apparent Power, unitless; default=None
+                Apparent Power, unitless, default=None
     PF:         float
-                Power Factor, unitless, provided as a
-                decimal value, lagging is positive,
-                leading is negative; default=None
+                Power Factor, unitless, provided as a decimal value, lagging is
+                positive, leading is negative; default=None
     color:      string, optional
-                The color of the power triangle lines;
-                default="red"
+                The color of the power triangle lines, default="red"
     text:       string, optional
-                The title of the power triangle plot,
-                default="Power Triangle"
+                The title of the power triangle plot, default="Power Triangle"
     printval:   bool, optional
-                Control argument to allow the numeric
-                values to be printed on the plot,
-                default="False"
+                Control argument to allow the numeric values to be printed on
+                the plot, default="False"
+    
+    Returns
+    -------
+    matplotlib.pyplot:  Plotting object to be used for additional configuration
+                        or plotting.
     """
     # Calculate all values if not all are provided
     if (P == None or Q == None or S == None or PF == None):

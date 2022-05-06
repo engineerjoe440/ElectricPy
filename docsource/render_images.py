@@ -11,6 +11,16 @@ def render_power_triangle():
     plt = ep.powertriangle(400, 200)
     plt.savefig("docsource/static/PowerTriangle.png")
 
+def render_phasor_plot():
+    """Render the Phasor Plot Function."""
+    phasors = ep.phasor.phasorlist([
+        [67,0],
+        [45,-120],
+        [52,120]
+    ])
+    plt = ep.phasor.phasorplot(phasor=phasors)
+    plt.savefig("docsource/static/PhasorPlot.png")
+
 
 
 # Entrypoint
