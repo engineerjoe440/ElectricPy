@@ -23,7 +23,7 @@ __version__ = _version_  # Alias Version for User Ease
 # Import Submodules
 from .constants import *
 from .phasor import compose, parallelz
-from .phasor import phaosrz as impedance
+from .phasor import phasorz as impedance
 
 # Import Supporting Modules
 import numpy as _np
