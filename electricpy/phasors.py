@@ -22,8 +22,7 @@ def phs(ang):
     """
     Complex Phase Angle Generator.
 
-    Generate a complex value given the phase angle
-    for the complex value.
+    Generate a complex value given the phase angle for the complex value.
 
     Same as `phase`.
 
