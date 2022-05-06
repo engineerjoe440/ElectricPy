@@ -27,4 +27,6 @@ def render_phasor_plot():
 if __name__ == '__main__':
     # Add function calls here as new rendering functions are added
     render_power_triangle()
+    render_phasor_plot()
 
+# END
