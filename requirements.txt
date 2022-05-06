@@ -1,5 +1,5 @@
-numpy
+NumPy
 matplotlib
-scipy
-sympy
+SciPy
+SymPy
 numdifftools
