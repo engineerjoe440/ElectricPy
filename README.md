@@ -41,10 +41,10 @@ Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/
 
 ### Dependencies:
 
-- [numpy](https://numpy.org/)
+- [NumPy](https://numpy.org/)
 - [matplotlib](https://matplotlib.org/)
-- [scipy](https://scipy.org/)
-- [sympy](https://www.sympy.org/en/index.html)
+- [SciPy](https://scipy.org/)
+- [SymPy](https://www.sympy.org/en/index.html)
 - [numdifftools](https://numdifftools.readthedocs.io/en/latest/)
 
 
