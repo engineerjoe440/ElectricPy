@@ -38,10 +38,10 @@ def phs(ang):
 
     See Also
     --------
-    cprint:                        Complex Variable Printing Function
-    electricpy.phasor.phasorlist:  Phasor Generator for List or Array
-    electricpy.phasor.phasorz:     Impedance Phasor Generator
-    electricpy.phasor.phasor:      Phasor Generating Function
+    electricpy.cprint:              Complex Variable Printing Function
+    electricpy.phasor.phasorlist:   Phasor Generator for List or Array
+    electricpy.phasor.phasorz:      Impedance Phasor Generator
+    electricpy.phasor.phasor:       Phasor Generating Function
     """
     # Return the Complex Angle Modulator
     return (_np.exp(1j * _np.radians(ang)))
@@ -80,7 +80,7 @@ def phasor(mag, ang=0):
 
     See Also
     --------
-    cprint:                         Complex Variable Printing Function
+    electricpy.cprint:              Complex Variable Printing Function
     electricpy.phasor.phasorlist:   Phasor Generator for List or Array
     electricpy.phasor.phasorz:      Impedance Phasor Generator
     electricpy.phasor.phs:          Complex Phase Angle Generator
@@ -180,7 +180,7 @@ def phasorlist(arr):
 
     See Also
     --------
-    cprint:                         Complex Variable Printing Function
+    electricpy.cprint:              Complex Variable Printing Function
     electricpy.phasor.phasor:       Phasor Generating Function
     electricpy.phasor.vectarray:    Magnitude/Angle Array Pairing Function
     electricpy.phasor.phasorz:      Impedance Phasor Generator

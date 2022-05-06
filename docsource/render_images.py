@@ -48,6 +48,19 @@ def render_receiving_end_power_circle():
     ).plot()
     plt.savefig("docsource/static/ReceivingEndPowerCircleExample.png")
 
+def render_receiving_power_circle():
+    """Render the Receiving End Power Circle Plot."""
+    import math, cmath
+    plt = visu.PowerCircle(
+        power_circle_type="receiving",
+        A=cmath.rect(0.895, math.radians(1.4)),
+        B=cmath.rect(182.5, math.radians(78.6)),
+        Vr=cmath.rect(215, 0),
+        Pr=50,
+        power_factor=-0.9
+    ).plot()
+    plt.savefig("docsource/static/ReceivingPowerCircleExample.png")
+
 
 # Entrypoint
 if __name__ == '__main__':
@@ -55,5 +68,8 @@ if __name__ == '__main__':
     render_power_triangle()
     render_phasor_plot()
     render_motor_circle()
+    render_receiving_end_power_circle()
+    render_receiving_power_circle()
+
 
 # END
