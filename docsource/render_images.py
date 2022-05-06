@@ -77,6 +77,7 @@ if __name__ == '__main__':
     render_motor_circle()
     render_receiving_end_power_circle()
     render_receiving_power_circle()
+    render_convbar_example()
 
 
 # END
