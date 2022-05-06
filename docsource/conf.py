@@ -87,7 +87,7 @@ html_extra_path = ['extra']
 html_logo="static/ElectricpyLogo.svg"
 html_favicon="static/ElectricpyLogo.svg"
 html_sidebars = {
-    "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
+    "**": ["logo-text.html", "globaltoc.html", "searchbox.html"]
 }
 
 # github_repo = "electricpy"

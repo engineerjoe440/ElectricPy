@@ -132,17 +132,17 @@ class InductionMotorCircle:
 
     def plot(self):
         """Plot the Induction Motor Circle Diagram."""
-        [circle_x, circle_y] = InductionMotorCircle.get_circle(
+        [circle_x, circle_y] = InductionMotorCircle.__get_circle(
             self.center,
             self.radius,
             semi=True
         )
         _plt.plot(circle_x, circle_y)
 
-        InductionMotorCircle.plot_line(self.no_load_line)
-        InductionMotorCircle.plot_line(self.secondary_current_line)
-        InductionMotorCircle.plot_line(self.full_load_line, ls='-.')
-        InductionMotorCircle.plot_line(self.torque_line, ls='-.')
+        InductionMotorCircle.__plot_line(self.no_load_line)
+        InductionMotorCircle.__plot_line(self.secondary_current_line)
+        InductionMotorCircle.__plot_line(self.full_load_line, ls='-.')
+        InductionMotorCircle.__plot_line(self.torque_line, ls='-.')
 
         # Full load output
         _plt.plot(
@@ -235,7 +235,7 @@ class InductionMotorCircle:
         return data
 
     @staticmethod
-    def get_circle(center, radius, semi=False):
+    def __get_circle(center, radius, semi=False):
         """
         Determine parametric equation of circle.
 
@@ -262,7 +262,7 @@ class InductionMotorCircle:
         return x, y
 
     @staticmethod
-    def plot_line(line, mark_start=True, mark_end=True, ls='-', marker=None):
+    def __plot_line(line, mark_start=True, mark_end=True, ls='-', marker=None):
         """Supporting function to plot a line."""
         [x, y] = line
         [x1, x2] = x
@@ -351,6 +351,21 @@ class PowerCircle:
 
     This class is designed to plot the power circle diagram of a transmission
     system both sending and reciving ends.
+
+    Examples
+    --------
+    >>> import math, cmath
+    >>> from electricpy import visu
+    >>> visu.PowerCircle(
+    ...     power_circle_type="receiving",
+    ...     A=cmath.rect(0.895, math.radians(1.4)),
+    ...     B=cmath.rect(182.5, math.radians(78.6)),
+    ...     Vr=cmath.rect(215, 0),
+    ...     Pr=50,
+    ...     power_factor=-0.9
+    ... )
+
+    .. image:: /static/ReceivingPowerCircleExample.png
 
     Parameters
     ----------
