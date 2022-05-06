@@ -46,12 +46,25 @@ def convolve(tuple):
 
 # Define Step function
 def step(t):
-    """
+    r"""
     Step Function [ u(t) ].
 
-    Simple implimentation of numpy.heaviside function
-    to provide standard step-function as specified to
-    be zero at x<0, and one at x>=0.
+    Simple implimentation of numpy.heaviside function to provide standard
+    step-function as specified to be zero at :math:`x < 0`, and one at
+    :math:`x \geq 0`.
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> from electricpy.math import step
+    >>> t = np.array([-10, -8, -5, -3, 0, 1, 2, 5, 7, 15])
+    >>> x = step(t)
+    array([0, 0, 0, 0, 1, 1, 1, 1, 1, 1])
+
+    Parameters
+    ----------
+    t:  arraylike
+        Time samples for which the step response should be generated.
     """
     return (_np.heaviside(t, 1))
 
@@ -74,7 +87,6 @@ def funcrms(func, T):
     Returns
     -------
     RMS:    The RMS value of the function (f) over the interval ( 0, T )
-
     """
     fn = lambda x: func(x) ** 2
     integral, _ = integrate(fn, 0, T)

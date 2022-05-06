@@ -38,10 +38,10 @@ def phs(ang):
 
     See Also
     --------
-    phasorlist: Phasor Generator for List or Array
-    cprint:     Complex Variable Printing Function
-    phasorz:    Impedance Phasor Generator
-    phasor:     Phasor Generating Function
+    electricpy.cprint:              Complex Variable Printing Function
+    electricpy.phasor.phasorlist:   Phasor Generator for List or Array
+    electricpy.phasor.phasorz:      Impedance Phasor Generator
+    electricpy.phasor.phasor:       Phasor Generating Function
     """
     # Return the Complex Angle Modulator
     return (_np.exp(1j * _np.radians(ang)))
@@ -80,16 +80,67 @@ def phasor(mag, ang=0):
 
     See Also
     --------
-    phasorlist: Phasor Generator for List or Array
-    cprint:     Complex Variable Printing Function
-    phasorz:    Impedance Phasor Generator
-    phs:        Complex Phase Angle Generator
+    electricpy.cprint:              Complex Variable Printing Function
+    electricpy.phasor.phasorlist:   Phasor Generator for List or Array
+    electricpy.phasor.phasorz:      Impedance Phasor Generator
+    electricpy.phasor.phs:          Complex Phase Angle Generator
     """
     # Test for Tuple/List Arg
     if isinstance(mag, (tuple, list, _np.ndarray)):
         ang = mag[1]
         mag = mag[0]
     return (_c.rect(mag, _np.radians(ang)))
+
+
+# Define Impedance Conversion function
+def phasorz(C=None, L=None, freq=60, complex=True):
+    r"""
+    Phasor Impedance Generator.
+
+    This function's purpose is to generate the phasor-based
+    impedance of the specified input given as either the
+    capacitance (in Farads) or the inductance (in Henreys).
+    The function will return the phasor value (in Ohms).
+
+    .. math:: Z = \frac{-j}{\omega*C}
+
+    .. math:: Z = j*\omega*L
+
+    where:
+
+    .. math:: \omega = 2*\pi*freq
+
+    Parameters
+    ----------
+    C:          float, optional
+                The capacitance value (specified in Farads),
+                default=None
+    L:          float, optional
+                The inductance value (specified in Henreys),
+                default=None
+    freq:       float, optional
+                The system frequency to be calculated upon, default=60
+    complex:    bool, optional
+                Control argument to specify whether the returned
+                value should be returned as a complex value.
+                default=True
+
+    Returns
+    -------
+    Z:      complex
+            The ohmic impedance of either C or L (respectively).
+    """
+    w = 2 * _np.pi * freq
+    # C Given in ohms, return as Z
+    if (C != None):
+        Z = -1 / (w * C)
+    # L Given in ohms, return as Z
+    if (L != None):
+        Z = w * L
+    # If asked for imaginary number
+    if (complex):
+        Z *= 1j
+    return Z
 
 
 # Define Phasor Array Generator
@@ -118,19 +169,21 @@ def phasorlist(arr):
     Examples
     --------
     >>> import numpy as np
-    >>> import electricpy as ep
-    >>> voltages = np.array([[67,0],
-                             [67,-120],
-                             [67,120]])
-    >>> Vset = ep.phasorlist( voltages )
+    >>> from electricpy import phasor
+    >>> voltages = np.array([
+    ...     [67,0],
+    ...     [67,-120],
+    ...     [67,120]
+    ... ])
+    >>> Vset = phasor.phasorlist( voltages )
     >>> print(Vset)
 
     See Also
     --------
-    phasor:     Phasor Generating Function
-    vectarray:  Magnitude/Angle Array Pairing Function
-    cprint:     Complex Variable Printing Function
-    phasorz:    Impedance Phasor Generator
+    electricpy.cprint:              Complex Variable Printing Function
+    electricpy.phasor.phasor:       Phasor Generating Function
+    electricpy.phasor.vectarray:    Magnitude/Angle Array Pairing Function
+    electricpy.phasor.phasorz:      Impedance Phasor Generator
     """
     # Use List Comprehension to Process
 
@@ -170,8 +223,8 @@ def vectarray(arr, degrees=True, flatarray=False):
 
     See Also
     --------
-    phasor:     Phasor Generating Function
-    phasorlist: Phasor Generator for List or Array
+    electricpy.phasor.phasor:       Phasor Generating Function
+    electricpy.phasor.phasorlist:   Phasor Generator for List or Array
     """
     # Iteratively Append Arrays to the Base
 
@@ -358,14 +411,28 @@ def parallelz(*args):
 # Define Phasor Plot Generator
 def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
             colors=None, radius=None, linewidth=None, size=None,
-            filename=None, plot=True, label=False, labels=False,
-            tolerance=None):
+            label=False, labels=False, tolerance=None):
     """
     Phasor Plotting Function.
 
     This function is designed to plot a phasor-diagram with angles in degrees
-    for up to 12 phasor sets. Phasors must be passed as a complex number set,
-    (e.g. [ m+ja, m+ja, m+ja, ... , m+ja ] ).
+    for up to 12 phasor sets (more may be used if additional colors are set).
+    Phasors must be passed as a complex number set, (e.g.
+    [ m+ja, m+ja, m+ja, ... , m+ja ] ).
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> from electricpy import phasor
+    >>> voltages = np.array([
+    ...     [67,0],
+    ...     [45,-120],
+    ...     [52,120]
+    ... ])
+    >>> plt = phasor.phasorlist( voltages, colors=["red", "green", "blue"] )
+    >>> plt.show()
+
+    .. image:: /static/PhasorPlot.png
 
     Parameters
     ----------
@@ -382,20 +449,22 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     radius:     float, optional
                 The diagram radius, unless specified, automatically scales
     colors:     list of str, optional
-                List of hexidecimal color strings denoting the line colors to use.
-    filename:   string, optional
-                String of filename, if set, will force function to save image.
-    plot:       bool, optional
-                Control argument to disable plotting. default=True
+                List of hexidecimal color strings denoting the line colors to
+                use.
     size:       float, optional
                 Control argument for figure size. default=None
     linewidth:  float, optional
                 Control argument to declare the line thickness. default=None
     tolerance:  float, optional
                 Minimum magnitude to plot, anything less than tolerance will be
-                plotted as a single point at the origin, by default, the tolerance
-                is scaled to be 1/25-th the maximum radius. To disable the tolerance,
-                simply provide either False or -1.
+                plotted as a single point at the origin, by default, the
+                tolerance is scaled to be 1/25-th the maximum radius. To disable
+                the tolerance, simply provide either False or -1.
+    
+    Returns
+    -------
+    matplotlib.pyplot:  Plotting object to be used for additional configuration
+                        or plotting.
     """
     # Load Complex Values if Necessary
     try:
@@ -404,8 +473,10 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
         phasor = [phasor]
     # Manage Colors
     if colors == None:
-        colors = ["#FF0000", "#800000", "#FFFF00", "#808000", "#00ff00", "#008000",
-                "#00ffff", "#008080", "#0000ff", "#000080", "#ff00ff", "#800080"]
+        colors = [
+            "#FF0000", "#800000", "#FFFF00", "#808000", "#00ff00","#008000",
+            "#00ffff", "#008080", "#0000ff", "#000080", "#ff00ff", "#800080"
+        ]
     # Scale Radius
     if radius == None:
         radius = _np.abs(phasor).max()
@@ -426,7 +497,9 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     numphs = len(phasor)
     numclr = len(colors)
     if numphs > numclr:
-        raise ValueError("ERROR: Too many phasors provided. Specify more line colors.")
+        raise ValueError(
+            "ERROR: Too many phasors provided. Specify more line colors."
+        )
 
     if size == None:
         # Force square figure and square axes
@@ -458,12 +531,6 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     # Set Minimum and Maximum Radius Terms
     ax.set_rmax(radius)
     ax.set_rmin(0)
-    if filename != None:
-        if not any(sub in filename for sub in ['.png', '.jpg']):
-            filename += '.png'  # Add File Extension
-        _plt.savefig(filename)
-    if plot:
-        _plt.show()
-    else:
-        _plt.close()
+    return _plt
+
 # END

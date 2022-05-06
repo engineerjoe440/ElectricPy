@@ -1,7 +1,7 @@
 ElectricPy API
 ================================================================================
 
-.. _electricpy.py:
+.. _electricpyapi.py:
 
 Python functions and constants related to electrical engineering.
 
@@ -30,7 +30,6 @@ to aid in scientific calculations.
 
    electricpy
    electricpy.bode
-   electricpy.constants
    electricpy.conversions
    electricpy.fault
    electricpy.latex

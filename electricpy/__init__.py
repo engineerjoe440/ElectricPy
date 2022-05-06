@@ -23,10 +23,10 @@ __version__ = _version_  # Alias Version for User Ease
 # Import Submodules
 from .constants import *
 from .phasor import compose, parallelz
+from .phasor import phasorz as impedance
 
 # Import Supporting Modules
 import numpy as _np
-import matplotlib as _matplotlib
 import matplotlib.pyplot as _plt
 import cmath as _c
 from scipy.optimize import fsolve as _fsolve
@@ -34,7 +34,6 @@ from warnings import showwarning as _showwarning
 from inspect import getframeinfo as _getframeinfo
 from inspect import stack as _stack
 from scipy.integrate import quad as integrate
-import scipy.signal as sig
 
 
 # Define Cycle Time Function
@@ -213,9 +212,9 @@ def cprint(val, unit=None, label=None, title=None,
 
     See Also
     --------
-    phasor:     Phasor Generating Function
-    phasorlist: Phasor Generating Function for Lists or Arrays
-    phasorz:    Impedance Phasor Generator
+    electricpy.phasor.phasor:       Phasor Generating Function
+    electricpy.phasor.phasorlist:   Phasor Generating Function for Lists/Arrays
+    electricpy.phasor.phasorz:      Impedance Phasor Generator
     """
     # Use depricated `round`
     if round != 3:
@@ -352,59 +351,9 @@ def cprint(val, unit=None, label=None, title=None,
         raise ValueError("Invalid Input Type")
 
 
-# Define Impedance Conversion function
-def phasorz(C=None, L=None, freq=60, complex=True):
-    r"""
-    Phasor Impedance Generator.
-
-    This function's purpose is to generate the phasor-based
-    impedance of the specified input given as either the
-    capacitance (in Farads) or the inductance (in Henreys).
-    The function will return the phasor value (in Ohms).
-
-    .. math:: Z = \frac{-j}{\omega*C}
-
-    .. math:: Z = j*\omega*L
-
-    where:
-
-    .. math:: \omega = 2*\pi*freq
-
-    Parameters
-    ----------
-    C:          float, optional
-                The capacitance value (specified in Farads),
-                default=None
-    L:          float, optional
-                The inductance value (specified in Henreys),
-                default=None
-    freq:       float, optional
-                The system frequency to be calculated upon, default=60
-    complex:    bool, optional
-                Control argument to specify whether the returned
-                value should be returned as a complex value.
-                default=True
-
-    Returns
-    -------
-    Z:      complex
-            The ohmic impedance of either C or L (respectively).
-    """
-    w = 2 * _np.pi * freq
-    # C Given in ohms, return as Z
-    if (C != None):
-        Z = -1 / (w * C)
-    # L Given in ohms, return as Z
-    if (L != None):
-        Z = w * L
-    # If asked for imaginary number
-    if (complex):
-        Z *= 1j
-    return (Z)
-
-
 # Define Phase/Line Converter
-def phaseline(VLL=None, VLN=None, Iline=None, Iphase=None, realonly=None, **kwargs):
+def phaseline(VLL=None, VLN=None, Iline=None, Iphase=None, realonly=None,
+              **kwargs):
     r"""
     Line-Line to Line-Neutral Converter.
 
@@ -623,28 +572,31 @@ def powertriangle(P=None, Q=None, S=None, PF=None, color="red",
     This function is designed to draw a power triangle given
     values for the complex power system.
 
+    .. image:: /static/PowerTriangle.png
+
     Parameters
     ----------
     P:          float
-                Real Power, unitless; default=None
+                Real Power, unitless, default=None
     Q:          float
-                Reactive Power, unitless; default=None
+                Reactive Power, unitless, default=None
     S:          float
-                Apparent Power, unitless; default=None
+                Apparent Power, unitless, default=None
     PF:         float
-                Power Factor, unitless, provided as a
-                decimal value, lagging is positive,
-                leading is negative; default=None
+                Power Factor, unitless, provided as a decimal value, lagging is
+                positive, leading is negative; default=None
     color:      string, optional
-                The color of the power triangle lines;
-                default="red"
+                The color of the power triangle lines, default="red"
     text:       string, optional
-                The title of the power triangle plot,
-                default="Power Triangle"
+                The title of the power triangle plot, default="Power Triangle"
     printval:   bool, optional
-                Control argument to allow the numeric
-                values to be printed on the plot,
-                default="False"
+                Control argument to allow the numeric values to be printed on
+                the plot, default="False"
+    
+    Returns
+    -------
+    matplotlib.pyplot:  Plotting object to be used for additional configuration
+                        or plotting.
     """
     # Calculate all values if not all are provided
     if (P == None or Q == None or S == None or PF == None):
@@ -692,7 +644,7 @@ def powertriangle(P=None, Q=None, S=None, PF=None, color="red",
     # Print all values if asked to
     if printval:
         _plt.text(x / 20, y * 4 / 5, text, color=color)
-    _plt.show()
+    return _plt
 
 
 # Define Transformer Short-Circuit/Open-Circuit Function
@@ -783,8 +735,8 @@ def nlinpf(PFtrue=False, PFdist=False, PFdisp=False):
 
     Returns
     -------
-    {unknown}:  This function will return the unknown variable from
-                the previously described set of variables.
+    float:  This function will return the unknown variable from the previously
+            described set of variables.
     """
     if (PFtrue != None and PFdist != None and PFdisp != None):
         raise ValueError("ERROR: Too many constraints, no solution.")
@@ -1124,14 +1076,17 @@ def dynetz(delta=None, wye=None, round=None):
         if round != None: Zset = _np.around(Zset, round)
         return (Zset)  # Return Delta Impedances
     else:
-        raise ValueError("ERROR: Either delta or wye impedances must be specified.")
+        raise ValueError(
+            "ERROR: Either delta or wye impedances must be specified."
+        )
 
 #calculating impedance of bridge network
 def bridge_impedance(z1, z2, z3, z4, z5):
     r"""
     Bridge Impedance Calculator.
     
-    The following condition describing the Wheatstone Bridge is utilized to ensure that current through `z5` will be zero.
+    The following condition describing the Wheatstone Bridge is utilized to
+    ensure that current through `z5` will be zero.
 
     .. math:: z1 \cdot z3 = z2 \cdot z4
     
@@ -1711,6 +1666,16 @@ def convbar(h, x, outline=True):
     generates a convolved bar-graph of the two inputs to demonstrate
     and illustrate convolution, typically for an educational purpose.
 
+    Examples
+    --------
+    >>> import numpy as np
+    >>> import electricpy as ep
+    >>> h = np.array([0, 1, 1, 1, 0])
+    >>> x = np.array([0, 1, 1, 1, 0])
+    >>> ep.convbar(h, x)
+    
+    .. image:: /static/convbar-example.png
+
     Parameters
     ----------
     h:      numpy.ndarray
@@ -1752,31 +1717,45 @@ def convbar(h, x, outline=True):
     _plt.ylabel('y')
     _plt.grid()
     _plt.title('Convolved Output')
-    _plt.show()
+    return _plt
 
 
 # Define Peak Calculator
 def peak(val):
-    """
+    r"""
     Sinusoid RMS to Peak Converter.
 
-    Provides a readable format to convert an
-    RMS (Root-Mean-Square) value to its peak
-    representation. Performs a simple multiplication
-    with the square-root of two.
+    Provides a readable format to convert an RMS (Root-Mean-Square) value to its
+    peak representation. Performs a simple multiplication with the square-root
+    of two.
+
+    .. math:: V_{\text{peak}} = \sqrt{2} \cdot V_{\text{RMS}}
+
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> ep.peak(120)
+    169.7056274847714
     """
     return (_np.sqrt(2) * val)
 
 
 # Define RMS Calculator
 def rms(val):
-    """
+    r"""
     Sinusoid Peak to RMS Converter.
 
-    Provides a readable format to convert a peak
-    value to its RMS (Root-Mean-Square) representation.
-    Performs a simple division by the square-root of
-    two.
+    Provides a readable format to convert a peak value to its RMS
+    (Root-Mean-Square) representation. Performs a simple division by the
+    square-root of two.
+
+    .. math:: V_{\text{RMS}} = \frac{V_{\text{peak}}}{\sqrt{2}}
+
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> ep.rms(169.7)
+    119.99602076735711
     """
     return (val * _np.sqrt(0.5))
 
@@ -1787,8 +1766,8 @@ def wrms(func, dw=0.1, NN=100, quad=False, plot=True,
     """
     WRMS Function.
 
-    This function is designed to calculate the RMS
-    bandwidth (Wrms) using a numerical process.
+    This function is designed to calculate the RMS bandwidth (Wrms) using a
+    numerical process.
 
     Parameters
     ----------
@@ -2415,7 +2394,10 @@ def sampfft(data, dt, minfreq=60.0, complex=False):
     NN = 1 // (dt * minfreq)
     # Test for Invalid System
     if FR > minfreq:
-        raise ValueError("Too few data samples to evaluate FFT at specified minimum frequency.")
+        raise ValueError(
+            "Too few data samples to evaluate FFT at specified minimum "
+            "frequency."
+        )
     elif FR == minfreq:
         # Evaluate FFT
         y = _np.fft.rfft(data) / len(data)
@@ -2438,8 +2420,8 @@ def fftplot(dc, real, imag=None, title="Fourier Coefficients"):
     """
     FFT System Plotter.
 
-    Plotting function for FFT (harmonic) values,
-    plots the DC, Real, and Imaginary components.
+    Plotting function for FFT (harmonic) values, plots the DC, Real, and
+    Imaginary components.
 
     Parameters
     ----------
@@ -2452,6 +2434,11 @@ def fftplot(dc, real, imag=None, title="Fourier Coefficients"):
     title:      str, optional
                 String appended to plot title,
                 default="Fourier Coefficients"
+    
+    Returns
+    -------
+    matplotlib.pyplot:  Plotting object to be used for additional configuration
+                        or plotting.
     """
     # Define Range values for plots
     rng = range(1, len(real) + 1, 1)
@@ -2462,18 +2449,30 @@ def fftplot(dc, real, imag=None, title="Fourier Coefficients"):
     # Plot
     _plt.title(title)
     _plt.plot(a0x, a0y, 'g', label="DC-Term")
-    _plt.stem(rng, real, 'r', 'ro', label="Real-Terms", use_line_collection=True)
-    try:
-        imag != None
-    except ValueError:
-        _plt.stem(rng, imag, 'b', 'bo', label="Imaginary-Terms", use_line_collection=True)
+    _plt.stem(
+        rng,
+        real,
+        linefmt='r',
+        markerfmt='ro',
+        label="Real-Terms",
+        use_line_collection=True
+    )
+    if imag != None:
+        _plt.stem(
+            rng,
+            imag,
+            linefmt='b',
+            markerfmt='bo',
+            label="Imaginary-Terms",
+            use_line_collection=True
+        )
     _plt.xlabel("Harmonics (Multiple of Fundamental)")
     _plt.ylabel("Harmonic Magnitude")
     _plt.axhline(0.0, color='k')
     _plt.legend()
     if (len(xtic) < 50):
         _plt.xticks(xtic)
-    _plt.show()
+    return _plt
 
 
 # Define FFT Composition Plotting Function
@@ -2503,6 +2502,11 @@ def fftsumplot(dc, real, imag=None, freq=60, xrange=None, npts=1000,
     title:      str, optional
                 String appended to plot title,
                 default="Fourier Series Summation"
+    
+    Returns
+    -------
+    matplotlib.pyplot:  Plotting object to be used for additional configuration
+                        or plotting.
     """
     # Determine the number (N) of terms
     N = len(real)
@@ -2526,7 +2530,7 @@ def fftsumplot(dc, real, imag=None, freq=60, xrange=None, npts=1000,
     _plt.title(title)
     _plt.xlabel("Time (seconds)")
     _plt.ylabel("Magnitude")
-    _plt.show()
+    return _plt
 
 
 # Define harmonic system generation function
@@ -2589,10 +2593,9 @@ def harmonics(real, imag=None, dc=0, freq=60, domain=None):
         return (out)
 
     if domain is None:
-        system = _harmonic_
+        return _harmonic_ # Return as callable for external use
     else:
-        system = _harmonic_(domain)
-    return (system)
+        return _harmonic_(domain)
 
 
 # Define Single Phase Motor Startup Capacitor Formula
@@ -2622,8 +2625,7 @@ def motorstartcap(V, I, freq=60):
     I = abs(I)
     V = abs(V)
     # Calculate Capacitance
-    C = I / (2 * _np.pi * freq * V)
-    return (C)
+    return I / (2 * _np.pi * freq * V)
 
 
 # Define Power Factor Correction Function
@@ -2840,8 +2842,9 @@ def tap_changing_transformer(Vgen, Vdis, Pload, Qload, R, X):
     r"""
     Calculate Turn Ratio of Load Tap Changing Transformer.
 
-    The purpose of a tap changer is to regulate the output voltage of a transformer.
-    It does this by altering the number of turns in one winding and thereby changing the turns ratio of the transformer
+    The purpose of a tap changer is to regulate the output voltage of a
+    transformer. It does this by altering the number of turns in one winding and
+    thereby changing the turns ratio of the transformer
     
     .. math:: \sqrt{\frac{Vgen^2}{Vgen \cdot Vdis - R \cdot P - X \cdot Q}}
 
@@ -2934,9 +2937,9 @@ def natfreq(C, L, Hz=True):
     r"""
     Natural Frequency Evaluator.
 
-    Evaluates the natural frequency (resonant frequency)
-    of a circuit given the circuit's C and L values. Defaults
-    to returning values in Hz, but may also return in rad/sec.
+    Evaluates the natural frequency (resonant frequency) of a circuit given the
+    circuit's C and L values. Defaults to returning values in Hz, but may also
+    return in rad/sec.
 
     .. math:: freq=\frac{1}{\sqrt{L*C}*(2*\pi)}
 
@@ -4988,13 +4991,19 @@ def ic_555_monostable(R=None,C=None,freq=None,t_high=None,t_low=None):
         try:
             assert C!=None and T!=None
         except AssertionError:
-            raise ValueError("To find Resitance, Capacitance and delay time should be provided")
+            raise ValueError(
+                "To find Resitance, Capacitance and delay time should be "
+                "provided"
+            )
         return T/(_np.log(3)*C)
     elif C is None:
         try:
             assert R!=None and T!=None
         except AssertionError:
-            raise ValueError("To find Capacitance , Resistance and delay time should be provided")
+            raise ValueError(
+                "To find Capacitance , Resistance and delay time should be "
+                "provided"
+            )
         return T/(_np.log(3)*R)
 
     elif T is None:
@@ -5002,7 +5011,10 @@ def ic_555_monostable(R=None,C=None,freq=None,t_high=None,t_low=None):
         try:
             assert R!=None and T!=None
         except AssertionError:
-            raise ValueError("To find Time delay , Resistance and Capacitance should be provided")
+            raise ValueError(
+                "To find Time delay , Resistance and Capacitance should be "
+                "provided"
+            )
         return R*C*_np.log(3)
 
 
@@ -5012,11 +5024,12 @@ def t_attenuator(Adb, Z0):
 
     The T attenuator is a type of attenuator that looks like the letter T. 
     The T attenuator consists of three resistors. Two of these are connected in 
-    series and the other one is connected from between the two other resistors to ground. 
-    The resistors in series often have the same resistance.
+    series and the other one is connected from between the two other resistors
+    to ground. The resistors in series often have the same resistance.
 
     .. math:: R1 = Z0*(\frac{10^{\frac{A_{db}}{20}}-1}{10^{\frac{A_{db}}{20}}+1});
     .. math:: R2 = Z0*(\frac{10^{\frac{A_{db}}{20}}}{10^{\frac{A_{db}}{10}}-1})
+
     .. image:: /static/t-attenuator-circuit.png
 
     Parameters
