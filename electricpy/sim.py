@@ -128,7 +128,7 @@ def digifiltersim(fin,filter,freqs,NN=1000,dt=0.01,title="",
         elif xmxscale!=None: _plt.xlim((0,xmxscale/(freq*dt)))
         
     _plt.tight_layout()
-    _plt.show()
+    return _plt
 
 # Define Step Response Simulator Function
 def step_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
@@ -212,7 +212,7 @@ def step_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
     _plt.subplots_adjust(wspace=0.3)
     if filename!=None:
         _plt.savefig(filename)
-    _plt.show()
+    return _plt
 
 # Define Ramp Response Simulator Function
 def ramp_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
@@ -296,7 +296,7 @@ def ramp_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
     _plt.subplots_adjust(wspace=0.3)
     if filename!=None:
         _plt.savefig(filename)
-    _plt.show()
+    return _plt
     
 # Define Parabolic Response Simulator Function
 def parabolic_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
@@ -380,7 +380,7 @@ def parabolic_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
     _plt.subplots_adjust(wspace=0.3)
     if filename!=None:
         _plt.savefig(filename)
-    _plt.show()
+    return _plt
 
 # Define State Space Simulator
 def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
