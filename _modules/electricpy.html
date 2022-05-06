@@ -984,6 +984,8 @@
 <span class="sd">    This function is designed to draw a power triangle given</span>
 <span class="sd">    values for the complex power system.</span>
 
+<span class="sd">    .. image:: /static/PowerTriangle.png</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    P:          float</span>
@@ -1053,7 +1055,7 @@
     <span class="c1"># Print all values if asked to</span>
     <span class="k">if</span> <span class="n">printval</span><span class="p">:</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">20</span><span class="p">,</span> <span class="n">y</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">/</span> <span class="mi">5</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+    <span class="k">return</span> <span class="n">_plt</span></div>
 
 
 <span class="c1"># Define Transformer Short-Circuit/Open-Circuit Function</span>
