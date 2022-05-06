@@ -12,7 +12,6 @@ import numpy as _np
 import scipy.signal as _sig
 from numpy import pi as _pi
 from cmath import exp as _exp
-import scipy.signal as sig
 
 # Import Local Dependencies
 from electricpy.math import convolve
