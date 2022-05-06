@@ -24,7 +24,7 @@ G = 1e+9 #: Giga Multiple       (10^9)
 u0 = 4*_np.pi*10**(-7) #: µ0 (mu-not)       4πE-7
 e0 = 8.8541878128e-12  #: ε0 (epsilon-not)  8.854E-12
 carson_r = 9.869e-7 #: Carson's Ristance Constant  8.869E-7
-De0 = 2160 #: De Constant for Use with Transmission Impedance Calculations      2160
+De0 = 2160 #: De Constant for Use with Transmission Impedance Calculations =2160
 NAN = float('nan')
 VLLcVLN = _c.rect(_np.sqrt(3),_np.radians(30)) # Conversion Operator
 ILcIP = _c.rect(_np.sqrt(3),_np.radians(30)) # Conversion Operator
@@ -39,20 +39,28 @@ A012 = _np.array([[ 1, 1, 1    ],        # Convert 012 to ABC
                  [ 1, a**2, a ],        # (i.e. sequence to phase)
                  [ 1, a, a**2 ]])
 # Define Clarke Component Matricies
-Cabc = _np.sqrt(2/3) * _np.array([[ 1, -1/2, -1/2],         # Convert ABC to alpha/beta/gamma
-                                  [ 0, _np.sqrt(3)/2, -_np.sqrt(3)/2],
-                                  [ 1/_np.sqrt(2), 1/_np.sqrt(2), 1/_np.sqrt(2)]])
-Cxyz = _np.array([[ 2/_np.sqrt(6), 0, 1/_np.sqrt(3)],       # Convert alpha/beta/gamma to ABC
-                  [ -1/_np.sqrt(6), 1/_np.sqrt(2), 1/_np.sqrt(3)],
-                  [ -1/_np.sqrt(6), -1/_np.sqrt(2), 1/_np.sqrt(3)]])
+Cabc = _np.sqrt(2/3) * _np.array([
+    [ 1, -1/2, -1/2],         # Convert ABC to alpha/beta/gamma
+    [ 0, _np.sqrt(3)/2, -_np.sqrt(3)/2],
+    [ 1/_np.sqrt(2), 1/_np.sqrt(2), 1/_np.sqrt(2)]
+])
+Cxyz = _np.array([
+    [ 2/_np.sqrt(6), 0, 1/_np.sqrt(3)],       # Convert alpha/beta/gamma to ABC
+    [ -1/_np.sqrt(6), 1/_np.sqrt(2), 1/_np.sqrt(3)],
+    [ -1/_np.sqrt(6), -1/_np.sqrt(2), 1/_np.sqrt(3)]
+])
 # Define Park Components Matricies
 _rad = lambda th: _np.radians( th )
-Pdq0_im = lambda th: _np.sqrt(2/3)*_np.array([[ _np.cos(_rad(th)), _np.cos(_rad(th)-2*pi/3), _np.cos(_rad(th)+2*pi/3)],
-                                           [-_np.sin(_rad(th)),-_np.sin(_rad(th)-2*pi/3),-_np.sin(_rad(th)+2*pi/3)],
-                                           [ _np.sqrt(2)/2,     _np.sqrt(2)/2,            _np.sqrt(2)/2]])
-Pabc_im = lambda th: _np.sqrt(2/3)*_np.array([[ _np.cos(_rad(th)),      -_np.sin(_rad(th)),        _np.sqrt(2)/2],
-                                           [_np.cos(_rad(th)-2*pi/3),-_np.sin(_rad(th)-2*pi/3), _np.sqrt(2)/2],
-                                           [_np.cos(_rad(th)+2*pi/3),-_np.sin(_rad(th)+2*pi/3), _np.sqrt(2)/2]])
+_Pdq0_im = lambda th: _np.sqrt(2/3)*_np.array([
+    [ _np.cos(_rad(th)), _np.cos(_rad(th)-2*pi/3), _np.cos(_rad(th)+2*pi/3)],
+    [-_np.sin(_rad(th)),-_np.sin(_rad(th)-2*pi/3),-_np.sin(_rad(th)+2*pi/3)],
+    [ _np.sqrt(2)/2,     _np.sqrt(2)/2,            _np.sqrt(2)/2]
+])
+_Pabc_im = lambda th: _np.sqrt(2/3)*_np.array([
+    [ _np.cos(_rad(th)),      -_np.sin(_rad(th)),        _np.sqrt(2)/2],
+    [_np.cos(_rad(th)-2*pi/3),-_np.sin(_rad(th)-2*pi/3), _np.sqrt(2)/2],
+    [_np.cos(_rad(th)+2*pi/3),-_np.sin(_rad(th)+2*pi/3), _np.sqrt(2)/2]
+])
 Pdq0 = 2/3 * _np.array([[0,-_np.sqrt(3/2),_np.sqrt(3/2)],
                         [1,-1/2,-1/2],
                         [1/2, 1/2, 1/2]])

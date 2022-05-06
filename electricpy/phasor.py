@@ -378,7 +378,7 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     ...     [45,-120],
     ...     [52,120]
     ... ])
-    >>> plt = phasor.phasorlist( voltages )
+    >>> plt = phasor.phasorlist( voltages, colors=["red", "green", "blue"] )
     >>> plt.show()
 
     .. image:: /static/PhasorPlot.png
