@@ -80,10 +80,10 @@ def phasor(mag, ang=0):
 
     See Also
     --------
-    phasorlist: Phasor Generator for List or Array
-    cprint:     Complex Variable Printing Function
-    phasorz:    Impedance Phasor Generator
-    phs:        Complex Phase Angle Generator
+    phasor.phasorlist:  Phasor Generator for List or Array
+    phasor.cprint:      Complex Variable Printing Function
+    phasor.phasorz:     Impedance Phasor Generator
+    phasor.phs:         Complex Phase Angle Generator
     """
     # Test for Tuple/List Arg
     if isinstance(mag, (tuple, list, _np.ndarray)):
@@ -118,19 +118,21 @@ def phasorlist(arr):
     Examples
     --------
     >>> import numpy as np
-    >>> import electricpy as ep
-    >>> voltages = np.array([[67,0],
-                             [67,-120],
-                             [67,120]])
-    >>> Vset = ep.phasorlist( voltages )
+    >>> from electricpy import phasor
+    >>> voltages = np.array([
+    ...     [67,0],
+    ...     [67,-120],
+    ...     [67,120]
+    ... ])
+    >>> Vset = phasor.phasorlist( voltages )
     >>> print(Vset)
 
     See Also
     --------
-    phasor:     Phasor Generating Function
-    vectarray:  Magnitude/Angle Array Pairing Function
-    cprint:     Complex Variable Printing Function
-    phasorz:    Impedance Phasor Generator
+    phasor.phasor:      Phasor Generating Function
+    phasor.vectarray:   Magnitude/Angle Array Pairing Function
+    phasor.cprint:      Complex Variable Printing Function
+    phasor.phasorz:     Impedance Phasor Generator
     """
     # Use List Comprehension to Process
 
@@ -170,8 +172,8 @@ def vectarray(arr, degrees=True, flatarray=False):
 
     See Also
     --------
-    phasor:     Phasor Generating Function
-    phasorlist: Phasor Generator for List or Array
+    phasor.phasor:      Phasor Generating Function
+    phasor.phasorlist:  Phasor Generator for List or Array
     """
     # Iteratively Append Arrays to the Base
 
@@ -358,14 +360,28 @@ def parallelz(*args):
 # Define Phasor Plot Generator
 def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
             colors=None, radius=None, linewidth=None, size=None,
-            filename=None, plot=True, label=False, labels=False,
-            tolerance=None):
+            label=False, labels=False, tolerance=None):
     """
     Phasor Plotting Function.
 
     This function is designed to plot a phasor-diagram with angles in degrees
-    for up to 12 phasor sets. Phasors must be passed as a complex number set,
-    (e.g. [ m+ja, m+ja, m+ja, ... , m+ja ] ).
+    for up to 12 phasor sets (more may be used if additional colors are set).
+    Phasors must be passed as a complex number set, (e.g.
+    [ m+ja, m+ja, m+ja, ... , m+ja ] ).
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> from electricpy import phasor
+    >>> voltages = np.array([
+    ...     [67,0],
+    ...     [45,-120],
+    ...     [52,120]
+    ... ])
+    >>> plt = phasor.phasorlist( voltages )
+    >>> plt.show()
+
+    .. image:: /static/PhasorPlot.png
 
     Parameters
     ----------
@@ -382,20 +398,22 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     radius:     float, optional
                 The diagram radius, unless specified, automatically scales
     colors:     list of str, optional
-                List of hexidecimal color strings denoting the line colors to use.
-    filename:   string, optional
-                String of filename, if set, will force function to save image.
-    plot:       bool, optional
-                Control argument to disable plotting. default=True
+                List of hexidecimal color strings denoting the line colors to
+                use.
     size:       float, optional
                 Control argument for figure size. default=None
     linewidth:  float, optional
                 Control argument to declare the line thickness. default=None
     tolerance:  float, optional
                 Minimum magnitude to plot, anything less than tolerance will be
-                plotted as a single point at the origin, by default, the tolerance
-                is scaled to be 1/25-th the maximum radius. To disable the tolerance,
-                simply provide either False or -1.
+                plotted as a single point at the origin, by default, the
+                tolerance is scaled to be 1/25-th the maximum radius. To disable
+                the tolerance, simply provide either False or -1.
+    
+    Returns
+    -------
+    matplotlib.pyplot:  Plotting object to be used for additional configuration
+                        or plotting.
     """
     # Load Complex Values if Necessary
     try:
@@ -404,8 +422,10 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
         phasor = [phasor]
     # Manage Colors
     if colors == None:
-        colors = ["#FF0000", "#800000", "#FFFF00", "#808000", "#00ff00", "#008000",
-                "#00ffff", "#008080", "#0000ff", "#000080", "#ff00ff", "#800080"]
+        colors = [
+            "#FF0000", "#800000", "#FFFF00", "#808000", "#00ff00","#008000",
+            "#00ffff", "#008080", "#0000ff", "#000080", "#ff00ff", "#800080"
+        ]
     # Scale Radius
     if radius == None:
         radius = _np.abs(phasor).max()
@@ -426,7 +446,9 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     numphs = len(phasor)
     numclr = len(colors)
     if numphs > numclr:
-        raise ValueError("ERROR: Too many phasors provided. Specify more line colors.")
+        raise ValueError(
+            "ERROR: Too many phasors provided. Specify more line colors."
+        )
 
     if size == None:
         # Force square figure and square axes
@@ -458,12 +480,6 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     # Set Minimum and Maximum Radius Terms
     ax.set_rmax(radius)
     ax.set_rmin(0)
-    if filename != None:
-        if not any(sub in filename for sub in ['.png', '.jpg']):
-            filename += '.png'  # Add File Extension
-        _plt.savefig(filename)
-    if plot:
-        _plt.show()
-    else:
-        _plt.close()
+    return _plt
+
 # END
