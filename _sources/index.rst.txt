@@ -35,6 +35,7 @@ CONTENTS:
    
    additionalresources
    electricpyapi
+   constants
    changes
    Github <https://github.com/engineerjoe440/ElectricPy>
    PyPI <https://pypi.org/project/electricpy>
