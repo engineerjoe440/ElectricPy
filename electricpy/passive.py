@@ -402,34 +402,40 @@ def inductordischarge(t, Io, R, L):
     Vl = Io * R * (1 - _np.exp(-R * t / L))
     return (Vl, Il)
 
-def air_core_inductor(coil_diameter: float, coil_length: float, turns: int):
+def air_core_inductance(d: float, coil_l: float, n: int):
     r"""
     Compute Inductance of Air Core Inductor.
 
     Air core inductors that consist of a coil of conducting wire with no core.
     They are used in all sorts of electronic devices like radios and computers.
 
+    .. math:: \frac{d^2 \cdot n^2}{457418\cdot d + 1016127\cdot l}
+
     Parameters
     ---------- 
-    coil_diameter: float in meters
-    coil_length: float in meters
-    turns: int inductor turns
+    d:      float
+            Coil diameter, measured in meters
+    coil_l: float
+            Coil length, measured in meters
+    n:      int
+            Number of inductor turns
 
     Returns 
     ------- 
-    L: float Inductance of air core inductor in (mH)
+    float   Inductance of air core inductor in Henry's (H)
     """
-    k1 = (1000*coil_diameter*coil_diameter) * (turns*turns)
-    k2 = (457418*coil_diameter) + (1016127*coil_length)
+    k1 = (1000*d**2) * n**2
+    k2 = (457418*d) + (1016127*coil_l)
     return  k1/k2
 
 def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
     r"""
     Inductive voltage divider.
 
-    Inductive voltage divider Inductive voltage dividers are made out of two inductors. 
-    One of the inductors is connected from the input to the output and the other one is connected from the output to ground. 
-    You can also use other components like resistors and inductors.
+    Inductive voltage divider Inductive voltage dividers are made out of two
+    inductors. One of the inductors is connected from the input to the output
+    and the other one is connected from the output to ground. You can also use
+    other components like resistors and inductors.
 
     .. math:: V_{out} = \frac{V_{in}*L1}{L1+L2}
 
@@ -491,3 +497,5 @@ def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
         return L2
     else:
         return (Vin, Vout, L1, L2)
+
+# END
