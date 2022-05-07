@@ -1,0 +1,6 @@
+electricpy.passive.air\_core\_inductance
+========================================
+
+.. currentmodule:: electricpy.passive
+
+.. autofunction:: air_core_inductance

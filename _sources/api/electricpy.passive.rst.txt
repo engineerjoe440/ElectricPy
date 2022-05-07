@@ -19,7 +19,7 @@
 .. autosummary::
     :toctree: .
     
-    air_core_inductor
+    air_core_inductance
     
     capbacktoback
     

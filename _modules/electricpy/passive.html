@@ -764,34 +764,40 @@
     <span class="n">Vl</span> <span class="o">=</span> <span class="n">Io</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">R</span> <span class="o">*</span> <span class="n">t</span> <span class="o">/</span> <span class="n">L</span><span class="p">))</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">Vl</span><span class="p">,</span> <span class="n">Il</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="air_core_inductor"><a class="viewcode-back" href="../../api/electricpy.passive.air_core_inductor.html#electricpy.passive.air_core_inductor">[docs]</a><span class="k">def</span> <span class="nf">air_core_inductor</span><span class="p">(</span><span class="n">coil_diameter</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">coil_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">turns</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<div class="viewcode-block" id="air_core_inductance"><a class="viewcode-back" href="../../api/electricpy.passive.air_core_inductance.html#electricpy.passive.air_core_inductance">[docs]</a><span class="k">def</span> <span class="nf">air_core_inductance</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">coil_l</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute Inductance of Air Core Inductor.</span>
 
 <span class="sd">    Air core inductors that consist of a coil of conducting wire with no core.</span>
 <span class="sd">    They are used in all sorts of electronic devices like radios and computers.</span>
 
+<span class="sd">    .. math:: \frac{d^2 \cdot n^2}{457418\cdot d + 1016127\cdot l}</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ---------- </span>
-<span class="sd">    coil_diameter: float in meters</span>
-<span class="sd">    coil_length: float in meters</span>
-<span class="sd">    turns: int inductor turns</span>
+<span class="sd">    d:      float</span>
+<span class="sd">            Coil diameter, measured in meters</span>
+<span class="sd">    coil_l: float</span>
+<span class="sd">            Coil length, measured in meters</span>
+<span class="sd">    n:      int</span>
+<span class="sd">            Number of inductor turns</span>
 
 <span class="sd">    Returns </span>
 <span class="sd">    ------- </span>
-<span class="sd">    L: float Inductance of air core inductor in (mH)</span>
+<span class="sd">    float   Inductance of air core inductor in Henry's (H)</span>
 <span class="sd">    """</span>
-    <span class="n">k1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="n">coil_diameter</span><span class="o">*</span><span class="n">coil_diameter</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">turns</span><span class="o">*</span><span class="n">turns</span><span class="p">)</span>
-    <span class="n">k2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">457418</span><span class="o">*</span><span class="n">coil_diameter</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1016127</span><span class="o">*</span><span class="n">coil_length</span><span class="p">)</span>
+    <span class="n">k1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">457418</span><span class="o">*</span><span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1016127</span><span class="o">*</span><span class="n">coil_l</span><span class="p">)</span>
     <span class="k">return</span>  <span class="n">k1</span><span class="o">/</span><span class="n">k2</span></div>
 
 <div class="viewcode-block" id="inductive_voltdiv"><a class="viewcode-back" href="../../api/electricpy.passive.inductive_voltdiv.html#electricpy.passive.inductive_voltdiv">[docs]</a><span class="k">def</span> <span class="nf">inductive_voltdiv</span><span class="p">(</span><span class="n">Vin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Vout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">find</span><span class="o">=</span><span class="s1">''</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Inductive voltage divider.</span>
 
-<span class="sd">    Inductive voltage divider Inductive voltage dividers are made out of two inductors. </span>
-<span class="sd">    One of the inductors is connected from the input to the output and the other one is connected from the output to ground. </span>
-<span class="sd">    You can also use other components like resistors and inductors.</span>
+<span class="sd">    Inductive voltage divider Inductive voltage dividers are made out of two</span>
+<span class="sd">    inductors. One of the inductors is connected from the input to the output</span>
+<span class="sd">    and the other one is connected from the output to ground. You can also use</span>
+<span class="sd">    other components like resistors and inductors.</span>
 
 <span class="sd">    .. math:: V_{out} = \frac{V_{in}*L1}{L1+L2}</span>
 
@@ -853,6 +859,8 @@
         <span class="k">return</span> <span class="n">L2</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">Vin</span><span class="p">,</span> <span class="n">Vout</span><span class="p">,</span> <span class="n">L1</span><span class="p">,</span> <span class="n">L2</span><span class="p">)</span></div>
+
+<span class="c1"># END</span>
 </pre></div>
 
           </article>
