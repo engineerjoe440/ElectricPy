@@ -7,16 +7,16 @@ def read_dependencies():
     with open("requirements.txt", "r") as fh:
         dependencies = fh.readlines()
     return dependencies
-        
+
 # Load Description Document
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 # Gather Version Information from Python File
-with open("electricpy/__init__.py", encoding="utf-8") as fh:
+with open("version.py", encoding="utf-8") as fh:
     file_str = fh.read()
-    name = re.search('_name_ = \"(.*)\"', file_str).group(1)
-    ver = re.search('_version_ = \"(.*)\"', file_str).group(1)
+    name = re.search('__name__ = \"(.*)\"', file_str).group(1)
+    ver = re.search('__version__ = \"(.*)\"', file_str).group(1)
     # Version Breakdown:
     # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
     print("Setup for:",name,"   Version:",ver)
