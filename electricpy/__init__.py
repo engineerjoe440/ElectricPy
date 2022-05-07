@@ -13,7 +13,7 @@ to aid in scientific calculations.
 ################################################################################
 
 # Define Module Specific Variables
-import electricpy.version as _version
+import version as _version
 __name__ = _version.__name__
 __version__ = _version.__version__  # Alias Version for User Ease
 
