@@ -107,7 +107,7 @@ html_theme_options = {
 
     # Specify a base_url used to generate sitemap.xml. If not
     # specified, then no sitemap will be built.
-    'base_url': 'https://engineerjoe440.github.io/ElectricPy/html/',
+    'base_url': 'https://electricpy.readthedocs.io/en/latest/',
 
     # Set the color and the accent color
     'color_primary': 'blue',
