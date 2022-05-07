@@ -498,9 +498,9 @@ class Test_air_core_inductor:
 
     def invoke(test_case):
         def wrapper(self):
-            from electricpy.passive import air_core_inductor
+            from electricpy.passive import air_core_inductance
             expected_result = test_case(self)
-            computed_result = air_core_inductor(self.coil_diameter, self.coil_length, self.turn)            
+            computed_result = air_core_inductance(self.coil_diameter, self.coil_length, self.turn)            
             assert_almost_equal(computed_result, expected_result, decimal = 3)
         return wrapper
 
