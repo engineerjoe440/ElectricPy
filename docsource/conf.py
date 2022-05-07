@@ -10,6 +10,7 @@ print("Build with:", sys.version)
 parent_dir = os.path.dirname(os.getcwd())
 initfile = os.path.join(parent_dir, 'electricpy', '__init__.py')
 sys.path.insert(0, parent_dir)
+sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 print(parent_dir)
 
 # Generate all Documentation Images
