@@ -445,20 +445,20 @@ def rpm_to_hz(rpm):
 # Define dBW to Watts converter
 def dbw_to_watts(dbw):
     """
-    dBW to Watt converter.
+    Convert dBW to Watts.
     
     Given the power in the decibel scale, this function will evaluate the
-    power in Watt.
+    power in Watts.
     
     Parameters
     ----------
     dbw:        float
-                A unit of power in the decibel scale
+                Power in the decibel scale (dBW)
                 
     Returns
     -------
     watts       float
-                A unit of power
+                Power in Watts
     """
     watts = 10 ** (dbw / 10)
     return watts
@@ -469,16 +469,16 @@ def watts_to_dbw(watts):
     """
     Watt to dBW converter.
     
-    Given the power in watt, this function will evaluate the power in the 
-    decibel scale
+    Given the power in watts, this function will evaluate the power in the 
+    decibel scale.
     
     Parameters
-    ---------
+    ----------
     watts:      float
-                A unit of power
+                Power in Watts
     Return
     ------
-    dbw:        A unit of power in the decibel scale
+    dbw:        Power in the decibel scale (dBW)
     """
     dbw = 10 * _np.log10(watts)
     return dbw
@@ -487,7 +487,7 @@ def watts_to_dbw(watts):
 # Define dbW to dBmW converter
 def dbw_to_dbmw(dbw):
     """
-    dbw to dbmw converter.
+    Convert dBW to dBmW.
     
     Given the power in the decibel scale, this function will evulate the power
     in the decibel-milliwatts scale.
@@ -495,11 +495,11 @@ def dbw_to_dbmw(dbw):
     Parameters
     ----------
     dbw:        float
-                A unit of power in the decibel scale
+                Power in the decibel scale (dBW)
     Return
     ------
     dbmw:       float
-                A unit of power in the decibel-milliwatts scale
+                Power in the decibel-milliwatts scale (dBmW)
     """
     dbmw = dbw + 30
     return dbmw
@@ -508,7 +508,7 @@ def dbw_to_dbmw(dbw):
 # Define dBmW to dBW converter
 def dbmw_to_dbw(dbmw):
     """
-    dBmW to dBW converter.
+    Convert dBmW to dBW.
     
     Given the power in the decibel milliwattscale, this function will evulate 
     the power in the decibel scale.
@@ -516,11 +516,11 @@ def dbmw_to_dbw(dbmw):
     Parameters
     ----------
     dbmw:       float
-                A unit of power in the decibel-milliwatts scale
+                Power in the decibel-milliwatts scale (dBmW)
     Return
     ------
     dbw:        float
-                A unit of power in the decibel scale
+                Power in the decibel scale (dBW)
     """
     dbw = dbmw - 30
     return dbw
@@ -529,19 +529,19 @@ def dbmw_to_dbw(dbmw):
 # Define dBmW to Watts converter
 def dbmw_to_watts(dbmw):
     """
-    dbmW to Watts converter.
+    Convert dbmW to Watts.
     
     Given the power in the decibel milliwattscale, this function will evulate 
-    the power in watts
+    the power in watts.
     
     Parameters
     ----------
     dbmw:       float
-                A unit of power in the decibel-milliwatts scale
+                Power in the decibel-milliwatts scale (dBmW)
     Return
     ------
-    watt:        float
-                A unit of power
+    watt:       float
+                Power in Watts
     """
     dbw = dbmw_to_dbw(dbmw)
     watts = dbw_to_watts(dbw)
@@ -559,11 +559,11 @@ def watts_to_dbmw(watts):
     Parameters
     ----------
     watt:       float
-                A unit of power
+                Power in Watts
     Return
     ------
     dbmw:       float
-                A unit of power in the decibel-milliwatts scale
+                Power in the decibel-milliwatts scale (dBmW)
     """
     dbw = watts_to_dbw(watts)
     dbmw = dbw_to_dbmw(dbw)
