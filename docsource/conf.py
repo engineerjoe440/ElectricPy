@@ -8,8 +8,8 @@ import sys
 
 print("Build with:", sys.version)
 parent_dir = os.path.dirname(os.getcwd())
-initfile = os.path.join(parent_dir,'electricpy','__init__.py')
-sys.path.insert(0,parent_dir)
+initfile = os.path.join(parent_dir, 'electricpy', '__init__.py')
+sys.path.insert(0, parent_dir)
 print(parent_dir)
 
 # Generate all Documentation Images
@@ -23,7 +23,7 @@ with open(initfile) as fh:
     ver = re.search('_version_ = \"(.*)\"', file_str).group(1)
     # Version Breakdown:
     # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
-    print("Sphinx HTML Build For:",name,"   Version:",ver)
+    print("Sphinx HTML Build For:", name,"   Version:", ver)
 
 
 # Verify Import
