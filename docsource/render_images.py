@@ -69,8 +69,8 @@ def render_convbar_example():
     plt.savefig("docsource/static/convbar-example.png")
 
 
-# Entrypoint
-if __name__ == '__main__':
+def main():
+    """Run all of the Image Generators."""
     # Add function calls here as new rendering functions are added
     render_power_triangle()
     render_phasor_plot()
@@ -78,6 +78,11 @@ if __name__ == '__main__':
     render_receiving_end_power_circle()
     render_receiving_power_circle()
     render_convbar_example()
+
+
+# Entrypoint
+if __name__ == '__main__':
+    main()
 
 
 # END
