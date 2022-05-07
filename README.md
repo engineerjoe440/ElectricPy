@@ -1,4 +1,6 @@
-<img src="https://raw.githubusercontent.com/engineerjoe440/ElectricPy/master/logo/ElectricpyLogo.svg" width="200" alt="logo" align="right">
+<a href="https://electricpy.readthedocs.io/en/latest/">
+  <img src="https://raw.githubusercontent.com/engineerjoe440/ElectricPy/master/logo/ElectricpyLogo.svg" width="200" alt="logo" align="right">
+</a>
 
 # ElectricPy
 
@@ -20,10 +22,15 @@
 
 Python Libraries with functions and constants related to electrical engineering.
 
-The functions and constants that make up these modules represent a library of material compiled with the intent of being used primarily
-for research, development, education, and exploration in the realm of electrical engineering.
+The functions and constants that make up these modules represent a library of material compiled with the intent of being
+used primarily for research, development, education, and exploration in the realm of electrical engineering.
 
-Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/
+Check out our full documentation: https://electricpy.readthedocs.io/en/latest/
+
+**:warning: Documentation has recently been updated to use [ReadTheDocs](https://readthedocs.org/)**
+
+GitHub Pages are still active, and will continue to be for the forseeable future, but they're intended for developmental
+updates rather than primary documentation.
 
 ### Special thanks to:
 

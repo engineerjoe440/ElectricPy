@@ -41,6 +41,6 @@ setuptools.setup(
     project_urls={
         "Source Repository": "https://github.com/engineerjoe440/ElectricPy",
         "Bug Tracker": "https://github.com/engineerjoe440/ElectricPy/issues",
-        "Documentation": "https://engineerjoe440.github.io/ElectricPy/",
+        "Documentation": "https://electricpy.readthedocs.io/en/latest/",
         }
 )
