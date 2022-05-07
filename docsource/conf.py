@@ -12,6 +12,10 @@ initfile = os.path.join(parent_dir,'electricpy','__init__.py')
 sys.path.insert(0,parent_dir)
 print(parent_dir)
 
+# Generate all Documentation Images
+from render_images import main as render_images
+render_images()
+
 # Gather Version Information from Python File
 with open(initfile) as fh:
     file_str = fh.read()

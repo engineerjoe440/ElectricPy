@@ -29,7 +29,6 @@ jobs:
         run: |
           pip install .
           python3 -c "import electricpy; print('electricpy.__file__')"
-          python3 docsource/render_images.py
           sphinx-build -M html docsource docs
       - name: Generate Coverage Badge
         if: success()
