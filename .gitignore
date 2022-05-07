@@ -1,5 +1,6 @@
 # Built Documentation Reference Pages
 docs/
+docsource/api/
 
 # Ignore Python Compiled Files
 *.pyc
