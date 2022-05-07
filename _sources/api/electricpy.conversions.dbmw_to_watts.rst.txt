@@ -1,0 +1,6 @@
+electricpy.conversions.dbmw\_to\_watts
+======================================
+
+.. currentmodule:: electricpy.conversions
+
+.. autofunction:: dbmw_to_watts

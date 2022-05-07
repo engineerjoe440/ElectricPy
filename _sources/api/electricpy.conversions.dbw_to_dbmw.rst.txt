@@ -1,0 +1,6 @@
+electricpy.conversions.dbw\_to\_dbmw
+====================================
+
+.. currentmodule:: electricpy.conversions
+
+.. autofunction:: dbw_to_dbmw

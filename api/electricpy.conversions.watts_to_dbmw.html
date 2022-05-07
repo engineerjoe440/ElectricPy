@@ -47,7 +47,7 @@
   
   
   
-    <title>electricpy.conversions &#8212; electricpy 0.2.2 documentation</title>
+    <title>electricpy.conversions.watts_to_dbmw &#8212; electricpy 0.2.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/material.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -57,8 +57,8 @@
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.conversions.abc_to_seq" href="electricpy.conversions.abc_to_seq.html" />
-    <link rel="prev" title="electricpy.bode.zbode" href="electricpy.bode.zbode.html" />
+    <link rel="next" title="electricpy.conversions.watts_to_dbw" href="electricpy.conversions.watts_to_dbw.html" />
+    <link rel="prev" title="electricpy.conversions.watts" href="electricpy.conversions.watts.html" />
   
    
 
@@ -77,7 +77,7 @@
   <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
   <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
   <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
-  <a href="#api/electricpy.conversions" tabindex="1" class="md-skip"> Skip to content </a>
+  <a href="#api/electricpy.conversions.watts_to_dbmw" tabindex="1" class="md-skip"> Skip to content </a>
   <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
@@ -96,7 +96,7 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           <span class="md-header-nav__topic">ElectricPy</span>
-          <span class="md-header-nav__topic"> electricpy.conversions </span>
+          <span class="md-header-nav__topic"> electricpy.conversions.watts_to_dbmw </span>
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
@@ -171,6 +171,7 @@
       <ul class="md-tabs__list">
           <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">electricpy 0.2.2 documentation</a></li>
           <li class="md-tabs__item"><a href="../electricpyapi.html" class="md-tabs__link">ElectricPy API</a></li>
+          <li class="md-tabs__item"><a href="electricpy.conversions.html" class="md-tabs__link">electricpy.conversions</a></li>
       </ul>
     </div>
   </nav>
@@ -231,19 +232,7 @@
     <li class="md-nav__item">
     
     
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    <label class="md-nav__link md-nav__link--active" for="__toc"> electricpy.conversions </label>
-    
-      <a href="#" class="md-nav__link md-nav__link--active">electricpy.conversions</a>
-      
-        
-<nav class="md-nav md-nav--secondary">
-  <ul class="md-nav__list" data-md-scrollfix="">
-    
-<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/api/electricpy.conversions.rst.txt">Show Source</a> </li>
-
-  </ul>
-</nav>
+      <a href="electricpy.conversions.html" class="md-nav__link">electricpy.conversions</a>
       
     
     </li>
@@ -361,7 +350,7 @@
 <nav class="md-nav md-nav--secondary">
   <ul class="md-nav__list" data-md-scrollfix="">
     
-<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/api/electricpy.conversions.rst.txt">Show Source</a> </li>
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/api/electricpy.conversions.watts_to_dbmw.rst.txt">Show Source</a> </li>
 
 <li id="searchbox" class="md-nav__item"></li>
 
@@ -374,107 +363,26 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  <section id="electricpy-conversions">
-<h1 id="api-electricpy-conversions--page-root">electricpy.conversions<a class="headerlink" href="#api-electricpy-conversions--page-root" title="Permalink to this headline">¶</a></h1>
-<p class="rubric">Description</p>
-<span class="target" id="module-electricpy.conversions"></span><p><cite>electricpy</cite> Package - <cite>conversions</cite> Module.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">conversions</span>
-</pre></div>
-</div>
-<p>Filled with simple conversion functions to help manage unit conversions and the
-like, this module is very helpful to electrical engineers.</p>
-<p>Built to support operations similar to Numpy and Scipy, this package is designed
-to aid in scientific calculations.</p>
-<p class="rubric">Functions</p>
-<table class="autosummary longtable docutils align-default">
-<colgroup>
-<col style="width: 10%"/>
-<col style="width: 90%"/>
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.conversions.abc_to_seq.html#electricpy.conversions.abc_to_seq" title="electricpy.conversions.abc_to_seq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">abc_to_seq</span></code></a>(Mabc[, reference])</p></td>
-<td><p>Phase-System to Sequence-System Conversion.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.conversions.btu.html#electricpy.conversions.btu" title="electricpy.conversions.btu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">btu</span></code></a>(kWh)</p></td>
-<td><p>Killo-Watt-Hours to BTU Function.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.conversions.btu_to_kwh.html#electricpy.conversions.btu_to_kwh" title="electricpy.conversions.btu_to_kwh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">btu_to_kwh</span></code></a>(BTU)</p></td>
-<td><p>BTU to Killo-Watt-Hours Function.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.conversions.dbmw_to_dbw.html#electricpy.conversions.dbmw_to_dbw" title="electricpy.conversions.dbmw_to_dbw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dbmw_to_dbw</span></code></a>(dbmw)</p></td>
-<td><p>dBmW to dBW converter.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.conversions.dbmw_to_watts.html#electricpy.conversions.dbmw_to_watts" title="electricpy.conversions.dbmw_to_watts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dbmw_to_watts</span></code></a>(dbmw)</p></td>
-<td><p>dbmW to Watts converter.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.conversions.dbw_to_dbmw.html#electricpy.conversions.dbw_to_dbmw" title="electricpy.conversions.dbw_to_dbmw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dbw_to_dbmw</span></code></a>(dbw)</p></td>
-<td><p>dbw to dbmw converter.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.conversions.dbw_to_watts.html#electricpy.conversions.dbw_to_watts" title="electricpy.conversions.dbw_to_watts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dbw_to_watts</span></code></a>(dbw)</p></td>
-<td><p>dBW to Watt converter.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.conversions.hertz.html#electricpy.conversions.hertz" title="electricpy.conversions.hertz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hertz</span></code></a>(radians)</p></td>
-<td><p>Radians to Hertz Converter.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.conversions.horsepower.html#electricpy.conversions.horsepower" title="electricpy.conversions.horsepower"><code class="xref py py-obj docutils literal notranslate"><span class="pre">horsepower</span></code></a>(watts)</p></td>
-<td><p>Watts to Horsepower Function.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.conversions.hp_to_watts.html#electricpy.conversions.hp_to_watts" title="electricpy.conversions.hp_to_watts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hp_to_watts</span></code></a>(hp)</p></td>
-<td><p>Horsepower to Watts Formula.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.conversions.hz_to_rad.html#electricpy.conversions.hz_to_rad" title="electricpy.conversions.hz_to_rad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hz_to_rad</span></code></a>(hertz)</p></td>
-<td><p>Hertz to Radians Converter.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.conversions.hz_to_rpm.html#electricpy.conversions.hz_to_rpm" title="electricpy.conversions.hz_to_rpm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hz_to_rpm</span></code></a>(hz)</p></td>
-<td><p>Hertz to RPM Converter.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.conversions.kwh.html#electricpy.conversions.kwh" title="electricpy.conversions.kwh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kwh</span></code></a>(BTU)</p></td>
-<td><p>BTU to Killo-Watt-Hours Function.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.conversions.kwh_to_btu.html#electricpy.conversions.kwh_to_btu" title="electricpy.conversions.kwh_to_btu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kwh_to_btu</span></code></a>(kWh)</p></td>
-<td><p>Killo-Watt-Hours to BTU Function.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.conversions.phs_to_seq.html#electricpy.conversions.phs_to_seq" title="electricpy.conversions.phs_to_seq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phs_to_seq</span></code></a>(Mabc[, reference])</p></td>
-<td><p>Phase-System to Sequence-System Conversion.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.conversions.rad_to_hz.html#electricpy.conversions.rad_to_hz" title="electricpy.conversions.rad_to_hz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rad_to_hz</span></code></a>(radians)</p></td>
-<td><p>Radians to Hertz Converter.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.conversions.rad_to_rpm.html#electricpy.conversions.rad_to_rpm" title="electricpy.conversions.rad_to_rpm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rad_to_rpm</span></code></a>(rad)</p></td>
-<td><p>Radians-per-Second to RPM Converter.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.conversions.radsec.html#electricpy.conversions.radsec" title="electricpy.conversions.radsec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">radsec</span></code></a>(hertz)</p></td>
-<td><p>Hertz to Radians Converter.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.conversions.rpm_to_hz.html#electricpy.conversions.rpm_to_hz" title="electricpy.conversions.rpm_to_hz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rpm_to_hz</span></code></a>(rpm)</p></td>
-<td><p>RPM to Hertz Converter.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.conversions.rpm_to_rad.html#electricpy.conversions.rpm_to_rad" title="electricpy.conversions.rpm_to_rad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rpm_to_rad</span></code></a>(rpm)</p></td>
-<td><p>RPM to Radians-per-Second Converter.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.conversions.seq_to_abc.html#electricpy.conversions.seq_to_abc" title="electricpy.conversions.seq_to_abc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seq_to_abc</span></code></a>(M012[, reference])</p></td>
-<td><p>Sequence-System to Phase-System Conversion.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.conversions.seq_to_phs.html#electricpy.conversions.seq_to_phs" title="electricpy.conversions.seq_to_phs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seq_to_phs</span></code></a>(M012[, reference])</p></td>
-<td><p>Sequence-System to Phase-System Conversion.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.conversions.sequencez.html#electricpy.conversions.sequencez" title="electricpy.conversions.sequencez"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sequencez</span></code></a>(Zabc[, reference, resolve, diag, ...])</p></td>
-<td><p>Sequence Impedance Calculator.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.conversions.watts.html#electricpy.conversions.watts" title="electricpy.conversions.watts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">watts</span></code></a>(hp)</p></td>
-<td><p>Horsepower to Watts Formula.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.conversions.watts_to_dbmw.html#electricpy.conversions.watts_to_dbmw" title="electricpy.conversions.watts_to_dbmw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">watts_to_dbmw</span></code></a>(watts)</p></td>
-<td><p>Watts to dBmW.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.conversions.watts_to_dbw.html#electricpy.conversions.watts_to_dbw" title="electricpy.conversions.watts_to_dbw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">watts_to_dbw</span></code></a>(watts)</p></td>
-<td><p>Watt to dBW converter.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.conversions.watts_to_hp.html#electricpy.conversions.watts_to_hp" title="electricpy.conversions.watts_to_hp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">watts_to_hp</span></code></a>(watts)</p></td>
-<td><p>Watts to Horsepower Function.</p></td>
-</tr>
-</tbody>
-</table>
+  <section id="electricpy-conversions-watts-to-dbmw">
+<h1 id="api-electricpy-conversions-watts-to-dbmw--page-root">electricpy.conversions.watts_to_dbmw<a class="headerlink" href="#api-electricpy-conversions-watts-to-dbmw--page-root" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="electricpy.conversions.watts_to_dbmw">
+<span class="sig-prename descclassname"><span class="pre">electricpy.conversions.</span></span><span class="sig-name descname"><span class="pre">watts_to_dbmw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">watts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/conversions.html#watts_to_dbmw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.conversions.watts_to_dbmw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Watts to dBmW.</p>
+<p>Given the power in watts, this function will evulate
+the power in the decibel milliwatt scale.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>watt</strong> (<em>float</em>) – A unit of power</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>dbmw</strong> – A unit of power in the decibel-milliwatts scale</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 </section>
 
 
@@ -487,7 +395,7 @@ to aid in scientific calculations.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
           
-            <a href="electricpy.bode.zbode.html" title="electricpy.bode.zbode"
+            <a href="electricpy.conversions.watts.html" title="electricpy.conversions.watts"
                class="md-flex md-footer-nav__link md-footer-nav__link--prev"
                rel="prev">
               <div class="md-flex__cell md-flex__cell--shrink">
@@ -496,17 +404,17 @@ to aid in scientific calculations.</p>
               <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
                 <span class="md-flex__ellipsis">
                   <span
-                      class="md-footer-nav__direction"> Previous </span> electricpy.bode.zbode </span>
+                      class="md-footer-nav__direction"> Previous </span> electricpy.conversions.watts </span>
               </div>
             </a>
           
           
-            <a href="electricpy.conversions.abc_to_seq.html" title="electricpy.conversions.abc_to_seq"
+            <a href="electricpy.conversions.watts_to_dbw.html" title="electricpy.conversions.watts_to_dbw"
                class="md-flex md-footer-nav__link md-footer-nav__link--next"
                rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
                 class="md-flex__ellipsis"> <span
-                class="md-footer-nav__direction"> Next </span> electricpy.conversions.abc_to_seq </span>
+                class="md-footer-nav__direction"> Next </span> electricpy.conversions.watts_to_dbw </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink"><i
                 class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>

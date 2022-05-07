@@ -25,6 +25,14 @@
     
     btu_to_kwh
     
+    dbmw_to_dbw
+    
+    dbmw_to_watts
+    
+    dbw_to_dbmw
+    
+    dbw_to_watts
+    
     hertz
     
     horsepower
@@ -58,6 +66,10 @@
     sequencez
     
     watts
+    
+    watts_to_dbmw
+    
+    watts_to_dbw
     
     watts_to_hp
     
