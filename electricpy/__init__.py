@@ -13,9 +13,9 @@ to aid in scientific calculations.
 ################################################################################
 
 # Define Module Specific Variables
-_name_ = "electricpy"
-_version_ = "0.2.2"
-__version__ = _version_  # Alias Version for User Ease
+import electricpy.version as _version
+__name__ = _version.__name__
+__version__ = _version.__version__  # Alias Version for User Ease
 
 # Version Breakdown:
 # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
@@ -592,7 +592,7 @@ def powertriangle(P=None, Q=None, S=None, PF=None, color="red",
     printval:   bool, optional
                 Control argument to allow the numeric values to be printed on
                 the plot, default="False"
-    
+
     Returns
     -------
     matplotlib.pyplot:  Plotting object to be used for additional configuration
@@ -974,7 +974,7 @@ def led_resistor(Vsrc, Vfwd = 2, Ifwd = 20):
             Forward voltage of LED (or series LEDs if available), default=2
     Ifwd:   float, optional
             Forward current of LEDs in milliamps, default=20 (milliamps)
-    
+
     Returns
     -------
     R:      float
@@ -1084,14 +1084,14 @@ def dynetz(delta=None, wye=None, round=None):
 def bridge_impedance(z1, z2, z3, z4, z5):
     r"""
     Bridge Impedance Calculator.
-    
+
     The following condition describing the Wheatstone Bridge is utilized to
     ensure that current through `z5` will be zero.
 
     .. math:: z1 \cdot z3 = z2 \cdot z4
-    
+
     .. image:: /static/WheatstoneBridgeCircuit.png
-    
+
     Parameters
     ----------
     z1:     [float, complex]
@@ -1673,7 +1673,7 @@ def convbar(h, x, outline=True):
     >>> h = np.array([0, 1, 1, 1, 0])
     >>> x = np.array([0, 1, 1, 1, 0])
     >>> ep.convbar(h, x)
-    
+
     .. image:: /static/convbar-example.png
 
     Parameters
@@ -2434,7 +2434,7 @@ def fftplot(dc, real, imag=None, title="Fourier Coefficients"):
     title:      str, optional
                 String appended to plot title,
                 default="Fourier Coefficients"
-    
+
     Returns
     -------
     matplotlib.pyplot:  Plotting object to be used for additional configuration
@@ -2502,7 +2502,7 @@ def fftsumplot(dc, real, imag=None, freq=60, xrange=None, npts=1000,
     title:      str, optional
                 String appended to plot title,
                 default="Fourier Series Summation"
-    
+
     Returns
     -------
     matplotlib.pyplot:  Plotting object to be used for additional configuration
@@ -2845,7 +2845,7 @@ def tap_changing_transformer(Vgen, Vdis, Pload, Qload, R, X):
     The purpose of a tap changer is to regulate the output voltage of a
     transformer. It does this by altering the number of turns in one winding and
     thereby changing the turns ratio of the transformer
-    
+
     .. math:: \sqrt{\frac{Vgen^2}{Vgen \cdot Vdis - R \cdot P - X \cdot Q}}
 
     Parameters
@@ -2862,7 +2862,7 @@ def tap_changing_transformer(Vgen, Vdis, Pload, Qload, R, X):
             Resistance of transmission line
     X:      float
             Reactance of transmission line
-    
+
     Returns
     -------
     ts:     float
@@ -2883,12 +2883,12 @@ def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
     .. math:: \sum_{i=1}^{n-2} V_{i} + V_{n-1} \cdot (1+m) - V_{n} \cdot m=0
 
     .. math:: \sum_{i=1}^{n} V_{i} = V_{\text{transmission line}}
-    
+
     .. image:: /static/SuspensionInuslator.png
-    
+
     `Additional Information
     <https://electrical-engineering-portal.com/download-center/books-and-guides/power-substations/insulator-pollution>`_
-    
+
     Parameters
     ----------
     number_capacitors:  int
@@ -2897,7 +2897,7 @@ def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
                         Ratio of disk capacitance and pin to pole air capacitance
     Voltage:            float
                         Voltage difference between the transmission line and ground
-    
+
     Returns
     -------
     string_efficiency:          float
@@ -3163,32 +3163,32 @@ def propagation_constants(z, y, length):
 
     This function will evaluate the propagation constants for a long transmission
     line whose properties are governed by the differential equation:
-    
+
     .. math:: \frac{d^2V}{dx^2} = \gamma V
-    
+
     From the above equation, the following formulas are derived to evaluate the
     desired constants.
-    
+
     .. math:: \gamma = \sqrt( z * y )
-    
+
     .. math:: Z_{\text{surge}} = \sqrt( z / y )
-    
+
     .. math:: \alpha = \Re{ \gamma }
-    
+
     .. math:: \beta = \Im{ \gamma }
-    
+
     Parameters
     ----------
     z:              complex
                     Impedence of the transmission line: R+j*2*pi*f*L
     y:              complex
                     Admitance of the transmission line g+j*2*pi*f*C
-        
+
     Returns
     -------
     params:    dict
                Dictionary of propagation constants including:
-                    
+
                          gamma:   Propagation constant
                          zc:            Surge impedance
                          alpha:      Attenuation constant
@@ -4753,7 +4753,7 @@ def wireresistance(length=None,diameter=None,rho=16.8*10**-9,R=None):
                 Wire diameter, unitless.
     rho:        [float], optional
                 Material resistivity, unitless
-                Default value is copper resistivity: 16.8*10-9 
+                Default value is copper resistivity: 16.8*10-9
     R:          [float], optional
                 Wire resistance, unitless.
 
@@ -4765,7 +4765,7 @@ def wireresistance(length=None,diameter=None,rho=16.8*10**-9,R=None):
                 Wire diameter, unitless.
     rho:        [float], optional
                 Material resistivity, unitless
-                Default value is copper resistivity: 16.8*10-9 
+                Default value is copper resistivity: 16.8*10-9
     R:          [float], optional
                 Wire resistance, unitless.
     """
@@ -4882,37 +4882,37 @@ def solenoid_inductance(A=None, l=None, N=None, u=u0, L=None):
     # Given inductance, area and length
     elif L != None and A != None and l != None:
         return _np.sqrt(L*l/(u*A))
-        
+
 def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
     """
     555 Integrated Circuit Calculator.
-    
+
     Evaluate a number of common attributes related to the common 555 integrated
     circuit including time period, frequency, duty cycle, time spent low during
     each cycle, time spent high during each cycle.
 
     TODO: This function should be broken into multiple smaller functions.
-    
+
     Parameters
-    ---------- 
+    ----------
     R:      list[float, float] or tuple(float, float), optional
             List of 2 resistor which are need in configuring IC 555.
     C:      float, optional
             Capacitance between Threshold Pin and ground
     f:      float, optional
-            Electrical system frequency in Hertz. 
+            Electrical system frequency in Hertz.
     t_high: float, optional
-            ON time of IC 555 
+            ON time of IC 555
     t_low:  float, optional
-            OFF time of IC 555 
-    
-    Returns 
-    ------- 
-    dict:   "time_period": Time period of oscillating IC 555 
-            "frequency": frequency of oscilation of IC 555 
+            OFF time of IC 555
+
+    Returns
+    -------
+    dict:   "time_period": Time period of oscillating IC 555
+            "frequency": frequency of oscilation of IC 555
             "duty_cycle": ration between ON time and total time
-            "t_low": ON time of IC 555 
-            "t_high": OFF time of IC 555 
+            "t_low": ON time of IC 555
+            "t_high": OFF time of IC 555
     """
     if R!=None and C!=None:
         if len(R) != 2:
@@ -4936,7 +4936,7 @@ def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
             't_low':t_low,
             't_high':t_high
         }
-    
+
     elif t_high!=None and t_low!=None and C!=None:
 
         x2 = t_low/C*_np.log(2)
@@ -4954,37 +4954,37 @@ def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
         }
     else:
         raise TypeError("Not enough parqmeters are passed")
-            
+
 def ic_555_monostable(R=None,C=None,freq=None,t_high=None,t_low=None):
     """
     555 Integrated Circuit Calculator.
-    
+
     Evaluate a number of common attributes related to the common 555 integrated
     circuit including time period, frequency, duty cycle, time spent low during
     each cycle, time spent high during each cycle.
 
     TODO: This function should be broken into multiple smaller functions.
-    
+
     Parameters
-    ---------- 
+    ----------
     R:      list[float, float] or tuple(float, float), optional
             List of 2 resistor which are need in configuring IC 555.
     C:      float, optional
             Capacitance between Threshold Pin and ground
     f:      float, optional
-            Electrical system frequency in Hertz. 
+            Electrical system frequency in Hertz.
     t_high: float, optional
-            ON time of IC 555 
+            ON time of IC 555
     t_low:  float, optional
-            OFF time of IC 555 
-    
-    Returns 
-    ------- 
-    dict:   "time_period": Time period of oscillating IC 555 
-            "frequency": frequency of oscilation of IC 555 
+            OFF time of IC 555
+
+    Returns
+    -------
+    dict:   "time_period": Time period of oscillating IC 555
+            "frequency": frequency of oscilation of IC 555
             "duty_cycle": ration between ON time and total time
-            "t_low": ON time of IC 555 
-            "t_high": OFF time of IC 555 
+            "t_low": ON time of IC 555
+            "t_high": OFF time of IC 555
     """
     T = t_high+t_low
     if R is None:
@@ -5022,8 +5022,8 @@ def t_attenuator(Adb, Z0):
     r"""
     T attenuator.
 
-    The T attenuator is a type of attenuator that looks like the letter T. 
-    The T attenuator consists of three resistors. Two of these are connected in 
+    The T attenuator is a type of attenuator that looks like the letter T.
+    The T attenuator consists of three resistors. Two of these are connected in
     series and the other one is connected from between the two other resistors
     to ground. The resistors in series often have the same resistance.
 
@@ -5033,12 +5033,12 @@ def t_attenuator(Adb, Z0):
     .. image:: /static/t-attenuator-circuit.png
 
     Parameters
-    ---------- 
+    ----------
     Adb: float Attenuation in db
     Z0: float Impedence
 
-    Returns 
-    ------- 
+    Returns
+    -------
     R1: float T attenuator R1
     R2: float T attenuator R2
     """
@@ -5054,7 +5054,7 @@ def pi_attenuator(Adb, Z0):
     Pi attenuator.
 
     The Pi attenuator is a type of attenuator that looks like the Greek letter π.
-    The Pi attenuator consists of three resistors. One of these is connected in series and 
+    The Pi attenuator consists of three resistors. One of these is connected in series and
     the other two are connected in parallel to ground. The parallel resistors often have the same resistance.
 
     .. math:: R1 = Z0*(\frac{10^{\frac{A_{db}}{20}}+1}{10^{\frac{A_{db}}{20}}-1})
@@ -5062,12 +5062,12 @@ def pi_attenuator(Adb, Z0):
     .. image:: /static/pi-attenuator-circuit.png
 
     Parameters
-    ---------- 
+    ----------
     Adb: float Attenuation in db
     Z0: float Impedence
 
-    Returns 
-    ------- 
+    Returns
+    -------
     R1: float π attenuator R1
     R2: float π attenuator R2
     """
