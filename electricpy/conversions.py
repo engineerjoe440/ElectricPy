@@ -504,7 +504,7 @@ def dbw_to_dbmw(dbw):
     dbmw = dbw + 30
     return dbmw
 
-    
+
 # Define dBmW to dBW converter
 def dbmw_to_dbw(dbmw):
     """
@@ -569,4 +569,73 @@ def watts_to_dbmw(watts):
     dbmw = dbw_to_dbmw(dbw)
     return dbmw
 
+
+# Define Voltage to decibel converter
+def voltage_to_db(voltage, ref_voltage):
+    """
+    Voltage to Decibel.
+
+    Given the voltage and reference voltage, this function will evaluate
+    the voltage in the decibel scale.
+
+    Parameters
+    ----------
+    voltage:     float
+                 voltage
+
+    ref_voltage: float
+                 Reference voltage
+    Return
+    ------
+    decibel:    float
+                voltage in the decibel scale
+    """
+
+    return 20 * _np.log10(voltage / ref_voltage)
+
+
+# Define Decibel to reference Voltage
+def db_to_vref(db, voltage):
+    """
+    Decibel to Reference Voltage.
+
+    Given decibel and voltage, this function will evaluate
+    the power of reference voltage.
+
+    Parameters
+    ----------
+    db:          float
+                 voltage in Decibel
+
+    voltage:     float
+                 Voltage
+    Return
+    ------
+    ref_voltage: float
+                 reference voltage
+    """
+    return voltage * _np.power(10, -(db / 20))
+
+
+# Define Decibel to reference Voltage
+def db_to_voltage(db, ref_voltage):
+    """
+    Decibel to Reference Voltage.
+
+    Given decibel and voltage, this function will evaluate
+    the power of reference voltage.
+
+    Parameters
+    ----------
+    db:              float
+                     voltage in Decibel
+
+    ref_voltage:     float
+                     Ref Voltage
+    Return
+    ------
+    voltage:         float
+                     Voltage
+    """
+    return ref_voltage * _np.power(10, -(db / 20))
 # END
