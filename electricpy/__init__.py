@@ -5146,7 +5146,7 @@ def zener_diode_power(Vin, Vo, R):
     return(P)
 
 def lm317(r1, r2, v_out):
-    """
+    r"""
     LM317.
 
     The LM317 is a linear voltage regulator that can be adjusted to supply a specific output voltage.
