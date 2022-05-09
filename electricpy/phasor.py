@@ -227,7 +227,6 @@ def vectarray(arr, degrees=True, flatarray=False):
     electricpy.phasor.phasor:       Phasor Generating Function
     electricpy.phasor.phasorlist:   Phasor Generator for List or Array
     """
-
     # Iteratively Append Arrays to the Base
 
     def vector_cast(num):
