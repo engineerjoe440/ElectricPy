@@ -1,0 +1,6 @@
+electricpy.zener\_diode\_required\_resistor
+===========================================
+
+.. currentmodule:: electricpy
+
+.. autofunction:: zener_diode_required_resistor

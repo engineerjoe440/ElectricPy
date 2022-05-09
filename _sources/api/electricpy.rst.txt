@@ -189,6 +189,10 @@
     
     zdecompose
     
+    zener_diode_power
+    
+    zener_diode_required_resistor
+    
     zperlength
     
     zpu

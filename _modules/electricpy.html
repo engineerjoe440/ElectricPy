@@ -5440,6 +5440,74 @@
     <span class="k">return</span> <span class="n">R1</span><span class="p">,</span><span class="n">R2</span></div>
 
 
+<span class="c1"># Calculate Zener Diode Resistor</span>
+<div class="viewcode-block" id="zener_diode_required_resistor"><a class="viewcode-back" href="../api/electricpy.zener_diode_required_resistor.html#electricpy.zener_diode_required_resistor">[docs]</a><span class="k">def</span> <span class="nf">zener_diode_required_resistor</span><span class="p">(</span><span class="n">Vin</span><span class="p">,</span> <span class="n">Vo</span><span class="p">,</span> <span class="n">I</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Zener diode required resistor function.</span>
+
+<span class="sd">    A zener diode is uses to allow current to flow "backwards" when the zener </span>
+<span class="sd">    voltage is reached. This function use to calculate the required resistor </span>
+<span class="sd">    value following below formula: </span>
+
+<span class="sd">    .. math:: R = \frac{V_{in(min)} - V_{out}}{I_{load}+0.01}</span>
+
+<span class="sd">    .. image:: /static/zenerdiode.png</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Vin:        float</span>
+<span class="sd">                Minimum input Voltage in Volt</span>
+<span class="sd">    Vo:         float</span>
+<span class="sd">                Output Voltage in Volt</span>
+<span class="sd">    I:          float</span>
+<span class="sd">                Load Current in Ampere</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    R:          float</span>
+<span class="sd">                Load Resistance in Ohm </span>
+<span class="sd">    """</span>
+    <span class="c1"># Solve Load Resistance</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="p">(</span><span class="n">Vin</span> <span class="o">-</span> <span class="n">Vo</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">I</span><span class="o">+</span><span class="mf">0.01</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">R</span><span class="p">)</span></div>
+
+<span class="c1"># Calculate Zener Diode Power</span>
+<div class="viewcode-block" id="zener_diode_power"><a class="viewcode-back" href="../api/electricpy.zener_diode_power.html#electricpy.zener_diode_power">[docs]</a><span class="k">def</span> <span class="nf">zener_diode_power</span><span class="p">(</span><span class="n">Vin</span><span class="p">,</span> <span class="n">Vo</span><span class="p">,</span> <span class="n">R</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Zener diode power-loss function.</span>
+
+<span class="sd">    A zener diode is uses to allow current to flow "backwards" when the zener </span>
+<span class="sd">    voltage is reached. This function use to calculate the power in resistor </span>
+<span class="sd">    following below formula: </span>
+
+<span class="sd">    .. math:: P_R = \frac{(V_{out} - V_{in(max)})^2}{R}</span>
+
+<span class="sd">    .. image:: /static/zenerdiode.png</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Vin:        float</span>
+<span class="sd">                Maximum input Voltage in Volt</span>
+<span class="sd">    Vo:         float</span>
+<span class="sd">                Output Voltage in Volt</span>
+<span class="sd">    R:          float</span>
+<span class="sd">                Load Resistance in Ohm</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    P:          float </span>
+<span class="sd">                Power on resistance in Watt </span>
+<span class="sd">    """</span>
+
+    <span class="c1"># Validate Inputs</span>
+    <span class="k">if</span> <span class="n">R</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Resistance Value can not be zero"</span><span class="p">)</span>
+    
+    <span class="c1"># Solve Load Resistance</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="p">((</span><span class="n">Vo</span> <span class="o">-</span> <span class="n">Vin</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">R</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">P</span><span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="lm317"><a class="viewcode-back" href="../api/electricpy.lm317.html#electricpy.lm317">[docs]</a><span class="k">def</span> <span class="nf">lm317</span><span class="p">(</span><span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">v_out</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    LM317.</span>
@@ -5488,6 +5556,7 @@
 
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid arguments"</span><span class="p">)</span></div>
+
 <span class="c1"># END OF FILE</span>
 </pre></div>
 
