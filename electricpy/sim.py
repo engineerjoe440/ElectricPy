@@ -513,10 +513,10 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
     D = _np.asmatrix(D)
 
     # Create values for input testing
-    if isinstance(func, function):  # if f is a function, test as one
+    if callable(func):  # if f is a function, test as one
         mF = func(1)  # f should return: int, float, tuple, _np.arr, _np.matrix
     elif isinstance(func, (tuple, list)):  # if f is tupple of arguments
-        if isinstance(func[0], function):  # if first argument is a function
+        if callable(func[0]):  # if first argument is a function
             c_funcs = c_func_concat(func)  # concatinate functions into one
             mF = "MultiFunctions"  # label as multiple concatenated functions
         else:
