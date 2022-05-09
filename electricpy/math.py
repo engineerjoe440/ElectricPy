@@ -144,7 +144,6 @@ def gausdist(x, mu=0, sigma=1):
             Computed distribution of the gausian function at the
             points specified by (array) x
     """
-
     # Define Integrand
     def integrand(sq):
         return _np.exp(-sq ** 2 / 2)
