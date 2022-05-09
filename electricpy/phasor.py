@@ -44,7 +44,7 @@ def phs(ang):
     electricpy.phasor.phasor:       Phasor Generating Function
     """
     # Return the Complex Angle Modulator
-    return (_np.exp(1j * _np.radians(ang)))
+    return _np.exp(1j * _np.radians(ang))
 
 
 phase = phs  # Create Duplicate Name
@@ -89,7 +89,7 @@ def phasor(mag, ang=0):
     if isinstance(mag, (tuple, list, _np.ndarray)):
         ang = mag[1]
         mag = mag[0]
-    return (_c.rect(mag, _np.radians(ang)))
+    return _c.rect(mag, _np.radians(ang))
 
 
 # Define Impedance Conversion function
@@ -132,13 +132,13 @@ def phasorz(C=None, L=None, freq=60, complex=True):
     """
     w = 2 * _np.pi * freq
     # C Given in ohms, return as Z
-    if (C != None):
+    if C is not None:
         Z = -1 / (w * C)
     # L Given in ohms, return as Z
-    if (L != None):
+    if L is not None:
         Z = w * L
     # If asked for imaginary number
-    if (complex):
+    if complex:
         Z *= 1j
     return Z
 
@@ -189,6 +189,7 @@ def phasorlist(arr):
 
     # Return Array
     return _np.array([phasor(i) for i in arr])
+
 
 # Define Vector Array Generator
 def vectarray(arr, degrees=True, flatarray=False):
@@ -241,6 +242,7 @@ def vectarray(arr, degrees=True, flatarray=False):
     if not flatarray:
         polararr = _np.reshape(polararr, (-1, 2))
     return polararr
+
 
 # Define Phasor Data Generator
 def phasordata(mn, mx=None, npts=1000, mag=1, ang=0, freq=60,
@@ -300,8 +302,9 @@ def phasordata(mn, mx=None, npts=1000, mag=1, ang=0, freq=60,
         dataset.append(t)
     # Return Dataset
     if len(dataset) == 1:
-        return (dataset[0])
-    return (dataset)
+        return dataset[0]
+    return dataset
+
 
 # Define Complex Composition Function
 def compose(*arr):
@@ -354,7 +357,7 @@ def compose(*arr):
         if length != 2:
             raise ValueError("Invalid Array Size, Saw Length of " + str(length))
         # Valid Size, Calculate and Return
-        return (arr[0] + 1j * arr[1])
+        return arr[0] + 1j * arr[1]
 
 
 # Define Parallel Impedance Adder
@@ -387,31 +390,32 @@ def parallelz(*args):
         Z = args[0]  # Only One Tuple Provided
         try:
             L = len(Z)
-            if (L == 1):
+            if L == 1:
                 Zp = Z[0]  # Only one impedance, burried in tuple
             else:
                 # Inversely add the first two elements in tuple
                 Zp = (1 / Z[0] + 1 / Z[1]) ** (-1)
                 # If there are more than two elements, add them all inversely
-                if (L > 2):
+                if L > 2:
                     for i in range(2, L):
                         Zp = (1 / Zp + 1 / Z[i]) ** (-1)
-        except:
+        except ValueError or IndexError:
             Zp = Z  # Only one impedance
     else:
         Z = args  # Set of Args acts as Tuple
         # Inversely add the first two elements in tuple
         Zp = (1 / Z[0] + 1 / Z[1]) ** (-1)
         # If there are more than two elements, add them all inversely
-        if (L > 2):
+        if L > 2:
             for i in range(2, L):
                 Zp = (1 / Zp + 1 / Z[i]) ** (-1)
-    return (Zp)
+    return Zp
+
 
 # Define Phasor Plot Generator
 def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
-            colors=None, radius=None, linewidth=None, size=None,
-            label=False, labels=False, tolerance=None):
+               colors=None, radius=None, linewidth=None, size=None,
+               label=False, labels=False, tolerance=None):
     """
     Phasor Plotting Function.
 
@@ -460,7 +464,7 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
                 plotted as a single point at the origin, by default, the
                 tolerance is scaled to be 1/25-th the maximum radius. To disable
                 the tolerance, simply provide either False or -1.
-    
+
     Returns
     -------
     matplotlib.pyplot:  Plotting object to be used for additional configuration
@@ -472,21 +476,21 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     except TypeError:
         phasor = [phasor]
     # Manage Colors
-    if colors == None:
+    if colors is None:
         colors = [
-            "#FF0000", "#800000", "#FFFF00", "#808000", "#00ff00","#008000",
+            "#FF0000", "#800000", "#FFFF00", "#808000", "#00ff00", "#008000",
             "#00ffff", "#008080", "#0000ff", "#000080", "#ff00ff", "#800080"
         ]
     # Scale Radius
-    if radius == None:
+    if radius is None:
         radius = _np.abs(phasor).max()
     # Set Tolerance
-    if tolerance == None:
+    if tolerance is None:
         tolerance = radius / 25
     elif tolerance == False:
         tolerance = -1
     # Set Background Color
-    if bg == None:
+    if bg is None:
         bg = "#FFFFFF"
     # Load labels if handled in other argument
     if label != False:
@@ -501,7 +505,7 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
             "ERROR: Too many phasors provided. Specify more line colors."
         )
 
-    if size == None:
+    if size is None:
         # Force square figure and square axes
         width, height = _matplotlib.rcParams['figure.figsize']
         size = min(width, height)
@@ -516,18 +520,19 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     for i in range(numphs):
         mag, ang_r = _c.polar(phasor[i])
         # Plot with labels
-        if legend != False:
+        if legend:
             if mag > tolerance:
                 hand = _plt.arrow(0, 0, ang_r, mag, color=colors[i],
-                                label=legend[i], linewidth=linewidth)
+                                  label=legend[i], linewidth=linewidth)
             else:
                 hand = _plt.plot(0, 0, 'o', markersize=linewidth * 3,
-                                label=legend[i], color=colors[i])
+                                 label=legend[i], color=colors[i])
             handles = _np.append(handles, [hand])
         # Plot without labels
         else:
             _plt.arrow(0, 0, ang_r, mag, color=colors[i], linewidth=linewidth)
-    if legend != False: _plt.legend((handles), legend)
+    if legend:
+        _plt.legend(handles, legend)
     # Set Minimum and Maximum Radius Terms
     ax.set_rmax(radius)
     ax.set_rmin(0)

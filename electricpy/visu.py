@@ -7,12 +7,15 @@ this module is designed to assist engineers visualize their designs.
 """
 ################################################################################
 
-import numpy as _np
-import matplotlib.pyplot as _plt
 import cmath
+
+import matplotlib.pyplot as _plt
+import numpy as _np
+
 from electricpy import geometry
 from electricpy.geometry import Point
 from electricpy.geometry.circle import Circle
+
 
 class InductionMotorCircle:
     """
@@ -33,7 +36,7 @@ class InductionMotorCircle:
     ...     blocked_rotor_data=blocked_rotor_test_data,
     ...     output_power=output_power,
     ...     torque_ration=ratio,
-    ...     frequency=50, 
+    ...     frequency=50,
     ...     poles=4
     ... )
 
@@ -61,7 +64,7 @@ class InductionMotorCircle:
     """
 
     def __init__(self, no_load_data, blocked_rotor_data, output_power,
-                torque_ration=1, frequency=50, poles=4):
+                 torque_ration=1, frequency=50, poles=4):
         """Primary Entrypoint."""
         self.no_load_data = no_load_data
         self.blocked_rotor_data = blocked_rotor_data
@@ -147,11 +150,11 @@ class InductionMotorCircle:
         # Full load output
         _plt.plot(
             [self.secondary_current_line[0][1],
-            self.secondary_current_line[0][1]],
+             self.secondary_current_line[0][1]],
             [self.secondary_current_line[1][1], self.center_y])
         # Diameter of the circle
         _plt.plot([self.center_x - self.radius, self.center_x + self.radius],
-                [self.center_y, self.center_y], ls='-.')
+                  [self.center_y, self.center_y], ls='-.')
         # Max torque line
         _plt.plot(
             [self.center_x, self.torque_max_x],
@@ -215,7 +218,7 @@ class InductionMotorCircle:
         rotor_cu_loss = total_cu_loss - stator_cu_loss
 
         rotor_output = self.power_y * self.power_scale - \
-                    (rotor_cu_loss + stator_cu_loss + no_load_losses)
+                       (rotor_cu_loss + stator_cu_loss + no_load_losses)
 
         slip = rotor_cu_loss / rotor_output
 
@@ -324,7 +327,7 @@ class InductionMotorCircle:
         """
         Determine induction motor circle desired output power point.
 
-        Obtain the point on the induction motor circle diagram which 
+        Obtain the point on the induction motor circle diagram which
         corresponds to the desired output power
         """
         [[x1, x2], [y1, y2]] = self.secondary_current_line
@@ -344,6 +347,7 @@ class InductionMotorCircle:
         p_x_2 = center_x - self.radius * _np.cos(beta_1)
         p_y_2 = center_y + self.radius * _np.sin(beta_1)
         return [p_x_1, p_y_1], [p_x_2, p_y_2]
+
 
 class PowerCircle:
     r"""
@@ -369,16 +373,16 @@ class PowerCircle:
 
     Parameters
     ----------
-    power_circle_type:  ["sending", "receiving"] 
-                        Type of power circle diagram to plot. 
-    Vr:                 complex 
+    power_circle_type:  ["sending", "receiving"]
+                        Type of power circle diagram to plot.
+    Vr:                 complex
                         Transmission Line Receiving End Voltage (phasor complex
                         value)
     Vs:                 complex
                         Transmission Line Sending End Voltage (phasor complex
                         value)
     power_factor:       float
-                        Power Factor of the transmission system, default = None 
+                        Power Factor of the transmission system, default = None
     Pr:                 float
                         Receiving End Real Power, default = None
     Qr:                 float
@@ -391,14 +395,14 @@ class PowerCircle:
                         Sending End Reactive Power, default = None
     Ss:                 complex
                         Sending End Total Complex Power, default = None
-    A:                  float 
-                        Transmission System ABCD Parameters, A, default = None     
-    B:                  float 
-                        Transmission System ABCD Parameters, B, default = None         
-    C:                  float 
-                        Transmission System ABCD Parameters, C, default = None     
-    D:                  float 
-                        Transmission System ABCD Parameters, D, default = None 
+    A:                  float
+                        Transmission System ABCD Parameters, A, default = None
+    B:                  float
+                        Transmission System ABCD Parameters, B, default = None
+    C:                  float
+                        Transmission System ABCD Parameters, C, default = None
+    D:                  float
+                        Transmission System ABCD Parameters, D, default = None
     """
 
     def __init__(self, power_circle_type: str, power_factor: float = None,
@@ -409,21 +413,21 @@ class PowerCircle:
                  D: complex = None) -> None:
         r"""Initialize the class."""
         if C is not None:
-            assert abs(A*D - B*C - 1) < 1e-6, "ABCD Matrix is not a valid ABCD Matrix"
+            assert abs(A * D - B * C - 1) < 1e-6, "ABCD Matrix is not a valid ABCD Matrix"
 
         if power_circle_type.lower() == "receiving":
 
-            if A != None and B != None and Vr != None:
-                self.radius, self.center, self.operating_point = PowerCircle._build_circle(A, B, "receiving_end", Vr, 
-                Pr, Qr, Sr, power_factor, Vs)
+            if A is not None and B is not None and Vr is not None:
+                self.radius, self.center, self.operating_point = PowerCircle._build_circle(A, B, "receiving_end", Vr,
+                                                                                           Pr, Qr, Sr, power_factor, Vs)
             else:
                 raise ValueError("Not enough attributes to build circle")
 
         elif power_circle_type.lower() == "sending":
-            
-            if B != None and D != None and Vs != None:
-                self.radius, self.center, self.operating_point = PowerCircle._build_circle(D, B, "sending_end", Vs, 
-                Ps, Qs, Ss, power_factor, Vr)
+
+            if B is not None and D is not None and Vs is not None:
+                self.radius, self.center, self.operating_point = PowerCircle._build_circle(D, B, "sending_end", Vs,
+                                                                                           Ps, Qs, Ss, power_factor, Vr)
             else:
                 raise ValueError("Not enough attributes to build power circle")
 
@@ -434,37 +438,37 @@ class PowerCircle:
         self.parameters = locals()
 
     @staticmethod
-    def _build_circle(a1, a2, circle_type, V, P = None, Q = None, S = None, power_factor = None, V_ref = None):
+    def _build_circle(a1, a2, circle_type, V, P=None, Q=None, S=None, power_factor=None, V_ref=None):
 
-        k = (abs(V)**2)*abs(a1)/abs(a2)
+        k = (abs(V) ** 2) * abs(a1) / abs(a2)
         alpha = cmath.phase(a1)
         beta = cmath.phase(a2)
-        
+
         if circle_type == "receiving_end":
-            center = Point(-k*cmath.cos(alpha - beta), -k*cmath.sin(alpha - beta))
+            center = Point(-k * cmath.cos(alpha - beta), -k * cmath.sin(alpha - beta))
 
         elif circle_type == "sending_end":
-            center = Point(k*cmath.cos(alpha -beta), -k*cmath.sin(alpha - beta))
+            center = Point(k * cmath.cos(alpha - beta), -k * cmath.sin(alpha - beta))
 
-        if V_ref != None and P != None and Q != None:
-            radius = abs(V)*abs(V_ref)/(abs(a2))
+        if V_ref is not None and P is not None and Q is not None:
+            radius = abs(V) * abs(V_ref) / (abs(a2))
             operation_point = Point(P, Q)
 
-        elif V_ref != None and S != None:
-            radius = abs(V)*abs(V_ref)/(abs(a2))
+        elif V_ref is not None and S is not None:
+            radius = abs(V) * abs(V_ref) / (abs(a2))
             operation_point = Point(S.real, S.imag)
 
-        elif P != None and Q != None:
+        elif P is not None and Q is not None:
             radius = geometry.distance(center, Point(P, Q))
             operation_point = Point(P, Q)
 
-        elif S != None:
+        elif S is not None:
             radius = geometry.distance(center, Point(S.real, S.imag))
             operation_point = Point(S.real, S.imag)
 
-        elif P != None and power_factor != None:
+        elif P is not None and power_factor is not None:
 
-            Q = P*cmath.sqrt(1/power_factor**2 - 1).real
+            Q = P * cmath.sqrt(1 / power_factor ** 2 - 1).real
 
             if power_factor < 0:
                 Q = -Q
@@ -472,8 +476,8 @@ class PowerCircle:
             radius = geometry.distance(center, Point(P, Q))
             operation_point = Point(P, Q)
 
-        elif Q != None and power_factor != None:
-            P = Q/cmath.sqrt(1/power_factor**2 - 1).real
+        elif Q is not None and power_factor is not None:
+            P = Q / cmath.sqrt(1 / power_factor ** 2 - 1).real
             radius = geometry.distance(center, Point(P, Q))
             operation_point = Point(P, Q)
 
@@ -483,41 +487,41 @@ class PowerCircle:
         return radius, center, operation_point
 
     def _cal_parameters(self, type1, type2):
-        
-        if self.parameters['V'+type2] == None:
-            self.parameters['V' + type2] = abs(self.parameters['B'])*self.radius/self.parameters['V' + type1]
 
-        if self.parameters['P'+type1] == None:
+        if self.parameters['V' + type2] is None:
+            self.parameters['V' + type2] = abs(self.parameters['B']) * self.radius / self.parameters['V' + type1]
+
+        if self.parameters['P' + type1] is None:
             self.parameters['P' + type1] = self.operating_point.x
 
-        if self.parameters['Q'+type1] == None:
+        if self.parameters['Q' + type1] is None:
             self.parameters['Q' + type1] = self.operating_point.y
 
-        if self.parameters['S'+type1] == None:
-            self.parameters['S' + type1] = self.operating_point.x + 1j*self.operating_point.y
+        if self.parameters['S' + type1] == None:
+            self.parameters['S' + type1] = self.operating_point.x + 1j * self.operating_point.y
 
-        if self.parameters['power_factor'] == None:
-            self.parameters['power_factor'] = self.operating_point.y/self.operating_point.x
+        if self.parameters['power_factor'] is None:
+            self.parameters['power_factor'] = self.operating_point.y / self.operating_point.x
 
         if type1 == 'r' and type2 == 's':
-            self.parameters["Vs"] = self.parameters['B']*self.parameters["Sr"] + self.parameters["A"] * abs(self.parameters["Vr"])**2
-            self.parameters["Vs"] = self.parameters["Vs"]/self.parameters["Vr"].conjugate()
+            self.parameters["Vs"] = self.parameters['B'] * self.parameters["Sr"] + self.parameters["A"] * abs(
+                self.parameters["Vr"]) ** 2
+            self.parameters["Vs"] = self.parameters["Vs"] / self.parameters["Vr"].conjugate()
 
         elif type1 == 's' and type2 == 'r':
-            self.parameters["Vr"] = -self.parameters['B']*self.parameters["Ss"] + self.parameters["D"] * abs(self.parameters["Vs"])**2
-            self.parameters["Vr"] = self.parameters["Vr"]/self.parameters["Vs"].conjugate()
+            self.parameters["Vr"] = -self.parameters['B'] * self.parameters["Ss"] + self.parameters["D"] * abs(
+                self.parameters["Vs"]) ** 2
+            self.parameters["Vr"] = self.parameters["Vr"] / self.parameters["Vs"].conjugate()
 
     def print_data(self):
         r"""Print the data of the circle."""
-        if self.operating_point == None:
+        if self.operating_point is None:
             return self.center, self.radius
 
         if self.parameters["power_circle_type"] == "receiving":
-
             self._cal_parameters("r", "s")
 
         if self.parameters["power_circle_type"] == "sending":
-            
             self._cal_parameters("s", "r")
 
         for key, value in self.parameters.items():
@@ -526,11 +530,9 @@ class PowerCircle:
     def __call__(self) -> dict:
         r"""Return the data of the circle."""
         if self.parameters["power_circle_type"] == "receiving":
-
             self._cal_parameters("r", "s")
 
         if self.parameters["power_circle_type"] == "sending":
-
             self._cal_parameters("s", "r")
 
         return self.parameters
@@ -539,11 +541,11 @@ class PowerCircle:
         r"""Plot the circle."""
         circle_x = []
         circle_y = []
-        
+
         for data in self.circle.parametric_equation(theta_resolution=1e-5):
             [x, y] = data
             circle_x.append(x)
-            circle_y.append(y)        
+            circle_y.append(y)
 
         c_x = self.center.x
         c_y = self.center.y
@@ -551,13 +553,13 @@ class PowerCircle:
         op_x = self.operating_point.x
         op_y = self.operating_point.y
 
-        #plot Circle and Diameter
+        # plot Circle and Diameter
         _plt.plot(circle_x, circle_y)
         _plt.plot([c_x - self.radius, c_x + self.radius], [c_y, c_y], 'g--')
         _plt.plot([c_x, c_x], [c_y - self.radius, c_y + self.radius], 'g--')
 
         _plt.plot([c_x, op_x], [c_y, op_y], 'y*-.')
-        _plt.plot([op_x, op_x], [op_y, c_y], 'b*-.') 
+        _plt.plot([op_x, op_x], [op_y, c_y], 'b*-.')
         _plt.scatter(op_x, op_y, marker='*', color='r')
         _plt.title(
             f"{self.parameters['power_circle_type'].capitalize()} Power Circle"
@@ -567,11 +569,12 @@ class PowerCircle:
         _plt.grid()
         return _plt
 
+
 def receiving_end_power_circle(Vr: complex = None, A: complex = None,
-                               B: complex = None, Pr:float = None,
+                               B: complex = None, Pr: float = None,
                                Qr: float = None, Sr: complex = None,
                                power_factor: float = None, Vs: complex = None
-                            ) -> PowerCircle :
+                               ) -> PowerCircle:
     """
     Construct Receiving End Power Circle.
 
@@ -591,11 +594,11 @@ def receiving_end_power_circle(Vr: complex = None, A: complex = None,
 
     Parameters
     ----------
-    Vr:             complex    
+    Vr:             complex
                     Receiving End Voltage, default = None.
-    A:              complex     
+    A:              complex
                     Transmission System ABCD Parameters, A, default = None.
-    B:              complex,     
+    B:              complex,
                     Transmission System ABCD Parameters, B, default = None.
     Pr:             float, optional
                     Receiving End Real Power, default = None
@@ -613,7 +616,7 @@ def receiving_end_power_circle(Vr: complex = None, A: complex = None,
     Receiving End Power Circle: PowerCircle
     """
     try:
-        assert Vr != None and A != None and B != None
+        assert Vr is not None and A is not None and B is not None
     except AssertionError:
         raise ValueError(
             "Not enough attributes to build Receiving end power circle at least"
@@ -621,12 +624,12 @@ def receiving_end_power_circle(Vr: complex = None, A: complex = None,
         )
 
     if not (
-        ((Pr != None and Qr != None) or (Sr != None and power_factor != None))
-        or
-        (
-            (Pr != None and power_factor != None) or
-            (Qr != None and power_factor != None)
-        )):
+            ((Pr is not None and Qr is not None) or (Sr is not None and power_factor is not None))
+            or
+            (
+                    (Pr is not None and power_factor is not None) or
+                    (Qr is not None and power_factor is not None)
+            )):
         raise ValueError(
             "Not enough attributes for marking an operating point on Receiving "
             "End Power Circle"
@@ -646,17 +649,18 @@ def receiving_end_power_circle(Vr: complex = None, A: complex = None,
         }
     )
 
+
 def sending_end_power_circle(Vs: complex = None, B: complex = None,
-                             D: complex = None, Ps:float = None,
-                             Qs:float = None, Ss: complex = None,
+                             D: complex = None, Ps: float = None,
+                             Qs: float = None, Ss: complex = None,
                              power_factor: float = None, Vr: complex = None
-                            ) -> PowerCircle:
+                             ) -> PowerCircle:
     """
     Construct Receiving End Power Circle.
 
     Parameters
     ----------
-    Vs:             complex 
+    Vs:             complex
                     Sending End Voltage
     B:              complex
                     Transmission System ABCD Parameters, A
@@ -677,19 +681,19 @@ def sending_end_power_circle(Vs: complex = None, B: complex = None,
     -------
     Sending End Power Circle: PowerCircle
     """
-    if not (Vs != None and B != None and D != None):
+    if not (Vs is not None and B is not None and D is not None):
         raise ValueError(
             "Not enough attributes to build Sending end power circle at least "
             "provide `Vs`, `B`, `D`"
         )
 
     if not (
-        ((Ps != None and Qs != None) or (Ss != None and power_factor != None))
-        or
-        (
-            (Ps != None and power_factor != None) or
-            (Qs != None and power_factor != None)
-        )):
+            ((Ps is not None and Qs is not None) or (Ss is not None and power_factor is not None))
+            or
+            (
+                    (Ps is not None and power_factor is not None) or
+                    (Qs is not None and power_factor is not None)
+            )):
         raise ValueError(
             "Not enough attributes for marking an operating point on Sending "
             "End Power Circle"
