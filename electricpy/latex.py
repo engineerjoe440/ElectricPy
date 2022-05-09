@@ -57,7 +57,6 @@ def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
     latex:      str
                 LaTeX string for the complex value.
     """
-
     # Define Interpretation Functions
     def polarstring(val, round):
         mag, ang_r = _c.polar(val)  # Convert to polar form
