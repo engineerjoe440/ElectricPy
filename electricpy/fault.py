@@ -33,16 +33,16 @@ def _phaseroll(M012,reference):
 def phs1g(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     r"""
     Single-Phase-to-Ground Fault Calculator.
-    
+
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a single-line-to-ground fault.
-    
+
     .. math:: I_1 = \frac{V_{th}}{Z_0+Z_1+Z_2+3*R_f}
-    
+
     .. math:: I_2 = I_1
-    
+
     .. math:: I_0 = I_1
-    
+
     Parameters
     ----------
     Vth:        complex
@@ -57,7 +57,7 @@ def phs1g(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
-    
+
     Returns
     -------
     Ifault:     list of complex,
@@ -77,21 +77,21 @@ def phs1g(Vth,Zseq,Rf=0,sequence=True,reference='A'):
         Ifault = _phaseroll( Ifault, reference ) # Convert to ABC-Domain
     # Return Value
     return(Ifault)
-    
+
 # Define Double Line to Ground Fault Current Calculator
 def phs2g(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     r"""
     Double-Line-to-Ground Fault Calculator.
-    
+
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a double-line-to-ground fault.
-    
+
     .. math:: I_1 = \frac{V_{th}}{Z_1+\frac{Z_2*(Z_0+3*R_f)}{Z_0+Z_2+3*R_f}}
-    
+
     .. math:: I_2 = -\frac{V_{th}-Z_1*I_1}{X_2}
-    
+
     .. math:: I_0 = -\frac{V_{th}-Z_1*I_1}{X_0+3*R_f}
-    
+
     Parameters
     ----------
     Vth:        complex
@@ -106,7 +106,7 @@ def phs2g(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
-    
+
     Returns
     -------
     Ifault:     list of complex,
@@ -132,16 +132,16 @@ def phs2g(Vth,Zseq,Rf=0,sequence=True,reference='A'):
 def phs2(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     r"""
     Line-to-Line Fault Calculator.
-    
+
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a phase-to-phase fault.
-    
+
     .. math:: I_1 = \frac{V_{th}}{Z_1+Z_2+R_f}
-    
+
     .. math:: I_2 = -I_1
-    
+
     .. math:: I_0 = 0
-    
+
     Parameters
     ----------
     Vth:        complex
@@ -156,7 +156,7 @@ def phs2(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
-    
+
     Returns
     -------
     Ifault:     list of complex,
@@ -182,16 +182,16 @@ def phs2(Vth,Zseq,Rf=0,sequence=True,reference='A'):
 def phs3(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     r"""
     Three-Phase Fault Calculator.
-    
+
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a three-phase fault.
-    
+
     .. math:: I_1 = \frac{V_{th}}{Z_1+R_1}
-    
+
     .. math:: I_2 = 0
-    
+
     .. math:: I_0 = 0
-    
+
     Parameters
     ----------
     Vth:        complex
@@ -206,7 +206,7 @@ def phs3(Vth,Zseq,Rf=0,sequence=True,reference='A'):
     reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
-    
+
     Returns
     -------
     Ifault:     list of complex
@@ -228,16 +228,16 @@ def phs3(Vth,Zseq,Rf=0,sequence=True,reference='A'):
 def poleopen1(Vth,Zseq,sequence=True,reference='A'):
     r"""
     Single Pole Open Fault Calculator.
-    
+
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a single pole open fault.
-    
+
     .. math:: I_1 = \frac{V_{th}}{Z_1+(\frac{1}{Z_2}+\frac{1}{Z_0})^-1}
-    
+
     .. math:: I_2 = -I_1 * \frac{Z_0}{Z_2+Z_0}
-    
+
     .. math:: I_0 = -I_1 * \frac{Z_2}{Z_2+Z_0}
-    
+
     Parameters
     ----------
     Vth:        complex
@@ -250,7 +250,7 @@ def poleopen1(Vth,Zseq,sequence=True,reference='A'):
     reference:  {'A', 'B', 'C'}
                 Single character denoting the reference, or the
                 faulted phase indicator; default='A'
-    
+
     Returns
     -------
     Ifault:     list of complex,
@@ -276,16 +276,16 @@ def poleopen1(Vth,Zseq,sequence=True,reference='A'):
 def poleopen2(Vth,Zseq,sequence=True,reference='A'):
     r"""
     Single Pole Open Fault Calculator.
-    
+
     This function will evaluate the Zero, Positive, and Negative
     sequence currents for a single pole open fault.
-    
+
     .. math:: I_1 = \frac{V_{th}}{Z_1+Z_2+Z_0}
-    
+
     .. math:: I_2 = I_1
-    
+
     .. math:: I_0 = I_1
-    
+
     Parameters
     ----------
     Vth:        complex
@@ -298,7 +298,7 @@ def poleopen2(Vth,Zseq,sequence=True,reference='A'):
     reference:  {'A', 'B', 'C'}
                 Single character denoting the reference, or the
                 faulted phase indicator; default='A'
-    
+
     Returns
     -------
     Ifault:     list of complex,
@@ -324,16 +324,16 @@ def poleopen2(Vth,Zseq,sequence=True,reference='A'):
 def scMVA(Zth=None,Isc=None,Vth=1):
     r"""
     Short-Circuit MVA Calculator.
-    
+
     Function defines a method of interpretively
     calculating the short-circuit MVA value
     given two of the three arguments. The formulas
     are all based around the following:
-    
+
     .. math:: MVA_{sc} = V_{th}*I_{sc}
-    
+
     .. math:: V_{th} = I_{sc}*Z_{th}
-    
+
     Parameters
     ----------
     Zth:        float
@@ -347,7 +347,7 @@ def scMVA(Zth=None,Isc=None,Vth=1):
                 The Thevenin-Equivalent-Voltage,
                 defaults to a 1-per-unit value.
                 default=1
-    
+
     Returns
     -------
     MVA:        float
@@ -380,12 +380,12 @@ def scMVA(Zth=None,Isc=None,Vth=1):
 def phs3mvasc(Vth,Zseq,Rf=0,Sbase=1):
     r"""
     Three-Phase MVA Short-Circuit Calculator.
-    
+
     Calculator to evaluate the Short-Circuit MVA of a three-phase fault given the system
     parameters of Vth, Zseq, and an optional Rf. Uses the formula as follows:
-    
+
     .. math:: MVA_{sc} = \frac{\left|V_{th}^2\right|}{|Z_1|} * Sbase
-    
+
     Parameters
     ----------
     Vth:        complex
@@ -396,7 +396,7 @@ def phs3mvasc(Vth,Zseq,Rf=0,Sbase=1):
                 The fault resistance, default=0
     Sbase:      real, optional
                 The per-unit base for power. default=1
-    
+
     Returns
     -------
     MVA:        real
@@ -409,22 +409,22 @@ def phs3mvasc(Vth,Zseq,Rf=0,Sbase=1):
         MVA = MVA * 1e-6 # Divide by 1e6 (M)
     # Return
     return(MVA)
-    
-    
+
+
 # Define Explicitly 1-Phase MVAsc Calculator
 def phs1mvasc(Vth,Zseq,Rf=0,Sbase=1):
     r"""
     Single-Phase MVA Short-Circuit Calculator.
-    
+
     Calculator to evaluate the Short-Circuit MVA of a single-phase fault given the system
     parameters of Vth, Zseq, and an optional Rf. Uses the formula as follows:
-    
+
     .. math:: MVA_{sc} = \left|I_1^2\right|*|Z_1| * Sbase
-    
+
     where:
-    
+
     .. math:: I_1 = \frac{V_{th}}{Z_0+Z_1+Z_2+3*R_f}
-    
+
     Parameters
     ----------
     Vth:        complex
@@ -435,7 +435,7 @@ def phs1mvasc(Vth,Zseq,Rf=0,Sbase=1):
                 The fault resistance, default=0
     Sbase:      real, optional
                 The per-unit base for power. default=1
-    
+
     Returns
     -------
     MVA:        real
@@ -461,10 +461,10 @@ def phs1mvasc(Vth,Zseq,Rf=0,Sbase=1):
 def busvolt(k,n,Vpf,Z0,Z1,Z2,If,sequence=True,reference='A'):
     """
     Faulted Bus Voltage Calculator.
-    
+
     This function is designed to calculate the bus voltage(s)
     given a specific set of fault characteristics.
-    
+
     Parameters
     ----------
     k:          float
@@ -487,7 +487,7 @@ def busvolt(k,n,Vpf,Z0,Z1,Z2,If,sequence=True,reference='A'):
     reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
-    
+
     Returns
     -------
     Vf:         complex
@@ -517,17 +517,17 @@ def busvolt(k,n,Vpf,Z0,Z1,Z2,If,sequence=True,reference='A'):
 def ct_saturation(XoR,Imag,Vrated,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
     r"""
     Electrical Current Transformer Saturation Calculator.
-    
+
     A function to determine the saturation value and a boolean indicator
     showing whether or not CT is -in fact- saturated.
-    
+
     To perform this evaluation, we must satisfy the equation:
-    
+
     .. math::
        20\geq(1+\frac{X}{R})*\frac{|I_{mag}|}{I_{rated}*CTR}
        *\frac{\left|R_{burden}+j*\omega*\frac{X_{burden}}
        {\omega}\right|*100}{V_{rated}*(1-remnanc)}
-    
+
     Parameters
     ----------
     XoR:        float
@@ -553,7 +553,7 @@ def ct_saturation(XoR,Imag,Vrated,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
     ALF:        float, optional
                 The Saturation Constant which must be satisfied,
                 default=20.
-    
+
     Returns
     -------
     result:     float
@@ -583,29 +583,29 @@ def ct_saturation(XoR,Imag,Vrated,Irated,CTR,Rb,Xb,remnance=0,freq=60,ALF=20):
 def ct_cclass(XoR,Imag,Irated,CTR,Rb,Xb,remnance=0,sat_crit=20):
     r"""
     Electrical Current Transformer (CT) C-Class Function.
-    
+
     A function to determine the C-Class rated voltage for a CT.
     The formula shown below demonstrates the standard formula
     which is normally used to evaluate the saturation criteria.
     Worth noting here, is the fact that :math:`V_{rated}` is the
     CT C-Class.
-    
+
     .. math::
        \text{Saturation Criteria}=\frac{(1+\frac{X}{R})\cdot
        \frac{|I_{mag}|}{I_{rated}\cdot CTR}\cdot\frac{\left|
        R_{burden}+j\cdot X_{burden}\right|\cdot100}{V_{rated}}}
        {1-remnance}
-    
+
     For the purposes of this function, the above formula is applied
     as follows to evaluate the CT C-Class such as to satisfy the
     saturation criteria defined.
-    
+
     .. math::
        \text{CT C-Class}=\frac{(1+\frac{X}{R})\cdot
        \frac{|I_{mag}|}{I_{rated}\cdot CTR}\cdot\frac{
        \left|R_{burden}+j\cdot X_{burden}\right|\cdot100}
        {\text{Saturation Criteria (i.e., 20)}}}{1-remnance}
-    
+
     Parameters
     ----------
     XoR:        float
@@ -627,7 +627,7 @@ def ct_cclass(XoR,Imag,Irated,CTR,Rb,Xb,remnance=0,sat_crit=20):
                 The saturation criteria which must be satisfied,
                 typically such that CT saturation will not occur,
                 default=20.
-    
+
     Returns
     -------
     c_class:    float
@@ -648,15 +648,15 @@ def ct_cclass(XoR,Imag,Irated,CTR,Rb,Xb,remnance=0,sat_crit=20):
 def ct_satratburden(Inom,VArat=None,ANSIv=None,ALF=20,):
     r"""
     Electrical Current Transformer (CT) Saturation at Rated Burden Calculator.
-    
+
     A function to determine the Saturation at rated burden.
-    
+
     .. math:: V_{saturated}=ALF*\frac{VA_{rated}}{I_{nominal}}
-    
+
     where:
-    
+
     .. math:: VA_{rated}=I_{nominal}*\frac{ANSI_{voltage}}{20}
-    
+
     Parameters
     ----------
     Inom:       float
@@ -667,7 +667,7 @@ def ct_satratburden(Inom,VArat=None,ANSIv=None,ALF=20,):
                 The ANSI voltage requirement to meet.
     ALF:        float, optional
                 Accuracy Limit Factor, default=20.
-    
+
     Returns
     -------
     Vsat:       float
@@ -688,11 +688,11 @@ def ct_satratburden(Inom,VArat=None,ANSIv=None,ALF=20,):
 def ct_vpeak(Zb,Ip,CTR):
     r"""
     Electrical Current Transformer (CT) Peak Voltage Calculator.
-    
+
     Simple formula to calculate the Peak Voltage of a CT.
-    
+
     .. math:: \sqrt{3.5*|Z_burden|*I_{peak}*CTR}
-    
+
     Parameters
     ----------
     Zb:         float
@@ -701,7 +701,7 @@ def ct_vpeak(Zb,Ip,CTR):
                 The peak current for the CT.
     CTR:        float
                 The CTR turns ratio of the CT.
-    
+
     Returns
     -------
     Vpeak:      float
@@ -714,10 +714,10 @@ def ct_vpeak(Zb,Ip,CTR):
 def ct_timetosat(Vknee,XoR,Rb,CTR,Imax,ts=None,npts=100,freq=60,plot=False):
     r"""
     Electrical Current Transformer (CT) Time to Saturation Function.
-    
+
     Function to determine the "time to saturate" for an underrated C-Class
     CT using three standard curves described by Juergen Holbach.
-    
+
     Parameters
     ----------
     Vknee:      float
@@ -787,11 +787,11 @@ def ct_timetosat(Vknee,XoR,Rb,CTR,Imax,ts=None,npts=100,freq=60,plot=False):
 def pktransrecvolt(C,L,R=0,VLL=None,VLN=None,freq=60):
     """
     Peak Transient Recovery Function.
-    
+
     Peak Transient Recovery Voltage calculation function, evaluates the peak
     transient recovery voltage (restriking voltage) and the
     Rate-of-Rise-Recovery Voltage.
-    
+
     Parameters
     ----------
     C:          float
@@ -809,7 +809,7 @@ def pktransrecvolt(C,L,R=0,VLL=None,VLN=None,freq=60):
                 optional argument.
     freq:       float, optional
                 System frequency in Hz.
-    
+
     Returns
     -------
     Vcpk:       float
@@ -840,10 +840,10 @@ def pktransrecvolt(C,L,R=0,VLL=None,VLN=None,freq=60):
 def trvresistor(C,L,reduction,Rd0=500,wd0=260e3,tpk0=10e-6):
     """
     Transient Recovery Voltage (TRV) Reduction Resistor Function.
-    
+
     Function to find the resistor value that will reduce the TRV by a specified
     percentage.
-    
+
     Parameters
     ----------
     C:          float
@@ -858,7 +858,7 @@ def trvresistor(C,L,reduction,Rd0=500,wd0=260e3,tpk0=10e-6):
                 Omega-d evaluation starting point, default=260*k
     tpk0:       float, optional
                 Time of peak voltage evaluation starting point, default=10*u
-    
+
     Returns
     -------
     Rd:         float
@@ -886,11 +886,11 @@ def trvresistor(C,L,reduction,Rd0=500,wd0=260e3,tpk0=10e-6):
 def toctriptime(I,Ipickup,TD,curve="U1",CTR=1):
     """
     Time OverCurrent Trip Time Function.
-    
+
     Time-OverCurrent Trip Time Calculator, evaluates the time
     to trip for a specific TOC (51) element given the curve
     type, current characteristics and time-dial setting.
-    
+
     Parameters
     ----------
     I:          float
@@ -904,7 +904,7 @@ def toctriptime(I,Ipickup,TD,curve="U1",CTR=1):
                 {U1,U2,U3,U4,U5,C1,C2,C3,C4,C5}, default=U1
     CTR:        float, optional
                 Current Transformer Ratio, default=1
-    
+
     Returns
     -------
     tt:         float
@@ -937,10 +937,10 @@ def toctriptime(I,Ipickup,TD,curve="U1",CTR=1):
 def tocreset(I,Ipickup,TD,curve="U1",CTR=1):
     """
     Time OverCurrent Reset Time Function.
-    
+
     Function to calculate the time to reset for a TOC
     (Time-OverCurrent, 51) element.
-    
+
     Parameters
     ----------
     I:          float
@@ -954,7 +954,7 @@ def tocreset(I,Ipickup,TD,curve="U1",CTR=1):
                 {U1,U2,U3,U4,U5,C1,C2,C3,C4,C5}, default=U1
     CTR:        float, optional
                 Current Transformer Ratio, default=1
-    
+
     Returns
     -------
     tr:         float
@@ -977,11 +977,11 @@ def tocreset(I,Ipickup,TD,curve="U1",CTR=1):
 def pickup(Iloadmax,Ifaultmin,scale=0,printout=False,units="A"):
     """
     Electrical Current Pickup Selection Assistant.
-    
+
     Used to assist in evaluating an optimal phase-over-current pickup
     setting. Uses maximum load and minimum fault current to provide
     user assistance.
-    
+
     Parameters
     ----------
     Iloadmax:   float
@@ -997,7 +997,7 @@ def pickup(Iloadmax,Ifaultmin,scale=0,printout=False,units="A"):
     units:      string, optional
                 String to be appended to any printed output denoting
                 the units of which are being printed, default="A"
-    
+
     Returns
     -------
     setpoint:   float
@@ -1023,12 +1023,12 @@ def tdradial(I,CTI,Ipu_up,Ipu_dn=0,TDdn=0,curve="U1",scale=2,freq=60,
                   CTR_up=1,CTR_dn=1,tfixed=None):
     """
     Radial Time Dial Coordination Function.
-    
+
     Function to evaluate the Time-Dial (TD) setting in radial schemes
     where the Coordinating Time Interval (CTI) and the up/downstream
     pickup settings are known along with the TD setting for the
     downstream protection.
-    
+
     Parameters
     ----------
     I:          float
@@ -1065,7 +1065,7 @@ def tdradial(I,CTI,Ipu_up,Ipu_dn=0,TDdn=0,curve="U1",scale=2,freq=60,
                 TOC elements (51) with OC elements (50) with a fixed
                 tripping time. Overrides downstream TOC arguments
                 including *Ipu_dn* and *TDdn*.
-    
+
     Returns
     -------
     TD:         float
@@ -1110,13 +1110,13 @@ def tdradial(I,CTI,Ipu_up,Ipu_dn=0,TDdn=0,curve="U1",scale=2,freq=60,
 def protectiontap(S,CTR=1,VLN=None,VLL=None):
     """
     Protection TAP Setting Calculator.
-    
+
     Evaluates the required TAP setting based on the rated power of
     a transformer (the object being protected) and the voltage
     (either primary or secondary) in conjunction with the CTR
     (current transformer ratio) for the side in question (primary/
     secondary).
-    
+
     Parameters
     ----------
     CTR:        float
@@ -1127,7 +1127,7 @@ def protectiontap(S,CTR=1,VLN=None,VLL=None):
                 Line-to-Neutral voltage in volts.
     VLL:        float, exclusive
                 Line-to-Line voltage in volts.
-    
+
     Returns
     -------
     TAP:        float
@@ -1150,10 +1150,10 @@ def protectiontap(S,CTR=1,VLN=None,VLL=None):
 def correctedcurrents(Ipri,TAP,correction="Y",CTR=1):
     """
     Electrical Transformer Current Correction Function.
-    
+
     Function to evaluate the currents as corrected for microprocessor-
     based relay protection schemes.
-    
+
     Parameters
     ----------
     Ipri:       list of complex
@@ -1168,7 +1168,7 @@ def correctedcurrents(Ipri,TAP,correction="Y",CTR=1):
                 removal. default="Y"
     CTR:        float
                 Current Transformer Ratio, default=1
-    
+
     Returns
     -------
     Isec_corr:  list of complex
@@ -1202,10 +1202,10 @@ def correctedcurrents(Ipri,TAP,correction="Y",CTR=1):
 def iopirt(IpriHV,IpriLV,TAPHV,TAPLV,corrHV="Y",corrLV="Y",CTRHV=1,CTRLV=1):
     """
     Operate/Restraint Current Calculator.
-    
+
     Calculates the operating current (Iop) and the restraint
     current (Irt) as well as the slope.
-    
+
     Parameters
     ----------
     IpriHV:     list of complex
@@ -1240,7 +1240,7 @@ def iopirt(IpriHV,IpriLV,TAPHV,TAPLV,corrHV="Y",corrLV="Y",CTRHV=1,CTRLV=1):
     CTRLV       float
                 Current Transformer Ratio for low-voltage side
                 of power transformer, default=1
-    
+
     Returns
     -------
     Iop:        list of float
@@ -1264,10 +1264,10 @@ def iopirt(IpriHV,IpriLV,TAPHV,TAPLV,corrHV="Y",corrLV="Y",CTRHV=1,CTRLV=1):
 def symrmsfaultcur(V,R,X,t=1/60,freq=60):
     """
     Symmetrical/RMS Current Calculator.
-    
+
     Function to evaluate the time-constant tau, the symmetrical fault current,
     and the RMS current for a faulted circuit.
-    
+
     Parameters
     ----------
     V:          float
@@ -1282,7 +1282,7 @@ def symrmsfaultcur(V,R,X,t=1/60,freq=60):
                 The time in seconds.
     freq:       float, optional
                 The system frequency in Hz.
-    
+
     Returns
     -------
     tau:        float
@@ -1305,11 +1305,11 @@ def symrmsfaultcur(V,R,X,t=1/60,freq=60):
 def faultratio(I,Ipickup,CTR=1):
     """
     Fault Multiple of Pickup (Ratio) Calculator.
-    
+
     Evaluates the CTR-scaled pickup measured to pickup current ratio.
-    
+
     M = meas / pickup
-    
+
     Parameters
     ----------
     I:          float
@@ -1319,7 +1319,7 @@ def faultratio(I,Ipickup,CTR=1):
     CTR:        float, optional
                 Current Transformer Ratio for relay,
                 default=1
-    
+
     Returns
     -------
     M:          float
@@ -1332,15 +1332,15 @@ def faultratio(I,Ipickup,CTR=1):
 def residcomp(z1,z0,linelength=1):
     """
     Residual Compensation Factor Function.
-    
+
     Evaluates the residual compensation factor based on the line's positive and
     zero sequence impedance characteristics.
-    
+
     Parameters
     ----------
     z1:         complex
                 The positive-sequence impedance
-                characteristic of the line, specified in 
+                characteristic of the line, specified in
                 ohms-per-unit where the total line length
                 (of same unit) is specified in
                 *linelength* argument.
@@ -1352,7 +1352,7 @@ def residcomp(z1,z0,linelength=1):
     linelength: float, optional
                 The length (in same base unit as impedance
                 characteristics) of the line. default=1
-    
+
     Returns
     -------
     k0:         complex
@@ -1369,10 +1369,10 @@ def residcomp(z1,z0,linelength=1):
 def distmeasz(VLNmeas,If,Ip,Ipp,CTR=1,VTR=1,k0=None,z1=None,z0=None,linelength=1):
     """
     Distance Element Measured Impedance Function.
-    
+
     Function to evaluate the Relay-Measured-Impedance as calculated from
     the measured voltage, current, and line parameters.
-    
+
     Parameters
     ----------
     VLNmeas:    complex
@@ -1395,7 +1395,7 @@ def distmeasz(VLNmeas,If,Ip,Ipp,CTR=1,VTR=1,k0=None,z1=None,z0=None,linelength=1
                 Residual Compensation Factor
     z1:         complex, optional
                 The positive-sequence impedance
-                characteristic of the line, specified in 
+                characteristic of the line, specified in
                 ohms-per-unit where the total line length
                 (of same unit) is specified in
                 *linelength* argument.
@@ -1407,7 +1407,7 @@ def distmeasz(VLNmeas,If,Ip,Ipp,CTR=1,VTR=1,k0=None,z1=None,z0=None,linelength=1
     linelength: float, optional
                 The length (in same base unit as impedance
                 characteristics) of the line. default=1
-    
+
     Returns
     -------
     Zmeas:      complex
@@ -1433,9 +1433,9 @@ def distmeasz(VLNmeas,If,Ip,Ipp,CTR=1,VTR=1,k0=None,z1=None,z0=None,linelength=1
 def transmismatch(I1,I2,tap1,tap2):
     """
     Electrical Transformer TAP Mismatch Function.
-    
+
     Function to evaluate the transformer ratio mismatch for protection.
-    
+
     Parameters
     ----------
     I1:         complex
@@ -1446,7 +1446,7 @@ def transmismatch(I1,I2,tap1,tap2):
                 Relay TAP setting on the primary side.
     tap2:       float
                 Relay TAP setting on the secondary side.
-    
+
     Returns
     -------
     mismatch:   float
@@ -1464,10 +1464,10 @@ def highzvpickup(I,RL,Rct,CTR=1,threephase=False,Ks=1.5,
                  Vstd=400,Kd=0.5):
     """
     High Impedance Pickup Setting Function.
-    
+
     Evaluates the voltage pickup setting for a high
     impedance bus protection system.
-    
+
     Parameters
     ----------
     I:          float
@@ -1480,7 +1480,7 @@ def highzvpickup(I,RL,Rct,CTR=1,threephase=False,Ks=1.5,
                 Current Transformer Ratio, default=1
     threephase: bool, optional
                 Control argument to set the function to
-                evaluate the result for a three-phase 
+                evaluate the result for a three-phase
                 fault or unbalanced fault. default=False
     Ks:         float, optional
                 Security Factor for secure voltage pickup
@@ -1491,7 +1491,7 @@ def highzvpickup(I,RL,Rct,CTR=1,threephase=False,Ks=1.5,
     Kd:         float, optional
                 The dependability factor for dependable
                 voltage pickup setting, default=0.5
-    
+
     Returns
     -------
     Vsens:      float
@@ -1512,10 +1512,10 @@ def highzvpickup(I,RL,Rct,CTR=1,threephase=False,Ks=1.5,
 def highzmini(N,Ie,Irly=None,Vset=None,Rrly=2000,Imov=0,CTR=1):
     """
     Minimum Current for High Impedance Protection Calculator.
-    
+
     Evaluates the minimum pickup current required to cause
     high-impedance bus protection element pickup.
-    
+
     Parameters
     ----------
     N:          int
@@ -1533,7 +1533,7 @@ def highzmini(N,Ie,Irly=None,Vset=None,Rrly=2000,Imov=0,CTR=1):
                 voltage setting. default=0.0
     CTR:        float, optional
                 Current Transformer Ratio, default=1
-    
+
     Returns
     -------
     Imin:       float
@@ -1559,10 +1559,10 @@ def highzmini(N,Ie,Irly=None,Vset=None,Rrly=2000,Imov=0,CTR=1):
 def instoc(Imin,CTR=1,Ki=0.5):
     """
     Instantaneous OverCurrent Pickup Calculator.
-    
+
     Using a sensetivity factor and the CTR, evaluates the secondary-level pickup
     setting for an instantaneous overcurrent element.
-    
+
     Parameters
     ----------
     Imin:       float
@@ -1570,7 +1570,7 @@ def instoc(Imin,CTR=1,Ki=0.5):
     CTR:        float, optional
                 Current Transformer Ratio, default=1
     Ki:         Sensetivity factor, default=0.5
-    
+
     Returns
     -------
     Ipu:        float
@@ -1586,10 +1586,10 @@ def instoc(Imin,CTR=1,Ki=0.5):
 def genlossfield(Xd,Xpd,Zbase=1,CTR=1,VTR=1):
     """
     Electric Generator Loss of Field Function.
-    
+
     Generates the Loss-of-Field Element settings for a generator using the Xd
     value and per-unit base information.
-    
+
     Parameters
     ----------
     Xd:         float
@@ -1607,7 +1607,7 @@ def genlossfield(Xd,Xpd,Zbase=1,CTR=1,VTR=1):
                 Current Transformer Ratio, default=1
     VTR:        float, optional
                 Voltage Transformer Ratio, default=1
-    
+
     Returns
     -------
     ZoneOff:    float
@@ -1636,15 +1636,15 @@ def genlossfield(Xd,Xpd,Zbase=1,CTR=1,VTR=1):
 def thermaltime(In,Ibase,tbase):
     r"""
     Thermal Time Limit Calculator.
-    
+
     Computes the maximum allowable time for a specified current `In` given
     parameters for a maximum current and time at some other level, (`Ibase`,
     `tbase`).
-    
+
     Uses the following formula:
-    
+
     .. math:: t_n=\frac{I_{base}^2*t_{base}}{I_n^2}
-    
+
     Parameters
     ----------
     In:         float
@@ -1655,7 +1655,7 @@ def thermaltime(In,Ibase,tbase):
     tbase:      float
                 Base time for which a maximum allowable
                 current `Ibase` is specified. Unitless.
-    
+
     Returns
     -------
     tn:         float
@@ -1665,23 +1665,23 @@ def thermaltime(In,Ibase,tbase):
     # Perform Calculation
     tn = (Ibase**2*tbase)/(In**2)
     return(tn)
-    
+
 
 # Define Synch. Machine Fault Current Calculator
 def synmach_Isym(t,Eq,Xd,Xdp,Xdpp,Tdp,Tdpp):
     r"""
     Synch. Machine Symmetrical Fault Current Calc.
-    
+
     Determines the Symmetrical Fault Current of a synchronous
     machine given the machine parameters, the internal voltage,
     and the time for which to calculate.
-    
+
     .. math:: I_a(t)=\sqrt{2}\left|E_q\right|\left[
        \frac{1}{X_d}+\left(\frac{1}{X'_d}-\frac{1}{X_d}
        \right)\cdot e^{\frac{-t}{T'_d}}+\left(\frac{1}
        {X"_d}-\frac{1}{X'_d}\right)\cdot e^{\frac{-t}{T"_d}}
        \right]
-    
+
     Parameters
     ----------
     t:          float
@@ -1702,7 +1702,7 @@ def synmach_Isym(t,Eq,Xd,Xdp,Xdpp,Tdp,Tdpp):
     Tdpp:       float
                 The T"d (d-axis subtransient) time constant of
                 the machine in seconds
-    
+
     Returns
     -------
     Ia:         float
@@ -1718,15 +1718,15 @@ def synmach_Isym(t,Eq,Xd,Xdp,Xdpp,Tdp,Tdpp):
 def synmach_Iasym(t,Eq,Xdpp,Xqpp,Ta):
     r"""
     Synch. Machine Asymmetrical Fault Current Calc.
-    
+
     Determines the asymmetrical fault current of a synchronous
     machine given the machine parameters, the internal voltage,
     and the time for which to calculate.
-    
+
     .. math:: I_{asym}=\sqrt{2}\left|E_q\right|\frac{1}{2}
        \left(\frac{1}{X"_d}+\frac{1}{X"_q}\right)e^{\frac{-t}
        {T_a}}
-    
+
     Parameters
     ----------
     t:          float
@@ -1741,7 +1741,7 @@ def synmach_Iasym(t,Eq,Xdpp,Xqpp,Ta):
                 per-unit-ohms
     Ta:         float
                 Armature short-circuit (DC) time constant in seconds
-    
+
     Returns
     -------
     Iasym:      float
@@ -1757,11 +1757,11 @@ def synmach_Iasym(t,Eq,Xdpp,Xqpp,Ta):
 def indmacheigenvalues(Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60):
     """
     Induction Machine Eigenvalue Calculator.
-    
+
     Calculates the pertinent eigenvalues for an unloaded
     induction machine given a specific set of machine
     parameters.
-    
+
     Parameters
     ----------
     Lr:         float
@@ -1781,7 +1781,7 @@ def indmacheigenvalues(Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60):
     freq:       float, optional
                 Base frequency of the system (in Hertz).
                 default=60
-    
+
     Returns
     -------
     lam1:       complex
@@ -1813,10 +1813,10 @@ def indmacheigenvalues(Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60):
 def indmachphs3sc(t,Is0,Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60,real=True):
     """
     Induction Machine 3-Phase SC Calculator.
-    
+
     Determines the short-circuit current at a specified time for a three-phase
     fault on an unloaded induction machine.
-    
+
     Parameters
     ----------
     t:          array_like
@@ -1846,7 +1846,7 @@ def indmachphs3sc(t,Is0,Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60,real=True):
     real:       bool, optional
                 Control argument to force returned value
                 to be real part only. default=True
-    
+
     Returns
     -------
     ias:        array_like
@@ -1873,10 +1873,10 @@ def indmachphs3sc(t,Is0,Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60,real=True):
 def indmachphs3torq(t,Is0,Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60):
     """
     Induction Machine 3-Phase Torque Calculator.
-    
+
     Determines the torque exerted during a three-phase fault on an induction
     machine.
-    
+
     Parameters
     ----------
     t:          array_like
@@ -1905,7 +1905,7 @@ def indmachphs3torq(t,Is0,Lr,Ls,Lm,Rr,Rs,wrf=0,freq=60):
     freq:       float, optional
                 Base frequency of the system (in Hertz).
                 default=60
-    
+
     Returns
     -------
     Tem:        array_like
@@ -1936,14 +1936,14 @@ def synmach_ifault(t,Ea,alpha,Xd,Xdp,Xdpp,Xqpp,Tdp,Tdpp,Ta,freq=60):
     # noqa: D401   "Synchronous" is intentional descriptor
     """
     Synchronous Machine Fault Current Calculator.
-    
+
     Given machine parameters, fault inception angle, and time at
     which to calculate fault current, this function will identify
     the complete (symmetrical, asymmetrical, and double frequency)
     fault current.
-    
+
     .. image:: /static/synmach_ifault_formula.png
-    
+
     Parameters
     ----------
     t:          float
@@ -1974,7 +1974,7 @@ def synmach_ifault(t,Ea,alpha,Xd,Xdp,Xdpp,Xqpp,Tdp,Tdpp,Ta,freq=60):
     freq:       float, optional
                 System (electrical) frequency (in degrees),
                 default=60
-    
+
     Returns
     -------
     ias:        float
@@ -2004,7 +2004,7 @@ def synmach_ifault(t,Ea,alpha,Xd,Xdp,Xdpp,Xqpp,Tdp,Tdpp,Ta,freq=60):
     # Compose Complet Current Value
     ias = isym - iasym - idbl
     return(ias)
-    
-    
+
+
 
 # END OF FILE

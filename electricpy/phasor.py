@@ -460,7 +460,7 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
                 plotted as a single point at the origin, by default, the
                 tolerance is scaled to be 1/25-th the maximum radius. To disable
                 the tolerance, simply provide either False or -1.
-    
+
     Returns
     -------
     matplotlib.pyplot:  Plotting object to be used for additional configuration
