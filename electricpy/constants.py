@@ -67,7 +67,7 @@ Pdq0 = 2/3 * _np.array([[0,-_np.sqrt(3/2),_np.sqrt(3/2)],
 Pqd0 = 2/3 * _np.array([[1,-1/2,-1/2],
                         [0,-_np.sqrt(3/2),_np.sqrt(3/2)],
                         [1/2, 1/2, 1/2]])
-                 
+
 # Define Transformer Shift Correction Matricies
 XFMY0 = _np.array([[1,0,0],[0,1,0],[0,0,1]])
 XFMD1 = 1/_np.sqrt(3) * _np.array([[1,-1,0],[0,1,-1],[-1,0,1]])

@@ -22,7 +22,7 @@ def digifiltersim(fin,filter,freqs,NN=1000,dt=0.01,title="",
                legend=True,xlim=False,xmxscale=None,figsize=None):
     r"""
     Digital Filter Simulator.
-    
+
     Given an input function and filter parameters (specified in
     the z-domain) this function will plot the input function over
     NN time-steps of an unspecified size (the step-size must be
@@ -30,13 +30,13 @@ def digifiltersim(fin,filter,freqs,NN=1000,dt=0.01,title="",
     will also plot the resultant (output) function over the NN
     time-steps after having been filtered by that filter which
     is specified.
-    
+
     The applied filter should be of the form:
-    
+
     .. math:: \frac{b_0+b_1z^{-1}+b_2z^{-2}}{1-a_1z^{-1}-a_2z^{-2}}
-    
+
     Where each row corresponds to a 1- or 2-pole filter.
-    
+
     Parameters
     ----------
     fin:        function
@@ -44,14 +44,14 @@ def digifiltersim(fin,filter,freqs,NN=1000,dt=0.01,title="",
                 step-size.
     filter:     array_like
                 The filter parameter set as shown here:
-                
+
                 .. code-block:: python
-                   
+
                    [[ a11, a12, b10, b11, b12],
                    [ a21, a22, b20, b21, b22],
                    [           ...          ],
                    [ an1, an2, bn0, bn1, bn2]]
-                
+
     freqs:      list of float
                 The set of frequencies to plot the input and output for.
     NN:         int, optional
@@ -78,15 +78,15 @@ def digifiltersim(fin,filter,freqs,NN=1000,dt=0.01,title="",
     for i in range(flen):
         # Gather frequency
         freq = freqs[i]
-        
+
         # Start with arrays set to zero
         x = _np.zeros(NN)
         y = _np.zeros(NN)
-        
+
         # ----- The input  -----
         for k in range(NN):
             x[k] = fin(k*dt,freq)
-        
+
         # Identify how many rows were provided
         sz = filter.size
         if(sz < 5):
@@ -126,7 +126,7 @@ def digifiltersim(fin,filter,freqs,NN=1000,dt=0.01,title="",
         if legend: _plt.legend(title="Frequency = "+str(freq)+"Hz")
         if xlim!=False: _plt.xlim(xlim)
         elif xmxscale!=None: _plt.xlim((0,xmxscale/(freq*dt)))
-        
+
     _plt.tight_layout()
     return _plt
 
@@ -137,10 +137,10 @@ def step_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
                   errlabel="Error",filename=None):
     """
     Step Function Response Plotter Function.
-    
+
     Given a transfer function, plots the response against step input
     and plots the error for the function.
-    
+
     Parameters
     ----------
     system:     array_like
@@ -170,26 +170,26 @@ def step_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
     """
     # Define Time Axis
     TT = _np.arange(0,npts*dt,dt)
-    
+
     # Condition system input to ensure proper execution
-    system = _sys_condition(system,combine)    
-    
+    system = _sys_condition(system,combine)
+
     # Allocate space for all outputs
     step = _np.zeros(npts)
     errS = _np.zeros(npts)
-    
+
     # Generate Inputs
     for i in range(npts):
         step[i] = 1.0
-    
+
     # Simulate Response for each input (step, ramp, parabola)
     # All 'x' values are variables that are considered don't-care
     x, y1, x = _sig.lsim((system),step,TT)
-    
+
     # Calculate error over all points
     for k in range(npts):
         errS[k] = step[k] - y1[k]
-    
+
     # Plot Step Response
     _plt.figure()
     _plt.subplot(121)
@@ -221,10 +221,10 @@ def ramp_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
                   errlabel="Error",filename=None):
     """
     Ramp Function Response Plotter Function.
-    
+
     Given a transfer function, plots the response against step input
     and plots the error for the function.
-    
+
     Parameters
     ----------
     system:     array_like
@@ -249,31 +249,31 @@ def ramp_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
                 Limit in x-axis for graph plot. Accepts tuple of: (xmin, xmax).
                 default=False.
     filename:   str, optional
-                File directory/name with which the plotted figures 
+                File directory/name with which the plotted figures
                 should be saved. default=None
     """
     # Define Time Axis
     TT = _np.arange(0,npts*dt,dt)
-    
+
     # Condition system input to ensure proper execution
     system = _sys_condition(system,combine)
-    
+
     # Allocate space for all outputs
     ramp = _np.zeros(npts)
     errR = _np.zeros(npts)
-    
+
     # Generate Inputs
     for i in range(npts):
         ramp[i] = (dt*i)
-    
+
     # Simulate Response for each input (step, ramp, parabola)
     # All 'x' values are variables that are considered don't-care
     x, y2, x = _sig.lsim((system),ramp,TT)
-    
+
     # Calculate error over all points
     for k in range(npts):
         errR[k] = ramp[k] - y2[k]
-    
+
     # Plot Ramp Response
     _plt.figure()
     _plt.subplot(121)
@@ -297,7 +297,7 @@ def ramp_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
     if filename!=None:
         _plt.savefig(filename)
     return _plt
-    
+
 # Define Parabolic Response Simulator Function
 def parabolic_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
                   title="Parabolic Response",errtitle="Parabolic Response Error",
@@ -305,10 +305,10 @@ def parabolic_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
                   errlabel="Error",filename=None):
     """
     Parabolic Function Response Plotter Function.
-    
+
     Given a transfer function, plots the response against step input
     and plots the error for the function.
-    
+
     Parameters
     ----------
     system:     array_like
@@ -338,26 +338,26 @@ def parabolic_response(system,npts=1000,dt=0.01,combine=True,xlim=False,
     """
     # Define Time Axis
     TT = _np.arange(0,npts*dt,dt)
-    
+
     # Condition system input to ensure proper execution
     system = _sys_condition(system,combine)
-    
+
     # Allocate space for all outputs
     parabola = _np.zeros(npts)
     errP = _np.zeros(npts)
-    
+
     # Generate Inputs
     for i in range(npts):
         parabola[i] = (dt*i)**(2)
-    
+
     # Simulate Response for each input (step, ramp, parabola)
     # All 'x' values are variables that are considered don't-care
     x, y3, x = _sig.lsim((system),parabola,TT)
-    
+
     # Calculate error over all points
     for k in range(npts):
         errP[k] = parabola[k] - y3[k]
-    
+
     # Plot Parabolic Response
     _plt.figure()
     _plt.subplot(121)
@@ -428,7 +428,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
                 Control value to enable plotting of the final (combined) result.
 
     **Figures**
-    
+
     Forcing Functions:      The plot of forcing functions, only provided if plotforcing is true.
     State Variables:        The plot of state variables, always provided if plot is true.
     Combined Output:        The plot of the combined terms in the output, provided if C and D are not False.
@@ -440,7 +440,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
     #1=zero-state    ( No Initial Conditions )
     #2=total         ( Both Initial Conditions and Forcing Function )
     #3=total, output ( Both ICs and FFs, also plot combined output )
-    
+
     # Tuple to Matrix Converter
     def tuple_to_matrix(x,yx):
         n = yx(x) # Evaluate function at specified point
@@ -455,7 +455,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
         if n.shape[1] != 1: # If there is more than 1 column
             n = _np.matrix.reshape(n,(n.size,1)) # Reshape
         return(n)
-    
+
     # Define Function Concatinator Class
     class c_func_concat:
         def __init__(self,funcs): # Initialize class with tupple of functions
@@ -471,14 +471,14 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
                 rets = _np.append(rets, y) # Add value to return array
             rets = _np.asmatrix(rets).T # Convert array to matrix, then transpose
             return(rets)
-    
+
     # Condition Inputs
     A = _np.asmatrix(A)
     B = _np.asmatrix(B)
-    
+
     # Define Tuple of Types For Testing
     typetest = (_np.matrixlib.defmatrix.matrix,_np.ndarray,tuple,list)
-    
+
     # Test for NN and simpts
     if (simpts >= NN):
         _warn("WARNING: NN must be greater than simpts; NN="+str(NN)+
@@ -497,7 +497,7 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
         C = _np.matrix('0')
         D = _np.matrix('0')
         solution = 2
-    
+
     # Condition C/D Matrices
     C = _np.asmatrix(C)
     D = _np.asmatrix(D)
@@ -701,12 +701,12 @@ def statespace(A,B,x=None,func=None,C=None,D=None,simpts=9999,NN=10000,dt=0.01,
 def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
     """
     Newton Raphson Calculator.
-    
+
     Solve nonlinear system F=0 by Newton's method.
     J is the Jacobian of F. Both F and J must be functions of x.
     At input, x holds the start value. The iteration continues
     until ||F|| < eps.
-    
+
     Parameters
     ----------
     F:          array_like
@@ -727,7 +727,7 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
     lsq_eps:    float, optional
                 Least Squares Method (Failover) Epsilon - the error value.
                 default=0.25
-    
+
     Returns
     -------
     X0:                 array_like
@@ -736,7 +736,7 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
                         The number of iterations completed before returning
                         either due to solution being found, or max iterations
                         being surpassed.
-    
+
     Examples
     --------
     >>> import numpy as np
@@ -756,19 +756,19 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
     [-0.236,0.8554]
     >>> print(iter) # Iteration Counter
     4
-    
+
     See Also
     --------
     nr_pq:              Newton-Raphson System Generator
     mbuspowerflow:      Multi-Bus Power Flow Calculator
-    
+
     """
     # Test for one-variable inputs
     if isinstance(F(X0),(int,float,_np.float64)): # System is size-1
         if not isinstance(J(X0),(int,float,_np.float64)): # Jacobian isn't size-1
             raise ValueError("ERROR: The Jacobian isn't size-1.")
         return( newton( F, X0, J ) )
-    
+
     # Test for valid argument sizes
     f0sz = len(F(X0))
     j0sz = len(J(X0))
@@ -818,10 +818,10 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
 def nr_pq(Ybus,V_set,P_set,Q_set,extend=True,argshape=False,verbose=False):
     """
     Newton Raphson Real/Reactive Power Function Generator.
-    
+
     Given specified parameters, will generate the necessary real and reactive
     power functions necessary to compute the system's power flow.
-    
+
     Parameters
     ----------
     Ybus:       array_like
@@ -858,7 +858,7 @@ def nr_pq(Ybus,V_set,P_set,Q_set,extend=True,argshape=False,verbose=False):
                 Control argument to print verbose information
                 about function generation, useful for debugging.
                 default=False
-    
+
     Returns
     -------
     retset:     array_like
@@ -871,7 +871,7 @@ def nr_pq(Ybus,V_set,P_set,Q_set,extend=True,argshape=False,verbose=False):
                 where n is the number of busses with unknown
                 voltage angle, and m is the number of busses
                 with unknown voltage magnitude.
-    
+
     Examples
     --------
     >>> import numpy as np
@@ -890,12 +890,12 @@ def nr_pq(Ybus,V_set,P_set,Q_set,extend=True,argshape=False,verbose=False):
     [-0.236,0.8554]
     >>> print(iter) # Iteration Counter
     4
-    
+
     See Also
     --------
     NewtonRaphson:      Newton-Raphson System Solver
     mbuspowerflow:      Multi-Bus Power Flow Calculator
-    
+
     """
     # Condition Inputs
     Ybus = _np.asarray(Ybus)
@@ -1011,7 +1011,7 @@ def nr_pq(Ybus,V_set,P_set,Q_set,extend=True,argshape=False,verbose=False):
                     else:
                         Vja = "V_list[{}][1]".format(_j) # Load Angle
                 # Generate String and Append to List of Functions
-                P_strgs[i] = ( Pstr.format(Vkm,Vka,Vjm,Vja,Yind) ) 
+                P_strgs[i] = ( Pstr.format(Vkm,Vka,Vjm,Vja,Yind) )
                 if verbose: print("New P-String:",P_strgs[i])
                 # Generate Q Requirement
                 if Q_list[_k] != None:
@@ -1059,12 +1059,12 @@ def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0='flatstart',eps=1e-4,
                   slackbus=0,lsq_eps=0.25):
     """
     Multi-Bus Power Flow Calculator.
-    
+
     Function wrapper to simplify the evaluation of a power flow calculation.
     Determines the function array (F) and the Jacobian array (J) and uses the
     Newton-Raphson method to iteratively evaluate the system to converge to a
     solution.
-    
+
     Parameters
     ----------
     Ybus:       array_like
@@ -1125,10 +1125,10 @@ def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0='flatstart',eps=1e-4,
     lsq_eps:    float, optional
                 Least Squares Method (Failover) Epsilon - the error value.
                 default=0.25
-    
-    
+
+
     .. image:: /static/mbuspowerflow_example.png
-    
+
     Examples
     --------
     >>> # Perform Power-Flow Analysis for Figure
@@ -1142,7 +1142,7 @@ def mbuspowerflow(Ybus,Vknown,Pknown,Qknown,X0='flatstart',eps=1e-4,
     >>> nr_res = sim.mbuspowerflow(ybustest,Vlist,Plist,Qlist,degrees=True,split=True,returnct=True)
     >>> print(nr_res)
     ([array([-13.52185223]), array([ 0.85537271])], 4)
-    
+
     See Also
     --------
     NewtonRaphson:          Newton-Raphson System Solver
