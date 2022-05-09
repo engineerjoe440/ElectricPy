@@ -41,7 +41,7 @@ def hp_to_watts(hp):
     watts:      float
                 The power in watts.
     """
-    return (hp * WATTS_PER_HP)
+    return hp * WATTS_PER_HP
 
 
 watts = hp_to_watts  # Make Duplicate Name
@@ -69,7 +69,7 @@ def watts_to_hp(watts):
     hp:         float
                 The power in horsepower.
     """
-    return (watts / WATTS_PER_HP)
+    return watts / WATTS_PER_HP
 
 
 horsepower = watts_to_hp  # Make Duplicate Name
@@ -96,7 +96,7 @@ def kwh_to_btu(kWh):
     BTU:        float
                 The number of British Thermal Units
     """
-    return (kWh * KWH_PER_BTU)
+    return kWh * KWH_PER_BTU
 
 
 btu = kwh_to_btu  # Make Duplicate Name
@@ -122,7 +122,7 @@ def btu_to_kwh(BTU):
     kWh:        float
                 The number of killo-Watt-hours
     """
-    return (BTU / KWH_PER_BTU)
+    return BTU / KWH_PER_BTU
 
 
 kwh = btu_to_kwh  # Make Duplicate Name
@@ -150,7 +150,7 @@ def rad_to_hz(radians):
     hertz:      float
                 The frequency (represented in Hertz)
     """
-    return (radians / (2 * _np.pi))  # Evaluate and Return
+    return radians / (2 * _np.pi)  # Evaluate and Return
 
 
 hertz = rad_to_hz  # Make Duplicate Name
@@ -178,7 +178,7 @@ def hz_to_rad(hertz):
     radians:    float
                 The frequency (represented in radians/sec)
     """
-    return (hertz * (2 * _np.pi))  # Evaluate and Return
+    return hertz * (2 * _np.pi)  # Evaluate and Return
 
 
 radsec = hz_to_rad  # Make Duplicate Name
@@ -224,7 +224,7 @@ def abc_to_seq(Mabc, reference='A'):
         M = _np.roll(Aabc, 2, 0)
     else:
         raise ValueError("Invalid Phase Reference.")
-    return (M.dot(Mabc))
+    return M.dot(Mabc)
 
 
 # Define Second Name for abc_to_seq
@@ -273,7 +273,7 @@ def seq_to_abc(M012, reference='A'):
         M = _np.roll(M, 2, 0)
     else:
         raise ValueError("Invalid Phase Reference.")
-    return (M)
+    return M
 
 
 # Define Second Name for seq_to_abc
@@ -351,7 +351,7 @@ def sequencez(Zabc, reference='A', resolve=False, diag=False, round=3):
     # Reduce to Diagonal Terms if Needed
     if diag:
         Z012 = [Z012[0][0], Z012[1][1], Z012[2][2]]
-    return (_np.around(Z012, round))
+    return _np.around(Z012, round)
 
 
 # Define Angular Velocity Conversion Functions
@@ -373,7 +373,7 @@ def rad_to_rpm(rad):
                 The angular velocity in revolutions-per-minute (RPM)
     """
     rpm = 60 / (2 * _np.pi) * rad
-    return (rpm)
+    return rpm
 
 
 # Define Angular Velocity Conversion Functions
@@ -395,7 +395,7 @@ def rpm_to_rad(rpm):
                 The angular velocity in radians-per-second
     """
     rad = 2 * _np.pi / 60 * rpm
-    return (rad)
+    return rad
 
 
 # Define Angular Velocity Conversion Functions
@@ -417,7 +417,7 @@ def hz_to_rpm(hz):
                 The angular velocity in revolutions-per-minute (RPM)
     """
     rpm = hz * 60
-    return (rpm)
+    return rpm
 
 
 # Define Angular Velocity Conversion Functions
@@ -439,7 +439,7 @@ def rpm_to_hz(rpm):
                 The angular velocity in Hertz
     """
     hz = rpm / 60
-    return (hz)
+    return hz
 
 
 # Define dBW to Watts converter

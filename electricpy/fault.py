@@ -703,9 +703,9 @@ def ct_satratburden(Inom, VArat=None, ANSIv=None, ALF=20, ):
                 The saturated voltage.
     """
     # Validate Inputs
-    if VArat == None and ANSIv == None:
+    if VArat is None and ANSIv is None:
         raise ValueError("VArat or ANSIv must be specified.")
-    elif VArat == None:
+    elif VArat is None:
         # Calculate VArat from ANSIv
         VArat = Inom * ANSIv / (20)
     # Determine Vsaturation
@@ -1454,12 +1454,12 @@ def distmeasz(VLNmeas, If, Ip, Ipp, CTR=1, VTR=1, k0=None, z1=None, z0=None, lin
                 The "measured" impedance as calculated by the relay.
     """
     # Validate Residual Compensation Inputs
-    if k0 == z1 == z0 == None:
+    if k0 == z1 == z0 is None:
         raise ValueError("Residual compensation arguments must be set.")
-    if k0 == None and (z1 == None or z0 == None):
+    if k0 is None and (z1 is None or z0 is None):
         raise ValueError("Both *z1* and *z0* must be specified.")
     # Calculate Residual Compensation if Necessary
-    if k0 == None:
+    if k0 is None:
         k0 = residcomp(z1, z0, linelength)
     # Convert Primary Units to Secondary
     V = VLNmeas / VTR
@@ -1584,12 +1584,12 @@ def highzmini(N, Ie, Irly=None, Vset=None, Rrly=2000, Imov=0, CTR=1):
                 bus protection element pickup.
     """
     # Validate Inputs
-    if Irly == Vset == None:
+    if Irly == Vset is None:
         raise ValueError("Relay Current Required.")
     # Condition Inputs
     Ie = abs(Ie)
     Imov = abs(Imov)
-    if Irly == None:
+    if Irly is None:
         Vset = abs(Vset)
         Irly = Vset / Rrly
     else:
