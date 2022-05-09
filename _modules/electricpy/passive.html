@@ -368,6 +368,8 @@
 <span class="sd">"""</span>
 <span class="c1">################################################################################</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">_np</span>
+
+
 <div class="viewcode-block" id="vcapdischarge"><a class="viewcode-back" href="../../api/electricpy.passive.vcapdischarge.html#electricpy.passive.vcapdischarge">[docs]</a><span class="k">def</span> <span class="nf">vcapdischarge</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Vs</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Discharging Capacitor Function.</span>
@@ -394,12 +396,13 @@
 <span class="sd">    Vc:         float</span>
 <span class="sd">                The calculated voltage of the capacitor.</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">t</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Time must be greater than or equal to zero."</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">R</span><span class="o">*</span><span class="n">C</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">R</span> <span class="o">*</span> <span class="n">C</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Resistance and Capacitance must be non-zero."</span><span class="p">)</span>
     <span class="n">Vc</span> <span class="o">=</span> <span class="n">Vs</span> <span class="o">*</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">C</span><span class="p">)))</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">Vc</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">Vc</span></div>
+
 
 <div class="viewcode-block" id="vcapcharge"><a class="viewcode-back" href="../../api/electricpy.passive.vcapcharge.html#electricpy.passive.vcapcharge">[docs]</a><span class="k">def</span> <span class="nf">vcapcharge</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Vs</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
@@ -427,12 +430,13 @@
 <span class="sd">    Vc:         float</span>
 <span class="sd">                The calculated voltage of the capacitor.</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">t</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Time must be greater than or equal to zero."</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">R</span><span class="o">*</span><span class="n">C</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">R</span> <span class="o">*</span> <span class="n">C</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Resistance and Capacitance must be non-zero."</span><span class="p">)</span>
     <span class="n">Vc</span> <span class="o">=</span> <span class="n">Vs</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">C</span><span class="p">)))</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">Vc</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">Vc</span></div>
+
 
 <div class="viewcode-block" id="captransfer"><a class="viewcode-back" href="../../api/electricpy.passive.captransfer.html#electricpy.passive.captransfer">[docs]</a><span class="k">def</span> <span class="nf">captransfer</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Vs</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">Cs</span><span class="p">,</span> <span class="n">Cd</span><span class="p">):</span>
     <span class="sd">"""</span>
@@ -464,7 +468,7 @@
 <span class="sd">    vfinal:     float</span>
 <span class="sd">                Final voltage that both capacitors settle to.</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">t</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Time must be greater than zero."</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">tau</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">Cs</span> <span class="o">*</span> <span class="n">Cd</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">Cs</span> <span class="o">+</span> <span class="n">Cd</span><span class="p">)</span>
@@ -472,7 +476,8 @@
     <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">"Sum of Source and Destination Capacitance must be non-zero."</span><span class="p">)</span>
     <span class="n">vfinal</span> <span class="o">=</span> <span class="n">Vs</span> <span class="o">*</span> <span class="n">Cs</span> <span class="o">/</span> <span class="p">(</span><span class="n">Cs</span> <span class="o">+</span> <span class="n">Cd</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">rvolt</span><span class="p">,</span> <span class="n">vfinal</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">rvolt</span><span class="p">,</span> <span class="n">vfinal</span></div>
+
 
 <span class="c1"># Define Capacitive Back-to-Back Switching Formula</span>
 <div class="viewcode-block" id="capbacktoback"><a class="viewcode-back" href="../../api/electricpy.passive.capbacktoback.html#electricpy.passive.capbacktoback">[docs]</a><span class="k">def</span> <span class="nf">capbacktoback</span><span class="p">(</span><span class="n">C1</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">Lm</span><span class="p">,</span> <span class="n">VLN</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">VLL</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -509,7 +514,8 @@
     <span class="n">imax</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">VLL</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">C1</span> <span class="o">*</span> <span class="n">C2</span><span class="p">)</span> <span class="o">/</span> <span class="p">((</span><span class="n">C1</span> <span class="o">+</span> <span class="n">C2</span><span class="p">)</span> <span class="o">*</span> <span class="n">Lm</span><span class="p">))</span>
     <span class="c1"># Evaluate Inrush Current Frequency</span>
     <span class="n">ifreq</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Lm</span> <span class="o">*</span> <span class="p">(</span><span class="n">C1</span> <span class="o">*</span> <span class="n">C2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">C1</span> <span class="o">+</span> <span class="n">C2</span><span class="p">)))</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">imax</span><span class="p">,</span> <span class="n">ifreq</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">imax</span><span class="p">,</span> <span class="n">ifreq</span></div>
+
 
 <span class="c1"># Define Apparent Power to Farad Conversion</span>
 <div class="viewcode-block" id="farads"><a class="viewcode-back" href="../../api/electricpy.passive.farads.html#electricpy.passive.farads">[docs]</a><span class="k">def</span> <span class="nf">farads</span><span class="p">(</span><span class="n">VAR</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
@@ -538,7 +544,7 @@
 <span class="sd">    C:          float</span>
 <span class="sd">                The evaluated capacitance (in Farads).</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">VAR</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span> <span class="o">*</span> <span class="n">V</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="n">VAR</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span> <span class="o">*</span> <span class="n">V</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span></div>
 
 
 <span class="c1"># Define Capacitor Energy Calculation</span>
@@ -564,7 +570,7 @@
 <span class="sd">                Energy stored in capacitor (Joules).</span>
 <span class="sd">    """</span>
     <span class="n">energy</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">C</span> <span class="o">*</span> <span class="n">V</span> <span class="o">**</span> <span class="mi">2</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">energy</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">energy</span></div>
 
 
 <span class="c1"># Define Capacitor Voltage Discharge Function</span>
@@ -596,7 +602,7 @@
 <span class="sd">                Voltage of capacitor at time t.</span>
 <span class="sd">    """</span>
     <span class="n">Vt</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">vo</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">P</span> <span class="o">*</span> <span class="n">t</span> <span class="o">/</span> <span class="n">C</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">Vt</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">Vt</span></div>
 
 
 <span class="c1"># Define Capacitor Discharge Function</span>
@@ -635,15 +641,15 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">vo</span> <span class="o">=</span> <span class="n">Vinit</span>
     <span class="n">vc</span> <span class="o">=</span> <span class="n">loadedvcapdischarge</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">vo</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>  <span class="c1"># set initial cap voltage</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">vc</span> <span class="o">&gt;=</span> <span class="n">Vmin</span><span class="p">):</span>
+    <span class="k">while</span> <span class="n">vc</span> <span class="o">&gt;=</span> <span class="n">Vmin</span><span class="p">:</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">+</span> <span class="n">dt</span>  <span class="c1"># increment the time</span>
         <span class="n">vcp</span> <span class="o">=</span> <span class="n">vc</span>  <span class="c1"># save previous voltage</span>
         <span class="n">vc</span> <span class="o">=</span> <span class="n">loadedvcapdischarge</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">vo</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>  <span class="c1"># calc. new voltage</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">Eremain</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">Eremain</span><span class="p">:</span>
         <span class="n">E</span> <span class="o">=</span> <span class="n">capenergy</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">vcp</span><span class="p">)</span>  <span class="c1"># calc. energy</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">dt</span><span class="p">,</span> <span class="n">E</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">t</span> <span class="o">-</span> <span class="n">dt</span><span class="p">,</span> <span class="n">E</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">dt</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">t</span> <span class="o">-</span> <span class="n">dt</span></div>
 
 
 <span class="c1"># Define Rectifier Capacitor Calculator</span>
@@ -672,7 +678,9 @@
 <span class="sd">                Required capacitance (in Farads) to meet arguments.</span>
 <span class="sd">    """</span>
     <span class="n">C</span> <span class="o">=</span> <span class="n">Iload</span> <span class="o">/</span> <span class="p">(</span><span class="n">fswitch</span> <span class="o">*</span> <span class="n">dVout</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">C</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">C</span></div>
+
+
 <span class="c1"># Define Inductor Energy Formula</span>
 <div class="viewcode-block" id="inductorenergy"><a class="viewcode-back" href="../../api/electricpy.passive.inductorenergy.html#electricpy.passive.inductorenergy">[docs]</a><span class="k">def</span> <span class="nf">inductorenergy</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">I</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
@@ -695,7 +703,8 @@
 <span class="sd">    E:          float</span>
 <span class="sd">                The energy stored in the inductor (in Joules).</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">L</span> <span class="o">*</span> <span class="n">I</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">L</span> <span class="o">*</span> <span class="n">I</span> <span class="o">**</span> <span class="mi">2</span></div>
+
 
 <div class="viewcode-block" id="inductorcharge"><a class="viewcode-back" href="../../api/electricpy.passive.inductorcharge.html#electricpy.passive.inductorcharge">[docs]</a><span class="k">def</span> <span class="nf">inductorcharge</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Vs</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
@@ -728,7 +737,8 @@
 <span class="sd">    """</span>
     <span class="n">Vl</span> <span class="o">=</span> <span class="n">Vs</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">R</span> <span class="o">*</span> <span class="n">t</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span>
     <span class="n">Il</span> <span class="o">=</span> <span class="n">Vs</span> <span class="o">/</span> <span class="n">R</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">R</span> <span class="o">*</span> <span class="n">t</span> <span class="o">/</span> <span class="n">L</span><span class="p">))</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">Vl</span><span class="p">,</span> <span class="n">Il</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">Vl</span><span class="p">,</span> <span class="n">Il</span></div>
+
 
 <span class="c1"># Define Inductor Discharge Function</span>
 <div class="viewcode-block" id="inductordischarge"><a class="viewcode-back" href="../../api/electricpy.passive.inductordischarge.html#electricpy.passive.inductordischarge">[docs]</a><span class="k">def</span> <span class="nf">inductordischarge</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Io</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
@@ -764,6 +774,7 @@
     <span class="n">Vl</span> <span class="o">=</span> <span class="n">Io</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">R</span> <span class="o">*</span> <span class="n">t</span> <span class="o">/</span> <span class="n">L</span><span class="p">))</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">Vl</span><span class="p">,</span> <span class="n">Il</span><span class="p">)</span></div>
 
+
 <div class="viewcode-block" id="air_core_inductance"><a class="viewcode-back" href="../../api/electricpy.passive.air_core_inductance.html#electricpy.passive.air_core_inductance">[docs]</a><span class="k">def</span> <span class="nf">air_core_inductance</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">coil_l</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute Inductance of Air Core Inductor.</span>
@@ -774,7 +785,7 @@
 <span class="sd">    .. math:: \frac{d^2 \cdot n^2}{457418\cdot d + 1016127\cdot l}</span>
 
 <span class="sd">    Parameters</span>
-<span class="sd">    ---------- </span>
+<span class="sd">    ----------</span>
 <span class="sd">    d:      float</span>
 <span class="sd">            Coil diameter, measured in meters</span>
 <span class="sd">    coil_l: float</span>
@@ -782,13 +793,14 @@
 <span class="sd">    n:      int</span>
 <span class="sd">            Number of inductor turns</span>
 
-<span class="sd">    Returns </span>
-<span class="sd">    ------- </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
 <span class="sd">    float   Inductance of air core inductor in Henry's (H)</span>
 <span class="sd">    """</span>
-    <span class="n">k1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span>
-    <span class="n">k2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">457418</span><span class="o">*</span><span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1016127</span><span class="o">*</span><span class="n">coil_l</span><span class="p">)</span>
-    <span class="k">return</span>  <span class="n">k1</span><span class="o">/</span><span class="n">k2</span></div>
+    <span class="n">k1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1000</span> <span class="o">*</span> <span class="n">d</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">457418</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1016127</span> <span class="o">*</span> <span class="n">coil_l</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">k1</span> <span class="o">/</span> <span class="n">k2</span></div>
+
 
 <div class="viewcode-block" id="inductive_voltdiv"><a class="viewcode-back" href="../../api/electricpy.passive.inductive_voltdiv.html#electricpy.passive.inductive_voltdiv">[docs]</a><span class="k">def</span> <span class="nf">inductive_voltdiv</span><span class="p">(</span><span class="n">Vin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Vout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">find</span><span class="o">=</span><span class="s1">''</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
@@ -805,7 +817,7 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    Vin:    float, optional </span>
+<span class="sd">    Vin:    float, optional</span>
 <span class="sd">            The input voltage for the system, default=None</span>
 
 <span class="sd">    Vout:   float, optional</span>
@@ -820,10 +832,10 @@
 <span class="sd">    find:   str, optional</span>
 <span class="sd">            Control argument to specify which value</span>
 <span class="sd">            should be returned.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    Vin:    float, optional </span>
+<span class="sd">    Vin:    float, optional</span>
 <span class="sd">            The input voltage for the system, default=None</span>
 
 <span class="sd">    Vout:   float, optional</span>
@@ -835,20 +847,20 @@
 <span class="sd">    L2:     float,optional</span>
 <span class="sd">            Value of the inductor below the output voltage</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">Vin</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">L1</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">L2</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
-        <span class="n">Vout</span> <span class="o">=</span> <span class="p">(</span><span class="n">Vin</span><span class="o">*</span><span class="n">L1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">L1</span><span class="o">+</span><span class="n">L2</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">Vout</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">L1</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">L2</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
-        <span class="n">Vin</span> <span class="o">=</span> <span class="p">(</span><span class="n">Vout</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">L1</span><span class="o">+</span><span class="n">L2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">L1</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">Vin</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">Vout</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">L2</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
-        <span class="n">L1</span> <span class="o">=</span> <span class="n">L2</span><span class="o">*</span><span class="p">(</span><span class="n">Vin</span> <span class="o">-</span><span class="n">Vout</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">Vout</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">Vin</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">Vout</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">L1</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
-        <span class="n">L2</span> <span class="o">=</span> <span class="n">L1</span><span class="o">*</span><span class="p">(</span><span class="n">Vout</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">Vin</span> <span class="o">-</span> <span class="n">Vout</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">Vin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">L1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">L2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">Vout</span> <span class="o">=</span> <span class="p">(</span><span class="n">Vin</span> <span class="o">*</span> <span class="n">L1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">L1</span> <span class="o">+</span> <span class="n">L2</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">Vout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">L1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">L2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">Vin</span> <span class="o">=</span> <span class="p">(</span><span class="n">Vout</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">L1</span> <span class="o">+</span> <span class="n">L2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">L1</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">Vin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Vout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">L2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">L1</span> <span class="o">=</span> <span class="n">L2</span> <span class="o">*</span> <span class="p">(</span><span class="n">Vin</span> <span class="o">-</span> <span class="n">Vout</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">Vout</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">Vin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Vout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">L1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">L2</span> <span class="o">=</span> <span class="n">L1</span> <span class="o">*</span> <span class="n">Vout</span> <span class="o">/</span> <span class="p">(</span><span class="n">Vin</span> <span class="o">-</span> <span class="n">Vout</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"ERROR: Invalid Parameters or too few"</span> <span class="o">+</span>
-                        <span class="s2">" parameters given to calculate."</span><span class="p">)</span>
+                         <span class="s2">" parameters given to calculate."</span><span class="p">)</span>
 
     <span class="n">find</span> <span class="o">=</span> <span class="n">find</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-    
+
     <span class="k">if</span> <span class="n">find</span> <span class="o">==</span> <span class="s1">'vin'</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Vin</span>
     <span class="k">elif</span> <span class="n">find</span> <span class="o">==</span> <span class="s1">'vout'</span><span class="p">:</span>
@@ -858,7 +870,7 @@
     <span class="k">elif</span> <span class="n">find</span> <span class="o">==</span> <span class="s1">'l2'</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">L2</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">Vin</span><span class="p">,</span> <span class="n">Vout</span><span class="p">,</span> <span class="n">L1</span><span class="p">,</span> <span class="n">L2</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">Vin</span><span class="p">,</span> <span class="n">Vout</span><span class="p">,</span> <span class="n">L1</span><span class="p">,</span> <span class="n">L2</span></div>
 
 <span class="c1"># END</span>
 </pre></div>
