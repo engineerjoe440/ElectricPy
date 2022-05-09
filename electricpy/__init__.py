@@ -1916,7 +1916,6 @@ def crcsender(data, key):
                 Bit-string representation of
                 encoded message.
     """
-
     # Define Sub-Functions
     def xor(a, b):
         # initialize result
@@ -2010,7 +2009,6 @@ def crcremainder(data, key):
                 Bit-string representation of
                 encoded message.
     """
-
     # Define Sub-Functions
     def xor(a, b):
         # initialize result
