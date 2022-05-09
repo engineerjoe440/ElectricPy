@@ -5205,6 +5205,7 @@ def lm317(r1, r2, v_out):
     r2:    float
            r2 is resistance and is measured in ohm
 
+
     .. [1] Electronial, "LM317" BasicTables, Accessed May, 2022
        https://www.basictables.com/electronics/lm317
     """
