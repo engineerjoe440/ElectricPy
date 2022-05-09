@@ -5081,9 +5081,11 @@ def pi_attenuator(Adb, Z0):
 
 def lm317(r1, r2):
     """
-    LM317
+    LM317.
+
     The LM317 is a linear voltage regulator that can be adjusted to supply a specific output voltage.
     The LM317 has three pins, adjust, output and input. The LM317 is often connected as in the image below.
+
     Parameters
     ----------
     r1: float
@@ -5094,7 +5096,7 @@ def lm317(r1, r2):
     Returns
     -------
     v_out: float
-       v_out is the output voltage and is measured in volt (V)
+           v_out is the output voltage and is measured in volt (V)
     """
     return 1.25 * (1 + (r2 / r1))
 # END OF FILE
