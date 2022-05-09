@@ -168,7 +168,7 @@ def test_suspension_insulators():
     Voltage = 66
 
     _, string_efficiency = suspension_insulators(number_capacitors,
-                                                capacitance_ration, 
+                                                capacitance_ration,
                                                 Voltage)
 
     string_efficiency_actual = 54.16
@@ -223,7 +223,7 @@ def test_ic_555_astable():
 def test_powerflow():
     from electricpy import powerflow
     from electricpy.phasor import phasor
-    
+
     def test_0():
         Vsend = phasor(1.01, 30)
         Vrecv = phasor(1, 0)
@@ -258,7 +258,7 @@ def test_slew_rate():
 def test_phs():
     from electricpy.phasor import phs
     def test_0():
-        
+
 
         inputs = [0, 90, 180, 270, 360]
 
@@ -388,7 +388,7 @@ def test_abc_to_seq():
 
 def test_seq_to_abc():
     from electricpy.conversions import seq_to_abc
-    a = cmath.rect(1, np.radians(120))    
+    a = cmath.rect(1, np.radians(120))
 
     def test_0():
         np.testing.assert_array_almost_equal(seq_to_abc([1, 1, 1]), [3+0j, 0j, 0j])
@@ -403,7 +403,7 @@ def test_vectarray():
     from electricpy.phasor import vectarray
 
     def test_0():
-        
+
         A = [2+3j, 4+5j, 6+7j, 8+9j]
         B = vectarray(A)
 
@@ -500,13 +500,13 @@ class Test_air_core_inductor:
         def wrapper(self):
             from electricpy.passive import air_core_inductance
             expected_result = test_case(self)
-            computed_result = air_core_inductance(self.coil_diameter, self.coil_length, self.turn)            
+            computed_result = air_core_inductance(self.coil_diameter, self.coil_length, self.turn)
             assert_almost_equal(computed_result, expected_result, decimal = 3)
         return wrapper
 
     @invoke
     def test_0(self):
-        
+
         self.coil_diameter = 1e-3
         self.coil_length = 1e-3
         self.turn = 1000
