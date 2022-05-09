@@ -1065,9 +1065,9 @@
 <span class="sd">                The saturated voltage.</span>
 <span class="sd">    """</span>
     <span class="c1"># Validate Inputs</span>
-    <span class="k">if</span> <span class="n">VArat</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">ANSIv</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">VArat</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">ANSIv</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"VArat or ANSIv must be specified."</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">VArat</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">VArat</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># Calculate VArat from ANSIv</span>
         <span class="n">VArat</span> <span class="o">=</span> <span class="n">Inom</span> <span class="o">*</span> <span class="n">ANSIv</span> <span class="o">/</span> <span class="p">(</span><span class="mi">20</span><span class="p">)</span>
     <span class="c1"># Determine Vsaturation</span>
@@ -1816,12 +1816,12 @@
 <span class="sd">                The "measured" impedance as calculated by the relay.</span>
 <span class="sd">    """</span>
     <span class="c1"># Validate Residual Compensation Inputs</span>
-    <span class="k">if</span> <span class="n">k0</span> <span class="o">==</span> <span class="n">z1</span> <span class="o">==</span> <span class="n">z0</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">k0</span> <span class="o">==</span> <span class="n">z1</span> <span class="o">==</span> <span class="n">z0</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Residual compensation arguments must be set."</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">k0</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="n">z1</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">z0</span> <span class="o">==</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">k0</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="n">z1</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">z0</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Both *z1* and *z0* must be specified."</span><span class="p">)</span>
     <span class="c1"># Calculate Residual Compensation if Necessary</span>
-    <span class="k">if</span> <span class="n">k0</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">k0</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">k0</span> <span class="o">=</span> <span class="n">residcomp</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="n">z0</span><span class="p">,</span> <span class="n">linelength</span><span class="p">)</span>
     <span class="c1"># Convert Primary Units to Secondary</span>
     <span class="n">V</span> <span class="o">=</span> <span class="n">VLNmeas</span> <span class="o">/</span> <span class="n">VTR</span>
@@ -1946,12 +1946,12 @@
 <span class="sd">                bus protection element pickup.</span>
 <span class="sd">    """</span>
     <span class="c1"># Validate Inputs</span>
-    <span class="k">if</span> <span class="n">Irly</span> <span class="o">==</span> <span class="n">Vset</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">Irly</span> <span class="o">==</span> <span class="n">Vset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Relay Current Required."</span><span class="p">)</span>
     <span class="c1"># Condition Inputs</span>
     <span class="n">Ie</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Ie</span><span class="p">)</span>
     <span class="n">Imov</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Imov</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">Irly</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">Irly</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">Vset</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Vset</span><span class="p">)</span>
         <span class="n">Irly</span> <span class="o">=</span> <span class="n">Vset</span> <span class="o">/</span> <span class="n">Rrly</span>
     <span class="k">else</span><span class="p">:</span>

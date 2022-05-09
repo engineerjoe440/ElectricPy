@@ -403,7 +403,7 @@
 <span class="sd">    watts:      float</span>
 <span class="sd">                The power in watts.</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">hp</span> <span class="o">*</span> <span class="n">WATTS_PER_HP</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">hp</span> <span class="o">*</span> <span class="n">WATTS_PER_HP</span></div>
 
 
 <span class="n">watts</span> <span class="o">=</span> <span class="n">hp_to_watts</span>  <span class="c1"># Make Duplicate Name</span>
@@ -431,7 +431,7 @@
 <span class="sd">    hp:         float</span>
 <span class="sd">                The power in horsepower.</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">watts</span> <span class="o">/</span> <span class="n">WATTS_PER_HP</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">watts</span> <span class="o">/</span> <span class="n">WATTS_PER_HP</span></div>
 
 
 <span class="n">horsepower</span> <span class="o">=</span> <span class="n">watts_to_hp</span>  <span class="c1"># Make Duplicate Name</span>
@@ -458,7 +458,7 @@
 <span class="sd">    BTU:        float</span>
 <span class="sd">                The number of British Thermal Units</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">kWh</span> <span class="o">*</span> <span class="n">KWH_PER_BTU</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">kWh</span> <span class="o">*</span> <span class="n">KWH_PER_BTU</span></div>
 
 
 <span class="n">btu</span> <span class="o">=</span> <span class="n">kwh_to_btu</span>  <span class="c1"># Make Duplicate Name</span>
@@ -484,7 +484,7 @@
 <span class="sd">    kWh:        float</span>
 <span class="sd">                The number of killo-Watt-hours</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">BTU</span> <span class="o">/</span> <span class="n">KWH_PER_BTU</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">BTU</span> <span class="o">/</span> <span class="n">KWH_PER_BTU</span></div>
 
 
 <span class="n">kwh</span> <span class="o">=</span> <span class="n">btu_to_kwh</span>  <span class="c1"># Make Duplicate Name</span>
@@ -512,7 +512,7 @@
 <span class="sd">    hertz:      float</span>
 <span class="sd">                The frequency (represented in Hertz)</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">radians</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>  <span class="c1"># Evaluate and Return</span></div>
+    <span class="k">return</span> <span class="n">radians</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>  <span class="c1"># Evaluate and Return</span></div>
 
 
 <span class="n">hertz</span> <span class="o">=</span> <span class="n">rad_to_hz</span>  <span class="c1"># Make Duplicate Name</span>
@@ -540,7 +540,7 @@
 <span class="sd">    radians:    float</span>
 <span class="sd">                The frequency (represented in radians/sec)</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">hertz</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>  <span class="c1"># Evaluate and Return</span></div>
+    <span class="k">return</span> <span class="n">hertz</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>  <span class="c1"># Evaluate and Return</span></div>
 
 
 <span class="n">radsec</span> <span class="o">=</span> <span class="n">hz_to_rad</span>  <span class="c1"># Make Duplicate Name</span>
@@ -586,7 +586,7 @@
         <span class="n">M</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">Aabc</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid Phase Reference."</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Mabc</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="n">M</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Mabc</span><span class="p">)</span></div>
 
 
 <span class="c1"># Define Second Name for abc_to_seq</span>
@@ -635,7 +635,7 @@
         <span class="n">M</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid Phase Reference."</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">M</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">M</span></div>
 
 
 <span class="c1"># Define Second Name for seq_to_abc</span>
@@ -713,7 +713,7 @@
     <span class="c1"># Reduce to Diagonal Terms if Needed</span>
     <span class="k">if</span> <span class="n">diag</span><span class="p">:</span>
         <span class="n">Z012</span> <span class="o">=</span> <span class="p">[</span><span class="n">Z012</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">Z012</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">Z012</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]]</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">Z012</span><span class="p">,</span> <span class="nb">round</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="n">_np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">Z012</span><span class="p">,</span> <span class="nb">round</span><span class="p">)</span></div>
 
 
 <span class="c1"># Define Angular Velocity Conversion Functions</span>
@@ -735,7 +735,7 @@
 <span class="sd">                The angular velocity in revolutions-per-minute (RPM)</span>
 <span class="sd">    """</span>
     <span class="n">rpm</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">rad</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">rpm</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">rpm</span></div>
 
 
 <span class="c1"># Define Angular Velocity Conversion Functions</span>
@@ -757,7 +757,7 @@
 <span class="sd">                The angular velocity in radians-per-second</span>
 <span class="sd">    """</span>
     <span class="n">rad</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">60</span> <span class="o">*</span> <span class="n">rpm</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">rad</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">rad</span></div>
 
 
 <span class="c1"># Define Angular Velocity Conversion Functions</span>
@@ -779,7 +779,7 @@
 <span class="sd">                The angular velocity in revolutions-per-minute (RPM)</span>
 <span class="sd">    """</span>
     <span class="n">rpm</span> <span class="o">=</span> <span class="n">hz</span> <span class="o">*</span> <span class="mi">60</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">rpm</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">rpm</span></div>
 
 
 <span class="c1"># Define Angular Velocity Conversion Functions</span>
@@ -801,7 +801,7 @@
 <span class="sd">                The angular velocity in Hertz</span>
 <span class="sd">    """</span>
     <span class="n">hz</span> <span class="o">=</span> <span class="n">rpm</span> <span class="o">/</span> <span class="mi">60</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">hz</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">hz</span></div>
 
 
 <span class="c1"># Define dBW to Watts converter</span>
