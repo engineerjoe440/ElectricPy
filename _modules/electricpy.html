@@ -5243,7 +5243,7 @@
     <span class="c1"># Given inductance, area and length</span>
     <span class="k">elif</span> <span class="n">L</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">A</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">l</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">L</span><span class="o">*</span><span class="n">l</span><span class="o">/</span><span class="p">(</span><span class="n">u</span><span class="o">*</span><span class="n">A</span><span class="p">))</span></div>
-        
+
 <div class="viewcode-block" id="ic_555_astable"><a class="viewcode-back" href="../api/electricpy.ic_555_astable.html#electricpy.ic_555_astable">[docs]</a><span class="k">def</span> <span class="nf">ic_555_astable</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">C</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">t_high</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">t_low</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    555 Integrated Circuit Calculator.</span>
@@ -5297,7 +5297,7 @@
             <span class="s1">'t_low'</span><span class="p">:</span><span class="n">t_low</span><span class="p">,</span>
             <span class="s1">'t_high'</span><span class="p">:</span><span class="n">t_high</span>
         <span class="p">}</span>
-    
+
     <span class="k">elif</span> <span class="n">t_high</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">t_low</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">C</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
 
         <span class="n">x2</span> <span class="o">=</span> <span class="n">t_low</span><span class="o">/</span><span class="n">C</span><span class="o">*</span><span class="n">_np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -5315,7 +5315,7 @@
         <span class="p">}</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Not enough parqmeters are passed"</span><span class="p">)</span></div>
-            
+
 <div class="viewcode-block" id="ic_555_monostable"><a class="viewcode-back" href="../api/electricpy.ic_555_monostable.html#electricpy.ic_555_monostable">[docs]</a><span class="k">def</span> <span class="nf">ic_555_monostable</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">C</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">t_high</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">t_low</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    555 Integrated Circuit Calculator.</span>
@@ -5438,6 +5438,56 @@
     <span class="n">R2</span> <span class="o">=</span> <span class="p">(</span><span class="n">Z0</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">x</span><span class="p">))))</span>
 
     <span class="k">return</span> <span class="n">R1</span><span class="p">,</span><span class="n">R2</span></div>
+
+
+<div class="viewcode-block" id="lm317"><a class="viewcode-back" href="../api/electricpy.lm317.html#electricpy.lm317">[docs]</a><span class="k">def</span> <span class="nf">lm317</span><span class="p">(</span><span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">v_out</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    LM317.</span>
+
+<span class="sd">    The LM317 is a linear voltage regulator that can be adjusted to supply a specific output voltage.</span>
+<span class="sd">    The LM317 has three pins, adjust, output and input. The LM317 is often connected as in the image below.</span>
+
+<span class="sd">    .. [1] Electronial, "LM317" BasicTables, Accessed May, 2022 https://www.basictables.com/electronics/lm317</span>
+
+<span class="sd">    .. image:: https://www.basictables.com/media/lm317-circuit.png</span>
+
+<span class="sd">     Formula to Calculate Output Voltage, R1, R2:</span>
+<span class="sd">    .. math:: V_{out} = 1.25 * (1+\frac{R2}{R1})</span>
+<span class="sd">    .. math:: R1 = \frac{1.25*R2}{V_{out}-1.25}</span>
+<span class="sd">    .. math:: R2 = \frac{R1*V_{out}}{1.25} - R1}</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    v_out: float, Optional</span>
+<span class="sd">           Output Voltage in LM317 in Volts</span>
+<span class="sd">    r1:    float, Optional</span>
+<span class="sd">           r1 is resistance and is measured in ohm</span>
+<span class="sd">    r2:    float, Optional</span>
+<span class="sd">           r2 is resistance and is measured in ohm</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    v_out: float</span>
+<span class="sd">           v_out is the output voltage and is measured in volt (V)</span>
+<span class="sd">    r1:    float</span>
+<span class="sd">           r1 is resistance and is measured in ohm</span>
+<span class="sd">    r2:    float</span>
+<span class="sd">           r2 is resistance and is measured in ohm</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">r1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">r2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Returns Voltage</span>
+        <span class="k">return</span> <span class="mf">1.25</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">r2</span> <span class="o">/</span> <span class="n">r1</span><span class="p">))</span>
+
+    <span class="k">elif</span> <span class="n">r2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">v_out</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Returns R1</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mf">1.25</span> <span class="o">*</span> <span class="n">r2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">v_out</span> <span class="o">-</span> <span class="mf">1.25</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">r1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">v_out</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Returns R2</span>
+        <span class="k">return</span> <span class="p">((</span><span class="n">r1</span> <span class="o">*</span> <span class="n">v_out</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.25</span><span class="p">)</span> <span class="o">-</span> <span class="n">r1</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid arguments"</span><span class="p">)</span></div>
 <span class="c1"># END OF FILE</span>
 </pre></div>
 

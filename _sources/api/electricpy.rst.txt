@@ -91,6 +91,8 @@
     
     led_resistor
     
+    lm317
+    
     machslip
     
     motorstartcap
