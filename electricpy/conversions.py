@@ -34,7 +34,7 @@ def hp_to_watts(hp):
     Parameters
     ----------
     hp:         float
-                The horspower to compute.
+                The horsepower to compute.
 
     Returns
     -------
@@ -48,7 +48,7 @@ watts = hp_to_watts  # Make Duplicate Name
 
 
 # Define Watts to HP Calculation
-def watts_to_hp(watts):
+def watts_to_hp(watt):
     r"""
     Watts to Horsepower Function.
 
@@ -61,7 +61,7 @@ def watts_to_hp(watts):
 
     Parameters
     ----------
-    watts:      float
+    watt:      float
                 The wattage to compute.
 
     Returns
@@ -69,7 +69,7 @@ def watts_to_hp(watts):
     hp:         float
                 The power in horsepower.
     """
-    return watts / WATTS_PER_HP
+    return watt / WATTS_PER_HP
 
 
 horsepower = watts_to_hp  # Make Duplicate Name
@@ -104,9 +104,9 @@ btu = kwh_to_btu  # Make Duplicate Name
 
 def btu_to_kwh(BTU):
     r"""
-    BTU to Killo-Watt-Hours Function.
+    BTU to Kilo-Watt-Hours Function.
 
-    Converts BTU (British Thermal Units) to kWh (killo-Watt-hours).
+    Converts BTU (British Thermal Units) to kWh (kilo-Watt-hours).
 
     .. math:: \text{kWh} = \frac{\text{BTU}}{3412.14}
 
@@ -120,7 +120,7 @@ def btu_to_kwh(BTU):
     Returns
     -------
     kWh:        float
-                The number of killo-Watt-hours
+                The number of kilo-Watt-hours
     """
     return BTU / KWH_PER_BTU
 
@@ -134,7 +134,7 @@ def rad_to_hz(radians):
     Radians to Hertz Converter.
 
     Accepts a frequency in radians/sec and calculates
-    the hertzian frequency (in Hz).
+    the hertz frequency (in Hz).
 
     .. math:: f_{\text{Hz}} = \frac{f_{\text{rad/sec}}}{2\cdot\pi}
 
@@ -157,7 +157,7 @@ hertz = rad_to_hz  # Make Duplicate Name
 
 
 # Define Simple Hertz to Radians Converter
-def hz_to_rad(hertz):
+def hz_to_rad(hz):
     r"""
     Hertz to Radians Converter.
 
@@ -170,7 +170,7 @@ def hz_to_rad(hertz):
 
     Parameters
     ----------
-    hertz:      float
+    hz:      float
                 The frequency (represented in Hertz)
 
     Returns
@@ -178,7 +178,7 @@ def hz_to_rad(hertz):
     radians:    float
                 The frequency (represented in radians/sec)
     """
-    return hertz * (2 * _np.pi)  # Evaluate and Return
+    return hz * (2 * _np.pi)  # Evaluate and Return
 
 
 radsec = hz_to_rad  # Make Duplicate Name
@@ -206,13 +206,13 @@ def abc_to_seq(Mabc, reference='A'):
 
     Returns
     -------
-    M012:       numpy.ndarray
+    M012:       numpy.array
                 Sequence-based values in order of 0-1-2
 
     See Also
     --------
     seq_to_abc: Sequence to Phase Conversion
-    sequencez:  Phase Impedance to Sequence Converter
+    sequence:  Phase Impedance to Sequence Converter
     """
     # Condition Reference:
     reference = reference.upper()
@@ -253,13 +253,13 @@ def seq_to_abc(M012, reference='A'):
 
     Returns
     -------
-    Mabc:       numpy.ndarray
+    Mabc:       numpy.array
                 Phase-based values in order of A-B-C
 
     See Also
     --------
     abc_to_seq: Phase to Sequence Conversion
-    sequencez:  Phase Impedance to Sequence Converter
+    sequence:  Phase Impedance to Sequence Converter
     """
     # Compute Dot Product
     M = A012.dot(M012)
@@ -281,7 +281,7 @@ seq_to_phs = seq_to_abc
 
 
 # Define Sequence Impedance Calculator
-def sequencez(Zabc, reference='A', resolve=False, diag=False, round=3):
+def sequencez(Zabc, reference='A', resolve=False, diag=False, rounds=3):
     r"""
     Sequence Impedance Calculator.
 
@@ -301,30 +301,30 @@ def sequencez(Zabc, reference='A', resolve=False, diag=False, round=3):
 
     Parameters
     ----------
-    Zabc:       numpy.ndarray of complex
+    Zabc:       numpy.array of complex
                 2-D (3x3) matrix of complex values
-                representing the phasor impedances
+                representing the pharo impedance
                 in the ABC-domain.
     reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
                 default='A'
     resolve:    bool, optional
                 Control argument to force the function to
-                evaluate the individual sequence impedances
+                evaluate the individual sequence impedance
                 [Z0, Z1, Z2], default=False
     diag:       bool, optional
                 Control argument to force the function to
                 reduce the matrix to its diagonal terms.
-    round:      int, optional
+    rounds:      int, optional
                 Integer denoting number of decimal places
                 resulting matrix should be rounded to.
                 default=3
 
     Returns
     -------
-    Z012:       numpy.ndarray of complex
+    Z012:       numpy.array of complex
                 2-D (3x3) matrix of complex values
-                representing the sequence impedances
+                representing the sequence impedance
                 in the 012-domain
 
     See Also
@@ -334,24 +334,24 @@ def sequencez(Zabc, reference='A', resolve=False, diag=False, round=3):
     """
     # Condition Reference
     reference = reference.upper()
-    rollrate = {'A': 0, 'B': 1, 'C': 2}
+    roll_rate = {'A': 0, 'B': 1, 'C': 2}
     # Test Validity
-    if reference not in rollrate:
+    if reference not in roll_rate:
         raise ValueError("Invalad Phase Reference")
     # Determine Roll Factor
-    roll = rollrate[reference]
-    # Evaluate Matricies
+    roll = roll_rate[reference]
+    # Evaluate Matrices
     M012 = _np.roll(A012, roll, 0)
-    Minv = _np.linalg.inv(M012)
-    # Compute Sequence Impedances
+    min_v = _np.linalg.inv(M012)
+    # Compute Sequence Impedance
     if resolve:
-        Z012 = M012.dot(Zabc.dot(Minv))
+        Z012 = M012.dot(Zabc.dot(min_v))
     else:
-        Z012 = Minv.dot(Zabc.dot(M012))
+        Z012 = min_v.dot(Zabc.dot(M012))
     # Reduce to Diagonal Terms if Needed
     if diag:
         Z012 = [Z012[0][0], Z012[1][1], Z012[2][2]]
-    return _np.around(Z012, round)
+    return _np.around(Z012, rounds)
 
 
 # Define Angular Velocity Conversion Functions
@@ -416,8 +416,7 @@ def hz_to_rpm(hz):
     rpm:        float
                 The angular velocity in revolutions-per-minute (RPM)
     """
-    rpm = hz * 60
-    return rpm
+    return hz * 60
 
 
 # Define Angular Velocity Conversion Functions
@@ -438,8 +437,7 @@ def rpm_to_hz(rpm):
     hz:         float
                 The angular velocity in Hertz
     """
-    hz = rpm / 60
-    return hz
+    return rpm / 60
 
 
 # Define dBW to Watts converter
@@ -460,12 +458,11 @@ def dbw_to_watts(dbw):
     watts       float
                 Power in Watts
     """
-    watts = 10 ** (dbw / 10)
-    return watts
+    return 10 ** (dbw / 10)
 
 
 # Define Watts to dBW converter
-def watts_to_dbw(watts):
+def watts_to_dbw(watt):
     """
     Watt to dBW converter.
 
@@ -474,14 +471,13 @@ def watts_to_dbw(watts):
 
     Parameters
     ----------
-    watts:      float
+    watt:      float
                 Power in Watts
     Return
     ------
     dbw:        Power in the decibel scale (dBW)
     """
-    dbw = 10 * _np.log10(watts)
-    return dbw
+    return 10 * _np.log10(watt)
 
 
 # Define dbW to dBmW converter
@@ -489,8 +485,8 @@ def dbw_to_dbmw(dbw):
     """
     Convert dBW to dBmW.
 
-    Given the power in the decibel scale, this function will evulate the power
-    in the decibel-milliwatts scale.
+    Given the power in the decibel scale, this function will evaluate the power
+    in the decibel-milli-watts scale.
 
     Parameters
     ----------
@@ -499,10 +495,9 @@ def dbw_to_dbmw(dbw):
     Return
     ------
     dbmw:       float
-                Power in the decibel-milliwatts scale (dBmW)
+                Power in the decibel-milli-watts scale (dBmW)
     """
-    dbmw = dbw + 30
-    return dbmw
+    return dbw + 30
 
 
 # Define dBmW to dBW converter
@@ -510,20 +505,19 @@ def dbmw_to_dbw(dbmw):
     """
     Convert dBmW to dBW.
 
-    Given the power in the decibel milliwattscale, this function will evulate
+    Given the power in the decibel milli-watts-scale, this function will evaluate
     the power in the decibel scale.
 
     Parameters
     ----------
     dbmw:       float
-                Power in the decibel-milliwatts scale (dBmW)
+                Power in the decibel-milli-watts scale (dBmW)
     Return
     ------
     dbw:        float
                 Power in the decibel scale (dBW)
     """
-    dbw = dbmw - 30
-    return dbw
+    return dbmw - 30
 
 
 # Define dBmW to Watts converter
@@ -531,30 +525,29 @@ def dbmw_to_watts(dbmw):
     """
     Convert dbmW to Watts.
 
-    Given the power in the decibel milliwattscale, this function will evulate
+    Given the power in the decibel milli-watts-scale, this function will evaluate
     the power in watts.
 
     Parameters
     ----------
     dbmw:       float
-                Power in the decibel-milliwatts scale (dBmW)
+                Power in the decibel-milli-watts scale (dBmW)
     Return
     ------
     watt:       float
                 Power in Watts
     """
     dbw = dbmw_to_dbw(dbmw)
-    watts = dbw_to_watts(dbw)
-    return watts
+    return dbw_to_watts(dbw)
 
 
 # Define Watts to dBmW converter
-def watts_to_dbmw(watts):
+def watts_to_dbmw(watt):
     """
     Watts to dBmW.
 
-    Given the power in watts, this function will evulate
-    the power in the decibel milliwatt scale.
+    Given the power in watts, this function will evaluate
+    the power in the decibel milli-watt scale.
 
     Parameters
     ----------
@@ -563,11 +556,10 @@ def watts_to_dbmw(watts):
     Return
     ------
     dbmw:       float
-                Power in the decibel-milliwatts scale (dBmW)
+                Power in the decibel-milli-watts scale (dBmW)
     """
-    dbw = watts_to_dbw(watts)
-    dbmw = dbw_to_dbmw(dbw)
-    return dbmw
+    dbw = watts_to_dbw(watt)
+    return dbw_to_dbmw(dbw)
 
 
 # Define Voltage to decibel converter
