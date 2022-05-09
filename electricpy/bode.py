@@ -115,35 +115,9 @@ def bode(system, mn=0.001, mx=1000, npts=100, title="", xlim=False, ylim=False, 
     # Calculate the bode system
     w, mag, ang = _sig.bode(system, wover)
 
-    # Plot Magnitude
-    if magnitude:
-        magTitle = "Magnitude " + title
-        _plt.title(magTitle)
-        if degrees:  # Plot in degrees
-            _plt.plot(w / (2 * _np.pi), mag)
-            _plt.xlabel("Frequency (Hz)")
-        else:  # Plot in radians
-            _plt.plot(w, mag)
-            _plt.xlabel("Frequency (rad/sec)")
-        _plt.xscale("log")
-        _plt.grid(which="both")
-        _plt.ylabel("Magnitude (dB)")
-        if disp3db:
-            _plt.axhline(-3)
-        if lowcut is not None:
-            _plt.axhline(lowcut)
-        if xlim:
-            _plt.xlim(xlim)
-        if ylim:
-            _plt.ylim(ylim)
-        if sv:
-            _plt.savefig(magTitle + ".png")
-        _plt.show()
-
-    # Plot Angle
-    if angle:
-        angTitle = "Angle " + title
-        _plt.title(angTitle)
+    def _plot(plot_title, y_label):
+        _plt.title(plot_title)
+        _plt.ylabel(y_label)
         if degrees:  # Plot in degrees
             _plt.plot(w / (2 * _np.pi), ang)
             _plt.xlabel("Frequency (Hz)")
@@ -152,14 +126,44 @@ def bode(system, mn=0.001, mx=1000, npts=100, title="", xlim=False, ylim=False, 
             _plt.xlabel("Frequency (rad/sec)")
         _plt.xscale("log")
         _plt.grid(which="both")
-        _plt.ylabel("Angle (degrees)")
         if xlim:
             _plt.xlim(xlim)
         if ylim:
             _plt.ylim(ylim)
         if sv:
-            _plt.savefig(angTitle + ".png")
+            _plt.savefig(title + ".png")
+
+    # Plot Magnitude
+    if magnitude:
+        magTitle = "Magnitude " + title
+        _plot(magTitle, "Magnitude (DB)")
+        if disp3db:
+            _plt.axhline(-3)
+        if lowcut is not None:
+            _plt.axhline(lowcut)
         _plt.show()
+
+    # Plot Angle
+    if angle:
+        angTitle = "Angle " + title
+        _plot(angTitle, "Angle (degrees)")
+        _plt.show()
+
+
+def _magnitude_plot(title, disp3db, lowcut, xlim, ylim, sv):
+    _plt.title(title + " Magnitude")
+    _plt.grid(which='both')
+    if disp3db:
+        _plt.axhline(-3)
+    if lowcut is not None:
+        _plt.axhline(lowcut)
+    if xlim:
+        _plt.xlim(xlim)
+    if ylim:
+        _plt.ylim(ylim)
+    if sv:
+        _plt.savefig(title + " Magnitude.png")
+    _plt.show()
 
 
 def sbode(f, NN=1000, title="", xlim=False, ylim=False, mn=0, mx=1000,
@@ -208,19 +212,7 @@ def sbode(f, NN=1000, title="", xlim=False, ylim=False, mn=0, mx=1000,
         _plt.semilogx(W, 20 * _np.log10(abs(H)), 'k')
         _plt.ylabel('|H| dB')
         _plt.xlabel('Frequency (rad/sec)')
-        _plt.title(title + " Magnitude")
-        _plt.grid(which='both')
-        if disp3db:
-            _plt.axhline(-3)
-        if lowcut is not None:
-            _plt.axhline(lowcut)
-        if xlim:
-            _plt.xlim(xlim)
-        if ylim:
-            _plt.ylim(ylim)
-        if sv:
-            _plt.savefig(title + " Magnitude.png")
-        _plt.show()
+        _magnitude_plot(title, disp3db, lowcut, xlim, ylim, sv)
 
     aaa = _np.angle(H)
     for n in range(NN):
@@ -263,7 +255,7 @@ def zbode(f, dt=0.01, NN=1000, title="", mn=0, mx=2 * _pi, xlim=False, ylim=Fals
                     The minimum phi value to be generated, default=0
     mx:             float, optional
                     The maximum phi value to be generated, default=2*pi
-    approx:         bool, optional
+    approx:         bool, optional, callable
                     Control argument to specify whether input funciton
                     should be treated as Z-Domain function or approximated
                     Z-Domain function. default=False
@@ -293,7 +285,8 @@ def zbode(f, dt=0.01, NN=1000, title="", mn=0, mx=2 * _pi, xlim=False, ylim=Fals
     H = _np.zeros(NN, dtype=_np.complex)
     for n in range(0, NN):
         z = _exp(1j * phi[n])
-        if approx != False:  # Approximated Z-Domain
+        if approx is not False and callable(approx):
+            # Approximated Z-Domain
             s = approx(z, dt)  # Pass current z-value and dt
             H[n] = f(s)
         else:  # Z-Domain Transfer Function Provided
@@ -303,26 +296,14 @@ def zbode(f, dt=0.01, NN=1000, title="", mn=0, mx=2 * _pi, xlim=False, ylim=Fals
         _plt.semilogx((180 / _pi) * phi, 20 * _np.log10(abs(H)), 'k')
         _plt.ylabel('|H| dB')
         _plt.xlabel('Frequency (degrees)')
-        _plt.title(title + " Magnitude")
-        _plt.grid(which='both')
-        if disp3db:
-            _plt.axhline(-3)
-        if lowcut is not None:
-            _plt.axhline(lowcut)
-        if xlim:
-            _plt.xlim(xlim)
-        if ylim:
-            _plt.ylim(ylim)
-        if sv:
-            _plt.savefig(title + " Magnitude.png")
-        _plt.show()
+        _magnitude_plot(title, disp3db, lowcut, xlim, ylim, sv)
 
     aaa = _np.angle(H)
     for n in range(NN):
         if aaa[n] > _pi:
             aaa[n] = aaa[n] - 2 * _pi
 
-    if (angle):
+    if angle:
         _plt.semilogx((180 / _pi) * phi, (180 / _pi) * aaa, 'k')
         _plt.ylabel('H (degrees)')
         _plt.grid(which='both')
@@ -330,7 +311,7 @@ def zbode(f, dt=0.01, NN=1000, title="", mn=0, mx=2 * _pi, xlim=False, ylim=Fals
         _plt.title(title + " Phase")
         if xlim:
             _plt.xlim(xlim)
-        if ylim != False:
+        if ylim:
             _plt.ylim(ylim)
         if sv:
             _plt.savefig(title + " Phase.png")
