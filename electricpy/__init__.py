@@ -5147,7 +5147,7 @@ def zener_diode_power(Vin, Vo, R):
 
 def lm317(r1, r2, v_out):
     r"""
-    LM317.
+    LM317 linear voltage regulator solver.
 
     The LM317 is a linear voltage regulator that can be adjusted to supply a specific output voltage.
     The LM317 has three pins, adjust, output and input. The LM317 is often connected as in the image below.
