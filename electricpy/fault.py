@@ -13,22 +13,12 @@ from scipy.optimize import fsolve as _fsolve
 
 # Import Local Dependencies
 from .constants import *
+from .conversions import seq_to_abc
 
 
 def _phaseroll(M012, reference):
     # Compute Dot Product
-    M = A012.dot(M012)
-    # Condition Reference:
-    reference = reference.upper()
-    if reference == 'A':
-        pass
-    elif reference == 'B':
-        M = _np.roll(M, 1, 0)
-    elif reference == 'C':
-        M = _np.roll(M, 2, 0)
-    else:
-        raise ValueError("Invalid Phase Reference.")
-    return M
+    return seq_to_abc(M012, reference)
 
 
 # Define Single Line to Ground Fault Function
