@@ -5145,24 +5145,48 @@ def zener_diode_power(Vin, Vo, R):
     P = ((Vo - Vin) ** 2) / R
     return(P)
 
-def lm317(r1, r2):
+def lm317(r1, r2, v_out):
     """
     LM317.
 
     The LM317 is a linear voltage regulator that can be adjusted to supply a specific output voltage.
     The LM317 has three pins, adjust, output and input. The LM317 is often connected as in the image below.
 
+     Formula to Calculate Output Voltage, R1, R2:
+    .. math:: V_{out} = 1.25 * (1+\frac{R2}{R1})
+    .. math:: R1 = \frac{1.25*R2}{V_{out}-1.25}
+    .. math:: R2 = \frac{R1*V_{out}}{1.25} - R1}
+
     Parameters
     ----------
-    r1: float
-        r1 is resistance and is measured in ohm
-    r2: float
-        r2 is resistance and is measured in ohm
+    v_out: float, Optional
+           Output Voltage in LM317 in Volts
+    r1:    float, Optional
+           r1 is resistance and is measured in ohm
+    r2:    float, Optional
+           r2 is resistance and is measured in ohm
 
     Returns
     -------
     v_out: float
            v_out is the output voltage and is measured in volt (V)
+    r1:    float
+           r1 is resistance and is measured in ohm
+    r2:    float
+           r2 is resistance and is measured in ohm
     """
-    return 1.25 * (1 + (r2 / r1))
+    if r1 is not None and r2 is not None:
+        # Returns Voltage
+        return 1.25 * (1 + (r2 / r1))
+
+    elif r2 is not None and v_out is not None:
+        # Returns R1
+        return (1.25 * r2) / (v_out - 1.25)
+
+    elif r1 is not None and v_out is not None:
+        # Returns R2
+        return ((r1 * v_out) / 1.25) - r1
+
+    else:
+        raise ValueError("Invalid arguments")
 # END OF FILE
