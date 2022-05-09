@@ -5081,7 +5081,7 @@ def pi_attenuator(Adb, Z0):
 # Calculate Zener Diode Resistor
 def zener_diode_required_resistor(Vin, Vo, I):
     r"""
-    Zener diode function 
+    Zener diode required resistance function .
 
     A zener diode is uses to allow current to flow "backwards" when the zener 
     voltage is reached. This function use to calculate the required resistor 
@@ -5112,7 +5112,7 @@ def zener_diode_required_resistor(Vin, Vo, I):
 # Calculate Zener Diode Power
 def zener_diode_power(Vin, Vo, R):
     r"""
-    Zener diode function 
+    Zener diode power loss function.
 
     A zener diode is uses to allow current to flow "backwards" when the zener 
     voltage is reached. This function use to calculate the power in resistor 
@@ -5136,7 +5136,6 @@ def zener_diode_power(Vin, Vo, R):
     P:          float 
                 Power on resistance in Watt 
     """
-
     # Validate Inputs
     if R == 0:
         raise ValueError("Resistance Value can not be zero")
@@ -5144,6 +5143,7 @@ def zener_diode_power(Vin, Vo, R):
     # Solve Load Resistance
     P = ((Vo - Vin) ** 2) / R
     return(P)
+
 
 def lm317(r1, r2, v_out):
     r"""
@@ -5193,4 +5193,5 @@ def lm317(r1, r2, v_out):
 
     else:
         raise ValueError("Invalid arguments")
+
 # END OF FILE
