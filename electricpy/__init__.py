@@ -5173,17 +5173,19 @@ def lm317(r1, r2, v_out):
 
     The LM317 is a linear voltage regulator that can be adjusted to supply a
     specific output voltage. The LM317 has three pins, adjust, output and input.
-    The LM317 is often connected as in the image below.
-
-    .. [1] Electronial, "LM317" BasicTables, Accessed May, 2022
-       https://www.basictables.com/electronics/lm317
+    The LM317 is often connected as in the image below. [1]_
+    
 
     .. image:: https://www.basictables.com/media/lm317-circuit.png
 
-     Formula to Calculate Output Voltage, R1, R2:
+
+    Formula to Calculate Output Voltage, R1, R2:
+
     .. math:: V_{out} = 1.25 * (1+\frac{R2}{R1})
+    
     .. math:: R1 = \frac{1.25*R2}{V_{out}-1.25}
-    .. math:: R2 = \frac{R1*V_{out}}{1.25} - R1}
+    
+    .. math:: R2 = \frac{R1*V_{out}}{1.25 - R1}
 
     Parameters
     ----------
@@ -5202,6 +5204,10 @@ def lm317(r1, r2, v_out):
            r1 is resistance and is measured in ohm
     r2:    float
            r2 is resistance and is measured in ohm
+
+
+    .. [1] Electronial, "LM317" BasicTables, Accessed May, 2022
+       https://www.basictables.com/electronics/lm317
     """
     if r1 is not None and r2 is not None:
         # Returns Voltage
