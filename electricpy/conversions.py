@@ -505,7 +505,7 @@ def dbmw_to_dbw(dbmw):
     """
     Convert dBmW to dBW.
 
-    Given the power in the decibel milli-watts-cale, this function will evaluate
+    Given the power in the decibel milli-watts-scale, this function will evaluate
     the power in the decibel scale.
 
     Parameters
@@ -525,7 +525,7 @@ def dbmw_to_watts(dbmw):
     """
     Convert dbmW to Watts.
 
-    Given the power in the decibel milli-watts-cale, this function will evaluate
+    Given the power in the decibel milli-watts-scale, this function will evaluate
     the power in watts.
 
     Parameters
