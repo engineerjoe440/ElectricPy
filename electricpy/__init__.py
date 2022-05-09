@@ -4882,7 +4882,7 @@ def solenoid_inductance(A=None, l=None, N=None, u=u0, L=None):
     # Given inductance, area and length
     elif L != None and A != None and l != None:
         return _np.sqrt(L*l/(u*A))
-        
+
 def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
     """
     555 Integrated Circuit Calculator.
@@ -4936,7 +4936,7 @@ def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
             't_low':t_low,
             't_high':t_high
         }
-    
+
     elif t_high!=None and t_low!=None and C!=None:
 
         x2 = t_low/C*_np.log(2)
@@ -4954,7 +4954,7 @@ def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
         }
     else:
         raise TypeError("Not enough parqmeters are passed")
-            
+
 def ic_555_monostable(R=None,C=None,freq=None,t_high=None,t_low=None):
     """
     555 Integrated Circuit Calculator.
@@ -5077,4 +5077,54 @@ def pi_attenuator(Adb, Z0):
     R2 = (Z0/2)*(_np.power(10, x) - (1/(_np.power(10, x))))
 
     return R1,R2
+
+
+def lm317(r1, r2, v_out):
+    r"""
+    LM317.
+
+    The LM317 is a linear voltage regulator that can be adjusted to supply a specific output voltage.
+    The LM317 has three pins, adjust, output and input. The LM317 is often connected as in the image below.
+
+    .. [1] Electronial, "LM317" BasicTables, Accessed May, 2022 https://www.basictables.com/electronics/lm317
+
+    .. image:: https://www.basictables.com/media/lm317-circuit.png
+
+     Formula to Calculate Output Voltage, R1, R2:
+    .. math:: V_{out} = 1.25 * (1+\frac{R2}{R1})
+    .. math:: R1 = \frac{1.25*R2}{V_{out}-1.25}
+    .. math:: R2 = \frac{R1*V_{out}}{1.25} - R1}
+
+    Parameters
+    ----------
+    v_out: float, Optional
+           Output Voltage in LM317 in Volts
+    r1:    float, Optional
+           r1 is resistance and is measured in ohm
+    r2:    float, Optional
+           r2 is resistance and is measured in ohm
+
+    Returns
+    -------
+    v_out: float
+           v_out is the output voltage and is measured in volt (V)
+    r1:    float
+           r1 is resistance and is measured in ohm
+    r2:    float
+           r2 is resistance and is measured in ohm
+    """
+    if r1 is not None and r2 is not None:
+        # Returns Voltage
+        return 1.25 * (1 + (r2 / r1))
+
+    elif r2 is not None and v_out is not None:
+        # Returns R1
+        return (1.25 * r2) / (v_out - 1.25)
+
+    elif r1 is not None and v_out is not None:
+        # Returns R2
+        return ((r1 * v_out) / 1.25) - r1
+
+    else:
+        raise ValueError("Invalid arguments")
 # END OF FILE
