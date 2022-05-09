@@ -590,7 +590,6 @@ def voltage_to_db(voltage, ref_voltage):
     decibel:    float
                 voltage in the decibel scale
     """
-
     return 20 * _np.log10(voltage / ref_voltage)
 
 
