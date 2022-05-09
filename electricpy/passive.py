@@ -412,7 +412,7 @@ def air_core_inductance(d: float, coil_l: float, n: int):
     .. math:: \frac{d^2 \cdot n^2}{457418\cdot d + 1016127\cdot l}
 
     Parameters
-    ---------- 
+    ----------
     d:      float
             Coil diameter, measured in meters
     coil_l: float
@@ -420,8 +420,8 @@ def air_core_inductance(d: float, coil_l: float, n: int):
     n:      int
             Number of inductor turns
 
-    Returns 
-    ------- 
+    Returns
+    -------
     float   Inductance of air core inductor in Henry's (H)
     """
     k1 = (1000*d**2) * n**2
@@ -443,7 +443,7 @@ def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
 
     Parameters
     ----------
-    Vin:    float, optional 
+    Vin:    float, optional
             The input voltage for the system, default=None
 
     Vout:   float, optional
@@ -458,10 +458,10 @@ def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
     find:   str, optional
             Control argument to specify which value
             should be returned.
-    
+
     Returns
     -------
-    Vin:    float, optional 
+    Vin:    float, optional
             The input voltage for the system, default=None
 
     Vout:   float, optional
@@ -486,7 +486,7 @@ def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
                         " parameters given to calculate.")
 
     find = find.lower()
-    
+
     if find == 'vin':
         return Vin
     elif find == 'vout':

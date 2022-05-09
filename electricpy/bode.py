@@ -50,10 +50,10 @@ def bode(system,mn=0.001,mx=1000,npts=100,title="",xlim=False,ylim=False,sv=Fals
          disp3db=False,lowcut=None,magnitude=True,angle=True,freqaxis="rad"):
     """
     System Bode Plotting Function.
-    
+
     A simple function to generate the Bode Plot for magnitude
     and frequency given a transfer function system.
-    
+
     Parameters
     ----------
     system:         transfer function object
@@ -95,7 +95,7 @@ def bode(system,mn=0.001,mx=1000,npts=100,title="",xlim=False,ylim=False,sv=Fals
     """
     # Condition system input to ensure proper execution
     system = _sys_condition(system,False)
-    
+
     # Condition min and max freq terms
     degrees = False
     if freqaxis.lower().find("deg") != -1: # degrees requested
@@ -105,13 +105,13 @@ def bode(system,mn=0.001,mx=1000,npts=100,title="",xlim=False,ylim=False,sv=Fals
         mx = 2*_np.pi*mx
     mn = _np.log10(mn) # find the _exponent value
     mx = _np.log10(mx) # find the _exponent value
-    
+
     # Generate the frequency range to calculate over
     wover = _np.logspace(mn,mx,npts)
-    
+
     # Calculate the bode system
     w, mag, ang = _sig.bode(system, wover)
-    
+
     # Plot Magnitude
     if(magnitude):
         magTitle = "Magnitude "+title
@@ -162,7 +162,7 @@ def sbode(f,NN=1000,title="",xlim=False,ylim=False,mn=0,mx=1000,
           sv=False,disp3db=False,lowcut=None,magnitude=True,angle=True):
     """
     S-Domain Bode Plotting Function.
-    
+
     Parameters
     ----------
     f:              function
@@ -243,7 +243,7 @@ def zbode(f,dt=0.01,NN=1000,title="",mn=0,mx=2*_pi,xlim=False,ylim=False,
           angle=True):
     """
     Z-Domain Bode Plotting Function.
-    
+
     Parameters
     ----------
     f:              function
@@ -294,7 +294,7 @@ def zbode(f,dt=0.01,NN=1000,title="",mn=0,mx=2*_pi,xlim=False,ylim=False,
             H[n] = f(s)
         else: # Z-Domain Transfer Function Provided
             H[n] = dt*f(z)
-            
+
     if(magnitude):
         _plt.semilogx((180/_pi)*phi,20*_np.log10(abs(H)),'k')
         _plt.ylabel('|H| dB')
