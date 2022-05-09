@@ -4903,7 +4903,6 @@ def solenoid_inductance(A=None, l=None, N=None, u=u0, L=None):
 
 
 def ic_555_astable(R=None, C=None, freq=None, t_high=None, t_low=None):
-
     """
     555 Integrated Circuit Calculator.
 
@@ -4977,7 +4976,6 @@ def ic_555_astable(R=None, C=None, freq=None, t_high=None, t_low=None):
 
 
 def ic_555_monostable(R=None, C=None, freq=None, t_high=None, t_low=None):
-
     """
     555 Integrated Circuit Calculator.
 
