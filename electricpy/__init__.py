@@ -5144,4 +5144,23 @@ def zener_diode_power(Vin, Vo, R):
     # Solve Load Resistance
     P = ((Vo - Vin) ** 2) / R
     return(P)
+
+def lm317(r1, r2):
+    """
+    LM317
+    The LM317 is a linear voltage regulator that can be adjusted to supply a specific output voltage.
+    The LM317 has three pins, adjust, output and input. The LM317 is often connected as in the image below.
+    Parameters
+    ----------
+    r1: float
+        r1 is resistance and is measured in ohm
+    r2: float
+        r2 is resistance and is measured in ohm
+
+    Returns
+    -------
+    v_out: float
+       v_out is the output voltage and is measured in volt (V)
+    """
+    return 1.25 * (1 + (r2 / r1))
 # END OF FILE
