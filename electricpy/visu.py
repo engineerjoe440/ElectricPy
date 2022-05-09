@@ -33,7 +33,7 @@ class InductionMotorCircle:
     ...     blocked_rotor_data=blocked_rotor_test_data,
     ...     output_power=output_power,
     ...     torque_ration=ratio,
-    ...     frequency=50, 
+    ...     frequency=50,
     ...     poles=4
     ... )
 
@@ -165,20 +165,20 @@ class InductionMotorCircle:
         # Operating Point
         _plt.plot([0, self.power_x], [0, self.power_y], c='black')
 
-        _plt.scatter(self.power_x, self.power_y, marker='X', c='red')
+        _plt.scatter(self.power_x, self.power_y, marker='X', c='red', label='_nolegend_')
         # mark the center of the circle
-        _plt.scatter(self.center_x, self.center_y, marker='*', c='blue')
+        _plt.scatter(self.center_x, self.center_y, marker='*', c='blue', label='_nolegend_')
         _plt.scatter(
             self.center_x - self.radius * _np.sin(self.theta),
             self.center_y + self.radius * _np.cos(self.theta),
-            linewidths=3, c='black', marker='*'
+            linewidths=3, c='black', marker='*',label='_nolegend_'
         )
         _plt.scatter(
             self.torque_max_x,
             self.torque_max_y,
             linewidths=3,
             c='black',
-            marker='*'
+            marker='*', label='_nolegend_'
         )
 
         _plt.title("Induction Motor Circle Diagram")
@@ -269,9 +269,9 @@ class InductionMotorCircle:
         [y1, y2] = y
         _plt.plot(x, y, ls=ls)
         if mark_start:
-            _plt.scatter(x1, y1, marker=marker)
+            _plt.scatter(x1, y1, marker=marker, label='_nolegend_')
         if mark_end:
-            _plt.scatter(x2, y2, marker=marker)
+            _plt.scatter(x2, y2, marker=marker, label='_nolegend_')
 
     def compute_circle_params(self):
         """Compute the parameters of induction motor circle."""
@@ -324,7 +324,7 @@ class InductionMotorCircle:
         """
         Determine induction motor circle desired output power point.
 
-        Obtain the point on the induction motor circle diagram which 
+        Obtain the point on the induction motor circle diagram which
         corresponds to the desired output power
         """
         [[x1, x2], [y1, y2]] = self.secondary_current_line
@@ -369,16 +369,16 @@ class PowerCircle:
 
     Parameters
     ----------
-    power_circle_type:  ["sending", "receiving"] 
-                        Type of power circle diagram to plot. 
-    Vr:                 complex 
+    power_circle_type:  ["sending", "receiving"]
+                        Type of power circle diagram to plot.
+    Vr:                 complex
                         Transmission Line Receiving End Voltage (phasor complex
                         value)
     Vs:                 complex
                         Transmission Line Sending End Voltage (phasor complex
                         value)
     power_factor:       float
-                        Power Factor of the transmission system, default = None 
+                        Power Factor of the transmission system, default = None
     Pr:                 float
                         Receiving End Real Power, default = None
     Qr:                 float
@@ -391,14 +391,14 @@ class PowerCircle:
                         Sending End Reactive Power, default = None
     Ss:                 complex
                         Sending End Total Complex Power, default = None
-    A:                  float 
-                        Transmission System ABCD Parameters, A, default = None     
-    B:                  float 
-                        Transmission System ABCD Parameters, B, default = None         
-    C:                  float 
-                        Transmission System ABCD Parameters, C, default = None     
-    D:                  float 
-                        Transmission System ABCD Parameters, D, default = None 
+    A:                  float
+                        Transmission System ABCD Parameters, A, default = None
+    B:                  float
+                        Transmission System ABCD Parameters, B, default = None
+    C:                  float
+                        Transmission System ABCD Parameters, C, default = None
+    D:                  float
+                        Transmission System ABCD Parameters, D, default = None
     """
 
     def __init__(self, power_circle_type: str, power_factor: float = None,
@@ -414,15 +414,15 @@ class PowerCircle:
         if power_circle_type.lower() == "receiving":
 
             if A != None and B != None and Vr != None:
-                self.radius, self.center, self.operating_point = PowerCircle._build_circle(A, B, "receiving_end", Vr, 
+                self.radius, self.center, self.operating_point = PowerCircle._build_circle(A, B, "receiving_end", Vr,
                 Pr, Qr, Sr, power_factor, Vs)
             else:
                 raise ValueError("Not enough attributes to build circle")
 
         elif power_circle_type.lower() == "sending":
-            
+
             if B != None and D != None and Vs != None:
-                self.radius, self.center, self.operating_point = PowerCircle._build_circle(D, B, "sending_end", Vs, 
+                self.radius, self.center, self.operating_point = PowerCircle._build_circle(D, B, "sending_end", Vs,
                 Ps, Qs, Ss, power_factor, Vr)
             else:
                 raise ValueError("Not enough attributes to build power circle")
@@ -439,7 +439,7 @@ class PowerCircle:
         k = (abs(V)**2)*abs(a1)/abs(a2)
         alpha = cmath.phase(a1)
         beta = cmath.phase(a2)
-        
+
         if circle_type == "receiving_end":
             center = Point(-k*cmath.cos(alpha - beta), -k*cmath.sin(alpha - beta))
 
@@ -483,7 +483,7 @@ class PowerCircle:
         return radius, center, operation_point
 
     def _cal_parameters(self, type1, type2):
-        
+
         if self.parameters['V'+type2] == None:
             self.parameters['V' + type2] = abs(self.parameters['B'])*self.radius/self.parameters['V' + type1]
 
@@ -517,7 +517,7 @@ class PowerCircle:
             self._cal_parameters("r", "s")
 
         if self.parameters["power_circle_type"] == "sending":
-            
+
             self._cal_parameters("s", "r")
 
         for key, value in self.parameters.items():
@@ -539,11 +539,11 @@ class PowerCircle:
         r"""Plot the circle."""
         circle_x = []
         circle_y = []
-        
+
         for data in self.circle.parametric_equation(theta_resolution=1e-5):
             [x, y] = data
             circle_x.append(x)
-            circle_y.append(y)        
+            circle_y.append(y)
 
         c_x = self.center.x
         c_y = self.center.y
@@ -557,7 +557,7 @@ class PowerCircle:
         _plt.plot([c_x, c_x], [c_y - self.radius, c_y + self.radius], 'g--')
 
         _plt.plot([c_x, op_x], [c_y, op_y], 'y*-.')
-        _plt.plot([op_x, op_x], [op_y, c_y], 'b*-.') 
+        _plt.plot([op_x, op_x], [op_y, c_y], 'b*-.')
         _plt.scatter(op_x, op_y, marker='*', color='r')
         _plt.title(
             f"{self.parameters['power_circle_type'].capitalize()} Power Circle"
@@ -591,11 +591,11 @@ def receiving_end_power_circle(Vr: complex = None, A: complex = None,
 
     Parameters
     ----------
-    Vr:             complex    
+    Vr:             complex
                     Receiving End Voltage, default = None.
-    A:              complex     
+    A:              complex
                     Transmission System ABCD Parameters, A, default = None.
-    B:              complex,     
+    B:              complex,
                     Transmission System ABCD Parameters, B, default = None.
     Pr:             float, optional
                     Receiving End Real Power, default = None
@@ -656,7 +656,7 @@ def sending_end_power_circle(Vs: complex = None, B: complex = None,
 
     Parameters
     ----------
-    Vs:             complex 
+    Vs:             complex
                     Sending End Voltage
     B:              complex
                     Transmission System ABCD Parameters, A

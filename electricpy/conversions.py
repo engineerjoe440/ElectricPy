@@ -446,15 +446,15 @@ def rpm_to_hz(rpm):
 def dbw_to_watts(dbw):
     """
     Convert dBW to Watts.
-    
+
     Given the power in the decibel scale, this function will evaluate the
     power in Watts.
-    
+
     Parameters
     ----------
     dbw:        float
                 Power in the decibel scale (dBW)
-                
+
     Returns
     -------
     watts       float
@@ -468,10 +468,10 @@ def dbw_to_watts(dbw):
 def watts_to_dbw(watts):
     """
     Watt to dBW converter.
-    
-    Given the power in watts, this function will evaluate the power in the 
+
+    Given the power in watts, this function will evaluate the power in the
     decibel scale.
-    
+
     Parameters
     ----------
     watts:      float
@@ -488,10 +488,10 @@ def watts_to_dbw(watts):
 def dbw_to_dbmw(dbw):
     """
     Convert dBW to dBmW.
-    
+
     Given the power in the decibel scale, this function will evulate the power
     in the decibel-milliwatts scale.
-    
+
     Parameters
     ----------
     dbw:        float
@@ -504,15 +504,15 @@ def dbw_to_dbmw(dbw):
     dbmw = dbw + 30
     return dbmw
 
-    
+
 # Define dBmW to dBW converter
 def dbmw_to_dbw(dbmw):
     """
     Convert dBmW to dBW.
-    
-    Given the power in the decibel milliwattscale, this function will evulate 
+
+    Given the power in the decibel milliwattscale, this function will evulate
     the power in the decibel scale.
-    
+
     Parameters
     ----------
     dbmw:       float
@@ -530,10 +530,10 @@ def dbmw_to_dbw(dbmw):
 def dbmw_to_watts(dbmw):
     """
     Convert dbmW to Watts.
-    
-    Given the power in the decibel milliwattscale, this function will evulate 
+
+    Given the power in the decibel milliwattscale, this function will evulate
     the power in watts.
-    
+
     Parameters
     ----------
     dbmw:       float
@@ -548,14 +548,14 @@ def dbmw_to_watts(dbmw):
     return watts
 
 
-# Define Watts to dBmW converter    
+# Define Watts to dBmW converter
 def watts_to_dbmw(watts):
     """
     Watts to dBmW.
-    
-    Given the power in watts, this function will evulate 
+
+    Given the power in watts, this function will evulate
     the power in the decibel milliwatt scale.
-    
+
     Parameters
     ----------
     watt:       float
