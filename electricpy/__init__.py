@@ -5130,8 +5130,9 @@ def zener_diode_required_resistor(Vin, Vo, I):
                 Load Resistance in Ohm 
     """
     # Solve Load Resistance
-    R = (Vin - Vo) / (I+0.01)
-    return(R)
+    R = (Vin - Vo) / (I + 0.01)
+    return (R)
+
 
 # Calculate Zener Diode Power
 def zener_diode_power(Vin, Vo, R):
@@ -5160,14 +5161,13 @@ def zener_diode_power(Vin, Vo, R):
     P:          float 
                 Power on resistance in Watt 
     """
-
     # Validate Inputs
     if R == 0:
         raise ValueError("Resistance Value can not be zero")
-    
+
     # Solve Load Resistance
     P = ((Vo - Vin) ** 2) / R
-    return(P)
+    return P
 
 
 def lm317(r1, r2, v_out):
