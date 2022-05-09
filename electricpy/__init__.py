@@ -5103,74 +5103,6 @@ def pi_attenuator(Adb, Z0):
 # Calculate Zener Diode Resistor
 def zener_diode_required_resistor(Vin, Vo, I):
     r"""
-    Zener diode required resistor function.
-
-    A zener diode is uses to allow current to flow "backwards" when the zener 
-    voltage is reached. This function use to calculate the required resistor 
-    value following below formula: 
-
-    .. math:: R = \frac{V_{in(min)} - V_{out}}{I_{load}+0.01}
-
-    .. image:: /static/zenerdiode.png
-
-    Parameters
-    ----------
-    Vin:        float
-                Minimum input Voltage in Volt
-    Vo:         float
-                Output Voltage in Volt
-    I:          float
-                Load Current in Ampere
-
-    Returns
-    -------
-    R:          float
-                Load Resistance in Ohm 
-    """
-    # Solve Load Resistance
-    R = (Vin - Vo) / (I + 0.01)
-    return (R)
-
-
-# Calculate Zener Diode Power
-def zener_diode_power(Vin, Vo, R):
-    r"""
-    Zener diode power-loss function.
-
-    A zener diode is uses to allow current to flow "backwards" when the zener 
-    voltage is reached. This function use to calculate the power in resistor 
-    following below formula: 
-
-    .. math:: P_R = \frac{(V_{out} - V_{in(max)})^2}{R}
-
-    .. image:: /static/zenerdiode.png
-
-    Parameters
-    ----------
-    Vin:        float
-                Maximum input Voltage in Volt
-    Vo:         float
-                Output Voltage in Volt
-    R:          float
-                Load Resistance in Ohm
-
-    Returns
-    -------
-    P:          float 
-                Power on resistance in Watt 
-    """
-    # Validate Inputs
-    if R == 0:
-        raise ValueError("Resistance Value can not be zero")
-
-    # Solve Load Resistance
-    P = ((Vo - Vin) ** 2) / R
-    return P
-
-
-# Calculate Zener Diode Resistor
-def zener_diode_required_resistor(Vin, Vo, I):
-    r"""
     Zener diode required resistance function .
 
     A zener diode is uses to allow current to flow "backwards" when the zener 
@@ -5239,10 +5171,12 @@ def lm317(r1, r2, v_out):
     r"""
     LM317 linear voltage regulator solver.
 
-    The LM317 is a linear voltage regulator that can be adjusted to supply a specific output voltage.
-    The LM317 has three pins, adjust, output and input. The LM317 is often connected as in the image below.
+    The LM317 is a linear voltage regulator that can be adjusted to supply a
+    specific output voltage. The LM317 has three pins, adjust, output and input.
+    The LM317 is often connected as in the image below.
 
-    .. [1] Electronial, "LM317" BasicTables, Accessed May, 2022 https://www.basictables.com/electronics/lm317
+    .. [1] Electronial, "LM317" BasicTables, Accessed May, 2022
+       https://www.basictables.com/electronics/lm317
 
     .. image:: https://www.basictables.com/media/lm317-circuit.png
 
