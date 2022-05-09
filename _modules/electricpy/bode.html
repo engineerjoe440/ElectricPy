@@ -412,10 +412,10 @@
          <span class="n">disp3db</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">lowcut</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">magnitude</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">angle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">freqaxis</span><span class="o">=</span><span class="s2">"rad"</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    System Bode Plotting Function.</span>
-
+<span class="sd">    </span>
 <span class="sd">    A simple function to generate the Bode Plot for magnitude</span>
 <span class="sd">    and frequency given a transfer function system.</span>
-
+<span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    system:         transfer function object</span>
@@ -457,7 +457,7 @@
 <span class="sd">    """</span>
     <span class="c1"># Condition system input to ensure proper execution</span>
     <span class="n">system</span> <span class="o">=</span> <span class="n">_sys_condition</span><span class="p">(</span><span class="n">system</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
-
+    
     <span class="c1"># Condition min and max freq terms</span>
     <span class="n">degrees</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="n">freqaxis</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"deg"</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="c1"># degrees requested</span>
@@ -467,13 +467,13 @@
         <span class="n">mx</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">mx</span>
     <span class="n">mn</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">mn</span><span class="p">)</span> <span class="c1"># find the _exponent value</span>
     <span class="n">mx</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">mx</span><span class="p">)</span> <span class="c1"># find the _exponent value</span>
-
+    
     <span class="c1"># Generate the frequency range to calculate over</span>
     <span class="n">wover</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="n">mn</span><span class="p">,</span><span class="n">mx</span><span class="p">,</span><span class="n">npts</span><span class="p">)</span>
-
+    
     <span class="c1"># Calculate the bode system</span>
     <span class="n">w</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">ang</span> <span class="o">=</span> <span class="n">_sig</span><span class="o">.</span><span class="n">bode</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">wover</span><span class="p">)</span>
-
+    
     <span class="c1"># Plot Magnitude</span>
     <span class="k">if</span><span class="p">(</span><span class="n">magnitude</span><span class="p">):</span>
         <span class="n">magTitle</span> <span class="o">=</span> <span class="s2">"Magnitude "</span><span class="o">+</span><span class="n">title</span>
@@ -524,7 +524,7 @@
           <span class="n">sv</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">disp3db</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">lowcut</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">magnitude</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">angle</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    S-Domain Bode Plotting Function.</span>
-
+<span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    f:              function</span>
@@ -605,7 +605,7 @@
           <span class="n">angle</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Z-Domain Bode Plotting Function.</span>
-
+<span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    f:              function</span>
@@ -656,7 +656,7 @@
             <span class="n">H</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span> <span class="c1"># Z-Domain Transfer Function Provided</span>
             <span class="n">H</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">dt</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-
+            
     <span class="k">if</span><span class="p">(</span><span class="n">magnitude</span><span class="p">):</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">((</span><span class="mi">180</span><span class="o">/</span><span class="n">_pi</span><span class="p">)</span><span class="o">*</span><span class="n">phi</span><span class="p">,</span><span class="mi">20</span><span class="o">*</span><span class="n">_np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">H</span><span class="p">)),</span><span class="s1">'k'</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'|H| dB'</span><span class="p">)</span>

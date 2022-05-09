@@ -774,7 +774,7 @@
 <span class="sd">    .. math:: \frac{d^2 \cdot n^2}{457418\cdot d + 1016127\cdot l}</span>
 
 <span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
+<span class="sd">    ---------- </span>
 <span class="sd">    d:      float</span>
 <span class="sd">            Coil diameter, measured in meters</span>
 <span class="sd">    coil_l: float</span>
@@ -782,8 +782,8 @@
 <span class="sd">    n:      int</span>
 <span class="sd">            Number of inductor turns</span>
 
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
+<span class="sd">    Returns </span>
+<span class="sd">    ------- </span>
 <span class="sd">    float   Inductance of air core inductor in Henry's (H)</span>
 <span class="sd">    """</span>
     <span class="n">k1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span>
@@ -805,7 +805,7 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    Vin:    float, optional</span>
+<span class="sd">    Vin:    float, optional </span>
 <span class="sd">            The input voltage for the system, default=None</span>
 
 <span class="sd">    Vout:   float, optional</span>
@@ -820,10 +820,10 @@
 <span class="sd">    find:   str, optional</span>
 <span class="sd">            Control argument to specify which value</span>
 <span class="sd">            should be returned.</span>
-
+<span class="sd">    </span>
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    Vin:    float, optional</span>
+<span class="sd">    Vin:    float, optional </span>
 <span class="sd">            The input voltage for the system, default=None</span>
 
 <span class="sd">    Vout:   float, optional</span>
@@ -848,7 +848,7 @@
                         <span class="s2">" parameters given to calculate."</span><span class="p">)</span>
 
     <span class="n">find</span> <span class="o">=</span> <span class="n">find</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-
+    
     <span class="k">if</span> <span class="n">find</span> <span class="o">==</span> <span class="s1">'vin'</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Vin</span>
     <span class="k">elif</span> <span class="n">find</span> <span class="o">==</span> <span class="s1">'vout'</span><span class="p">:</span>
