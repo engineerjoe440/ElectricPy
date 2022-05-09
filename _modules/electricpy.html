@@ -5534,17 +5534,19 @@
 
 <span class="sd">    The LM317 is a linear voltage regulator that can be adjusted to supply a</span>
 <span class="sd">    specific output voltage. The LM317 has three pins, adjust, output and input.</span>
-<span class="sd">    The LM317 is often connected as in the image below.</span>
-
-<span class="sd">    .. [1] Electronial, "LM317" BasicTables, Accessed May, 2022</span>
-<span class="sd">       https://www.basictables.com/electronics/lm317</span>
+<span class="sd">    The LM317 is often connected as in the image below. [1]_</span>
+<span class="sd">    </span>
 
 <span class="sd">    .. image:: https://www.basictables.com/media/lm317-circuit.png</span>
 
-<span class="sd">     Formula to Calculate Output Voltage, R1, R2:</span>
+
+<span class="sd">    Formula to Calculate Output Voltage, R1, R2:</span>
+
 <span class="sd">    .. math:: V_{out} = 1.25 * (1+\frac{R2}{R1})</span>
+<span class="sd">    </span>
 <span class="sd">    .. math:: R1 = \frac{1.25*R2}{V_{out}-1.25}</span>
-<span class="sd">    .. math:: R2 = \frac{R1*V_{out}}{1.25} - R1}</span>
+<span class="sd">    </span>
+<span class="sd">    .. math:: R2 = \frac{R1*V_{out}}{1.25 - R1}</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -5563,6 +5565,9 @@
 <span class="sd">           r1 is resistance and is measured in ohm</span>
 <span class="sd">    r2:    float</span>
 <span class="sd">           r2 is resistance and is measured in ohm</span>
+
+<span class="sd">    .. [1] Electronial, "LM317" BasicTables, Accessed May, 2022</span>
+<span class="sd">       https://www.basictables.com/electronics/lm317</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">r1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">r2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># Returns Voltage</span>
