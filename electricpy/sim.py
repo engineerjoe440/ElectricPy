@@ -306,7 +306,6 @@ def ramp_response(system, npts=1000, dt=0.01, combine=True, xlim=False,
         _plt.savefig(filename)
     return _plt
 
-
 # Define Parabolic Response Simulator Function
 def parabolic_response(system, npts=1000, dt=0.01, combine=True, xlim=False,
                        title="Parabolic Response", errtitle="Parabolic Response Error",
