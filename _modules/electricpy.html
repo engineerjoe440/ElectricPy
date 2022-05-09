@@ -953,7 +953,7 @@
 <span class="sd">    printval:   bool, optional</span>
 <span class="sd">                Control argument to allow the numeric values to be printed on</span>
 <span class="sd">                the plot, default="False"</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    matplotlib.pyplot:  Plotting object to be used for additional configuration</span>
@@ -1335,7 +1335,7 @@
 <span class="sd">            Forward voltage of LED (or series LEDs if available), default=2</span>
 <span class="sd">    Ifwd:   float, optional</span>
 <span class="sd">            Forward current of LEDs in milliamps, default=20 (milliamps)</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    R:      float</span>
@@ -1445,14 +1445,14 @@
 <div class="viewcode-block" id="bridge_impedance"><a class="viewcode-back" href="../api/electricpy.bridge_impedance.html#electricpy.bridge_impedance">[docs]</a><span class="k">def</span> <span class="nf">bridge_impedance</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="n">z2</span><span class="p">,</span> <span class="n">z3</span><span class="p">,</span> <span class="n">z4</span><span class="p">,</span> <span class="n">z5</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Bridge Impedance Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    The following condition describing the Wheatstone Bridge is utilized to</span>
 <span class="sd">    ensure that current through `z5` will be zero.</span>
 
 <span class="sd">    .. math:: z1 \cdot z3 = z2 \cdot z4</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. image:: /static/WheatstoneBridgeCircuit.png</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    z1:     [float, complex]</span>
@@ -2034,7 +2034,7 @@
 <span class="sd">    &gt;&gt;&gt; h = np.array([0, 1, 1, 1, 0])</span>
 <span class="sd">    &gt;&gt;&gt; x = np.array([0, 1, 1, 1, 0])</span>
 <span class="sd">    &gt;&gt;&gt; ep.convbar(h, x)</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. image:: /static/convbar-example.png</span>
 
 <span class="sd">    Parameters</span>
@@ -2795,7 +2795,7 @@
 <span class="sd">    title:      str, optional</span>
 <span class="sd">                String appended to plot title,</span>
 <span class="sd">                default="Fourier Coefficients"</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    matplotlib.pyplot:  Plotting object to be used for additional configuration</span>
@@ -2863,7 +2863,7 @@
 <span class="sd">    title:      str, optional</span>
 <span class="sd">                String appended to plot title,</span>
 <span class="sd">                default="Fourier Series Summation"</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    matplotlib.pyplot:  Plotting object to be used for additional configuration</span>
@@ -3206,7 +3206,7 @@
 <span class="sd">    The purpose of a tap changer is to regulate the output voltage of a</span>
 <span class="sd">    transformer. It does this by altering the number of turns in one winding and</span>
 <span class="sd">    thereby changing the turns ratio of the transformer</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: \sqrt{\frac{Vgen^2}{Vgen \cdot Vdis - R \cdot P - X \cdot Q}}</span>
 
 <span class="sd">    Parameters</span>
@@ -3223,7 +3223,7 @@
 <span class="sd">            Resistance of transmission line</span>
 <span class="sd">    X:      float</span>
 <span class="sd">            Reactance of transmission line</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    ts:     float</span>
@@ -3244,12 +3244,12 @@
 <span class="sd">    .. math:: \sum_{i=1}^{n-2} V_{i} + V_{n-1} \cdot (1+m) - V_{n} \cdot m=0</span>
 
 <span class="sd">    .. math:: \sum_{i=1}^{n} V_{i} = V_{\text{transmission line}}</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. image:: /static/SuspensionInuslator.png</span>
-<span class="sd">    </span>
+
 <span class="sd">    `Additional Information</span>
 <span class="sd">    &lt;https://electrical-engineering-portal.com/download-center/books-and-guides/power-substations/insulator-pollution&gt;`_</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    number_capacitors:  int</span>
@@ -3258,7 +3258,7 @@
 <span class="sd">                        Ratio of disk capacitance and pin to pole air capacitance</span>
 <span class="sd">    Voltage:            float</span>
 <span class="sd">                        Voltage difference between the transmission line and ground</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    string_efficiency:          float</span>
@@ -3524,32 +3524,32 @@
 
 <span class="sd">    This function will evaluate the propagation constants for a long transmission</span>
 <span class="sd">    line whose properties are governed by the differential equation:</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: \frac{d^2V}{dx^2} = \gamma V</span>
-<span class="sd">    </span>
+
 <span class="sd">    From the above equation, the following formulas are derived to evaluate the</span>
 <span class="sd">    desired constants.</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: \gamma = \sqrt( z * y )</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: Z_{\text{surge}} = \sqrt( z / y )</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: \alpha = \Re{ \gamma }</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: \beta = \Im{ \gamma }</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    z:              complex</span>
 <span class="sd">                    Impedence of the transmission line: R+j*2*pi*f*L</span>
 <span class="sd">    y:              complex</span>
 <span class="sd">                    Admitance of the transmission line g+j*2*pi*f*C</span>
-<span class="sd">        </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    params:    dict</span>
 <span class="sd">               Dictionary of propagation constants including:</span>
-<span class="sd">                    </span>
+
 <span class="sd">                         gamma:   Propagation constant</span>
 <span class="sd">                         zc:            Surge impedance</span>
 <span class="sd">                         alpha:      Attenuation constant</span>
@@ -5114,7 +5114,7 @@
 <span class="sd">                Wire diameter, unitless.</span>
 <span class="sd">    rho:        [float], optional</span>
 <span class="sd">                Material resistivity, unitless</span>
-<span class="sd">                Default value is copper resistivity: 16.8*10-9 </span>
+<span class="sd">                Default value is copper resistivity: 16.8*10-9</span>
 <span class="sd">    R:          [float], optional</span>
 <span class="sd">                Wire resistance, unitless.</span>
 
@@ -5126,7 +5126,7 @@
 <span class="sd">                Wire diameter, unitless.</span>
 <span class="sd">    rho:        [float], optional</span>
 <span class="sd">                Material resistivity, unitless</span>
-<span class="sd">                Default value is copper resistivity: 16.8*10-9 </span>
+<span class="sd">                Default value is copper resistivity: 16.8*10-9</span>
 <span class="sd">    R:          [float], optional</span>
 <span class="sd">                Wire resistance, unitless.</span>
 <span class="sd">    """</span>
@@ -5247,33 +5247,33 @@
 <div class="viewcode-block" id="ic_555_astable"><a class="viewcode-back" href="../api/electricpy.ic_555_astable.html#electricpy.ic_555_astable">[docs]</a><span class="k">def</span> <span class="nf">ic_555_astable</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">C</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">t_high</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">t_low</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    555 Integrated Circuit Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Evaluate a number of common attributes related to the common 555 integrated</span>
 <span class="sd">    circuit including time period, frequency, duty cycle, time spent low during</span>
 <span class="sd">    each cycle, time spent high during each cycle.</span>
 
 <span class="sd">    TODO: This function should be broken into multiple smaller functions.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
-<span class="sd">    ---------- </span>
+<span class="sd">    ----------</span>
 <span class="sd">    R:      list[float, float] or tuple(float, float), optional</span>
 <span class="sd">            List of 2 resistor which are need in configuring IC 555.</span>
 <span class="sd">    C:      float, optional</span>
 <span class="sd">            Capacitance between Threshold Pin and ground</span>
 <span class="sd">    f:      float, optional</span>
-<span class="sd">            Electrical system frequency in Hertz. </span>
+<span class="sd">            Electrical system frequency in Hertz.</span>
 <span class="sd">    t_high: float, optional</span>
-<span class="sd">            ON time of IC 555 </span>
+<span class="sd">            ON time of IC 555</span>
 <span class="sd">    t_low:  float, optional</span>
-<span class="sd">            OFF time of IC 555 </span>
-<span class="sd">    </span>
-<span class="sd">    Returns </span>
-<span class="sd">    ------- </span>
-<span class="sd">    dict:   "time_period": Time period of oscillating IC 555 </span>
-<span class="sd">            "frequency": frequency of oscilation of IC 555 </span>
+<span class="sd">            OFF time of IC 555</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict:   "time_period": Time period of oscillating IC 555</span>
+<span class="sd">            "frequency": frequency of oscilation of IC 555</span>
 <span class="sd">            "duty_cycle": ration between ON time and total time</span>
-<span class="sd">            "t_low": ON time of IC 555 </span>
-<span class="sd">            "t_high": OFF time of IC 555 </span>
+<span class="sd">            "t_low": ON time of IC 555</span>
+<span class="sd">            "t_high": OFF time of IC 555</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">R</span><span class="o">!=</span><span class="kc">None</span> <span class="ow">and</span> <span class="n">C</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
@@ -5319,33 +5319,33 @@
 <div class="viewcode-block" id="ic_555_monostable"><a class="viewcode-back" href="../api/electricpy.ic_555_monostable.html#electricpy.ic_555_monostable">[docs]</a><span class="k">def</span> <span class="nf">ic_555_monostable</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">C</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">t_high</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">t_low</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    555 Integrated Circuit Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Evaluate a number of common attributes related to the common 555 integrated</span>
 <span class="sd">    circuit including time period, frequency, duty cycle, time spent low during</span>
 <span class="sd">    each cycle, time spent high during each cycle.</span>
 
 <span class="sd">    TODO: This function should be broken into multiple smaller functions.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
-<span class="sd">    ---------- </span>
+<span class="sd">    ----------</span>
 <span class="sd">    R:      list[float, float] or tuple(float, float), optional</span>
 <span class="sd">            List of 2 resistor which are need in configuring IC 555.</span>
 <span class="sd">    C:      float, optional</span>
 <span class="sd">            Capacitance between Threshold Pin and ground</span>
 <span class="sd">    f:      float, optional</span>
-<span class="sd">            Electrical system frequency in Hertz. </span>
+<span class="sd">            Electrical system frequency in Hertz.</span>
 <span class="sd">    t_high: float, optional</span>
-<span class="sd">            ON time of IC 555 </span>
+<span class="sd">            ON time of IC 555</span>
 <span class="sd">    t_low:  float, optional</span>
-<span class="sd">            OFF time of IC 555 </span>
-<span class="sd">    </span>
-<span class="sd">    Returns </span>
-<span class="sd">    ------- </span>
-<span class="sd">    dict:   "time_period": Time period of oscillating IC 555 </span>
-<span class="sd">            "frequency": frequency of oscilation of IC 555 </span>
+<span class="sd">            OFF time of IC 555</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict:   "time_period": Time period of oscillating IC 555</span>
+<span class="sd">            "frequency": frequency of oscilation of IC 555</span>
 <span class="sd">            "duty_cycle": ration between ON time and total time</span>
-<span class="sd">            "t_low": ON time of IC 555 </span>
-<span class="sd">            "t_high": OFF time of IC 555 </span>
+<span class="sd">            "t_low": ON time of IC 555</span>
+<span class="sd">            "t_high": OFF time of IC 555</span>
 <span class="sd">    """</span>
     <span class="n">T</span> <span class="o">=</span> <span class="n">t_high</span><span class="o">+</span><span class="n">t_low</span>
     <span class="k">if</span> <span class="n">R</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -5383,8 +5383,8 @@
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    T attenuator.</span>
 
-<span class="sd">    The T attenuator is a type of attenuator that looks like the letter T. </span>
-<span class="sd">    The T attenuator consists of three resistors. Two of these are connected in </span>
+<span class="sd">    The T attenuator is a type of attenuator that looks like the letter T.</span>
+<span class="sd">    The T attenuator consists of three resistors. Two of these are connected in</span>
 <span class="sd">    series and the other one is connected from between the two other resistors</span>
 <span class="sd">    to ground. The resistors in series often have the same resistance.</span>
 
@@ -5394,12 +5394,12 @@
 <span class="sd">    .. image:: /static/t-attenuator-circuit.png</span>
 
 <span class="sd">    Parameters</span>
-<span class="sd">    ---------- </span>
+<span class="sd">    ----------</span>
 <span class="sd">    Adb: float Attenuation in db</span>
 <span class="sd">    Z0: float Impedence</span>
 
-<span class="sd">    Returns </span>
-<span class="sd">    ------- </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
 <span class="sd">    R1: float T attenuator R1</span>
 <span class="sd">    R2: float T attenuator R2</span>
 <span class="sd">    """</span>
@@ -5415,7 +5415,7 @@
 <span class="sd">    Pi attenuator.</span>
 
 <span class="sd">    The Pi attenuator is a type of attenuator that looks like the Greek letter π.</span>
-<span class="sd">    The Pi attenuator consists of three resistors. One of these is connected in series and </span>
+<span class="sd">    The Pi attenuator consists of three resistors. One of these is connected in series and</span>
 <span class="sd">    the other two are connected in parallel to ground. The parallel resistors often have the same resistance.</span>
 
 <span class="sd">    .. math:: R1 = Z0*(\frac{10^{\frac{A_{db}}{20}}+1}{10^{\frac{A_{db}}{20}}-1})</span>
@@ -5423,12 +5423,12 @@
 <span class="sd">    .. image:: /static/pi-attenuator-circuit.png</span>
 
 <span class="sd">    Parameters</span>
-<span class="sd">    ---------- </span>
+<span class="sd">    ----------</span>
 <span class="sd">    Adb: float Attenuation in db</span>
 <span class="sd">    Z0: float Impedence</span>
 
-<span class="sd">    Returns </span>
-<span class="sd">    ------- </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
 <span class="sd">    R1: float π attenuator R1</span>
 <span class="sd">    R2: float π attenuator R2</span>
 <span class="sd">    """</span>
@@ -5439,11 +5439,10 @@
 
     <span class="k">return</span> <span class="n">R1</span><span class="p">,</span><span class="n">R2</span></div>
 
-
 <span class="c1"># Calculate Zener Diode Resistor</span>
 <div class="viewcode-block" id="zener_diode_required_resistor"><a class="viewcode-back" href="../api/electricpy.zener_diode_required_resistor.html#electricpy.zener_diode_required_resistor">[docs]</a><span class="k">def</span> <span class="nf">zener_diode_required_resistor</span><span class="p">(</span><span class="n">Vin</span><span class="p">,</span> <span class="n">Vo</span><span class="p">,</span> <span class="n">I</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
-<span class="sd">    Zener diode required resistor function.</span>
+<span class="sd">    Zener diode required resistance function .</span>
 
 <span class="sd">    A zener diode is uses to allow current to flow "backwards" when the zener </span>
 <span class="sd">    voltage is reached. This function use to calculate the required resistor </span>
@@ -5474,7 +5473,7 @@
 <span class="c1"># Calculate Zener Diode Power</span>
 <div class="viewcode-block" id="zener_diode_power"><a class="viewcode-back" href="../api/electricpy.zener_diode_power.html#electricpy.zener_diode_power">[docs]</a><span class="k">def</span> <span class="nf">zener_diode_power</span><span class="p">(</span><span class="n">Vin</span><span class="p">,</span> <span class="n">Vo</span><span class="p">,</span> <span class="n">R</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
-<span class="sd">    Zener diode power-loss function.</span>
+<span class="sd">    Zener diode power loss function.</span>
 
 <span class="sd">    A zener diode is uses to allow current to flow "backwards" when the zener </span>
 <span class="sd">    voltage is reached. This function use to calculate the power in resistor </span>
@@ -5498,7 +5497,6 @@
 <span class="sd">    P:          float </span>
 <span class="sd">                Power on resistance in Watt </span>
 <span class="sd">    """</span>
-
     <span class="c1"># Validate Inputs</span>
     <span class="k">if</span> <span class="n">R</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Resistance Value can not be zero"</span><span class="p">)</span>
