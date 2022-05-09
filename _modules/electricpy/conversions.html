@@ -808,15 +808,15 @@
 <div class="viewcode-block" id="dbw_to_watts"><a class="viewcode-back" href="../../api/electricpy.conversions.dbw_to_watts.html#electricpy.conversions.dbw_to_watts">[docs]</a><span class="k">def</span> <span class="nf">dbw_to_watts</span><span class="p">(</span><span class="n">dbw</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Convert dBW to Watts.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Given the power in the decibel scale, this function will evaluate the</span>
 <span class="sd">    power in Watts.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    dbw:        float</span>
 <span class="sd">                Power in the decibel scale (dBW)</span>
-<span class="sd">                </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    watts       float</span>
@@ -830,10 +830,10 @@
 <div class="viewcode-block" id="watts_to_dbw"><a class="viewcode-back" href="../../api/electricpy.conversions.watts_to_dbw.html#electricpy.conversions.watts_to_dbw">[docs]</a><span class="k">def</span> <span class="nf">watts_to_dbw</span><span class="p">(</span><span class="n">watts</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Watt to dBW converter.</span>
-<span class="sd">    </span>
-<span class="sd">    Given the power in watts, this function will evaluate the power in the </span>
+
+<span class="sd">    Given the power in watts, this function will evaluate the power in the</span>
 <span class="sd">    decibel scale.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    watts:      float</span>
@@ -850,10 +850,10 @@
 <div class="viewcode-block" id="dbw_to_dbmw"><a class="viewcode-back" href="../../api/electricpy.conversions.dbw_to_dbmw.html#electricpy.conversions.dbw_to_dbmw">[docs]</a><span class="k">def</span> <span class="nf">dbw_to_dbmw</span><span class="p">(</span><span class="n">dbw</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Convert dBW to dBmW.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Given the power in the decibel scale, this function will evulate the power</span>
 <span class="sd">    in the decibel-milliwatts scale.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    dbw:        float</span>
@@ -866,15 +866,15 @@
     <span class="n">dbmw</span> <span class="o">=</span> <span class="n">dbw</span> <span class="o">+</span> <span class="mi">30</span>
     <span class="k">return</span> <span class="n">dbmw</span></div>
 
-    
+
 <span class="c1"># Define dBmW to dBW converter</span>
 <div class="viewcode-block" id="dbmw_to_dbw"><a class="viewcode-back" href="../../api/electricpy.conversions.dbmw_to_dbw.html#electricpy.conversions.dbmw_to_dbw">[docs]</a><span class="k">def</span> <span class="nf">dbmw_to_dbw</span><span class="p">(</span><span class="n">dbmw</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Convert dBmW to dBW.</span>
-<span class="sd">    </span>
-<span class="sd">    Given the power in the decibel milliwattscale, this function will evulate </span>
+
+<span class="sd">    Given the power in the decibel milliwattscale, this function will evulate</span>
 <span class="sd">    the power in the decibel scale.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    dbmw:       float</span>
@@ -892,10 +892,10 @@
 <div class="viewcode-block" id="dbmw_to_watts"><a class="viewcode-back" href="../../api/electricpy.conversions.dbmw_to_watts.html#electricpy.conversions.dbmw_to_watts">[docs]</a><span class="k">def</span> <span class="nf">dbmw_to_watts</span><span class="p">(</span><span class="n">dbmw</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Convert dbmW to Watts.</span>
-<span class="sd">    </span>
-<span class="sd">    Given the power in the decibel milliwattscale, this function will evulate </span>
+
+<span class="sd">    Given the power in the decibel milliwattscale, this function will evulate</span>
 <span class="sd">    the power in watts.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    dbmw:       float</span>
@@ -910,14 +910,14 @@
     <span class="k">return</span> <span class="n">watts</span></div>
 
 
-<span class="c1"># Define Watts to dBmW converter    </span>
+<span class="c1"># Define Watts to dBmW converter</span>
 <div class="viewcode-block" id="watts_to_dbmw"><a class="viewcode-back" href="../../api/electricpy.conversions.watts_to_dbmw.html#electricpy.conversions.watts_to_dbmw">[docs]</a><span class="k">def</span> <span class="nf">watts_to_dbmw</span><span class="p">(</span><span class="n">watts</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Watts to dBmW.</span>
-<span class="sd">    </span>
-<span class="sd">    Given the power in watts, this function will evulate </span>
+
+<span class="sd">    Given the power in watts, this function will evulate</span>
 <span class="sd">    the power in the decibel milliwatt scale.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    watt:       float</span>

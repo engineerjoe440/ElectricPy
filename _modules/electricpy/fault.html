@@ -395,16 +395,16 @@
 <div class="viewcode-block" id="phs1g"><a class="viewcode-back" href="../../api/electricpy.fault.phs1g.html#electricpy.fault.phs1g">[docs]</a><span class="k">def</span> <span class="nf">phs1g</span><span class="p">(</span><span class="n">Vth</span><span class="p">,</span><span class="n">Zseq</span><span class="p">,</span><span class="n">Rf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sequence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">reference</span><span class="o">=</span><span class="s1">'A'</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Single-Phase-to-Ground Fault Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    This function will evaluate the Zero, Positive, and Negative</span>
 <span class="sd">    sequence currents for a single-line-to-ground fault.</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_1 = \frac{V_{th}}{Z_0+Z_1+Z_2+3*R_f}</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_2 = I_1</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_0 = I_1</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Vth:        complex</span>
@@ -419,7 +419,7 @@
 <span class="sd">    reference:  {'A', 'B', 'C'}</span>
 <span class="sd">                Single character denoting the reference,</span>
 <span class="sd">                default='A'</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Ifault:     list of complex,</span>
@@ -439,21 +439,21 @@
         <span class="n">Ifault</span> <span class="o">=</span> <span class="n">_phaseroll</span><span class="p">(</span> <span class="n">Ifault</span><span class="p">,</span> <span class="n">reference</span> <span class="p">)</span> <span class="c1"># Convert to ABC-Domain</span>
     <span class="c1"># Return Value</span>
     <span class="k">return</span><span class="p">(</span><span class="n">Ifault</span><span class="p">)</span></div>
-    
+
 <span class="c1"># Define Double Line to Ground Fault Current Calculator</span>
 <div class="viewcode-block" id="phs2g"><a class="viewcode-back" href="../../api/electricpy.fault.phs2g.html#electricpy.fault.phs2g">[docs]</a><span class="k">def</span> <span class="nf">phs2g</span><span class="p">(</span><span class="n">Vth</span><span class="p">,</span><span class="n">Zseq</span><span class="p">,</span><span class="n">Rf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sequence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">reference</span><span class="o">=</span><span class="s1">'A'</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Double-Line-to-Ground Fault Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    This function will evaluate the Zero, Positive, and Negative</span>
 <span class="sd">    sequence currents for a double-line-to-ground fault.</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_1 = \frac{V_{th}}{Z_1+\frac{Z_2*(Z_0+3*R_f)}{Z_0+Z_2+3*R_f}}</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_2 = -\frac{V_{th}-Z_1*I_1}{X_2}</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_0 = -\frac{V_{th}-Z_1*I_1}{X_0+3*R_f}</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Vth:        complex</span>
@@ -468,7 +468,7 @@
 <span class="sd">    reference:  {'A', 'B', 'C'}</span>
 <span class="sd">                Single character denoting the reference,</span>
 <span class="sd">                default='A'</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Ifault:     list of complex,</span>
@@ -494,16 +494,16 @@
 <div class="viewcode-block" id="phs2"><a class="viewcode-back" href="../../api/electricpy.fault.phs2.html#electricpy.fault.phs2">[docs]</a><span class="k">def</span> <span class="nf">phs2</span><span class="p">(</span><span class="n">Vth</span><span class="p">,</span><span class="n">Zseq</span><span class="p">,</span><span class="n">Rf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sequence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">reference</span><span class="o">=</span><span class="s1">'A'</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Line-to-Line Fault Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    This function will evaluate the Zero, Positive, and Negative</span>
 <span class="sd">    sequence currents for a phase-to-phase fault.</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_1 = \frac{V_{th}}{Z_1+Z_2+R_f}</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_2 = -I_1</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_0 = 0</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Vth:        complex</span>
@@ -518,7 +518,7 @@
 <span class="sd">    reference:  {'A', 'B', 'C'}</span>
 <span class="sd">                Single character denoting the reference,</span>
 <span class="sd">                default='A'</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Ifault:     list of complex,</span>
@@ -544,16 +544,16 @@
 <div class="viewcode-block" id="phs3"><a class="viewcode-back" href="../../api/electricpy.fault.phs3.html#electricpy.fault.phs3">[docs]</a><span class="k">def</span> <span class="nf">phs3</span><span class="p">(</span><span class="n">Vth</span><span class="p">,</span><span class="n">Zseq</span><span class="p">,</span><span class="n">Rf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sequence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">reference</span><span class="o">=</span><span class="s1">'A'</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Three-Phase Fault Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    This function will evaluate the Zero, Positive, and Negative</span>
 <span class="sd">    sequence currents for a three-phase fault.</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_1 = \frac{V_{th}}{Z_1+R_1}</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_2 = 0</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_0 = 0</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Vth:        complex</span>
@@ -568,7 +568,7 @@
 <span class="sd">    reference:  {'A', 'B', 'C'}</span>
 <span class="sd">                Single character denoting the reference,</span>
 <span class="sd">                default='A'</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Ifault:     list of complex</span>
@@ -590,16 +590,16 @@
 <div class="viewcode-block" id="poleopen1"><a class="viewcode-back" href="../../api/electricpy.fault.poleopen1.html#electricpy.fault.poleopen1">[docs]</a><span class="k">def</span> <span class="nf">poleopen1</span><span class="p">(</span><span class="n">Vth</span><span class="p">,</span><span class="n">Zseq</span><span class="p">,</span><span class="n">sequence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">reference</span><span class="o">=</span><span class="s1">'A'</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Single Pole Open Fault Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    This function will evaluate the Zero, Positive, and Negative</span>
 <span class="sd">    sequence currents for a single pole open fault.</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_1 = \frac{V_{th}}{Z_1+(\frac{1}{Z_2}+\frac{1}{Z_0})^-1}</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_2 = -I_1 * \frac{Z_0}{Z_2+Z_0}</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_0 = -I_1 * \frac{Z_2}{Z_2+Z_0}</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Vth:        complex</span>
@@ -612,7 +612,7 @@
 <span class="sd">    reference:  {'A', 'B', 'C'}</span>
 <span class="sd">                Single character denoting the reference, or the</span>
 <span class="sd">                faulted phase indicator; default='A'</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Ifault:     list of complex,</span>
@@ -638,16 +638,16 @@
 <div class="viewcode-block" id="poleopen2"><a class="viewcode-back" href="../../api/electricpy.fault.poleopen2.html#electricpy.fault.poleopen2">[docs]</a><span class="k">def</span> <span class="nf">poleopen2</span><span class="p">(</span><span class="n">Vth</span><span class="p">,</span><span class="n">Zseq</span><span class="p">,</span><span class="n">sequence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">reference</span><span class="o">=</span><span class="s1">'A'</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Single Pole Open Fault Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    This function will evaluate the Zero, Positive, and Negative</span>
 <span class="sd">    sequence currents for a single pole open fault.</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_1 = \frac{V_{th}}{Z_1+Z_2+Z_0}</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_2 = I_1</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_0 = I_1</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Vth:        complex</span>
@@ -660,7 +660,7 @@
 <span class="sd">    reference:  {'A', 'B', 'C'}</span>
 <span class="sd">                Single character denoting the reference, or the</span>
 <span class="sd">                faulted phase indicator; default='A'</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Ifault:     list of complex,</span>
@@ -686,16 +686,16 @@
 <div class="viewcode-block" id="scMVA"><a class="viewcode-back" href="../../api/electricpy.fault.scMVA.html#electricpy.fault.scMVA">[docs]</a><span class="k">def</span> <span class="nf">scMVA</span><span class="p">(</span><span class="n">Zth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Isc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Vth</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Short-Circuit MVA Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Function defines a method of interpretively</span>
 <span class="sd">    calculating the short-circuit MVA value</span>
 <span class="sd">    given two of the three arguments. The formulas</span>
 <span class="sd">    are all based around the following:</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: MVA_{sc} = V_{th}*I_{sc}</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: V_{th} = I_{sc}*Z_{th}</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Zth:        float</span>
@@ -709,7 +709,7 @@
 <span class="sd">                The Thevenin-Equivalent-Voltage,</span>
 <span class="sd">                defaults to a 1-per-unit value.</span>
 <span class="sd">                default=1</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    MVA:        float</span>
@@ -742,12 +742,12 @@
 <div class="viewcode-block" id="phs3mvasc"><a class="viewcode-back" href="../../api/electricpy.fault.phs3mvasc.html#electricpy.fault.phs3mvasc">[docs]</a><span class="k">def</span> <span class="nf">phs3mvasc</span><span class="p">(</span><span class="n">Vth</span><span class="p">,</span><span class="n">Zseq</span><span class="p">,</span><span class="n">Rf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">Sbase</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Three-Phase MVA Short-Circuit Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Calculator to evaluate the Short-Circuit MVA of a three-phase fault given the system</span>
 <span class="sd">    parameters of Vth, Zseq, and an optional Rf. Uses the formula as follows:</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: MVA_{sc} = \frac{\left|V_{th}^2\right|}{|Z_1|} * Sbase</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Vth:        complex</span>
@@ -758,7 +758,7 @@
 <span class="sd">                The fault resistance, default=0</span>
 <span class="sd">    Sbase:      real, optional</span>
 <span class="sd">                The per-unit base for power. default=1</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    MVA:        real</span>
@@ -771,22 +771,22 @@
         <span class="n">MVA</span> <span class="o">=</span> <span class="n">MVA</span> <span class="o">*</span> <span class="mf">1e-6</span> <span class="c1"># Divide by 1e6 (M)</span>
     <span class="c1"># Return</span>
     <span class="k">return</span><span class="p">(</span><span class="n">MVA</span><span class="p">)</span></div>
-    
-    
+
+
 <span class="c1"># Define Explicitly 1-Phase MVAsc Calculator</span>
 <div class="viewcode-block" id="phs1mvasc"><a class="viewcode-back" href="../../api/electricpy.fault.phs1mvasc.html#electricpy.fault.phs1mvasc">[docs]</a><span class="k">def</span> <span class="nf">phs1mvasc</span><span class="p">(</span><span class="n">Vth</span><span class="p">,</span><span class="n">Zseq</span><span class="p">,</span><span class="n">Rf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">Sbase</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Single-Phase MVA Short-Circuit Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Calculator to evaluate the Short-Circuit MVA of a single-phase fault given the system</span>
 <span class="sd">    parameters of Vth, Zseq, and an optional Rf. Uses the formula as follows:</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: MVA_{sc} = \left|I_1^2\right|*|Z_1| * Sbase</span>
-<span class="sd">    </span>
+
 <span class="sd">    where:</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_1 = \frac{V_{th}}{Z_0+Z_1+Z_2+3*R_f}</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Vth:        complex</span>
@@ -797,7 +797,7 @@
 <span class="sd">                The fault resistance, default=0</span>
 <span class="sd">    Sbase:      real, optional</span>
 <span class="sd">                The per-unit base for power. default=1</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    MVA:        real</span>
@@ -823,10 +823,10 @@
 <div class="viewcode-block" id="busvolt"><a class="viewcode-back" href="../../api/electricpy.fault.busvolt.html#electricpy.fault.busvolt">[docs]</a><span class="k">def</span> <span class="nf">busvolt</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">Vpf</span><span class="p">,</span><span class="n">Z0</span><span class="p">,</span><span class="n">Z1</span><span class="p">,</span><span class="n">Z2</span><span class="p">,</span><span class="n">If</span><span class="p">,</span><span class="n">sequence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">reference</span><span class="o">=</span><span class="s1">'A'</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Faulted Bus Voltage Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    This function is designed to calculate the bus voltage(s)</span>
 <span class="sd">    given a specific set of fault characteristics.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    k:          float</span>
@@ -849,7 +849,7 @@
 <span class="sd">    reference:  {'A', 'B', 'C'}</span>
 <span class="sd">                Single character denoting the reference,</span>
 <span class="sd">                default='A'</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Vf:         complex</span>
@@ -879,17 +879,17 @@
 <div class="viewcode-block" id="ct_saturation"><a class="viewcode-back" href="../../api/electricpy.fault.ct_saturation.html#electricpy.fault.ct_saturation">[docs]</a><span class="k">def</span> <span class="nf">ct_saturation</span><span class="p">(</span><span class="n">XoR</span><span class="p">,</span><span class="n">Imag</span><span class="p">,</span><span class="n">Vrated</span><span class="p">,</span><span class="n">Irated</span><span class="p">,</span><span class="n">CTR</span><span class="p">,</span><span class="n">Rb</span><span class="p">,</span><span class="n">Xb</span><span class="p">,</span><span class="n">remnance</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span><span class="n">ALF</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Electrical Current Transformer Saturation Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    A function to determine the saturation value and a boolean indicator</span>
 <span class="sd">    showing whether or not CT is -in fact- saturated.</span>
-<span class="sd">    </span>
+
 <span class="sd">    To perform this evaluation, we must satisfy the equation:</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math::</span>
 <span class="sd">       20\geq(1+\frac{X}{R})*\frac{|I_{mag}|}{I_{rated}*CTR}</span>
 <span class="sd">       *\frac{\left|R_{burden}+j*\omega*\frac{X_{burden}}</span>
 <span class="sd">       {\omega}\right|*100}{V_{rated}*(1-remnanc)}</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    XoR:        float</span>
@@ -915,7 +915,7 @@
 <span class="sd">    ALF:        float, optional</span>
 <span class="sd">                The Saturation Constant which must be satisfied,</span>
 <span class="sd">                default=20.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    result:     float</span>
@@ -945,29 +945,29 @@
 <div class="viewcode-block" id="ct_cclass"><a class="viewcode-back" href="../../api/electricpy.fault.ct_cclass.html#electricpy.fault.ct_cclass">[docs]</a><span class="k">def</span> <span class="nf">ct_cclass</span><span class="p">(</span><span class="n">XoR</span><span class="p">,</span><span class="n">Imag</span><span class="p">,</span><span class="n">Irated</span><span class="p">,</span><span class="n">CTR</span><span class="p">,</span><span class="n">Rb</span><span class="p">,</span><span class="n">Xb</span><span class="p">,</span><span class="n">remnance</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sat_crit</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Electrical Current Transformer (CT) C-Class Function.</span>
-<span class="sd">    </span>
+
 <span class="sd">    A function to determine the C-Class rated voltage for a CT.</span>
 <span class="sd">    The formula shown below demonstrates the standard formula</span>
 <span class="sd">    which is normally used to evaluate the saturation criteria.</span>
 <span class="sd">    Worth noting here, is the fact that :math:`V_{rated}` is the</span>
 <span class="sd">    CT C-Class.</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math::</span>
 <span class="sd">       \text{Saturation Criteria}=\frac{(1+\frac{X}{R})\cdot</span>
 <span class="sd">       \frac{|I_{mag}|}{I_{rated}\cdot CTR}\cdot\frac{\left|</span>
 <span class="sd">       R_{burden}+j\cdot X_{burden}\right|\cdot100}{V_{rated}}}</span>
 <span class="sd">       {1-remnance}</span>
-<span class="sd">    </span>
+
 <span class="sd">    For the purposes of this function, the above formula is applied</span>
 <span class="sd">    as follows to evaluate the CT C-Class such as to satisfy the</span>
 <span class="sd">    saturation criteria defined.</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math::</span>
 <span class="sd">       \text{CT C-Class}=\frac{(1+\frac{X}{R})\cdot</span>
 <span class="sd">       \frac{|I_{mag}|}{I_{rated}\cdot CTR}\cdot\frac{</span>
 <span class="sd">       \left|R_{burden}+j\cdot X_{burden}\right|\cdot100}</span>
 <span class="sd">       {\text{Saturation Criteria (i.e., 20)}}}{1-remnance}</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    XoR:        float</span>
@@ -989,7 +989,7 @@
 <span class="sd">                The saturation criteria which must be satisfied,</span>
 <span class="sd">                typically such that CT saturation will not occur,</span>
 <span class="sd">                default=20.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    c_class:    float</span>
@@ -1010,15 +1010,15 @@
 <div class="viewcode-block" id="ct_satratburden"><a class="viewcode-back" href="../../api/electricpy.fault.ct_satratburden.html#electricpy.fault.ct_satratburden">[docs]</a><span class="k">def</span> <span class="nf">ct_satratburden</span><span class="p">(</span><span class="n">Inom</span><span class="p">,</span><span class="n">VArat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">ANSIv</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">ALF</span><span class="o">=</span><span class="mi">20</span><span class="p">,):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Electrical Current Transformer (CT) Saturation at Rated Burden Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    A function to determine the Saturation at rated burden.</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: V_{saturated}=ALF*\frac{VA_{rated}}{I_{nominal}}</span>
-<span class="sd">    </span>
+
 <span class="sd">    where:</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: VA_{rated}=I_{nominal}*\frac{ANSI_{voltage}}{20}</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Inom:       float</span>
@@ -1029,7 +1029,7 @@
 <span class="sd">                The ANSI voltage requirement to meet.</span>
 <span class="sd">    ALF:        float, optional</span>
 <span class="sd">                Accuracy Limit Factor, default=20.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Vsat:       float</span>
@@ -1050,11 +1050,11 @@
 <div class="viewcode-block" id="ct_vpeak"><a class="viewcode-back" href="../../api/electricpy.fault.ct_vpeak.html#electricpy.fault.ct_vpeak">[docs]</a><span class="k">def</span> <span class="nf">ct_vpeak</span><span class="p">(</span><span class="n">Zb</span><span class="p">,</span><span class="n">Ip</span><span class="p">,</span><span class="n">CTR</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Electrical Current Transformer (CT) Peak Voltage Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Simple formula to calculate the Peak Voltage of a CT.</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: \sqrt{3.5*|Z_burden|*I_{peak}*CTR}</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Zb:         float</span>
@@ -1063,7 +1063,7 @@
 <span class="sd">                The peak current for the CT.</span>
 <span class="sd">    CTR:        float</span>
 <span class="sd">                The CTR turns ratio of the CT.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Vpeak:      float</span>
@@ -1076,10 +1076,10 @@
 <div class="viewcode-block" id="ct_timetosat"><a class="viewcode-back" href="../../api/electricpy.fault.ct_timetosat.html#electricpy.fault.ct_timetosat">[docs]</a><span class="k">def</span> <span class="nf">ct_timetosat</span><span class="p">(</span><span class="n">Vknee</span><span class="p">,</span><span class="n">XoR</span><span class="p">,</span><span class="n">Rb</span><span class="p">,</span><span class="n">CTR</span><span class="p">,</span><span class="n">Imax</span><span class="p">,</span><span class="n">ts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">npts</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span><span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Electrical Current Transformer (CT) Time to Saturation Function.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Function to determine the "time to saturate" for an underrated C-Class</span>
 <span class="sd">    CT using three standard curves described by Juergen Holbach.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Vknee:      float</span>
@@ -1149,11 +1149,11 @@
 <div class="viewcode-block" id="pktransrecvolt"><a class="viewcode-back" href="../../api/electricpy.fault.pktransrecvolt.html#electricpy.fault.pktransrecvolt">[docs]</a><span class="k">def</span> <span class="nf">pktransrecvolt</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">R</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">VLL</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">VLN</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Peak Transient Recovery Function.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Peak Transient Recovery Voltage calculation function, evaluates the peak</span>
 <span class="sd">    transient recovery voltage (restriking voltage) and the</span>
 <span class="sd">    Rate-of-Rise-Recovery Voltage.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    C:          float</span>
@@ -1171,7 +1171,7 @@
 <span class="sd">                optional argument.</span>
 <span class="sd">    freq:       float, optional</span>
 <span class="sd">                System frequency in Hz.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Vcpk:       float</span>
@@ -1202,10 +1202,10 @@
 <div class="viewcode-block" id="trvresistor"><a class="viewcode-back" href="../../api/electricpy.fault.trvresistor.html#electricpy.fault.trvresistor">[docs]</a><span class="k">def</span> <span class="nf">trvresistor</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">reduction</span><span class="p">,</span><span class="n">Rd0</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">wd0</span><span class="o">=</span><span class="mf">260e3</span><span class="p">,</span><span class="n">tpk0</span><span class="o">=</span><span class="mf">10e-6</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Transient Recovery Voltage (TRV) Reduction Resistor Function.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Function to find the resistor value that will reduce the TRV by a specified</span>
 <span class="sd">    percentage.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    C:          float</span>
@@ -1220,7 +1220,7 @@
 <span class="sd">                Omega-d evaluation starting point, default=260*k</span>
 <span class="sd">    tpk0:       float, optional</span>
 <span class="sd">                Time of peak voltage evaluation starting point, default=10*u</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Rd:         float</span>
@@ -1248,11 +1248,11 @@
 <div class="viewcode-block" id="toctriptime"><a class="viewcode-back" href="../../api/electricpy.fault.toctriptime.html#electricpy.fault.toctriptime">[docs]</a><span class="k">def</span> <span class="nf">toctriptime</span><span class="p">(</span><span class="n">I</span><span class="p">,</span><span class="n">Ipickup</span><span class="p">,</span><span class="n">TD</span><span class="p">,</span><span class="n">curve</span><span class="o">=</span><span class="s2">"U1"</span><span class="p">,</span><span class="n">CTR</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Time OverCurrent Trip Time Function.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Time-OverCurrent Trip Time Calculator, evaluates the time</span>
 <span class="sd">    to trip for a specific TOC (51) element given the curve</span>
 <span class="sd">    type, current characteristics and time-dial setting.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    I:          float</span>
@@ -1266,7 +1266,7 @@
 <span class="sd">                {U1,U2,U3,U4,U5,C1,C2,C3,C4,C5}, default=U1</span>
 <span class="sd">    CTR:        float, optional</span>
 <span class="sd">                Current Transformer Ratio, default=1</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    tt:         float</span>
@@ -1299,10 +1299,10 @@
 <div class="viewcode-block" id="tocreset"><a class="viewcode-back" href="../../api/electricpy.fault.tocreset.html#electricpy.fault.tocreset">[docs]</a><span class="k">def</span> <span class="nf">tocreset</span><span class="p">(</span><span class="n">I</span><span class="p">,</span><span class="n">Ipickup</span><span class="p">,</span><span class="n">TD</span><span class="p">,</span><span class="n">curve</span><span class="o">=</span><span class="s2">"U1"</span><span class="p">,</span><span class="n">CTR</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Time OverCurrent Reset Time Function.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Function to calculate the time to reset for a TOC</span>
 <span class="sd">    (Time-OverCurrent, 51) element.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    I:          float</span>
@@ -1316,7 +1316,7 @@
 <span class="sd">                {U1,U2,U3,U4,U5,C1,C2,C3,C4,C5}, default=U1</span>
 <span class="sd">    CTR:        float, optional</span>
 <span class="sd">                Current Transformer Ratio, default=1</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    tr:         float</span>
@@ -1339,11 +1339,11 @@
 <div class="viewcode-block" id="pickup"><a class="viewcode-back" href="../../api/electricpy.fault.pickup.html#electricpy.fault.pickup">[docs]</a><span class="k">def</span> <span class="nf">pickup</span><span class="p">(</span><span class="n">Iloadmax</span><span class="p">,</span><span class="n">Ifaultmin</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">printout</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">units</span><span class="o">=</span><span class="s2">"A"</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Electrical Current Pickup Selection Assistant.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Used to assist in evaluating an optimal phase-over-current pickup</span>
 <span class="sd">    setting. Uses maximum load and minimum fault current to provide</span>
 <span class="sd">    user assistance.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Iloadmax:   float</span>
@@ -1359,7 +1359,7 @@
 <span class="sd">    units:      string, optional</span>
 <span class="sd">                String to be appended to any printed output denoting</span>
 <span class="sd">                the units of which are being printed, default="A"</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    setpoint:   float</span>
@@ -1385,12 +1385,12 @@
                   <span class="n">CTR_up</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">CTR_dn</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">tfixed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Radial Time Dial Coordination Function.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Function to evaluate the Time-Dial (TD) setting in radial schemes</span>
 <span class="sd">    where the Coordinating Time Interval (CTI) and the up/downstream</span>
 <span class="sd">    pickup settings are known along with the TD setting for the</span>
 <span class="sd">    downstream protection.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    I:          float</span>
@@ -1427,7 +1427,7 @@
 <span class="sd">                TOC elements (51) with OC elements (50) with a fixed</span>
 <span class="sd">                tripping time. Overrides downstream TOC arguments</span>
 <span class="sd">                including *Ipu_dn* and *TDdn*.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    TD:         float</span>
@@ -1472,13 +1472,13 @@
 <div class="viewcode-block" id="protectiontap"><a class="viewcode-back" href="../../api/electricpy.fault.protectiontap.html#electricpy.fault.protectiontap">[docs]</a><span class="k">def</span> <span class="nf">protectiontap</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">CTR</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">VLN</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">VLL</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Protection TAP Setting Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Evaluates the required TAP setting based on the rated power of</span>
 <span class="sd">    a transformer (the object being protected) and the voltage</span>
 <span class="sd">    (either primary or secondary) in conjunction with the CTR</span>
 <span class="sd">    (current transformer ratio) for the side in question (primary/</span>
 <span class="sd">    secondary).</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    CTR:        float</span>
@@ -1489,7 +1489,7 @@
 <span class="sd">                Line-to-Neutral voltage in volts.</span>
 <span class="sd">    VLL:        float, exclusive</span>
 <span class="sd">                Line-to-Line voltage in volts.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    TAP:        float</span>
@@ -1512,10 +1512,10 @@
 <div class="viewcode-block" id="correctedcurrents"><a class="viewcode-back" href="../../api/electricpy.fault.correctedcurrents.html#electricpy.fault.correctedcurrents">[docs]</a><span class="k">def</span> <span class="nf">correctedcurrents</span><span class="p">(</span><span class="n">Ipri</span><span class="p">,</span><span class="n">TAP</span><span class="p">,</span><span class="n">correction</span><span class="o">=</span><span class="s2">"Y"</span><span class="p">,</span><span class="n">CTR</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Electrical Transformer Current Correction Function.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Function to evaluate the currents as corrected for microprocessor-</span>
 <span class="sd">    based relay protection schemes.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Ipri:       list of complex</span>
@@ -1530,7 +1530,7 @@
 <span class="sd">                removal. default="Y"</span>
 <span class="sd">    CTR:        float</span>
 <span class="sd">                Current Transformer Ratio, default=1</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Isec_corr:  list of complex</span>
@@ -1564,10 +1564,10 @@
 <div class="viewcode-block" id="iopirt"><a class="viewcode-back" href="../../api/electricpy.fault.iopirt.html#electricpy.fault.iopirt">[docs]</a><span class="k">def</span> <span class="nf">iopirt</span><span class="p">(</span><span class="n">IpriHV</span><span class="p">,</span><span class="n">IpriLV</span><span class="p">,</span><span class="n">TAPHV</span><span class="p">,</span><span class="n">TAPLV</span><span class="p">,</span><span class="n">corrHV</span><span class="o">=</span><span class="s2">"Y"</span><span class="p">,</span><span class="n">corrLV</span><span class="o">=</span><span class="s2">"Y"</span><span class="p">,</span><span class="n">CTRHV</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">CTRLV</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Operate/Restraint Current Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Calculates the operating current (Iop) and the restraint</span>
 <span class="sd">    current (Irt) as well as the slope.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    IpriHV:     list of complex</span>
@@ -1602,7 +1602,7 @@
 <span class="sd">    CTRLV       float</span>
 <span class="sd">                Current Transformer Ratio for low-voltage side</span>
 <span class="sd">                of power transformer, default=1</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Iop:        list of float</span>
@@ -1626,10 +1626,10 @@
 <div class="viewcode-block" id="symrmsfaultcur"><a class="viewcode-back" href="../../api/electricpy.fault.symrmsfaultcur.html#electricpy.fault.symrmsfaultcur">[docs]</a><span class="k">def</span> <span class="nf">symrmsfaultcur</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">R</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Symmetrical/RMS Current Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Function to evaluate the time-constant tau, the symmetrical fault current,</span>
 <span class="sd">    and the RMS current for a faulted circuit.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    V:          float</span>
@@ -1644,7 +1644,7 @@
 <span class="sd">                The time in seconds.</span>
 <span class="sd">    freq:       float, optional</span>
 <span class="sd">                The system frequency in Hz.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    tau:        float</span>
@@ -1667,11 +1667,11 @@
 <div class="viewcode-block" id="faultratio"><a class="viewcode-back" href="../../api/electricpy.fault.faultratio.html#electricpy.fault.faultratio">[docs]</a><span class="k">def</span> <span class="nf">faultratio</span><span class="p">(</span><span class="n">I</span><span class="p">,</span><span class="n">Ipickup</span><span class="p">,</span><span class="n">CTR</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Fault Multiple of Pickup (Ratio) Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Evaluates the CTR-scaled pickup measured to pickup current ratio.</span>
-<span class="sd">    </span>
+
 <span class="sd">    M = meas / pickup</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    I:          float</span>
@@ -1681,7 +1681,7 @@
 <span class="sd">    CTR:        float, optional</span>
 <span class="sd">                Current Transformer Ratio for relay,</span>
 <span class="sd">                default=1</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    M:          float</span>
@@ -1694,15 +1694,15 @@
 <div class="viewcode-block" id="residcomp"><a class="viewcode-back" href="../../api/electricpy.fault.residcomp.html#electricpy.fault.residcomp">[docs]</a><span class="k">def</span> <span class="nf">residcomp</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span><span class="n">z0</span><span class="p">,</span><span class="n">linelength</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Residual Compensation Factor Function.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Evaluates the residual compensation factor based on the line's positive and</span>
 <span class="sd">    zero sequence impedance characteristics.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    z1:         complex</span>
 <span class="sd">                The positive-sequence impedance</span>
-<span class="sd">                characteristic of the line, specified in </span>
+<span class="sd">                characteristic of the line, specified in</span>
 <span class="sd">                ohms-per-unit where the total line length</span>
 <span class="sd">                (of same unit) is specified in</span>
 <span class="sd">                *linelength* argument.</span>
@@ -1714,7 +1714,7 @@
 <span class="sd">    linelength: float, optional</span>
 <span class="sd">                The length (in same base unit as impedance</span>
 <span class="sd">                characteristics) of the line. default=1</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    k0:         complex</span>
@@ -1731,10 +1731,10 @@
 <div class="viewcode-block" id="distmeasz"><a class="viewcode-back" href="../../api/electricpy.fault.distmeasz.html#electricpy.fault.distmeasz">[docs]</a><span class="k">def</span> <span class="nf">distmeasz</span><span class="p">(</span><span class="n">VLNmeas</span><span class="p">,</span><span class="n">If</span><span class="p">,</span><span class="n">Ip</span><span class="p">,</span><span class="n">Ipp</span><span class="p">,</span><span class="n">CTR</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">VTR</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">k0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">z1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">z0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">linelength</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Distance Element Measured Impedance Function.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Function to evaluate the Relay-Measured-Impedance as calculated from</span>
 <span class="sd">    the measured voltage, current, and line parameters.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    VLNmeas:    complex</span>
@@ -1757,7 +1757,7 @@
 <span class="sd">                Residual Compensation Factor</span>
 <span class="sd">    z1:         complex, optional</span>
 <span class="sd">                The positive-sequence impedance</span>
-<span class="sd">                characteristic of the line, specified in </span>
+<span class="sd">                characteristic of the line, specified in</span>
 <span class="sd">                ohms-per-unit where the total line length</span>
 <span class="sd">                (of same unit) is specified in</span>
 <span class="sd">                *linelength* argument.</span>
@@ -1769,7 +1769,7 @@
 <span class="sd">    linelength: float, optional</span>
 <span class="sd">                The length (in same base unit as impedance</span>
 <span class="sd">                characteristics) of the line. default=1</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Zmeas:      complex</span>
@@ -1795,9 +1795,9 @@
 <div class="viewcode-block" id="transmismatch"><a class="viewcode-back" href="../../api/electricpy.fault.transmismatch.html#electricpy.fault.transmismatch">[docs]</a><span class="k">def</span> <span class="nf">transmismatch</span><span class="p">(</span><span class="n">I1</span><span class="p">,</span><span class="n">I2</span><span class="p">,</span><span class="n">tap1</span><span class="p">,</span><span class="n">tap2</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Electrical Transformer TAP Mismatch Function.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Function to evaluate the transformer ratio mismatch for protection.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    I1:         complex</span>
@@ -1808,7 +1808,7 @@
 <span class="sd">                Relay TAP setting on the primary side.</span>
 <span class="sd">    tap2:       float</span>
 <span class="sd">                Relay TAP setting on the secondary side.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    mismatch:   float</span>
@@ -1826,10 +1826,10 @@
                  <span class="n">Vstd</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span><span class="n">Kd</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    High Impedance Pickup Setting Function.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Evaluates the voltage pickup setting for a high</span>
 <span class="sd">    impedance bus protection system.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    I:          float</span>
@@ -1842,7 +1842,7 @@
 <span class="sd">                Current Transformer Ratio, default=1</span>
 <span class="sd">    threephase: bool, optional</span>
 <span class="sd">                Control argument to set the function to</span>
-<span class="sd">                evaluate the result for a three-phase </span>
+<span class="sd">                evaluate the result for a three-phase</span>
 <span class="sd">                fault or unbalanced fault. default=False</span>
 <span class="sd">    Ks:         float, optional</span>
 <span class="sd">                Security Factor for secure voltage pickup</span>
@@ -1853,7 +1853,7 @@
 <span class="sd">    Kd:         float, optional</span>
 <span class="sd">                The dependability factor for dependable</span>
 <span class="sd">                voltage pickup setting, default=0.5</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Vsens:      float</span>
@@ -1874,10 +1874,10 @@
 <div class="viewcode-block" id="highzmini"><a class="viewcode-back" href="../../api/electricpy.fault.highzmini.html#electricpy.fault.highzmini">[docs]</a><span class="k">def</span> <span class="nf">highzmini</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">Ie</span><span class="p">,</span><span class="n">Irly</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Vset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Rrly</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span><span class="n">Imov</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">CTR</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Minimum Current for High Impedance Protection Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Evaluates the minimum pickup current required to cause</span>
 <span class="sd">    high-impedance bus protection element pickup.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    N:          int</span>
@@ -1895,7 +1895,7 @@
 <span class="sd">                voltage setting. default=0.0</span>
 <span class="sd">    CTR:        float, optional</span>
 <span class="sd">                Current Transformer Ratio, default=1</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Imin:       float</span>
@@ -1921,10 +1921,10 @@
 <div class="viewcode-block" id="instoc"><a class="viewcode-back" href="../../api/electricpy.fault.instoc.html#electricpy.fault.instoc">[docs]</a><span class="k">def</span> <span class="nf">instoc</span><span class="p">(</span><span class="n">Imin</span><span class="p">,</span><span class="n">CTR</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Ki</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Instantaneous OverCurrent Pickup Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Using a sensetivity factor and the CTR, evaluates the secondary-level pickup</span>
 <span class="sd">    setting for an instantaneous overcurrent element.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Imin:       float</span>
@@ -1932,7 +1932,7 @@
 <span class="sd">    CTR:        float, optional</span>
 <span class="sd">                Current Transformer Ratio, default=1</span>
 <span class="sd">    Ki:         Sensetivity factor, default=0.5</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Ipu:        float</span>
@@ -1948,10 +1948,10 @@
 <div class="viewcode-block" id="genlossfield"><a class="viewcode-back" href="../../api/electricpy.fault.genlossfield.html#electricpy.fault.genlossfield">[docs]</a><span class="k">def</span> <span class="nf">genlossfield</span><span class="p">(</span><span class="n">Xd</span><span class="p">,</span><span class="n">Xpd</span><span class="p">,</span><span class="n">Zbase</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">CTR</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">VTR</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Electric Generator Loss of Field Function.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Generates the Loss-of-Field Element settings for a generator using the Xd</span>
 <span class="sd">    value and per-unit base information.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Xd:         float</span>
@@ -1969,7 +1969,7 @@
 <span class="sd">                Current Transformer Ratio, default=1</span>
 <span class="sd">    VTR:        float, optional</span>
 <span class="sd">                Voltage Transformer Ratio, default=1</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    ZoneOff:    float</span>
@@ -1998,15 +1998,15 @@
 <div class="viewcode-block" id="thermaltime"><a class="viewcode-back" href="../../api/electricpy.fault.thermaltime.html#electricpy.fault.thermaltime">[docs]</a><span class="k">def</span> <span class="nf">thermaltime</span><span class="p">(</span><span class="n">In</span><span class="p">,</span><span class="n">Ibase</span><span class="p">,</span><span class="n">tbase</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Thermal Time Limit Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Computes the maximum allowable time for a specified current `In` given</span>
 <span class="sd">    parameters for a maximum current and time at some other level, (`Ibase`,</span>
 <span class="sd">    `tbase`).</span>
-<span class="sd">    </span>
+
 <span class="sd">    Uses the following formula:</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: t_n=\frac{I_{base}^2*t_{base}}{I_n^2}</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    In:         float</span>
@@ -2017,7 +2017,7 @@
 <span class="sd">    tbase:      float</span>
 <span class="sd">                Base time for which a maximum allowable</span>
 <span class="sd">                current `Ibase` is specified. Unitless.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    tn:         float</span>
@@ -2027,23 +2027,23 @@
     <span class="c1"># Perform Calculation</span>
     <span class="n">tn</span> <span class="o">=</span> <span class="p">(</span><span class="n">Ibase</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">tbase</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">In</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
     <span class="k">return</span><span class="p">(</span><span class="n">tn</span><span class="p">)</span></div>
-    
+
 
 <span class="c1"># Define Synch. Machine Fault Current Calculator</span>
 <div class="viewcode-block" id="synmach_Isym"><a class="viewcode-back" href="../../api/electricpy.fault.synmach_Isym.html#electricpy.fault.synmach_Isym">[docs]</a><span class="k">def</span> <span class="nf">synmach_Isym</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Eq</span><span class="p">,</span><span class="n">Xd</span><span class="p">,</span><span class="n">Xdp</span><span class="p">,</span><span class="n">Xdpp</span><span class="p">,</span><span class="n">Tdp</span><span class="p">,</span><span class="n">Tdpp</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Synch. Machine Symmetrical Fault Current Calc.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Determines the Symmetrical Fault Current of a synchronous</span>
 <span class="sd">    machine given the machine parameters, the internal voltage,</span>
 <span class="sd">    and the time for which to calculate.</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_a(t)=\sqrt{2}\left|E_q\right|\left[</span>
 <span class="sd">       \frac{1}{X_d}+\left(\frac{1}{X'_d}-\frac{1}{X_d}</span>
 <span class="sd">       \right)\cdot e^{\frac{-t}{T'_d}}+\left(\frac{1}</span>
 <span class="sd">       {X"_d}-\frac{1}{X'_d}\right)\cdot e^{\frac{-t}{T"_d}}</span>
 <span class="sd">       \right]</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    t:          float</span>
@@ -2064,7 +2064,7 @@
 <span class="sd">    Tdpp:       float</span>
 <span class="sd">                The T"d (d-axis subtransient) time constant of</span>
 <span class="sd">                the machine in seconds</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Ia:         float</span>
@@ -2080,15 +2080,15 @@
 <div class="viewcode-block" id="synmach_Iasym"><a class="viewcode-back" href="../../api/electricpy.fault.synmach_Iasym.html#electricpy.fault.synmach_Iasym">[docs]</a><span class="k">def</span> <span class="nf">synmach_Iasym</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Eq</span><span class="p">,</span><span class="n">Xdpp</span><span class="p">,</span><span class="n">Xqpp</span><span class="p">,</span><span class="n">Ta</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Synch. Machine Asymmetrical Fault Current Calc.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Determines the asymmetrical fault current of a synchronous</span>
 <span class="sd">    machine given the machine parameters, the internal voltage,</span>
 <span class="sd">    and the time for which to calculate.</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. math:: I_{asym}=\sqrt{2}\left|E_q\right|\frac{1}{2}</span>
 <span class="sd">       \left(\frac{1}{X"_d}+\frac{1}{X"_q}\right)e^{\frac{-t}</span>
 <span class="sd">       {T_a}}</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    t:          float</span>
@@ -2103,7 +2103,7 @@
 <span class="sd">                per-unit-ohms</span>
 <span class="sd">    Ta:         float</span>
 <span class="sd">                Armature short-circuit (DC) time constant in seconds</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Iasym:      float</span>
@@ -2119,11 +2119,11 @@
 <div class="viewcode-block" id="indmacheigenvalues"><a class="viewcode-back" href="../../api/electricpy.fault.indmacheigenvalues.html#electricpy.fault.indmacheigenvalues">[docs]</a><span class="k">def</span> <span class="nf">indmacheigenvalues</span><span class="p">(</span><span class="n">Lr</span><span class="p">,</span><span class="n">Ls</span><span class="p">,</span><span class="n">Lm</span><span class="p">,</span><span class="n">Rr</span><span class="p">,</span><span class="n">Rs</span><span class="p">,</span><span class="n">wrf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Induction Machine Eigenvalue Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Calculates the pertinent eigenvalues for an unloaded</span>
 <span class="sd">    induction machine given a specific set of machine</span>
 <span class="sd">    parameters.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Lr:         float</span>
@@ -2143,7 +2143,7 @@
 <span class="sd">    freq:       float, optional</span>
 <span class="sd">                Base frequency of the system (in Hertz).</span>
 <span class="sd">                default=60</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    lam1:       complex</span>
@@ -2175,10 +2175,10 @@
 <div class="viewcode-block" id="indmachphs3sc"><a class="viewcode-back" href="../../api/electricpy.fault.indmachphs3sc.html#electricpy.fault.indmachphs3sc">[docs]</a><span class="k">def</span> <span class="nf">indmachphs3sc</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Is0</span><span class="p">,</span><span class="n">Lr</span><span class="p">,</span><span class="n">Ls</span><span class="p">,</span><span class="n">Lm</span><span class="p">,</span><span class="n">Rr</span><span class="p">,</span><span class="n">Rs</span><span class="p">,</span><span class="n">wrf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span><span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Induction Machine 3-Phase SC Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Determines the short-circuit current at a specified time for a three-phase</span>
 <span class="sd">    fault on an unloaded induction machine.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    t:          array_like</span>
@@ -2208,7 +2208,7 @@
 <span class="sd">    real:       bool, optional</span>
 <span class="sd">                Control argument to force returned value</span>
 <span class="sd">                to be real part only. default=True</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    ias:        array_like</span>
@@ -2235,10 +2235,10 @@
 <div class="viewcode-block" id="indmachphs3torq"><a class="viewcode-back" href="../../api/electricpy.fault.indmachphs3torq.html#electricpy.fault.indmachphs3torq">[docs]</a><span class="k">def</span> <span class="nf">indmachphs3torq</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Is0</span><span class="p">,</span><span class="n">Lr</span><span class="p">,</span><span class="n">Ls</span><span class="p">,</span><span class="n">Lm</span><span class="p">,</span><span class="n">Rr</span><span class="p">,</span><span class="n">Rs</span><span class="p">,</span><span class="n">wrf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Induction Machine 3-Phase Torque Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Determines the torque exerted during a three-phase fault on an induction</span>
 <span class="sd">    machine.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    t:          array_like</span>
@@ -2267,7 +2267,7 @@
 <span class="sd">    freq:       float, optional</span>
 <span class="sd">                Base frequency of the system (in Hertz).</span>
 <span class="sd">                default=60</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Tem:        array_like</span>
@@ -2298,14 +2298,14 @@
     <span class="c1"># noqa: D401   "Synchronous" is intentional descriptor</span>
     <span class="sd">"""</span>
 <span class="sd">    Synchronous Machine Fault Current Calculator.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Given machine parameters, fault inception angle, and time at</span>
 <span class="sd">    which to calculate fault current, this function will identify</span>
 <span class="sd">    the complete (symmetrical, asymmetrical, and double frequency)</span>
 <span class="sd">    fault current.</span>
-<span class="sd">    </span>
+
 <span class="sd">    .. image:: /static/synmach_ifault_formula.png</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    t:          float</span>
@@ -2336,7 +2336,7 @@
 <span class="sd">    freq:       float, optional</span>
 <span class="sd">                System (electrical) frequency (in degrees),</span>
 <span class="sd">                default=60</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    ias:        float</span>
@@ -2366,8 +2366,8 @@
     <span class="c1"># Compose Complet Current Value</span>
     <span class="n">ias</span> <span class="o">=</span> <span class="n">isym</span> <span class="o">-</span> <span class="n">iasym</span> <span class="o">-</span> <span class="n">idbl</span>
     <span class="k">return</span><span class="p">(</span><span class="n">ias</span><span class="p">)</span></div>
-    
-    
+
+
 
 <span class="c1"># END OF FILE</span>
 </pre></div>

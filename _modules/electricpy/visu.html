@@ -395,7 +395,7 @@
 <span class="sd">    ...     blocked_rotor_data=blocked_rotor_test_data,</span>
 <span class="sd">    ...     output_power=output_power,</span>
 <span class="sd">    ...     torque_ration=ratio,</span>
-<span class="sd">    ...     frequency=50, </span>
+<span class="sd">    ...     frequency=50,</span>
 <span class="sd">    ...     poles=4</span>
 <span class="sd">    ... )</span>
 
@@ -527,20 +527,20 @@
         <span class="c1"># Operating Point</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_x</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_y</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">'black'</span><span class="p">)</span>
 
-        <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">power_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'X'</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">power_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'X'</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'_nolegend_'</span><span class="p">)</span>
         <span class="c1"># mark the center of the circle</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'*'</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'*'</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'_nolegend_'</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">),</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">),</span>
-            <span class="n">linewidths</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'*'</span>
+            <span class="n">linewidths</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'*'</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">'_nolegend_'</span>
         <span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">torque_max_x</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">torque_max_y</span><span class="p">,</span>
             <span class="n">linewidths</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
             <span class="n">c</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span>
-            <span class="n">marker</span><span class="o">=</span><span class="s1">'*'</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s1">'*'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'_nolegend_'</span>
         <span class="p">)</span>
 
         <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Induction Motor Circle Diagram"</span><span class="p">)</span>
@@ -631,9 +631,9 @@
         <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="n">ls</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">mark_start</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">)</span>
+            <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'_nolegend_'</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">mark_end</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">)</span>
+            <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'_nolegend_'</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">compute_circle_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">"""Compute the parameters of induction motor circle."""</span>
@@ -686,7 +686,7 @@
         <span class="sd">"""</span>
 <span class="sd">        Determine induction motor circle desired output power point.</span>
 
-<span class="sd">        Obtain the point on the induction motor circle diagram which </span>
+<span class="sd">        Obtain the point on the induction motor circle diagram which</span>
 <span class="sd">        corresponds to the desired output power</span>
 <span class="sd">        """</span>
         <span class="p">[[</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">],</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span>
@@ -731,16 +731,16 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    power_circle_type:  ["sending", "receiving"] </span>
-<span class="sd">                        Type of power circle diagram to plot. </span>
-<span class="sd">    Vr:                 complex </span>
+<span class="sd">    power_circle_type:  ["sending", "receiving"]</span>
+<span class="sd">                        Type of power circle diagram to plot.</span>
+<span class="sd">    Vr:                 complex</span>
 <span class="sd">                        Transmission Line Receiving End Voltage (phasor complex</span>
 <span class="sd">                        value)</span>
 <span class="sd">    Vs:                 complex</span>
 <span class="sd">                        Transmission Line Sending End Voltage (phasor complex</span>
 <span class="sd">                        value)</span>
 <span class="sd">    power_factor:       float</span>
-<span class="sd">                        Power Factor of the transmission system, default = None </span>
+<span class="sd">                        Power Factor of the transmission system, default = None</span>
 <span class="sd">    Pr:                 float</span>
 <span class="sd">                        Receiving End Real Power, default = None</span>
 <span class="sd">    Qr:                 float</span>
@@ -753,14 +753,14 @@
 <span class="sd">                        Sending End Reactive Power, default = None</span>
 <span class="sd">    Ss:                 complex</span>
 <span class="sd">                        Sending End Total Complex Power, default = None</span>
-<span class="sd">    A:                  float </span>
-<span class="sd">                        Transmission System ABCD Parameters, A, default = None     </span>
-<span class="sd">    B:                  float </span>
-<span class="sd">                        Transmission System ABCD Parameters, B, default = None         </span>
-<span class="sd">    C:                  float </span>
-<span class="sd">                        Transmission System ABCD Parameters, C, default = None     </span>
-<span class="sd">    D:                  float </span>
-<span class="sd">                        Transmission System ABCD Parameters, D, default = None </span>
+<span class="sd">    A:                  float</span>
+<span class="sd">                        Transmission System ABCD Parameters, A, default = None</span>
+<span class="sd">    B:                  float</span>
+<span class="sd">                        Transmission System ABCD Parameters, B, default = None</span>
+<span class="sd">    C:                  float</span>
+<span class="sd">                        Transmission System ABCD Parameters, C, default = None</span>
+<span class="sd">    D:                  float</span>
+<span class="sd">                        Transmission System ABCD Parameters, D, default = None</span>
 <span class="sd">    """</span>
 
 <div class="viewcode-block" id="PowerCircle.__init__"><a class="viewcode-back" href="../../api/electricpy.visu.PowerCircle.html#electricpy.visu.PowerCircle.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">power_circle_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -776,15 +776,15 @@
         <span class="k">if</span> <span class="n">power_circle_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"receiving"</span><span class="p">:</span>
 
             <span class="k">if</span> <span class="n">A</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">B</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Vr</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span> <span class="o">=</span> <span class="n">PowerCircle</span><span class="o">.</span><span class="n">_build_circle</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="s2">"receiving_end"</span><span class="p">,</span> <span class="n">Vr</span><span class="p">,</span> 
+                <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span> <span class="o">=</span> <span class="n">PowerCircle</span><span class="o">.</span><span class="n">_build_circle</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="s2">"receiving_end"</span><span class="p">,</span> <span class="n">Vr</span><span class="p">,</span>
                 <span class="n">Pr</span><span class="p">,</span> <span class="n">Qr</span><span class="p">,</span> <span class="n">Sr</span><span class="p">,</span> <span class="n">power_factor</span><span class="p">,</span> <span class="n">Vs</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Not enough attributes to build circle"</span><span class="p">)</span>
 
         <span class="k">elif</span> <span class="n">power_circle_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"sending"</span><span class="p">:</span>
-            
+
             <span class="k">if</span> <span class="n">B</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">D</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Vs</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span> <span class="o">=</span> <span class="n">PowerCircle</span><span class="o">.</span><span class="n">_build_circle</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="s2">"sending_end"</span><span class="p">,</span> <span class="n">Vs</span><span class="p">,</span> 
+                <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span> <span class="o">=</span> <span class="n">PowerCircle</span><span class="o">.</span><span class="n">_build_circle</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="s2">"sending_end"</span><span class="p">,</span> <span class="n">Vs</span><span class="p">,</span>
                 <span class="n">Ps</span><span class="p">,</span> <span class="n">Qs</span><span class="p">,</span> <span class="n">Ss</span><span class="p">,</span> <span class="n">power_factor</span><span class="p">,</span> <span class="n">Vr</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Not enough attributes to build power circle"</span><span class="p">)</span>
@@ -801,7 +801,7 @@
         <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">V</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="nb">abs</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span>
         <span class="n">alpha</span> <span class="o">=</span> <span class="n">cmath</span><span class="o">.</span><span class="n">phase</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span>
         <span class="n">beta</span> <span class="o">=</span> <span class="n">cmath</span><span class="o">.</span><span class="n">phase</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span>
-        
+
         <span class="k">if</span> <span class="n">circle_type</span> <span class="o">==</span> <span class="s2">"receiving_end"</span><span class="p">:</span>
             <span class="n">center</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">cmath</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span> <span class="o">-</span> <span class="n">beta</span><span class="p">),</span> <span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">cmath</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alpha</span> <span class="o">-</span> <span class="n">beta</span><span class="p">))</span>
 
@@ -845,7 +845,7 @@
         <span class="k">return</span> <span class="n">radius</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">operation_point</span>
 
     <span class="k">def</span> <span class="nf">_cal_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type1</span><span class="p">,</span> <span class="n">type2</span><span class="p">):</span>
-        
+
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'V'</span><span class="o">+</span><span class="n">type2</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'V'</span> <span class="o">+</span> <span class="n">type2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'B'</span><span class="p">])</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'V'</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span>
 
@@ -879,7 +879,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_cal_parameters</span><span class="p">(</span><span class="s2">"r"</span><span class="p">,</span> <span class="s2">"s"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"power_circle_type"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"sending"</span><span class="p">:</span>
-            
+
             <span class="bp">self</span><span class="o">.</span><span class="n">_cal_parameters</span><span class="p">(</span><span class="s2">"s"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -901,11 +901,11 @@
         <span class="sa">r</span><span class="sd">"""Plot the circle."""</span>
         <span class="n">circle_x</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">circle_y</span> <span class="o">=</span> <span class="p">[]</span>
-        
+
         <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">circle</span><span class="o">.</span><span class="n">parametric_equation</span><span class="p">(</span><span class="n">theta_resolution</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">):</span>
             <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
             <span class="n">circle_x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="n">circle_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>        
+            <span class="n">circle_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
         <span class="n">c_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="o">.</span><span class="n">x</span>
         <span class="n">c_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="o">.</span><span class="n">y</span>
@@ -919,7 +919,7 @@
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">c_x</span><span class="p">,</span> <span class="n">c_x</span><span class="p">],</span> <span class="p">[</span><span class="n">c_y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="n">c_y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">],</span> <span class="s1">'g--'</span><span class="p">)</span>
 
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">c_x</span><span class="p">,</span> <span class="n">op_x</span><span class="p">],</span> <span class="p">[</span><span class="n">c_y</span><span class="p">,</span> <span class="n">op_y</span><span class="p">],</span> <span class="s1">'y*-.'</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">op_x</span><span class="p">,</span> <span class="n">op_x</span><span class="p">],</span> <span class="p">[</span><span class="n">op_y</span><span class="p">,</span> <span class="n">c_y</span><span class="p">],</span> <span class="s1">'b*-.'</span><span class="p">)</span> 
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">op_x</span><span class="p">,</span> <span class="n">op_x</span><span class="p">],</span> <span class="p">[</span><span class="n">op_y</span><span class="p">,</span> <span class="n">c_y</span><span class="p">],</span> <span class="s1">'b*-.'</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">op_x</span><span class="p">,</span> <span class="n">op_y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'*'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'r'</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'power_circle_type'</span><span class="p">]</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2"> Power Circle"</span>
@@ -953,11 +953,11 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    Vr:             complex    </span>
+<span class="sd">    Vr:             complex</span>
 <span class="sd">                    Receiving End Voltage, default = None.</span>
-<span class="sd">    A:              complex     </span>
+<span class="sd">    A:              complex</span>
 <span class="sd">                    Transmission System ABCD Parameters, A, default = None.</span>
-<span class="sd">    B:              complex,     </span>
+<span class="sd">    B:              complex,</span>
 <span class="sd">                    Transmission System ABCD Parameters, B, default = None.</span>
 <span class="sd">    Pr:             float, optional</span>
 <span class="sd">                    Receiving End Real Power, default = None</span>
@@ -1018,7 +1018,7 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    Vs:             complex </span>
+<span class="sd">    Vs:             complex</span>
 <span class="sd">                    Sending End Voltage</span>
 <span class="sd">    B:              complex</span>
 <span class="sd">                    Transmission System ABCD Parameters, A</span>
