@@ -61,7 +61,7 @@ def tcycle(ncycles=1, freq=60):
                 Total time for *ncycles*
 
     Examples
-    -------
+    --------
     >>> import electricpy as ep
     >>> ep.tcycle(1, freq=60) #Value of ncycles=1 & freq=60
     0.01666667
