@@ -59,6 +59,14 @@ def tcycle(ncycles=1, freq=60):
     -------
     t:          float
                 Total time for *ncycles*
+
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> ep.tcycle(1, freq=60) #Value of ncycles=1 & freq=60
+    0.01666667
+    >>> ep.tcycle(1, freq=50) #Value of ncycles=1 & freq=50
+    0.02
     """
     # Condition Inputs
     ncycles = _np.asarray(ncycles)
@@ -66,11 +74,13 @@ def tcycle(ncycles=1, freq=60):
     # Evaluate the time for ncycles
     time = ncycles / freq
     # Return
-    if len(time) == 1:
-        return time[0]
-    else:
+    try:
+        if len(time) == 1:
+            return time[0]
+        else:
+            return time
+    except TypeError:
         return time
-
 
 # Define Reactance Calculator
 def reactance(z, freq=60, sensetivity=1e-12):
