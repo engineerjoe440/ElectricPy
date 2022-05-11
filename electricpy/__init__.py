@@ -74,8 +74,13 @@ def tcycle(ncycles=1, freq=60):
     # Evaluate the time for ncycles
     time = ncycles / freq
     # Return
-    return time
-
+    try:
+        if len(time) == 1:
+            return time[0]
+        else:
+            return time
+    except TypeError:
+        return time
 
 # Define Reactance Calculator
 def reactance(z, freq=60, sensetivity=1e-12):
