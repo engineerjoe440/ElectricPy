@@ -177,7 +177,7 @@ def test_suspension_insulators():
     Voltage = 66
 
     _, string_efficiency = suspension_insulators(number_capacitors,
-                                                capacitance_ration, 
+                                                capacitance_ration,
                                                 Voltage)
 
     string_efficiency_actual = 54.16
@@ -326,3 +326,17 @@ def test_induction_machine_slip():
     assert induction_machine_slip(Nr, freq=freq, poles=p) == 0.2
     assert induction_machine_slip(1500, freq=freq, poles=p) == 0
     assert induction_machine_slip(0, freq=freq, poles=p) == 1
+
+def test_tcycle():
+    from electricpy import tcycle
+
+    # Test 0
+    assert tcycle(ncycles = 1, freq = 50) == 1/50
+    assert tcycle(ncycles = 2, freq = 50) == 2/50
+    assert tcycle(ncycles = 3, freq = 50) == 3/50
+    assert tcycle(ncycles = 4, freq = 50) == 4/50
+
+    # Test 1
+    assert (tcycle(ncycles = [1, 2, 3], freq = 100) == np.asarray([1/100, 2/100, 3/100])).all()
+    assert (tcycle(ncycles = 1, freq = [100, 200, 300]) == np.asarray([1/100, 1/200, 1/300])).all()
+    assert (tcycle(ncycles = [1, 2, 3], freq = [100, 200, 300]) == np.asarray([1/100, 1/100, 1/100])).all()

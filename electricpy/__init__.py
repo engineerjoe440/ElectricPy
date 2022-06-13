@@ -28,6 +28,7 @@ from electricpy.latex import *
 from electricpy.math import *
 
 # Import Supporting Modules
+from typing import Union
 import numpy as _np
 import matplotlib as _matplotlib
 import matplotlib.pyplot as _plt
@@ -38,9 +39,9 @@ from inspect import getframeinfo as _getframeinfo
 from inspect import stack as _stack
 from scipy.integrate import quad as integrate
 
-
 # Define Cycle Time Function
-def tcycle(ncycles=1, freq=60):
+def tcycle(ncycles = Union[float, list[int], _np.ndarray],
+    freq = Union[float, list[float], _np.ndarray]) -> Union[float, _np.ndarray]:
     r"""
     Time of Electrical Cycles.
 
@@ -64,13 +65,22 @@ def tcycle(ncycles=1, freq=60):
     # Condition Inputs
     ncycles = _np.asarray(ncycles)
     freq = _np.asarray(freq)
+
+    if isinstance(ncycles, _np.ndarray) and isinstance(freq, _np.ndarray):
+        try:
+            assert ncycles.shape == freq.shape
+        except AssertionError:
+            raise AssertionError("ERROR: Both ncycles and frequencies must be the same shape.")
     # Evaluate the time for ncycles
-    time = ncycles / freq
+    try:
+        time = ncycles / freq
+    except ZeroDivisionError:
+        raise ValueError("ERROR: ZeroDivisionError: Frequency cannot be zero.")
     # Return
-    if len(time) == 1:
-        return (time[0])
+    if isinstance(time, _np.ndarray) and len(time) == 1:
+        return time[0]
     else:
-        return (time)
+        return time
 
 # Define display function
 def cprint(val, unit=None, label=None, title=None,
@@ -1028,8 +1038,8 @@ def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
     r"""
     Inductive voltage divider.
 
-    Inductive voltage divider Inductive voltage dividers are made out of two inductors. 
-    One of the inductors is connected from the input to the output and the other one is connected from the output to ground. 
+    Inductive voltage divider Inductive voltage dividers are made out of two inductors.
+    One of the inductors is connected from the input to the output and the other one is connected from the output to ground.
     You can also use other components like resistors and inductors.
 
     .. math:: V_{out} = \frac{V_{in}*L1}{L1+L2}
@@ -1038,7 +1048,7 @@ def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
 
     Parameters
     ----------
-    Vin:    float, optional 
+    Vin:    float, optional
             The input voltage for the system, default=None
 
     Vout:   float, optional
@@ -1053,10 +1063,10 @@ def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
     find:   str, optional
             Control argument to specify which value
             should be returned.
-    
+
     Returns
     -------
-    Vin:    float, optional 
+    Vin:    float, optional
             The input voltage for the system, default=None
 
     Vout:   float, optional
@@ -1081,7 +1091,7 @@ def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
                         " parameters given to calculate.")
 
     find = find.lower()
-    
+
     if find == 'vin':
         return Vin
     elif find == 'vout':
@@ -1133,7 +1143,7 @@ def led_resistor(Vsrc, Vfwd = 2, Ifwd = 20):
             Forward voltage of LED (or series LEDs if available), default=2
     Ifwd:   float, optional
             Forward current of LEDs in milliamps, default=20 (milliamps)
-    
+
     Returns
     -------
     R:      float
@@ -3154,7 +3164,7 @@ def tap_changing_transformer(Vgen, Vdis, Pload, Qload, R, X):
     The purpose of a tap changer is to regulate the output voltage of a
     transformer. It does this by altering the number of turns in one winding and
     thereby changing the turns ratio of the transformer
-    
+
     .. math:: \sqrt{\frac{Vgen^2}{Vgen \cdot Vdis - R \cdot P - X \cdot Q}}
 
     Parameters
@@ -3171,7 +3181,7 @@ def tap_changing_transformer(Vgen, Vdis, Pload, Qload, R, X):
             Resistance of transmission line
     X:      float
             Reactance of transmission line
-    
+
     Returns
     -------
     ts:     float
@@ -3192,12 +3202,12 @@ def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
     .. math:: \sum_{i=1}^{n-2} V_{i} + V_{n-1} \cdot (1+m) - V_{n} \cdot m=0
 
     .. math:: \sum_{i=1}^{n} V_{i} = V_{\text{transmission line}}
-    
+
     .. image:: /static/SuspensionInuslator.png
-    
+
     `Additional Information
     <https://electrical-engineering-portal.com/download-center/books-and-guides/power-substations/insulator-pollution>`_
-    
+
     Parameters
     ----------
     number_capacitors:  int
@@ -3206,7 +3216,7 @@ def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
                         Ratio of disk capacitance and pin to pole air capacitance
     Voltage:            float
                         Voltage difference between the transmission line and ground
-    
+
     Returns
     -------
     string_efficiency:          float
@@ -3472,32 +3482,32 @@ def propagation_constants(z, y, length):
 
     This function will evaluate the propagation constants for a long transmission
     line whose properties are governed by the differential equation:
-    
+
     .. math:: \frac{d^2V}{dx^2} = \gamma V
-    
+
     From the above equation, the following formulas are derived to evaluate the
     desired constants.
-    
+
     .. math:: \gamma = \sqrt( z * y )
-    
+
     .. math:: Z_{\text{surge}} = \sqrt( z / y )
-    
+
     .. math:: \alpha = \Re{ \gamma }
-    
+
     .. math:: \beta = \Im{ \gamma }
-    
+
     Parameters
     ----------
     z:              complex
                     Impedence of the transmission line: R+j*2*pi*f*L
     y:              complex
                     Admitance of the transmission line g+j*2*pi*f*C
-        
+
     Returns
     -------
     params:    dict
                Dictionary of propagation constants including:
-                    
+
                          gamma:   Propagation constant
                          zc:            Surge impedance
                          alpha:      Attenuation constant
@@ -5067,7 +5077,7 @@ def wireresistance(length=None,diameter=None,rho=16.8*10**-9,R=None):
                 Wire diameter, unitless.
     rho:        [float], optional
                 Material resistivity, unitless
-                Default value is copper resistivity: 16.8*10-9 
+                Default value is copper resistivity: 16.8*10-9
     R:          [float], optional
                 Wire resistance, unitless.
 
@@ -5079,7 +5089,7 @@ def wireresistance(length=None,diameter=None,rho=16.8*10**-9,R=None):
                 Wire diameter, unitless.
     rho:        [float], optional
                 Material resistivity, unitless
-                Default value is copper resistivity: 16.8*10-9 
+                Default value is copper resistivity: 16.8*10-9
     R:          [float], optional
                 Wire resistance, unitless.
     """
@@ -5099,37 +5109,37 @@ def wireresistance(length=None,diameter=None,rho=16.8*10**-9,R=None):
     elif R != None and length != None:
         A = rho*length/R
         return _np.sqrt(4*A/pi)
-        
+
 def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
     """
     555 Integrated Circuit Calculator.
-    
+
     Evaluate a number of common attributes related to the common 555 integrated
     circuit including time period, frequency, duty cycle, time spent low during
     each cycle, time spent high during each cycle.
 
     TODO: This function should be broken into multiple smaller functions.
-    
-    Parameters 
-    ---------- 
+
+    Parameters
+    ----------
     R:      list[float, float] or tuple(float, float), optional
             List of 2 resistor which are need in configuring IC 555.
     C:      float, optional
             Capacitance between Threshold Pin and ground
     f:      float, optional
-            Electrical system frequency in Hertz. 
+            Electrical system frequency in Hertz.
     t_high: float, optional
-            ON time of IC 555 
+            ON time of IC 555
     t_low:  float, optional
-            OFF time of IC 555 
-    
-    Returns 
-    ------- 
-    dict:   "time_period": Time period of oscillating IC 555 
-            "frequency": frequency of oscilation of IC 555 
+            OFF time of IC 555
+
+    Returns
+    -------
+    dict:   "time_period": Time period of oscillating IC 555
+            "frequency": frequency of oscilation of IC 555
             "duty_cycle": ration between ON time and total time
-            "t_low": ON time of IC 555 
-            "t_high": OFF time of IC 555 
+            "t_low": ON time of IC 555
+            "t_high": OFF time of IC 555
     """
     if R!=None and C!=None:
         if len(R) != 2:
@@ -5153,7 +5163,7 @@ def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
             't_low':t_low,
             't_high':t_high
         }
-    
+
     elif t_high!=None and t_low!=None and C!=None:
 
         x2 = t_low/C*_np.log(2)
@@ -5171,37 +5181,37 @@ def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
         }
     else:
         raise TypeError("Not enough parqmeters are passed")
-            
+
 def ic_555_monostable(R=None,C=None,freq=None,t_high=None,t_low=None):
     """
     555 Integrated Circuit Calculator.
-    
+
     Evaluate a number of common attributes related to the common 555 integrated
     circuit including time period, frequency, duty cycle, time spent low during
     each cycle, time spent high during each cycle.
 
     TODO: This function should be broken into multiple smaller functions.
-    
-    Parameters 
-    ---------- 
+
+    Parameters
+    ----------
     R:      list[float, float] or tuple(float, float), optional
             List of 2 resistor which are need in configuring IC 555.
     C:      float, optional
             Capacitance between Threshold Pin and ground
     f:      float, optional
-            Electrical system frequency in Hertz. 
+            Electrical system frequency in Hertz.
     t_high: float, optional
-            ON time of IC 555 
+            ON time of IC 555
     t_low:  float, optional
-            OFF time of IC 555 
-    
-    Returns 
-    ------- 
-    dict:   "time_period": Time period of oscillating IC 555 
-            "frequency": frequency of oscilation of IC 555 
+            OFF time of IC 555
+
+    Returns
+    -------
+    dict:   "time_period": Time period of oscillating IC 555
+            "frequency": frequency of oscilation of IC 555
             "duty_cycle": ration between ON time and total time
-            "t_low": ON time of IC 555 
-            "t_high": OFF time of IC 555 
+            "t_low": ON time of IC 555
+            "t_high": OFF time of IC 555
     """
     T = t_high+t_low
     if R is None:
@@ -5230,22 +5240,22 @@ def t_attenuator(Adb, Z0):
     r"""
     T attenuator.
 
-    The T attenuator is a type of attenuator that looks like the letter T. 
-    The T attenuator consists of three resistors. Two of these are connected in 
-    series and the other one is connected from between the two other resistors to ground. 
+    The T attenuator is a type of attenuator that looks like the letter T.
+    The T attenuator consists of three resistors. Two of these are connected in
+    series and the other one is connected from between the two other resistors to ground.
     The resistors in series often have the same resistance.
 
     .. math:: R1 = Z0*(\frac{10^{\frac{A_{db}}{20}}-1}{10^{\frac{A_{db}}{20}}+1});
     .. math:: R2 = Z0*(\frac{10^{\frac{A_{db}}{20}}}{10^{\frac{A_{db}}{10}}-1})
     .. image:: /static/t-attenuator-circuit.png
 
-    Parameters 
-    ---------- 
+    Parameters
+    ----------
     Adb: float Attenuation in db
     Z0: float Impedence
 
-    Returns 
-    ------- 
+    Returns
+    -------
     R1: float T attenuator R1
     R2: float T attenuator R2
     """
@@ -5261,20 +5271,20 @@ def pi_attenuator(Adb, Z0):
     Pi attenuator.
 
     The Pi attenuator is a type of attenuator that looks like the Greek letter π.
-    The Pi attenuator consists of three resistors. One of these is connected in series and 
+    The Pi attenuator consists of three resistors. One of these is connected in series and
     the other two are connected in parallel to ground. The parallel resistors often have the same resistance.
 
     .. math:: R1 = Z0*(\frac{10^{\frac{A_{db}}{20}}+1}{10^{\frac{A_{db}}{20}}-1})
     .. math:: R2 = \frac{Z0}{2}*(10^{\frac{A_{db}}{20}} - \frac{1}{10^{\frac{A_{db}}{20}}})
     .. image:: /static/pi-attenuator-circuit.png
 
-    Parameters 
-    ---------- 
+    Parameters
+    ----------
     Adb: float Attenuation in db
     Z0: float Impedence
 
-    Returns 
-    ------- 
+    Returns
+    -------
     R1: float π attenuator R1
     R2: float π attenuator R2
     """
