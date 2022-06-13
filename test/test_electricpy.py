@@ -517,7 +517,7 @@ def test_tcycle():
         print(tcycle(ncycles = [1, 2, 3], freq = [0, 0, 0]))
 
     # Test 4
-    with pytest.raises(AssertionError):
+    with pytest.raises(ValueError):
         tcycle(ncycles = [1, 2, 3], freq = [2, 3, 4, 5])
 
 class Test_air_core_inductor:
