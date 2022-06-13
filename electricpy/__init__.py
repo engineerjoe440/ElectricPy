@@ -40,8 +40,7 @@ __version__ = _version_  # Alias Version for User Ease
 
 
 # Define Cycle Time Function
-def tcycle(ncycles : _Union[float, list[float], _np.ndarray] = 1,
-freq : _Union[float, list[float], _np.ndarray] = 60) -> _Union[float, _np.ndarray]:
+def tcycle(ncycles = 1, freq = 60):
     r"""
     Time of Electrical Cycles.
 
