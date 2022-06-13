@@ -494,6 +494,32 @@ def test_solenoid_inductance():
     # Test length given inductance, area, number of turns and permeability
     assert_almost_equal(solenoid_inductance(L=L2, A=A2, N=N2, u=u2), l2)
 
+def test_tcycle():
+    from electricpy import tcycle
+
+    # Test 0
+    assert tcycle(1, 1) == 1
+    assert tcycle(2, 1) == 2
+    assert tcycle(1, 2) == 0.5
+
+    # Test 1
+    assert (tcycle(ncycles = [1, 2, 3], freq = 2) == np.array([1/2, 2/2, 3/2])).all()
+    assert (tcycle(ncycles = [1, 2, 3], freq = 3) == np.array([1/3, 2/3, 3/3])).all()
+    assert (tcycle(ncycles = 2, freq= [1, 2, 3]) == np.array([2/1, 2/2, 2/3])).all()
+    assert (tcycle(ncycles = 3, freq= [1, 2, 3]) == np.array([3/1, 3/2, 3/3])).all()
+
+    # Test 2
+    assert (tcycle(ncycles = [1, 2, 3], freq = [2, 3, 4]) == np.array([1/2, 2/3, 3/4])).all()
+    assert (tcycle(ncycles = [1, 2, 3], freq = [3, 4, 5]) == np.array([1/3, 2/4, 3/5])).all()
+
+    # Test 3
+    with pytest.raises(ZeroDivisionError):
+        print(tcycle(ncycles = [1, 2, 3], freq = [0, 0, 0]))
+
+    # Test 4
+    with pytest.raises(AssertionError):
+        tcycle(ncycles = [1, 2, 3], freq = [2, 3, 4, 5])
+
 class Test_air_core_inductor:
 
     def invoke(test_case):
