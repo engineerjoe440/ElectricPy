@@ -190,7 +190,7 @@ class Line:
         return line_intersection(self, l1)
 
 def angle_btw_lines(l1: Line, l2: Line) -> float:
-    """Return angle (in radians) between two lines l1 and l2"""
+    """Return angle (in radians) between two lines l1 and l2."""
     a1, b1 = l1.a, l1.b
     a2, b2 = l2.a, l2.b
 
