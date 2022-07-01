@@ -402,6 +402,15 @@ def test_solenoid_inductance():
     # Test length given inductance, area, number of turns and permeability
     assert_almost_equal(solenoid_inductance(L=L2, A=A2, N=N2, u=u2), l2)
 
+def test_syncspeed():
+    from electricpy import syncspeed
+    assert syncspeed(4, freq = 60, rpm = True) == 1800
+    assert syncspeed(4, freq = 60, Hz = True) == 30
+
+    with pytest.raises(ZeroDivisionError, match = "Poles of an electrical machine \
+        can not be zero"):
+        syncspeed(0)
+
 class TestVectarray():
 
     def test_0(self):
