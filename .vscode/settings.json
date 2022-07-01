@@ -15,6 +15,11 @@
         "-m",
         "test"
     ],
+    "files.exclude": {
+        ".venv":true,
+        ".pytest_cache": true,
+        "**/__pycache__/**":true
+    },
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "python.testing.cwd": "${workspaceRoot}",
