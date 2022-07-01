@@ -1,7 +1,7 @@
 wheel
 sphinx
 numpydoc
-myst-parser
+myst-parser[linkify]
 sphinx-sitemap
 sphinx-git
 sphinx-material
