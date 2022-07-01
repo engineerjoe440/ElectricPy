@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -53,6 +53,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -364,7 +365,7 @@
           <article class="md-content__inner md-typeset" role="main">
             
   <section id="electricpy-ic-555-monostable">
-<h1 id="api-electricpy-ic-555-monostable--page-root">electricpy.ic_555_monostable<a class="headerlink" href="#api-electricpy-ic-555-monostable--page-root" title="Permalink to this headline">¶</a></h1>
+<h1 id="api-electricpy-ic-555-monostable--page-root">electricpy.ic_555_monostable<a class="headerlink" href="#api-electricpy-ic-555-monostable--page-root" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="electricpy.ic_555_monostable">
 <span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">ic_555_monostable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">R</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_high</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_low</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy.html#ic_555_monostable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.ic_555_monostable" title="Permalink to this definition">¶</a></dt>
@@ -374,7 +375,7 @@ circuit including time period, frequency, duty cycle, time spent low during
 each cycle, time spent high during each cycle.</p>
 <p>TODO: This function should be broken into multiple smaller functions.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>R</strong> (<em>list</em><em>[</em><em>float</em><em>, </em><em>float</em><em>] or </em><em>tuple</em><em>(</em><em>float</em><em>, </em><em>float</em><em>)</em><em>, </em><em>optional</em>) – List of 2 resistor which are need in configuring IC 555.</p></li>
 <li><p><strong>C</strong> (<em>float</em><em>, </em><em>optional</em>) – Capacitance between Threshold Pin and ground</p></li>
@@ -383,13 +384,13 @@ each cycle, time spent high during each cycle.</p>
 <li><p><strong>t_low</strong> (<em>float</em><em>, </em><em>optional</em>) – OFF time of IC 555</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>dict</strong> – “frequency”: frequency of oscilation of IC 555
 “duty_cycle”: ration between ON time and total time
 “t_low”: ON time of IC 555
 “t_high”: OFF time of IC 555</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>“time_period”: Time period of oscillating IC 555</p>
 </dd>
 </dl>
@@ -443,7 +444,7 @@ each cycle, time spent high during each cycle.</p>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -53,6 +53,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
@@ -365,7 +366,7 @@
           <article class="md-content__inner md-typeset" role="main">
             
   <section id="electricpy-dynetz">
-<h1 id="api-electricpy-dynetz--page-root">electricpy.dynetz<a class="headerlink" href="#api-electricpy-dynetz--page-root" title="Permalink to this headline">¶</a></h1>
+<h1 id="api-electricpy-dynetz--page-root">electricpy.dynetz<a class="headerlink" href="#api-electricpy-dynetz--page-root" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="electricpy.dynetz">
 <span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">dynetz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wye</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy.html#dynetz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.dynetz" title="Permalink to this definition">¶</a></dt>
@@ -384,7 +385,7 @@ Z_{2/3} = \frac{Z_{ms}}{Z_1}//
 Z_{3/1} = \frac{Z_{ms}}{Z_2}//
 Z_{1/2} = \frac{Z_{ms}}{Z_3}\]</div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>delta</strong> (<em>tuple of float</em><em>, </em><em>exclusive</em>) – Tuple of the delta-connected impedance values as:
 { Z12, Z23, Z31 }, default=None</p></li>
@@ -392,7 +393,7 @@ Z_{1/2} = \frac{Z_{ms}}{Z_3}\]</div>
 { Z1, Z2, Z3 }, default=None</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>delta-set</strong> (<em>tuple of float</em>) – Delta-Connected impedance values { Z12, Z23, Z31 }</p></li>
 <li><p><strong>wye-set</strong> (<em>tuple of float</em>) – Wye-Connected impedance values { Z1, Z2, Z3 }</p></li>
@@ -450,7 +451,7 @@ Z_{1/2} = \frac{Z_{ms}}{Z_3}\]</div>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

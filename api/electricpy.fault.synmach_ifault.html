@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -53,6 +53,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -364,7 +365,7 @@
           <article class="md-content__inner md-typeset" role="main">
             
   <section id="electricpy-fault-synmach-ifault">
-<h1 id="api-electricpy-fault-synmach-ifault--page-root">electricpy.fault.synmach_ifault<a class="headerlink" href="#api-electricpy-fault-synmach-ifault--page-root" title="Permalink to this headline">¶</a></h1>
+<h1 id="api-electricpy-fault-synmach-ifault--page-root">electricpy.fault.synmach_ifault<a class="headerlink" href="#api-electricpy-fault-synmach-ifault--page-root" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="electricpy.fault.synmach_ifault">
 <span class="sig-prename descclassname"><span class="pre">electricpy.fault.</span></span><span class="sig-name descname"><span class="pre">synmach_ifault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ea</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xdp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xdpp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xqpp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tdp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tdpp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/fault.html#synmach_ifault"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.fault.synmach_ifault" title="Permalink to this definition">¶</a></dt>
@@ -375,7 +376,7 @@ the complete (symmetrical, asymmetrical, and double frequency)
 fault current.</p>
 <img alt="../_images/synmach_ifault_formula.png" src="../_images/synmach_ifault_formula.png"/>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>t</strong> (<em>float</em>) – Time at which to calculate the fault current</p></li>
 <li><p><strong>Eq</strong> (<em>float</em>) – The internal machine voltage in per-unit-volts</p></li>
@@ -396,12 +397,12 @@ the machine in seconds</p></li>
 default=60</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ias</strong> – Synchronous machine fault current (symmetrical,
 asymmetrical, and double frequency component) in
 amps</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
@@ -455,7 +456,7 @@ amps</p>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

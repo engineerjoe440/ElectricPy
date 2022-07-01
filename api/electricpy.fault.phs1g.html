@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -53,6 +53,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
@@ -365,7 +366,7 @@
           <article class="md-content__inner md-typeset" role="main">
             
   <section id="electricpy-fault-phs1g">
-<h1 id="api-electricpy-fault-phs1g--page-root">electricpy.fault.phs1g<a class="headerlink" href="#api-electricpy-fault-phs1g--page-root" title="Permalink to this headline">¶</a></h1>
+<h1 id="api-electricpy-fault-phs1g--page-root">electricpy.fault.phs1g<a class="headerlink" href="#api-electricpy-fault-phs1g--page-root" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="electricpy.fault.phs1g">
 <span class="sig-prename descclassname"><span class="pre">electricpy.fault.</span></span><span class="sig-name descname"><span class="pre">phs1g</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Zseq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'A'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/fault.html#phs1g"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.fault.phs1g" title="Permalink to this definition">¶</a></dt>
@@ -379,7 +380,7 @@ sequence currents for a single-line-to-ground fault.</p>
 <div class="math notranslate nohighlight">
 \[I_0 = I_1\]</div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>Vth</strong> (<em>complex</em>) – The Thevenin-Equivalent-Voltage</p></li>
 <li><p><strong>Zseq</strong> (<em>list of complex</em>) – Tupple of sequence reactances as (Z0, Z1, Z2)</p></li>
@@ -390,10 +391,10 @@ or phase-domain values.</p></li>
 default=’A’</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>Ifault</strong> – The Array of Fault Currents as (If0, If1, If2)</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list of complex,</p>
 </dd>
 </dl>
@@ -447,7 +448,7 @@ default=’A’</p></li>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -53,6 +53,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
@@ -365,7 +366,7 @@
           <article class="md-content__inner md-typeset" role="main">
             
   <section id="electricpy-synmach-eq">
-<h1 id="api-electricpy-synmach-eq--page-root">electricpy.synmach_Eq<a class="headerlink" href="#api-electricpy-synmach-eq--page-root" title="Permalink to this headline">¶</a></h1>
+<h1 id="api-electricpy-synmach-eq--page-root">electricpy.synmach_Eq<a class="headerlink" href="#api-electricpy-synmach-eq--page-root" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="electricpy.synmach_Eq">
 <span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">synmach_Eq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vt_pu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Itmag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ra</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xq</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy.html#synmach_Eq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.synmach_Eq" title="Permalink to this definition">¶</a></dt>
@@ -387,7 +388,7 @@ I_{t_{pu}}+j\cdot X_qI_{t_{pu}}\right)\]</div>
 -\cos^{-1}(PF)+\theta_q)\right|e^{j(\theta_q
 -90°)}\]</div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>Vt_pu</strong> (<em>complex</em>) – Terminal voltage in per-unit-volts</p></li>
 <li><p><strong>Itmag</strong> (<em>float</em>) – Terminal current magnitude in per-
@@ -400,11 +401,11 @@ lagging power factor</p></li>
 <li><p><strong>Xq</strong> (<em>float</em>) – Q-axis reactance in per-unit-ohms</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>Eq</strong> – Internal Synchronous Machine Voltage
 in per-unit-volts</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>complex</p>
 </dd>
 </dl>
@@ -458,7 +459,7 @@ in per-unit-volts</p>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

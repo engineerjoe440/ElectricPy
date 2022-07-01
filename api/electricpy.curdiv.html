@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -53,6 +53,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -364,7 +365,7 @@
           <article class="md-content__inner md-typeset" role="main">
             
   <section id="electricpy-curdiv">
-<h1 id="api-electricpy-curdiv--page-root">electricpy.curdiv<a class="headerlink" href="#api-electricpy-curdiv--page-root" title="Permalink to this headline">¶</a></h1>
+<h1 id="api-electricpy-curdiv--page-root">electricpy.curdiv<a class="headerlink" href="#api-electricpy-curdiv--page-root" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="electricpy.curdiv">
 <span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">curdiv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ri</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Iin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combine</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy.html#curdiv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.curdiv" title="Permalink to this definition">¶</a></dt>
@@ -373,7 +374,7 @@
 voltage to a resistor (or impedance) network of parallel resistors
 (impedances) and calculate the current through a particular element.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>Ri</strong> (<em>float</em>) – The Particular Resistor of Interest, should not be included in
 the tuple passed to Rset.</p></li>
@@ -385,7 +386,7 @@ resistor (impedance) of interest (Ri)</p></li>
 <li><p><strong>combine</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force resistance combination. default=True</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>Opt1 - Ii</strong> (<em>The Current through the resistor (impedance) of interest</em>)</p></li>
 <li><p><strong>Opt2 - (Ii,Vi)</strong> (<em>The afore mentioned current, and voltage across the</em>) – resistor (impedance) of interest</p></li>
@@ -443,7 +444,7 @@ resistor (impedance) of interest (Ri)</p></li>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

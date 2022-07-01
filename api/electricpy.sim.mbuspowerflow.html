@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -53,6 +53,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -364,7 +365,7 @@
           <article class="md-content__inner md-typeset" role="main">
             
   <section id="electricpy-sim-mbuspowerflow">
-<h1 id="api-electricpy-sim-mbuspowerflow--page-root">electricpy.sim.mbuspowerflow<a class="headerlink" href="#api-electricpy-sim-mbuspowerflow--page-root" title="Permalink to this headline">¶</a></h1>
+<h1 id="api-electricpy-sim-mbuspowerflow--page-root">electricpy.sim.mbuspowerflow<a class="headerlink" href="#api-electricpy-sim-mbuspowerflow--page-root" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="electricpy.sim.mbuspowerflow">
 <span class="sig-prename descclassname"><span class="pre">electricpy.sim.</span></span><span class="sig-name descname"><span class="pre">mbuspowerflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ybus</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vknown</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pknown</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Qknown</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'flatstart'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mxiter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">returnct</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degrees</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slackbus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lsq_eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.25</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/sim.html#mbuspowerflow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.sim.mbuspowerflow" title="Permalink to this definition">¶</a></dt>
@@ -374,7 +375,7 @@ Determines the function array (F) and the Jacobian array (J) and uses the
 Newton-Raphson method to iteratively evaluate the system to converge to a
 solution.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>Ybus</strong> (<em>array_like</em>) – Postitive Sequence Y-Bus Matrix for Network.</p></li>
 <li><p><strong>Vknown</strong> (<em>list of list of float</em>) – List of known and unknown voltages.
@@ -501,7 +502,7 @@ default=0.25</p></li>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

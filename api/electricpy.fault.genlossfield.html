@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -53,6 +53,7 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -364,7 +365,7 @@
           <article class="md-content__inner md-typeset" role="main">
             
   <section id="electricpy-fault-genlossfield">
-<h1 id="api-electricpy-fault-genlossfield--page-root">electricpy.fault.genlossfield<a class="headerlink" href="#api-electricpy-fault-genlossfield--page-root" title="Permalink to this headline">¶</a></h1>
+<h1 id="api-electricpy-fault-genlossfield--page-root">electricpy.fault.genlossfield<a class="headerlink" href="#api-electricpy-fault-genlossfield--page-root" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="electricpy.fault.genlossfield">
 <span class="sig-prename descclassname"><span class="pre">electricpy.fault.</span></span><span class="sig-name descname"><span class="pre">genlossfield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Xd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xpd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Zbase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CTR</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">VTR</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/fault.html#genlossfield"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.fault.genlossfield" title="Permalink to this definition">¶</a></dt>
@@ -372,7 +373,7 @@
 <p>Generates the Loss-of-Field Element settings for a generator using the Xd
 value and per-unit base information.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>Xd</strong> (<em>float</em>) – The Transient Reactance (Xd) term. May be
 specified in ohms or Per-Unit ohms if
@@ -386,7 +387,7 @@ Xd and Xpd to secondary values. default=1</p></li>
 <li><p><strong>VTR</strong> (<em>float</em><em>, </em><em>optional</em>) – Voltage Transformer Ratio, default=1</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>ZoneOff</strong> (<em>float</em>) – Zone Offset in ohms.</p></li>
 <li><p><strong>Z1dia</strong> (<em>float</em>) – Zone 1 diameter in ohms.</p></li>
@@ -445,7 +446,7 @@ Xd and Xpd to secondary values. default=1</p></li>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>
