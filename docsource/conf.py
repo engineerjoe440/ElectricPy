@@ -59,7 +59,7 @@ extensions = [
     'numpydoc',
     'sphinx_git',
     'sphinx_sitemap',
-    'm2r2',
+    'myst_parser',
 ]
 autosummary_generate = True
 numpydoc_show_class_members = False
