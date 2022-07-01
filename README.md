@@ -49,7 +49,7 @@ updates rather than primary documentation.
 and
 
 <a href="https://github.com/engineerjoe440/electricpy/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=engineerjoe440/electricpy" />
+  <img src="https://contrib.rocks/image?repo=engineerjoe440/electricpy" alt="contributors">
 </a>
 
 
