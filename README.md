@@ -46,11 +46,11 @@ updates rather than primary documentation.
 - Shaurya Uppal | Online Code Contributor
 - Paul Ortman | Power Quality Engineer - Idaho Power | Instructor - University of Idaho
 
-  and
+and
 
-  <a href="https://github.com/engineerjoe440/electricpy/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=engineerjoe440/electricpy" />
-  </a>
+<a href="https://github.com/engineerjoe440/electricpy/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=engineerjoe440/electricpy" />
+</a>
 
 
 ### Dependencies:
