@@ -13,6 +13,7 @@ to aid in scientific calculations.
 ################################################################################
 
 import cmath as _c
+from typing import Union as _Union
 from inspect import getframeinfo as _getframeinfo
 from inspect import stack as _stack
 from warnings import showwarning as _showwarning
@@ -39,7 +40,7 @@ __version__ = _version_  # Alias Version for User Ease
 
 
 # Define Cycle Time Function
-def tcycle(ncycles=1, freq=60):
+def tcycle(ncycles = 1, freq = 60):
     r"""
     Time of Electrical Cycles.
 
@@ -69,17 +70,27 @@ def tcycle(ncycles=1, freq=60):
     0.02
     """
     # Condition Inputs
+    if isinstance(ncycles, _np.ndarray) and isinstance(freq, _np.ndarray):
+        if ncycles.shape != freq.shape:
+            raise ValueError("ncycles and freq must be the same shape")
+
+    elif isinstance(ncycles, list) and isinstance(freq, list):
+        if len(ncycles) != len(freq):
+            raise ValueError("ncycles and freq must be the same length")
+
     ncycles = _np.asarray(ncycles)
     freq = _np.asarray(freq)
+    if 0 in freq:
+        raise ZeroDivisionError("Frequency must not be 0")
+    if not (freq > 0).all():
+        # frequency must be postive value
+        raise ValueError("Frequency must be postive value")
     # Evaluate the time for ncycles
     time = ncycles / freq
     # Return
-    try:
-        if len(time) == 1:
-            return time[0]
-        else:
-            return time
-    except TypeError:
+    if isinstance(time, _np.ndarray) and len(time) == 1:
+        return time[0]
+    else:
         return time
 
 # Define Reactance Calculator
@@ -5115,9 +5126,9 @@ def zener_diode_required_resistor(Vin, Vo, I):
     r"""
     Zener diode required resistance function .
 
-    A zener diode is uses to allow current to flow "backwards" when the zener 
-    voltage is reached. This function use to calculate the required resistor 
-    value following below formula: 
+    A zener diode is uses to allow current to flow "backwards" when the zener
+    voltage is reached. This function use to calculate the required resistor
+    value following below formula:
 
     .. math:: R = \frac{V_{in(min)} - V_{out}}{I_{load}+0.01}
 
@@ -5135,7 +5146,7 @@ def zener_diode_required_resistor(Vin, Vo, I):
     Returns
     -------
     R:          float
-                Load Resistance in Ohm 
+                Load Resistance in Ohm
     """
     # Solve Load Resistance
     R = (Vin - Vo) / (I+0.01)
@@ -5146,9 +5157,9 @@ def zener_diode_power(Vin, Vo, R):
     r"""
     Zener diode power loss function.
 
-    A zener diode is uses to allow current to flow "backwards" when the zener 
-    voltage is reached. This function use to calculate the power in resistor 
-    following below formula: 
+    A zener diode is uses to allow current to flow "backwards" when the zener
+    voltage is reached. This function use to calculate the power in resistor
+    following below formula:
 
     .. math:: P_R = \frac{(V_{out} - V_{in(max)})^2}{R}
 
@@ -5165,13 +5176,13 @@ def zener_diode_power(Vin, Vo, R):
 
     Returns
     -------
-    P:          float 
-                Power on resistance in Watt 
+    P:          float
+                Power on resistance in Watt
     """
     # Validate Inputs
     if R == 0:
         raise ValueError("Resistance Value can not be zero")
-    
+
     # Solve Load Resistance
     P = ((Vo - Vin) ** 2) / R
     return(P)
@@ -5184,7 +5195,7 @@ def lm317(r1, r2, v_out):
     The LM317 is a linear voltage regulator that can be adjusted to supply a
     specific output voltage. The LM317 has three pins, adjust, output and input.
     The LM317 is often connected as in the image below. [1]_
-    
+
 
     .. image:: https://www.basictables.com/media/lm317-circuit.png
 
@@ -5192,9 +5203,9 @@ def lm317(r1, r2, v_out):
     Formula to Calculate Output Voltage, R1, R2:
 
     .. math:: V_{out} = 1.25 * (1+\frac{R2}{R1})
-    
+
     .. math:: R1 = \frac{1.25*R2}{V_{out}-1.25}
-    
+
     .. math:: R2 = \frac{R1*V_{out}}{1.25 - R1}
 
     Parameters
