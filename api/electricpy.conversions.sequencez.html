@@ -55,11 +55,12 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.conversions.watts" href="electricpy.conversions.watts.html" />
+    <link rel="next" title="electricpy.conversions.voltage_to_db" href="electricpy.conversions.voltage_to_db.html" />
     <link rel="prev" title="electricpy.conversions.seq_to_phs" href="electricpy.conversions.seq_to_phs.html" />
   
    
@@ -369,7 +370,7 @@
 <h1 id="api-electricpy-conversions-sequencez--page-root">electricpy.conversions.sequencez<a class="headerlink" href="#api-electricpy-conversions-sequencez--page-root" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="electricpy.conversions.sequencez">
-<span class="sig-prename descclassname"><span class="pre">electricpy.conversions.</span></span><span class="sig-name descname"><span class="pre">sequencez</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Zabc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'A'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/conversions.html#sequencez"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.conversions.sequencez" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">electricpy.conversions.</span></span><span class="sig-name descname"><span class="pre">sequencez</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Zabc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'A'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/conversions.html#sequencez"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.conversions.sequencez" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sequence Impedance Calculator.</p>
 <p>Accepts the phase (ABC-domain) impedances for a
 system and calculates the sequence (012-domain)
@@ -385,28 +386,28 @@ combine terms into the set of [Z0, Z1, Z2].</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>Zabc</strong> (<em>numpy.ndarray of complex</em>) – 2-D (3x3) matrix of complex values
-representing the phasor impedances
+<li><p><strong>Zabc</strong> (<em>numpy.array of complex</em>) – 2-D (3x3) matrix of complex values
+representing the pharo impedance
 in the ABC-domain.</p></li>
 <li><p><strong>reference</strong> (<em>{'A'</em><em>, </em><em>'B'</em><em>, </em><em>'C'}</em>) – Single character denoting the reference,
 default=’A’</p></li>
 <li><p><strong>resolve</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force the function to
-evaluate the individual sequence impedances
+evaluate the individual sequence impedance
 [Z0, Z1, Z2], default=False</p></li>
 <li><p><strong>diag</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force the function to
 reduce the matrix to its diagonal terms.</p></li>
-<li><p><strong>round</strong> (<em>int</em><em>, </em><em>optional</em>) – Integer denoting number of decimal places
+<li><p><strong>rounds</strong> (<em>int</em><em>, </em><em>optional</em>) – Integer denoting number of decimal places
 resulting matrix should be rounded to.
 default=3</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>Z012</strong> – 2-D (3x3) matrix of complex values
-representing the sequence impedances
+representing the sequence impedance
 in the 012-domain</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>numpy.ndarray of complex</p>
+<dd class="field-odd"><p>numpy.array of complex</p>
 </dd>
 </dl>
 <div class="admonition seealso">
@@ -445,12 +446,12 @@ in the 012-domain</p>
             </a>
           
           
-            <a href="electricpy.conversions.watts.html" title="electricpy.conversions.watts"
+            <a href="electricpy.conversions.voltage_to_db.html" title="electricpy.conversions.voltage_to_db"
                class="md-flex md-footer-nav__link md-footer-nav__link--next"
                rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
                 class="md-flex__ellipsis"> <span
-                class="md-footer-nav__direction"> Next </span> electricpy.conversions.watts </span>
+                class="md-footer-nav__direction"> Next </span> electricpy.conversions.voltage_to_db </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink"><i
                 class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>

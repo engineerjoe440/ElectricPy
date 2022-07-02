@@ -55,7 +55,8 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -372,7 +373,7 @@
 <span class="sig-prename descclassname"><span class="pre">electricpy.conversions.</span></span><span class="sig-name descname"><span class="pre">hertz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radians</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.conversions.hertz" title="Permalink to this definition">¶</a></dt>
 <dd><p>Radians to Hertz Converter.</p>
 <p>Accepts a frequency in radians/sec and calculates
-the hertzian frequency (in Hz).</p>
+the hertz frequency (in Hz).</p>
 <div class="math notranslate nohighlight">
 \[f_{\text{Hz}} = \frac{f_{\text{rad/sec}}}{2\cdot\pi}\]</div>
 <p>Same as <cite>hertz</cite>.</p>

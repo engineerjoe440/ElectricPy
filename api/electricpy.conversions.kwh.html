@@ -55,7 +55,8 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -370,8 +371,8 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="electricpy.conversions.kwh">
 <span class="sig-prename descclassname"><span class="pre">electricpy.conversions.</span></span><span class="sig-name descname"><span class="pre">kwh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">BTU</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.conversions.kwh" title="Permalink to this definition">¶</a></dt>
-<dd><p>BTU to Killo-Watt-Hours Function.</p>
-<p>Converts BTU (British Thermal Units) to kWh (killo-Watt-hours).</p>
+<dd><p>BTU to Kilo-Watt-Hours Function.</p>
+<p>Converts BTU (British Thermal Units) to kWh (kilo-Watt-hours).</p>
 <div class="math notranslate nohighlight">
 \[\text{kWh} = \frac{\text{BTU}}{3412.14}\]</div>
 <p>Same as <cite>kwh</cite>.</p>
@@ -380,7 +381,7 @@
 <dd class="field-odd"><p><strong>BTU</strong> (<em>float</em>) – The number of British Thermal Units</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>kWh</strong> – The number of killo-Watt-hours</p>
+<dd class="field-even"><p><strong>kWh</strong> – The number of kilo-Watt-hours</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>

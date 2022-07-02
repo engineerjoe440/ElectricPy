@@ -407,7 +407,7 @@
 <span class="sd">    electricpy.phasor.phasor:       Phasor Generating Function</span>
 <span class="sd">    """</span>
     <span class="c1"># Return the Complex Angle Modulator</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">ang</span><span class="p">)))</span></div>
+    <span class="k">return</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">ang</span><span class="p">))</span></div>
 
 
 <span class="n">phase</span> <span class="o">=</span> <span class="n">phs</span>  <span class="c1"># Create Duplicate Name</span>
@@ -452,7 +452,7 @@
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
         <span class="n">ang</span> <span class="o">=</span> <span class="n">mag</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">mag</span> <span class="o">=</span> <span class="n">mag</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">_c</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">ang</span><span class="p">)))</span></div>
+    <span class="k">return</span> <span class="n">_c</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">ang</span><span class="p">))</span></div>
 
 
 <span class="c1"># Define Impedance Conversion function</span>
@@ -495,13 +495,13 @@
 <span class="sd">    """</span>
     <span class="n">w</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span>
     <span class="c1"># C Given in ohms, return as Z</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">C</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">C</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">Z</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">C</span><span class="p">)</span>
     <span class="c1"># L Given in ohms, return as Z</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">L</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">L</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">Z</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">L</span>
     <span class="c1"># If asked for imaginary number</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nb">complex</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">complex</span><span class="p">:</span>
         <span class="n">Z</span> <span class="o">*=</span> <span class="mi">1</span><span class="n">j</span>
     <span class="k">return</span> <span class="n">Z</span></div>
 
@@ -552,6 +552,7 @@
 
     <span class="c1"># Return Array</span>
     <span class="k">return</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">phasor</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">])</span></div>
+
 
 <span class="c1"># Define Vector Array Generator</span>
 <div class="viewcode-block" id="vectarray"><a class="viewcode-back" href="../../api/electricpy.phasor.vectarray.html#electricpy.phasor.vectarray">[docs]</a><span class="k">def</span> <span class="nf">vectarray</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">flatarray</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -604,6 +605,7 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="n">flatarray</span><span class="p">:</span>
         <span class="n">polararr</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">polararr</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">polararr</span></div>
+
 
 <span class="c1"># Define Phasor Data Generator</span>
 <div class="viewcode-block" id="phasordata"><a class="viewcode-back" href="../../api/electricpy.phasor.phasordata.html#electricpy.phasor.phasordata">[docs]</a><span class="k">def</span> <span class="nf">phasordata</span><span class="p">(</span><span class="n">mn</span><span class="p">,</span> <span class="n">mx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">mag</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ang</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
@@ -663,8 +665,9 @@
         <span class="n">dataset</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
     <span class="c1"># Return Dataset</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">dataset</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">dataset</span></div>
+
 
 <span class="c1"># Define Complex Composition Function</span>
 <div class="viewcode-block" id="compose"><a class="viewcode-back" href="../../api/electricpy.phasor.compose.html#electricpy.phasor.compose">[docs]</a><span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="o">*</span><span class="n">arr</span><span class="p">):</span>
@@ -717,7 +720,7 @@
         <span class="k">if</span> <span class="n">length</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid Array Size, Saw Length of "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
         <span class="c1"># Valid Size, Calculate and Return</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
+        <span class="k">return</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></div>
 
 
 <span class="c1"># Define Parallel Impedance Adder</span>
@@ -750,31 +753,32 @@
         <span class="n">Z</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Only One Tuple Provided</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">L</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">L</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">L</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">Zp</span> <span class="o">=</span> <span class="n">Z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Only one impedance, burried in tuple</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># Inversely add the first two elements in tuple</span>
                 <span class="n">Zp</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Z</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
                 <span class="c1"># If there are more than two elements, add them all inversely</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">L</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">L</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
                     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
                         <span class="n">Zp</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Zp</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="ow">or</span> <span class="ne">IndexError</span><span class="p">:</span>
             <span class="n">Zp</span> <span class="o">=</span> <span class="n">Z</span>  <span class="c1"># Only one impedance</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">Z</span> <span class="o">=</span> <span class="n">args</span>  <span class="c1"># Set of Args acts as Tuple</span>
         <span class="c1"># Inversely add the first two elements in tuple</span>
         <span class="n">Zp</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Z</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Z</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="c1"># If there are more than two elements, add them all inversely</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">L</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">L</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
                 <span class="n">Zp</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Zp</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">Zp</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">Zp</span></div>
+
 
 <span class="c1"># Define Phasor Plot Generator</span>
 <div class="viewcode-block" id="phasorplot"><a class="viewcode-back" href="../../api/electricpy.phasor.phasorplot.html#electricpy.phasor.phasorplot">[docs]</a><span class="k">def</span> <span class="nf">phasorplot</span><span class="p">(</span><span class="n">phasor</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Phasor Diagram"</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">label</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+               <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">label</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Phasor Plotting Function.</span>
 
@@ -835,21 +839,21 @@
     <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
         <span class="n">phasor</span> <span class="o">=</span> <span class="p">[</span><span class="n">phasor</span><span class="p">]</span>
     <span class="c1"># Manage Colors</span>
-    <span class="k">if</span> <span class="n">colors</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="s2">"#FF0000"</span><span class="p">,</span> <span class="s2">"#800000"</span><span class="p">,</span> <span class="s2">"#FFFF00"</span><span class="p">,</span> <span class="s2">"#808000"</span><span class="p">,</span> <span class="s2">"#00ff00"</span><span class="p">,</span><span class="s2">"#008000"</span><span class="p">,</span>
+            <span class="s2">"#FF0000"</span><span class="p">,</span> <span class="s2">"#800000"</span><span class="p">,</span> <span class="s2">"#FFFF00"</span><span class="p">,</span> <span class="s2">"#808000"</span><span class="p">,</span> <span class="s2">"#00ff00"</span><span class="p">,</span> <span class="s2">"#008000"</span><span class="p">,</span>
             <span class="s2">"#00ffff"</span><span class="p">,</span> <span class="s2">"#008080"</span><span class="p">,</span> <span class="s2">"#0000ff"</span><span class="p">,</span> <span class="s2">"#000080"</span><span class="p">,</span> <span class="s2">"#ff00ff"</span><span class="p">,</span> <span class="s2">"#800080"</span>
         <span class="p">]</span>
     <span class="c1"># Scale Radius</span>
-    <span class="k">if</span> <span class="n">radius</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">radius</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">radius</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">phasor</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
     <span class="c1"># Set Tolerance</span>
-    <span class="k">if</span> <span class="n">tolerance</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">tolerance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">tolerance</span> <span class="o">=</span> <span class="n">radius</span> <span class="o">/</span> <span class="mi">25</span>
     <span class="k">elif</span> <span class="n">tolerance</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
         <span class="n">tolerance</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
     <span class="c1"># Set Background Color</span>
-    <span class="k">if</span> <span class="n">bg</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">bg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">bg</span> <span class="o">=</span> <span class="s2">"#FFFFFF"</span>
     <span class="c1"># Load labels if handled in other argument</span>
     <span class="k">if</span> <span class="n">label</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
@@ -864,7 +868,7 @@
             <span class="s2">"ERROR: Too many phasors provided. Specify more line colors."</span>
         <span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">size</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># Force square figure and square axes</span>
         <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">_matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'figure.figsize'</span><span class="p">]</span>
         <span class="n">size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
@@ -879,18 +883,19 @@
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numphs</span><span class="p">):</span>
         <span class="n">mag</span><span class="p">,</span> <span class="n">ang_r</span> <span class="o">=</span> <span class="n">_c</span><span class="o">.</span><span class="n">polar</span><span class="p">(</span><span class="n">phasor</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
         <span class="c1"># Plot with labels</span>
-        <span class="k">if</span> <span class="n">legend</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">legend</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">mag</span> <span class="o">&gt;</span> <span class="n">tolerance</span><span class="p">:</span>
                 <span class="n">hand</span> <span class="o">=</span> <span class="n">_plt</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ang_r</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-                                <span class="n">label</span><span class="o">=</span><span class="n">legend</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">linewidth</span><span class="p">)</span>
+                                  <span class="n">label</span><span class="o">=</span><span class="n">legend</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">linewidth</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">hand</span> <span class="o">=</span> <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'o'</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="n">linewidth</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span>
-                                <span class="n">label</span><span class="o">=</span><span class="n">legend</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                                 <span class="n">label</span><span class="o">=</span><span class="n">legend</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
             <span class="n">handles</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="p">[</span><span class="n">hand</span><span class="p">])</span>
         <span class="c1"># Plot without labels</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ang_r</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">linewidth</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">legend</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span> <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">((</span><span class="n">handles</span><span class="p">),</span> <span class="n">legend</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">legend</span><span class="p">:</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">legend</span><span class="p">)</span>
     <span class="c1"># Set Minimum and Maximum Radius Terms</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_rmax</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_rmin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
