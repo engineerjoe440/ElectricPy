@@ -71,23 +71,20 @@ def tcycle(ncycles = 1, freq = 60):
     """
     # Condition Inputs
     if isinstance(ncycles, _np.ndarray) and isinstance(freq, _np.ndarray):
-        try:
-            assert ncycles.shape == freq.shape
-        except AssertionError:
+        if ncycles.shape != freq.shape:
             raise ValueError("ncycles and freq must be the same shape")
 
     elif isinstance(ncycles, list) and isinstance(freq, list):
-        try:
-            assert len(ncycles) == len(freq)
-        except AssertionError:
+        if len(ncycles) != len(freq):
             raise ValueError("ncycles and freq must be the same length")
 
     ncycles = _np.asarray(ncycles)
     freq = _np.asarray(freq)
-    try:
-        assert 0 not in freq
-    except AssertionError:
+    if 0 in freq:
         raise ZeroDivisionError("Frequency must not be 0")
+    if not (freq > 0).all():
+        # frequency must be postive value
+        raise ValueError("Frequency must be postive value")
     # Evaluate the time for ncycles
     time = ncycles / freq
     # Return
