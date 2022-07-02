@@ -55,8 +55,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -370,7 +369,7 @@
 <h1 id="api-electricpy-syncspeed--page-root">electricpy.syncspeed<a class="headerlink" href="#api-electricpy-syncspeed--page-root" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="electricpy.syncspeed">
-<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">syncspeed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Npol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Hz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy.html#syncspeed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.syncspeed" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">syncspeed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Npol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Hz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rpm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy.html#syncspeed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.syncspeed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Synchronous Speed Calculator Function.</p>
 <p>Simple method of calculating the synchronous speed of an induction machine
 given the number of poles in the machine’s construction, and
@@ -384,11 +383,12 @@ the machine’s operating electrical frequency.</p>
 <li><p><strong>Npol</strong> (<em>int</em>) – Number of electrical poles in machine’s construction.</p></li>
 <li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – Frequency of electrical system in Hertz, default=60</p></li>
 <li><p><strong>Hz</strong> (<em>bool</em><em>, </em><em>optional</em>) – Boolean control to enable return in Hertz. default=False</p></li>
+<li><p><strong>rpm</strong> (<em>bool</em><em>, </em><em>optional</em>) – Boolean control to enable return in rpm. default=False</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>wsyn</strong> – Synchronous Speed of Induction Machine, defaults to units of
-rad/sec, but may be set to Hertz if <cite>Hz</cite> set to True.</p>
+rad/sec, but may be set to Hertz or RPM if <cite>Hz</cite> or <cite>rpm</cite> set to True.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>

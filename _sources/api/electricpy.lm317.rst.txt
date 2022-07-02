@@ -1,6 +1,0 @@
-electricpy.lm317
-================
-
-.. currentmodule:: electricpy
-
-.. autofunction:: lm317

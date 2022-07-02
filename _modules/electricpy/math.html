@@ -381,7 +381,6 @@
 <span class="kn">import</span> <span class="nn">scipy.signal</span> <span class="k">as</span> <span class="nn">_sig</span>
 <span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span> <span class="k">as</span> <span class="n">integrate</span>
 
-
 <span class="c1"># Define convolution function</span>
 <div class="viewcode-block" id="convolve"><a class="viewcode-back" href="../../api/electricpy.math.convolve.html#electricpy.math.convolve">[docs]</a><span class="k">def</span> <span class="nf">convolve</span><span class="p">(</span><span class="nb">tuple</span><span class="p">):</span>
     <span class="sd">"""</span>
@@ -432,7 +431,6 @@
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span></div>
 
-
 <span class="c1"># Arbitrary Waveform RMS Calculating Function</span>
 <div class="viewcode-block" id="funcrms"><a class="viewcode-back" href="../../api/electricpy.math.funcrms.html#electricpy.math.funcrms">[docs]</a><span class="k">def</span> <span class="nf">funcrms</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
     <span class="sd">"""</span>
@@ -457,7 +455,6 @@
     <span class="n">integral</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">T</span> <span class="o">*</span> <span class="n">integral</span><span class="p">)</span></div>
 
-
 <span class="c1"># Define Gaussian Function</span>
 <div class="viewcode-block" id="gaussian"><a class="viewcode-back" href="../../api/electricpy.math.gaussian.html#electricpy.math.gaussian">[docs]</a><span class="k">def</span> <span class="nf">gaussian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">"""</span>
@@ -481,7 +478,6 @@
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span> <span class="o">*</span>
             <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)))</span></div>
-
 
 <span class="c1"># Define Gaussian Distribution Function</span>
 <div class="viewcode-block" id="gausdist"><a class="viewcode-back" href="../../api/electricpy.math.gausdist.html#electricpy.math.gausdist">[docs]</a><span class="k">def</span> <span class="nf">gausdist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -509,8 +505,7 @@
 <span class="sd">    """</span>
     <span class="c1"># Define Integrand</span>
     <span class="k">def</span> <span class="nf">integrand</span><span class="p">(</span><span class="n">sq</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">sq</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
-
+        <span class="k">return</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">sq</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">lx</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># Find length of Input</span>
     <span class="k">except</span><span class="p">:</span>
@@ -525,10 +520,9 @@
         <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">integral</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Evaluate Result</span>
         <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
     <span class="c1"># Return only the 0-th value if there's only 1 value available</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">F</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">F</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">F</span> <span class="o">=</span> <span class="n">F</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">F</span></div>
-
+    <span class="k">return</span> <span class="p">(</span><span class="n">F</span><span class="p">)</span></div>
 
 <span class="c1"># Define Probability Density Function</span>
 <div class="viewcode-block" id="probdensity"><a class="viewcode-back" href="../../api/electricpy.math.probdensity.html#electricpy.math.probdensity">[docs]</a><span class="k">def</span> <span class="nf">probdensity</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -568,16 +562,15 @@
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lx</span><span class="p">):</span>
         <span class="n">sumx</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sumx</span><span class="p">,</span> <span class="n">integrate</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
     <span class="c1"># Return only the 0-th value if there's only 1 value available</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sumx</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sumx</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">sumx</span> <span class="o">=</span> <span class="n">sumx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">scale</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">scale</span> <span class="o">==</span> <span class="kc">True</span><span class="p">):</span>
             <span class="n">mx</span> <span class="o">=</span> <span class="n">sumx</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
             <span class="n">sumx</span> <span class="o">/=</span> <span class="n">mx</span>
-        <span class="k">elif</span> <span class="n">scale</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">scale</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">):</span>
             <span class="n">sumx</span> <span class="o">/=</span> <span class="n">scale</span>
-    <span class="k">return</span> <span class="n">sumx</span></div>
-
+    <span class="k">return</span> <span class="p">(</span><span class="n">sumx</span><span class="p">)</span></div>
 
 <span class="c1"># Define Real FFT Evaluation Function</span>
 <div class="viewcode-block" id="rfft"><a class="viewcode-back" href="../../api/electricpy.math.rfft.html#electricpy.math.rfft">[docs]</a><span class="k">def</span> <span class="nf">rfft</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">resample</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -612,20 +605,20 @@
         <span class="n">fourier</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">fourier</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">resample</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">resample</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
         <span class="c1"># Evaluate the Downsampling Ratio</span>
         <span class="n">dn</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dt</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
         <span class="c1"># Downsample to remove unnecessary points</span>
         <span class="n">fixedfft</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">dnsample</span><span class="p">(</span><span class="n">fourier</span><span class="p">,</span> <span class="n">dn</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">fixedfft</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="ow">not</span> <span class="n">resample</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">resample</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">fourier</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># Condition Resample Value</span>
         <span class="n">resample</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">resample</span><span class="p">)</span>
         <span class="c1"># Downsample to remove unnecessary points</span>
         <span class="n">fixedfft</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">dnsample</span><span class="p">(</span><span class="n">fourier</span><span class="p">,</span> <span class="n">resample</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">fixedfft</span></div>
+        <span class="k">return</span> <span class="p">(</span><span class="n">fixedfft</span><span class="p">)</span></div>
 </pre></div>
 
           </article>

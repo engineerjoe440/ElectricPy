@@ -25,10 +25,6 @@
     
     btu_to_kwh
     
-    db_to_voltage
-    
-    db_to_vref
-    
     dbmw_to_dbw
     
     dbmw_to_watts
@@ -68,8 +64,6 @@
     seq_to_phs
     
     sequencez
-    
-    voltage_to_db
     
     watts
     

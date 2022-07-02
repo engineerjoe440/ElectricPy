@@ -91,8 +91,6 @@
     
     led_resistor
     
-    lm317
-    
     machslip
     
     motorstartcap
@@ -188,10 +186,6 @@
     xfmphs
     
     zdecompose
-    
-    zener_diode_power
-    
-    zener_diode_required_resistor
     
     zperlength
     
