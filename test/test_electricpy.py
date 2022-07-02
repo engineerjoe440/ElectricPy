@@ -4,6 +4,12 @@ import cmath
 import math
 from numpy.testing import assert_almost_equal
 
+# Electricpy Imports
+from electricpy import powerflow
+from electricpy.phasor import phasor
+from electricpy.phasor import phs
+from electricpy.phasor import vectarray
+
 def test_phasor():
     from electricpy.phasor import phasor
     magnitude = 10
@@ -112,25 +118,6 @@ def test_powerset():
     assert_almost_equal(S, 10)
     assert_almost_equal(PF, 0.6)
 
-    #Test case 2 Failed
-
-    # P = 0
-    # Q = 0
-
-    # _,_,S,PF = powerset(P = P, Q = Q)
-
-    # assert_almost_equal(S,0)
-    # assert_almost_equal(PF,0)
-
-    #Test case 3 input validation is required
-    # P = 10
-    # Q = 10
-    # PF = 0.6
-
-    # _,_,S,_ = powerset(P = P, Q = Q, PF = PF)
-    # assert_almost_equal(S,10*np.sqrt(2))
-    # assert_almost_equal(PF,1/(np.sqrt(2)))
-
 def test_voltdiv():
     from electricpy import voltdiv
     from electricpy.phasor import phasor
@@ -219,30 +206,6 @@ def test_ic_555_astable():
     assert_almost_equal(result['t_low'], 6.931*10**-6, decimal = 3)
     assert_almost_equal(result['t_high'], 1.386*10**-5, decimal = 3)
 
-    #test the other way around
-def test_powerflow():
-    from electricpy import powerflow
-    from electricpy.phasor import phasor
-
-    def test_0():
-        Vsend = phasor(1.01, 30)
-        Vrecv = phasor(1, 0)
-        Xline = 0.2
-
-        ans = powerflow(Vsend, Vrecv, Xline)
-        assert_almost_equal(ans, 2.525)
-
-    def test_1():
-        Vsend = 1.01
-        Vrecv = 1
-        Xline = 0.2
-
-        ans = powerflow(Vsend, Vrecv, Xline)
-        assert ans == 0
-
-    for i in range(2):
-        exec(f"test_{i}()")
-
 def test_slew_rate():
 
     from electricpy import slew_rate
@@ -254,31 +217,6 @@ def test_slew_rate():
     assert_almost_equal(np.pi*2, SR)
     assert_almost_equal(1/(np.pi*2), V)
     assert_almost_equal(1/(np.pi*2), freq)
-
-def test_phs():
-    from electricpy.phasor import phs
-    def test_0():
-
-
-        inputs = [0, 90, 180, 270, 360]
-
-        outputs = [phs(x) for x in inputs]
-        actual_outputs = [1, 1j, -1, -1j, 1]
-
-        for x,y in zip(outputs, actual_outputs):
-            assert_almost_equal(x, y)
-
-    def test_1():
-        inputs = [30, 45, 60, 135]
-
-        outputs = [phs(x) for x in inputs]
-        actual_outputs = [0.866025+0.5j, 0.707106+0.707106j, 0.5+0.866025j, -0.707106+0.707106j]
-
-        for x,y in zip(outputs, actual_outputs):
-            assert_almost_equal(x, y, decimal = 3)
-
-    test_0()
-    test_1()
 
 def test_induction_motor_circle():
     from electricpy.visu import InductionMotorCircle
@@ -398,36 +336,6 @@ def test_seq_to_abc():
 
     test_0()
 
-def test_vectarray():
-
-    from electricpy.phasor import vectarray
-
-    def test_0():
-
-        A = [2+3j, 4+5j, 6+7j, 8+9j]
-        B = vectarray(A)
-
-        B_test = [[np.abs(x), np.degrees(np.angle(x))] for x in A]
-
-        np.testing.assert_array_almost_equal(B, B_test)
-
-    def test_1():
-
-        A = np.random.random(size = 16)
-        B = vectarray(A)
-
-        B_test = [[np.abs(x), 0] for x in A]
-        np.testing.assert_array_almost_equal(B, B_test)
-
-        A = np.random.random(size = 16)*1j
-        B = vectarray(A)
-
-        B_test = [[np.abs(x), 90] for x in A]
-        np.testing.assert_array_almost_equal(B, B_test)
-
-    test_0()
-    test_1()
-
 def test_parallel_plate_capacitance():
     from electricpy import parallel_plate_capacitance
 
@@ -493,6 +401,77 @@ def test_solenoid_inductance():
     assert_almost_equal(solenoid_inductance(L=L2, A=A2, l=l2, u=u2), N2)
     # Test length given inductance, area, number of turns and permeability
     assert_almost_equal(solenoid_inductance(L=L2, A=A2, N=N2, u=u2), l2)
+
+def test_syncspeed():
+    from electricpy import syncspeed
+    assert syncspeed(4, freq = 60, rpm = True) == 1800
+    assert syncspeed(4, freq = 60, Hz = True) == 30
+
+    with pytest.raises(ZeroDivisionError, match = "Poles of an electrical machine \
+        can not be zero"):
+        syncspeed(0)
+
+class TestVectarray():
+
+    def test_0(self):
+
+        A = [2+3j, 4+5j, 6+7j, 8+9j]
+        B = vectarray(A)
+
+        B_test = [[np.abs(x), np.degrees(np.angle(x))] for x in A]
+
+        np.testing.assert_array_almost_equal(B, B_test)
+
+    def test_1(self):
+
+        A = np.random.random(size = 16)
+        B = vectarray(A)
+
+        B_test = [[np.abs(x), 0] for x in A]
+        np.testing.assert_array_almost_equal(B, B_test)
+
+        A = np.random.random(size = 16)*1j
+        B = vectarray(A)
+
+        B_test = [[np.abs(x), 90] for x in A]
+        np.testing.assert_array_almost_equal(B, B_test)
+
+class TestPhs():
+    def test_0(self):
+        inputs = [0, 90, 180, 270, 360]
+
+        outputs = [phs(x) for x in inputs]
+        actual_outputs = [1, 1j, -1, -1j, 1]
+
+        for x,y in zip(outputs, actual_outputs):
+            assert_almost_equal(x, y)
+
+    def test_1(self):
+        inputs = [30, 45, 60, 135]
+
+        outputs = [phs(x) for x in inputs]
+        actual_outputs = [0.866025+0.5j, 0.707106+0.707106j, 0.5+0.866025j, -0.707106+0.707106j]
+
+        for x,y in zip(outputs, actual_outputs):
+            assert_almost_equal(x, y, decimal = 3)
+
+class TestPowerflow():
+
+    def test_0(self):
+        Vsend = phasor(1.01, 30)
+        Vrecv = phasor(1, 0)
+        Xline = 0.2
+
+        ans = powerflow(Vsend, Vrecv, Xline)
+        assert_almost_equal(ans, 2.525)
+
+    def test_1(self):
+        Vsend = 1.01
+        Vrecv = 1
+        Xline = 0.2
+
+        ans = powerflow(Vsend, Vrecv, Xline)
+        assert ans == 0
 
 class Test_air_core_inductor:
 

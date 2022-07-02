@@ -4636,7 +4636,7 @@ def vipf(V=None, I=None, PF=1, find=''):
 
 
 # Define Synchronous Speed Calculator
-def syncspeed(Npol, freq=60, Hz=False):
+def syncspeed(Npol, freq=60, Hz=False, rpm=False):
     # noqa: D401   "Synchronous" is an intentional descriptor
     r"""
     Synchronous Speed Calculator Function.
@@ -4656,17 +4656,26 @@ def syncspeed(Npol, freq=60, Hz=False):
                 Frequency of electrical system in Hertz, default=60
     Hz:         bool, optional
                 Boolean control to enable return in Hertz. default=False
+    rpm:        bool, optional
+                Boolean control to enable return in rpm. default=False
+
 
     Returns
     -------
     wsyn:       float
                 Synchronous Speed of Induction Machine, defaults to units of
-                rad/sec, but may be set to Hertz if `Hz` set to True.
+                rad/sec, but may be set to Hertz or RPM if `Hz` or `rpm` set to True.
     """
-    wsyn = 2 * _np.pi * freq / (Npol / 2)
+    try:
+        wsyn = 2 * _np.pi * freq / (Npol / 2)
+    except ZeroDivisionError:
+        raise ZeroDivisionError("Poles of an electrical machine \
+        can not be zero")
     if Hz:
-        return (wsyn / (2 * _np.pi))
-    return (wsyn)
+        return (2*freq / (Npol))
+    if rpm:
+        return (120 * freq)/(Npol)
+    return wsyn
 
 
 # Define Machine Slip Calculation Function
@@ -4694,7 +4703,7 @@ def machslip(mech, syn=60):
                 The rotating machine's slip constant.
     """
     slip = (syn - mech) / syn
-    return (slip)
+    return slip
 
 
 # Define 3-Phase Valpha Calculator
