@@ -4657,7 +4657,7 @@ def syncspeed(Npol, freq=60, Hz=False, rpm=False):
     Hz:         bool, optional
                 Boolean control to enable return in Hertz. default=False
     rpm:        bool, optional
-                Boolean control to enable return in rpm. default
+                Boolean control to enable return in rpm. default=False
 
 
     Returns
