@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+  paths:
+    - 'electricpy/version.py'
 
 jobs:
   release:
