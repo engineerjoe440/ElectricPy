@@ -1,13 +1,12 @@
 name: pytest
 
-on: [
+on:
   push:
     path:
-    - '**.py',
+    - '**.py'
   pull_request:
     path:
     - '**.py'
-]
 
 jobs:
   build:
