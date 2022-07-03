@@ -12,11 +12,6 @@ to aid in scientific calculations.
 """
 ################################################################################
 
-# Define Module Specific Variables
-_name_ = "electricpy"
-_version_ = "0.2.2"
-__version__ = _version_  # Alias Version for User Ease
-
 # Version Breakdown:
 # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
 
@@ -5086,4 +5081,10 @@ def pi_attenuator(Adb, Z0):
     R2 = (Z0/2)*(_np.power(10, x) - (1/(_np.power(10, x))))
 
     return R1,R2
+
+# Define Module Specific Variables
+from .version import NAME, VERSION
+_name_ = NAME
+_version_ = VERSION
+__version__ = _version_  # Alias Version for User Ease
 # END OF FILE
