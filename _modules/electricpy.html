@@ -374,6 +374,7 @@
 <span class="sd">"""</span>
 <span class="c1">################################################################################</span>
 
+
 <span class="kn">import</span> <span class="nn">cmath</span> <span class="k">as</span> <span class="nn">_c</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span> <span class="k">as</span> <span class="n">_Union</span>
 <span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">getframeinfo</span> <span class="k">as</span> <span class="n">_getframeinfo</span>
@@ -390,16 +391,6 @@
 <span class="kn">from</span> <span class="nn">.constants</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">.phasor</span> <span class="kn">import</span> <span class="n">compose</span><span class="p">,</span> <span class="n">parallelz</span>
 <span class="kn">from</span> <span class="nn">.phasor</span> <span class="kn">import</span> <span class="n">phasorz</span> <span class="k">as</span> <span class="n">impedance</span>
-
-<span class="c1"># Define Module Specific Variables</span>
-<span class="n">_name_</span> <span class="o">=</span> <span class="s2">"electricpy"</span>
-<span class="n">_version_</span> <span class="o">=</span> <span class="s2">"0.2.2"</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="n">_version_</span>  <span class="c1"># Alias Version for User Ease</span>
-
-
-<span class="c1"># Version Breakdown:</span>
-<span class="c1"># MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE</span>
-
 
 <span class="c1"># Define Cycle Time Function</span>
 <div class="viewcode-block" id="tcycle"><a class="viewcode-back" href="../api/electricpy.tcycle.html#electricpy.tcycle">[docs]</a><span class="k">def</span> <span class="nf">tcycle</span><span class="p">(</span><span class="n">ncycles</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">freq</span> <span class="o">=</span> <span class="mi">60</span><span class="p">):</span>
@@ -5034,7 +5025,7 @@
 
 
 <span class="c1"># Define Synchronous Speed Calculator</span>
-<div class="viewcode-block" id="syncspeed"><a class="viewcode-back" href="../api/electricpy.syncspeed.html#electricpy.syncspeed">[docs]</a><span class="k">def</span> <span class="nf">syncspeed</span><span class="p">(</span><span class="n">Npol</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">Hz</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="syncspeed"><a class="viewcode-back" href="../api/electricpy.syncspeed.html#electricpy.syncspeed">[docs]</a><span class="k">def</span> <span class="nf">syncspeed</span><span class="p">(</span><span class="n">Npol</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">Hz</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rpm</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="c1"># noqa: D401   "Synchronous" is an intentional descriptor</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Synchronous Speed Calculator Function.</span>
@@ -5054,16 +5045,25 @@
 <span class="sd">                Frequency of electrical system in Hertz, default=60</span>
 <span class="sd">    Hz:         bool, optional</span>
 <span class="sd">                Boolean control to enable return in Hertz. default=False</span>
+<span class="sd">    rpm:        bool, optional</span>
+<span class="sd">                Boolean control to enable return in rpm. default=False</span>
+
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    wsyn:       float</span>
 <span class="sd">                Synchronous Speed of Induction Machine, defaults to units of</span>
-<span class="sd">                rad/sec, but may be set to Hertz if `Hz` set to True.</span>
+<span class="sd">                rad/sec, but may be set to Hertz or RPM if `Hz` or `rpm` set to True.</span>
 <span class="sd">    """</span>
-    <span class="n">wsyn</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span> <span class="o">/</span> <span class="p">(</span><span class="n">Npol</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">wsyn</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span> <span class="o">/</span> <span class="p">(</span><span class="n">Npol</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">"Poles of an electrical machine </span><span class="se">\</span>
+<span class="s2">        can not be zero"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">Hz</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">wsyn</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">freq</span> <span class="o">/</span> <span class="p">(</span><span class="n">Npol</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">rpm</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="mi">120</span> <span class="o">*</span> <span class="n">freq</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">Npol</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">wsyn</span></div>
 
 
@@ -5605,7 +5605,15 @@
         <span class="k">return</span> <span class="p">((</span><span class="n">r1</span> <span class="o">*</span> <span class="n">v_out</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.25</span><span class="p">)</span> <span class="o">-</span> <span class="n">r1</span>
 
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid arguments"</span><span class="p">)</span></div>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid arguments"</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">R1</span><span class="p">,</span><span class="n">R2</span></div>
+
+<span class="c1"># Define Module Specific Variables</span>
+<span class="kn">from</span> <span class="nn">.version</span> <span class="kn">import</span> <span class="n">NAME</span><span class="p">,</span> <span class="n">VERSION</span>
+<span class="n">_name_</span> <span class="o">=</span> <span class="n">NAME</span>
+<span class="n">_version_</span> <span class="o">=</span> <span class="n">VERSION</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="n">_version_</span>  <span class="c1"># Alias Version for User Ease</span>
 
 <span class="c1"># END OF FILE</span>
 </pre></div>
