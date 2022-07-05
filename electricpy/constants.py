@@ -12,91 +12,91 @@ import numpy as _np
 import cmath as _c
 
 # Define Electrical Engineering Constants
-pi = _np.pi #: PI Constant 3.14159...
-a = _c.rect(1,_np.radians(120)) #: 'A' Operator for Symmetrical Components
-p = 1e-12 #: Pico Multiple      (10^-12)
-n = 1e-9 #: Nano Multiple       (10^-9)
-u = 1e-6 #: Micro (mu) Multiple (10^-6)
-m = 1e-3 #: Mili Multiple       (10^-3)
-k = 1e+3 #: Kili Multiple       (10^3)
-M = 1e+6 #: Mega Multiple       (10^6)
-G = 1e+9 #: Giga Multiple       (10^9)
-u0 = 4*_np.pi*10**(-7) #: µ0 (mu-not)       4πE-7
+pi = _np.pi  #: PI Constant 3.14159...
+a = _c.rect(1, _np.radians(120))  #: 'A' Operator for Symmetrical Components
+p = 1e-12  #: Pico Multiple      (10^-12)
+n = 1e-9  #: Nano Multiple       (10^-9)
+u = 1e-6  #: Micro (mu) Multiple (10^-6)
+m = 1e-3  #: Mili Multiple       (10^-3)
+k = 1e+3  #: Kili Multiple       (10^3)
+M = 1e+6  #: Mega Multiple       (10^6)
+G = 1e+9  #: Giga Multiple       (10^9)
+u0 = 4 * _np.pi * 10 ** (-7)  #: µ0 (mu-not)       4πE-7
 e0 = 8.8541878128e-12  #: ε0 (epsilon-not)  8.854E-12
-carson_r = 9.869e-7 #: Carson's Ristance Constant  8.869E-7
-De0 = 2160 #: De Constant for Use with Transmission Impedance Calculations =2160
+carson_r = 9.869e-7  #: Carson's Ristance Constant  8.869E-7
+De0 = 2160  #: De Constant for Use with Transmission Impedance Calculations =2160
 NAN = float('nan')
-VLLcVLN = _c.rect(_np.sqrt(3),_np.radians(30)) # Conversion Operator
-ILcIP = _c.rect(_np.sqrt(3),_np.radians(30)) # Conversion Operator
+VLLcVLN = _c.rect(_np.sqrt(3), _np.radians(30))  # Conversion Operator
+ILcIP = _c.rect(_np.sqrt(3), _np.radians(30))  # Conversion Operator
 WATTS_PER_HP = 745.699872
 KWH_PER_BTU = 3412.14
 
 # Define Symmetrical Component Matricies
-Aabc = 1/3 * _np.array([[ 1, 1, 1    ],  # Convert ABC to 012
-                       [ 1, a, a**2 ],  # (i.e. phase to sequence)
-                       [ 1, a**2, a ]])
-A012 = _np.array([[ 1, 1, 1    ],        # Convert 012 to ABC
-                 [ 1, a**2, a ],        # (i.e. sequence to phase)
-                 [ 1, a, a**2 ]])
+Aabc = 1 / 3 * _np.array([[1, 1, 1],  # Convert ABC to 012
+                          [1, a, a ** 2],  # (i.e. phase to sequence)
+                          [1, a ** 2, a]])
+A012 = _np.array([[1, 1, 1],  # Convert 012 to ABC
+                  [1, a ** 2, a],  # (i.e. sequence to phase)
+                  [1, a, a ** 2]])
 # Define Clarke Component Matricies
-Cabc = _np.sqrt(2/3) * _np.array([
-    [ 1, -1/2, -1/2],         # Convert ABC to alpha/beta/gamma
-    [ 0, _np.sqrt(3)/2, -_np.sqrt(3)/2],
-    [ 1/_np.sqrt(2), 1/_np.sqrt(2), 1/_np.sqrt(2)]
+Cabc = _np.sqrt(2 / 3) * _np.array([
+    [1, -1 / 2, -1 / 2],  # Convert ABC to alpha/beta/gamma
+    [0, _np.sqrt(3) / 2, -_np.sqrt(3) / 2],
+    [1 / _np.sqrt(2), 1 / _np.sqrt(2), 1 / _np.sqrt(2)]
 ])
 Cxyz = _np.array([
-    [ 2/_np.sqrt(6), 0, 1/_np.sqrt(3)],       # Convert alpha/beta/gamma to ABC
-    [ -1/_np.sqrt(6), 1/_np.sqrt(2), 1/_np.sqrt(3)],
-    [ -1/_np.sqrt(6), -1/_np.sqrt(2), 1/_np.sqrt(3)]
+    [2 / _np.sqrt(6), 0, 1 / _np.sqrt(3)],  # Convert alpha/beta/gamma to ABC
+    [-1 / _np.sqrt(6), 1 / _np.sqrt(2), 1 / _np.sqrt(3)],
+    [-1 / _np.sqrt(6), -1 / _np.sqrt(2), 1 / _np.sqrt(3)]
 ])
 # Define Park Components Matricies
-_rad = lambda th: _np.radians( th )
-_Pdq0_im = lambda th: _np.sqrt(2/3)*_np.array([
-    [ _np.cos(_rad(th)), _np.cos(_rad(th)-2*pi/3), _np.cos(_rad(th)+2*pi/3)],
-    [-_np.sin(_rad(th)),-_np.sin(_rad(th)-2*pi/3),-_np.sin(_rad(th)+2*pi/3)],
-    [ _np.sqrt(2)/2,     _np.sqrt(2)/2,            _np.sqrt(2)/2]
+_rad = lambda th: _np.radians(th)
+_Pdq0_im = lambda th: _np.sqrt(2 / 3) * _np.array([
+    [_np.cos(_rad(th)), _np.cos(_rad(th) - 2 * pi / 3), _np.cos(_rad(th) + 2 * pi / 3)],
+    [-_np.sin(_rad(th)), -_np.sin(_rad(th) - 2 * pi / 3), -_np.sin(_rad(th) + 2 * pi / 3)],
+    [_np.sqrt(2) / 2, _np.sqrt(2) / 2, _np.sqrt(2) / 2]
 ])
-_Pabc_im = lambda th: _np.sqrt(2/3)*_np.array([
-    [ _np.cos(_rad(th)),      -_np.sin(_rad(th)),        _np.sqrt(2)/2],
-    [_np.cos(_rad(th)-2*pi/3),-_np.sin(_rad(th)-2*pi/3), _np.sqrt(2)/2],
-    [_np.cos(_rad(th)+2*pi/3),-_np.sin(_rad(th)+2*pi/3), _np.sqrt(2)/2]
+_Pabc_im = lambda th: _np.sqrt(2 / 3) * _np.array([
+    [_np.cos(_rad(th)), -_np.sin(_rad(th)), _np.sqrt(2) / 2],
+    [_np.cos(_rad(th) - 2 * pi / 3), -_np.sin(_rad(th) - 2 * pi / 3), _np.sqrt(2) / 2],
+    [_np.cos(_rad(th) + 2 * pi / 3), -_np.sin(_rad(th) + 2 * pi / 3), _np.sqrt(2) / 2]
 ])
-Pdq0 = 2/3 * _np.array([[0,-_np.sqrt(3/2),_np.sqrt(3/2)],
-                        [1,-1/2,-1/2],
-                        [1/2, 1/2, 1/2]])
-Pqd0 = 2/3 * _np.array([[1,-1/2,-1/2],
-                        [0,-_np.sqrt(3/2),_np.sqrt(3/2)],
-                        [1/2, 1/2, 1/2]])
+Pdq0 = 2 / 3 * _np.array([[0, -_np.sqrt(3 / 2), _np.sqrt(3 / 2)],
+                          [1, -1 / 2, -1 / 2],
+                          [1 / 2, 1 / 2, 1 / 2]])
+Pqd0 = 2 / 3 * _np.array([[1, -1 / 2, -1 / 2],
+                          [0, -_np.sqrt(3 / 2), _np.sqrt(3 / 2)],
+                          [1 / 2, 1 / 2, 1 / 2]])
 
 # Define Transformer Shift Correction Matricies
-XFMY0 = _np.array([[1,0,0],[0,1,0],[0,0,1]])
-XFMD1 = 1/_np.sqrt(3) * _np.array([[1,-1,0],[0,1,-1],[-1,0,1]])
-XFMD11 = 1/_np.sqrt(3) * _np.array([[1,0,-1],[-1,1,0],[0,-1,1]])
-XFM12 = 1/3 * _np.array([[2,-1,-1],[-1,2,-1],[-1,-1,2]])
+XFMY0 = _np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
+XFMD1 = 1 / _np.sqrt(3) * _np.array([[1, -1, 0], [0, 1, -1], [-1, 0, 1]])
+XFMD11 = 1 / _np.sqrt(3) * _np.array([[1, 0, -1], [-1, 1, 0], [0, -1, 1]])
+XFM12 = 1 / 3 * _np.array([[2, -1, -1], [-1, 2, -1], [-1, -1, 2]])
 
 # Define Complex Angle Terms
-e30 = _c.rect(1,_np.radians(30)) #: 30° Phase Operator
-en30 = _c.rect(1,_np.radians(-30)) #: -30° Phase Operator
-e60 = _c.rect(1,_np.radians(60)) #: 60° Phase Operator
-en60 = _c.rect(1,_np.radians(-60)) #: -60° Phase Operator
-e90 = _c.rect(1,_np.radians(90)) #: 90° Phase Operator
-en90 = _c.rect(1,_np.radians(-90)) #: -90° Phase Operator
-e45 = _c.rect(1,_np.radians(45)) #: 45° Phase Operator
-en45 = _c.rect(1,_np.radians(-45)) #: -45° Phase Operator
+e30 = _c.rect(1, _np.radians(30))  #: 30° Phase Operator
+en30 = _c.rect(1, _np.radians(-30))  #: -30° Phase Operator
+e60 = _c.rect(1, _np.radians(60))  #: 60° Phase Operator
+en60 = _c.rect(1, _np.radians(-60))  #: -60° Phase Operator
+e90 = _c.rect(1, _np.radians(90))  #: 90° Phase Operator
+en90 = _c.rect(1, _np.radians(-90))  #: -90° Phase Operator
+e45 = _c.rect(1, _np.radians(45))  #: 45° Phase Operator
+en45 = _c.rect(1, _np.radians(-45))  #: -45° Phase Operator
 
 # Define Material Resistivity (Rho)
 resistivity_rho = {
-    'silver':       15.9,
-    'copper':       16.8,
-    'aluminium':    6.5,
-    'tungsten':     56,
-    'iron':         97.1,
-    'platinum':     106,
-    'manganin':     482,
-    'lead':         220,
-    'mercury':      980,
-    'nichrome':     1000,
-    'constantan':   490,
+    'silver': 15.9,
+    'copper': 16.8,
+    'aluminium': 6.5,
+    'tungsten': 56,
+    'iron': 97.1,
+    'platinum': 106,
+    'manganin': 482,
+    'lead': 220,
+    'mercury': 980,
+    'nichrome': 1000,
+    'constantan': 490,
 }
 THERMO_COUPLE_DATA = {
     "J": [
@@ -135,17 +135,17 @@ THERMO_COUPLE_DATA = {
         [-1.1721668E+02, -5.0000000E+01, 2.5014600E+02, 6.0139890E+02, 8.0435911E+02],
         [-5.9901698E+00, -2.7871777E+00, 1.7191713E+01, 4.5206167E+01, 6.1359178E+01],
         [2.3647275E+01, 1.9022736E+01, 1.3115522E+01,
-            1.2399357E+01, 1.2759508E+01],
+         1.2399357E+01, 1.2759508E+01],
         [1.2807377E+01, -1.7042725E+00, 1.1780364E+00,
-            4.3399963E-01, -1.1116072E+00],
+         4.3399963E-01, -1.1116072E+00],
         [2.0665069E+00, -3.5195189E-01, 3.6422433E-02,
-            9.1967085E-03, 3.5332536E-02],
+         9.1967085E-03, 3.5332536E-02],
         [8.6513472E-02, 4.7766102E-03, 3.9584261E-04,
-            1.6901585E-04, 3.3080380E-05],
+         1.6901585E-04, 3.3080380E-05],
         [5.8995860E-01, -6.5379760E-02, 9.3112756E-02,
-            3.4424680E-02, -8.8196889E-02],
+         3.4424680E-02, -8.8196889E-02],
         [1.0960713E-01, -2.1732833E-02, 2.9804232E-03,
-            6.9741215E-04, 2.8497415E-03],
+         6.9741215E-04, 2.8497415E-03],
         [6.1769588E-03, 0.0, 3.3263032E-05, 1.2946992E-05, 0.0]],
     "N": [
         [-5.9610511E+01, 3.1534505E+02, 1.0340172E+03],
@@ -205,14 +205,22 @@ THERMO_COUPLE_VOLTAGES = {
 }
 
 COLD_JUNCTION_DATA = {
-    "To": [4.2000000E+01, 2.5000000E+01, 2.5000000E+01, 2.5000000E+01, 7.0000000E+00, 2.5000000E+01, 2.5000000E+01, 2.5000000E+01],
-    "Vo": [3.3933898E-04, 1.4950582E+00, 1.2773432E+00, 1.0003453E+00, 1.8210024E-01, 1.4067016E-01, 1.4269163E-01, 9.9198279E-01],
-    "P1": [2.1196684E-04, 6.0958443E-02, 5.1744084E-02, 4.0514854E-02, 2.6228256E-02, 5.9330356E-03, 5.9829057E-03, 4.0716564E-02],
-    "P2": [3.3801250E-06, -2.7351789E-04, -5.4138663E-05, -3.8789638E-05, -1.5485539E-04, 2.7736904E-05, 4.5292259E-06, 7.1170297E-04],
-    "P3": [-1.4793289E-07, -1.9130146E-05, -2.2895769E-06, -2.8608478E-06, 2.1366031E-06, -1.0819644E-06, -1.3380281E-06, 6.8782631E-07],
-    "P4": [-3.3571424E-09, -1.3948840E-08, -7.7947143E-10, -9.5367041E-10, 9.2047105E-10, -2.3098349E-09, -2.3742577E-09, 4.3295061E-11],
-    "Q1": [-1.0920410E-02, -5.2382378E-03, -1.5173342E-03, -1.3948675E-03, -6.4070932E-03, 2.6146871E-03, -1.0650446E-03, 1.6458102E-02],
-    "Q2": [-4.9782932E-04, -3.0970168E-04, -4.2314514E-05, -6.7976627E-05, 8.2161781E-05, -1.8621487E-04, -2.2042420E-04, 0.0000000E+00]
+    "To": [4.2000000E+01, 2.5000000E+01, 2.5000000E+01, 2.5000000E+01, 7.0000000E+00, 2.5000000E+01, 2.5000000E+01,
+           2.5000000E+01],
+    "Vo": [3.3933898E-04, 1.4950582E+00, 1.2773432E+00, 1.0003453E+00, 1.8210024E-01, 1.4067016E-01, 1.4269163E-01,
+           9.9198279E-01],
+    "P1": [2.1196684E-04, 6.0958443E-02, 5.1744084E-02, 4.0514854E-02, 2.6228256E-02, 5.9330356E-03, 5.9829057E-03,
+           4.0716564E-02],
+    "P2": [3.3801250E-06, -2.7351789E-04, -5.4138663E-05, -3.8789638E-05, -1.5485539E-04, 2.7736904E-05, 4.5292259E-06,
+           7.1170297E-04],
+    "P3": [-1.4793289E-07, -1.9130146E-05, -2.2895769E-06, -2.8608478E-06, 2.1366031E-06, -1.0819644E-06,
+           -1.3380281E-06, 6.8782631E-07],
+    "P4": [-3.3571424E-09, -1.3948840E-08, -7.7947143E-10, -9.5367041E-10, 9.2047105E-10, -2.3098349E-09,
+           -2.3742577E-09, 4.3295061E-11],
+    "Q1": [-1.0920410E-02, -5.2382378E-03, -1.5173342E-03, -1.3948675E-03, -6.4070932E-03, 2.6146871E-03,
+           -1.0650446E-03, 1.6458102E-02],
+    "Q2": [-4.9782932E-04, -3.0970168E-04, -4.2314514E-05, -6.7976627E-05, 8.2161781E-05, -1.8621487E-04,
+           -2.2042420E-04, 0.0000000E+00]
 }
 COLD_JUNCTION_KEYS = ["To", "Vo", "P1", "P2", "P3", "P4", "Q1", "Q2"]
 
