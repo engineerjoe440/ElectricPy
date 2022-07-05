@@ -4,8 +4,8 @@
 
 >>> import electricpy.geometry as geometry
 
-This Package help to handle coordinate geometry calculatios which are required 
-for plotting various graphs in electrical engineering. 
+This Package help to handle coordinate geometry calculatios which are required
+for plotting various graphs in electrical engineering.
 
 Built to support operations similar to Numpy and Scipy, this package is designed
 to aid in scientific calculations.
@@ -18,7 +18,7 @@ from typing import Tuple
 
 class Point:
     """A point in 2D space.
-    
+
     Parameters
     ----------
     x : float
@@ -65,7 +65,7 @@ class Line:
     """A line in 2D space in the form .
 
     math:: ax + by + c = 0
-    
+
     Parameters
     ----------
     a : float
@@ -189,6 +189,16 @@ class Line:
         """Return the intersection of two lines."""
         return line_intersection(self, l1)
 
+def angle_btw_lines(l1: Line, l2: Line) -> float:
+    """Return angle (in radians) between two lines l1 and l2."""
+    a1, b1 = l1.a, l1.b
+    a2, b2 = l2.a, l2.b
+
+    if a1*a2 + b1*b2 == 0:
+        return cmath.pi/2
+
+    ans = abs((b1*a2 - a1*b2)/(a1*a2 + b1*b2))
+    return cmath.atan(ans)
 
 def line_intersection(l1: Line, l2: Line) -> Point:
     """Calculate the intersection point of two lines."""
