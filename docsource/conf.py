@@ -59,10 +59,26 @@ extensions = [
     'numpydoc',
     'sphinx_git',
     'sphinx_sitemap',
-    'm2r2',
+    'myst_parser',
 ]
 autosummary_generate = True
 numpydoc_show_class_members = False
+
+myst_enable_extensions = [
+    "amsmath",
+    "colon_fence",
+    "deflist",
+    "dollarmath",
+    "fieldlist",
+    "html_admonition",
+    "html_image",
+    "linkify",
+    "replacements",
+    "smartquotes",
+    "strikethrough",
+    "substitution",
+    "tasklist",
+]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -107,7 +123,7 @@ html_theme_options = {
 
     # Specify a base_url used to generate sitemap.xml. If not
     # specified, then no sitemap will be built.
-    'base_url': 'https://engineerjoe440.github.io/ElectricPy/html/',
+    'base_url': 'https://electricpy.readthedocs.io/en/latest/',
 
     # Set the color and the accent color
     'color_primary': 'blue',

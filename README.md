@@ -1,11 +1,15 @@
-<img src="https://raw.githubusercontent.com/engineerjoe440/ElectricPy/master/logo/ElectricpyLogo.svg" width="200" alt="logo" align="right">
+<a href="https://electricpy.readthedocs.io/en/latest/">
+  <img src="https://raw.githubusercontent.com/engineerjoe440/ElectricPy/master/logo/ElectricpyLogo.svg" width="200" alt="logo" align="right">
+</a>
 
 # ElectricPy
 
 *Electrical-Engineering-for-Python*
 
 [![sphinx](https://github.com/engineerjoe440/ElectricPy/actions/workflows/sphinx-build.yml/badge.svg?branch=master)](https://github.com/engineerjoe440/ElectricPy/actions/workflows/sphinx-build.yml)
+[![Documentation Status](https://readthedocs.org/projects/electricpy/badge/?version=latest)](https://electricpy.readthedocs.io/en/latest/?badge=latest)
 ![Tox Import Test](https://github.com/engineerjoe440/ElectricPy/workflows/Tox%20Tests/badge.svg)
+
 [![pytest](https://github.com/engineerjoe440/ElectricPy/actions/workflows/pytest.yml/badge.svg?branch=master)](https://github.com/engineerjoe440/ElectricPy/actions/workflows/pytest.yml)
 [![pydocstyle](https://github.com/engineerjoe440/ElectricPy/actions/workflows/pydocstyle.yml/badge.svg?branch=master)](https://github.com/engineerjoe440/ElectricPy/actions/workflows/pydocstyle.yml)
 ![Coverage](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/coverage.svg)
@@ -20,10 +24,15 @@
 
 Python Libraries with functions and constants related to electrical engineering.
 
-The functions and constants that make up these modules represent a library of material compiled with the intent of being used primarily
-for research, development, education, and exploration in the realm of electrical engineering.
+The functions and constants that make up these modules represent a library of material compiled with the intent of being
+used primarily for research, development, education, and exploration in the realm of electrical engineering.
 
-Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/
+Check out our full documentation: https://electricpy.readthedocs.io/en/latest/
+
+**:warning: Documentation has recently been updated to use [ReadTheDocs](https://readthedocs.org/)**
+
+GitHub Pages are still active, and will continue to be for the forseeable future, but they're intended for developmental
+updates rather than primary documentation.
 
 ### Special thanks to:
 
@@ -37,11 +46,11 @@ Check out our full documentation: https://engineerjoe440.github.io/ElectricPy/
 - Shaurya Uppal | Online Code Contributor
 - Paul Ortman | Power Quality Engineer - Idaho Power | Instructor - University of Idaho
 
-  and
+and
 
-  <a href="https://github.com/engineerjoe440/electricpy/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=engineerjoe440/electricpy" />
-  </a>
+<a href="https://github.com/engineerjoe440/electricpy/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=engineerjoe440/electricpy" alt="contributors">
+</a>
 
 
 ### Dependencies:
