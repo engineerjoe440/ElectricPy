@@ -13,10 +13,8 @@ import matplotlib.pyplot as _plt
 import numpy as _np
 import scipy.signal as _sig
 from numpy import pi as _pi
-
 # Import Local Dependencies
 from electricpy.math import convolve
-
 
 # Define System Conditioning Function
 def _sys_condition(system, feedback):
