@@ -411,6 +411,52 @@ def test_syncspeed():
         can not be zero"):
         syncspeed(0)
 
+def test_tcycle():
+    from electricpy import tcycle
+
+    # Test 0
+    assert tcycle(1, 1) == 1
+    assert tcycle(2, 1) == 2
+    assert tcycle(1, 2) == 0.5
+
+    # Test 1
+    assert (tcycle(ncycles = [1, 2, 3], freq = 2) == np.array([1/2, 2/2, 3/2])).all()
+    assert (tcycle(ncycles = [1, 2, 3], freq = 3) == np.array([1/3, 2/3, 3/3])).all()
+    assert (tcycle(ncycles = 2, freq= [1, 2, 3]) == np.array([2/1, 2/2, 2/3])).all()
+    assert (tcycle(ncycles = 3, freq= [1, 2, 3]) == np.array([3/1, 3/2, 3/3])).all()
+
+    # Test 2
+    assert (tcycle(ncycles = [1, 2, 3], freq = [2, 3, 4]) == np.array([1/2, 2/3, 3/4])).all()
+    assert (tcycle(ncycles = [1, 2, 3], freq = [3, 4, 5]) == np.array([1/3, 2/4, 3/5])).all()
+
+    # Test 3
+    with pytest.raises(ZeroDivisionError):
+        print(tcycle(ncycles = [1, 2, 3], freq = [0, 0, 0]))
+
+    # Test 4
+    with pytest.raises(ValueError, match = "ncycles and freq must be the same length"):
+        tcycle(ncycles = [1, 2, 3], freq = [2, 3, 4, 5])
+
+    # Test 5
+    with pytest.raises(ValueError, match = "Frequency must be postive value"):
+        tcycle(ncycles=[1, 2, 3, 4], freq = [-2, -3, 4, 5])
+
+def test_nr_pqd():
+    from electricpy import sim
+    from numpy.testing import assert_array_almost_equal
+    ybustest = [[-10j,10j],
+        [10j,-10j]]
+    Vlist = [[1,0],[None,None]]
+    Plist = [None,-2.0]
+    Qlist = [None,-1.0] # 1pu vars consumed
+    F = sim.nr_pq(ybustest,Vlist,Plist,Qlist)
+    X0 = [0,1] # Define Initial Conditions
+    J = sim.jacobian(F) # Find Jacobian
+    # Now use Newton-Raphson to Solve
+    results, iter = sim.NewtonRaphson(F,J,X0)
+    assert_array_almost_equal(results, [-0.236,0.8554], decimal = 3)
+    assert iter == 4 # Iteration Counter
+
 class TestVectarray():
 
     def test_0(self):
@@ -472,7 +518,6 @@ class TestPowerflow():
 
         ans = powerflow(Vsend, Vrecv, Xline)
         assert ans == 0
-        
 def test_tcycle():
     from electricpy import tcycle
 
