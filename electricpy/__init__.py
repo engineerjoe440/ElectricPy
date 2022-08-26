@@ -731,7 +731,7 @@ def transformertest(Poc=False, Voc=False, Ioc=False, Psc=False, Vsc=False,
 
 
 # Define Non-Linear Power Factor Calculator
-def nlinpf(PFtrue=False, PFdist=False, PFdisp=False):
+def non_linear_pf(PFtrue=False, PFdist=False, PFdisp=False):
     """
     Non-Linear Power Factor Evaluator.
 
@@ -739,6 +739,8 @@ def nlinpf(PFtrue=False, PFdist=False, PFdisp=False):
     given the other two. These particular unknowns are the arguments
     and as such, they are described in the representative sections
     below.
+
+    .. note:: Also available as `nlinpf`.
 
     Parameters
     ----------
@@ -765,15 +767,20 @@ def nlinpf(PFtrue=False, PFdist=False, PFdisp=False):
     else:
         raise ValueError("ERROR: Function requires at least two arguments.")
 
+# Alias to original Name
+nlinpf = non_linear_pf
+
 
 # Define Short-Circuit RL Current Calculator
-def iscrl(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
+def short_circuit_current(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
     """
     Short-Circuit-Current (ISC) Calculator.
 
     The Isc-RL function (Short Circuit Current for RL Circuit)
     is designed to calculate the short-circuit current for an
     RL circuit.
+
+    .. note:: Also available as `iscrl`.
 
     Parameters
     ----------
@@ -853,6 +860,9 @@ def iscrl(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
         Iac = abs(V / Z)
         return Iac
 
+# Alias to original Name
+iscrl = short_circuit_current
+
 
 # Define Voltage Divider Calculator
 def voltdiv(Vin, R1, R2, Rload=None):
@@ -885,6 +895,14 @@ def voltdiv(Vin, R1, R2, Rload=None):
     -------
     Vout:   float
             The Output voltage as measured across R2 and/or Rload
+    
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> ep.voltdiv(Vin=12, R1=4, R2=8)
+    8
+    >>> ep.voltdiv(Vin=12, R1=6, R2=12, Rload=12) # R2 and Rload are parallel
+    6
     """
     # Determine whether Rload is given
     if Rload is None:  # No Load Given
@@ -1116,7 +1134,7 @@ def bridge_impedance(z1, z2, z3, z4, z5):
     Parameters
     ----------
     z1:     [float, complex]
-            Bridge impedance 1
+            Bridge impedance 1iscrl
     z2:     [float, complex]
             Bridge impedance 2
     z3:     [float, complex]
@@ -2466,6 +2484,14 @@ def acpiv(S=None, I=None, VLL=None, VLN=None, V=None, PF=None):
     PF:         float, optional
                 Supporting argument to convert floating-point
                 apparent power to complex representation.
+    
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> ep.acpiv(S=550, V=167)
+    3.2934131736526946
+    >>> ep.acpiv(S=550, I=3.2934131736526946),
+    (96.4174949546675, 55.66666666666667, 167.0)
     """
     # Validate Inputs
     if S == I is None:
@@ -2952,7 +2978,7 @@ def propagation_constants(z, y, length):
 
 
 # Define Simple Transformer Phase Shift Function
-def xfmphs(style="DY", shift=30):
+def phase_shift_transformer(style="DY", shift=30):
     """
     Electrical Transformer Phase-Shift Calculator.
 
@@ -2995,6 +3021,9 @@ def xfmphs(style="DY", shift=30):
     phase = _np.exp(1j * _np.radians(v * abs(shift)))
     # Return
     return (phase)
+
+# Alias to original Name.
+xfmphs = phase_shift_transformer
 
 
 # Define Induction Machine Thevenin Voltage Calculator
