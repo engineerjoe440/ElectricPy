@@ -1,6 +1,6 @@
 ################################################################################
 """
-`electricpy.capacitor` Package - Capacitor Specific Methods.
+Functions and Formulas Related to Passive Electrical Components (R/L/C).
 
 Filled with methods related capacitors.
 """

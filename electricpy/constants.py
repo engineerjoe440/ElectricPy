@@ -1,6 +1,6 @@
 ################################################################################
 """
-`electricpy.constants` - Electrical Engineering Constants.
+Numerical Constants for Electrical Engineering - Pi, Tau, α, etc.
 
 Defenition of all required constants and matricies for
 *electricpy* module.

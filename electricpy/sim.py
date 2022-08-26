@@ -1,6 +1,6 @@
 ################################################################################
 """
-`electricpy.sim`  -  Simulation Module.
+Simulation Module for Filter and System Simulation for Electrical Engineering.
 
 >>> from electricpy import sim
 """
@@ -12,8 +12,12 @@ import matplotlib.pyplot as _plt
 # Import Required External Dependencies
 import numpy as _np
 import scipy.signal as _sig
-from numdifftools import Jacobian as jacobian
 from scipy.optimize import newton
+try:
+    from numdifftools import Jacobian as jacobian
+    __NUMDIFFTOOL_SUPPORT__ = True
+except ImportError:
+    __NUMDIFFTOOL_SUPPORT__ = False
 
 # Import Local Dependencies
 from electricpy.bode import _sys_condition
@@ -1165,6 +1169,13 @@ def mbuspowerflow(Ybus, Vknown, Pknown, Qknown, X0='flatstart', eps=1e-4,
     nr_pq:                  Newton-Raphson System Generator
     electricpy.powerflow:   Simple (2-bus) Power Flow Calculator
     """
+    # Identify Lack of Support
+    if not __NUMDIFFTOOL_SUPPORT__:
+        raise ImportError(
+            "(!)  Cannot perform request due to lack of installed package: "
+            "`numdifftools` which may be obtained with: `pip install "
+            "numdifftools`."
+        )
     # Reformat Inputs to Meet Criteria
     if slackbus != 0:
         # Ybus
