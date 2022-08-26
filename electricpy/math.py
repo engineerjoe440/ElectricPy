@@ -1,6 +1,6 @@
 ################################################################################
 """
-`electricpy` Package - `math` Module.
+Common Mathematic Functions for Electrical Engineering.
 
 >>> from electricpy import math as epmath
 

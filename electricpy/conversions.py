@@ -1,6 +1,6 @@
 ################################################################################
 """
-`electricpy` Package - `conversions` Module.
+Conversion Utilities Common for Electrical Engineering.
 
 >>> from electricpy import conversions
 
