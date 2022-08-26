@@ -2460,6 +2460,9 @@ def acpiv(S=None, I=None, VLL=None, VLN=None, V=None, PF=None):
                 Line-to-Neutral voltage in volts
     V:          complex, optional
                 Single-phase voltage in volts
+    PF:         float, optional
+                Power factor to condition the apparent power to an appropriate
+                complex value.
 
     Returns
     -------
