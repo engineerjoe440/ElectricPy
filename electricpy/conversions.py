@@ -213,6 +213,18 @@ def abc_to_seq(Mabc, reference='A'):
     --------
     seq_to_abc: Sequence to Phase Conversion
     sequence:  Phase Impedance to Sequence Converter
+
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> import electricpy.conversions as conv
+    >>> abc_matrix = [
+    ...     ep.phasor(167, 0),
+    ...     ep.phasor(167, -120),
+    ...     ep.phasor(167, -240),
+    ... ]
+    >>> conv.abc_to_seq(abc_matrix)
+    [0+0j, 167+0j, 0+0j]
     """
     # Condition Reference:
     reference = reference.upper()
@@ -629,4 +641,5 @@ def db_to_voltage(db, ref_voltage):
                      Voltage
     """
     return ref_voltage * _np.power(10, -(db / 20))
+
 # END
