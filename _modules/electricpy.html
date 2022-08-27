@@ -1995,213 +1995,6 @@
     <span class="k">return</span> <span class="n">C</span></div>
 
 
-<span class="c1"># Define CRC Generator (Sender Side)</span>
-<div class="viewcode-block" id="crcsender"><a class="viewcode-back" href="../api/electricpy.crcsender.html#electricpy.crcsender">[docs]</a><span class="k">def</span> <span class="nf">crcsender</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    CRC Sender Function.</span>
-
-<span class="sd">    Function to generate a CRC-embedded message ready for transmission.</span>
-
-<span class="sd">    Contributing Author Credit:</span>
-<span class="sd">    Shaurya Uppal</span>
-<span class="sd">    Available from: geeksforgeeks.org</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    data:       string of bits</span>
-<span class="sd">                The bit-string to be encoded.</span>
-<span class="sd">    key:        string of bits</span>
-<span class="sd">                Bit-string representing key.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    codeword:   string of bits</span>
-<span class="sd">                Bit-string representation of</span>
-<span class="sd">                encoded message.</span>
-<span class="sd">    """</span>
-    <span class="c1"># Define Sub-Functions</span>
-    <span class="k">def</span> <span class="nf">xor</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="c1"># initialize result</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="c1"># Traverse all bits, if bits are</span>
-        <span class="c1"># same, then XOR is 0, else 1</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'0'</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'1'</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-
-    <span class="c1"># Performs Modulo-2 division</span>
-    <span class="k">def</span> <span class="nf">mod2div</span><span class="p">(</span><span class="n">divident</span><span class="p">,</span> <span class="n">divisor</span><span class="p">):</span>
-        <span class="c1"># Number of bits to be XORed at a time.</span>
-        <span class="n">pick</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">divisor</span><span class="p">)</span>
-
-        <span class="c1"># Slicing the divident to appropriate</span>
-        <span class="c1"># length for particular step</span>
-        <span class="n">tmp</span> <span class="o">=</span> <span class="n">divident</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="n">pick</span><span class="p">]</span>
-
-        <span class="k">while</span> <span class="n">pick</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">divident</span><span class="p">):</span>
-
-            <span class="k">if</span> <span class="n">tmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'1'</span><span class="p">:</span>
-
-                <span class="c1"># replace the divident by the result</span>
-                <span class="c1"># of XOR and pull 1 bit down</span>
-                <span class="n">tmp</span> <span class="o">=</span> <span class="n">xor</span><span class="p">(</span><span class="n">divisor</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)</span> <span class="o">+</span> <span class="n">divident</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span>
-
-            <span class="k">else</span><span class="p">:</span>  <span class="c1"># If leftmost bit is '0'</span>
-
-                <span class="c1"># If the leftmost bit of the dividend (or the</span>
-                <span class="c1"># part used in each step) is 0, the step cannot</span>
-                <span class="c1"># use the regular divisor; we need to use an</span>
-                <span class="c1"># all-0s divisor.</span>
-                <span class="n">tmp</span> <span class="o">=</span> <span class="n">xor</span><span class="p">(</span><span class="s1">'0'</span> <span class="o">*</span> <span class="n">pick</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)</span> <span class="o">+</span> <span class="n">divident</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span>
-
-                <span class="c1"># increment pick to move further</span>
-            <span class="n">pick</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="c1"># For the last n bits, we have to carry it out</span>
-        <span class="c1"># normally as increased value of pick will cause</span>
-        <span class="c1"># Index Out of Bounds.</span>
-        <span class="k">if</span> <span class="n">tmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'1'</span><span class="p">:</span>
-            <span class="n">tmp</span> <span class="o">=</span> <span class="n">xor</span><span class="p">(</span><span class="n">divisor</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">tmp</span> <span class="o">=</span> <span class="n">xor</span><span class="p">(</span><span class="s1">'0'</span> <span class="o">*</span> <span class="n">pick</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)</span>
-
-        <span class="n">checkword</span> <span class="o">=</span> <span class="n">tmp</span>
-        <span class="k">return</span> <span class="n">checkword</span>
-
-    <span class="c1"># Condition data</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="c1"># Condition Key</span>
-    <span class="n">key</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-    <span class="n">l_key</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-
-    <span class="c1"># Appends n-1 zeroes at end of data</span>
-    <span class="n">appended_data</span> <span class="o">=</span> <span class="n">data</span> <span class="o">+</span> <span class="s1">'0'</span> <span class="o">*</span> <span class="p">(</span><span class="n">l_key</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">remainder</span> <span class="o">=</span> <span class="n">mod2div</span><span class="p">(</span><span class="n">appended_data</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-
-    <span class="c1"># Append remainder in the original data</span>
-    <span class="n">codeword</span> <span class="o">=</span> <span class="n">data</span> <span class="o">+</span> <span class="n">remainder</span>
-    <span class="k">return</span> <span class="n">codeword</span></div>
-
-
-<span class="c1"># Define CRC Generator (Sender Side)</span>
-<div class="viewcode-block" id="crcremainder"><a class="viewcode-back" href="../api/electricpy.crcremainder.html#electricpy.crcremainder">[docs]</a><span class="k">def</span> <span class="nf">crcremainder</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    CRC Remainder Function.</span>
-
-<span class="sd">    Function to calculate the CRC remainder of a CRC message.</span>
-
-<span class="sd">    Contributing Author Credit:</span>
-<span class="sd">    Shaurya Uppal</span>
-<span class="sd">    Available from: geeksforgeeks.org</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    data:       string of bits</span>
-<span class="sd">                The bit-string to be decoded.</span>
-<span class="sd">    key:        string of bits</span>
-<span class="sd">                Bit-string representing key.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    remainder: string of bits</span>
-<span class="sd">                Bit-string representation of</span>
-<span class="sd">                encoded message.</span>
-<span class="sd">    """</span>
-    <span class="c1"># Define Sub-Functions</span>
-    <span class="k">def</span> <span class="nf">xor</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="c1"># initialize result</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="c1"># Traverse all bits, if bits are</span>
-        <span class="c1"># same, then XOR is 0, else 1</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'0'</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'1'</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-
-    <span class="c1"># Performs Modulo-2 division</span>
-    <span class="k">def</span> <span class="nf">mod2div</span><span class="p">(</span><span class="n">divident</span><span class="p">,</span> <span class="n">divisor</span><span class="p">):</span>
-        <span class="c1"># Number of bits to be XORed at a time.</span>
-        <span class="n">pick</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">divisor</span><span class="p">)</span>
-
-        <span class="c1"># Slicing the divident to appropriate</span>
-        <span class="c1"># length for particular step</span>
-        <span class="n">tmp</span> <span class="o">=</span> <span class="n">divident</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="n">pick</span><span class="p">]</span>
-
-        <span class="k">while</span> <span class="n">pick</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">divident</span><span class="p">):</span>
-
-            <span class="k">if</span> <span class="n">tmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'1'</span><span class="p">:</span>
-
-                <span class="c1"># replace the divident by the result</span>
-                <span class="c1"># of XOR and pull 1 bit down</span>
-                <span class="n">tmp</span> <span class="o">=</span> <span class="n">xor</span><span class="p">(</span><span class="n">divisor</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)</span> <span class="o">+</span> <span class="n">divident</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span>
-
-            <span class="k">else</span><span class="p">:</span>  <span class="c1"># If leftmost bit is '0'</span>
-
-                <span class="c1"># If the leftmost bit of the dividend (or the</span>
-                <span class="c1"># part used in each step) is 0, the step cannot</span>
-                <span class="c1"># use the regular divisor; we need to use an</span>
-                <span class="c1"># all-0s divisor.</span>
-                <span class="n">tmp</span> <span class="o">=</span> <span class="n">xor</span><span class="p">(</span><span class="s1">'0'</span> <span class="o">*</span> <span class="n">pick</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)</span> <span class="o">+</span> <span class="n">divident</span><span class="p">[</span><span class="n">pick</span><span class="p">]</span>
-
-                <span class="c1"># increment pick to move further</span>
-            <span class="n">pick</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="c1"># For the last n bits, we have to carry it out</span>
-        <span class="c1"># normally as increased value of pick will cause</span>
-        <span class="c1"># Index Out of Bounds.</span>
-        <span class="k">if</span> <span class="n">tmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'1'</span><span class="p">:</span>
-            <span class="n">tmp</span> <span class="o">=</span> <span class="n">xor</span><span class="p">(</span><span class="n">divisor</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">tmp</span> <span class="o">=</span> <span class="n">xor</span><span class="p">(</span><span class="s1">'0'</span> <span class="o">*</span> <span class="n">pick</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)</span>
-
-        <span class="n">checkword</span> <span class="o">=</span> <span class="n">tmp</span>
-        <span class="k">return</span> <span class="n">checkword</span>
-
-    <span class="c1"># Condition data</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="c1"># Condition Key</span>
-    <span class="n">key</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-    <span class="n">l_key</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-
-    <span class="c1"># Appends n-1 zeroes at end of data</span>
-    <span class="n">appended_data</span> <span class="o">=</span> <span class="n">data</span> <span class="o">+</span> <span class="s1">'0'</span> <span class="o">*</span> <span class="p">(</span><span class="n">l_key</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="n">remainder</span> <span class="o">=</span> <span class="n">mod2div</span><span class="p">(</span><span class="n">appended_data</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">remainder</span></div>
-
-
-<span class="c1"># Define String to Bits Function</span>
-<div class="viewcode-block" id="string_to_bits"><a class="viewcode-back" href="../api/electricpy.string_to_bits.html#electricpy.string_to_bits">[docs]</a><span class="k">def</span> <span class="nf">string_to_bits</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
-    <span class="c1"># noqa: D401   "String" is an intended leading word.</span>
-    <span class="sd">"""</span>
-<span class="sd">    String to Bits Converter.</span>
-
-<span class="sd">    Converts a Pythonic string to the string's binary representation.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    str:        string</span>
-<span class="sd">                The string to be converted.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    data:       string</span>
-<span class="sd">                The binary representation of the</span>
-<span class="sd">                input string.</span>
-<span class="sd">    """</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">format</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">'b'</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">data</span></div>
-
-
 <span class="c1"># Define Per-Unit Impedance Formula</span>
 <div class="viewcode-block" id="zpu"><a class="viewcode-back" href="../api/electricpy.zpu.html#electricpy.zpu">[docs]</a><span class="k">def</span> <span class="nf">zpu</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">VLL</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">VLN</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
@@ -4739,6 +4532,16 @@
 <span class="sd">                System power factor, (+)ive values denote</span>
 <span class="sd">                leading power factor, (-)ive values denote</span>
 <span class="sd">                lagging poer factor; default=1</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
+<span class="sd">    &gt;&gt;&gt; # Demonstrate the generic functionality</span>
+<span class="sd">    &gt;&gt;&gt; ep.vipf(V=480, I=ep.phasor.phasor(20, 120))</span>
+<span class="sd">    (480, (-9.999999999999996+17.320508075688775j), -0.4999999999999998)</span>
+<span class="sd">    &gt;&gt;&gt; # Find the power factor</span>
+<span class="sd">    &gt;&gt;&gt; ep.vipf(V=480, I=ep.phasor.phasor(20, 120), find="PF")</span>
+<span class="sd">    -0.4999999999999998</span>
 <span class="sd">    """</span>
     <span class="c1"># Test to find Voltage</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="nb">complex</span><span class="p">):</span>

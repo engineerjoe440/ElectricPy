@@ -29,10 +29,6 @@
     
     cprint
     
-    crcremainder
-    
-    crcsender
-    
     curdiv
     
     de_calc
@@ -150,8 +146,6 @@
     slew_rate
     
     solenoid_inductance
-    
-    string_to_bits
     
     suspension_insulators
     
