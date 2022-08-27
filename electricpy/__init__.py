@@ -1633,213 +1633,6 @@ def shannondata(BW, S, N):
     return C
 
 
-# Define CRC Generator (Sender Side)
-def crcsender(data, key):
-    """
-    CRC Sender Function.
-
-    Function to generate a CRC-embedded message ready for transmission.
-
-    Contributing Author Credit:
-    Shaurya Uppal
-    Available from: geeksforgeeks.org
-
-    Parameters
-    ----------
-    data:       string of bits
-                The bit-string to be encoded.
-    key:        string of bits
-                Bit-string representing key.
-
-    Returns
-    -------
-    codeword:   string of bits
-                Bit-string representation of
-                encoded message.
-    """
-    # Define Sub-Functions
-    def xor(a, b):
-        # initialize result
-        result = []
-
-        # Traverse all bits, if bits are
-        # same, then XOR is 0, else 1
-        for i in range(1, len(b)):
-            if a[i] == b[i]:
-                result.append('0')
-            else:
-                result.append('1')
-
-        return ''.join(result)
-
-    # Performs Modulo-2 division
-    def mod2div(divident, divisor):
-        # Number of bits to be XORed at a time.
-        pick = len(divisor)
-
-        # Slicing the divident to appropriate
-        # length for particular step
-        tmp = divident[0: pick]
-
-        while pick < len(divident):
-
-            if tmp[0] == '1':
-
-                # replace the divident by the result
-                # of XOR and pull 1 bit down
-                tmp = xor(divisor, tmp) + divident[pick]
-
-            else:  # If leftmost bit is '0'
-
-                # If the leftmost bit of the dividend (or the
-                # part used in each step) is 0, the step cannot
-                # use the regular divisor; we need to use an
-                # all-0s divisor.
-                tmp = xor('0' * pick, tmp) + divident[pick]
-
-                # increment pick to move further
-            pick += 1
-
-        # For the last n bits, we have to carry it out
-        # normally as increased value of pick will cause
-        # Index Out of Bounds.
-        if tmp[0] == '1':
-            tmp = xor(divisor, tmp)
-        else:
-            tmp = xor('0' * pick, tmp)
-
-        checkword = tmp
-        return checkword
-
-    # Condition data
-    data = str(data)
-    # Condition Key
-    key = str(key)
-    l_key = len(key)
-
-    # Appends n-1 zeroes at end of data
-    appended_data = data + '0' * (l_key - 1)
-    remainder = mod2div(appended_data, key)
-
-    # Append remainder in the original data
-    codeword = data + remainder
-    return codeword
-
-
-# Define CRC Generator (Sender Side)
-def crcremainder(data, key):
-    """
-    CRC Remainder Function.
-
-    Function to calculate the CRC remainder of a CRC message.
-
-    Contributing Author Credit:
-    Shaurya Uppal
-    Available from: geeksforgeeks.org
-
-    Parameters
-    ----------
-    data:       string of bits
-                The bit-string to be decoded.
-    key:        string of bits
-                Bit-string representing key.
-
-    Returns
-    -------
-    remainder: string of bits
-                Bit-string representation of
-                encoded message.
-    """
-    # Define Sub-Functions
-    def xor(a, b):
-        # initialize result
-        result = []
-
-        # Traverse all bits, if bits are
-        # same, then XOR is 0, else 1
-        for i in range(1, len(b)):
-            if a[i] == b[i]:
-                result.append('0')
-            else:
-                result.append('1')
-
-        return ''.join(result)
-
-    # Performs Modulo-2 division
-    def mod2div(divident, divisor):
-        # Number of bits to be XORed at a time.
-        pick = len(divisor)
-
-        # Slicing the divident to appropriate
-        # length for particular step
-        tmp = divident[0: pick]
-
-        while pick < len(divident):
-
-            if tmp[0] == '1':
-
-                # replace the divident by the result
-                # of XOR and pull 1 bit down
-                tmp = xor(divisor, tmp) + divident[pick]
-
-            else:  # If leftmost bit is '0'
-
-                # If the leftmost bit of the dividend (or the
-                # part used in each step) is 0, the step cannot
-                # use the regular divisor; we need to use an
-                # all-0s divisor.
-                tmp = xor('0' * pick, tmp) + divident[pick]
-
-                # increment pick to move further
-            pick += 1
-
-        # For the last n bits, we have to carry it out
-        # normally as increased value of pick will cause
-        # Index Out of Bounds.
-        if tmp[0] == '1':
-            tmp = xor(divisor, tmp)
-        else:
-            tmp = xor('0' * pick, tmp)
-
-        checkword = tmp
-        return checkword
-
-    # Condition data
-    data = str(data)
-    # Condition Key
-    key = str(key)
-    l_key = len(key)
-
-    # Appends n-1 zeroes at end of data
-    appended_data = data + '0' * (l_key - 1)
-    remainder = mod2div(appended_data, key)
-
-    return remainder
-
-
-# Define String to Bits Function
-def string_to_bits(str):
-    # noqa: D401   "String" is an intended leading word.
-    """
-    String to Bits Converter.
-
-    Converts a Pythonic string to the string's binary representation.
-
-    Parameters
-    ----------
-    str:        string
-                The string to be converted.
-
-    Returns
-    -------
-    data:       string
-                The binary representation of the
-                input string.
-    """
-    data = (''.join(format(ord(x), 'b') for x in str))
-    return data
-
-
 # Define Per-Unit Impedance Formula
 def zpu(S, VLL=None, VLN=None):
     r"""
@@ -4377,6 +4170,16 @@ def vipf(V=None, I=None, PF=1, find=''):
                 System power factor, (+)ive values denote
                 leading power factor, (-)ive values denote
                 lagging poer factor; default=1
+    
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> # Demonstrate the generic functionality
+    >>> ep.vipf(V=480, I=ep.phasor.phasor(20, 120))
+    (480, (-9.999999999999996+17.320508075688775j), -0.4999999999999998)
+    >>> # Find the power factor
+    >>> ep.vipf(V=480, I=ep.phasor.phasor(20, 120), find="PF")
+    -0.4999999999999998
     """
     # Test to find Voltage
     if isinstance(V, float) and isinstance(I, complex):
