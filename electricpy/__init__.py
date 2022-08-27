@@ -56,7 +56,7 @@ def tcycle(ncycles = 1, freq = 60):
     --------
     >>> import electricpy as ep
     >>> ep.tcycle(1, freq=60) #Value of ncycles=1 & freq=60
-    0.01666667
+    0.016666666666666666
     >>> ep.tcycle(1, freq=50) #Value of ncycles=1 & freq=50
     0.02
     """
@@ -211,13 +211,14 @@ def cprint(val, unit=None, label=None, title=None,
     Examples
     --------
     >>> import electricpy as ep
-    >>> v = ep.phasor(67, 120)
+    >>> from electricpy.phasor import phasor
+    >>> v = phasor(67, 120)
     >>> ep.cprint(v)
     67.0 ∠ 120.0°
     >>> voltages = np.array([[67,0],
                              [67,-120],
                              [67,120]])
-    >>> Vset = ep.phasorlist( voltages )
+    >>> Vset = ep.phasor.phasorlist( voltages )
     >>> ep.cprint(Vset)
     [['67.0 ∠ 0.0°']
     ['67.0 ∠ -120.0°']
@@ -900,9 +901,9 @@ def voltdiv(Vin, R1, R2, Rload=None):
     --------
     >>> import electricpy as ep
     >>> ep.voltdiv(Vin=12, R1=4, R2=8)
-    8
+    8.0
     >>> ep.voltdiv(Vin=12, R1=6, R2=12, Rload=12) # R2 and Rload are parallel
-    6
+    6.0
     """
     # Determine whether Rload is given
     if Rload is None:  # No Load Given
@@ -2286,7 +2287,7 @@ def acpiv(S=None, I=None, VLL=None, VLN=None, V=None, PF=None):
     >>> import electricpy as ep
     >>> ep.acpiv(S=550, V=167)
     3.2934131736526946
-    >>> ep.acpiv(S=550, I=3.2934131736526946),
+    >>> ep.acpiv(S=550, I=3.2934131736526946)
     (96.4174949546675, 55.66666666666667, 167.0)
     """
     # Validate Inputs
@@ -4176,7 +4177,7 @@ def vipf(V=None, I=None, PF=1, find=''):
     >>> import electricpy as ep
     >>> # Demonstrate the generic functionality
     >>> ep.vipf(V=480, I=ep.phasor.phasor(20, 120))
-    (480, (-9.999999999999996+17.320508075688775j), -0.4999999999999998)
+    (480, (-9.999999999999996+17.320508075688775j), -0.4999999999999997)
     >>> # Find the power factor
     >>> ep.vipf(V=480, I=ep.phasor.phasor(20, 120), find="PF")
     -0.4999999999999998
