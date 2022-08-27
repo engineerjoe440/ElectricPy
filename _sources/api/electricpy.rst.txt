@@ -25,10 +25,6 @@
     
     characterz
     
-    coldjunction
-    
-    convbar
-    
     cosfilt
     
     cprint
@@ -101,11 +97,15 @@
     
     nlinpf
     
+    non_linear_pf
+    
     parallel_plate_capacitance
     
     peak
     
     pfcorrection
+    
+    phase_shift_transformer
     
     phaseline
     
@@ -135,8 +135,6 @@
     
     rms
     
-    rtdtemp
-    
     rxrecompose
     
     sampfft
@@ -144,6 +142,8 @@
     secondary
     
     shannondata
+    
+    short_circuit_current
     
     sinfilt
     
@@ -164,8 +164,6 @@
     tap_changing_transformer
     
     tcycle
-    
-    thermocouple
     
     transformertest
     

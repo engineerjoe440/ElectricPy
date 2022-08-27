@@ -363,7 +363,7 @@
   <h1 id="modules-electricpy-sim--page-root">Source code for electricpy.sim</h1><div class="highlight"><pre>
 <span></span><span class="c1">################################################################################</span>
 <span class="sd">"""</span>
-<span class="sd">`electricpy.sim`  -  Simulation Module.</span>
+<span class="sd">Simulation Module for Filter and System Simulation for Electrical Engineering.</span>
 
 <span class="sd">&gt;&gt;&gt; from electricpy import sim</span>
 <span class="sd">"""</span>
@@ -375,8 +375,12 @@
 <span class="c1"># Import Required External Dependencies</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">_np</span>
 <span class="kn">import</span> <span class="nn">scipy.signal</span> <span class="k">as</span> <span class="nn">_sig</span>
-<span class="kn">from</span> <span class="nn">numdifftools</span> <span class="kn">import</span> <span class="n">Jacobian</span> <span class="k">as</span> <span class="n">jacobian</span>
 <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">newton</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">numdifftools</span> <span class="kn">import</span> <span class="n">Jacobian</span> <span class="k">as</span> <span class="n">jacobian</span>
+    <span class="n">__NUMDIFFTOOL_SUPPORT__</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">__NUMDIFFTOOL_SUPPORT__</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="c1"># Import Local Dependencies</span>
 <span class="kn">from</span> <span class="nn">electricpy.bode</span> <span class="kn">import</span> <span class="n">_sys_condition</span>
@@ -1528,6 +1532,13 @@
 <span class="sd">    nr_pq:                  Newton-Raphson System Generator</span>
 <span class="sd">    electricpy.powerflow:   Simple (2-bus) Power Flow Calculator</span>
 <span class="sd">    """</span>
+    <span class="c1"># Identify Lack of Support</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">__NUMDIFFTOOL_SUPPORT__</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
+            <span class="s2">"(!)  Cannot perform request due to lack of installed package: "</span>
+            <span class="s2">"`numdifftools` which may be obtained with: `pip install "</span>
+            <span class="s2">"numdifftools`."</span>
+        <span class="p">)</span>
     <span class="c1"># Reformat Inputs to Meet Criteria</span>
     <span class="k">if</span> <span class="n">slackbus</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="c1"># Ybus</span>

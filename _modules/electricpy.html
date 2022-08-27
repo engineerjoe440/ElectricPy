@@ -1093,7 +1093,7 @@
 
 
 <span class="c1"># Define Non-Linear Power Factor Calculator</span>
-<div class="viewcode-block" id="nlinpf"><a class="viewcode-back" href="../api/electricpy.nlinpf.html#electricpy.nlinpf">[docs]</a><span class="k">def</span> <span class="nf">nlinpf</span><span class="p">(</span><span class="n">PFtrue</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">PFdist</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">PFdisp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="non_linear_pf"><a class="viewcode-back" href="../api/electricpy.non_linear_pf.html#electricpy.non_linear_pf">[docs]</a><span class="k">def</span> <span class="nf">non_linear_pf</span><span class="p">(</span><span class="n">PFtrue</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">PFdist</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">PFdisp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Non-Linear Power Factor Evaluator.</span>
 
@@ -1101,6 +1101,8 @@
 <span class="sd">    given the other two. These particular unknowns are the arguments</span>
 <span class="sd">    and as such, they are described in the representative sections</span>
 <span class="sd">    below.</span>
+
+<span class="sd">    .. note:: Also available as `nlinpf`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -1127,15 +1129,20 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"ERROR: Function requires at least two arguments."</span><span class="p">)</span></div>
 
+<span class="c1"># Alias to original Name</span>
+<span class="n">nlinpf</span> <span class="o">=</span> <span class="n">non_linear_pf</span>
+
 
 <span class="c1"># Define Short-Circuit RL Current Calculator</span>
-<div class="viewcode-block" id="iscrl"><a class="viewcode-back" href="../api/electricpy.iscrl.html#electricpy.iscrl">[docs]</a><span class="k">def</span> <span class="nf">iscrl</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mxcurrent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="short_circuit_current"><a class="viewcode-back" href="../api/electricpy.short_circuit_current.html#electricpy.short_circuit_current">[docs]</a><span class="k">def</span> <span class="nf">short_circuit_current</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mxcurrent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Short-Circuit-Current (ISC) Calculator.</span>
 
 <span class="sd">    The Isc-RL function (Short Circuit Current for RL Circuit)</span>
 <span class="sd">    is designed to calculate the short-circuit current for an</span>
 <span class="sd">    RL circuit.</span>
+
+<span class="sd">    .. note:: Also available as `iscrl`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -1215,6 +1222,9 @@
         <span class="n">Iac</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">V</span> <span class="o">/</span> <span class="n">Z</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Iac</span></div>
 
+<span class="c1"># Alias to original Name</span>
+<span class="n">iscrl</span> <span class="o">=</span> <span class="n">short_circuit_current</span>
+
 
 <span class="c1"># Define Voltage Divider Calculator</span>
 <div class="viewcode-block" id="voltdiv"><a class="viewcode-back" href="../api/electricpy.voltdiv.html#electricpy.voltdiv">[docs]</a><span class="k">def</span> <span class="nf">voltdiv</span><span class="p">(</span><span class="n">Vin</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">Rload</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1247,6 +1257,14 @@
 <span class="sd">    -------</span>
 <span class="sd">    Vout:   float</span>
 <span class="sd">            The Output voltage as measured across R2 and/or Rload</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
+<span class="sd">    &gt;&gt;&gt; ep.voltdiv(Vin=12, R1=4, R2=8)</span>
+<span class="sd">    8</span>
+<span class="sd">    &gt;&gt;&gt; ep.voltdiv(Vin=12, R1=6, R2=12, Rload=12) # R2 and Rload are parallel</span>
+<span class="sd">    6</span>
 <span class="sd">    """</span>
     <span class="c1"># Determine whether Rload is given</span>
     <span class="k">if</span> <span class="n">Rload</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># No Load Given</span>
@@ -1478,7 +1496,7 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    z1:     [float, complex]</span>
-<span class="sd">            Bridge impedance 1</span>
+<span class="sd">            Bridge impedance 1iscrl</span>
 <span class="sd">    z2:     [float, complex]</span>
 <span class="sd">            Bridge impedance 2</span>
 <span class="sd">    z3:     [float, complex]</span>
@@ -1731,229 +1749,6 @@
     <span class="k">return</span> <span class="n">R</span></div>
 
 
-<span class="c1"># Define Cold-Junction-Voltage Calculator</span>
-<div class="viewcode-block" id="coldjunction"><a class="viewcode-back" href="../api/electricpy.coldjunction.html#electricpy.coldjunction">[docs]</a><span class="k">def</span> <span class="nf">coldjunction</span><span class="p">(</span><span class="n">Tcj</span><span class="p">,</span> <span class="n">coupletype</span><span class="o">=</span><span class="s2">"K"</span><span class="p">,</span> <span class="n">To</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Vo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">P1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">P2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">P3</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">P4</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Q1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Q2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">round</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Thermocouple Cold-Junction Formula.</span>
-
-<span class="sd">    Function to calculate the expected cold-junction-voltage given</span>
-<span class="sd">    the temperature at the cold-junction.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    Tcj:        float</span>
-<span class="sd">                The temperature (in degrees C) that the junction is</span>
-<span class="sd">                currently subjected to.</span>
-<span class="sd">    coupletype: string, optional</span>
-<span class="sd">                Thermocouple Type, may be one of (B,E,J,K,N,R,S,T), default="K"</span>
-<span class="sd">    To:         float, optional</span>
-<span class="sd">                Temperature Constant used in Polynomial.</span>
-<span class="sd">    Vo:         float, optional</span>
-<span class="sd">                Voltage Constant used in Polynomial.</span>
-<span class="sd">    P1:         float, optional</span>
-<span class="sd">                Polynomial constant.</span>
-<span class="sd">    P2:         float, optional</span>
-<span class="sd">                Polynomial constant.</span>
-<span class="sd">    P3:         float, optional</span>
-<span class="sd">                Polynomial constant.</span>
-<span class="sd">    P4:         float, optional</span>
-<span class="sd">                Polynomial constant.</span>
-<span class="sd">    Q1:         float, optional</span>
-<span class="sd">                Polynomial constant.</span>
-<span class="sd">    Q2:         float, optional</span>
-<span class="sd">                Polynomial constant.</span>
-<span class="sd">    round:      int, optional</span>
-<span class="sd">                Control input to specify how many decimal places the result</span>
-<span class="sd">                should be rounded to, default=1.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    Vcj:        float</span>
-<span class="sd">                The calculated cold-junction-voltage in volts.</span>
-<span class="sd">    """</span>
-    <span class="c1"># Condition Inputs</span>
-    <span class="n">coupletype</span> <span class="o">=</span> <span class="n">coupletype</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-    <span class="c1"># Validate Temperature Range</span>
-    <span class="k">if</span> <span class="n">coupletype</span> <span class="o">==</span> <span class="s2">"B"</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;</span> <span class="n">Tcj</span> <span class="o">&lt;</span> <span class="mi">70</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Temperature out of range."</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="o">-</span><span class="mi">20</span> <span class="o">&lt;</span> <span class="n">Tcj</span> <span class="o">&lt;</span> <span class="mi">70</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Temperature out of range."</span><span class="p">)</span>
-    <span class="c1"># Define Constant Lookup System</span>
-    <span class="n">lookup</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"B"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">,</span> <span class="s2">"J"</span><span class="p">,</span> <span class="s2">"K"</span><span class="p">,</span> <span class="s2">"N"</span><span class="p">,</span> <span class="s2">"R"</span><span class="p">,</span> <span class="s2">"S"</span><span class="p">,</span> <span class="s2">"T"</span><span class="p">]</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">coupletype</span> <span class="ow">in</span> <span class="n">lookup</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid Thermocouple Type"</span><span class="p">)</span>
-    <span class="n">index</span> <span class="o">=</span> <span class="n">lookup</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">coupletype</span><span class="p">)</span>
-    <span class="c1"># Define Constant Dictionary</span>
-    <span class="c1"># Load Data Into Terms</span>
-    <span class="n">parameters</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">COLD_JUNCTION_DATA</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-        <span class="n">parameters</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="n">COLD_JUNCTION_DATA</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="n">index</span><span class="p">]</span>
-    <span class="n">To</span><span class="p">,</span> <span class="n">Vo</span><span class="p">,</span> <span class="n">P1</span><span class="p">,</span> <span class="n">P2</span><span class="p">,</span> <span class="n">P3</span><span class="p">,</span> <span class="n">P4</span><span class="p">,</span> <span class="n">Q1</span><span class="p">,</span> <span class="n">Q2</span> <span class="o">=</span> <span class="p">[</span><span class="n">parameters</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">COLD_JUNCTION_KEYS</span><span class="p">]</span>
-    <span class="c1"># Define Formula Terms</span>
-    <span class="n">tx</span> <span class="o">=</span> <span class="p">(</span><span class="n">Tcj</span> <span class="o">-</span> <span class="n">To</span><span class="p">)</span>
-    <span class="n">num</span> <span class="o">=</span> <span class="n">tx</span> <span class="o">*</span> <span class="p">(</span><span class="n">P1</span> <span class="o">+</span> <span class="n">tx</span> <span class="o">*</span> <span class="p">(</span><span class="n">P2</span> <span class="o">+</span> <span class="n">tx</span> <span class="o">*</span> <span class="p">(</span><span class="n">P3</span> <span class="o">+</span> <span class="n">P4</span> <span class="o">*</span> <span class="n">tx</span><span class="p">)))</span>
-    <span class="n">den</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">tx</span> <span class="o">*</span> <span class="p">(</span><span class="n">Q1</span> <span class="o">+</span> <span class="n">Q2</span> <span class="o">*</span> <span class="n">tx</span><span class="p">)</span>
-    <span class="n">Vcj</span> <span class="o">=</span> <span class="n">Vo</span> <span class="o">+</span> <span class="n">num</span> <span class="o">/</span> <span class="n">den</span>
-    <span class="c1"># Round Value if Allowed</span>
-    <span class="k">if</span> <span class="nb">round</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">Vcj</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">Vcj</span><span class="p">,</span> <span class="nb">round</span><span class="p">)</span>
-    <span class="c1"># Return in milivolts</span>
-    <span class="k">return</span> <span class="n">Vcj</span> <span class="o">*</span> <span class="n">m</span></div>
-
-
-<span class="c1"># Define Thermocouple Temperature Calculation</span>
-<div class="viewcode-block" id="thermocouple"><a class="viewcode-back" href="../api/electricpy.thermocouple.html#electricpy.thermocouple">[docs]</a><span class="k">def</span> <span class="nf">thermocouple</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">coupletype</span><span class="o">=</span><span class="s2">"K"</span><span class="p">,</span> <span class="n">fahrenheit</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cjt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">To</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">Vo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">P1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">P2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">P3</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">P4</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Q1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Q2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">Q3</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">round</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Thermocouple Temperature Calculator.</span>
-
-<span class="sd">    Utilizes polynomial formula to calculate the temperature being monitored</span>
-<span class="sd">    by a thermocouple. Allows for various thermocouple types (B,E,J,K,N,R,S,T)</span>
-<span class="sd">    and various cold-junction-temperatures.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    V:          float</span>
-<span class="sd">                Measured voltage (in Volts)</span>
-<span class="sd">    coupletype: string, optional</span>
-<span class="sd">                Thermocouple Type, may be one of (B,E,J,K,N,R,S,T), default="K"</span>
-<span class="sd">    fahrenheit: bool, optional</span>
-<span class="sd">                Control to enable return value as Fahrenheit instead of Celsius,</span>
-<span class="sd">                default=False</span>
-<span class="sd">    cjt:        float, optional</span>
-<span class="sd">                Cold-Junction-Temperature</span>
-<span class="sd">    To:         float, optional</span>
-<span class="sd">                Temperature Constant used in Polynomial.</span>
-<span class="sd">    Vo:         float, optional</span>
-<span class="sd">                Voltage Constant used in Polynomial.</span>
-<span class="sd">    P1:         float, optional</span>
-<span class="sd">                Polynomial constant.</span>
-<span class="sd">    P2:         float, optional</span>
-<span class="sd">                Polynomial constant.</span>
-<span class="sd">    P3:         float, optional</span>
-<span class="sd">                Polynomial constant.</span>
-<span class="sd">    P4:         float, optional</span>
-<span class="sd">                Polynomial constant.</span>
-<span class="sd">    Q1:         float, optional</span>
-<span class="sd">                Polynomial constant.</span>
-<span class="sd">    Q2:         float, optional</span>
-<span class="sd">                Polynomial constant.</span>
-<span class="sd">    Q3:         float, optional</span>
-<span class="sd">                Polynomial constant.</span>
-<span class="sd">    round:      int, optional</span>
-<span class="sd">                Control input to specify how many decimal places the result</span>
-<span class="sd">                should be rounded to, default=1.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    T:          float</span>
-<span class="sd">                The temperature (by default in degrees C, but optionally in</span>
-<span class="sd">                degrees F) as computed by the function.</span>
-<span class="sd">    """</span>
-    <span class="c1"># Condition Inputs</span>
-    <span class="n">coupletype</span> <span class="o">=</span> <span class="n">coupletype</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-    <span class="n">V</span> <span class="o">=</span> <span class="n">V</span> <span class="o">/</span> <span class="n">m</span>  <span class="c1"># Scale volts to milivolts</span>
-    <span class="c1"># Determine Cold-Junction-Voltage</span>
-    <span class="k">if</span> <span class="n">cjt</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">Vcj</span> <span class="o">=</span> <span class="n">coldjunction</span><span class="p">(</span><span class="n">cjt</span><span class="p">,</span> <span class="n">coupletype</span><span class="p">,</span> <span class="n">To</span><span class="p">,</span> <span class="n">Vo</span><span class="p">,</span> <span class="n">P1</span><span class="p">,</span> <span class="n">P2</span><span class="p">,</span> <span class="n">P3</span><span class="p">,</span> <span class="n">P4</span><span class="p">,</span> <span class="n">Q1</span><span class="p">,</span> <span class="n">Q2</span><span class="p">,</span> <span class="nb">round</span><span class="p">)</span>
-        <span class="n">V</span> <span class="o">+=</span> <span class="n">Vcj</span> <span class="o">/</span> <span class="n">m</span>
-    <span class="c1"># Define Constant Lookup System</span>
-    <span class="n">lookup</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"B"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">,</span> <span class="s2">"J"</span><span class="p">,</span> <span class="s2">"K"</span><span class="p">,</span> <span class="s2">"N"</span><span class="p">,</span> <span class="s2">"R"</span><span class="p">,</span> <span class="s2">"S"</span><span class="p">,</span> <span class="s2">"T"</span><span class="p">]</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">coupletype</span> <span class="ow">in</span> <span class="n">lookup</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid Thermocouple Type"</span><span class="p">)</span>
-    <span class="c1"># Determine Array Selection</span>
-    <span class="n">vset</span> <span class="o">=</span> <span class="n">THERMO_COUPLE_VOLTAGES</span><span class="p">[</span><span class="n">coupletype</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">V</span> <span class="o">&lt;</span> <span class="n">vset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">m</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Voltage Below Lower Bound"</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">vset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">V</span> <span class="o">&lt;</span> <span class="n">vset</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-        <span class="n">select</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">elif</span> <span class="n">vset</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">V</span> <span class="o">&lt;</span> <span class="n">vset</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
-        <span class="n">select</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">elif</span> <span class="n">vset</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">V</span> <span class="o">&lt;</span> <span class="n">vset</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
-        <span class="n">select</span> <span class="o">=</span> <span class="mi">2</span>
-    <span class="k">elif</span> <span class="n">vset</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">V</span> <span class="o">&lt;</span> <span class="n">vset</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span>
-        <span class="n">select</span> <span class="o">=</span> <span class="mi">3</span>
-    <span class="k">elif</span> <span class="n">vset</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">V</span> <span class="o">&lt;=</span> <span class="n">vset</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span>
-        <span class="n">select</span> <span class="o">=</span> <span class="mi">4</span>
-    <span class="k">elif</span> <span class="n">vset</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">V</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Voltage Above Upper Bound"</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Internal Error!"</span><span class="p">)</span>
-    <span class="c1"># Load Data Into Terms</span>
-    <span class="n">parameters</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">THERMO_COUPLE_KEYS</span><span class="p">):</span>
-        <span class="n">parameters</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="n">THERMO_COUPLE_DATA</span><span class="p">[</span><span class="n">coupletype</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">select</span><span class="p">]</span>
-    <span class="n">Vo</span><span class="p">,</span> <span class="n">To</span><span class="p">,</span> <span class="n">P1</span><span class="p">,</span> <span class="n">P2</span><span class="p">,</span> <span class="n">P3</span><span class="p">,</span> <span class="n">P4</span><span class="p">,</span> <span class="n">Q1</span><span class="p">,</span> <span class="n">Q2</span><span class="p">,</span> <span class="n">Q3</span> <span class="o">=</span> <span class="p">[</span><span class="n">parameters</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">THERMO_COUPLE_KEYS</span><span class="p">]</span>
-    <span class="c1"># Calculate Temperature in Degrees C</span>
-    <span class="n">num</span> <span class="o">=</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">Vo</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">P1</span> <span class="o">+</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">Vo</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">P2</span> <span class="o">+</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">Vo</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">P3</span> <span class="o">+</span> <span class="n">P4</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">Vo</span><span class="p">))))</span>
-    <span class="n">den</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">Vo</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">Q1</span> <span class="o">+</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">Vo</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">Q2</span> <span class="o">+</span> <span class="n">Q3</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">Vo</span><span class="p">)))</span>
-    <span class="n">temp</span> <span class="o">=</span> <span class="n">To</span> <span class="o">+</span> <span class="n">num</span> <span class="o">/</span> <span class="n">den</span>
-    <span class="c1"># Return Temperature</span>
-    <span class="k">if</span> <span class="n">fahrenheit</span><span class="p">:</span>
-        <span class="n">temp</span> <span class="o">=</span> <span class="p">(</span><span class="n">temp</span> <span class="o">*</span> <span class="mi">9</span> <span class="o">/</span> <span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">32</span>
-    <span class="n">temp</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="nb">round</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">temp</span></div>
-
-
-<span class="c1"># Define RTD Calculator</span>
-<div class="viewcode-block" id="rtdtemp"><a class="viewcode-back" href="../api/electricpy.rtdtemp.html#electricpy.rtdtemp">[docs]</a><span class="k">def</span> <span class="nf">rtdtemp</span><span class="p">(</span><span class="n">RT</span><span class="p">,</span> <span class="n">rtdtype</span><span class="o">=</span><span class="s2">"PT100"</span><span class="p">,</span> <span class="n">fahrenheit</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Rref</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Tref</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">a</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">round</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    RTD Temperature Calculator.</span>
-
-<span class="sd">    Evaluates the measured temperature based on the measured resistance</span>
-<span class="sd">    and the RTD type.</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    RT:         float</span>
-<span class="sd">                The measured resistance (in ohms).</span>
-<span class="sd">    rtdtype:    string</span>
-<span class="sd">                RTD Type string, may be one of: (PT100, PT1000,</span>
-<span class="sd">                CU100, NI100, NI120, NIFE), default=PT100</span>
-<span class="sd">    fahrenheit: bool, optional</span>
-<span class="sd">                Control parameter to force return into degrees</span>
-<span class="sd">                fahrenheit, default=False</span>
-<span class="sd">    Rref:       float, optional</span>
-<span class="sd">                Resistance reference, commonly used if non-standard</span>
-<span class="sd">                RTD type being used. Specified in ohms.</span>
-<span class="sd">    Tref:       float, optional</span>
-<span class="sd">                Temperature reference, commonly used if non-standard</span>
-<span class="sd">                RTD type being used. Specified in degrees Celsius.</span>
-<span class="sd">    a:          float, optional</span>
-<span class="sd">                Scaling value, commonly used if non-standard</span>
-<span class="sd">                RTD type being used.</span>
-<span class="sd">    round:      int, optional</span>
-<span class="sd">                Control argument to specify number of decimal points</span>
-<span class="sd">                in returned value.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    temp:       float</span>
-<span class="sd">                Calculated temperature, defaults to degrees Celsius.</span>
-<span class="sd">    """</span>
-    <span class="c1"># Load Variables</span>
-    <span class="k">if</span> <span class="n">Rref</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">Rref</span> <span class="o">=</span> <span class="n">RTD_TYPES</span><span class="p">[</span><span class="n">rtdtype</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">Tref</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">Tref</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">a</span> <span class="o">=</span> <span class="n">RTD_TYPES</span><span class="p">[</span><span class="n">rtdtype</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-    <span class="c1"># Define Terms</span>
-    <span class="n">num</span> <span class="o">=</span> <span class="n">RT</span> <span class="o">-</span> <span class="n">Rref</span> <span class="o">+</span> <span class="n">Rref</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">Tref</span>
-    <span class="n">den</span> <span class="o">=</span> <span class="n">Rref</span> <span class="o">*</span> <span class="n">a</span>
-    <span class="n">temp</span> <span class="o">=</span> <span class="n">num</span> <span class="o">/</span> <span class="n">den</span>
-    <span class="c1"># Return Temperature</span>
-    <span class="k">if</span> <span class="n">fahrenheit</span><span class="p">:</span>
-        <span class="n">temp</span> <span class="o">=</span> <span class="p">(</span><span class="n">temp</span> <span class="o">*</span> <span class="mi">9</span> <span class="o">/</span> <span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">32</span>
-    <span class="n">temp</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="nb">round</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">temp</span></div>
-
-
 <span class="c1"># Define function to find VDC setpoint</span>
 <div class="viewcode-block" id="vscdcbus"><a class="viewcode-back" href="../api/electricpy.vscdcbus.html#electricpy.vscdcbus">[docs]</a><span class="k">def</span> <span class="nf">vscdcbus</span><span class="p">(</span><span class="n">VLL</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">mmax</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">"""</span>
@@ -2038,72 +1833,6 @@
     <span class="c1"># Calculate w0L</span>
     <span class="n">w0L</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span> <span class="o">*</span> <span class="n">Ls</span>
     <span class="k">return</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">w0L</span></div>
-
-
-<span class="c1"># Define Convolution Bar-Graph Function:</span>
-<div class="viewcode-block" id="convbar"><a class="viewcode-back" href="../api/electricpy.convbar.html#electricpy.convbar">[docs]</a><span class="k">def</span> <span class="nf">convbar</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">outline</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Convolution Bar-Graph Plotter Function.</span>
-
-<span class="sd">    Generates plots of each of two input arrays as bar-graphs, then</span>
-<span class="sd">    generates a convolved bar-graph of the two inputs to demonstrate</span>
-<span class="sd">    and illustrate convolution, typically for an educational purpose.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
-<span class="sd">    &gt;&gt;&gt; h = np.array([0, 1, 1, 1, 0])</span>
-<span class="sd">    &gt;&gt;&gt; x = np.array([0, 1, 1, 1, 0])</span>
-<span class="sd">    &gt;&gt;&gt; ep.convbar(h, x)</span>
-
-<span class="sd">    .. image:: /static/convbar-example.png</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    h:      numpy.ndarray</span>
-<span class="sd">            Impulse Response - Given as Array (Prefferably Numpy Array)</span>
-<span class="sd">    x:      numpy.ndarray</span>
-<span class="sd">            Input Function - Given as Array (Prefferably Numpy Array)</span>
-<span class="sd">    """</span>
-    <span class="c1"># The impulse response</span>
-    <span class="n">M</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-    <span class="c1"># Plot</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">outline</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'h'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Impulse Response'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-
-    <span class="c1"># The input function</span>
-    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-    <span class="c1"># Plot</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">outline</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">19</span><span class="p">])</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Input Function'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'x'</span><span class="p">)</span>
-
-    <span class="c1"># The output</span>
-    <span class="n">L</span> <span class="o">=</span> <span class="n">M</span> <span class="o">+</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="n">w</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">outline</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'y'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Convolved Output'</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">_plt</span></div>
 
 
 <span class="c1"># Define Peak Calculator</span>
@@ -3093,6 +2822,9 @@
 <span class="sd">                Line-to-Neutral voltage in volts</span>
 <span class="sd">    V:          complex, optional</span>
 <span class="sd">                Single-phase voltage in volts</span>
+<span class="sd">    PF:         float, optional</span>
+<span class="sd">                Power factor to condition the apparent power to an appropriate</span>
+<span class="sd">                complex value.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -3117,6 +2849,14 @@
 <span class="sd">    PF:         float, optional</span>
 <span class="sd">                Supporting argument to convert floating-point</span>
 <span class="sd">                apparent power to complex representation.</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
+<span class="sd">    &gt;&gt;&gt; ep.acpiv(S=550, V=167)</span>
+<span class="sd">    3.2934131736526946</span>
+<span class="sd">    &gt;&gt;&gt; ep.acpiv(S=550, I=3.2934131736526946),</span>
+<span class="sd">    (96.4174949546675, 55.66666666666667, 167.0)</span>
 <span class="sd">    """</span>
     <span class="c1"># Validate Inputs</span>
     <span class="k">if</span> <span class="n">S</span> <span class="o">==</span> <span class="n">I</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -3603,7 +3343,7 @@
 
 
 <span class="c1"># Define Simple Transformer Phase Shift Function</span>
-<div class="viewcode-block" id="xfmphs"><a class="viewcode-back" href="../api/electricpy.xfmphs.html#electricpy.xfmphs">[docs]</a><span class="k">def</span> <span class="nf">xfmphs</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">"DY"</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+<div class="viewcode-block" id="phase_shift_transformer"><a class="viewcode-back" href="../api/electricpy.phase_shift_transformer.html#electricpy.phase_shift_transformer">[docs]</a><span class="k">def</span> <span class="nf">phase_shift_transformer</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">"DY"</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Electrical Transformer Phase-Shift Calculator.</span>
 
@@ -3646,6 +3386,9 @@
     <span class="n">phase</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">v</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">shift</span><span class="p">)))</span>
     <span class="c1"># Return</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">phase</span><span class="p">)</span></div>
+
+<span class="c1"># Alias to original Name.</span>
+<span class="n">xfmphs</span> <span class="o">=</span> <span class="n">phase_shift_transformer</span>
 
 
 <span class="c1"># Define Induction Machine Thevenin Voltage Calculator</span>

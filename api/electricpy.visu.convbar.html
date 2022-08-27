@@ -47,7 +47,7 @@
   
   
   
-    <title>electricpy.rtdtemp &#8212; electricpy 0.2.2 documentation</title>
+    <title>electricpy.visu.convbar &#8212; electricpy 0.2.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/material.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -58,8 +58,8 @@
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.rxrecompose" href="electricpy.rxrecompose.html" />
-    <link rel="prev" title="electricpy.rms" href="electricpy.rms.html" />
+    <link rel="next" title="electricpy.visu.phasorplot" href="electricpy.visu.phasorplot.html" />
+    <link rel="prev" title="electricpy.visu.PowerCircle" href="electricpy.visu.PowerCircle.html" />
   
    
 
@@ -78,7 +78,7 @@
   <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
   <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
   <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
-  <a href="#api/electricpy.rtdtemp" tabindex="1" class="md-skip"> Skip to content </a>
+  <a href="#api/electricpy.visu.convbar" tabindex="1" class="md-skip"> Skip to content </a>
   <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
@@ -97,7 +97,7 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           <span class="md-header-nav__topic">ElectricPy</span>
-          <span class="md-header-nav__topic"> electricpy.rtdtemp </span>
+          <span class="md-header-nav__topic"> electricpy.visu.convbar </span>
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
@@ -172,7 +172,7 @@
       <ul class="md-tabs__list">
           <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">electricpy 0.2.2 documentation</a></li>
           <li class="md-tabs__item"><a href="../electricpyapi.html" class="md-tabs__link">ElectricPy API</a></li>
-          <li class="md-tabs__item"><a href="electricpy.html" class="md-tabs__link">electricpy</a></li>
+          <li class="md-tabs__item"><a href="electricpy.visu.html" class="md-tabs__link">electricpy.visu</a></li>
       </ul>
     </div>
   </nav>
@@ -351,7 +351,7 @@
 <nav class="md-nav md-nav--secondary">
   <ul class="md-nav__list" data-md-scrollfix="">
     
-<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/api/electricpy.rtdtemp.rst.txt">Show Source</a> </li>
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/api/electricpy.visu.convbar.rst.txt">Show Source</a> </li>
 
 <li id="searchbox" class="md-nav__item"></li>
 
@@ -364,37 +364,30 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  <section id="electricpy-rtdtemp">
-<h1 id="api-electricpy-rtdtemp--page-root">electricpy.rtdtemp<a class="headerlink" href="#api-electricpy-rtdtemp--page-root" title="Permalink to this heading">¶</a></h1>
+  <section id="electricpy-visu-convbar">
+<h1 id="api-electricpy-visu-convbar--page-root">electricpy.visu.convbar<a class="headerlink" href="#api-electricpy-visu-convbar--page-root" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="electricpy.rtdtemp">
-<span class="sig-prename descclassname"><span class="pre">electricpy.</span></span><span class="sig-name descname"><span class="pre">rtdtemp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">RT</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rtdtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'PT100'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fahrenheit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy.html#rtdtemp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.rtdtemp" title="Permalink to this definition">¶</a></dt>
-<dd><p>RTD Temperature Calculator.</p>
-<p>Evaluates the measured temperature based on the measured resistance
-and the RTD type.</p>
+<dt class="sig sig-object py" id="electricpy.visu.convbar">
+<span class="sig-prename descclassname"><span class="pre">electricpy.visu.</span></span><span class="sig-name descname"><span class="pre">convbar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">h</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/visu.html#convbar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.visu.convbar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convolution Bar-Graph Plotter Function.</p>
+<p>Generates plots of each of two input arrays as bar-graphs, then
+generates a convolved bar-graph of the two inputs to demonstrate
+and illustrate convolution, typically for an educational purpose.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">electricpy</span> <span class="k">as</span> <span class="nn">ep</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">convbar</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/convbar-example.png" src="../_images/convbar-example.png"/>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>RT</strong> (<em>float</em>) – The measured resistance (in ohms).</p></li>
-<li><p><strong>rtdtype</strong> (<em>string</em>) – RTD Type string, may be one of: (PT100, PT1000,
-CU100, NI100, NI120, NIFE), default=PT100</p></li>
-<li><p><strong>fahrenheit</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control parameter to force return into degrees
-fahrenheit, default=False</p></li>
-<li><p><strong>Rref</strong> (<em>float</em><em>, </em><em>optional</em>) – Resistance reference, commonly used if non-standard
-RTD type being used. Specified in ohms.</p></li>
-<li><p><strong>Tref</strong> (<em>float</em><em>, </em><em>optional</em>) – Temperature reference, commonly used if non-standard
-RTD type being used. Specified in degrees Celsius.</p></li>
-<li><p><strong>a</strong> (<em>float</em><em>, </em><em>optional</em>) – Scaling value, commonly used if non-standard
-RTD type being used.</p></li>
-<li><p><strong>round</strong> (<em>int</em><em>, </em><em>optional</em>) – Control argument to specify number of decimal points
-in returned value.</p></li>
+<li><p><strong>h</strong> (<em>numpy.ndarray</em>) – Impulse Response - Given as Array (Prefferably Numpy Array)</p></li>
+<li><p><strong>x</strong> (<em>numpy.ndarray</em>) – Input Function - Given as Array (Prefferably Numpy Array)</p></li>
 </ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>temp</strong> – Calculated temperature, defaults to degrees Celsius.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -410,7 +403,7 @@ in returned value.</p></li>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
           
-            <a href="electricpy.rms.html" title="electricpy.rms"
+            <a href="electricpy.visu.PowerCircle.html" title="electricpy.visu.PowerCircle"
                class="md-flex md-footer-nav__link md-footer-nav__link--prev"
                rel="prev">
               <div class="md-flex__cell md-flex__cell--shrink">
@@ -419,17 +412,17 @@ in returned value.</p></li>
               <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
                 <span class="md-flex__ellipsis">
                   <span
-                      class="md-footer-nav__direction"> Previous </span> electricpy.rms </span>
+                      class="md-footer-nav__direction"> Previous </span> electricpy.visu.PowerCircle </span>
               </div>
             </a>
           
           
-            <a href="electricpy.rxrecompose.html" title="electricpy.rxrecompose"
+            <a href="electricpy.visu.phasorplot.html" title="electricpy.visu.phasorplot"
                class="md-flex md-footer-nav__link md-footer-nav__link--next"
                rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
                 class="md-flex__ellipsis"> <span
-                class="md-footer-nav__direction"> Next </span> electricpy.rxrecompose </span>
+                class="md-footer-nav__direction"> Next </span> electricpy.visu.phasorplot </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink"><i
                 class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>

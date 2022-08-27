@@ -381,6 +381,8 @@ specified in volt-amps (VAs)</p></li>
 <li><p><strong>VLL</strong> (<em>complex</em><em>, </em><em>optional</em>) – Line-to-Line voltage in volts</p></li>
 <li><p><strong>VLN</strong> (<em>complex</em><em>, </em><em>optional</em>) – Line-to-Neutral voltage in volts</p></li>
 <li><p><strong>V</strong> (<em>complex</em><em>, </em><em>optional</em>) – Single-phase voltage in volts</p></li>
+<li><p><strong>PF</strong> (<em>float</em><em>, </em><em>optional</em>) – Power factor to condition the apparent power to an appropriate
+complex value.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -404,6 +406,14 @@ apparent power to complex representation.</p></li>
 </p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">electricpy</span> <span class="k">as</span> <span class="nn">ep</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">acpiv</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">550</span><span class="p">,</span> <span class="n">V</span><span class="o">=</span><span class="mi">167</span><span class="p">)</span>
+<span class="go">3.2934131736526946</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">acpiv</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="mi">550</span><span class="p">,</span> <span class="n">I</span><span class="o">=</span><span class="mf">3.2934131736526946</span><span class="p">),</span>
+<span class="go">(96.4174949546675, 55.66666666666667, 167.0)</span>
+</pre></div>
+</div>
 </dd></dl>
 </section>
 

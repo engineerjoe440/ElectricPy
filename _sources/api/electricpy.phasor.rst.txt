@@ -31,8 +31,6 @@
     
     phasorlist
     
-    phasorplot
-    
     phasorz
     
     phs

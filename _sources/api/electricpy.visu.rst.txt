@@ -30,6 +30,10 @@
 .. autosummary::
     :toctree: .
     
+    convbar
+    
+    phasorplot
+    
     receiving_end_power_circle
     
     sending_end_power_circle

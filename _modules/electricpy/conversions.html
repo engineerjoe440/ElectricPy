@@ -363,7 +363,7 @@
   <h1 id="modules-electricpy-conversions--page-root">Source code for electricpy.conversions</h1><div class="highlight"><pre>
 <span></span><span class="c1">################################################################################</span>
 <span class="sd">"""</span>
-<span class="sd">`electricpy` Package - `conversions` Module.</span>
+<span class="sd">Conversion Utilities Common for Electrical Engineering.</span>
 
 <span class="sd">&gt;&gt;&gt; from electricpy import conversions</span>
 
@@ -576,6 +576,18 @@
 <span class="sd">    --------</span>
 <span class="sd">    seq_to_abc: Sequence to Phase Conversion</span>
 <span class="sd">    sequence:  Phase Impedance to Sequence Converter</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
+<span class="sd">    &gt;&gt;&gt; import electricpy.conversions as conv</span>
+<span class="sd">    &gt;&gt;&gt; abc_matrix = [</span>
+<span class="sd">    ...     ep.phasor(167, 0),</span>
+<span class="sd">    ...     ep.phasor(167, -120),</span>
+<span class="sd">    ...     ep.phasor(167, -240),</span>
+<span class="sd">    ... ]</span>
+<span class="sd">    &gt;&gt;&gt; conv.abc_to_seq(abc_matrix)</span>
+<span class="sd">    [0+0j, 167+0j, 0+0j]</span>
 <span class="sd">    """</span>
     <span class="c1"># Condition Reference:</span>
     <span class="n">reference</span> <span class="o">=</span> <span class="n">reference</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
@@ -992,6 +1004,7 @@
 <span class="sd">                     Voltage</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="n">ref_voltage</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="p">(</span><span class="n">db</span> <span class="o">/</span> <span class="mi">20</span><span class="p">))</span></div>
+
 <span class="c1"># END</span>
 </pre></div>
 
