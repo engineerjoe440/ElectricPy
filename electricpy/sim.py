@@ -754,17 +754,18 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
 
     Examples
     --------
+    # doctest: +SKIP
     >>> import numpy as np
     >>> from electricpy import sim # Import Simulation Submodule
     >>> def F(x):
-        matr = np.array([[x[1]*10*np.sin(x[0])+2],
-            [x[1]*(-10)*np.cos(x[0])+x[1]**2*10+1]])
-        return(matr)
+    ...     matr = np.array([[x[1]*10*np.sin(x[0])+2],
+    ...         [x[1]*(-10)*np.cos(x[0])+x[1]**2*10+1]])
+    ...     return(matr)
     >>> def J(x):
-        matr = np.array([[10*x[1]*np.cos(x[0]), 10*np.sin(x[0])],
-            [10*x[1]*np.sin(x[0]), -10*np.cos(x[0])+20*x[1]]])
-        return(matr)
-    # Now compute Newton-Raphson
+    ...     matr = np.array([[10*x[1]*np.cos(x[0]), 10*np.sin(x[0])],
+    ...         [10*x[1]*np.sin(x[0]), -10*np.cos(x[0])+20*x[1]]])
+    ...     return(matr)
+    >>> # Now compute Newton-Raphson
     >>> X0 = [0, 1]
     >>> results, iter = sim.NewtonRaphson(F,J,X0)
     >>> print(results)
@@ -834,7 +835,6 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
 
 # Define Newton-Raphson P/Q Evaluator
 def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False):
-    # doctest: +SKIP
     """
     Newton Raphson Real/Reactive Power Function Generator.
 
@@ -893,10 +893,11 @@ def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False)
 
     Examples
     --------
+    # doctest: +SKIP
     >>> import numpy as np
     >>> from electricpy import sim # Import Simulation Submodule
     >>> ybustest = [[-10j,10j],
-        [10j,-10j]]
+    ...             [10j,-10j]]
     >>> Vlist = [[1,0],[None,None]] # We don't know the voltage or angle at bus 2
     >>> Plist = [None,-2.0] # 2pu watts consumed
     >>> Qlist = [None,-1.0] # 1pu vars consumed
@@ -1153,16 +1154,24 @@ def mbuspowerflow(Ybus, Vknown, Pknown, Qknown, X0='flatstart', eps=1e-4,
 
     Examples
     --------
+    # doctest: +SKIP
     >>> # Perform Power-Flow Analysis for Figure
     >>> import numpy as np
     >>> from electricpy import sim # Import Simulation Submodule
     >>> ybustest = [[-10j,10j],
-        [10j,-10j]]
+    ...             [10j,-10j]]
     >>> Vlist = [[1,0],[None,None]] # We don't know the voltage or angle at bus 2
     >>> Plist = [None,-2.0] # 2pu watts consumed
     >>> Qlist = [None,-1.0] # 1pu vars consumed
-    >>> nr_res = sim.mbuspowerflow(ybustest,Vlist,Plist,Qlist,degrees=True,split=True,returnct=True)
-    >>> print(nr_res)
+    >>> sim.mbuspowerflow(
+    ...     ybustest,
+    ...     Vlist,
+    ...     Plist,
+    ...     Qlist,
+    ...     degrees=True,
+    ...     split=True,
+    ...     returnct=True
+    ... )
     ([array([-13.52185223]), array([ 0.85537271])], 4)
 
     See Also
