@@ -399,6 +399,14 @@ should be returned.</p></li>
 </p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">electricpy</span> <span class="k">as</span> <span class="nn">ep</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">powerset</span><span class="p">(</span><span class="n">P</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="go">(400, 300, 500.0, 0.8)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">powerset</span><span class="p">(</span><span class="n">P</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">find</span><span class="o">=</span><span class="s2">"PF"</span><span class="p">)</span>
+<span class="go">0.8</span>
+</pre></div>
+</div>
 </dd></dl>
 </section>
 

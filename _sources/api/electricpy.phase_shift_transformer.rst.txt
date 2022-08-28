@@ -1,6 +1,0 @@
-electricpy.phase\_shift\_transformer
-====================================
-
-.. currentmodule:: electricpy
-
-.. autofunction:: phase_shift_transformer

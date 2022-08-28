@@ -403,12 +403,18 @@ provided, default=1e-12</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>out</strong> – Capacitance or Inductance of Impedance</p>
+<dd class="field-even"><p><strong>float</strong></p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
+<dd class="field-odd"><p>Capacitance or Inductance of Impedance</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">electricpy</span> <span class="k">as</span> <span class="nn">ep</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">reactance</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># ohms - inductive impedance</span>
+<span class="go">0.0132629...</span>
+</pre></div>
+</div>
 </dd></dl>
 </section>
 

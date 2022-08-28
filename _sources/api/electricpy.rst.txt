@@ -53,26 +53,6 @@
     
     ic_555_monostable
     
-    imfoc_control
-    
-    indmachfocratings
-    
-    indmachiar
-    
-    indmachpem
-    
-    indmachpkslip
-    
-    indmachpktorq
-    
-    indmachstarttorq
-    
-    indmachtem
-    
-    indmachvth
-    
-    indmachzth
-    
     induction_machine_slip
     
     instpower
@@ -101,8 +81,6 @@
     
     pfcorrection
     
-    phase_shift_transformer
-    
     phaseline
     
     phs3valpha
@@ -120,10 +98,6 @@
     primary
     
     propagation_constants
-    
-    protor
-    
-    pstator
     
     puchgbase
     
@@ -151,15 +125,11 @@
     
     syncspeed
     
-    synmach_Eq
-    
     t_attenuator
     
     tap_changing_transformer
     
     tcycle
-    
-    transformertest
     
     transposez
     
@@ -176,8 +146,6 @@
     wireresistance
     
     wrms
-    
-    xfmphs
     
     zdecompose
     
