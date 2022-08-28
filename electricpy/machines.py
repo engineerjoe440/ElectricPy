@@ -108,7 +108,8 @@ def phase_shift_transformer(style="DY", shift=30):
 
     Examples
     --------
-    >>> import electricpy.machines
+    >>> import electricpy as ep
+    >>> import electricpy.machines as machines
     >>> # Find shift of Delta-Wye Transformer w/ 30° shift
     >>> shift = machines.xfmphs(style="DY", shift=30)
     >>> ep.cprint(shift)
