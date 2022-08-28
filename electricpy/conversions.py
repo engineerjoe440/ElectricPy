@@ -1,6 +1,6 @@
 ################################################################################
 """
-`electricpy` Package - `conversions` Module.
+Conversion Utilities Common for Electrical Engineering.
 
 >>> from electricpy import conversions
 
@@ -213,6 +213,19 @@ def abc_to_seq(Mabc, reference='A'):
     --------
     seq_to_abc: Sequence to Phase Conversion
     sequence:  Phase Impedance to Sequence Converter
+
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> from electricpy.phasor import phasor
+    >>> import electricpy.conversions as conv
+    >>> abc_matrix = [
+    ...     phasor(167, 0),
+    ...     phasor(167, -120),
+    ...     phasor(167, -240),
+    ... ]
+    >>> conv.abc_to_seq(abc_matrix)
+    >>> # Will return a list approximately equal to: [0+0j, 167+0j, 0+0j]
     """
     # Condition Reference:
     reference = reference.upper()
@@ -629,4 +642,5 @@ def db_to_voltage(db, ref_voltage):
                      Voltage
     """
     return ref_voltage * _np.power(10, -(db / 20))
+
 # END

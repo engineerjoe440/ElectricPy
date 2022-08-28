@@ -30,4 +30,4 @@ jobs:
         python3 -c "import electricpy; print('electricpy.__file__')"
     - name: Test with pytest
       run: |
-        pytest
+        pytest --xdoctest

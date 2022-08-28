@@ -1,6 +1,6 @@
 ################################################################################
 """
-`electricpy.bode`  -  Bode Plotting Module.
+Bode Plotting Functionality for ElectricPy Package.
 
 >>> from electricpy import bode
 """

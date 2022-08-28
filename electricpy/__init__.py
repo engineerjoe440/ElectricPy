@@ -56,7 +56,7 @@ def tcycle(ncycles = 1, freq = 60):
     --------
     >>> import electricpy as ep
     >>> ep.tcycle(1, freq=60) #Value of ncycles=1 & freq=60
-    0.01666667
+    0.016666666666666666
     >>> ep.tcycle(1, freq=50) #Value of ncycles=1 & freq=50
     0.02
     """
@@ -210,18 +210,20 @@ def cprint(val, unit=None, label=None, title=None,
 
     Examples
     --------
+    >>> import numpy as np
     >>> import electricpy as ep
-    >>> v = ep.phasor(67, 120)
+    >>> from electricpy.phasor import phasor
+    >>> v = phasor(67, 120)
     >>> ep.cprint(v)
     67.0 ∠ 120.0°
     >>> voltages = np.array([[67,0],
-                             [67,-120],
-                             [67,120]])
-    >>> Vset = ep.phasorlist( voltages )
+    ...                      [67,-120],
+    ...                      [67,120]])
+    >>> Vset = ep.phasor.phasorlist( voltages )
     >>> ep.cprint(Vset)
-    [['67.0 ∠ 0.0°']
-    ['67.0 ∠ -120.0°']
-    ['67.0 ∠ 120.0°']]
+    67.0 ∠ 0.0°
+    67.0 ∠ -120.0°
+    67.0 ∠ 120.0°
 
 
     See Also
@@ -731,7 +733,7 @@ def transformertest(Poc=False, Voc=False, Ioc=False, Psc=False, Vsc=False,
 
 
 # Define Non-Linear Power Factor Calculator
-def nlinpf(PFtrue=False, PFdist=False, PFdisp=False):
+def non_linear_pf(PFtrue=False, PFdist=False, PFdisp=False):
     """
     Non-Linear Power Factor Evaluator.
 
@@ -739,6 +741,8 @@ def nlinpf(PFtrue=False, PFdist=False, PFdisp=False):
     given the other two. These particular unknowns are the arguments
     and as such, they are described in the representative sections
     below.
+
+    .. note:: Also available as `nlinpf`.
 
     Parameters
     ----------
@@ -765,15 +769,20 @@ def nlinpf(PFtrue=False, PFdist=False, PFdisp=False):
     else:
         raise ValueError("ERROR: Function requires at least two arguments.")
 
+# Alias to original Name
+nlinpf = non_linear_pf
+
 
 # Define Short-Circuit RL Current Calculator
-def iscrl(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
+def short_circuit_current(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
     """
     Short-Circuit-Current (ISC) Calculator.
 
     The Isc-RL function (Short Circuit Current for RL Circuit)
     is designed to calculate the short-circuit current for an
     RL circuit.
+
+    .. note:: Also available as `iscrl`.
 
     Parameters
     ----------
@@ -853,6 +862,9 @@ def iscrl(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
         Iac = abs(V / Z)
         return Iac
 
+# Alias to original Name
+iscrl = short_circuit_current
+
 
 # Define Voltage Divider Calculator
 def voltdiv(Vin, R1, R2, Rload=None):
@@ -885,6 +897,14 @@ def voltdiv(Vin, R1, R2, Rload=None):
     -------
     Vout:   float
             The Output voltage as measured across R2 and/or Rload
+    
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> ep.voltdiv(Vin=12, R1=4, R2=8)
+    8.0
+    >>> ep.voltdiv(Vin=12, R1=6, R2=12, Rload=12) # R2 and Rload are parallel
+    6.0
     """
     # Determine whether Rload is given
     if Rload is None:  # No Load Given
@@ -1116,7 +1136,7 @@ def bridge_impedance(z1, z2, z3, z4, z5):
     Parameters
     ----------
     z1:     [float, complex]
-            Bridge impedance 1
+            Bridge impedance 1iscrl
     z2:     [float, complex]
             Bridge impedance 2
     z3:     [float, complex]
@@ -1369,229 +1389,6 @@ def powerimpedance(S, V, PF=None, parallel=False, terms=False):
     return R
 
 
-# Define Cold-Junction-Voltage Calculator
-def coldjunction(Tcj, coupletype="K", To=None, Vo=None, P1=None, P2=None,
-                 P3=None, P4=None, Q1=None, Q2=None, round=None):
-    """
-    Thermocouple Cold-Junction Formula.
-
-    Function to calculate the expected cold-junction-voltage given
-    the temperature at the cold-junction.
-
-    Parameters
-    ----------
-    Tcj:        float
-                The temperature (in degrees C) that the junction is
-                currently subjected to.
-    coupletype: string, optional
-                Thermocouple Type, may be one of (B,E,J,K,N,R,S,T), default="K"
-    To:         float, optional
-                Temperature Constant used in Polynomial.
-    Vo:         float, optional
-                Voltage Constant used in Polynomial.
-    P1:         float, optional
-                Polynomial constant.
-    P2:         float, optional
-                Polynomial constant.
-    P3:         float, optional
-                Polynomial constant.
-    P4:         float, optional
-                Polynomial constant.
-    Q1:         float, optional
-                Polynomial constant.
-    Q2:         float, optional
-                Polynomial constant.
-    round:      int, optional
-                Control input to specify how many decimal places the result
-                should be rounded to, default=1.
-
-    Returns
-    -------
-    Vcj:        float
-                The calculated cold-junction-voltage in volts.
-    """
-    # Condition Inputs
-    coupletype = coupletype.upper()
-    # Validate Temperature Range
-    if coupletype == "B":
-        if not (0 < Tcj < 70):
-            raise ValueError("Temperature out of range.")
-    else:
-        if not (-20 < Tcj < 70):
-            raise ValueError("Temperature out of range.")
-    # Define Constant Lookup System
-    lookup = ["B", "E", "J", "K", "N", "R", "S", "T"]
-    if not (coupletype in lookup):
-        raise ValueError("Invalid Thermocouple Type")
-    index = lookup.index(coupletype)
-    # Define Constant Dictionary
-    # Load Data Into Terms
-    parameters = {}
-    for var in COLD_JUNCTION_DATA.keys():
-        parameters[var] = parameters.get(var, None) or COLD_JUNCTION_DATA[var][index]
-    To, Vo, P1, P2, P3, P4, Q1, Q2 = [parameters[key] for key in COLD_JUNCTION_KEYS]
-    # Define Formula Terms
-    tx = (Tcj - To)
-    num = tx * (P1 + tx * (P2 + tx * (P3 + P4 * tx)))
-    den = 1 + tx * (Q1 + Q2 * tx)
-    Vcj = Vo + num / den
-    # Round Value if Allowed
-    if round is not None:
-        Vcj = _np.around(Vcj, round)
-    # Return in milivolts
-    return Vcj * m
-
-
-# Define Thermocouple Temperature Calculation
-def thermocouple(V, coupletype="K", fahrenheit=False, cjt=None, To=None,
-                 Vo=None, P1=None, P2=None, P3=None, P4=None, Q1=None, Q2=None,
-                 Q3=None, round=1):
-    """
-    Thermocouple Temperature Calculator.
-
-    Utilizes polynomial formula to calculate the temperature being monitored
-    by a thermocouple. Allows for various thermocouple types (B,E,J,K,N,R,S,T)
-    and various cold-junction-temperatures.
-
-    Parameters
-    ----------
-    V:          float
-                Measured voltage (in Volts)
-    coupletype: string, optional
-                Thermocouple Type, may be one of (B,E,J,K,N,R,S,T), default="K"
-    fahrenheit: bool, optional
-                Control to enable return value as Fahrenheit instead of Celsius,
-                default=False
-    cjt:        float, optional
-                Cold-Junction-Temperature
-    To:         float, optional
-                Temperature Constant used in Polynomial.
-    Vo:         float, optional
-                Voltage Constant used in Polynomial.
-    P1:         float, optional
-                Polynomial constant.
-    P2:         float, optional
-                Polynomial constant.
-    P3:         float, optional
-                Polynomial constant.
-    P4:         float, optional
-                Polynomial constant.
-    Q1:         float, optional
-                Polynomial constant.
-    Q2:         float, optional
-                Polynomial constant.
-    Q3:         float, optional
-                Polynomial constant.
-    round:      int, optional
-                Control input to specify how many decimal places the result
-                should be rounded to, default=1.
-
-    Returns
-    -------
-    T:          float
-                The temperature (by default in degrees C, but optionally in
-                degrees F) as computed by the function.
-    """
-    # Condition Inputs
-    coupletype = coupletype.upper()
-    V = V / m  # Scale volts to milivolts
-    # Determine Cold-Junction-Voltage
-    if cjt is not None:
-        Vcj = coldjunction(cjt, coupletype, To, Vo, P1, P2, P3, P4, Q1, Q2, round)
-        V += Vcj / m
-    # Define Constant Lookup System
-    lookup = ["B", "E", "J", "K", "N", "R", "S", "T"]
-    if not (coupletype in lookup):
-        raise ValueError("Invalid Thermocouple Type")
-    # Determine Array Selection
-    vset = THERMO_COUPLE_VOLTAGES[coupletype]
-    if V < vset[0] * m:
-        raise ValueError("Voltage Below Lower Bound")
-    elif vset[0] <= V < vset[1]:
-        select = 0
-    elif vset[1] <= V < vset[2]:
-        select = 1
-    elif vset[2] <= V < vset[3]:
-        select = 2
-    elif vset[3] <= V < vset[4]:
-        select = 3
-    elif vset[4] <= V <= vset[5]:
-        select = 4
-    elif vset[5] < V:
-        raise ValueError("Voltage Above Upper Bound")
-    else:
-        raise ValueError("Internal Error!")
-    # Load Data Into Terms
-    parameters = {}
-    for i, key in enumerate(THERMO_COUPLE_KEYS):
-        parameters[key] = parameters.get(key, None) or THERMO_COUPLE_DATA[coupletype][i][select]
-    Vo, To, P1, P2, P3, P4, Q1, Q2, Q3 = [parameters[key] for key in THERMO_COUPLE_KEYS]
-    # Calculate Temperature in Degrees C
-    num = (V - Vo) * (P1 + (V - Vo) * (P2 + (V - Vo) * (P3 + P4 * (V - Vo))))
-    den = 1 + (V - Vo) * (Q1 + (V - Vo) * (Q2 + Q3 * (V - Vo)))
-    temp = To + num / den
-    # Return Temperature
-    if fahrenheit:
-        temp = (temp * 9 / 5) + 32
-    temp = _np.around(temp, round)
-    return temp
-
-
-# Define RTD Calculator
-def rtdtemp(RT, rtdtype="PT100", fahrenheit=False, Rref=None, Tref=None,
-            a=None, round=1):
-    """
-    RTD Temperature Calculator.
-
-    Evaluates the measured temperature based on the measured resistance
-    and the RTD type.
-
-    Parameters
-    ----------
-    RT:         float
-                The measured resistance (in ohms).
-    rtdtype:    string
-                RTD Type string, may be one of: (PT100, PT1000,
-                CU100, NI100, NI120, NIFE), default=PT100
-    fahrenheit: bool, optional
-                Control parameter to force return into degrees
-                fahrenheit, default=False
-    Rref:       float, optional
-                Resistance reference, commonly used if non-standard
-                RTD type being used. Specified in ohms.
-    Tref:       float, optional
-                Temperature reference, commonly used if non-standard
-                RTD type being used. Specified in degrees Celsius.
-    a:          float, optional
-                Scaling value, commonly used if non-standard
-                RTD type being used.
-    round:      int, optional
-                Control argument to specify number of decimal points
-                in returned value.
-
-    Returns
-    -------
-    temp:       float
-                Calculated temperature, defaults to degrees Celsius.
-    """
-    # Load Variables
-    if Rref is None:
-        Rref = RTD_TYPES[rtdtype][0]
-    if Tref is None:
-        Tref = 0
-    if a is None:
-        a = RTD_TYPES[rtdtype][1]
-    # Define Terms
-    num = RT - Rref + Rref * a * Tref
-    den = Rref * a
-    temp = num / den
-    # Return Temperature
-    if fahrenheit:
-        temp = (temp * 9 / 5) + 32
-    temp = _np.around(temp, round)
-    return temp
-
-
 # Define function to find VDC setpoint
 def vscdcbus(VLL, Zs, P, Q=0, mmax=0.8, debug=False):
     """
@@ -1676,72 +1473,6 @@ def vscgains(Rs, Ls, tau=0.005, freq=60):
     # Calculate w0L
     w0L = 2 * _np.pi * freq * Ls
     return kp, ki, w0L
-
-
-# Define Convolution Bar-Graph Function:
-def convbar(h, x, outline=True):
-    """
-    Convolution Bar-Graph Plotter Function.
-
-    Generates plots of each of two input arrays as bar-graphs, then
-    generates a convolved bar-graph of the two inputs to demonstrate
-    and illustrate convolution, typically for an educational purpose.
-
-    Examples
-    --------
-    >>> import numpy as np
-    >>> import electricpy as ep
-    >>> h = np.array([0, 1, 1, 1, 0])
-    >>> x = np.array([0, 1, 1, 1, 0])
-    >>> ep.convbar(h, x)
-
-    .. image:: /static/convbar-example.png
-
-    Parameters
-    ----------
-    h:      numpy.ndarray
-            Impulse Response - Given as Array (Prefferably Numpy Array)
-    x:      numpy.ndarray
-            Input Function - Given as Array (Prefferably Numpy Array)
-    """
-    # The impulse response
-    M = len(h)
-    t = _np.arange(M)
-    # Plot
-    _plt.subplot(121)
-    if outline:
-        _plt.plot(t, h, color='red')
-    _plt.bar(t, h, color='black')
-    _plt.xticks([0, 5, 9])
-    _plt.ylabel('h')
-    _plt.title('Impulse Response')
-    _plt.grid()
-
-    # The input function
-    N = len(x)
-    s = _np.arange(N)
-    # Plot
-    _plt.subplot(122)
-    if outline:
-        _plt.plot(s, x, color='red')
-    _plt.bar(s, x, color='black')
-    _plt.xticks([0, 10, 19])
-    _plt.title('Input Function')
-    _plt.grid()
-    _plt.ylabel('x')
-
-    # The output
-    L = M + N - 1
-    w = _np.arange(L)
-    _plt.figure(3)
-    y = _np.convolve(h, x)
-    if outline:
-        _plt.plot(w, y, color='red')
-    _plt.bar(w, y, color='black')
-    _plt.ylabel('y')
-    _plt.grid()
-    _plt.title('Convolved Output')
-    return _plt
 
 
 # Define Peak Calculator
@@ -1902,213 +1633,6 @@ def shannondata(BW, S, N):
     """
     C = BW * _np.log2(1 + S / N)
     return C
-
-
-# Define CRC Generator (Sender Side)
-def crcsender(data, key):
-    """
-    CRC Sender Function.
-
-    Function to generate a CRC-embedded message ready for transmission.
-
-    Contributing Author Credit:
-    Shaurya Uppal
-    Available from: geeksforgeeks.org
-
-    Parameters
-    ----------
-    data:       string of bits
-                The bit-string to be encoded.
-    key:        string of bits
-                Bit-string representing key.
-
-    Returns
-    -------
-    codeword:   string of bits
-                Bit-string representation of
-                encoded message.
-    """
-    # Define Sub-Functions
-    def xor(a, b):
-        # initialize result
-        result = []
-
-        # Traverse all bits, if bits are
-        # same, then XOR is 0, else 1
-        for i in range(1, len(b)):
-            if a[i] == b[i]:
-                result.append('0')
-            else:
-                result.append('1')
-
-        return ''.join(result)
-
-    # Performs Modulo-2 division
-    def mod2div(divident, divisor):
-        # Number of bits to be XORed at a time.
-        pick = len(divisor)
-
-        # Slicing the divident to appropriate
-        # length for particular step
-        tmp = divident[0: pick]
-
-        while pick < len(divident):
-
-            if tmp[0] == '1':
-
-                # replace the divident by the result
-                # of XOR and pull 1 bit down
-                tmp = xor(divisor, tmp) + divident[pick]
-
-            else:  # If leftmost bit is '0'
-
-                # If the leftmost bit of the dividend (or the
-                # part used in each step) is 0, the step cannot
-                # use the regular divisor; we need to use an
-                # all-0s divisor.
-                tmp = xor('0' * pick, tmp) + divident[pick]
-
-                # increment pick to move further
-            pick += 1
-
-        # For the last n bits, we have to carry it out
-        # normally as increased value of pick will cause
-        # Index Out of Bounds.
-        if tmp[0] == '1':
-            tmp = xor(divisor, tmp)
-        else:
-            tmp = xor('0' * pick, tmp)
-
-        checkword = tmp
-        return checkword
-
-    # Condition data
-    data = str(data)
-    # Condition Key
-    key = str(key)
-    l_key = len(key)
-
-    # Appends n-1 zeroes at end of data
-    appended_data = data + '0' * (l_key - 1)
-    remainder = mod2div(appended_data, key)
-
-    # Append remainder in the original data
-    codeword = data + remainder
-    return codeword
-
-
-# Define CRC Generator (Sender Side)
-def crcremainder(data, key):
-    """
-    CRC Remainder Function.
-
-    Function to calculate the CRC remainder of a CRC message.
-
-    Contributing Author Credit:
-    Shaurya Uppal
-    Available from: geeksforgeeks.org
-
-    Parameters
-    ----------
-    data:       string of bits
-                The bit-string to be decoded.
-    key:        string of bits
-                Bit-string representing key.
-
-    Returns
-    -------
-    remainder: string of bits
-                Bit-string representation of
-                encoded message.
-    """
-    # Define Sub-Functions
-    def xor(a, b):
-        # initialize result
-        result = []
-
-        # Traverse all bits, if bits are
-        # same, then XOR is 0, else 1
-        for i in range(1, len(b)):
-            if a[i] == b[i]:
-                result.append('0')
-            else:
-                result.append('1')
-
-        return ''.join(result)
-
-    # Performs Modulo-2 division
-    def mod2div(divident, divisor):
-        # Number of bits to be XORed at a time.
-        pick = len(divisor)
-
-        # Slicing the divident to appropriate
-        # length for particular step
-        tmp = divident[0: pick]
-
-        while pick < len(divident):
-
-            if tmp[0] == '1':
-
-                # replace the divident by the result
-                # of XOR and pull 1 bit down
-                tmp = xor(divisor, tmp) + divident[pick]
-
-            else:  # If leftmost bit is '0'
-
-                # If the leftmost bit of the dividend (or the
-                # part used in each step) is 0, the step cannot
-                # use the regular divisor; we need to use an
-                # all-0s divisor.
-                tmp = xor('0' * pick, tmp) + divident[pick]
-
-                # increment pick to move further
-            pick += 1
-
-        # For the last n bits, we have to carry it out
-        # normally as increased value of pick will cause
-        # Index Out of Bounds.
-        if tmp[0] == '1':
-            tmp = xor(divisor, tmp)
-        else:
-            tmp = xor('0' * pick, tmp)
-
-        checkword = tmp
-        return checkword
-
-    # Condition data
-    data = str(data)
-    # Condition Key
-    key = str(key)
-    l_key = len(key)
-
-    # Appends n-1 zeroes at end of data
-    appended_data = data + '0' * (l_key - 1)
-    remainder = mod2div(appended_data, key)
-
-    return remainder
-
-
-# Define String to Bits Function
-def string_to_bits(str):
-    # noqa: D401   "String" is an intended leading word.
-    """
-    String to Bits Converter.
-
-    Converts a Pythonic string to the string's binary representation.
-
-    Parameters
-    ----------
-    str:        string
-                The string to be converted.
-
-    Returns
-    -------
-    data:       string
-                The binary representation of the
-                input string.
-    """
-    data = (''.join(format(ord(x), 'b') for x in str))
-    return data
 
 
 # Define Per-Unit Impedance Formula
@@ -2731,6 +2255,9 @@ def acpiv(S=None, I=None, VLL=None, VLN=None, V=None, PF=None):
                 Line-to-Neutral voltage in volts
     V:          complex, optional
                 Single-phase voltage in volts
+    PF:         float, optional
+                Power factor to condition the apparent power to an appropriate
+                complex value.
 
     Returns
     -------
@@ -2755,6 +2282,14 @@ def acpiv(S=None, I=None, VLL=None, VLN=None, V=None, PF=None):
     PF:         float, optional
                 Supporting argument to convert floating-point
                 apparent power to complex representation.
+    
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> ep.acpiv(S=550, V=167)
+    3.2934131736526946
+    >>> ep.acpiv(S=550, I=3.2934131736526946)
+    (96.4174949546675, 55.66666666666667, 167.0)
     """
     # Validate Inputs
     if S == I is None:
@@ -3241,7 +2776,7 @@ def propagation_constants(z, y, length):
 
 
 # Define Simple Transformer Phase Shift Function
-def xfmphs(style="DY", shift=30):
+def phase_shift_transformer(style="DY", shift=30):
     """
     Electrical Transformer Phase-Shift Calculator.
 
@@ -3284,6 +2819,9 @@ def xfmphs(style="DY", shift=30):
     phase = _np.exp(1j * _np.radians(v * abs(shift)))
     # Return
     return (phase)
+
+# Alias to original Name.
+xfmphs = phase_shift_transformer
 
 
 # Define Induction Machine Thevenin Voltage Calculator
@@ -4634,6 +4172,16 @@ def vipf(V=None, I=None, PF=1, find=''):
                 System power factor, (+)ive values denote
                 leading power factor, (-)ive values denote
                 lagging poer factor; default=1
+    
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> # Demonstrate the generic functionality
+    >>> ep.vipf(V=480, I=ep.phasor.phasor(20, 120))
+    (480, (-9.999999999999996+17.320508075688775j), -0.499999...)
+    >>> # Find the power factor
+    >>> ep.vipf(V=480, I=ep.phasor.phasor(20, 120), find="PF")
+    -0.49999...
     """
     # Test to find Voltage
     if isinstance(V, float) and isinstance(I, complex):
