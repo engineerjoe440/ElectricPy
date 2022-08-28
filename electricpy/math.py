@@ -60,14 +60,14 @@ def step(t):
     >>> from electricpy.math import step
     >>> t = np.array([-10, -8, -5, -3, 0, 1, 2, 5, 7, 15])
     >>> x = step(t)
-    array([0, 0, 0, 0, 1, 1, 1, 1, 1, 1])
+    array([0., 0., 0., 0., 1., 1., 1., 1., 1., 1.])
 
     Parameters
     ----------
     t:  arraylike
         Time samples for which the step response should be generated.
     """
-    return (_np.heaviside(t, 1))
+    return _np.heaviside(t, 1)
 
 
 # Arbitrary Waveform RMS Calculating Function

@@ -221,9 +221,9 @@ def cprint(val, unit=None, label=None, title=None,
     ...                      [67,120]])
     >>> Vset = ep.phasor.phasorlist( voltages )
     >>> ep.cprint(Vset)
-    [['67.0 ∠ 0.0°']
-    ['67.0 ∠ -120.0°']
-    ['67.0 ∠ 120.0°']]
+    67.0 ∠ 0.0°
+    67.0 ∠ -120.0°
+    67.0 ∠ 120.0°
 
 
     See Also

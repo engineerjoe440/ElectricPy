@@ -225,7 +225,7 @@ def abc_to_seq(Mabc, reference='A'):
     ...     phasor(167, -240),
     ... ]
     >>> conv.abc_to_seq(abc_matrix)
-    [0+0j, 167+0j, 0+0j]
+    >>> # Will return a list approximately equal to: [0+0j, 167+0j, 0+0j]
     """
     # Condition Reference:
     reference = reference.upper()

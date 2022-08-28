@@ -109,7 +109,7 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     ...     [52,120]
     ... ])
     >>> phasors = phasor.phasorlist(voltages)
-    >>> visu.phasorplot(phasors, colors=["red", "green", "blue"])
+    >>> plt = visu.phasorplot(phasors, colors=["red", "green", "blue"])
     >>> plt.show()
 
     .. image:: /static/PhasorPlot.png
