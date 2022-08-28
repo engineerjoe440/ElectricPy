@@ -377,12 +377,14 @@ Phasors must be passed as a complex number set, (e.g.
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">phasor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">visu</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">voltages</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
 <span class="gp">... </span>    <span class="p">[</span><span class="mi">67</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
 <span class="gp">... </span>    <span class="p">[</span><span class="mi">45</span><span class="p">,</span><span class="o">-</span><span class="mi">120</span><span class="p">],</span>
 <span class="gp">... </span>    <span class="p">[</span><span class="mi">52</span><span class="p">,</span><span class="mi">120</span><span class="p">]</span>
 <span class="gp">... </span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span> <span class="o">=</span> <span class="n">phasor</span><span class="o">.</span><span class="n">phasorlist</span><span class="p">(</span> <span class="n">voltages</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">"red"</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">]</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phasors</span> <span class="o">=</span> <span class="n">phasor</span><span class="o">.</span><span class="n">phasorlist</span><span class="p">(</span><span class="n">voltages</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">visu</span><span class="o">.</span><span class="n">phasorplot</span><span class="p">(</span><span class="n">phasors</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">"red"</span><span class="p">,</span> <span class="s2">"green"</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>

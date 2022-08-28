@@ -580,11 +580,12 @@
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy.phasor import phasor</span>
 <span class="sd">    &gt;&gt;&gt; import electricpy.conversions as conv</span>
 <span class="sd">    &gt;&gt;&gt; abc_matrix = [</span>
-<span class="sd">    ...     ep.phasor(167, 0),</span>
-<span class="sd">    ...     ep.phasor(167, -120),</span>
-<span class="sd">    ...     ep.phasor(167, -240),</span>
+<span class="sd">    ...     phasor(167, 0),</span>
+<span class="sd">    ...     phasor(167, -120),</span>
+<span class="sd">    ...     phasor(167, -240),</span>
 <span class="sd">    ... ]</span>
 <span class="sd">    &gt;&gt;&gt; conv.abc_to_seq(abc_matrix)</span>
 <span class="sd">    [0+0j, 167+0j, 0+0j]</span>

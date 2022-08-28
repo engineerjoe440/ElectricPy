@@ -395,10 +395,10 @@
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
+<span class="sd">    &gt;&gt;&gt; import electricpy.visu as visu</span>
 <span class="sd">    &gt;&gt;&gt; h = np.array([0, 1, 1, 1, 0])</span>
 <span class="sd">    &gt;&gt;&gt; x = np.array([0, 1, 1, 1, 0])</span>
-<span class="sd">    &gt;&gt;&gt; ep.convbar(h, x)</span>
+<span class="sd">    &gt;&gt;&gt; visu.convbar(h, x)</span>
 
 <span class="sd">    .. image:: /static/convbar-example.png</span>
 
@@ -465,12 +465,14 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; from electricpy import phasor</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy import visu</span>
 <span class="sd">    &gt;&gt;&gt; voltages = np.array([</span>
 <span class="sd">    ...     [67,0],</span>
 <span class="sd">    ...     [45,-120],</span>
 <span class="sd">    ...     [52,120]</span>
 <span class="sd">    ... ])</span>
-<span class="sd">    &gt;&gt;&gt; plt = phasor.phasorlist( voltages, colors=["red", "green", "blue"] )</span>
+<span class="sd">    &gt;&gt;&gt; phasors = phasor.phasorlist(voltages)</span>
+<span class="sd">    &gt;&gt;&gt; visu.phasorplot(phasors, colors=["red", "green", "blue"])</span>
 <span class="sd">    &gt;&gt;&gt; plt.show()</span>
 
 <span class="sd">    .. image:: /static/PhasorPlot.png</span>

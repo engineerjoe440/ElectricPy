@@ -572,14 +572,15 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
 <span class="sd">    &gt;&gt;&gt; from electricpy.phasor import phasor</span>
 <span class="sd">    &gt;&gt;&gt; v = phasor(67, 120)</span>
 <span class="sd">    &gt;&gt;&gt; ep.cprint(v)</span>
 <span class="sd">    67.0 ∠ 120.0°</span>
 <span class="sd">    &gt;&gt;&gt; voltages = np.array([[67,0],</span>
-<span class="sd">                             [67,-120],</span>
-<span class="sd">                             [67,120]])</span>
+<span class="sd">    ...                      [67,-120],</span>
+<span class="sd">    ...                      [67,120]])</span>
 <span class="sd">    &gt;&gt;&gt; Vset = ep.phasor.phasorlist( voltages )</span>
 <span class="sd">    &gt;&gt;&gt; ep.cprint(Vset)</span>
 <span class="sd">    [['67.0 ∠ 0.0°']</span>
@@ -4539,10 +4540,10 @@
 <span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
 <span class="sd">    &gt;&gt;&gt; # Demonstrate the generic functionality</span>
 <span class="sd">    &gt;&gt;&gt; ep.vipf(V=480, I=ep.phasor.phasor(20, 120))</span>
-<span class="sd">    (480, (-9.999999999999996+17.320508075688775j), -0.4999999999999997)</span>
+<span class="sd">    (480, (-9.999999999999996+17.320508075688775j), -0.499999...)</span>
 <span class="sd">    &gt;&gt;&gt; # Find the power factor</span>
 <span class="sd">    &gt;&gt;&gt; ep.vipf(V=480, I=ep.phasor.phasor(20, 120), find="PF")</span>
-<span class="sd">    -0.4999999999999998</span>
+<span class="sd">    -0.49999...</span>
 <span class="sd">    """</span>
     <span class="c1"># Test to find Voltage</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="nb">complex</span><span class="p">):</span>
