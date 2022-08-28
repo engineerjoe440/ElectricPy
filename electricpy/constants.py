@@ -1,6 +1,6 @@
 ################################################################################
 """
-`electricpy.constants` - Electrical Engineering Constants.
+Numerical Constants for Electrical Engineering - Pi, Tau, α, etc.
 
 Defenition of all required constants and matricies for
 *electricpy* module.
@@ -243,4 +243,5 @@ RHO_VALUES = {
     'SAND': 1E9,
     'SANDSTONE': 1E9,
 }
+
 # END OF FILE

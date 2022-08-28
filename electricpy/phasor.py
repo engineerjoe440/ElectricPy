@@ -1,8 +1,8 @@
 ################################################################################
 """
-`electricpy` Package - `phasors` Module.
+Functions to Support Common Electrical Engineering Formulas Related to Phasors.
 
->>> from electricpy import phasors
+>>> from electricpy import phasor
 
 Filled with calculators, evaluators, and plotting functions related to
 electrical phasors, this package will provide a wide array of capabilities to
@@ -16,8 +16,6 @@ to aid in scientific calculations.
 # Import Required Packages
 import numpy as _np
 import cmath as _c
-import matplotlib as _matplotlib
-import matplotlib.pyplot as _plt
 
 
 # Define Phase Angle Generator
@@ -74,8 +72,8 @@ def phasor(mag, ang=0):
 
     Examples
     --------
-    >>> import electricpy as ep
-    >>> ep.phasor(67, 120) # 67 volts at angle 120 degrees
+    >>> from electricpy.phasor import phasor
+    >>> phasor(67, 120) # 67 volts at angle 120 degrees
     (-33.499999999999986+58.02370205355739j)
 
     See Also
@@ -410,132 +408,5 @@ def parallelz(*args):
             for i in range(2, L):
                 Zp = (1 / Zp + 1 / Z[i]) ** (-1)
     return Zp
-
-
-# Define Phasor Plot Generator
-def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
-               colors=None, radius=None, linewidth=None, size=None,
-               label=False, labels=False, tolerance=None):
-    """
-    Phasor Plotting Function.
-
-    This function is designed to plot a phasor-diagram with angles in degrees
-    for up to 12 phasor sets (more may be used if additional colors are set).
-    Phasors must be passed as a complex number set, (e.g.
-    [ m+ja, m+ja, m+ja, ... , m+ja ] ).
-
-    Examples
-    --------
-    >>> import numpy as np
-    >>> from electricpy import phasor
-    >>> voltages = np.array([
-    ...     [67,0],
-    ...     [45,-120],
-    ...     [52,120]
-    ... ])
-    >>> plt = phasor.phasorlist( voltages, colors=["red", "green", "blue"] )
-    >>> plt.show()
-
-    .. image:: /static/PhasorPlot.png
-
-    Parameters
-    ----------
-    phasor:     list of complex
-                The set of phasors to be plotted.
-    title:      string, optional
-                The Plot Title, default="Phasor Diagram"
-    legend:     bool, optional
-                Control argument to enable displaying the legend, must be passed
-                as an array or list of strings. `label` and `labels` are mimic-
-                arguments and will perform similar operation, default=False
-    bg:         string, optional
-                Background-Color control, default="#d5de9c"
-    radius:     float, optional
-                The diagram radius, unless specified, automatically scales
-    colors:     list of str, optional
-                List of hexidecimal color strings denoting the line colors to
-                use.
-    size:       float, optional
-                Control argument for figure size. default=None
-    linewidth:  float, optional
-                Control argument to declare the line thickness. default=None
-    tolerance:  float, optional
-                Minimum magnitude to plot, anything less than tolerance will be
-                plotted as a single point at the origin, by default, the
-                tolerance is scaled to be 1/25-th the maximum radius. To disable
-                the tolerance, simply provide either False or -1.
-
-    Returns
-    -------
-    matplotlib.pyplot:  Plotting object to be used for additional configuration
-                        or plotting.
-    """
-    # Load Complex Values if Necessary
-    try:
-        len(phasor)
-    except TypeError:
-        phasor = [phasor]
-    # Manage Colors
-    if colors is None:
-        colors = [
-            "#FF0000", "#800000", "#FFFF00", "#808000", "#00ff00", "#008000",
-            "#00ffff", "#008080", "#0000ff", "#000080", "#ff00ff", "#800080"
-        ]
-    # Scale Radius
-    if radius is None:
-        radius = _np.abs(phasor).max()
-    # Set Tolerance
-    if tolerance is None:
-        tolerance = radius / 25
-    elif tolerance == False:
-        tolerance = -1
-    # Set Background Color
-    if bg is None:
-        bg = "#FFFFFF"
-    # Load labels if handled in other argument
-    if label != False:
-        legend = label
-    if labels != False:
-        legend = labels
-    # Check for more phasors than colors
-    numphs = len(phasor)
-    numclr = len(colors)
-    if numphs > numclr:
-        raise ValueError(
-            "ERROR: Too many phasors provided. Specify more line colors."
-        )
-
-    if size is None:
-        # Force square figure and square axes
-        width, height = _matplotlib.rcParams['figure.figsize']
-        size = min(width, height)
-    # Make a square figure
-    fig = _plt.figure(figsize=(size, size))
-    ax = fig.add_axes([0.1, 0.1, 0.8, 0.8], polar=True, facecolor=bg)
-    _plt.grid(True)
-
-    # Plot the diagram
-    _plt.title(title + "\n")
-    handles = _np.array([])  # Empty array for plot handles
-    for i in range(numphs):
-        mag, ang_r = _c.polar(phasor[i])
-        # Plot with labels
-        if legend:
-            if mag > tolerance:
-                hand = _plt.arrow(0, 0, ang_r, mag, color=colors[i],
-                                  label=legend[i], linewidth=linewidth)
-            else:
-                hand = _plt.plot(0, 0, 'o', markersize=linewidth * 3,
-                                 label=legend[i], color=colors[i])
-            handles = _np.append(handles, [hand])
-        # Plot without labels
-        else:
-            _plt.arrow(0, 0, ang_r, mag, color=colors[i], linewidth=linewidth)
-    if legend:
-        _plt.legend(handles, legend)
-    # Set Minimum and Maximum Radius Terms
-    ax.set_rmax(radius)
-    ax.set_rmin(0)
-    return _plt
 
 # END

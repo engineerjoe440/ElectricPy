@@ -1,6 +1,6 @@
 ################################################################################
 """
-`electricpy.fault` - Electrical Power Engineering Faults Calculations.
+Electrical Power Engineering Faults Calculations.
 
 >>> from electricpy import fault
 """

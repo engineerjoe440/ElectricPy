@@ -1,6 +1,6 @@
 ################################################################################
 """
-`electricpy` Package - `latex` Module.
+LaTeX Support Module to help Generate LaTeX formatted Math Symbols and Formulas.
 
 >>> from electricpy import latex
 
