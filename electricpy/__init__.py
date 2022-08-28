@@ -210,14 +210,15 @@ def cprint(val, unit=None, label=None, title=None,
 
     Examples
     --------
+    >>> import numpy as np
     >>> import electricpy as ep
     >>> from electricpy.phasor import phasor
     >>> v = phasor(67, 120)
     >>> ep.cprint(v)
     67.0 ∠ 120.0°
     >>> voltages = np.array([[67,0],
-                             [67,-120],
-                             [67,120]])
+    ...                      [67,-120],
+    ...                      [67,120]])
     >>> Vset = ep.phasor.phasorlist( voltages )
     >>> ep.cprint(Vset)
     [['67.0 ∠ 0.0°']
@@ -4177,10 +4178,10 @@ def vipf(V=None, I=None, PF=1, find=''):
     >>> import electricpy as ep
     >>> # Demonstrate the generic functionality
     >>> ep.vipf(V=480, I=ep.phasor.phasor(20, 120))
-    (480, (-9.999999999999996+17.320508075688775j), -0.4999999999999997)
+    (480, (-9.999999999999996+17.320508075688775j), -0.499999...)
     >>> # Find the power factor
     >>> ep.vipf(V=480, I=ep.phasor.phasor(20, 120), find="PF")
-    -0.4999999999999998
+    -0.49999...
     """
     # Test to find Voltage
     if isinstance(V, float) and isinstance(I, complex):

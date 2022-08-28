@@ -2,7 +2,7 @@
 """
 Functions to Support Common Electrical Engineering Formulas Related to Phasors.
 
->>> from electricpy import phasors
+>>> from electricpy import phasor
 
 Filled with calculators, evaluators, and plotting functions related to
 electrical phasors, this package will provide a wide array of capabilities to
@@ -72,8 +72,8 @@ def phasor(mag, ang=0):
 
     Examples
     --------
-    >>> import electricpy as ep
-    >>> ep.phasor(67, 120) # 67 volts at angle 120 degrees
+    >>> from electricpy.phasor import phasor
+    >>> phasor(67, 120) # 67 volts at angle 120 degrees
     (-33.499999999999986+58.02370205355739j)
 
     See Also

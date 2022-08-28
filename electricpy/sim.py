@@ -713,6 +713,7 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
 
 # Define Newton-Raphson Calculator
 def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
+    # doctest: +SKIP
     """
     Newton Raphson Calculator.
 
@@ -833,6 +834,7 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
 
 # Define Newton-Raphson P/Q Evaluator
 def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False):
+    # doctest: +SKIP
     """
     Newton Raphson Real/Reactive Power Function Generator.
 
