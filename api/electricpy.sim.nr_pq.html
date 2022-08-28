@@ -420,24 +420,23 @@ with unknown voltage magnitude.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">sim</span> <span class="c1"># Import Simulation Submodule</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ybustest</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mi">10</span><span class="n">j</span><span class="p">,</span><span class="mi">10</span><span class="n">j</span><span class="p">],</span>
-<span class="go">    [10j,-10j]]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Vlist</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">]]</span> <span class="c1"># We don't know the voltage or angle at bus 2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Plist</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span><span class="o">-</span><span class="mf">2.0</span><span class="p">]</span> <span class="c1"># 2pu watts consumed</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Qlist</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span><span class="o">-</span><span class="mf">1.0</span><span class="p">]</span> <span class="c1"># 1pu vars consumed</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">F</span> <span class="o">=</span> <span class="n">nr_pq</span><span class="p">(</span><span class="n">ybustest</span><span class="p">,</span><span class="n">Vlist</span><span class="p">,</span><span class="n">Plist</span><span class="p">,</span><span class="n">Qlist</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">X0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># Define Initial Conditions</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">J</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">F</span><span class="p">)</span> <span class="c1"># Find Jacobian</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Now use Newton-Raphson to Solve</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span><span class="p">,</span> <span class="nb">iter</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">NewtonRaphson</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">J</span><span class="p">,</span><span class="n">X0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
-<span class="go">[-0.236,0.8554]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">iter</span><span class="p">)</span> <span class="c1"># Iteration Counter</span>
-<span class="go">4</span>
-</pre></div>
-</div>
+<p># doctest: +SKIP
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; from electricpy import sim # Import Simulation Submodule
+&gt;&gt;&gt; ybustest = [[-10j,10j],
+…             [10j,-10j]]
+&gt;&gt;&gt; Vlist = [[1,0],[None,None]] # We don’t know the voltage or angle at bus 2
+&gt;&gt;&gt; Plist = [None,-2.0] # 2pu watts consumed
+&gt;&gt;&gt; Qlist = [None,-1.0] # 1pu vars consumed
+&gt;&gt;&gt; F = nr_pq(ybustest,Vlist,Plist,Qlist)
+&gt;&gt;&gt; X0 = [0,1] # Define Initial Conditions
+&gt;&gt;&gt; J = sim.jacobian(F) # Find Jacobian
+&gt;&gt;&gt; # Now use Newton-Raphson to Solve
+&gt;&gt;&gt; results, iter = sim.NewtonRaphson(F,J,X0)
+&gt;&gt;&gt; print(results)
+[-0.236,0.8554]
+&gt;&gt;&gt; print(iter) # Iteration Counter
+4</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">

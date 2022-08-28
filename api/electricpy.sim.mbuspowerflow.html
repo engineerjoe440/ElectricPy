@@ -428,19 +428,25 @@ default=0.25</p></li>
 </dl>
 <img alt="../_images/mbuspowerflow_example.png" src="../_images/mbuspowerflow_example.png"/>
 <p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Perform Power-Flow Analysis for Figure</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">sim</span> <span class="c1"># Import Simulation Submodule</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ybustest</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mi">10</span><span class="n">j</span><span class="p">,</span><span class="mi">10</span><span class="n">j</span><span class="p">],</span>
-<span class="go">    [10j,-10j]]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Vlist</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">]]</span> <span class="c1"># We don't know the voltage or angle at bus 2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Plist</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span><span class="o">-</span><span class="mf">2.0</span><span class="p">]</span> <span class="c1"># 2pu watts consumed</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Qlist</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span><span class="o">-</span><span class="mf">1.0</span><span class="p">]</span> <span class="c1"># 1pu vars consumed</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nr_res</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">mbuspowerflow</span><span class="p">(</span><span class="n">ybustest</span><span class="p">,</span><span class="n">Vlist</span><span class="p">,</span><span class="n">Plist</span><span class="p">,</span><span class="n">Qlist</span><span class="p">,</span><span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">returnct</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">nr_res</span><span class="p">)</span>
-<span class="go">([array([-13.52185223]), array([ 0.85537271])], 4)</span>
-</pre></div>
-</div>
+<p># doctest: +SKIP
+&gt;&gt;&gt; # Perform Power-Flow Analysis for Figure
+&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; from electricpy import sim # Import Simulation Submodule
+&gt;&gt;&gt; ybustest = [[-10j,10j],
+…             [10j,-10j]]
+&gt;&gt;&gt; Vlist = [[1,0],[None,None]] # We don’t know the voltage or angle at bus 2
+&gt;&gt;&gt; Plist = [None,-2.0] # 2pu watts consumed
+&gt;&gt;&gt; Qlist = [None,-1.0] # 1pu vars consumed
+&gt;&gt;&gt; sim.mbuspowerflow(
+…     ybustest,
+…     Vlist,
+…     Plist,
+…     Qlist,
+…     degrees=True,
+…     split=True,
+…     returnct=True
+… )
+([array([-13.52185223]), array([ 0.85537271])], 4)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
