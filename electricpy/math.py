@@ -59,7 +59,7 @@ def step(t):
     >>> import numpy as np
     >>> from electricpy.math import step
     >>> t = np.array([-10, -8, -5, -3, 0, 1, 2, 5, 7, 15])
-    >>> x = step(t)
+    >>> step(t)
     array([0., 0., 0., 0., 1., 1., 1., 1., 1., 1.])
 
     Parameters

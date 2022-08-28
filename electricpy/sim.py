@@ -713,7 +713,6 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
 
 # Define Newton-Raphson Calculator
 def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
-    # doctest: +SKIP
     """
     Newton Raphson Calculator.
 
@@ -754,7 +753,7 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
 
     Examples
     --------
-    # doctest: +SKIP
+    >>> # doctest: +SKIP
     >>> import numpy as np
     >>> from electricpy import sim # Import Simulation Submodule
     >>> def F(x):
