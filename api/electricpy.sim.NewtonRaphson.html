@@ -402,24 +402,26 @@ being surpassed.</p></li>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<p># doctest: +SKIP
-&gt;&gt;&gt; import numpy as np
-&gt;&gt;&gt; from electricpy import sim # Import Simulation Submodule
-&gt;&gt;&gt; def F(x):
-…     matr = np.array([[x[1]*10*np.sin(x[0])+2],
-…         [x[1]*(-10)*np.cos(x[0])+x[1]**2*10+1]])
-…     return(matr)
-&gt;&gt;&gt; def J(x):
-…     matr = np.array([[10*x[1]*np.cos(x[0]), 10*np.sin(x[0])],
-…         [10*x[1]*np.sin(x[0]), -10*np.cos(x[0])+20*x[1]]])
-…     return(matr)
-&gt;&gt;&gt; # Now compute Newton-Raphson
-&gt;&gt;&gt; X0 = [0, 1]
-&gt;&gt;&gt; results, iter = sim.NewtonRaphson(F,J,X0)
-&gt;&gt;&gt; print(results)
-[-0.236,0.8554]
-&gt;&gt;&gt; print(iter) # Iteration Counter
-4</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">sim</span> <span class="c1"># Import Simulation Submodule</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">F</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">matr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="mi">1</span><span class="p">]])</span>
+<span class="gp">... </span>    <span class="k">return</span><span class="p">(</span><span class="n">matr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">J</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">matr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">10</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="mi">10</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="o">-</span><span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="mi">20</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]]])</span>
+<span class="gp">... </span>    <span class="k">return</span><span class="p">(</span><span class="n">matr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Now compute Newton-Raphson</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span><span class="p">,</span> <span class="nb">iter</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">NewtonRaphson</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">J</span><span class="p">,</span><span class="n">X0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="go">[-0.236,0.8554]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">iter</span><span class="p">)</span> <span class="c1"># Iteration Counter</span>
+<span class="go">4</span>
+</pre></div>
+</div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
