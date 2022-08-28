@@ -892,7 +892,7 @@ def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False)
 
     Examples
     --------
-    # doctest: +SKIP
+    >>> # doctest: +SKIP
     >>> import numpy as np
     >>> from electricpy import sim # Import Simulation Submodule
     >>> ybustest = [[-10j,10j],
@@ -1153,7 +1153,7 @@ def mbuspowerflow(Ybus, Vknown, Pknown, Qknown, X0='flatstart', eps=1e-4,
 
     Examples
     --------
-    # doctest: +SKIP
+    >>> # doctest: +SKIP
     >>> # Perform Power-Flow Analysis for Figure
     >>> import numpy as np
     >>> from electricpy import sim # Import Simulation Submodule
