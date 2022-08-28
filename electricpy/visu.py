@@ -32,10 +32,10 @@ def convbar(h, x, outline=True):
     Examples
     --------
     >>> import numpy as np
-    >>> import electricpy as ep
+    >>> import electricpy.visu as visu
     >>> h = np.array([0, 1, 1, 1, 0])
     >>> x = np.array([0, 1, 1, 1, 0])
-    >>> ep.convbar(h, x)
+    >>> visu.convbar(h, x)
 
     .. image:: /static/convbar-example.png
 
@@ -102,12 +102,14 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     --------
     >>> import numpy as np
     >>> from electricpy import phasor
+    >>> from electricpy import visu
     >>> voltages = np.array([
     ...     [67,0],
     ...     [45,-120],
     ...     [52,120]
     ... ])
-    >>> plt = phasor.phasorlist( voltages, colors=["red", "green", "blue"] )
+    >>> phasors = phasor.phasorlist(voltages)
+    >>> visu.phasorplot(phasors, colors=["red", "green", "blue"])
     >>> plt.show()
 
     .. image:: /static/PhasorPlot.png
