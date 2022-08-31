@@ -14,10 +14,94 @@ import numpy as _np
 import matplotlib as _matplotlib
 import matplotlib.pyplot as _plt
 
-from electricpy import geometry
+from electricpy import powerset, geometry
 from electricpy.geometry import Point
 from electricpy.geometry.circle import Circle
 
+
+
+# Define Power Triangle Function
+def powertriangle(P=None, Q=None, S=None, PF=None, color="red",
+                  text="Power Triangle", printval=False):
+    """
+    Power Triangle Plotting Function.
+
+    This function is designed to draw a power triangle given
+    values for the complex power system.
+
+    .. image:: /static/PowerTriangle.png
+
+    Parameters
+    ----------
+    P:          float
+                Real Power, unitless, default=None
+    Q:          float
+                Reactive Power, unitless, default=None
+    S:          float
+                Apparent Power, unitless, default=None
+    PF:         float
+                Power Factor, unitless, provided as a decimal value, lagging is
+                positive, leading is negative; default=None
+    color:      string, optional
+                The color of the power triangle lines, default="red"
+    text:       string, optional
+                The title of the power triangle plot, default="Power Triangle"
+    printval:   bool, optional
+                Control argument to allow the numeric values to be printed on
+                the plot, default="False"
+
+    Returns
+    -------
+    matplotlib.pyplot:  Plotting object to be used for additional configuration
+                        or plotting.
+    """
+    # Calculate all values if not all are provided
+    if P is None or Q is None or S is None or PF is None:
+        P, Q, S, PF = powerset(P, Q, S, PF)
+
+    # Generate Lines
+    Plnx = [0, P]
+    Plny = [0, 0]
+    Qlnx = [P, P]
+    Qlny = [0, Q]
+    Slnx = [0, P]
+    Slny = [0, Q]
+
+    # Plot Power Triangle
+    _plt.figure(1)
+    _plt.title(text)
+    _plt.plot(Plnx, Plny, color=color)
+    _plt.plot(Qlnx, Qlny, color=color)
+    _plt.plot(Slnx, Slny, color=color)
+    _plt.xlabel("Real Power (W)")
+    _plt.ylabel("Reactive Power (VAR)")
+    mx = max(abs(P), abs(Q))
+
+    if P > 0:
+        _plt.xlim(0, mx * 1.1)
+        x = mx
+    else:
+        _plt.xlim(-mx * 1.1, 0)
+        x = -mx
+    if Q > 0:
+        _plt.ylim(0, mx * 1.1)
+        y = mx
+    else:
+        _plt.ylim(-mx * 1.1, 0)
+        y = -mx
+    if PF > 0:
+        PFtext = " Lagging"
+    else:
+        PFtext = " Leading"
+    text = "P:   " + str(P) + " W\n"
+    text = text + "Q:   " + str(Q) + " VAR\n"
+    text = text + "S:   " + str(S) + " VA\n"
+    text = text + "PF:  " + str(abs(PF)) + PFtext + "\n"
+    text = text + "ΘPF: " + str(_np.degrees(_np.arccos(PF))) + "°" + PFtext
+    # Print all values if asked to
+    if printval:
+        _plt.text(x / 20, y * 4 / 5, text, color=color)
+    return _plt
 
 
 # Define Convolution Bar-Graph Function:
