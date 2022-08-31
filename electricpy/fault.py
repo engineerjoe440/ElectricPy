@@ -22,7 +22,7 @@ def _phaseroll(M012, reference):
 
 
 # Define Single Line to Ground Fault Function
-def phs1g(Vth, Zseq, Rf=0, sequence=True, reference='A'):
+def single_phase_to_ground_fault(Vth, Zseq, Rf=0, sequence=True, reference='A'):
     r"""
     Single-Phase-to-Ground Fault Calculator.
 
@@ -73,9 +73,12 @@ def phs1g(Vth, Zseq, Rf=0, sequence=True, reference='A'):
     # Return Value
     return Ifault
 
+# Alias Original Name
+phs1g = single_phase_to_ground_fault
+
 
 # Define Double Line to Ground Fault Current Calculator
-def phs2g(Vth, Zseq, Rf=0, sequence=True, reference='A'):
+def double_phase_to_ground_fault(Vth, Zseq, Rf=0, sequence=True, reference='A'):
     r"""
     Double-Line-to-Ground Fault Calculator.
 
@@ -127,9 +130,12 @@ def phs2g(Vth, Zseq, Rf=0, sequence=True, reference='A'):
         Ifault = _phaseroll(Ifault, reference)  # Convert to ABC-Domain
     return Ifault
 
+# Alias Original Name
+phs2g = double_phase_to_ground_fault
+
 
 # Define Phase-to-Phase Fault Current Calculator
-def phs2(Vth, Zseq, Rf=0, sequence=True, reference='A'):
+def phase_to_phase_fault(Vth, Zseq, Rf=0, sequence=True, reference='A'):
     r"""
     Line-to-Line Fault Calculator.
 
@@ -181,9 +187,12 @@ def phs2(Vth, Zseq, Rf=0, sequence=True, reference='A'):
         Ifault = _phaseroll(Ifault, reference)  # Convert to ABC-Domain
     return Ifault
 
+# Alias Original Name
+phs2 = phase_to_phase_fault
+
 
 # Define Three-Phase Fault Current Calculator
-def phs3(Vth, Zseq, Rf=0, sequence=True, reference='A'):
+def three_phase_fault(Vth, Zseq, Rf=0, sequence=True, reference='A'):
     r"""
     Three-Phase Fault Calculator.
 
@@ -228,6 +237,9 @@ def phs3(Vth, Zseq, Rf=0, sequence=True, reference='A'):
     if not sequence:
         Ifault = _phaseroll(Ifault, reference)  # Convert to ABC-Domain
     return Ifault
+
+# Alias Original Name
+phs3 = three_phase_fault
 
 
 # Define Single Pole Open Calculator
@@ -335,7 +347,7 @@ def poleopen2(Vth, Zseq, sequence=True, reference='A'):
 
 
 # Define MVA Short Circuit
-def scMVA(Zth=None, Isc=None, Vth=1):
+def short_circuit_mva(Zth=None, Isc=None, Vth=1):
     r"""
     Short-Circuit MVA Calculator.
 
@@ -389,6 +401,9 @@ def scMVA(Zth=None, Isc=None, Vth=1):
         MVA = Vth * Isc
     # Return Value
     return MVA
+
+# Alias Original Name
+scMVA = short_circuit_mva
 
 
 # Define Explicitly 3-Phase MVAsc Calculator
@@ -533,7 +548,8 @@ def busvolt(k, n, Vpf, Z0, Z1, Z2, If, sequence=True, reference='A'):
 
 
 # Define CT Saturation Function
-def ct_saturation(XoR, Imag, Vrated, Irated, CTR, Rb, Xb, remnance=0, freq=60, ALF=20):
+def ct_saturation(XoR, Imag, Vrated, Irated, CTR, Rb, Xb, remnance=0, freq=60,
+                  ALF=20):
     r"""
     Electrical Current Transformer Saturation Calculator.
 
@@ -730,7 +746,8 @@ def ct_vpeak(Zb, Ip, CTR):
 
 
 # Define Saturation Time Calculator
-def ct_timetosat(Vknee, XoR, Rb, CTR, Imax, ts=None, npts=100, freq=60, plot=False):
+def ct_timetosat(Vknee, XoR, Rb, CTR, Imax, ts=None, npts=100, freq=60,
+                 plot=False):
     r"""
     Electrical Current Transformer (CT) Time to Saturation Function.
 
@@ -1225,7 +1242,8 @@ def correctedcurrents(Ipri, TAP, correction="Y", CTR=1):
 
 
 # Define Iop/Irt Calculator
-def iopirt(IpriHV, IpriLV, TAPHV, TAPLV, corrHV="Y", corrLV="Y", CTRHV=1, CTRLV=1):
+def iopirt(IpriHV, IpriLV, TAPHV, TAPLV, corrHV="Y", corrLV="Y", CTRHV=1,
+           CTRLV=1):
     """
     Operate/Restraint Current Calculator.
 
@@ -1396,7 +1414,8 @@ def residcomp(z1, z0, linelength=1):
 
 
 # Define Relay Measured Impedance Functon for Distance Elements
-def distmeasz(VLNmeas, If, Ip, Ipp, CTR=1, VTR=1, k0=None, z1=None, z0=None, linelength=1):
+def distmeasz(VLNmeas, If, Ip, Ipp, CTR=1, VTR=1, k0=None, z1=None, z0=None,
+              linelength=1):
     """
     Distance Element Measured Impedance Function.
 
@@ -1745,7 +1764,11 @@ def synmach_Isym(t, Eq, Xd, Xdp, Xdpp, Tdp, Tdpp):
                 Peak symmetrical fault current in per-unit-amps
     """
     # Calculate Time-Constant Term
-    t_c = 1 / Xd + (1 / Xdp - 1 / Xd) * _np.exp(-t / Tdp) + (1 / Xdpp - 1 / Xdp) * _np.exp(-t / Tdpp)
+    t_c = (
+        1 / Xd + 
+        (1 / Xdp - 1 / Xd) * _np.exp(-t / Tdp) + 
+        (1 / Xdpp - 1 / Xdp) * _np.exp(-t / Tdpp)
+    )
     # Calculate Fault Current
     Ia = _np.sqrt(2) * abs(Eq) * t_c
     return Ia
@@ -1840,8 +1863,10 @@ def indmacheigenvalues(Lr, Ls, Lm, Rr, Rs, wrf=0, freq=60):
     k1 += 1j * (omega_r / 2 - omega_rf)
     # Calculate k2
     k2 = 1 / (2 * phi * torque_r)
-    k2 *= _np.sqrt((1 + alpha) ** 2 - 4 * phi * alpha - (omega_r * phi * torque_r) ** 2
-                   + 2j * (alpha - 1) * omega_r * phi * torque_r)
+    k2 *= _np.sqrt(
+        (1 + alpha) ** 2 - 4 * phi * alpha - (omega_r * phi * torque_r) ** 2 +
+        2j * (alpha - 1) * omega_r * phi * torque_r
+    )
     # Evaluate Eigenvalues and Return
     lam1 = k1 + k2
     lam2 = k1 - k2
@@ -2036,8 +2061,10 @@ def synmach_ifault(t, Ea, alpha, Xd, Xdp, Xdpp, Xqpp, Tdp, Tdpp, Ta, freq=60):
         val = 0
     asym = 1 / 2 * (1 / Xdpp + val) * _np.exp(t / Ta)
     # Define Symmetrical Portion
-    isym = const * (1 / Xd + (1 / Xdp - 1 / Xd) * _np.exp(-t / Tdp)
-                    + (1 / Xdpp - 1 / Xdp) * _np.exp(-t / Tdpp)) * _np.sin(we * t + alpha)
+    isym = (
+        const * (1 / Xd + (1 / Xdp - 1 / Xd) * _np.exp(-t / Tdp) +
+        (1 / Xdpp - 1 / Xdp) * _np.exp(-t / Tdpp)) * _np.sin(we * t + alpha)
+    )
     # Define Asymmetrical Portion
     iasym = const * asym * _np.sin(alpha)
     # Define Double Frequency Term
@@ -2046,4 +2073,4 @@ def synmach_ifault(t, Ea, alpha, Xd, Xdp, Xdpp, Xqpp, Tdp, Tdpp, Ta, freq=60):
     ias = isym - iasym - idbl
     return ias
 
-# END OF FILE
+# END
