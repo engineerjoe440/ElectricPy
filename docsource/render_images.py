@@ -26,7 +26,7 @@ def canvas_capture(image_label):
 @canvas_capture("PowerTriangle")
 def render_power_triangle():
     """Render the Power Triangle Function."""
-    ep.powertriangle(400, 200)
+    visu.powertriangle(400, 200)
 
 # @canvas_capture("PhasorPlot")
 def render_phasor_plot():

@@ -597,90 +597,6 @@ def slew_rate(V=None, freq=None, SR=None, find=''):
         return V, freq, SR
 
 
-# Define Power Triangle Function
-def powertriangle(P=None, Q=None, S=None, PF=None, color="red",
-                  text="Power Triangle", printval=False):
-    """
-    Power Triangle Plotting Function.
-
-    This function is designed to draw a power triangle given
-    values for the complex power system.
-
-    .. image:: /static/PowerTriangle.png
-
-    Parameters
-    ----------
-    P:          float
-                Real Power, unitless, default=None
-    Q:          float
-                Reactive Power, unitless, default=None
-    S:          float
-                Apparent Power, unitless, default=None
-    PF:         float
-                Power Factor, unitless, provided as a decimal value, lagging is
-                positive, leading is negative; default=None
-    color:      string, optional
-                The color of the power triangle lines, default="red"
-    text:       string, optional
-                The title of the power triangle plot, default="Power Triangle"
-    printval:   bool, optional
-                Control argument to allow the numeric values to be printed on
-                the plot, default="False"
-
-    Returns
-    -------
-    matplotlib.pyplot:  Plotting object to be used for additional configuration
-                        or plotting.
-    """
-    # Calculate all values if not all are provided
-    if P is None or Q is None or S is None or PF is None:
-        P, Q, S, PF = powerset(P, Q, S, PF)
-
-    # Generate Lines
-    Plnx = [0, P]
-    Plny = [0, 0]
-    Qlnx = [P, P]
-    Qlny = [0, Q]
-    Slnx = [0, P]
-    Slny = [0, Q]
-
-    # Plot Power Triangle
-    _plt.figure(1)
-    _plt.title(text)
-    _plt.plot(Plnx, Plny, color=color)
-    _plt.plot(Qlnx, Qlny, color=color)
-    _plt.plot(Slnx, Slny, color=color)
-    _plt.xlabel("Real Power (W)")
-    _plt.ylabel("Reactive Power (VAR)")
-    mx = max(abs(P), abs(Q))
-
-    if P > 0:
-        _plt.xlim(0, mx * 1.1)
-        x = mx
-    else:
-        _plt.xlim(-mx * 1.1, 0)
-        x = -mx
-    if Q > 0:
-        _plt.ylim(0, mx * 1.1)
-        y = mx
-    else:
-        _plt.ylim(-mx * 1.1, 0)
-        y = -mx
-    if PF > 0:
-        PFtext = " Lagging"
-    else:
-        PFtext = " Leading"
-    text = "P:   " + str(P) + " W\n"
-    text = text + "Q:   " + str(Q) + " VAR\n"
-    text = text + "S:   " + str(S) + " VA\n"
-    text = text + "PF:  " + str(abs(PF)) + PFtext + "\n"
-    text = text + "ΘPF: " + str(_np.degrees(_np.arccos(PF))) + "°" + PFtext
-    # Print all values if asked to
-    if printval:
-        _plt.text(x / 20, y * 4 / 5, text, color=color)
-    return _plt
-
-
 # Define Non-Linear Power Factor Calculator
 def non_linear_pf(PFtrue=False, PFdist=False, PFdisp=False):
     """
@@ -895,6 +811,15 @@ def curdiv(Ri, Rset, Vin=None, Iin=None, Vout=False, combine=True):
     Opt1 - Ii:          The Current through the resistor (impedance) of interest
     Opt2 - (Ii,Vi):     The afore mentioned current, and voltage across the
                         resistor (impedance) of interest
+    
+    Examples
+    --------
+    >>> from electricpy.constants import k
+    >>> import electricpy as ep
+    >>> ep.curdiv(R1=1*k, Rset=(1*k, 1*k), Iin=12) # 12-amps, split three ways
+    4.0
+    >>> ep.curdiv(R1=1*k, Rset=(1*k, 1*k), Iin=12, Vout=True) # Find Voltage
+    (4.0, 4000)
     """
     # Validate Tuple
     if not isinstance(Rset, tuple):
