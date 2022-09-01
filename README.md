@@ -29,7 +29,7 @@ used primarily for research, development, education, and exploration in the real
 
 Check out our full documentation: https://electricpy.readthedocs.io/en/latest/
 
-<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Ff%2Ff7%2FAntu_dialog-warning.svg%2F1200px-Antu_dialog-warning.svg.png" width="40px"> **Documentation has recently been updated to use [ReadTheDocs](https://readthedocs.org/)**
+<a title="Fabián Alexis, CC BY-SA 3.0 &lt;https://creativecommons.org/licenses/by-sa/3.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Antu_dialog-warning.svg"><img width="25px" alt="Antu dialog-warning" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Antu_dialog-warning.svg/512px-Antu_dialog-warning.svg.png"></a> **Documentation has recently been updated to use [ReadTheDocs](https://readthedocs.org/)**
 
 GitHub Pages are still active, and will continue to be for the forseeable future, but they're intended for developmental
 updates rather than primary documentation.
