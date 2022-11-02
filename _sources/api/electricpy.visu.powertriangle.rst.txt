@@ -1,6 +1,0 @@
-electricpy.visu.powertriangle
-=============================
-
-.. currentmodule:: electricpy.visu
-
-.. autofunction:: powertriangle

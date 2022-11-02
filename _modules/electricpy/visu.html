@@ -54,6 +54,7 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
     <link rel="shortcut icon" href="../../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -377,94 +378,10 @@
 <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">_matplotlib</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">_plt</span>
 
-<span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">powerset</span><span class="p">,</span> <span class="n">geometry</span>
+<span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">geometry</span>
 <span class="kn">from</span> <span class="nn">electricpy.geometry</span> <span class="kn">import</span> <span class="n">Point</span>
 <span class="kn">from</span> <span class="nn">electricpy.geometry.circle</span> <span class="kn">import</span> <span class="n">Circle</span>
 
-
-
-<span class="c1"># Define Power Triangle Function</span>
-<div class="viewcode-block" id="powertriangle"><a class="viewcode-back" href="../../api/electricpy.visu.powertriangle.html#electricpy.visu.powertriangle">[docs]</a><span class="k">def</span> <span class="nf">powertriangle</span><span class="p">(</span><span class="n">P</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">PF</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span>
-                  <span class="n">text</span><span class="o">=</span><span class="s2">"Power Triangle"</span><span class="p">,</span> <span class="n">printval</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    Power Triangle Plotting Function.</span>
-
-<span class="sd">    This function is designed to draw a power triangle given</span>
-<span class="sd">    values for the complex power system.</span>
-
-<span class="sd">    .. image:: /static/PowerTriangle.png</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    P:          float</span>
-<span class="sd">                Real Power, unitless, default=None</span>
-<span class="sd">    Q:          float</span>
-<span class="sd">                Reactive Power, unitless, default=None</span>
-<span class="sd">    S:          float</span>
-<span class="sd">                Apparent Power, unitless, default=None</span>
-<span class="sd">    PF:         float</span>
-<span class="sd">                Power Factor, unitless, provided as a decimal value, lagging is</span>
-<span class="sd">                positive, leading is negative; default=None</span>
-<span class="sd">    color:      string, optional</span>
-<span class="sd">                The color of the power triangle lines, default="red"</span>
-<span class="sd">    text:       string, optional</span>
-<span class="sd">                The title of the power triangle plot, default="Power Triangle"</span>
-<span class="sd">    printval:   bool, optional</span>
-<span class="sd">                Control argument to allow the numeric values to be printed on</span>
-<span class="sd">                the plot, default="False"</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    matplotlib.pyplot:  Plotting object to be used for additional configuration</span>
-<span class="sd">                        or plotting.</span>
-<span class="sd">    """</span>
-    <span class="c1"># Calculate all values if not all are provided</span>
-    <span class="k">if</span> <span class="n">P</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">Q</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">S</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">PF</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">PF</span> <span class="o">=</span> <span class="n">powerset</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">PF</span><span class="p">)</span>
-
-    <span class="c1"># Generate Lines</span>
-    <span class="n">Plnx</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">P</span><span class="p">]</span>
-    <span class="n">Plny</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-    <span class="n">Qlnx</span> <span class="o">=</span> <span class="p">[</span><span class="n">P</span><span class="p">,</span> <span class="n">P</span><span class="p">]</span>
-    <span class="n">Qlny</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">Q</span><span class="p">]</span>
-    <span class="n">Slnx</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">P</span><span class="p">]</span>
-    <span class="n">Slny</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">Q</span><span class="p">]</span>
-
-    <span class="c1"># Plot Power Triangle</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Plnx</span><span class="p">,</span> <span class="n">Plny</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Qlnx</span><span class="p">,</span> <span class="n">Qlny</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Slnx</span><span class="p">,</span> <span class="n">Slny</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Real Power (W)"</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Reactive Power (VAR)"</span><span class="p">)</span>
-    <span class="n">mx</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">P</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Q</span><span class="p">))</span>
-
-    <span class="k">if</span> <span class="n">P</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">mx</span> <span class="o">*</span> <span class="mf">1.1</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">mx</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="n">mx</span> <span class="o">*</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="n">mx</span>
-    <span class="k">if</span> <span class="n">Q</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">mx</span> <span class="o">*</span> <span class="mf">1.1</span><span class="p">)</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">mx</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="n">mx</span> <span class="o">*</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="n">mx</span>
-    <span class="k">if</span> <span class="n">PF</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">PFtext</span> <span class="o">=</span> <span class="s2">" Lagging"</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">PFtext</span> <span class="o">=</span> <span class="s2">" Leading"</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="s2">"P:   "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">P</span><span class="p">)</span> <span class="o">+</span> <span class="s2">" W</span><span class="se">\n</span><span class="s2">"</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span> <span class="o">+</span> <span class="s2">"Q:   "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span> <span class="o">+</span> <span class="s2">" VAR</span><span class="se">\n</span><span class="s2">"</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span> <span class="o">+</span> <span class="s2">"S:   "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="o">+</span> <span class="s2">" VA</span><span class="se">\n</span><span class="s2">"</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span> <span class="o">+</span> <span class="s2">"PF:  "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">PF</span><span class="p">))</span> <span class="o">+</span> <span class="n">PFtext</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span> <span class="o">+</span> <span class="s2">"ΘPF: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">PF</span><span class="p">)))</span> <span class="o">+</span> <span class="s2">"°"</span> <span class="o">+</span> <span class="n">PFtext</span>
-    <span class="c1"># Print all values if asked to</span>
-    <span class="k">if</span> <span class="n">printval</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">20</span><span class="p">,</span> <span class="n">y</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">/</span> <span class="mi">5</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">_plt</span></div>
 
 
 <span class="c1"># Define Convolution Bar-Graph Function:</span>
@@ -1383,7 +1300,7 @@
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

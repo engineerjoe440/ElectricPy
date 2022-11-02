@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -55,6 +55,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
@@ -380,7 +381,7 @@ components.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>M012</strong> (<em>list of complex</em>) – Sequence-based values to convert.</p></li>
+<li><p><strong>M012</strong> (<em>list</em><em> of </em><em>complex</em>) – Sequence-based values to convert.</p></li>
 <li><p><strong>reference</strong> (<em>{'A'</em><em>, </em><em>'B'</em><em>, </em><em>'C'}</em>) – Single character denoting the reference,
 default=’A’</p></li>
 </ul>
@@ -400,21 +401,6 @@ default=’A’</p></li>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">sequence</span></code></dt><dd><p>Phase Impedance to Sequence Converter</p>
 </dd>
 </dl>
-</div>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">electricpy</span> <span class="k">as</span> <span class="nn">ep</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy.phasor</span> <span class="kn">import</span> <span class="n">phasor</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">electricpy.conversions</span> <span class="k">as</span> <span class="nn">conv</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">abc_matrix</span> <span class="o">=</span> <span class="p">[</span>
-<span class="gp">... </span>    <span class="n">phasor</span><span class="p">(</span><span class="mi">167</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-<span class="gp">... </span>    <span class="n">phasor</span><span class="p">(</span><span class="mi">167</span><span class="p">,</span> <span class="o">-</span><span class="mi">120</span><span class="p">),</span>
-<span class="gp">... </span>    <span class="n">phasor</span><span class="p">(</span><span class="mi">167</span><span class="p">,</span> <span class="o">-</span><span class="mi">240</span><span class="p">),</span>
-<span class="gp">... </span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">seq_quantities</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">abc_to_seq</span><span class="p">(</span><span class="n">abc_matrix</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Will return a list approximately equal to: [0+0j, 167+0j, 0+0j]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">phs_quantities</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">seq_to_abc</span><span class="p">(</span><span class="n">seq_quantities</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Returned Phase Quantities will Approximately Equal the Original Values</span>
-</pre></div>
 </div>
 </dd></dl>
 </section>
@@ -466,7 +452,7 @@ default=’A’</p></li>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -55,6 +55,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -376,15 +377,15 @@ components of the system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>real</strong> (<em>list of float</em>) – The real (cosine) component coefficients
+<li><p><strong>real</strong> (<em>list</em><em> of </em><em>float</em>) – The real (cosine) component coefficients
 for the harmonic system.</p></li>
-<li><p><strong>imag</strong> (<em>list of float</em><em>, </em><em>optional</em>) – The imaginary (sine) component coefficients
+<li><p><strong>imag</strong> (<em>list</em><em> of </em><em>float</em><em>, </em><em>optional</em>) – The imaginary (sine) component coefficients
 for the harmonic system.</p></li>
 <li><p><strong>dc</strong> (<em>float</em><em>, </em><em>optional</em>) – The DC offset for the harmonic system,
 default=0</p></li>
 <li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – The fundamental frequency of the system in
 Hz, default=60</p></li>
-<li><p><strong>domain</strong> (<em>list of float</em><em>, </em><em>optional</em>) – Domain of time samples at which to calculate
+<li><p><strong>domain</strong> (<em>list</em><em> of </em><em>float</em><em>, </em><em>optional</em>) – Domain of time samples at which to calculate
 the harmonic system, must be array-like, will
 cause function to return numpy array instead
 of function object.</p></li>
@@ -449,7 +450,7 @@ system at specified times.</p>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

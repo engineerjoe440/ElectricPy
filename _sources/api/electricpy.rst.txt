@@ -93,6 +93,8 @@
     
     powerset
     
+    powertriangle
+    
     primary
     
     propagation_constants

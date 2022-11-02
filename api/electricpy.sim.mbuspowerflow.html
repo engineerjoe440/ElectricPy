@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -55,6 +55,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -378,24 +379,24 @@ solution.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>Ybus</strong> (<em>array_like</em>) – Postitive Sequence Y-Bus Matrix for Network.</p></li>
-<li><p><strong>Vknown</strong> (<em>list of list of float</em>) – List of known and unknown voltages.
+<li><p><strong>Vknown</strong> (<em>list</em><em> of </em><em>list</em><em> of </em><em>float</em>) – List of known and unknown voltages.
 Known voltages should be provided as
 a list of floating values in the form of:
 [mag, ang], unknown voltages should
 be provided as None.</p></li>
-<li><p><strong>Pknown</strong> (<em>list of float</em>) – List of known and unknown real powers.
+<li><p><strong>Pknown</strong> (<em>list</em><em> of </em><em>float</em>) – List of known and unknown real powers.
 Known powers should be provided as
 a floating point value, unknown powers
 should be provided as None. Generated power
 should be noted as positive, consumed power
 should be noted as negative.</p></li>
-<li><p><strong>Qknown</strong> (<em>list of float</em>) – List of known and unknown reactive powers.
+<li><p><strong>Qknown</strong> (<em>list</em><em> of </em><em>float</em>) – List of known and unknown reactive powers.
 Known powers should be provided as
 a floating point value, unknown powers
 should be provided as None. Generated power
 should be noted as positive, consumed power
 should be noted as negative.</p></li>
-<li><p><strong>X0</strong> (<em>{'flatstart'</em><em>, </em><em>list of float}</em><em>, </em><em>optional</em>) – Initial conditions/Initial guess. May be set
+<li><p><strong>X0</strong> (<em>{'flatstart'</em><em>, </em><em>list</em><em> of </em><em>float}</em><em>, </em><em>optional</em>) – Initial conditions/Initial guess. May be set
 to ‘flatstart’ to force function to generate
 flat voltages and angles of 1∠0°. Must be
 specified in the form:
@@ -510,7 +511,7 @@ default=0.25</p></li>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

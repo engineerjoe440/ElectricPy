@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -55,13 +55,14 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="electricpy.fault.phs1mvasc" href="electricpy.fault.phs1mvasc.html" />
-    <link rel="prev" title="electricpy.fault.phase_to_phase_fault" href="electricpy.fault.phase_to_phase_fault.html" />
+    <link rel="prev" title="electricpy.fault.iopirt" href="electricpy.fault.iopirt.html" />
   
    
 
@@ -370,7 +371,7 @@
 <h1 id="api-electricpy-fault-phs1g--page-root">electricpy.fault.phs1g<a class="headerlink" href="#api-electricpy-fault-phs1g--page-root" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="electricpy.fault.phs1g">
-<span class="sig-prename descclassname"><span class="pre">electricpy.fault.</span></span><span class="sig-name descname"><span class="pre">phs1g</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Zseq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'A'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#electricpy.fault.phs1g" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">electricpy.fault.</span></span><span class="sig-name descname"><span class="pre">phs1g</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Zseq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'A'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/fault.html#phs1g"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.fault.phs1g" title="Permalink to this definition">¶</a></dt>
 <dd><p>Single-Phase-to-Ground Fault Calculator.</p>
 <p>This function will evaluate the Zero, Positive, and Negative
 sequence currents for a single-line-to-ground fault.</p>
@@ -384,7 +385,7 @@ sequence currents for a single-line-to-ground fault.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>Vth</strong> (<em>complex</em>) – The Thevenin-Equivalent-Voltage</p></li>
-<li><p><strong>Zseq</strong> (<em>list of complex</em>) – Tupple of sequence reactances as (Z0, Z1, Z2)</p></li>
+<li><p><strong>Zseq</strong> (<em>list</em><em> of </em><em>complex</em>) – Tupple of sequence reactances as (Z0, Z1, Z2)</p></li>
 <li><p><strong>Rf</strong> (<em>complex</em><em>, </em><em>optional</em>) – The fault resistance, default=0</p></li>
 <li><p><strong>sequence</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force return into symmetrical-
 or phase-domain values.</p></li>
@@ -412,7 +413,7 @@ default=’A’</p></li>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
           
-            <a href="electricpy.fault.phase_to_phase_fault.html" title="electricpy.fault.phase_to_phase_fault"
+            <a href="electricpy.fault.iopirt.html" title="electricpy.fault.iopirt"
                class="md-flex md-footer-nav__link md-footer-nav__link--prev"
                rel="prev">
               <div class="md-flex__cell md-flex__cell--shrink">
@@ -421,7 +422,7 @@ default=’A’</p></li>
               <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
                 <span class="md-flex__ellipsis">
                   <span
-                      class="md-footer-nav__direction"> Previous </span> electricpy.fault.phase_to_phase_fault </span>
+                      class="md-footer-nav__direction"> Previous </span> electricpy.fault.iopirt </span>
               </div>
             </a>
           
@@ -449,7 +450,7 @@ default=’A’</p></li>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>
