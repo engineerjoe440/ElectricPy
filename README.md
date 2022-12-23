@@ -24,36 +24,19 @@
 
 Python Libraries with functions and constants related to electrical engineering.
 
-The functions and constants that make up these modules represent a library of material compiled with the intent of being
-used primarily for research, development, education, and exploration in the realm of electrical engineering.
+The functions and constants that make up these modules represent a library of
+material compiled with the intent of being used primarily for research,
+development, education, and exploration in the realm of electrical engineering.
 
 Check out our full documentation: https://electricpy.readthedocs.io/en/latest/
 
 <a title="Fabián Alexis, CC BY-SA 3.0 &lt;https://creativecommons.org/licenses/by-sa/3.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Antu_dialog-warning.svg"><img width="25px" alt="Antu dialog-warning" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Antu_dialog-warning.svg/512px-Antu_dialog-warning.svg.png"></a> **Documentation has recently been updated to use [ReadTheDocs](https://readthedocs.org/)**
 
-GitHub Pages are still active, and will continue to be for the forseeable future, but they're intended for developmental
-updates rather than primary documentation.
+GitHub Pages are still active, and will continue to be for the forseeable
+future, but they're intended for developmental updates rather than primary
+documentation.
 
-### Special thanks to:
-
-- Stephen Weeks | Student - University of Idaho
-- Jeremy Perhac | Student - University of Idaho
-- Daniel Allen | Student - Universtiy of Idaho
-- Dr. Dennis Sullivan | Proffessor - University of Idaho
-- Dr. Brian Johnson | Proffessor - University of Idaho
-- Dr. Joe Law | Proffessor - University of Idaho
-- StackOverflow user gg349
-- Shaurya Uppal | Online Code Contributor
-- Paul Ortman | Power Quality Engineer - Idaho Power | Instructor - University of Idaho
-
-and
-
-<a href="https://github.com/engineerjoe440/electricpy/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=engineerjoe440/electricpy" alt="contributors">
-</a>
-
-
-### Dependencies:
+### Dependencies
 
 - [NumPy](https://numpy.org/)
 - [matplotlib](https://matplotlib.org/)
@@ -62,64 +45,102 @@ and
 - [numdifftools](https://numdifftools.readthedocs.io/en/latest/)
 
 
-## INSTALLATION:
+## Installing / Getting Started
 
-### 1) (option a) Install ElectricPy with Python's Own `pip`
+1. Install ElectricPy with `pip`
 
-Install *electricpy*
-  - `pip install electricpy`
-
-### 1) (option b) Install ElectricPy from Source
-
-[Python Documentation](https://docs.python.org/3/install/index.html)
+```
+pip install electricpy
+```
   
-Collect Repository and Install
-    
-1. Clone/Download Source Code from GitHub [Repository](https://github.com/engineerjoe440/ElectricPy)
-2. Open Terminal and Navigate to Folder with `cd` Commands:
-  - `cd <path\to\containing\folder>\electricpy`
-3. Use Python to Install Module from `setup.py`:
-  - `python setup.py install`
-  
-### 2) Verify Installation
-
-Check installation success in Python environment
+2. Check installation success in Python environment:
 
 ```python
 import electricpy
 electricpy._version_
 ```
 
-## To Do List
+3. Start using the electrical engineering formulas
 
-- Add Heat Sink Solver
-- DC/DC Converters
-- DC/AC Converters
-- Stationary and Synchronous Reference Frame conversion Matrices/Constants
-- Add arc-flash calculators suggested
-- *Develop Testing for All Functions*
+```python
+>>> import electricpy as ep
+>>> phsor = ep.phasor(67, 120) # 67 volts at angle 120 degrees
+>>> phsor
+(-33.499999999999986+58.02370205355739j)
+>>> ep.cprint(phsor)
+67.0 ∠ 120.0°
+```
+
+### Installing from Source
+
+If you're looking to get the "latest and greatest" from electricpy, you'll want
+to install directly from GitHub, you can do that one of two ways, the easiest of
+which is to simply issue the following command for `pip`
+
+```
+pip install git+https://github.com/engineerjoe440/ElectricPy.git
+```
+
+Alternatively, you can do it the "old fashioned way" by cloning the repository
+and installing locally.
+
+1. Clone/Download Source Code from GitHub
+[Repository](https://github.com/engineerjoe440/ElectricPy)
+2. Open Terminal and Navigate to Folder with `cd` Commands:
+  - `cd <path\to\containing\folder>\electricpy`
+3. Use Python to Install Module from `setup.py`:
+  - `python setup.py install`
+
 
 ## Get Involved / Contribute
 
-If you're interested in contributing, we'd love to see your support in a number of ways!
+If you're interested in contributing, we'd love to see your support in a number
+of ways!
 
-1. **Write Tests** - We're really lacking in this area. We've recently added simple GitHub actions to test installation, but that's about it. We hope that someday we can test all functions in this module for verification.
-2. **Contribute New Electrical Engineering Functions** - If you've got a new function related to electrical engineering that you'd like to see added, we'd love to throw it into this module. Our goal is that this module can become the comprehensive electrical engineering toolkit in Python. Drop us a note, or create a pull request!
-3. **Report Issues** - We don't want issues to go unnoticed. Please help us track bugs and resolve them!
-4. **Get the Word Out** - This project is still in its infancy, so please share it with your friends and colleagues. We want to make sure that everyone has the opportunity to take advantage of this project.
+1. **Write Tests** - We're really lacking in this area. We've recently added
+simple GitHub actions to test installation, but that's about it. We hope that
+someday we can test all functions in this module for verification.
+2. **Contribute New Electrical Engineering Functions** - If you've got a new
+function related to electrical engineering that you'd like to see added, we'd
+love to throw it into this module. Our goal is that this module can become the
+comprehensive electrical engineering toolkit in Python. Drop us a note, or
+create a [pull request](https://github.com/engineerjoe440/ElectricPy/pulls)!
+3. **Report Issues** - We don't want issues to go unnoticed. Please help us
+track bugs in [our issues](https://github.com/engineerjoe440/ElectricPy/issues)
+and resolve them!
+4. **Get the Word Out** - This project is still in its infancy, so please share
+it with your friends and colleagues. We want to make sure that everyone has the
+opportunity to take advantage of this project.
 
-#### Check out the [contribution guide](https://github.com/engineerjoe440/ElectricPy/blob/master/CONTRIBUTING.md)
-    
+**Check out the [contribution guide](https://github.com/engineerjoe440/ElectricPy/blob/master/CONTRIBUTING.md)**
+
+### Special thanks to...
+
+- Stephen Weeks | Student - U of Idaho
+- Jeremy Perhac | Student - U of Idaho
+- Daniel Allen | Student - Universtiy of Idaho
+- Dr. Dennis Sullivan | Proffessor - U of Idaho
+- Dr. Brian Johnson | Proffessor - U of Idaho
+- Dr. Joe Law | Proffessor - U of Idaho
+- StackOverflow user gg349
+- Shaurya Uppal | Online Code Contributor
+- Paul Ortman | Power Quality Engineer - Idaho Power | Instructor - U of Idaho
+
+*and*
+
+<a href="https://github.com/engineerjoe440/electricpy/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=engineerjoe440/electricpy" alt="contributors">
+</a>
 
 ## Contact
 
 For more information regarding this resource, please contact Joe Stanley
 
-- <stan3926@almuni.uidaho.edu>
+- <joe@stanleysolutionsnw.com>
 - <joe_stanley@selinc.com>
 
 ## License and Usage
 
-ElectricPy is licensed under the standard MIT license, and as such, you are permitted
-to use this resource as you see fit. Please feel free to ask questions, suggest edits
-and report bugs or other issues.
+ElectricPy is licensed under the standard MIT license, and as such, you are
+permitted to use this resource as you see fit. Please feel free to ask
+questions, suggest edits and report bugs or other issues.

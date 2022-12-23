@@ -25,7 +25,7 @@ from scipy.integrate import quad as integrate
 
 # Import Submodules
 from .constants import *
-from .phasor import parallelz
+from .phasor import phasor, parallelz
 
 # Define Cycle Time Function
 def tcycle(ncycles = 1, freq = 60):
