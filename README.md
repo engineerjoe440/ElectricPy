@@ -19,6 +19,8 @@
 [![](https://img.shields.io/github/stars/engineerjoe440/electricpy?logo=github)](https://github.com/engineerjoe440/electricpy/)
 [![](https://img.shields.io/pypi/l/electricpy.svg?color=blue)](https://github.com/engineerjoe440/electricpy/blob/master/LICENSE.txt)
 
+![Matrix](https://img.shields.io/matrix/electricpy:stanleysolutionsn.com?label=Matrix%20Chat&logo=matrix&server_fqdn=matrix.stanleysolutionsnw.com&style=for-the-badge)
+
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/engineerjoe440)
 
 
@@ -84,12 +86,11 @@ pip install git+https://github.com/engineerjoe440/ElectricPy.git
 Alternatively, you can do it the "old fashioned way" by cloning the repository
 and installing locally.
 
-1. Clone/Download Source Code from GitHub
-[Repository](https://github.com/engineerjoe440/ElectricPy)
+1. Clone/Download Source Code from [GitHub Repository](https://github.com/engineerjoe440/ElectricPy)
 2. Open Terminal and Navigate to Folder with `cd` Commands:
   - `cd <path\to\containing\folder>\electricpy`
 3. Use Python to Install Module from `setup.py`:
-  - `python setup.py install`
+  - `pip install .`
 
 
 ## Get Involved / Contribute
@@ -113,6 +114,9 @@ it with your friends and colleagues. We want to make sure that everyone has the
 opportunity to take advantage of this project.
 
 **Check out the [contribution guide](https://github.com/engineerjoe440/ElectricPy/blob/master/CONTRIBUTING.md)**
+
+**Come chat about ElectricPy**
+![Matrix](https://img.shields.io/matrix/electricpy:stanleysolutionsn.com?label=Matrix%20Chat&logo=matrix&server_fqdn=matrix.stanleysolutionsnw.com&style=for-the-badge)
 
 ### Special thanks to...
 
