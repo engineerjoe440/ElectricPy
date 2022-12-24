@@ -25,7 +25,7 @@ from scipy.integrate import quad as integrate
 
 # Import Submodules
 from .constants import *
-from .phasor import phasor, parallelz
+from .phasors import phasor, parallelz
 
 # Define Cycle Time Function
 def tcycle(ncycles = 1, freq = 60):
@@ -214,7 +214,7 @@ def cprint(val, unit=None, label=None, title=None,
     --------
     >>> import numpy as np
     >>> import electricpy as ep
-    >>> from electricpy.phasor import phasor
+    >>> from electricpy.phasors import phasor
     >>> v = phasor(67, 120)
     >>> ep.cprint(v)
     67.0 ∠ 120.0°
@@ -1134,9 +1134,9 @@ def zsource(S, V, XoR, Sbase=None, Vbase=None, perunit=True):
     if isinstance(nu, (list, _np.ndarray)):
         Zsource_pu = []
         for angle in nu:
-            Zsource_pu.append(phasor(Zsource_pu, angle))
+            Zsource_pu.append(phasors(Zsource_pu, angle))
     else:
-        Zsource_pu = phasor(Zsource_pu, nu)
+        Zsource_pu = phasors(Zsource_pu, nu)
     if not perunit:
         Zsource = Zsource_pu * Vbase ** 2 / Sbase
         return Zsource

@@ -72,7 +72,7 @@ def phasor(mag, ang=0):
 
     Examples
     --------
-    >>> from electricpy.phasor import phasor
+    >>> from electricpy.phasors import phasor
     >>> phasor(67, 120) # 67 volts at angle 120 degrees
     (-33.499999999999986+58.02370205355739j)
 

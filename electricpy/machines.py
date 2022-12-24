@@ -12,7 +12,7 @@ import numpy as _np
 from scipy.optimize import fsolve as _fsolve
 
 # Import Locals
-from .phasor import compose
+from .phasors import compose
 
 
 # Define Transformer Short-Circuit/Open-Circuit Function

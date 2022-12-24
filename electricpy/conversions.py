@@ -230,7 +230,7 @@ def abc_to_seq(Mabc, reference='A'):
     Examples
     --------
     >>> import electricpy as ep
-    >>> from electricpy.phasor import phasor
+    >>> from electricpy.phasors import phasor
     >>> import electricpy.conversions as conv
     >>> abc_matrix = [
     ...     phasor(167, 0),
@@ -290,7 +290,7 @@ def seq_to_abc(M012, reference='A'):
     Examples
     --------
     >>> import electricpy as ep
-    >>> from electricpy.phasor import phasor
+    >>> from electricpy.phasors import phasor
     >>> import electricpy.conversions as conv
     >>> abc_matrix = [
     ...     phasor(167, 0),

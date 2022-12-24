@@ -32,7 +32,7 @@ def render_power_triangle():
 def render_phasor_plot():
     """Render the Phasor Plot Function."""
     # This phasorplot is ploted on seperate canvas
-    phasors = ep.phasor.phasorlist([
+    phasors = ep.phasors.phasorlist([
         [67,0],
         [45,-120],
         [52,120]
