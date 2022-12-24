@@ -17,7 +17,7 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v1
         with:
-          python-version: "3.10"
+          python-version: "3.11"
       - name: Identify Version
         id: version
         run: |

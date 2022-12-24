@@ -14,10 +14,94 @@ import numpy as _np
 import matplotlib as _matplotlib
 import matplotlib.pyplot as _plt
 
-from electricpy import geometry
+from electricpy import powerset, geometry
 from electricpy.geometry import Point
 from electricpy.geometry.circle import Circle
 
+
+
+# Define Power Triangle Function
+def powertriangle(P=None, Q=None, S=None, PF=None, color="red",
+                  text="Power Triangle", printval=False):
+    """
+    Power Triangle Plotting Function.
+
+    This function is designed to draw a power triangle given
+    values for the complex power system.
+
+    .. image:: /static/PowerTriangle.png
+
+    Parameters
+    ----------
+    P:          float
+                Real Power, unitless, default=None
+    Q:          float
+                Reactive Power, unitless, default=None
+    S:          float
+                Apparent Power, unitless, default=None
+    PF:         float
+                Power Factor, unitless, provided as a decimal value, lagging is
+                positive, leading is negative; default=None
+    color:      string, optional
+                The color of the power triangle lines, default="red"
+    text:       string, optional
+                The title of the power triangle plot, default="Power Triangle"
+    printval:   bool, optional
+                Control argument to allow the numeric values to be printed on
+                the plot, default="False"
+
+    Returns
+    -------
+    matplotlib.pyplot:  Plotting object to be used for additional configuration
+                        or plotting.
+    """
+    # Calculate all values if not all are provided
+    if P is None or Q is None or S is None or PF is None:
+        P, Q, S, PF = powerset(P, Q, S, PF)
+
+    # Generate Lines
+    Plnx = [0, P]
+    Plny = [0, 0]
+    Qlnx = [P, P]
+    Qlny = [0, Q]
+    Slnx = [0, P]
+    Slny = [0, Q]
+
+    # Plot Power Triangle
+    _plt.figure(1)
+    _plt.title(text)
+    _plt.plot(Plnx, Plny, color=color)
+    _plt.plot(Qlnx, Qlny, color=color)
+    _plt.plot(Slnx, Slny, color=color)
+    _plt.xlabel("Real Power (W)")
+    _plt.ylabel("Reactive Power (VAR)")
+    mx = max(abs(P), abs(Q))
+
+    if P > 0:
+        _plt.xlim(0, mx * 1.1)
+        x = mx
+    else:
+        _plt.xlim(-mx * 1.1, 0)
+        x = -mx
+    if Q > 0:
+        _plt.ylim(0, mx * 1.1)
+        y = mx
+    else:
+        _plt.ylim(-mx * 1.1, 0)
+        y = -mx
+    if PF > 0:
+        PFtext = " Lagging"
+    else:
+        PFtext = " Leading"
+    text = "P:   " + str(P) + " W\n"
+    text = text + "Q:   " + str(Q) + " VAR\n"
+    text = text + "S:   " + str(S) + " VA\n"
+    text = text + "PF:  " + str(abs(PF)) + PFtext + "\n"
+    text = text + "ΘPF: " + str(_np.degrees(_np.arccos(PF))) + "°" + PFtext
+    # Print all values if asked to
+    if printval:
+        _plt.text(x / 20, y * 4 / 5, text, color=color)
+    return _plt
 
 
 # Define Convolution Bar-Graph Function:
@@ -87,7 +171,7 @@ def convbar(h, x, outline=True):
 
 
 # Define Phasor Plot Generator
-def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
+def phasorplot(phasors, title="Phasor Diagram", legend=False, bg=None,
                colors=None, radius=None, linewidth=None, size=None,
                label=False, labels=False, tolerance=None):
     """
@@ -101,14 +185,14 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     Examples
     --------
     >>> import numpy as np
-    >>> from electricpy import phasor
+    >>> from electricpy import phasors
     >>> from electricpy import visu
     >>> voltages = np.array([
     ...     [67,0],
     ...     [45,-120],
     ...     [52,120]
     ... ])
-    >>> phasors = phasor.phasorlist(voltages)
+    >>> phasors = phasors.phasorlist(voltages)
     >>> plt = visu.phasorplot(phasors, colors=["red", "green", "blue"])
     >>> plt.show()
 
@@ -116,7 +200,7 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
 
     Parameters
     ----------
-    phasor:     list of complex
+    phasors:    list of complex
                 The set of phasors to be plotted.
     title:      string, optional
                 The Plot Title, default="Phasor Diagram"
@@ -148,9 +232,9 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     """
     # Load Complex Values if Necessary
     try:
-        len(phasor)
+        len(phasors)
     except TypeError:
-        phasor = [phasor]
+        phasors = [phasors]
     # Manage Colors
     if colors is None:
         colors = [
@@ -159,7 +243,7 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
         ]
     # Scale Radius
     if radius is None:
-        radius = _np.abs(phasor).max()
+        radius = _np.abs(phasors).max()
     # Set Tolerance
     if tolerance is None:
         tolerance = radius / 25
@@ -174,7 +258,7 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     if labels != False:
         legend = labels
     # Check for more phasors than colors
-    numphs = len(phasor)
+    numphs = len(phasors)
     numclr = len(colors)
     if numphs > numclr:
         raise ValueError(
@@ -194,7 +278,7 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     _plt.title(title + "\n")
     handles = _np.array([])  # Empty array for plot handles
     for i in range(numphs):
-        mag, ang_r = _c.polar(phasor[i])
+        mag, ang_r = _c.polar(phasors[i])
         # Plot with labels
         if legend:
             if mag > tolerance:

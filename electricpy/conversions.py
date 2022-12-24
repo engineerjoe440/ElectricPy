@@ -149,6 +149,13 @@ def rad_to_hz(radians):
     -------
     hertz:      float
                 The frequency (represented in Hertz)
+    
+    Examples
+    --------
+    >>> from electricpy import pi
+    >>> from electricpy import conversions as conv
+    >>> conv.rad_to_hz(4*pi) # 4-pi-radians/second
+    2.0...
     """
     return radians / (2 * _np.pi)  # Evaluate and Return
 
@@ -170,13 +177,19 @@ def hz_to_rad(hz):
 
     Parameters
     ----------
-    hz:      float
-                The frequency (represented in Hertz)
+    hz:     float
+            The frequency (represented in Hertz)
 
     Returns
     -------
     radians:    float
                 The frequency (represented in radians/sec)
+    
+    Examples
+    --------
+    >>> from electricpy import conversions as conv
+    >>> conv.hz_to_rad(2) # 2 hz
+    12.566...
     """
     return hz * (2 * _np.pi)  # Evaluate and Return
 
@@ -217,12 +230,11 @@ def abc_to_seq(Mabc, reference='A'):
     Examples
     --------
     >>> import electricpy as ep
-    >>> from electricpy.phasor import phasor
     >>> import electricpy.conversions as conv
     >>> abc_matrix = [
-    ...     phasor(167, 0),
-    ...     phasor(167, -120),
-    ...     phasor(167, -240),
+    ...     ep.phasor(167, 0),
+    ...     ep.phasor(167, -120),
+    ...     ep.phasor(167, -240),
     ... ]
     >>> conv.abc_to_seq(abc_matrix)
     >>> # Will return a list approximately equal to: [0+0j, 167+0j, 0+0j]
@@ -273,6 +285,20 @@ def seq_to_abc(M012, reference='A'):
     --------
     abc_to_seq: Phase to Sequence Conversion
     sequence:  Phase Impedance to Sequence Converter
+
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> import electricpy.conversions as conv
+    >>> abc_matrix = [
+    ...     ep.phasor(167, 0),
+    ...     ep.phasor(167, -120),
+    ...     ep.phasor(167, -240),
+    ... ]
+    >>> seq_quantities = conv.abc_to_seq(abc_matrix)
+    >>> # Will return a list approximately equal to: [0+0j, 167+0j, 0+0j]
+    >>> phs_quantities = conv.seq_to_abc(seq_quantities)
+    >>> # Returned Phase Quantities will Approximately Equal the Original Values
     """
     # Compute Dot Product
     M = A012.dot(M012)
@@ -384,6 +410,13 @@ def rad_to_rpm(rad):
     -------
     rpm:        float
                 The angular velocity in revolutions-per-minute (RPM)
+    
+    Examples
+    --------
+    >>> from electricpy import pi
+    >>> from electricpy import conversions as conv
+    >>> conv.rad_to_rpm(2*pi)
+    60.0
     """
     rpm = 60 / (2 * _np.pi) * rad
     return rpm
@@ -406,6 +439,13 @@ def rpm_to_rad(rpm):
     -------
     rad:        float
                 The angular velocity in radians-per-second
+    
+    Examples
+    --------
+    >>> from electricpy import pi
+    >>> from electricpy import conversions as conv
+    >>> conv.rpm_to_rad(60)
+    6.28...
     """
     rad = 2 * _np.pi / 60 * rpm
     return rad
@@ -428,6 +468,12 @@ def hz_to_rpm(hz):
     -------
     rpm:        float
                 The angular velocity in revolutions-per-minute (RPM)
+
+    Examples
+    --------
+    >>> from electricpy import conversions as conv
+    >>> conv.hz_to_rpm(2) # 2 Hz
+    120
     """
     return hz * 60
 
@@ -449,6 +495,12 @@ def rpm_to_hz(rpm):
     -------
     hz:         float
                 The angular velocity in Hertz
+
+    Examples
+    --------
+    >>> from electricpy import conversions as conv
+    >>> conv.rpm_to_hz(120) # 120 RPM
+    2.0
     """
     return rpm / 60
 

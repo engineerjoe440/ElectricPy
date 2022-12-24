@@ -17,7 +17,7 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v1
         with:
-          python-version: "3.10"
+          python-version: "3.11"
       # I don't know where the "run" thing is documented.
       - name: Install dependencies
         run: |
