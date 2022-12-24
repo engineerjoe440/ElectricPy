@@ -412,14 +412,14 @@ where the angles are evaluated in degrees.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">electricpy</span> <span class="k">as</span> <span class="nn">ep</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy.phasors</span> <span class="kn">import</span> <span class="n">phasor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">phasors</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">phasor</span><span class="p">(</span><span class="mi">67</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">cprint</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 <span class="go">67.0 ∠ 120.0°</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">voltages</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">67</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
 <span class="gp">... </span>                     <span class="p">[</span><span class="mi">67</span><span class="p">,</span><span class="o">-</span><span class="mi">120</span><span class="p">],</span>
 <span class="gp">... </span>                     <span class="p">[</span><span class="mi">67</span><span class="p">,</span><span class="mi">120</span><span class="p">]])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Vset</span> <span class="o">=</span> <span class="n">ep</span><span class="o">.</span><span class="n">phasor</span><span class="o">.</span><span class="n">phasorlist</span><span class="p">(</span> <span class="n">voltages</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Vset</span> <span class="o">=</span> <span class="n">ep</span><span class="o">.</span><span class="n">phasors</span><span class="o">.</span><span class="n">phasorlist</span><span class="p">(</span> <span class="n">voltages</span> <span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ep</span><span class="o">.</span><span class="n">cprint</span><span class="p">(</span><span class="n">Vset</span><span class="p">)</span>
 <span class="go">67.0 ∠ 0.0°</span>
 <span class="go">67.0 ∠ -120.0°</span>
@@ -429,11 +429,11 @@ where the angles are evaluated in degrees.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">electricpy.phasor.phasor</span></code></dt><dd><p>Phasor Generating Function</p>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">electricpy.phasors.phasor</span></code></dt><dd><p>Phasor Generating Function</p>
 </dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">electricpy.phasor.phasorlist</span></code></dt><dd><p>Phasor Generating Function for Lists/Arrays</p>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">electricpy.phasors.phasorlist</span></code></dt><dd><p>Phasor Generating Function for Lists/Arrays</p>
 </dd>
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">electricpy.phasor.phasorz</span></code></dt><dd><p>Impedance Phasor Generator</p>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">electricpy.phasors.phasorz</span></code></dt><dd><p>Impedance Phasor Generator</p>
 </dd>
 </dl>
 </div>

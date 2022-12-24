@@ -535,7 +535,7 @@
 
 
 <span class="c1"># Define Phasor Plot Generator</span>
-<div class="viewcode-block" id="phasorplot"><a class="viewcode-back" href="../../api/electricpy.visu.phasorplot.html#electricpy.visu.phasorplot">[docs]</a><span class="k">def</span> <span class="nf">phasorplot</span><span class="p">(</span><span class="n">phasor</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Phasor Diagram"</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="phasorplot"><a class="viewcode-back" href="../../api/electricpy.visu.phasorplot.html#electricpy.visu.phasorplot">[docs]</a><span class="k">def</span> <span class="nf">phasorplot</span><span class="p">(</span><span class="n">phasors</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Phasor Diagram"</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                <span class="n">label</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">"""</span>
@@ -549,14 +549,14 @@
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">    &gt;&gt;&gt; from electricpy import phasor</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy import phasors</span>
 <span class="sd">    &gt;&gt;&gt; from electricpy import visu</span>
 <span class="sd">    &gt;&gt;&gt; voltages = np.array([</span>
 <span class="sd">    ...     [67,0],</span>
 <span class="sd">    ...     [45,-120],</span>
 <span class="sd">    ...     [52,120]</span>
 <span class="sd">    ... ])</span>
-<span class="sd">    &gt;&gt;&gt; phasors = phasor.phasorlist(voltages)</span>
+<span class="sd">    &gt;&gt;&gt; phasors = phasors.phasorlist(voltages)</span>
 <span class="sd">    &gt;&gt;&gt; plt = visu.phasorplot(phasors, colors=["red", "green", "blue"])</span>
 <span class="sd">    &gt;&gt;&gt; plt.show()</span>
 
@@ -564,7 +564,7 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    phasor:     list of complex</span>
+<span class="sd">    phasors:    list of complex</span>
 <span class="sd">                The set of phasors to be plotted.</span>
 <span class="sd">    title:      string, optional</span>
 <span class="sd">                The Plot Title, default="Phasor Diagram"</span>
@@ -596,9 +596,9 @@
 <span class="sd">    """</span>
     <span class="c1"># Load Complex Values if Necessary</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="nb">len</span><span class="p">(</span><span class="n">phasor</span><span class="p">)</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">phasors</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-        <span class="n">phasor</span> <span class="o">=</span> <span class="p">[</span><span class="n">phasor</span><span class="p">]</span>
+        <span class="n">phasors</span> <span class="o">=</span> <span class="p">[</span><span class="n">phasors</span><span class="p">]</span>
     <span class="c1"># Manage Colors</span>
     <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span>
@@ -607,7 +607,7 @@
         <span class="p">]</span>
     <span class="c1"># Scale Radius</span>
     <span class="k">if</span> <span class="n">radius</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">radius</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">phasor</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">radius</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">phasors</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
     <span class="c1"># Set Tolerance</span>
     <span class="k">if</span> <span class="n">tolerance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">tolerance</span> <span class="o">=</span> <span class="n">radius</span> <span class="o">/</span> <span class="mi">25</span>
@@ -622,7 +622,7 @@
     <span class="k">if</span> <span class="n">labels</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
         <span class="n">legend</span> <span class="o">=</span> <span class="n">labels</span>
     <span class="c1"># Check for more phasors than colors</span>
-    <span class="n">numphs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">phasor</span><span class="p">)</span>
+    <span class="n">numphs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">phasors</span><span class="p">)</span>
     <span class="n">numclr</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">numphs</span> <span class="o">&gt;</span> <span class="n">numclr</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -642,7 +642,7 @@
     <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
     <span class="n">handles</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>  <span class="c1"># Empty array for plot handles</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numphs</span><span class="p">):</span>
-        <span class="n">mag</span><span class="p">,</span> <span class="n">ang_r</span> <span class="o">=</span> <span class="n">_c</span><span class="o">.</span><span class="n">polar</span><span class="p">(</span><span class="n">phasor</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">mag</span><span class="p">,</span> <span class="n">ang_r</span> <span class="o">=</span> <span class="n">_c</span><span class="o">.</span><span class="n">polar</span><span class="p">(</span><span class="n">phasors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
         <span class="c1"># Plot with labels</span>
         <span class="k">if</span> <span class="n">legend</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">mag</span> <span class="o">&gt;</span> <span class="n">tolerance</span><span class="p">:</span>

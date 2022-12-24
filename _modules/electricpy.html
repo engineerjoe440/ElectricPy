@@ -580,14 +580,14 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
-<span class="sd">    &gt;&gt;&gt; from electricpy.phasors import phasor</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy import phasors</span>
 <span class="sd">    &gt;&gt;&gt; v = phasor(67, 120)</span>
 <span class="sd">    &gt;&gt;&gt; ep.cprint(v)</span>
 <span class="sd">    67.0 ∠ 120.0°</span>
 <span class="sd">    &gt;&gt;&gt; voltages = np.array([[67,0],</span>
 <span class="sd">    ...                      [67,-120],</span>
 <span class="sd">    ...                      [67,120]])</span>
-<span class="sd">    &gt;&gt;&gt; Vset = ep.phasor.phasorlist( voltages )</span>
+<span class="sd">    &gt;&gt;&gt; Vset = ep.phasors.phasorlist( voltages )</span>
 <span class="sd">    &gt;&gt;&gt; ep.cprint(Vset)</span>
 <span class="sd">    67.0 ∠ 0.0°</span>
 <span class="sd">    67.0 ∠ -120.0°</span>
@@ -596,9 +596,9 @@
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
-<span class="sd">    electricpy.phasor.phasor:       Phasor Generating Function</span>
-<span class="sd">    electricpy.phasor.phasorlist:   Phasor Generating Function for Lists/Arrays</span>
-<span class="sd">    electricpy.phasor.phasorz:      Impedance Phasor Generator</span>
+<span class="sd">    electricpy.phasors.phasor:       Phasor Generating Function</span>
+<span class="sd">    electricpy.phasors.phasorlist:   Phasor Generating Function for Lists/Arrays</span>
+<span class="sd">    electricpy.phasors.phasorz:      Impedance Phasor Generator</span>
 <span class="sd">    """</span>
     <span class="c1"># Use depricated `round`</span>
     <span class="k">if</span> <span class="nb">round</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
@@ -1182,10 +1182,10 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; from electricpy.constants import k</span>
 <span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
-<span class="sd">    &gt;&gt;&gt; ep.curdiv(R1=1*k, Rset=(1*k, 1*k), Iin=12) # 12-amps, split three ways</span>
+<span class="sd">    &gt;&gt;&gt; ep.curdiv(Ri=1*k, Rset=(1*k, 1*k), Iin=12) # 12-amps, split three ways</span>
 <span class="sd">    4.0</span>
-<span class="sd">    &gt;&gt;&gt; ep.curdiv(R1=1*k, Rset=(1*k, 1*k), Iin=12, Vout=True) # Find Voltage</span>
-<span class="sd">    (4.0, 4000)</span>
+<span class="sd">    &gt;&gt;&gt; ep.curdiv(Ri=1*k, Rset=(1*k, 1*k), Iin=12, Vout=True) # Find Voltage</span>
+<span class="sd">    (4.0, 4000.0)</span>
 <span class="sd">    """</span>
     <span class="c1"># Validate Tuple</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">Rset</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
@@ -3300,10 +3300,10 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
 <span class="sd">    &gt;&gt;&gt; # Demonstrate the generic functionality</span>
-<span class="sd">    &gt;&gt;&gt; ep.vipf(V=480, I=ep.phasor.phasor(20, 120))</span>
+<span class="sd">    &gt;&gt;&gt; ep.vipf(V=480, I=ep.phasors.phasor(20, 120))</span>
 <span class="sd">    (480, (-9.999999999999996+17.320508075688775j), -0.499999...)</span>
 <span class="sd">    &gt;&gt;&gt; # Find the power factor</span>
-<span class="sd">    &gt;&gt;&gt; ep.vipf(V=480, I=ep.phasor.phasor(20, 120), find="PF")</span>
+<span class="sd">    &gt;&gt;&gt; ep.vipf(V=480, I=ep.phasors.phasor(20, 120), find="PF")</span>
 <span class="sd">    -0.49999...</span>
 <span class="sd">    """</span>
     <span class="c1"># Test to find Voltage</span>
