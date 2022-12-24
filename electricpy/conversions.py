@@ -230,12 +230,11 @@ def abc_to_seq(Mabc, reference='A'):
     Examples
     --------
     >>> import electricpy as ep
-    >>> from electricpy.phasors import phasor
     >>> import electricpy.conversions as conv
     >>> abc_matrix = [
-    ...     phasor(167, 0),
-    ...     phasor(167, -120),
-    ...     phasor(167, -240),
+    ...     ep.phasor(167, 0),
+    ...     ep.phasor(167, -120),
+    ...     ep.phasor(167, -240),
     ... ]
     >>> conv.abc_to_seq(abc_matrix)
     >>> # Will return a list approximately equal to: [0+0j, 167+0j, 0+0j]
@@ -290,12 +289,11 @@ def seq_to_abc(M012, reference='A'):
     Examples
     --------
     >>> import electricpy as ep
-    >>> from electricpy.phasors import phasor
     >>> import electricpy.conversions as conv
     >>> abc_matrix = [
-    ...     phasor(167, 0),
-    ...     phasor(167, -120),
-    ...     phasor(167, -240),
+    ...     ep.phasor(167, 0),
+    ...     ep.phasor(167, -120),
+    ...     ep.phasor(167, -240),
     ... ]
     >>> seq_quantities = conv.abc_to_seq(abc_matrix)
     >>> # Will return a list approximately equal to: [0+0j, 167+0j, 0+0j]
@@ -502,7 +500,7 @@ def rpm_to_hz(rpm):
     --------
     >>> from electricpy import conversions as conv
     >>> conv.rpm_to_hz(120) # 120 RPM
-    2
+    2.0
     """
     return rpm / 60
 

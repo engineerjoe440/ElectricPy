@@ -37,7 +37,7 @@ def render_phasor_plot():
         [45,-120],
         [52,120]
     ])
-    plt = visu.phasorplot(phasor=phasors, colors=["red", "green", "blue"])
+    plt = visu.phasorplot(phasors=phasors, colors=["red", "green", "blue"])
     plt.savefig(f"{FIGURE_DIRECTORY}/PhasorPlot.png")
 
 @canvas_capture("InductionMotorCircleExample")

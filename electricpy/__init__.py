@@ -217,14 +217,14 @@ def cprint(val, unit=None, label=None, title=None,
     --------
     >>> import numpy as np
     >>> import electricpy as ep
-    >>> from electricpy.phasors import phasor
+    >>> from electricpy import phasors
     >>> v = phasor(67, 120)
     >>> ep.cprint(v)
     67.0 ∠ 120.0°
     >>> voltages = np.array([[67,0],
     ...                      [67,-120],
     ...                      [67,120]])
-    >>> Vset = ep.phasor.phasorlist( voltages )
+    >>> Vset = ep.phasors.phasorlist( voltages )
     >>> ep.cprint(Vset)
     67.0 ∠ 0.0°
     67.0 ∠ -120.0°
@@ -233,9 +233,9 @@ def cprint(val, unit=None, label=None, title=None,
 
     See Also
     --------
-    electricpy.phasor.phasor:       Phasor Generating Function
-    electricpy.phasor.phasorlist:   Phasor Generating Function for Lists/Arrays
-    electricpy.phasor.phasorz:      Impedance Phasor Generator
+    electricpy.phasors.phasor:       Phasor Generating Function
+    electricpy.phasors.phasorlist:   Phasor Generating Function for Lists/Arrays
+    electricpy.phasors.phasorz:      Impedance Phasor Generator
     """
     # Use depricated `round`
     if round != 3:
@@ -819,10 +819,10 @@ def curdiv(Ri, Rset, Vin=None, Iin=None, Vout=False, combine=True):
     --------
     >>> from electricpy.constants import k
     >>> import electricpy as ep
-    >>> ep.curdiv(R1=1*k, Rset=(1*k, 1*k), Iin=12) # 12-amps, split three ways
+    >>> ep.curdiv(Ri=1*k, Rset=(1*k, 1*k), Iin=12) # 12-amps, split three ways
     4.0
-    >>> ep.curdiv(R1=1*k, Rset=(1*k, 1*k), Iin=12, Vout=True) # Find Voltage
-    (4.0, 4000)
+    >>> ep.curdiv(Ri=1*k, Rset=(1*k, 1*k), Iin=12, Vout=True) # Find Voltage
+    (4.0, 4000.0)
     """
     # Validate Tuple
     if not isinstance(Rset, tuple):
@@ -2937,10 +2937,10 @@ def vipf(V=None, I=None, PF=1, find=''):
     --------
     >>> import electricpy as ep
     >>> # Demonstrate the generic functionality
-    >>> ep.vipf(V=480, I=ep.phasor.phasor(20, 120))
+    >>> ep.vipf(V=480, I=ep.phasors.phasor(20, 120))
     (480, (-9.999999999999996+17.320508075688775j), -0.499999...)
     >>> # Find the power factor
-    >>> ep.vipf(V=480, I=ep.phasor.phasor(20, 120), find="PF")
+    >>> ep.vipf(V=480, I=ep.phasors.phasor(20, 120), find="PF")
     -0.49999...
     """
     # Test to find Voltage

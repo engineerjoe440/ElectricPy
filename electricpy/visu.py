@@ -171,7 +171,7 @@ def convbar(h, x, outline=True):
 
 
 # Define Phasor Plot Generator
-def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
+def phasorplot(phasors, title="Phasor Diagram", legend=False, bg=None,
                colors=None, radius=None, linewidth=None, size=None,
                label=False, labels=False, tolerance=None):
     """
@@ -185,14 +185,14 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     Examples
     --------
     >>> import numpy as np
-    >>> from electricpy import phasor
+    >>> from electricpy import phasors
     >>> from electricpy import visu
     >>> voltages = np.array([
     ...     [67,0],
     ...     [45,-120],
     ...     [52,120]
     ... ])
-    >>> phasors = phasor.phasorlist(voltages)
+    >>> phasors = phasors.phasorlist(voltages)
     >>> plt = visu.phasorplot(phasors, colors=["red", "green", "blue"])
     >>> plt.show()
 
@@ -200,7 +200,7 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
 
     Parameters
     ----------
-    phasor:     list of complex
+    phasors:    list of complex
                 The set of phasors to be plotted.
     title:      string, optional
                 The Plot Title, default="Phasor Diagram"
@@ -232,9 +232,9 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     """
     # Load Complex Values if Necessary
     try:
-        len(phasor)
+        len(phasors)
     except TypeError:
-        phasor = [phasor]
+        phasors = [phasors]
     # Manage Colors
     if colors is None:
         colors = [
@@ -243,7 +243,7 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
         ]
     # Scale Radius
     if radius is None:
-        radius = _np.abs(phasor).max()
+        radius = _np.abs(phasors).max()
     # Set Tolerance
     if tolerance is None:
         tolerance = radius / 25
@@ -258,7 +258,7 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     if labels != False:
         legend = labels
     # Check for more phasors than colors
-    numphs = len(phasor)
+    numphs = len(phasors)
     numclr = len(colors)
     if numphs > numclr:
         raise ValueError(
@@ -278,7 +278,7 @@ def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
     _plt.title(title + "\n")
     handles = _np.array([])  # Empty array for plot handles
     for i in range(numphs):
-        mag, ang_r = _c.polar(phasor[i])
+        mag, ang_r = _c.polar(phasors[i])
         # Plot with labels
         if legend:
             if mag > tolerance:
