@@ -2,7 +2,7 @@
 """
 Functions to Support Common Electrical Engineering Formulas Related to Phasors.
 
->>> from electricpy import phasor
+>>> from electricpy import phasors
 
 Filled with calculators, evaluators, and plotting functions related to
 electrical phasors, this package will provide a wide array of capabilities to
@@ -37,9 +37,9 @@ def phs(ang):
     See Also
     --------
     electricpy.cprint:              Complex Variable Printing Function
-    electricpy.phasor.phasorlist:   Phasor Generator for List or Array
-    electricpy.phasor.phasorz:      Impedance Phasor Generator
-    electricpy.phasor.phasor:       Phasor Generating Function
+    electricpy.phasors.phasorlist:   Phasor Generator for List or Array
+    electricpy.phasors.phasorz:      Impedance Phasor Generator
+    electricpy.phasors.phasor:       Phasor Generating Function
     """
     # Return the Complex Angle Modulator
     return _np.exp(1j * _np.radians(ang))
@@ -72,16 +72,16 @@ def phasor(mag, ang=0):
 
     Examples
     --------
-    >>> from electricpy.phasors import phasor
+    >>> from electricpy import phasors
     >>> phasor(67, 120) # 67 volts at angle 120 degrees
     (-33.499999999999986+58.02370205355739j)
 
     See Also
     --------
     electricpy.cprint:              Complex Variable Printing Function
-    electricpy.phasor.phasorlist:   Phasor Generator for List or Array
-    electricpy.phasor.phasorz:      Impedance Phasor Generator
-    electricpy.phasor.phs:          Complex Phase Angle Generator
+    electricpy.phasors.phasorlist:   Phasor Generator for List or Array
+    electricpy.phasors.phasorz:      Impedance Phasor Generator
+    electricpy.phasors.phs:          Complex Phase Angle Generator
     """
     # Test for Tuple/List Arg
     if isinstance(mag, (tuple, list, _np.ndarray)):
@@ -160,28 +160,27 @@ def phasorlist(arr):
 
     Returns
     -------
-    phasor:     complex
-                Standard Pythonic Complex Representation of
-                the specified voltage or current.
+    list[complex]:  List of standard Pythonic complex representation of the
+                    specified voltage or current.
 
     Examples
     --------
     >>> import numpy as np
-    >>> from electricpy import phasor
+    >>> from electricpy import phasors
     >>> voltages = np.array([
     ...     [67,0],
     ...     [67,-120],
     ...     [67,120]
     ... ])
-    >>> Vset = phasor.phasorlist( voltages )
+    >>> Vset = phasors.phasorlist( voltages )
     >>> print(Vset)
 
     See Also
     --------
     electricpy.cprint:              Complex Variable Printing Function
-    electricpy.phasor.phasor:       Phasor Generating Function
-    electricpy.phasor.vectarray:    Magnitude/Angle Array Pairing Function
-    electricpy.phasor.phasorz:      Impedance Phasor Generator
+    electricpy.phasors.phasor:       Phasor Generating Function
+    electricpy.phasors.vectarray:    Magnitude/Angle Array Pairing Function
+    electricpy.phasors.phasorz:      Impedance Phasor Generator
     """
     # Use List Comprehension to Process
 
@@ -222,8 +221,8 @@ def vectarray(arr, degrees=True, flatarray=False):
 
     See Also
     --------
-    electricpy.phasor.phasor:       Phasor Generating Function
-    electricpy.phasor.phasorlist:   Phasor Generator for List or Array
+    electricpy.phasors.phasor:       Phasor Generating Function
+    electricpy.phasors.phasorlist:   Phasor Generator for List or Array
     """
     # Iteratively Append Arrays to the Base
 
