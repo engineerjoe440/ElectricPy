@@ -38,14 +38,19 @@ GitHub Pages are still active, and will continue to be for the forseeable
 future, but they're intended for developmental updates rather than primary
 documentation.
 
-### Dependencies
+## Features
 
-- [NumPy](https://numpy.org/)
-- [matplotlib](https://matplotlib.org/)
-- [SciPy](https://scipy.org/)
-- [SymPy](https://www.sympy.org/en/index.html)
-- [numdifftools](https://numdifftools.readthedocs.io/en/latest/)
+* Extensive set of common functions and formulas for electrical engineering and
+electronics.
+* Support for LaTeX math generation (use this in conjunction with your Jupyter
+notebooks!)
+* Generate focussed and simple plots, diagrams, and figures.
 
+### Samples Generated with ElectricPy
+
+| Phasor Plot | Power Triangle | Induction Motor Circle |
+|-------------|----------------|------------------------|
+| ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/develop/docsource/static/PhasorPlot.png) | ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/develop/docsource/static/PowerTriangle.png) | ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/develop/docsource/static/InductionMotorCircleExample.png) |
 
 ## Installing / Getting Started
 
@@ -91,6 +96,14 @@ and installing locally.
   - `cd <path\to\containing\folder>\electricpy`
 3. Use Python to Install Module from `setup.py`:
   - `pip install .`
+
+### Dependencies
+
+- [NumPy](https://numpy.org/)
+- [matplotlib](https://matplotlib.org/)
+- [SciPy](https://scipy.org/)
+- [SymPy](https://www.sympy.org/en/index.html)
+- [numdifftools](https://numdifftools.readthedocs.io/en/latest/)
 
 
 ## Get Involved / Contribute
