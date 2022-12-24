@@ -66,10 +66,10 @@ electricpy._version_
 
 ```python
 >>> import electricpy as ep
->>> phsor = ep.phasor(67, 120) # 67 volts at angle 120 degrees
->>> phsor
+>>> voltage = ep.phasor(67, 120) # 67 volts at angle 120 degrees
+>>> voltage
 (-33.499999999999986+58.02370205355739j)
->>> ep.cprint(phsor)
+>>> ep.cprint(voltage)
 67.0 ∠ 120.0°
 ```
 
