@@ -1,0 +1,6 @@
+electricpy.fault.double\_phase\_to\_ground\_fault
+=================================================
+
+.. currentmodule:: electricpy.fault
+
+.. autofunction:: double_phase_to_ground_fault

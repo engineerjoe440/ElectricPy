@@ -386,7 +386,7 @@
 
 
 <span class="c1"># Define Single Line to Ground Fault Function</span>
-<div class="viewcode-block" id="phs1g"><a class="viewcode-back" href="../../api/electricpy.fault.phs1g.html#electricpy.fault.phs1g">[docs]</a><span class="k">def</span> <span class="nf">phs1g</span><span class="p">(</span><span class="n">Vth</span><span class="p">,</span> <span class="n">Zseq</span><span class="p">,</span> <span class="n">Rf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sequence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="s1">'A'</span><span class="p">):</span>
+<div class="viewcode-block" id="single_phase_to_ground_fault"><a class="viewcode-back" href="../../api/electricpy.fault.single_phase_to_ground_fault.html#electricpy.fault.single_phase_to_ground_fault">[docs]</a><span class="k">def</span> <span class="nf">single_phase_to_ground_fault</span><span class="p">(</span><span class="n">Vth</span><span class="p">,</span> <span class="n">Zseq</span><span class="p">,</span> <span class="n">Rf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sequence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="s1">'A'</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Single-Phase-to-Ground Fault Calculator.</span>
 
@@ -437,9 +437,12 @@
     <span class="c1"># Return Value</span>
     <span class="k">return</span> <span class="n">Ifault</span></div>
 
+<span class="c1"># Alias Original Name</span>
+<span class="n">phs1g</span> <span class="o">=</span> <span class="n">single_phase_to_ground_fault</span>
+
 
 <span class="c1"># Define Double Line to Ground Fault Current Calculator</span>
-<div class="viewcode-block" id="phs2g"><a class="viewcode-back" href="../../api/electricpy.fault.phs2g.html#electricpy.fault.phs2g">[docs]</a><span class="k">def</span> <span class="nf">phs2g</span><span class="p">(</span><span class="n">Vth</span><span class="p">,</span> <span class="n">Zseq</span><span class="p">,</span> <span class="n">Rf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sequence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="s1">'A'</span><span class="p">):</span>
+<div class="viewcode-block" id="double_phase_to_ground_fault"><a class="viewcode-back" href="../../api/electricpy.fault.double_phase_to_ground_fault.html#electricpy.fault.double_phase_to_ground_fault">[docs]</a><span class="k">def</span> <span class="nf">double_phase_to_ground_fault</span><span class="p">(</span><span class="n">Vth</span><span class="p">,</span> <span class="n">Zseq</span><span class="p">,</span> <span class="n">Rf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sequence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="s1">'A'</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Double-Line-to-Ground Fault Calculator.</span>
 
@@ -491,9 +494,12 @@
         <span class="n">Ifault</span> <span class="o">=</span> <span class="n">_phaseroll</span><span class="p">(</span><span class="n">Ifault</span><span class="p">,</span> <span class="n">reference</span><span class="p">)</span>  <span class="c1"># Convert to ABC-Domain</span>
     <span class="k">return</span> <span class="n">Ifault</span></div>
 
+<span class="c1"># Alias Original Name</span>
+<span class="n">phs2g</span> <span class="o">=</span> <span class="n">double_phase_to_ground_fault</span>
+
 
 <span class="c1"># Define Phase-to-Phase Fault Current Calculator</span>
-<div class="viewcode-block" id="phs2"><a class="viewcode-back" href="../../api/electricpy.fault.phs2.html#electricpy.fault.phs2">[docs]</a><span class="k">def</span> <span class="nf">phs2</span><span class="p">(</span><span class="n">Vth</span><span class="p">,</span> <span class="n">Zseq</span><span class="p">,</span> <span class="n">Rf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sequence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="s1">'A'</span><span class="p">):</span>
+<div class="viewcode-block" id="phase_to_phase_fault"><a class="viewcode-back" href="../../api/electricpy.fault.phase_to_phase_fault.html#electricpy.fault.phase_to_phase_fault">[docs]</a><span class="k">def</span> <span class="nf">phase_to_phase_fault</span><span class="p">(</span><span class="n">Vth</span><span class="p">,</span> <span class="n">Zseq</span><span class="p">,</span> <span class="n">Rf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sequence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="s1">'A'</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Line-to-Line Fault Calculator.</span>
 
@@ -545,9 +551,12 @@
         <span class="n">Ifault</span> <span class="o">=</span> <span class="n">_phaseroll</span><span class="p">(</span><span class="n">Ifault</span><span class="p">,</span> <span class="n">reference</span><span class="p">)</span>  <span class="c1"># Convert to ABC-Domain</span>
     <span class="k">return</span> <span class="n">Ifault</span></div>
 
+<span class="c1"># Alias Original Name</span>
+<span class="n">phs2</span> <span class="o">=</span> <span class="n">phase_to_phase_fault</span>
+
 
 <span class="c1"># Define Three-Phase Fault Current Calculator</span>
-<div class="viewcode-block" id="phs3"><a class="viewcode-back" href="../../api/electricpy.fault.phs3.html#electricpy.fault.phs3">[docs]</a><span class="k">def</span> <span class="nf">phs3</span><span class="p">(</span><span class="n">Vth</span><span class="p">,</span> <span class="n">Zseq</span><span class="p">,</span> <span class="n">Rf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sequence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="s1">'A'</span><span class="p">):</span>
+<div class="viewcode-block" id="three_phase_fault"><a class="viewcode-back" href="../../api/electricpy.fault.three_phase_fault.html#electricpy.fault.three_phase_fault">[docs]</a><span class="k">def</span> <span class="nf">three_phase_fault</span><span class="p">(</span><span class="n">Vth</span><span class="p">,</span> <span class="n">Zseq</span><span class="p">,</span> <span class="n">Rf</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sequence</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">reference</span><span class="o">=</span><span class="s1">'A'</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Three-Phase Fault Calculator.</span>
 
@@ -592,6 +601,9 @@
     <span class="k">if</span> <span class="ow">not</span> <span class="n">sequence</span><span class="p">:</span>
         <span class="n">Ifault</span> <span class="o">=</span> <span class="n">_phaseroll</span><span class="p">(</span><span class="n">Ifault</span><span class="p">,</span> <span class="n">reference</span><span class="p">)</span>  <span class="c1"># Convert to ABC-Domain</span>
     <span class="k">return</span> <span class="n">Ifault</span></div>
+
+<span class="c1"># Alias Original Name</span>
+<span class="n">phs3</span> <span class="o">=</span> <span class="n">three_phase_fault</span>
 
 
 <span class="c1"># Define Single Pole Open Calculator</span>
@@ -699,7 +711,7 @@
 
 
 <span class="c1"># Define MVA Short Circuit</span>
-<div class="viewcode-block" id="scMVA"><a class="viewcode-back" href="../../api/electricpy.fault.scMVA.html#electricpy.fault.scMVA">[docs]</a><span class="k">def</span> <span class="nf">scMVA</span><span class="p">(</span><span class="n">Zth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Isc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Vth</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="short_circuit_mva"><a class="viewcode-back" href="../../api/electricpy.fault.short_circuit_mva.html#electricpy.fault.short_circuit_mva">[docs]</a><span class="k">def</span> <span class="nf">short_circuit_mva</span><span class="p">(</span><span class="n">Zth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Isc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Vth</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Short-Circuit MVA Calculator.</span>
 
@@ -753,6 +765,9 @@
         <span class="n">MVA</span> <span class="o">=</span> <span class="n">Vth</span> <span class="o">*</span> <span class="n">Isc</span>
     <span class="c1"># Return Value</span>
     <span class="k">return</span> <span class="n">MVA</span></div>
+
+<span class="c1"># Alias Original Name</span>
+<span class="n">scMVA</span> <span class="o">=</span> <span class="n">short_circuit_mva</span>
 
 
 <span class="c1"># Define Explicitly 3-Phase MVAsc Calculator</span>
@@ -897,7 +912,8 @@
 
 
 <span class="c1"># Define CT Saturation Function</span>
-<div class="viewcode-block" id="ct_saturation"><a class="viewcode-back" href="../../api/electricpy.fault.ct_saturation.html#electricpy.fault.ct_saturation">[docs]</a><span class="k">def</span> <span class="nf">ct_saturation</span><span class="p">(</span><span class="n">XoR</span><span class="p">,</span> <span class="n">Imag</span><span class="p">,</span> <span class="n">Vrated</span><span class="p">,</span> <span class="n">Irated</span><span class="p">,</span> <span class="n">CTR</span><span class="p">,</span> <span class="n">Rb</span><span class="p">,</span> <span class="n">Xb</span><span class="p">,</span> <span class="n">remnance</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">ALF</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+<div class="viewcode-block" id="ct_saturation"><a class="viewcode-back" href="../../api/electricpy.fault.ct_saturation.html#electricpy.fault.ct_saturation">[docs]</a><span class="k">def</span> <span class="nf">ct_saturation</span><span class="p">(</span><span class="n">XoR</span><span class="p">,</span> <span class="n">Imag</span><span class="p">,</span> <span class="n">Vrated</span><span class="p">,</span> <span class="n">Irated</span><span class="p">,</span> <span class="n">CTR</span><span class="p">,</span> <span class="n">Rb</span><span class="p">,</span> <span class="n">Xb</span><span class="p">,</span> <span class="n">remnance</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+                  <span class="n">ALF</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Electrical Current Transformer Saturation Calculator.</span>
 
@@ -1094,7 +1110,8 @@
 
 
 <span class="c1"># Define Saturation Time Calculator</span>
-<div class="viewcode-block" id="ct_timetosat"><a class="viewcode-back" href="../../api/electricpy.fault.ct_timetosat.html#electricpy.fault.ct_timetosat">[docs]</a><span class="k">def</span> <span class="nf">ct_timetosat</span><span class="p">(</span><span class="n">Vknee</span><span class="p">,</span> <span class="n">XoR</span><span class="p">,</span> <span class="n">Rb</span><span class="p">,</span> <span class="n">CTR</span><span class="p">,</span> <span class="n">Imax</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="ct_timetosat"><a class="viewcode-back" href="../../api/electricpy.fault.ct_timetosat.html#electricpy.fault.ct_timetosat">[docs]</a><span class="k">def</span> <span class="nf">ct_timetosat</span><span class="p">(</span><span class="n">Vknee</span><span class="p">,</span> <span class="n">XoR</span><span class="p">,</span> <span class="n">Rb</span><span class="p">,</span> <span class="n">CTR</span><span class="p">,</span> <span class="n">Imax</span><span class="p">,</span> <span class="n">ts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+                 <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Electrical Current Transformer (CT) Time to Saturation Function.</span>
 
@@ -1589,7 +1606,8 @@
 
 
 <span class="c1"># Define Iop/Irt Calculator</span>
-<div class="viewcode-block" id="iopirt"><a class="viewcode-back" href="../../api/electricpy.fault.iopirt.html#electricpy.fault.iopirt">[docs]</a><span class="k">def</span> <span class="nf">iopirt</span><span class="p">(</span><span class="n">IpriHV</span><span class="p">,</span> <span class="n">IpriLV</span><span class="p">,</span> <span class="n">TAPHV</span><span class="p">,</span> <span class="n">TAPLV</span><span class="p">,</span> <span class="n">corrHV</span><span class="o">=</span><span class="s2">"Y"</span><span class="p">,</span> <span class="n">corrLV</span><span class="o">=</span><span class="s2">"Y"</span><span class="p">,</span> <span class="n">CTRHV</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">CTRLV</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="iopirt"><a class="viewcode-back" href="../../api/electricpy.fault.iopirt.html#electricpy.fault.iopirt">[docs]</a><span class="k">def</span> <span class="nf">iopirt</span><span class="p">(</span><span class="n">IpriHV</span><span class="p">,</span> <span class="n">IpriLV</span><span class="p">,</span> <span class="n">TAPHV</span><span class="p">,</span> <span class="n">TAPLV</span><span class="p">,</span> <span class="n">corrHV</span><span class="o">=</span><span class="s2">"Y"</span><span class="p">,</span> <span class="n">corrLV</span><span class="o">=</span><span class="s2">"Y"</span><span class="p">,</span> <span class="n">CTRHV</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+           <span class="n">CTRLV</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Operate/Restraint Current Calculator.</span>
 
@@ -1760,7 +1778,8 @@
 
 
 <span class="c1"># Define Relay Measured Impedance Functon for Distance Elements</span>
-<div class="viewcode-block" id="distmeasz"><a class="viewcode-back" href="../../api/electricpy.fault.distmeasz.html#electricpy.fault.distmeasz">[docs]</a><span class="k">def</span> <span class="nf">distmeasz</span><span class="p">(</span><span class="n">VLNmeas</span><span class="p">,</span> <span class="n">If</span><span class="p">,</span> <span class="n">Ip</span><span class="p">,</span> <span class="n">Ipp</span><span class="p">,</span> <span class="n">CTR</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">VTR</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">k0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">linelength</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="distmeasz"><a class="viewcode-back" href="../../api/electricpy.fault.distmeasz.html#electricpy.fault.distmeasz">[docs]</a><span class="k">def</span> <span class="nf">distmeasz</span><span class="p">(</span><span class="n">VLNmeas</span><span class="p">,</span> <span class="n">If</span><span class="p">,</span> <span class="n">Ip</span><span class="p">,</span> <span class="n">Ipp</span><span class="p">,</span> <span class="n">CTR</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">VTR</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">k0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">linelength</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Distance Element Measured Impedance Function.</span>
 
@@ -2109,7 +2128,11 @@
 <span class="sd">                Peak symmetrical fault current in per-unit-amps</span>
 <span class="sd">    """</span>
     <span class="c1"># Calculate Time-Constant Term</span>
-    <span class="n">t_c</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Xd</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Xdp</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Xd</span><span class="p">)</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="n">Tdp</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Xdpp</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Xdp</span><span class="p">)</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="n">Tdpp</span><span class="p">)</span>
+    <span class="n">t_c</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="mi">1</span> <span class="o">/</span> <span class="n">Xd</span> <span class="o">+</span> 
+        <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Xdp</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Xd</span><span class="p">)</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="n">Tdp</span><span class="p">)</span> <span class="o">+</span> 
+        <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Xdpp</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Xdp</span><span class="p">)</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="n">Tdpp</span><span class="p">)</span>
+    <span class="p">)</span>
     <span class="c1"># Calculate Fault Current</span>
     <span class="n">Ia</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Eq</span><span class="p">)</span> <span class="o">*</span> <span class="n">t_c</span>
     <span class="k">return</span> <span class="n">Ia</span></div>
@@ -2204,8 +2227,10 @@
     <span class="n">k1</span> <span class="o">+=</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="n">omega_r</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">omega_rf</span><span class="p">)</span>
     <span class="c1"># Calculate k2</span>
     <span class="n">k2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">phi</span> <span class="o">*</span> <span class="n">torque_r</span><span class="p">)</span>
-    <span class="n">k2</span> <span class="o">*=</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">phi</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">-</span> <span class="p">(</span><span class="n">omega_r</span> <span class="o">*</span> <span class="n">phi</span> <span class="o">*</span> <span class="n">torque_r</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
-                   <span class="o">+</span> <span class="mi">2</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">omega_r</span> <span class="o">*</span> <span class="n">phi</span> <span class="o">*</span> <span class="n">torque_r</span><span class="p">)</span>
+    <span class="n">k2</span> <span class="o">*=</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+        <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">phi</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">-</span> <span class="p">(</span><span class="n">omega_r</span> <span class="o">*</span> <span class="n">phi</span> <span class="o">*</span> <span class="n">torque_r</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span>
+        <span class="mi">2</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">omega_r</span> <span class="o">*</span> <span class="n">phi</span> <span class="o">*</span> <span class="n">torque_r</span>
+    <span class="p">)</span>
     <span class="c1"># Evaluate Eigenvalues and Return</span>
     <span class="n">lam1</span> <span class="o">=</span> <span class="n">k1</span> <span class="o">+</span> <span class="n">k2</span>
     <span class="n">lam2</span> <span class="o">=</span> <span class="n">k1</span> <span class="o">-</span> <span class="n">k2</span>
@@ -2400,8 +2425,10 @@
         <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">asym</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Xdpp</span> <span class="o">+</span> <span class="n">val</span><span class="p">)</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="n">Ta</span><span class="p">)</span>
     <span class="c1"># Define Symmetrical Portion</span>
-    <span class="n">isym</span> <span class="o">=</span> <span class="n">const</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Xd</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Xdp</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Xd</span><span class="p">)</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="n">Tdp</span><span class="p">)</span>
-                    <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Xdpp</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Xdp</span><span class="p">)</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="n">Tdpp</span><span class="p">))</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">we</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="n">alpha</span><span class="p">)</span>
+    <span class="n">isym</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">const</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Xd</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Xdp</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Xd</span><span class="p">)</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="n">Tdp</span><span class="p">)</span> <span class="o">+</span>
+        <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">Xdpp</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Xdp</span><span class="p">)</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span> <span class="o">/</span> <span class="n">Tdpp</span><span class="p">))</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">we</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="n">alpha</span><span class="p">)</span>
+    <span class="p">)</span>
     <span class="c1"># Define Asymmetrical Portion</span>
     <span class="n">iasym</span> <span class="o">=</span> <span class="n">const</span> <span class="o">*</span> <span class="n">asym</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
     <span class="c1"># Define Double Frequency Term</span>
@@ -2410,7 +2437,7 @@
     <span class="n">ias</span> <span class="o">=</span> <span class="n">isym</span> <span class="o">-</span> <span class="n">iasym</span> <span class="o">-</span> <span class="n">idbl</span>
     <span class="k">return</span> <span class="n">ias</span></div>
 
-<span class="c1"># END OF FILE</span>
+<span class="c1"># END</span>
 </pre></div>
 
           </article>

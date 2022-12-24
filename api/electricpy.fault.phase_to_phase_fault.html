@@ -47,7 +47,7 @@
   
   
   
-    <title>electricpy.phasor.phasor &#8212; electricpy 0.3.0 documentation</title>
+    <title>electricpy.fault.phase_to_phase_fault &#8212; electricpy 0.3.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/material.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -56,11 +56,13 @@
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.phasor.phasordata" href="electricpy.phasor.phasordata.html" />
-    <link rel="prev" title="electricpy.phasor.phase" href="electricpy.phasor.phase.html" />
+    <link rel="next" title="electricpy.fault.phs1g" href="electricpy.fault.phs1g.html" />
+    <link rel="prev" title="electricpy.fault.iopirt" href="electricpy.fault.iopirt.html" />
   
    
 
@@ -79,7 +81,7 @@
   <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
   <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
   <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
-  <a href="#api/electricpy.phasor.phasor" tabindex="1" class="md-skip"> Skip to content </a>
+  <a href="#api/electricpy.fault.phase_to_phase_fault" tabindex="1" class="md-skip"> Skip to content </a>
   <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
@@ -98,7 +100,7 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           <span class="md-header-nav__topic">ElectricPy</span>
-          <span class="md-header-nav__topic"> electricpy.phasor.phasor </span>
+          <span class="md-header-nav__topic"> electricpy.fault.phase_to_phase_fault </span>
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
@@ -173,7 +175,7 @@
       <ul class="md-tabs__list">
           <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">electricpy 0.3.0 documentation</a></li>
           <li class="md-tabs__item"><a href="../electricpyapi.html" class="md-tabs__link">ElectricPy API</a></li>
-          <li class="md-tabs__item"><a href="electricpy.phasor.html" class="md-tabs__link">electricpy.phasor</a></li>
+          <li class="md-tabs__item"><a href="electricpy.fault.html" class="md-tabs__link">electricpy.fault</a></li>
       </ul>
     </div>
   </nav>
@@ -352,7 +354,7 @@
 <nav class="md-nav md-nav--secondary">
   <ul class="md-nav__list" data-md-scrollfix="">
     
-<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/api/electricpy.phasor.phasor.rst.txt">Show Source</a> </li>
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/api/electricpy.fault.phase_to_phase_fault.rst.txt">Show Source</a> </li>
 
 <li id="searchbox" class="md-nav__item"></li>
 
@@ -365,49 +367,39 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  <section id="electricpy-phasor-phasor">
-<h1 id="api-electricpy-phasor-phasor--page-root">electricpy.phasor.phasor<a class="headerlink" href="#api-electricpy-phasor-phasor--page-root" title="Permalink to this heading">¶</a></h1>
+  <section id="electricpy-fault-phase-to-phase-fault">
+<h1 id="api-electricpy-fault-phase-to-phase-fault--page-root">electricpy.fault.phase_to_phase_fault<a class="headerlink" href="#api-electricpy-fault-phase-to-phase-fault--page-root" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="electricpy.phasor.phasor">
-<span class="sig-prename descclassname"><span class="pre">electricpy.phasor.</span></span><span class="sig-name descname"><span class="pre">phasor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ang</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/phasor.html#phasor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.phasor.phasor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Complex Phasor Generator.</p>
-<p>Generates the standard Pythonic complex representation
-of a phasor voltage or current when given the magnitude
-and angle of the specific voltage or current.</p>
+<dt class="sig sig-object py" id="electricpy.fault.phase_to_phase_fault">
+<span class="sig-prename descclassname"><span class="pre">electricpy.fault.</span></span><span class="sig-name descname"><span class="pre">phase_to_phase_fault</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Vth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Zseq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Rf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sequence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'A'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/fault.html#phase_to_phase_fault"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.fault.phase_to_phase_fault" title="Permalink to this definition">¶</a></dt>
+<dd><p>Line-to-Line Fault Calculator.</p>
+<p>This function will evaluate the Zero, Positive, and Negative
+sequence currents for a phase-to-phase fault.</p>
+<div class="math notranslate nohighlight">
+\[I_1 = \frac{V_{th}}{Z_1+Z_2+R_f}\]</div>
+<div class="math notranslate nohighlight">
+\[I_2 = -I_1\]</div>
+<div class="math notranslate nohighlight">
+\[I_0 = 0\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>mag</strong> (<em>float</em>) – The Magnitude of the Voltage/Current</p></li>
-<li><p><strong>ang</strong> (<em>float</em>) – The Angle (in degrees) of the Voltage/Current</p></li>
+<li><p><strong>Vth</strong> (<em>complex</em>) – The Thevenin-Equivalent-Voltage</p></li>
+<li><p><strong>Zseq</strong> (<em>list</em><em> of </em><em>complex</em>) – Tupple of sequence reactances as (Z0, Z1, Z2)</p></li>
+<li><p><strong>Rf</strong> (<em>complex</em><em>, </em><em>optional</em>) – The fault resistance, default=0</p></li>
+<li><p><strong>sequence</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force return into symmetrical-
+or phase-domain values.</p></li>
+<li><p><strong>reference</strong> (<em>{'A'</em><em>, </em><em>'B'</em><em>, </em><em>'C'}</em>) – Single character denoting the reference,
+default=’A’</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>phasor</strong> – Standard Pythonic Complex Representation of
-the specified voltage or current.</p>
+<dd class="field-even"><p><strong>Ifault</strong> – The Array of Fault Currents as (If0, If1, If2)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>complex</p>
+<dd class="field-odd"><p>list of complex,</p>
 </dd>
 </dl>
-<p class="rubric">Examples</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy.phasor</span> <span class="kn">import</span> <span class="n">phasor</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">phasor</span><span class="p">(</span><span class="mi">67</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span> <span class="c1"># 67 volts at angle 120 degrees</span>
-<span class="go">(-33.499999999999986+58.02370205355739j)</span>
-</pre></div>
-</div>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><a class="reference internal" href="electricpy.cprint.html#electricpy.cprint" title="electricpy.cprint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">electricpy.cprint</span></code></a></dt><dd><p>Complex Variable Printing Function</p>
-</dd>
-<dt><a class="reference internal" href="electricpy.phasor.phasorlist.html#electricpy.phasor.phasorlist" title="electricpy.phasor.phasorlist"><code class="xref py py-obj docutils literal notranslate"><span class="pre">electricpy.phasor.phasorlist</span></code></a></dt><dd><p>Phasor Generator for List or Array</p>
-</dd>
-<dt><a class="reference internal" href="electricpy.phasor.phasorz.html#electricpy.phasor.phasorz" title="electricpy.phasor.phasorz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">electricpy.phasor.phasorz</span></code></a></dt><dd><p>Impedance Phasor Generator</p>
-</dd>
-<dt><a class="reference internal" href="electricpy.phasor.phs.html#electricpy.phasor.phs" title="electricpy.phasor.phs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">electricpy.phasor.phs</span></code></a></dt><dd><p>Complex Phase Angle Generator</p>
-</dd>
-</dl>
-</div>
 </dd></dl>
 </section>
 
@@ -421,7 +413,7 @@ the specified voltage or current.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
           
-            <a href="electricpy.phasor.phase.html" title="electricpy.phasor.phase"
+            <a href="electricpy.fault.iopirt.html" title="electricpy.fault.iopirt"
                class="md-flex md-footer-nav__link md-footer-nav__link--prev"
                rel="prev">
               <div class="md-flex__cell md-flex__cell--shrink">
@@ -430,17 +422,17 @@ the specified voltage or current.</p>
               <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
                 <span class="md-flex__ellipsis">
                   <span
-                      class="md-footer-nav__direction"> Previous </span> electricpy.phasor.phase </span>
+                      class="md-footer-nav__direction"> Previous </span> electricpy.fault.iopirt </span>
               </div>
             </a>
           
           
-            <a href="electricpy.phasor.phasordata.html" title="electricpy.phasor.phasordata"
+            <a href="electricpy.fault.phs1g.html" title="electricpy.fault.phs1g"
                class="md-flex md-footer-nav__link md-footer-nav__link--next"
                rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
                 class="md-flex__ellipsis"> <span
-                class="md-footer-nav__direction"> Next </span> electricpy.phasor.phasordata </span>
+                class="md-footer-nav__direction"> Next </span> electricpy.fault.phs1g </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink"><i
                 class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>

@@ -47,7 +47,7 @@
   
   
   
-    <title>electricpy.phasor.phasorz &#8212; electricpy 0.3.0 documentation</title>
+    <title>electricpy.fault.short_circuit_mva &#8212; electricpy 0.3.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/material.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -61,8 +61,8 @@
     <link rel="shortcut icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.phasor.phs" href="electricpy.phasor.phs.html" />
-    <link rel="prev" title="electricpy.phasor.phasorlist" href="electricpy.phasor.phasorlist.html" />
+    <link rel="next" title="electricpy.fault.single_phase_to_ground_fault" href="electricpy.fault.single_phase_to_ground_fault.html" />
+    <link rel="prev" title="electricpy.fault.scMVA" href="electricpy.fault.scMVA.html" />
   
    
 
@@ -81,7 +81,7 @@
   <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
   <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
   <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
-  <a href="#api/electricpy.phasor.phasorz" tabindex="1" class="md-skip"> Skip to content </a>
+  <a href="#api/electricpy.fault.short_circuit_mva" tabindex="1" class="md-skip"> Skip to content </a>
   <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
@@ -100,7 +100,7 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           <span class="md-header-nav__topic">ElectricPy</span>
-          <span class="md-header-nav__topic"> electricpy.phasor.phasorz </span>
+          <span class="md-header-nav__topic"> electricpy.fault.short_circuit_mva </span>
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
@@ -175,7 +175,7 @@
       <ul class="md-tabs__list">
           <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">electricpy 0.3.0 documentation</a></li>
           <li class="md-tabs__item"><a href="../electricpyapi.html" class="md-tabs__link">ElectricPy API</a></li>
-          <li class="md-tabs__item"><a href="electricpy.phasor.html" class="md-tabs__link">electricpy.phasor</a></li>
+          <li class="md-tabs__item"><a href="electricpy.fault.html" class="md-tabs__link">electricpy.fault</a></li>
       </ul>
     </div>
   </nav>
@@ -354,7 +354,7 @@
 <nav class="md-nav md-nav--secondary">
   <ul class="md-nav__list" data-md-scrollfix="">
     
-<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/api/electricpy.phasor.phasorz.rst.txt">Show Source</a> </li>
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/api/electricpy.fault.short_circuit_mva.rst.txt">Show Source</a> </li>
 
 <li id="searchbox" class="md-nav__item"></li>
 
@@ -367,41 +367,41 @@
         <div class="md-content">
           <article class="md-content__inner md-typeset" role="main">
             
-  <section id="electricpy-phasor-phasorz">
-<h1 id="api-electricpy-phasor-phasorz--page-root">electricpy.phasor.phasorz<a class="headerlink" href="#api-electricpy-phasor-phasorz--page-root" title="Permalink to this heading">¶</a></h1>
+  <section id="electricpy-fault-short-circuit-mva">
+<h1 id="api-electricpy-fault-short-circuit-mva--page-root">electricpy.fault.short_circuit_mva<a class="headerlink" href="#api-electricpy-fault-short-circuit-mva--page-root" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="electricpy.phasor.phasorz">
-<span class="sig-prename descclassname"><span class="pre">electricpy.phasor.</span></span><span class="sig-name descname"><span class="pre">phasorz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/phasor.html#phasorz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.phasor.phasorz" title="Permalink to this definition">¶</a></dt>
-<dd><p>Phasor Impedance Generator.</p>
-<p>This function’s purpose is to generate the phasor-based
-impedance of the specified input given as either the
-capacitance (in Farads) or the inductance (in Henreys).
-The function will return the phasor value (in Ohms).</p>
+<dt class="sig sig-object py" id="electricpy.fault.short_circuit_mva">
+<span class="sig-prename descclassname"><span class="pre">electricpy.fault.</span></span><span class="sig-name descname"><span class="pre">short_circuit_mva</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Zth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Isc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Vth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/fault.html#short_circuit_mva"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.fault.short_circuit_mva" title="Permalink to this definition">¶</a></dt>
+<dd><p>Short-Circuit MVA Calculator.</p>
+<p>Function defines a method of interpretively
+calculating the short-circuit MVA value
+given two of the three arguments. The formulas
+are all based around the following:</p>
 <div class="math notranslate nohighlight">
-\[Z = \frac{-j}{\omega*C}\]</div>
+\[MVA_{sc} = V_{th}*I_{sc}\]</div>
 <div class="math notranslate nohighlight">
-\[Z = j*\omega*L\]</div>
-<p>where:</p>
-<div class="math notranslate nohighlight">
-\[\omega = 2*\pi*freq\]</div>
+\[V_{th} = I_{sc}*Z_{th}\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>C</strong> (<em>float</em><em>, </em><em>optional</em>) – The capacitance value (specified in Farads),
+<li><p><strong>Zth</strong> (<em>float</em>) – The Thevenin-Equivalent-Impedance</p></li>
+<li><p><strong>Isc</strong> (<em>float</em><em>, </em><em>optional</em>) – Short-Circuit-Current, if left as
+None, will force function to use
+default setting for Vth.
 default=None</p></li>
-<li><p><strong>L</strong> (<em>float</em><em>, </em><em>optional</em>) – The inductance value (specified in Henreys),
-default=None</p></li>
-<li><p><strong>freq</strong> (<em>float</em><em>, </em><em>optional</em>) – The system frequency to be calculated upon, default=60</p></li>
-<li><p><strong>complex</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to specify whether the returned
-value should be returned as a complex value.
-default=True</p></li>
+<li><p><strong>Vth</strong> (<em>float</em><em>, </em><em>optional</em>) – The Thevenin-Equivalent-Voltage,
+defaults to a 1-per-unit value.
+default=1</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>Z</strong> – The ohmic impedance of either C or L (respectively).</p>
+<dd class="field-even"><p><strong>MVA</strong> – Short-Circuit MVA, not described
+as three-phase or otherwise, such
+determination is dependent upon
+inputs.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>complex</p>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -417,7 +417,7 @@ default=True</p></li>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
           
-            <a href="electricpy.phasor.phasorlist.html" title="electricpy.phasor.phasorlist"
+            <a href="electricpy.fault.scMVA.html" title="electricpy.fault.scMVA"
                class="md-flex md-footer-nav__link md-footer-nav__link--prev"
                rel="prev">
               <div class="md-flex__cell md-flex__cell--shrink">
@@ -426,17 +426,17 @@ default=True</p></li>
               <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
                 <span class="md-flex__ellipsis">
                   <span
-                      class="md-footer-nav__direction"> Previous </span> electricpy.phasor.phasorlist </span>
+                      class="md-footer-nav__direction"> Previous </span> electricpy.fault.scMVA </span>
               </div>
             </a>
           
           
-            <a href="electricpy.phasor.phs.html" title="electricpy.phasor.phs"
+            <a href="electricpy.fault.single_phase_to_ground_fault.html" title="electricpy.fault.single_phase_to_ground_fault"
                class="md-flex md-footer-nav__link md-footer-nav__link--next"
                rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
                 class="md-flex__ellipsis"> <span
-                class="md-footer-nav__direction"> Next </span> electricpy.phasor.phs </span>
+                class="md-footer-nav__direction"> Next </span> electricpy.fault.single_phase_to_ground_fault </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink"><i
                 class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>

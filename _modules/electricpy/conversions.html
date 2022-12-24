@@ -513,6 +513,13 @@
 <span class="sd">    -------</span>
 <span class="sd">    hertz:      float</span>
 <span class="sd">                The frequency (represented in Hertz)</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy import pi</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy import conversions as conv</span>
+<span class="sd">    &gt;&gt;&gt; conv.rad_to_hz(4*pi) # 4-pi-radians/second</span>
+<span class="sd">    2.0...</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="n">radians</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>  <span class="c1"># Evaluate and Return</span></div>
 
@@ -534,13 +541,19 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    hz:      float</span>
-<span class="sd">                The frequency (represented in Hertz)</span>
+<span class="sd">    hz:     float</span>
+<span class="sd">            The frequency (represented in Hertz)</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    radians:    float</span>
 <span class="sd">                The frequency (represented in radians/sec)</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy import conversions as conv</span>
+<span class="sd">    &gt;&gt;&gt; conv.hz_to_rad(2) # 2 hz</span>
+<span class="sd">    12.566...</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="n">hz</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>  <span class="c1"># Evaluate and Return</span></div>
 
@@ -581,7 +594,7 @@
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
-<span class="sd">    &gt;&gt;&gt; from electricpy.phasor import phasor</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy.phasors import phasor</span>
 <span class="sd">    &gt;&gt;&gt; import electricpy.conversions as conv</span>
 <span class="sd">    &gt;&gt;&gt; abc_matrix = [</span>
 <span class="sd">    ...     phasor(167, 0),</span>
@@ -637,6 +650,21 @@
 <span class="sd">    --------</span>
 <span class="sd">    abc_to_seq: Phase to Sequence Conversion</span>
 <span class="sd">    sequence:  Phase Impedance to Sequence Converter</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; import electricpy as ep</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy.phasors import phasor</span>
+<span class="sd">    &gt;&gt;&gt; import electricpy.conversions as conv</span>
+<span class="sd">    &gt;&gt;&gt; abc_matrix = [</span>
+<span class="sd">    ...     phasor(167, 0),</span>
+<span class="sd">    ...     phasor(167, -120),</span>
+<span class="sd">    ...     phasor(167, -240),</span>
+<span class="sd">    ... ]</span>
+<span class="sd">    &gt;&gt;&gt; seq_quantities = conv.abc_to_seq(abc_matrix)</span>
+<span class="sd">    &gt;&gt;&gt; # Will return a list approximately equal to: [0+0j, 167+0j, 0+0j]</span>
+<span class="sd">    &gt;&gt;&gt; phs_quantities = conv.seq_to_abc(seq_quantities)</span>
+<span class="sd">    &gt;&gt;&gt; # Returned Phase Quantities will Approximately Equal the Original Values</span>
 <span class="sd">    """</span>
     <span class="c1"># Compute Dot Product</span>
     <span class="n">M</span> <span class="o">=</span> <span class="n">A012</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">M012</span><span class="p">)</span>
@@ -748,6 +776,13 @@
 <span class="sd">    -------</span>
 <span class="sd">    rpm:        float</span>
 <span class="sd">                The angular velocity in revolutions-per-minute (RPM)</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy import pi</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy import conversions as conv</span>
+<span class="sd">    &gt;&gt;&gt; conv.rad_to_rpm(2*pi)</span>
+<span class="sd">    60.0</span>
 <span class="sd">    """</span>
     <span class="n">rpm</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">rad</span>
     <span class="k">return</span> <span class="n">rpm</span></div>
@@ -770,6 +805,13 @@
 <span class="sd">    -------</span>
 <span class="sd">    rad:        float</span>
 <span class="sd">                The angular velocity in radians-per-second</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy import pi</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy import conversions as conv</span>
+<span class="sd">    &gt;&gt;&gt; conv.rpm_to_rad(60)</span>
+<span class="sd">    6.28...</span>
 <span class="sd">    """</span>
     <span class="n">rad</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">60</span> <span class="o">*</span> <span class="n">rpm</span>
     <span class="k">return</span> <span class="n">rad</span></div>
@@ -792,6 +834,12 @@
 <span class="sd">    -------</span>
 <span class="sd">    rpm:        float</span>
 <span class="sd">                The angular velocity in revolutions-per-minute (RPM)</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy import conversions as conv</span>
+<span class="sd">    &gt;&gt;&gt; conv.hz_to_rpm(2) # 2 Hz</span>
+<span class="sd">    120</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="n">hz</span> <span class="o">*</span> <span class="mi">60</span></div>
 
@@ -813,6 +861,12 @@
 <span class="sd">    -------</span>
 <span class="sd">    hz:         float</span>
 <span class="sd">                The angular velocity in Hertz</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy import conversions as conv</span>
+<span class="sd">    &gt;&gt;&gt; conv.rpm_to_hz(120) # 120 RPM</span>
+<span class="sd">    2</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="n">rpm</span> <span class="o">/</span> <span class="mi">60</span></div>
 

@@ -402,6 +402,21 @@ default=’A’</p></li>
 </dd>
 </dl>
 </div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">electricpy</span> <span class="k">as</span> <span class="nn">ep</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy.phasors</span> <span class="kn">import</span> <span class="n">phasor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">electricpy.conversions</span> <span class="k">as</span> <span class="nn">conv</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">abc_matrix</span> <span class="o">=</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="n">phasor</span><span class="p">(</span><span class="mi">167</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">phasor</span><span class="p">(</span><span class="mi">167</span><span class="p">,</span> <span class="o">-</span><span class="mi">120</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">phasor</span><span class="p">(</span><span class="mi">167</span><span class="p">,</span> <span class="o">-</span><span class="mi">240</span><span class="p">),</span>
+<span class="gp">... </span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">seq_quantities</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">abc_to_seq</span><span class="p">(</span><span class="n">abc_matrix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Will return a list approximately equal to: [0+0j, 167+0j, 0+0j]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phs_quantities</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">seq_to_abc</span><span class="p">(</span><span class="n">seq_quantities</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Returned Phase Quantities will Approximately Equal the Original Values</span>
+</pre></div>
+</div>
 </dd></dl>
 </section>
 

@@ -1,0 +1,6 @@
+electricpy.fault.single\_phase\_to\_ground\_fault
+=================================================
+
+.. currentmodule:: electricpy.fault
+
+.. autofunction:: single_phase_to_ground_fault
