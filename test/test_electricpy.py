@@ -6,12 +6,12 @@ from numpy.testing import assert_almost_equal
 
 # Electricpy Imports
 from electricpy import powerflow
-from electricpy.phasor import phasor
-from electricpy.phasor import phs
-from electricpy.phasor import vectarray
+from electricpy import phasor
+from electricpy.phasors import phs
+from electricpy.phasors import vectarray
 
 def test_phasor():
-    from electricpy.phasor import phasor
+    from electricpy.phasors import phasor
     magnitude = 10
     # basic angles test case 0
     z1 = phasor(magnitude, 0)
@@ -120,7 +120,7 @@ def test_powerset():
 
 def test_voltdiv():
     from electricpy import voltdiv
-    from electricpy.phasor import phasor
+    from electricpy import phasors
 
     # Test case 0 R1 == R2 == Rload
     Vin = 10

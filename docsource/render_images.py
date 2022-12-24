@@ -26,18 +26,18 @@ def canvas_capture(image_label):
 @canvas_capture("PowerTriangle")
 def render_power_triangle():
     """Render the Power Triangle Function."""
-    ep.powertriangle(400, 200)
+    visu.powertriangle(400, 200)
 
 # @canvas_capture("PhasorPlot")
 def render_phasor_plot():
     """Render the Phasor Plot Function."""
     # This phasorplot is ploted on seperate canvas
-    phasors = ep.phasor.phasorlist([
+    phasors = ep.phasors.phasorlist([
         [67,0],
         [45,-120],
         [52,120]
     ])
-    plt = visu.phasorplot(phasor=phasors, colors=["red", "green", "blue"])
+    plt = visu.phasorplot(phasors=phasors, colors=["red", "green", "blue"])
     plt.savefig(f"{FIGURE_DIRECTORY}/PhasorPlot.png")
 
 @canvas_capture("InductionMotorCircleExample")
