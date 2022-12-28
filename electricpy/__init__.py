@@ -13,6 +13,7 @@ to aid in scientific calculations.
 ################################################################################
 
 
+from .version import NAME, VERSION
 import cmath as _c
 from inspect import getframeinfo as _getframeinfo
 from inspect import stack as _stack
@@ -26,12 +27,13 @@ from scipy.integrate import quad as integrate
 # Import Submodules
 from .constants import *
 from .phasors import phasor, parallelz
-from .version import VERSION
 
 __version__ = VERSION
 
 # Define Cycle Time Function
-def tcycle(ncycles = 1, freq = 60):
+
+
+def tcycle(ncycles=1, freq=60):
     r"""
     Time of Electrical Cycles.
 
@@ -85,6 +87,8 @@ def tcycle(ncycles = 1, freq = 60):
         return time
 
 # Define Reactance Calculator
+
+
 def reactance(z, freq=60, sensetivity=1e-12):
     r"""
     Capacitance/Inductance from Impedance.
@@ -150,7 +154,8 @@ def reactance(z, freq=60, sensetivity=1e-12):
             out = 1 / (w * 1j * z)
         out = abs(out)
         # Combine with resistance if present
-        if R != 0: out = (R, out)
+        if R != 0:
+            out = (R, out)
     else:
         if z > 0:
             out = z / w
@@ -416,7 +421,7 @@ def phaseline(VLL=None, VLN=None, Iline=None, Iphase=None, realonly=None,
     complex:    bool, optional, DEPRECATED
                 Control to return value in complex form, refer to
                 `realonly` instead. default=None
-    
+
     Examples
     --------
     >>> import electricpy as ep
@@ -501,7 +506,7 @@ def powerset(P=None, Q=None, S=None, PF=None, find=''):
             Calculated Apparent Power Magnitude
     PF:     float
             Calculated Power Factor
-    
+
     Examples
     --------
     >>> import electricpy as ep
@@ -628,14 +633,14 @@ def non_linear_pf(PFtrue=False, PFdist=False, PFdisp=False):
     """
     if PFtrue is not None and PFdist is not None and PFdisp is not None:
         raise ValueError("ERROR: Too many constraints, no solution.")
-    elif PFdist is not None and PFdisp is not None:
+    if PFdist is not None and PFdisp is not None:
         return PFdist * PFdisp
-    elif PFtrue is not None and PFdisp is not None:
+    if PFtrue is not None and PFdisp is not None:
         return PFtrue / PFdisp
-    elif PFtrue is not None and PFdist is not None:
+    if PFtrue is not None and PFdist is not None:
         return PFtrue / PFdist
-    else:
-        raise ValueError("ERROR: Function requires at least two arguments.")
+    raise ValueError("ERROR: Function requires at least two arguments.")
+
 
 # Alias to original Name
 nlinpf = non_linear_pf
@@ -719,7 +724,8 @@ def short_circuit_current(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
             T = X / (2 * _np.pi * f * R)  # seconds
             # Calculate iAC and iDC
             iAC = _np.sqrt(2) * V / Z * _np.sin(omega * t + alpha - theta)
-            iDC = -_np.sqrt(2) * V / Z * _np.sin(alpha - theta) * _np.exp(-t / T)
+            iDC = -_np.sqrt(2) * V / Z * \
+                _np.sin(alpha - theta) * _np.exp(-t / T)
             i = iAC + iDC
             # Return Values
             return i, iAC, iDC, T
@@ -729,6 +735,7 @@ def short_circuit_current(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
     else:
         Iac = abs(V / Z)
         return Iac
+
 
 # Alias to original Name
 iscrl = short_circuit_current
@@ -765,7 +772,7 @@ def voltdiv(Vin, R1, R2, Rload=None):
     -------
     Vout:   float
             The Output voltage as measured across R2 and/or Rload
-    
+
     Examples
     --------
     >>> import electricpy as ep
@@ -814,7 +821,7 @@ def curdiv(Ri, Rset, Vin=None, Iin=None, Vout=False, combine=True):
     Opt1 - Ii:          The Current through the resistor (impedance) of interest
     Opt2 - (Ii,Vi):     The afore mentioned current, and voltage across the
                         resistor (impedance) of interest
-    
+
     Examples
     --------
     >>> from electricpy.constants import k
@@ -969,6 +976,10 @@ def dynetz(delta=None, wye=None, round=None):
     wye-set:    tuple of float
                 Wye-Connected impedance values { Z1, Z2, Z3 }
     """
+    if delta is None and wye is None:
+        raise ValueError(
+            "ERROR: Either delta or wye impedances must be specified."
+        )
     # Determine which set of impedances was provided
     if delta is not None and wye is None:
         Z12, Z23, Z31 = delta  # Gather particular impedances
@@ -981,7 +992,7 @@ def dynetz(delta=None, wye=None, round=None):
         if round is not None:
             Zset = _np.around(Zset, round)
         return Zset  # Return Wye Impedances
-    elif delta is None and wye is not None:
+    if delta is None and wye is not None:
         Z1, Z2, Z3 = wye  # Gather particular impedances
         Zmultsum = Z1 * Z2 + Z2 * Z3 + Z3 * Z1
         Z23 = Zmultsum / Z1
@@ -991,10 +1002,6 @@ def dynetz(delta=None, wye=None, round=None):
         if round is not None:
             Zset = _np.around(Zset, round)
         return Zset  # Return Delta Impedances
-    else:
-        raise ValueError(
-            "ERROR: Either delta or wye impedances must be specified."
-        )
 
 
 # calculating impedance of bridge network
@@ -1029,11 +1036,10 @@ def bridge_impedance(z1, z2, z3, z4, z5):
     """
     if z1 * z3 == z2 * z4:
         return (z1 + z2) * (z3 + z4) / (z1 + z2 + z3 + z4)
-    else:
-        za, zb, zc = dynetz(delta=(z1, z5, z4))
-        ze1 = zb + z2
-        ze2 = zc + z3
-        return za + (ze1 * ze2) / (ze1 + ze2)
+    za, zb, zc = dynetz(delta=(z1, z5, z4))
+    ze1 = zb + z2
+    ze2 = zc + z3
+    return za + (ze1 * ze2) / (ze1 + ze2)
 
 
 # Define Single Line Power Flow Calculator
@@ -2158,7 +2164,7 @@ def acpiv(S=None, I=None, VLL=None, VLN=None, V=None, PF=None):
     PF:         float, optional
                 Supporting argument to convert floating-point
                 apparent power to complex representation.
-    
+
     Examples
     --------
     >>> import electricpy as ep
@@ -2799,7 +2805,8 @@ def zperlength(Rd=None, Rself=None, Rac=None, Rgwac=None, De=None,
         if all((Rgwac, Dsgw, Dagw, Dbgw, Dcgw)):
             # Append Right-Most Column
             Lperlen = _np.append(Lperlen,
-                                 [[_np.log(De / Dagw)], [_np.log(De / Dbgw)], [_np.log(De / Dcgw)]],
+                                 [[_np.log(De / Dagw)], [_np.log(De / Dbgw)],
+                                  [_np.log(De / Dcgw)]],
                                  axis=1)
             # Append New Row
             Lperlen = _np.append(Lperlen,
@@ -2866,7 +2873,8 @@ def transposez(Zeq, fabc=1 / 3, fcab=1 / 3, fbca=1 / 3, linelen=1):
     ])
     # Define Inverse Rp Array
     _Rp = _np.linalg.inv(Rp)
-    Zeq = fabc * Zeq + fcab * (_Rp.dot(Zeq.dot(Rp))) + fbca * (Rp.dot(Zeq.dot(_Rp)))
+    Zeq = fabc * Zeq + fcab * (_Rp.dot(Zeq.dot(Rp))) + \
+        fbca * (Rp.dot(Zeq.dot(_Rp)))
     Zeq = Zeq * linelen
     return Zeq
 
@@ -2932,7 +2940,7 @@ def vipf(V=None, I=None, PF=1, find=''):
                 System power factor, (+)ive values denote
                 leading power factor, (-)ive values denote
                 lagging poer factor; default=1
-    
+
     Examples
     --------
     >>> import electricpy as ep
@@ -2962,12 +2970,11 @@ def vipf(V=None, I=None, PF=1, find=''):
     find = find.upper()
     if find == 'V':
         return V
-    elif find == 'I':
+    if find == 'I':
         return I
-    elif find == 'PF':
+    if find == 'PF':
         return PF
-    else:
-        return V, I, PF
+    return V, I, PF
 
 
 # Define Synchronous Speed Calculator
@@ -3001,11 +3008,10 @@ def syncspeed(Npol, freq=60, Hz=False, rpm=False):
                 Synchronous Speed of Induction Machine, defaults to units of
                 rad/sec, but may be set to Hertz or RPM if `Hz` or `rpm` set to True.
     """
-    try:
-        wsyn = 2 * _np.pi * freq / (Npol / 2)
-    except ZeroDivisionError:
+    if Npol == 0:
         raise ZeroDivisionError("Poles of an electrical machine \
         can not be zero")
+    wsyn = 2 * _np.pi * freq / (Npol / 2)
     if Hz:
         return (2*freq / (Npol))
     if rpm:
@@ -3122,12 +3128,12 @@ def wireresistance(length=None, diameter=None, rho=16.8 * 10 ** -9, R=None):
         A = pi * (diameter ** 2) / 4
         return rho * length / A
     # Given resistance and diameter
-    elif R is not None and diameter is not None:
+    if R is not None and diameter is not None:
         # calculating the area
         A = pi * (diameter ** 2) / 4
         return R * A / rho
     # Given resistance and length
-    elif R is not None and length is not None:
+    if R is not None and length is not None:
         A = rho * length / R
         return _np.sqrt(4 * A / pi)
 
@@ -3171,10 +3177,10 @@ def parallel_plate_capacitance(A=None, d=None, e=e0, C=None):
     if A is not None and d is not None:
         return e * A / d
     # Given capacitance and distance
-    elif C is not None and d is not None:
+    if C is not None and d is not None:
         return d * C / e
     # Given capacitance and area
-    elif C is not None and A is not None:
+    if C is not None and A is not None:
         return e * A / C
 
 
@@ -3221,13 +3227,13 @@ def solenoid_inductance(A=None, l=None, N=None, u=u0, L=None):
     if A is not None and l is not None and N is not None:
         return N ** 2 * u * A / l
     # Given inductance, length and number of turns
-    elif L is not None and l is not None and N is not None:
+    if L is not None and l is not None and N is not None:
         return L * l / (N ** 2 * u)
     # Given inductance, area and number of turns
-    elif L is not None and A is not None and N is not None:
+    if L is not None and A is not None and N is not None:
         return N ** 2 * u * A / L
     # Given inductance, area and length
-    elif L is not None and A is not None and l is not None:
+    if L is not None and A is not None and l is not None:
         return _np.sqrt(L * l / (u * A))
 
 
@@ -3285,7 +3291,7 @@ def ic_555_astable(R=None, C=None, freq=None, t_high=None, t_low=None):
             't_high': t_high
         }
 
-    elif t_high is not None and t_low is not None and C is not None:
+    if t_high is not None and t_low is not None and C is not None:
 
         x2 = t_low / C * _np.log(2)
         x1 = t_high / C * _np.log(2)
@@ -3300,8 +3306,7 @@ def ic_555_astable(R=None, C=None, freq=None, t_high=None, t_low=None):
             'R1': x1 - x2,
             'R2': x2
         }
-    else:
-        raise TypeError("Not enough parqmeters are passed")
+    raise TypeError("Not enough parqmeters are passed")
 
 
 def ic_555_monostable(R=None, C=None, freq=None, t_high=None, t_low=None):
@@ -3337,29 +3342,22 @@ def ic_555_monostable(R=None, C=None, freq=None, t_high=None, t_low=None):
     """
     T = t_high + t_low
     if R is None:
-        try:
-            assert C is not None and T is not None
-        except AssertionError:
+        if not (C is not None and T is not None):
             raise ValueError(
                 "To find Resitance, Capacitance and delay time should be "
                 "provided"
             )
         return T / (_np.log(3) * C)
-    elif C is None:
-        try:
-            assert R is not None and T is not None
-        except AssertionError:
+    if C is None:
+        if not (R is not None and T is not None):
             raise ValueError(
                 "To find Capacitance , Resistance and delay time should be "
                 "provided"
             )
         return T / (_np.log(3) * R)
 
-    elif T is None:
-
-        try:
-            assert R is not None and T is not None
-        except AssertionError:
+    if T is None:
+        if not (R is not None and T is not None):
             raise ValueError(
                 "To find Time delay , Resistance and Capacitance should be "
                 "provided"
@@ -3458,9 +3456,11 @@ def zener_diode_required_resistor(Vin, Vo, I):
     """
     # Solve Load Resistance
     R = (Vin - Vo) / (I+0.01)
-    return(R)
+    return (R)
 
 # Calculate Zener Diode Power
+
+
 def zener_diode_power(Vin, Vo, R):
     r"""
     Zener diode power loss function.
@@ -3493,7 +3493,7 @@ def zener_diode_power(Vin, Vo, R):
 
     # Solve Load Resistance
     P = ((Vo - Vin) ** 2) / R
-    return(P)
+    return (P)
 
 
 def lm317(r1, r2, v_out):
@@ -3542,21 +3542,18 @@ def lm317(r1, r2, v_out):
         # Returns Voltage
         return 1.25 * (1 + (r2 / r1))
 
-    elif r2 is not None and v_out is not None:
+    if r2 is not None and v_out is not None:
         # Returns R1
         return (1.25 * r2) / (v_out - 1.25)
 
-    elif r1 is not None and v_out is not None:
+    if r1 is not None and v_out is not None:
         # Returns R2
         return ((r1 * v_out) / 1.25) - r1
 
-    else:
-        raise ValueError("Invalid arguments")
+    raise ValueError("Invalid arguments")
 
-    return R1,R2
 
 # Define Module Specific Variables
-from .version import NAME, VERSION
 _name_ = NAME
 _version_ = VERSION
 __version__ = _version_  # Alias Version for User Ease
