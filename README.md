@@ -19,7 +19,7 @@
 [![](https://img.shields.io/github/stars/engineerjoe440/electricpy?logo=github)](https://github.com/engineerjoe440/electricpy/)
 [![](https://img.shields.io/pypi/l/electricpy.svg?color=blue)](https://github.com/engineerjoe440/electricpy/blob/master/LICENSE.txt)
 
-[![Matrix](https://img.shields.io/matrix/electricpy:stanleysolutionsn.com?label=Matrix%20Chat&logo=matrix&server_fqdn=matrix.stanleysolutionsnw.com&style=for-the-badge)](https://matrix.to/#/#electricpy:stanleysolutionsnw.com)
+[![Matrix](https://img.shields.io/matrix/electricpy:stanleysolutionsn.com?label=%23electricpy:stanleysolutionsnw.com&logo=matrix&server_fqdn=matrix.stanleysolutionsnw.com&style=for-the-badge)](https://matrix.to/#/#electricpy:stanleysolutionsnw.com)
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/engineerjoe440)
 
