@@ -15,7 +15,8 @@ authors = [
     {name = "Miguel Zabala"},
     {name = "Soham Ratnaparkhi", email = "soham.ratnaparkhi@gmail.com"},
     {name = "I Wayan Kurniawan"},
-    {name = "Ankush", email = "ankush.opensource@gmail.com"}
+    {name = "Ankush", email = "ankush.opensource@gmail.com"},
+    {name = "Tanvir Riyad"}
 ]
 maintainers = [
     {name = "Joe Stanley", email = "engineerjoe440@yahoo.com"}
