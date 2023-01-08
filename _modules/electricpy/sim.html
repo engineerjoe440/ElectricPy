@@ -390,7 +390,7 @@
 <span class="c1"># Define Digital Filter Simulator Function</span>
 <div class="viewcode-block" id="digifiltersim"><a class="viewcode-back" href="../../api/electricpy.sim.digifiltersim.html#electricpy.sim.digifiltersim">[docs]</a><span class="k">def</span> <span class="nf">digifiltersim</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="nb">filter</span><span class="p">,</span> <span class="n">freqs</span><span class="p">,</span> <span class="n">NN</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
                   <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">xmxscale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">"""</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Digital Filter Simulator.</span>
 
 <span class="sd">    Given an input function and filter parameters (specified in</span>
@@ -510,7 +510,7 @@
                   <span class="n">title</span><span class="o">=</span><span class="s2">"Step Response"</span><span class="p">,</span> <span class="n">errtitle</span><span class="o">=</span><span class="s2">"Step Response Error"</span><span class="p">,</span>
                   <span class="n">resplabel</span><span class="o">=</span><span class="s2">"Step Response"</span><span class="p">,</span> <span class="n">funclabel</span><span class="o">=</span><span class="s2">"Step Function"</span><span class="p">,</span>
                   <span class="n">errlabel</span><span class="o">=</span><span class="s2">"Error"</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">"""</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Step Function Response Plotter Function.</span>
 
 <span class="sd">    Given a transfer function, plots the response against step input</span>
@@ -595,7 +595,7 @@
                   <span class="n">title</span><span class="o">=</span><span class="s2">"Ramp Response"</span><span class="p">,</span> <span class="n">errtitle</span><span class="o">=</span><span class="s2">"Ramp Response Error"</span><span class="p">,</span>
                   <span class="n">resplabel</span><span class="o">=</span><span class="s2">"Ramp Response"</span><span class="p">,</span> <span class="n">funclabel</span><span class="o">=</span><span class="s2">"Ramp Function"</span><span class="p">,</span>
                   <span class="n">errlabel</span><span class="o">=</span><span class="s2">"Error"</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">"""</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Ramp Function Response Plotter Function.</span>
 
 <span class="sd">    Given a transfer function, plots the response against step input</span>
@@ -679,7 +679,7 @@
                        <span class="n">title</span><span class="o">=</span><span class="s2">"Parabolic Response"</span><span class="p">,</span> <span class="n">errtitle</span><span class="o">=</span><span class="s2">"Parabolic Response Error"</span><span class="p">,</span>
                        <span class="n">resplabel</span><span class="o">=</span><span class="s2">"Parabolic Response"</span><span class="p">,</span> <span class="n">funclabel</span><span class="o">=</span><span class="s2">"Parabolic Function"</span><span class="p">,</span>
                        <span class="n">errlabel</span><span class="o">=</span><span class="s2">"Error"</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">"""</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Parabolic Function Response Plotter Function.</span>
 
 <span class="sd">    Given a transfer function, plots the response against step input</span>
@@ -763,7 +763,7 @@
 <div class="viewcode-block" id="statespace"><a class="viewcode-back" href="../../api/electricpy.sim.statespace.html#electricpy.sim.statespace">[docs]</a><span class="k">def</span> <span class="nf">statespace</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">simpts</span><span class="o">=</span><span class="mi">9999</span><span class="p">,</span> <span class="n">NN</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
                <span class="n">xlim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">ret</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plotstate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                <span class="n">plotforcing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plotresult</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">"""</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    State-Space Simulation Plotter.</span>
 
 <span class="sd">    Parameters</span>
@@ -1077,7 +1077,7 @@
 
 <span class="c1"># Define Newton-Raphson Calculator</span>
 <div class="viewcode-block" id="NewtonRaphson"><a class="viewcode-back" href="../../api/electricpy.sim.NewtonRaphson.html#electricpy.sim.NewtonRaphson">[docs]</a><span class="k">def</span> <span class="nf">NewtonRaphson</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">X0</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">mxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">lsq_eps</span><span class="o">=</span><span class="mf">0.25</span><span class="p">):</span>
-    <span class="sd">"""</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Newton Raphson Calculator.</span>
 
 <span class="sd">    Solve nonlinear system F=0 by Newton's method.</span>
@@ -1198,7 +1198,7 @@
 
 <span class="c1"># Define Newton-Raphson P/Q Evaluator</span>
 <div class="viewcode-block" id="nr_pq"><a class="viewcode-back" href="../../api/electricpy.sim.nr_pq.html#electricpy.sim.nr_pq">[docs]</a><span class="k">def</span> <span class="nf">nr_pq</span><span class="p">(</span><span class="n">Ybus</span><span class="p">,</span> <span class="n">V_set</span><span class="p">,</span> <span class="n">P_set</span><span class="p">,</span> <span class="n">Q_set</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">argshape</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">"""</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Newton Raphson Real/Reactive Power Function Generator.</span>
 
 <span class="sd">    Given specified parameters, will generate the necessary real and reactive</span>
@@ -1443,7 +1443,7 @@
 <div class="viewcode-block" id="mbuspowerflow"><a class="viewcode-back" href="../../api/electricpy.sim.mbuspowerflow.html#electricpy.sim.mbuspowerflow">[docs]</a><span class="k">def</span> <span class="nf">mbuspowerflow</span><span class="p">(</span><span class="n">Ybus</span><span class="p">,</span> <span class="n">Vknown</span><span class="p">,</span> <span class="n">Pknown</span><span class="p">,</span> <span class="n">Qknown</span><span class="p">,</span> <span class="n">X0</span><span class="o">=</span><span class="s1">'flatstart'</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span>
                   <span class="n">mxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">returnct</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                   <span class="n">slackbus</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">lsq_eps</span><span class="o">=</span><span class="mf">0.25</span><span class="p">):</span>
-    <span class="sd">"""</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Multi-Bus Power Flow Calculator.</span>
 
 <span class="sd">    Function wrapper to simplify the evaluation of a power flow calculation.</span>
