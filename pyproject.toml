@@ -8,6 +8,17 @@ description = "Electrical Engineering Functions in Python"
 readme = "README.md"
 requires-python = ">=3.7"
 authors = [
+    {name = "Joe Stanley", email = "engineerjoe440@yahoo.com"},
+    {name = "Lakshmikanth Ayyadevara"},
+    {name = "Khan Asfi Reza", email = "khanasfireza10@gmail.com"},
+    {name = "Arthur Lorencini Bergamaschi", email = "arthur.lorencini@gmail.com"},
+    {name = "Miguel Zabala"},
+    {name = "Soham Ratnaparkhi", email = "soham.ratnaparkhi@gmail.com"},
+    {name = "I Wayan Kurniawan"},
+    {name = "Ankush", email = "ankush.opensource@gmail.com"},
+    {name = "Tanvir Riyad"}
+]
+maintainers = [
     {name = "Joe Stanley", email = "engineerjoe440@yahoo.com"}
 ]
 license = {file = "LICENSE"}
