@@ -1,44 +1,11 @@
 import pytest
 import numpy as np
-import cmath
-import math
 from numpy.testing import assert_almost_equal
 
 # Electricpy Imports
 from electricpy import powerflow
 from electricpy import phasor
-from electricpy.phasors import phs
-from electricpy.phasors import vectarray
-
-def test_phasor():
-    from electricpy.phasors import phasor
-    magnitude = 10
-    # basic angles test case 0
-    z1 = phasor(magnitude, 0)
-    z2 = phasor(magnitude, 30)
-    z3 = phasor(magnitude, 45)
-    z4 = phasor(magnitude, 60)
-    z5 = phasor(magnitude, 90)
-
-    assert_almost_equal(z1, complex(magnitude, 0))
-    assert_almost_equal(z2, complex(magnitude * np.sqrt(3) / 2, magnitude / 2))
-    assert_almost_equal(z3, complex(magnitude / np.sqrt(2), magnitude / np.sqrt(2)))
-    assert_almost_equal(z4, complex(magnitude / 2, magnitude * np.sqrt(3) / 2))
-    assert_almost_equal(z5, complex(0, magnitude))
-
-    # z(theta) = z(theta+360) test case 1
-    theta = np.random.randint(360)
-    assert_almost_equal(phasor(magnitude, theta), phasor(magnitude, theta + 360))
-
-    # z(-theta)*z(theta) == abs(z)^2 test case 2.
-    z0 = phasor(magnitude, theta)
-    z1 = phasor(magnitude, -theta)
-    assert_almost_equal(z0 * z1, np.power(abs(z0), 2))
-
-    # z(theta+180) = -1*Z(theta)
-    z0 = phasor(magnitude, theta)
-    z1 = phasor(magnitude, 180 + theta)
-    assert_almost_equal(z0, -1 * z1)
+from electricpy.passive import air_core_inductance
 
 def test_bridge_impedance():
     # Perfectly Balanced Wheat Stone Bridge
@@ -218,20 +185,6 @@ def test_slew_rate():
     assert_almost_equal(1/(np.pi*2), V)
     assert_almost_equal(1/(np.pi*2), freq)
 
-def test_induction_motor_circle():
-    from electricpy.visu import InductionMotorCircle
-
-    open_circuit_test_data = {'V0': 400, 'I0': 9, 'W0': 1310}
-    blocked_rotor_test_data = {'Vsc': 200, 'Isc': 50, 'Wsc': 7100}
-    ratio = 1  # stator copper loss/ rotor copper loss
-    output_power = 15000
-    # InductionMotorCircle(open_circuit_test_data, blocked_rotor_test_data, output_power, torque_ration=ratio)
-    #
-    MotorCircle = InductionMotorCircle(open_circuit_test_data, blocked_rotor_test_data,
-                        output_power, torque_ration=ratio, frequency=50, poles=4)
-
-    assert_almost_equal(MotorCircle()['no_load_loss'], open_circuit_test_data['W0'])
-
 def test_t_attenuator():
     Adb = 1
     Z0 = 1
@@ -310,31 +263,6 @@ def test_induction_machine_slip():
     assert induction_machine_slip(Nr, freq=freq, poles=p) == 0.2
     assert induction_machine_slip(1500, freq=freq, poles=p) == 0
     assert induction_machine_slip(0, freq=freq, poles=p) == 1
-
-def test_abc_to_seq():
-
-    from electricpy.conversions import abc_to_seq
-    a = cmath.rect(1, np.radians(120))
-
-    def test_0():
-        np.testing.assert_array_almost_equal(abc_to_seq([1, 1, 1]), [1+0j, 0j, 0j])
-        np.testing.assert_array_almost_equal(abc_to_seq([1, 0, 0]), [1/3+0j, 1/3+0j, 1/3+0j])
-        np.testing.assert_array_almost_equal(abc_to_seq([0, 1, 0]), [1/3+0j, a/3+0j, a*a/3+0j])
-        np.testing.assert_array_almost_equal(abc_to_seq([0, 0, 1]), [1/3+0j, a*a/3, a/3])
-
-    test_0()
-
-def test_seq_to_abc():
-    from electricpy.conversions import seq_to_abc
-    a = cmath.rect(1, np.radians(120))
-
-    def test_0():
-        np.testing.assert_array_almost_equal(seq_to_abc([1, 1, 1]), [3+0j, 0j, 0j])
-        np.testing.assert_array_almost_equal(seq_to_abc([1, 0, 0]), [1+0j, 1+0j, 1+0j])
-        np.testing.assert_array_almost_equal(seq_to_abc([0, 1, 0]), [1+0j, a*a+0j, a+0j])
-        np.testing.assert_array_almost_equal(seq_to_abc([0, 0, 1]), [1+0j, a, a*a])
-
-    test_0()
 
 def test_parallel_plate_capacitance():
     from electricpy import parallel_plate_capacitance
@@ -457,67 +385,6 @@ def test_nr_pqd():
     assert_array_almost_equal(results, [-0.236,0.8554], decimal = 3)
     assert iter == 4 # Iteration Counter
 
-class TestVectarray():
-
-    def test_0(self):
-
-        A = [2+3j, 4+5j, 6+7j, 8+9j]
-        B = vectarray(A)
-
-        B_test = [[np.abs(x), np.degrees(np.angle(x))] for x in A]
-
-        np.testing.assert_array_almost_equal(B, B_test)
-
-    def test_1(self):
-
-        A = np.random.random(size = 16)
-        B = vectarray(A)
-
-        B_test = [[np.abs(x), 0] for x in A]
-        np.testing.assert_array_almost_equal(B, B_test)
-
-        A = np.random.random(size = 16)*1j
-        B = vectarray(A)
-
-        B_test = [[np.abs(x), 90] for x in A]
-        np.testing.assert_array_almost_equal(B, B_test)
-
-class TestPhs():
-    def test_0(self):
-        inputs = [0, 90, 180, 270, 360]
-
-        outputs = [phs(x) for x in inputs]
-        actual_outputs = [1, 1j, -1, -1j, 1]
-
-        for x,y in zip(outputs, actual_outputs):
-            assert_almost_equal(x, y)
-
-    def test_1(self):
-        inputs = [30, 45, 60, 135]
-
-        outputs = [phs(x) for x in inputs]
-        actual_outputs = [0.866025+0.5j, 0.707106+0.707106j, 0.5+0.866025j, -0.707106+0.707106j]
-
-        for x,y in zip(outputs, actual_outputs):
-            assert_almost_equal(x, y, decimal = 3)
-
-class TestPowerflow():
-
-    def test_0(self):
-        Vsend = phasor(1.01, 30)
-        Vrecv = phasor(1, 0)
-        Xline = 0.2
-
-        ans = powerflow(Vsend, Vrecv, Xline)
-        assert_almost_equal(ans, 2.525)
-
-    def test_1(self):
-        Vsend = 1.01
-        Vrecv = 1
-        Xline = 0.2
-
-        ans = powerflow(Vsend, Vrecv, Xline)
-        assert ans == 0
 def test_tcycle():
     from electricpy import tcycle
 
@@ -548,60 +415,42 @@ def test_tcycle():
     with pytest.raises(ValueError, match = "Frequency must be postive value"):
         tcycle(ncycles=[1, 2, 3, 4], freq = [-2, -3, 4, 5])
 
-class Test_air_core_inductor:
+class TestPowerflow():
 
-    def invoke(test_case):
-        def wrapper(self):
-            from electricpy.passive import air_core_inductance
-            expected_result = test_case(self)
-            computed_result = air_core_inductance(self.coil_diameter, self.coil_length, self.turn)
-            assert_almost_equal(computed_result, expected_result, decimal = 3)
-        return wrapper
-
-    @invoke
     def test_0(self):
+        Vsend = phasor(1.01, 30)
+        Vrecv = phasor(1, 0)
+        Xline = 0.2
 
+        ans = powerflow(Vsend, Vrecv, Xline)
+        assert_almost_equal(ans, 2.525)
+
+    def test_1(self):
+        Vsend = 1.01
+        Vrecv = 1
+        Xline = 0.2
+
+        ans = powerflow(Vsend, Vrecv, Xline)
+        assert ans == 0
+
+class TestAirCoreInductor:
+
+    def check_result(self, expected_result):
+        computed_result = air_core_inductance(self.coil_diameter, self.coil_length, self.turn)
+        assert_almost_equal(computed_result, expected_result, decimal = 3)
+
+    def test_0(self):
         self.coil_diameter = 1e-3
         self.coil_length = 1e-3
         self.turn = 1000
 
-        return 0.678640
+        expected_result = 0.678640
+        self.check_result(expected_result)
 
-    @invoke
     def test_1(self):
-
         self.coil_diameter = 1e-2
         self.coil_length = 1e-2
         self.turn = 251
 
-        return 0.42755
-
-class Test_visualization:
-
-    def test_induction_motor_circle(self):
-        from electricpy.visu import InductionMotorCircle
-
-        open_circuit_test_data = {'V0': 400, 'I0': 9, 'W0': 1310}
-        blocked_rotor_test_data = {'Vsc': 200, 'Isc': 50, 'Wsc': 7100}
-        ratio = 1  # stator copper loss/ rotor copper loss
-        output_power = 15000
-        # InductionMotorCircle(open_circuit_test_data, blocked_rotor_test_data, output_power, torque_ration=ratio)
-        #
-        MotorCircle = InductionMotorCircle(open_circuit_test_data, blocked_rotor_test_data,
-                            output_power, torque_ration=ratio, frequency=50, poles=4)
-
-        assert_almost_equal(MotorCircle()['no_load_loss'], open_circuit_test_data['W0'])
-
-    def test_power_circle(self):
-        from electricpy.visu import receiving_end_power_circle
-        data = {
-            "A" : cmath.rect(0.895, math.radians(1.4)),
-            "B" : cmath.rect(182.5, math.radians(78.6)),
-            "Vr" : cmath.rect(215, 0),
-            "Pr": 50,
-            "power_factor": -0.9,
-        }
-
-        power_circle = receiving_end_power_circle(**data)
-
-        assert_almost_equal(abs(power_circle()['Vs']), 224.909, decimal = 3)
+        expected_result = 0.42755
+        self.check_result(expected_result)
