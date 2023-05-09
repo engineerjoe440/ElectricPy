@@ -14,6 +14,8 @@ Generic and Data Science
     * SymPy: https://www.sympy.org/en/index.html
     
     * Pyomo: https://www.pyomo.org/
+
+    * Pint: https://pint.readthedocs.io/en/stable/
     
     * numdifftools: https://numdifftools.readthedocs.io/en/latest/
 
@@ -23,6 +25,8 @@ Electrical Engineering Focus
     * Python COMTRADE File Interpreter: https://github.com/dparrini/python-comtrade
     
     * Python COMTRADE Writer: https://github.com/relihanl/comtradehandlers
+
+    * Arc Flash Calculator: https://github.com/LiaungYip/arcflash
     
     * PandaPower: https://www.pandapower.org/start/
     
