@@ -1,6 +1,6 @@
 ################################################################################
 """
-`electricpy` Package - `phasors` Module.
+Functions to Support Common Electrical Engineering Formulas Related to Phasors.
 
 >>> from electricpy import phasors
 
@@ -13,11 +13,8 @@ to aid in scientific calculations.
 """
 ################################################################################
 
-# Import Required Packages
 import numpy as _np
 import cmath as _c
-import matplotlib as _matplotlib
-import matplotlib.pyplot as _plt
 
 
 # Define Phase Angle Generator
@@ -39,12 +36,12 @@ def phs(ang):
     See Also
     --------
     electricpy.cprint:              Complex Variable Printing Function
-    electricpy.phasor.phasorlist:   Phasor Generator for List or Array
-    electricpy.phasor.phasorz:      Impedance Phasor Generator
-    electricpy.phasor.phasor:       Phasor Generating Function
+    electricpy.phasors.phasorlist:   Phasor Generator for List or Array
+    electricpy.phasors.phasorz:      Impedance Phasor Generator
+    electricpy.phasors.phasor:       Phasor Generating Function
     """
     # Return the Complex Angle Modulator
-    return (_np.exp(1j * _np.radians(ang)))
+    return _np.exp(1j * _np.radians(ang))
 
 
 phase = phs  # Create Duplicate Name
@@ -74,22 +71,22 @@ def phasor(mag, ang=0):
 
     Examples
     --------
-    >>> import electricpy as ep
-    >>> ep.phasor(67, 120) # 67 volts at angle 120 degrees
+    >>> from electricpy import phasors
+    >>> phasor(67, 120) # 67 volts at angle 120 degrees
     (-33.499999999999986+58.02370205355739j)
 
     See Also
     --------
     electricpy.cprint:              Complex Variable Printing Function
-    electricpy.phasor.phasorlist:   Phasor Generator for List or Array
-    electricpy.phasor.phasorz:      Impedance Phasor Generator
-    electricpy.phasor.phs:          Complex Phase Angle Generator
+    electricpy.phasors.phasorlist:   Phasor Generator for List or Array
+    electricpy.phasors.phasorz:      Impedance Phasor Generator
+    electricpy.phasors.phs:          Complex Phase Angle Generator
     """
     # Test for Tuple/List Arg
     if isinstance(mag, (tuple, list, _np.ndarray)):
         ang = mag[1]
         mag = mag[0]
-    return (_c.rect(mag, _np.radians(ang)))
+    return _c.rect(mag, _np.radians(ang))
 
 
 # Define Impedance Conversion function
@@ -132,13 +129,13 @@ def phasorz(C=None, L=None, freq=60, complex=True):
     """
     w = 2 * _np.pi * freq
     # C Given in ohms, return as Z
-    if (C != None):
+    if C is not None:
         Z = -1 / (w * C)
     # L Given in ohms, return as Z
-    if (L != None):
+    if L is not None:
         Z = w * L
     # If asked for imaginary number
-    if (complex):
+    if complex:
         Z *= 1j
     return Z
 
@@ -162,33 +159,33 @@ def phasorlist(arr):
 
     Returns
     -------
-    phasor:     complex
-                Standard Pythonic Complex Representation of
-                the specified voltage or current.
+    list[complex]:  List of standard Pythonic complex representation of the
+                    specified voltage or current.
 
     Examples
     --------
     >>> import numpy as np
-    >>> from electricpy import phasor
+    >>> from electricpy import phasors
     >>> voltages = np.array([
     ...     [67,0],
     ...     [67,-120],
     ...     [67,120]
     ... ])
-    >>> Vset = phasor.phasorlist( voltages )
+    >>> Vset = phasors.phasorlist( voltages )
     >>> print(Vset)
 
     See Also
     --------
     electricpy.cprint:              Complex Variable Printing Function
-    electricpy.phasor.phasor:       Phasor Generating Function
-    electricpy.phasor.vectarray:    Magnitude/Angle Array Pairing Function
-    electricpy.phasor.phasorz:      Impedance Phasor Generator
+    electricpy.phasors.phasor:       Phasor Generating Function
+    electricpy.phasors.vectarray:    Magnitude/Angle Array Pairing Function
+    electricpy.phasors.phasorz:      Impedance Phasor Generator
     """
     # Use List Comprehension to Process
 
     # Return Array
     return _np.array([phasor(i) for i in arr])
+
 
 # Define Vector Array Generator
 def vectarray(arr, degrees=True, flatarray=False):
@@ -223,8 +220,8 @@ def vectarray(arr, degrees=True, flatarray=False):
 
     See Also
     --------
-    electricpy.phasor.phasor:       Phasor Generating Function
-    electricpy.phasor.phasorlist:   Phasor Generator for List or Array
+    electricpy.phasors.phasor:       Phasor Generating Function
+    electricpy.phasors.phasorlist:   Phasor Generator for List or Array
     """
     # Iteratively Append Arrays to the Base
 
@@ -241,6 +238,7 @@ def vectarray(arr, degrees=True, flatarray=False):
     if not flatarray:
         polararr = _np.reshape(polararr, (-1, 2))
     return polararr
+
 
 # Define Phasor Data Generator
 def phasordata(mn, mx=None, npts=1000, mag=1, ang=0, freq=60,
@@ -300,8 +298,9 @@ def phasordata(mn, mx=None, npts=1000, mag=1, ang=0, freq=60,
         dataset.append(t)
     # Return Dataset
     if len(dataset) == 1:
-        return (dataset[0])
-    return (dataset)
+        return dataset[0]
+    return dataset
+
 
 # Define Complex Composition Function
 def compose(*arr):
@@ -354,7 +353,7 @@ def compose(*arr):
         if length != 2:
             raise ValueError("Invalid Array Size, Saw Length of " + str(length))
         # Valid Size, Calculate and Return
-        return (arr[0] + 1j * arr[1])
+        return arr[0] + 1j * arr[1]
 
 
 # Define Parallel Impedance Adder
@@ -387,150 +386,25 @@ def parallelz(*args):
         Z = args[0]  # Only One Tuple Provided
         try:
             L = len(Z)
-            if (L == 1):
+            if L == 1:
                 Zp = Z[0]  # Only one impedance, burried in tuple
             else:
                 # Inversely add the first two elements in tuple
                 Zp = (1 / Z[0] + 1 / Z[1]) ** (-1)
                 # If there are more than two elements, add them all inversely
-                if (L > 2):
+                if L > 2:
                     for i in range(2, L):
                         Zp = (1 / Zp + 1 / Z[i]) ** (-1)
-        except:
+        except ValueError or IndexError:
             Zp = Z  # Only one impedance
     else:
         Z = args  # Set of Args acts as Tuple
         # Inversely add the first two elements in tuple
         Zp = (1 / Z[0] + 1 / Z[1]) ** (-1)
         # If there are more than two elements, add them all inversely
-        if (L > 2):
+        if L > 2:
             for i in range(2, L):
                 Zp = (1 / Zp + 1 / Z[i]) ** (-1)
-    return (Zp)
-
-# Define Phasor Plot Generator
-def phasorplot(phasor, title="Phasor Diagram", legend=False, bg=None,
-            colors=None, radius=None, linewidth=None, size=None,
-            label=False, labels=False, tolerance=None):
-    """
-    Phasor Plotting Function.
-
-    This function is designed to plot a phasor-diagram with angles in degrees
-    for up to 12 phasor sets (more may be used if additional colors are set).
-    Phasors must be passed as a complex number set, (e.g.
-    [ m+ja, m+ja, m+ja, ... , m+ja ] ).
-
-    Examples
-    --------
-    >>> import numpy as np
-    >>> from electricpy import phasor
-    >>> voltages = np.array([
-    ...     [67,0],
-    ...     [45,-120],
-    ...     [52,120]
-    ... ])
-    >>> plt = phasor.phasorlist( voltages, colors=["red", "green", "blue"] )
-    >>> plt.show()
-
-    .. image:: /static/PhasorPlot.png
-
-    Parameters
-    ----------
-    phasor:     list of complex
-                The set of phasors to be plotted.
-    title:      string, optional
-                The Plot Title, default="Phasor Diagram"
-    legend:     bool, optional
-                Control argument to enable displaying the legend, must be passed
-                as an array or list of strings. `label` and `labels` are mimic-
-                arguments and will perform similar operation, default=False
-    bg:         string, optional
-                Background-Color control, default="#d5de9c"
-    radius:     float, optional
-                The diagram radius, unless specified, automatically scales
-    colors:     list of str, optional
-                List of hexidecimal color strings denoting the line colors to
-                use.
-    size:       float, optional
-                Control argument for figure size. default=None
-    linewidth:  float, optional
-                Control argument to declare the line thickness. default=None
-    tolerance:  float, optional
-                Minimum magnitude to plot, anything less than tolerance will be
-                plotted as a single point at the origin, by default, the
-                tolerance is scaled to be 1/25-th the maximum radius. To disable
-                the tolerance, simply provide either False or -1.
-
-    Returns
-    -------
-    matplotlib.pyplot:  Plotting object to be used for additional configuration
-                        or plotting.
-    """
-    # Load Complex Values if Necessary
-    try:
-        len(phasor)
-    except TypeError:
-        phasor = [phasor]
-    # Manage Colors
-    if colors == None:
-        colors = [
-            "#FF0000", "#800000", "#FFFF00", "#808000", "#00ff00","#008000",
-            "#00ffff", "#008080", "#0000ff", "#000080", "#ff00ff", "#800080"
-        ]
-    # Scale Radius
-    if radius == None:
-        radius = _np.abs(phasor).max()
-    # Set Tolerance
-    if tolerance == None:
-        tolerance = radius / 25
-    elif tolerance == False:
-        tolerance = -1
-    # Set Background Color
-    if bg == None:
-        bg = "#FFFFFF"
-    # Load labels if handled in other argument
-    if label != False:
-        legend = label
-    if labels != False:
-        legend = labels
-    # Check for more phasors than colors
-    numphs = len(phasor)
-    numclr = len(colors)
-    if numphs > numclr:
-        raise ValueError(
-            "ERROR: Too many phasors provided. Specify more line colors."
-        )
-
-    if size == None:
-        # Force square figure and square axes
-        width, height = _matplotlib.rcParams['figure.figsize']
-        size = min(width, height)
-    # Make a square figure
-    fig = _plt.figure(figsize=(size, size))
-    ax = fig.add_axes([0.1, 0.1, 0.8, 0.8], polar=True, facecolor=bg)
-    _plt.grid(True)
-
-    # Plot the diagram
-    _plt.title(title + "\n")
-    handles = _np.array([])  # Empty array for plot handles
-    for i in range(numphs):
-        mag, ang_r = _c.polar(phasor[i])
-        # Plot with labels
-        if legend != False:
-            if mag > tolerance:
-                hand = _plt.arrow(0, 0, ang_r, mag, color=colors[i],
-                                label=legend[i], linewidth=linewidth)
-            else:
-                hand = _plt.plot(0, 0, 'o', markersize=linewidth * 3,
-                                label=legend[i], color=colors[i])
-            handles = _np.append(handles, [hand])
-        # Plot without labels
-        else:
-            _plt.arrow(0, 0, ang_r, mag, color=colors[i], linewidth=linewidth)
-    if legend != False: _plt.legend((handles), legend)
-    # Set Minimum and Maximum Radius Terms
-    ax.set_rmax(radius)
-    ax.set_rmin(0)
-    return _plt
+    return Zp
 
 # END

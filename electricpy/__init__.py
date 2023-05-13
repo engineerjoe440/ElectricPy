@@ -12,29 +12,21 @@ to aid in scientific calculations.
 """
 ################################################################################
 
-# Define Module Specific Variables
-_name_ = "electricpy"
-_version_ = "0.2.2"
-__version__ = _version_  # Alias Version for User Ease
 
-# Version Breakdown:
-# MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
-
-# Import Submodules
-from .constants import *
-from .phasor import compose, parallelz
-from .phasor import phasorz as impedance
-
-# Import Supporting Modules
-import numpy as _np
-import matplotlib.pyplot as _plt
 import cmath as _c
-from scipy.optimize import fsolve as _fsolve
-from warnings import showwarning as _showwarning
 from inspect import getframeinfo as _getframeinfo
 from inspect import stack as _stack
+from warnings import showwarning as _showwarning
+
+import matplotlib.pyplot as _plt
+import numpy as _np
 from scipy.integrate import quad as integrate
 
+from .version import NAME, VERSION
+from .constants import *
+from .phasors import phasor, parallelz
+
+__version__ = VERSION
 
 # Define Cycle Time Function
 def tcycle(ncycles=1, freq=60):
@@ -57,20 +49,42 @@ def tcycle(ncycles=1, freq=60):
     -------
     t:          float
                 Total time for *ncycles*
+
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> ep.tcycle(1, freq=60) #Value of ncycles=1 & freq=60
+    0.016666666666666666
+    >>> ep.tcycle(1, freq=50) #Value of ncycles=1 & freq=50
+    0.02
     """
     # Condition Inputs
+    if isinstance(ncycles, _np.ndarray) and isinstance(freq, _np.ndarray):
+        if ncycles.shape != freq.shape:
+            raise ValueError("ncycles and freq must be the same shape")
+
+    elif isinstance(ncycles, list) and isinstance(freq, list):
+        if len(ncycles) != len(freq):
+            raise ValueError("ncycles and freq must be the same length")
+
     ncycles = _np.asarray(ncycles)
     freq = _np.asarray(freq)
+    if 0 in freq:
+        raise ZeroDivisionError("Frequency must not be 0")
+    if not (freq > 0).all():
+        # frequency must be postive value
+        raise ValueError("Frequency must be postive value")
     # Evaluate the time for ncycles
     time = ncycles / freq
     # Return
-    if len(time) == 1:
-        return (time[0])
+    if isinstance(time, _np.ndarray) and len(time) == 1:
+        return time[0]
     else:
-        return (time)
-
+        return time
 
 # Define Reactance Calculator
+
+
 def reactance(z, freq=60, sensetivity=1e-12):
     r"""
     Capacitance/Inductance from Impedance.
@@ -113,33 +127,39 @@ def reactance(z, freq=60, sensetivity=1e-12):
 
     Returns
     -------
-    out:            float
-                    Capacitance or Inductance of Impedance
+    float:          Capacitance or Inductance of Impedance
+
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> ep.reactance(z=5) # ohms - inductive impedance
+    0.0132629...
     """
     # Evaluate Omega
     w = 2 * _np.pi * freq
     # Input is Complex
     if isinstance(z, complex):
         # Test for Resistance
-        if (abs(z.real) > sensetivity):
+        if abs(z.real) > sensetivity:
             R = z.real
         else:
             R = 0
-        if (z.imag > 0):
+        if z.imag > 0:
             out = z / (w * 1j)
         else:
             out = 1 / (w * 1j * z)
         out = abs(out)
         # Combine with resistance if present
-        if (R != 0): out = (R, out)
+        if R != 0:
+            out = (R, out)
     else:
-        if (z > 0):
-            out = z / (w)
+        if z > 0:
+            out = z / w
         else:
             out = 1 / (w * z)
         out = abs(out)
     # Return Output
-    return (out)
+    return out
 
 
 # Define display function
@@ -196,25 +216,27 @@ def cprint(val, unit=None, label=None, title=None,
 
     Examples
     --------
+    >>> import numpy as np
     >>> import electricpy as ep
-    >>> v = ep.phasor(67, 120)
+    >>> from electricpy import phasors
+    >>> v = phasor(67, 120)
     >>> ep.cprint(v)
     67.0 ∠ 120.0°
     >>> voltages = np.array([[67,0],
-                             [67,-120],
-                             [67,120]])
-    >>> Vset = ep.phasorlist( voltages )
+    ...                      [67,-120],
+    ...                      [67,120]])
+    >>> Vset = ep.phasors.phasorlist( voltages )
     >>> ep.cprint(Vset)
-    [['67.0 ∠ 0.0°']
-    ['67.0 ∠ -120.0°']
-    ['67.0 ∠ 120.0°']]
+    67.0 ∠ 0.0°
+    67.0 ∠ -120.0°
+    67.0 ∠ 120.0°
 
 
     See Also
     --------
-    electricpy.phasor.phasor:       Phasor Generating Function
-    electricpy.phasor.phasorlist:   Phasor Generating Function for Lists/Arrays
-    electricpy.phasor.phasorz:      Impedance Phasor Generator
+    electricpy.phasors.phasor:       Phasor Generating Function
+    electricpy.phasors.phasorlist:   Phasor Generating Function for Lists/Arrays
+    electricpy.phasors.phasorz:      Impedance Phasor Generator
     """
     # Use depricated `round`
     if round != 3:
@@ -231,7 +253,7 @@ def cprint(val, unit=None, label=None, title=None,
         shp = val.shape
         try:
             row, col = shp  # Interpret Shape of Object
-        except:
+        except (ValueError, IndexError):
             row = shp[0]
             col = 1
         sz = val.size
@@ -249,7 +271,7 @@ def cprint(val, unit=None, label=None, title=None,
             for _ in range(sz):
                 label = _np.append(label, [tmp])
         # Handle Lack of Label
-        elif label == None:
+        elif label is None:
             label = _np.array([])
             for _ in range(sz):
                 label = _np.append(label, None)
@@ -270,7 +292,7 @@ def cprint(val, unit=None, label=None, title=None,
             for _ in range(sz):
                 unit = _np.append(unit, [tmp])
         # Handle Lack of Unit
-        elif unit == None:
+        elif unit is None:
             unit = _np.array([])
             for _ in range(sz):
                 unit = _np.append(unit, None)
@@ -290,10 +312,10 @@ def cprint(val, unit=None, label=None, title=None,
             mag = _np.around(mag, decimals)  # Round
             ang = _np.around(ang, decimals)  # Round
             strg = ""
-            if _label != None:
+            if _label is not None:
                 strg += _label + " "
             strg += str(mag) + " ∠ " + str(ang) + "°"
-            if _unit != None:
+            if _unit is not None:
                 strg += " " + _unit
             printarr = _np.append(printarr, strg)
             numarr = _np.append(numarr, [mag, ang])
@@ -302,7 +324,7 @@ def cprint(val, unit=None, label=None, title=None,
         numarr = _np.reshape(numarr, (sz, 2))
         # Print
         if printval and row == 1:
-            if title != None:
+            if title is not None:
                 print(title)
             print(strg)
         elif printval and pretty:
@@ -313,11 +335,11 @@ def cprint(val, unit=None, label=None, title=None,
                     strg += '\n'
                 strg += str(i[0])
                 start = False
-            if title != None:
+            if title is not None:
                 print(title)
             print(strg)
         elif printval:
-            if title != None:
+            if title is not None:
                 print(title)
             print(printarr)
         # Return if Necessary
@@ -325,23 +347,23 @@ def cprint(val, unit=None, label=None, title=None,
             return (numarr)
     elif isinstance(val, (int, float, complex)):
         # Handle Invalid Unit/Label
-        if unit != None and not isinstance(unit, str):
+        if unit is not None and not isinstance(unit, str):
             raise ValueError("Invalid Unit Type for Value")
-        if label != None and not isinstance(label, str):
+        if label is not None and not isinstance(label, str):
             raise ValueError("Invalid Label Type for Value")
         mag, ang_r = _c.polar(val)  # Convert to polar form
         ang = _np.degrees(ang_r)  # Convert to degrees
         mag = _np.around(mag, decimals)  # Round
         ang = _np.around(ang, decimals)  # Round
         strg = ""
-        if label != None:
+        if label is not None:
             strg += label + " "
         strg += str(mag) + " ∠ " + str(ang) + "°"
-        if unit != None:
+        if unit is not None:
             strg += " " + unit
         # Print values (by default)
         if printval:
-            if title != None:
+            if title is not None:
                 print(title)
             print(strg)
         # Return values when requested
@@ -395,10 +417,16 @@ def phaseline(VLL=None, VLN=None, Iline=None, Iphase=None, realonly=None,
     complex:    bool, optional, DEPRECATED
                 Control to return value in complex form, refer to
                 `realonly` instead. default=None
+
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> ep.cprint(ep.phaseline(VLL=(13.8*ep.k))) # 13.8kV
+    7967.434 ∠ -30.0°
     """
     # Monitor for deprecated input
     if 'complex' in kwargs.keys():
-        if realonly == None:
+        if realonly is None:
             realonly = not kwargs['complex']
         caller = _getframeinfo(_stack()[1][0])
         # Demonstrate Deprecation Warning
@@ -428,10 +456,10 @@ def phaseline(VLL=None, VLN=None, Iline=None, Iphase=None, realonly=None,
               "given.")
         return (0)
     # Auto-detect Complex Values
-    if isinstance(output, complex) and realonly == None:
+    if isinstance(output, complex) and realonly is None:
         realonly = False
     # Return as complex only when requested
-    if realonly == True:
+    if realonly:
         return abs(output)
     return output
 
@@ -474,31 +502,39 @@ def powerset(P=None, Q=None, S=None, PF=None, find=''):
             Calculated Apparent Power Magnitude
     PF:     float
             Calculated Power Factor
+
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> ep.powerset(P=400, Q=300)
+    (400, 300, 500.0, 0.8)
+    >>> ep.powerset(P=400, Q=300, find="PF")
+    0.8
     """
     # Given P and Q
-    if (P != None) and (Q != None):
+    if (P is not None) and (Q is not None):
         S = _np.sqrt(P ** 2 + Q ** 2)
         PF = P / S
         if Q < 0:
             PF = -PF
     # Given S and PF
-    elif (S != None) and (PF != None):
+    elif (S is not None) and (PF is not None):
         P = abs(S * PF)
         Q = _np.sqrt(S ** 2 - P ** 2)
         if PF < 0:
             Q = -Q
     # Given P and PF
-    elif (P != None) and (PF != None):
+    elif (P is not None) and (PF is not None):
         S = P / PF
         Q = _np.sqrt(S ** 2 - P ** 2)
         if PF < 0:
             Q = -Q
     # Given P and S
-    elif (P != None) and (S != None):
+    elif (P is not None) and (S is not None):
         Q = _np.sqrt(S ** 2 - P ** 2)
         PF = P / S
     # Given Q and S
-    elif (Q != None) and (S != None):
+    elif (Q is not None) and (S is not None):
         P = _np.sqrt(S ** 2 - Q ** 2)
         PF = P / S
     else:
@@ -507,15 +543,16 @@ def powerset(P=None, Q=None, S=None, PF=None, find=''):
     # Return
     find = find.upper()
     if find == 'P':
-        return (P)
+        return P
     elif find == 'Q':
-        return (Q)
+        return Q
     elif find == 'S':
-        return (S)
+        return S
     elif find == 'PF':
-        return (PF)
+        return PF
     else:
-        return (P, Q, S, PF)
+        return P, Q, S, PF
+
 
 def slew_rate(V=None, freq=None, SR=None, find=''):
     """
@@ -545,177 +582,27 @@ def slew_rate(V=None, freq=None, SR=None, find=''):
     SR:     float
             Calculated slew rate
     """
-    if V!=None and freq!=None:
-        SR = 2*_np.pi*V*freq
-    elif freq!=None and SR!=None:
-        V = SR/(2*_np.pi*freq)
-    elif V!=None and SR!=None:
-        freq = SR/(2*_np.pi*V)
+    if V is not None and freq is not None:
+        SR = 2 * _np.pi * V * freq
+    elif freq is not None and SR is not None:
+        V = SR / (2 * _np.pi * freq)
+    elif V is not None and SR is not None:
+        freq = SR / (2 * _np.pi * V)
     else:
         raise ValueError("ERROR: Invalid Parameters or too few" +
-                        " parameters given to calculate.")
+                         " parameters given to calculate.")
     if find == 'V':
-        return (V)
+        return V
     elif find == 'freq':
-        return (freq)
+        return freq
     elif find == 'SR':
-        return (SR)
+        return SR
     else:
-        return (V, freq, SR)
-
-# Define Power Triangle Function
-def powertriangle(P=None, Q=None, S=None, PF=None, color="red",
-                  text="Power Triangle", printval=False):
-    """
-    Power Triangle Plotting Function.
-
-    This function is designed to draw a power triangle given
-    values for the complex power system.
-
-    .. image:: /static/PowerTriangle.png
-
-    Parameters
-    ----------
-    P:          float
-                Real Power, unitless, default=None
-    Q:          float
-                Reactive Power, unitless, default=None
-    S:          float
-                Apparent Power, unitless, default=None
-    PF:         float
-                Power Factor, unitless, provided as a decimal value, lagging is
-                positive, leading is negative; default=None
-    color:      string, optional
-                The color of the power triangle lines, default="red"
-    text:       string, optional
-                The title of the power triangle plot, default="Power Triangle"
-    printval:   bool, optional
-                Control argument to allow the numeric values to be printed on
-                the plot, default="False"
-
-    Returns
-    -------
-    matplotlib.pyplot:  Plotting object to be used for additional configuration
-                        or plotting.
-    """
-    # Calculate all values if not all are provided
-    if (P == None or Q == None or S == None or PF == None):
-        P, Q, S, PF = powerset(P, Q, S, PF)
-
-    # Generate Lines
-    Plnx = [0, P]
-    Plny = [0, 0]
-    Qlnx = [P, P]
-    Qlny = [0, Q]
-    Slnx = [0, P]
-    Slny = [0, Q]
-
-    # Plot Power Triangle
-    _plt.figure(1)
-    _plt.title(text)
-    _plt.plot(Plnx, Plny, color=color)
-    _plt.plot(Qlnx, Qlny, color=color)
-    _plt.plot(Slnx, Slny, color=color)
-    _plt.xlabel("Real Power (W)")
-    _plt.ylabel("Reactive Power (VAR)")
-    mx = max(abs(P), abs(Q))
-
-    if P > 0:
-        _plt.xlim(0, mx * 1.1)
-        x = mx
-    else:
-        _plt.xlim(-mx * 1.1, 0)
-        x = -mx
-    if Q > 0:
-        _plt.ylim(0, mx * 1.1)
-        y = mx
-    else:
-        _plt.ylim(-mx * 1.1, 0)
-        y = -mx
-    if PF > 0:
-        PFtext = " Lagging"
-    else:
-        PFtext = " Leading"
-    text = "P:   " + str(P) + " W\n"
-    text = text + "Q:   " + str(Q) + " VAR\n"
-    text = text + "S:   " + str(S) + " VA\n"
-    text = text + "PF:  " + str(abs(PF)) + PFtext + "\n"
-    text = text + "ΘPF: " + str(_np.degrees(_np.arccos(PF))) + "°" + PFtext
-    # Print all values if asked to
-    if printval:
-        _plt.text(x / 20, y * 4 / 5, text, color=color)
-    return _plt
-
-
-# Define Transformer Short-Circuit/Open-Circuit Function
-def transformertest(Poc=False, Voc=False, Ioc=False, Psc=False, Vsc=False,
-                    Isc=False):
-    """
-    Electrical Transformer Rated Test Evaluator.
-
-    This function will determine the non-ideal circuit components of
-    a transformer (Req and Xeq, or Rc and Xm) given the test-case
-    parameters for the open-circuit test and/or the closed-circuit
-    test. Requires one or both of two sets: { Poc, Voc, Ioc }, or
-    { Psc, Vsc, Isc }.
-    All values given must be given as absolute value, not complex.
-    All values returned are given with respect to primary.
-
-    Parameters
-    ----------
-    Poc:    float, optional
-            The open-circuit measured power (real power), default=None
-    Voc:    float, optional
-            The open-circuit measured voltage (measured on X),
-            default=None
-    Ioc:    float, optional
-            The open-circuit measured current (measured on primary),
-            default=None
-    Psc:    float, optional
-            The short-circuit measured power (real power), default=None
-    Vsc:    float, optional
-            The short-circuit measured voltage (measured on X),
-            default=None
-    Isc:    float, optional
-            The short-circuit measured current (measured on X),
-            default=None
-
-    Returns
-    -------
-    {Req,Xeq,Rc,Xm}:    Given all optional args
-    {Rc, Xm}:           Given open-circuit parameters
-    {Req, Xeq}:         Given short-circuit parameters
-    """
-    SC = False
-    OC = False
-    # Given Open-Circuit Values
-    if (Poc != None) and (Voc != None) and (Ioc != None):
-        PF = Poc / (Voc * Ioc)
-        Y = _c.rect(Ioc / Voc, -_np.arccos(PF))
-        Rc = 1 / Y.real
-        Xm = -1 / Y.imag
-        OC = True
-    # Given Short-Circuit Values
-    if (Psc != None) and (Vsc != None) and (Isc != None):
-        PF = Psc / (Vsc * Isc)
-        Zeq = _c.rect(Vsc / Isc, _np.arccos(PF))
-        Req = Zeq.real
-        Xeq = Zeq.imag
-        SC = True
-    # Return All if Found
-    if OC and SC:
-        return (Req, Xeq, Rc, Xm)
-    elif OC:
-        return (Rc, Xm)
-    elif SC:
-        return (Req, Xeq)
-    else:
-        print("An Error Was Encountered.\n" +
-              "Not enough arguments were provided.")
+        return V, freq, SR
 
 
 # Define Non-Linear Power Factor Calculator
-def nlinpf(PFtrue=False, PFdist=False, PFdisp=False):
+def non_linear_pf(PFtrue=False, PFdist=False, PFdisp=False):
     """
     Non-Linear Power Factor Evaluator.
 
@@ -723,6 +610,8 @@ def nlinpf(PFtrue=False, PFdist=False, PFdisp=False):
     given the other two. These particular unknowns are the arguments
     and as such, they are described in the representative sections
     below.
+
+    .. note:: Also available as `nlinpf`.
 
     Parameters
     ----------
@@ -738,26 +627,31 @@ def nlinpf(PFtrue=False, PFdist=False, PFdisp=False):
     float:  This function will return the unknown variable from the previously
             described set of variables.
     """
-    if (PFtrue != None and PFdist != None and PFdisp != None):
+    if PFtrue is not None and PFdist is not None and PFdisp is not None:
         raise ValueError("ERROR: Too many constraints, no solution.")
-    elif (PFdist != None and PFdisp != None):
-        return (PFdist * PFdisp)
-    elif (PFtrue != None and PFdisp != None):
-        return (PFtrue / PFdisp)
-    elif (PFtrue != None and PFdist != None):
-        return (PFtrue / PFdist)
-    else:
-        raise ValueError("ERROR: Function requires at least two arguments.")
+    if PFdist is not None and PFdisp is not None:
+        return PFdist * PFdisp
+    if PFtrue is not None and PFdisp is not None:
+        return PFtrue / PFdisp
+    if PFtrue is not None and PFdist is not None:
+        return PFtrue / PFdist
+    raise ValueError("ERROR: Function requires at least two arguments.")
+
+
+# Alias to original Name
+nlinpf = non_linear_pf
 
 
 # Define Short-Circuit RL Current Calculator
-def iscrl(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
+def short_circuit_current(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
     """
     Short-Circuit-Current (ISC) Calculator.
 
     The Isc-RL function (Short Circuit Current for RL Circuit)
     is designed to calculate the short-circuit current for an
     RL circuit.
+
+    .. note:: Also available as `iscrl`.
 
     Parameters
     ----------
@@ -788,7 +682,7 @@ def iscrl(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
     Opt 3 - (Iac):              The RMS current without DC offset.
     """
     # Calculate omega, theta, R, and X
-    if (f != None):
+    if f is not None:
         omega = 2 * _np.pi * f
     else:
         omega = None
@@ -797,24 +691,24 @@ def iscrl(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
     theta = _np.arctan(X / R)
 
     # If Maximum Current is Desired and No alpha provided
-    if (mxcurrent and alpha == None):
+    if mxcurrent and alpha is None:
         alpha = theta - _np.pi / 2
-    elif (mxcurrent and alpha != None):
+    elif mxcurrent and alpha is not None:
         raise ValueError("ERROR: Inappropriate Arguments Provided.\n" +
                          "Not both mxcurrent and alpha can be provided.")
 
-    # Calculate Asymmetrical (total) Current if t != None
-    if (t != None and f != None):
+    # Calculate Asymmetrical (total) Current if t is not None
+    if t is not None and f is not None:
         # Calculate RMS if none of the angular values are provided
-        if (alpha == None and omega == None):
+        if alpha is None and omega is None:
             # Calculate tau
             tau = t / (1 / 60)
             K = _np.sqrt(1 + 2 * _np.exp(-4 * _np.pi * tau / (X / R)))
             IAC = abs(V / Z)
             Irms = K * IAC
             # Return Values
-            return (Irms, IAC, K)
-        elif (alpha == None or omega == None):
+            return Irms, IAC, K
+        elif alpha is None or omega is None:
             raise ValueError("ERROR: Inappropriate Arguments Provided.")
         # Calculate Instantaneous if all angular values provided
         else:
@@ -826,16 +720,21 @@ def iscrl(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
             T = X / (2 * _np.pi * f * R)  # seconds
             # Calculate iAC and iDC
             iAC = _np.sqrt(2) * V / Z * _np.sin(omega * t + alpha - theta)
-            iDC = -_np.sqrt(2) * V / Z * _np.sin(alpha - theta) * _np.exp(-t / T)
+            iDC = -_np.sqrt(2) * V / Z * \
+                _np.sin(alpha - theta) * _np.exp(-t / T)
             i = iAC + iDC
             # Return Values
-            return (i, iAC, iDC, T)
-    elif ((t != None and f == None) or (t == None and f != None)):
+            return i, iAC, iDC, T
+    elif (t is not None and f is None) or (t is None and f is not None):
         raise ValueError("ERROR: Inappropriate Arguments Provided.\n" +
                          "Must provide both t and f or neither.")
     else:
         Iac = abs(V / Z)
-        return (Iac)
+        return Iac
+
+
+# Alias to original Name
+iscrl = short_circuit_current
 
 
 # Define Voltage Divider Calculator
@@ -869,14 +768,22 @@ def voltdiv(Vin, R1, R2, Rload=None):
     -------
     Vout:   float
             The Output voltage as measured across R2 and/or Rload
+
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> ep.voltdiv(Vin=12, R1=4, R2=8)
+    8.0
+    >>> ep.voltdiv(Vin=12, R1=6, R2=12, Rload=12) # R2 and Rload are parallel
+    6.0
     """
     # Determine whether Rload is given
-    if (Rload == None):  # No Load Given
+    if Rload is None:  # No Load Given
         Vout = Vin * R2 / (R1 + R2)
     else:  # Load was given
-        Rp = R2*Rload/(R2 + Rload)
+        Rp = R2 * Rload / (R2 + Rload)
         Vout = Vin * Rp / (R1 + Rp)
-    return (Vout)
+    return Vout
 
 
 # Define Current Divider Calculator
@@ -910,6 +817,15 @@ def curdiv(Ri, Rset, Vin=None, Iin=None, Vout=False, combine=True):
     Opt1 - Ii:          The Current through the resistor (impedance) of interest
     Opt2 - (Ii,Vi):     The afore mentioned current, and voltage across the
                         resistor (impedance) of interest
+
+    Examples
+    --------
+    >>> from electricpy.constants import k
+    >>> import electricpy as ep
+    >>> ep.curdiv(Ri=1*k, Rset=(1*k, 1*k), Iin=12) # 12-amps, split three ways
+    4.0
+    >>> ep.curdiv(Ri=1*k, Rset=(1*k, 1*k), Iin=12, Vout=True) # Find Voltage
+    (4.0, 4000.0)
     """
     # Validate Tuple
     if not isinstance(Rset, tuple):
@@ -921,20 +837,21 @@ def curdiv(Ri, Rset, Vin=None, Iin=None, Vout=False, combine=True):
     else:
         Rtot = parallelz(Rset)
     # Determine Whether Input was given as Voltage or Current
-    if (Vin != None and Iin == None):  # Vin Provided
+    if Vin is not None and Iin is None:  # Vin Provided
         Iin = Vin / Rtot  # Calculate total current
         Ii = Iin * Rtot / Ri  # Calculate the current of interest
-    elif (Vin == None and Iin != None):  # Iin provided
+    elif Vin is None and Iin is not None:  # Iin provided
         Ii = Iin * Rtot / Ri  # Calculate the current of interest
     else:
         raise ValueError("ERROR: Too many or too few constraints provided.")
-    if (Vout):  # Asked for voltage across resistor of interest
+    if Vout:  # Asked for voltage across resistor of interest
         Vi = Ii * Ri
-        return (Ii, Vi)
+        return Ii, Vi
     else:
-        return (Ii)
+        return Ii
 
-#Induction Machine Slip
+
+# Induction Machine Slip
 def induction_machine_slip(Nr, freq=60, poles=4):
     r"""
     Induction Machine slip calculator.
@@ -953,11 +870,12 @@ def induction_machine_slip(Nr, freq=60, poles=4):
     -------
     slip: float, Induction Machine forward Slip
     """
-    Ns = (120*freq)/poles
-    return (Ns - Nr)/(Ns)
+    Ns = (120 * freq) / poles
+    return (Ns - Nr) / (Ns)
+
 
 # Define Function to Evaluate Resistance Needed for LED
-def led_resistor(Vsrc, Vfwd = 2, Ifwd = 20):
+def led_resistor(Vsrc, Vfwd=2, Ifwd=20):
     r"""
     LED Resistor Calculator.
 
@@ -1008,14 +926,13 @@ def instpower(P, Q, t, freq=60):
 
     Returns
     -------
-    Pinst:  float
-            Instantaneous Power at time t
+    float:  Instantaneous Power at time t.
     """
     # Evaluate omega
     w = 2 * _np.pi * freq
     # Calculate
     Pinst = P + P * _np.cos(2 * w * t) - Q * _np.sin(2 * w * t)
-    return (Pinst)
+    return Pinst
 
 
 # Define Delta-Wye Impedance Network Calculator
@@ -1055,8 +972,12 @@ def dynetz(delta=None, wye=None, round=None):
     wye-set:    tuple of float
                 Wye-Connected impedance values { Z1, Z2, Z3 }
     """
+    if delta is None and wye is None:
+        raise ValueError(
+            "ERROR: Either delta or wye impedances must be specified."
+        )
     # Determine which set of impedances was provided
-    if (delta != None and wye == None):
+    if delta is not None and wye is None:
         Z12, Z23, Z31 = delta  # Gather particular impedances
         Zsum = Z12 + Z23 + Z31  # Find Sum
         # Calculate Wye Impedances
@@ -1064,23 +985,22 @@ def dynetz(delta=None, wye=None, round=None):
         Z2 = Z12 * Z23 / Zsum
         Z3 = Z23 * Z31 / Zsum
         Zset = (Z1, Z2, Z3)
-        if round != None: Zset = _np.around(Zset, round)
-        return (Zset)  # Return Wye Impedances
-    elif (delta == None and wye != None):
+        if round is not None:
+            Zset = _np.around(Zset, round)
+        return Zset  # Return Wye Impedances
+    if delta is None and wye is not None:
         Z1, Z2, Z3 = wye  # Gather particular impedances
         Zmultsum = Z1 * Z2 + Z2 * Z3 + Z3 * Z1
         Z23 = Zmultsum / Z1
         Z31 = Zmultsum / Z2
         Z12 = Zmultsum / Z3
         Zset = (Z12, Z23, Z31)
-        if round != None: Zset = _np.around(Zset, round)
-        return (Zset)  # Return Delta Impedances
-    else:
-        raise ValueError(
-            "ERROR: Either delta or wye impedances must be specified."
-        )
+        if round is not None:
+            Zset = _np.around(Zset, round)
+        return Zset  # Return Delta Impedances
 
-#calculating impedance of bridge network
+
+# calculating impedance of bridge network
 def bridge_impedance(z1, z2, z3, z4, z5):
     r"""
     Bridge Impedance Calculator.
@@ -1095,7 +1015,7 @@ def bridge_impedance(z1, z2, z3, z4, z5):
     Parameters
     ----------
     z1:     [float, complex]
-            Bridge impedance 1
+            Bridge impedance 1iscrl
     z2:     [float, complex]
             Bridge impedance 2
     z3:     [float, complex]
@@ -1112,11 +1032,10 @@ def bridge_impedance(z1, z2, z3, z4, z5):
     """
     if z1 * z3 == z2 * z4:
         return (z1 + z2) * (z3 + z4) / (z1 + z2 + z3 + z4)
-    else:
-        za, zb, zc = dynetz(delta = (z1, z5, z4))
-        ze1 = zb + z2
-        ze2 = zc + z3
-        return za + (ze1*ze2)/(ze1+ze2)
+    za, zb, zc = dynetz(delta=(z1, z5, z4))
+    ze1 = zb + z2
+    ze2 = zc + z3
+    return za + (ze1 * ze2) / (ze1 + ze2)
 
 
 # Define Single Line Power Flow Calculator
@@ -1156,8 +1075,8 @@ def powerflow(Vsend, Vrec, Xline):
     Vr = abs(Vrec)
     dr = _c.phase(Vrec)
     # Calculate Power Flow
-    pflow = (Vs * Vr) / (Xline) * _np.sin(ds - dr)
-    return (pflow)
+    pflow = (Vs * Vr) / Xline * _np.sin(ds - dr)
+    return pflow
 
 
 # Define Impedance From Power and X/R
@@ -1200,14 +1119,14 @@ def zsource(S, V, XoR, Sbase=None, Vbase=None, perunit=True):
                 *perunit* argument is specified as False.
     """
     # Force Sbase and Vbase if needed
-    if Vbase == None:
+    if Vbase is None:
         Vbase = V
-    if Sbase == None:
+    if Sbase is None:
         Sbase = S
     # Prevent scaling if per-unit already applied
-    if Vbase == True:
+    if Vbase:
         Vbase = 1
-    if Sbase == True:
+    if Sbase:
         Sbase = 1
     # Set to per-unit
     Spu = S / Sbase
@@ -1220,13 +1139,13 @@ def zsource(S, V, XoR, Sbase=None, Vbase=None, perunit=True):
     if isinstance(nu, (list, _np.ndarray)):
         Zsource_pu = []
         for angle in nu:
-            Zsource_pu.append(phasor(Zsource_pu, angle))
+            Zsource_pu.append(phasors(Zsource_pu, angle))
     else:
-        Zsource_pu = phasor(Zsource_pu, nu)
+        Zsource_pu = phasors(Zsource_pu, nu)
     if not perunit:
         Zsource = Zsource_pu * Vbase ** 2 / Sbase
-        return (Zsource)
-    return (Zsource_pu)
+        return Zsource
+    return Zsource_pu
 
 
 # Define Impedance Decomposer
@@ -1260,7 +1179,7 @@ def zdecompose(Zmag, XoR):
     # Evaluate Reactance
     X = R * XoR
     # Return
-    return (R, X)
+    return R, X
 
 
 # Define Power Reactance Calculator
@@ -1324,8 +1243,8 @@ def powerimpedance(S, V, PF=None, parallel=False, terms=False):
     # Condition Inputs
     V = abs(V)
     # Test for Parallel Component Option and Evaluate
-    if isinstance(S, complex) or PF != None:
-        if PF != None:
+    if isinstance(S, complex) or PF is not None:
+        if PF is not None:
             # Evaluate Elements
             P, Q, S, PF = powerset(S=S, PF=PF)
         else:
@@ -1333,9 +1252,9 @@ def powerimpedance(S, V, PF=None, parallel=False, terms=False):
             Q = S.imag
         # Compute Elements
         if parallel:
-            Zp = V ** 2 / (3 * (P + 1j*Q))
+            Zp = V ** 2 / (3 * (P + 1j * Q))
         else:
-            Zp = V ** 2 / (P + 1j*Q)
+            Zp = V ** 2 / (P + 1j * Q)
         Z = _np.conjugate(Zp)
         R = Z.real
         X = Z.imag
@@ -1346,229 +1265,6 @@ def powerimpedance(S, V, PF=None, parallel=False, terms=False):
     # Not Complex (just R)
     R = V ** 2 / S
     return R
-
-
-# Define Cold-Junction-Voltage Calculator
-def coldjunction(Tcj, coupletype="K", To=None, Vo=None, P1=None, P2=None,
-                 P3=None, P4=None, Q1=None, Q2=None, round=None):
-    """
-    Thermocouple Cold-Junction Formula.
-
-    Function to calculate the expected cold-junction-voltage given
-    the temperature at the cold-junction.
-
-    Parameters
-    ----------
-    Tcj:        float
-                The temperature (in degrees C) that the junction is
-                currently subjected to.
-    coupletype: string, optional
-                Thermocouple Type, may be one of (B,E,J,K,N,R,S,T), default="K"
-    To:         float, optional
-                Temperature Constant used in Polynomial.
-    Vo:         float, optional
-                Voltage Constant used in Polynomial.
-    P1:         float, optional
-                Polynomial constant.
-    P2:         float, optional
-                Polynomial constant.
-    P3:         float, optional
-                Polynomial constant.
-    P4:         float, optional
-                Polynomial constant.
-    Q1:         float, optional
-                Polynomial constant.
-    Q2:         float, optional
-                Polynomial constant.
-    round:      int, optional
-                Control input to specify how many decimal places the result
-                should be rounded to, default=1.
-
-    Returns
-    -------
-    Vcj:        float
-                The calculated cold-junction-voltage in volts.
-    """
-    # Condition Inputs
-    coupletype = coupletype.upper()
-    # Validate Temperature Range
-    if coupletype == "B":
-        if not (0 < Tcj and Tcj < 70):
-            raise ValueError("Temperature out of range.")
-    else:
-        if not (-20 < Tcj and Tcj < 70):
-            raise ValueError("Temperature out of range.")
-    # Define Constant Lookup System
-    lookup = ["B", "E", "J", "K", "N", "R", "S", "T"]
-    if not (coupletype in lookup):
-        raise ValueError("Invalid Thermocouple Type")
-    index = lookup.index(coupletype)
-    # Define Constant Dictionary
-    # Load Data Into Terms
-    parameters = {}
-    for var in COLD_JUNCTION_DATA.keys():
-        parameters[var] = parameters.get(var, None) or COLD_JUNCTION_DATA[var][index]
-    To, Vo, P1, P2, P3, P4, Q1, Q2 = [parameters[key] for key in COLD_JUNCTION_KEYS]
-    # Define Formula Terms
-    tx = (Tcj - To)
-    num = tx * (P1 + tx * (P2 + tx * (P3 + P4 * tx)))
-    den = 1 + tx * (Q1 + Q2 * tx)
-    Vcj = Vo + num / den
-    # Round Value if Allowed
-    if round != None:
-        Vcj = _np.around(Vcj, round)
-    # Return in milivolts
-    return (Vcj * m)
-
-
-# Define Thermocouple Temperature Calculation
-def thermocouple(V, coupletype="K", fahrenheit=False, cjt=None, To=None,
-                 Vo=None, P1=None, P2=None, P3=None, P4=None, Q1=None, Q2=None,
-                 Q3=None, round=1):
-    """
-    Thermocouple Temperature Calculator.
-
-    Utilizes polynomial formula to calculate the temperature being monitored
-    by a thermocouple. Allows for various thermocouple types (B,E,J,K,N,R,S,T)
-    and various cold-junction-temperatures.
-
-    Parameters
-    ----------
-    V:          float
-                Measured voltage (in Volts)
-    coupletype: string, optional
-                Thermocouple Type, may be one of (B,E,J,K,N,R,S,T), default="K"
-    fahrenheit: bool, optional
-                Control to enable return value as Fahrenheit instead of Celsius,
-                default=False
-    cjt:        float, optional
-                Cold-Junction-Temperature
-    To:         float, optional
-                Temperature Constant used in Polynomial.
-    Vo:         float, optional
-                Voltage Constant used in Polynomial.
-    P1:         float, optional
-                Polynomial constant.
-    P2:         float, optional
-                Polynomial constant.
-    P3:         float, optional
-                Polynomial constant.
-    P4:         float, optional
-                Polynomial constant.
-    Q1:         float, optional
-                Polynomial constant.
-    Q2:         float, optional
-                Polynomial constant.
-    Q3:         float, optional
-                Polynomial constant.
-    round:      int, optional
-                Control input to specify how many decimal places the result
-                should be rounded to, default=1.
-
-    Returns
-    -------
-    T:          float
-                The temperature (by default in degrees C, but optionally in
-                degrees F) as computed by the function.
-    """
-    # Condition Inputs
-    coupletype = coupletype.upper()
-    V = V / m  # Scale volts to milivolts
-    # Determine Cold-Junction-Voltage
-    if cjt != None:
-        Vcj = coldjunction(cjt, coupletype, To, Vo, P1, P2, P3, P4, Q1, Q2, round)
-        V += Vcj / m
-    # Define Constant Lookup System
-    lookup = ["B", "E", "J", "K", "N", "R", "S", "T"]
-    if not (coupletype in lookup):
-        raise ValueError("Invalid Thermocouple Type")
-    # Determine Array Selection
-    vset = THERMO_COUPLE_VOLTAGES[coupletype]
-    if V < vset[0] * m:
-        raise ValueError("Voltage Below Lower Bound")
-    elif vset[0] <= V < vset[1]:
-        select = 0
-    elif vset[1] <= V < vset[2]:
-        select = 1
-    elif vset[2] <= V < vset[3]:
-        select = 2
-    elif vset[3] <= V < vset[4]:
-        select = 3
-    elif vset[4] <= V <= vset[5]:
-        select = 4
-    elif vset[5] < V:
-        raise ValueError("Voltage Above Upper Bound")
-    else:
-        raise ValueError("Internal Error!")
-    # Load Data Into Terms
-    parameters = {}
-    for i, key in enumerate(THERMO_COUPLE_KEYS):
-        parameters[key] = parameters.get(key, None) or THERMO_COUPLE_DATA[coupletype][i][select]
-    Vo, To, P1, P2, P3, P4, Q1, Q2, Q3 = [parameters[key] for key in THERMO_COUPLE_KEYS]
-    # Calculate Temperature in Degrees C
-    num = (V - Vo) * (P1 + (V - Vo) * (P2 + (V - Vo) * (P3 + P4 * (V - Vo))))
-    den = 1 + (V - Vo) * (Q1 + (V - Vo) * (Q2 + Q3 * (V - Vo)))
-    temp = To + num / den
-    # Return Temperature
-    if fahrenheit:
-        temp = (temp * 9 / 5) + 32
-    temp = _np.around(temp, round)
-    return (temp)
-
-
-# Define RTD Calculator
-def rtdtemp(RT, rtdtype="PT100", fahrenheit=False, Rref=None, Tref=None,
-            a=None, round=1):
-    """
-    RTD Temperature Calculator.
-
-    Evaluates the measured temperature based on the measured resistance
-    and the RTD type.
-
-    Parameters
-    ----------
-    RT:         float
-                The measured resistance (in ohms).
-    rtdtype:    string
-                RTD Type string, may be one of: (PT100, PT1000,
-                CU100, NI100, NI120, NIFE), default=PT100
-    fahrenheit: bool, optional
-                Control parameter to force return into degrees
-                fahrenheit, default=False
-    Rref:       float, optional
-                Resistance reference, commonly used if non-standard
-                RTD type being used. Specified in ohms.
-    Tref:       float, optional
-                Temperature reference, commonly used if non-standard
-                RTD type being used. Specified in degrees Celsius.
-    a:          float, optional
-                Scaling value, commonly used if non-standard
-                RTD type being used.
-    round:      int, optional
-                Control argument to specify number of decimal points
-                in returned value.
-
-    Returns
-    -------
-    temp:       float
-                Calculated temperature, defaults to degrees Celsius.
-    """
-    # Load Variables
-    if Rref == None:
-        Rref = RTD_TYPES[rtdtype][0]
-    if Tref == None:
-        Tref = 0
-    if a == None:
-        a = RTD_TYPES[rtdtype][1]
-    # Define Terms
-    num = RT - Rref + Rref * a * Tref
-    den = Rref * a
-    temp = num / den
-    # Return Temperature
-    if fahrenheit:
-        temp = (temp * 9 / 5) + 32
-    temp = _np.around(temp, round)
-    return (temp)
 
 
 # Define function to find VDC setpoint
@@ -1617,7 +1313,7 @@ def vscdcbus(VLL, Zs, P, Q=0, mmax=0.8, debug=False):
         print("Vtln", Vtln)
         print("Vtpk", Vtpk)
         print("VDC", VDC)
-    return (VDC)
+    return VDC
 
 
 # Define kp/ki/w0L calculating function
@@ -1654,70 +1350,7 @@ def vscgains(Rs, Ls, tau=0.005, freq=60):
     ki = kp * Rs / Ls
     # Calculate w0L
     w0L = 2 * _np.pi * freq * Ls
-    return (kp, ki, w0L)
-
-
-# Define Convolution Bar-Graph Function:
-def convbar(h, x, outline=True):
-    """
-    Convolution Bar-Graph Plotter Function.
-
-    Generates plots of each of two input arrays as bar-graphs, then
-    generates a convolved bar-graph of the two inputs to demonstrate
-    and illustrate convolution, typically for an educational purpose.
-
-    Examples
-    --------
-    >>> import numpy as np
-    >>> import electricpy as ep
-    >>> h = np.array([0, 1, 1, 1, 0])
-    >>> x = np.array([0, 1, 1, 1, 0])
-    >>> ep.convbar(h, x)
-
-    .. image:: /static/convbar-example.png
-
-    Parameters
-    ----------
-    h:      numpy.ndarray
-            Impulse Response - Given as Array (Prefferably Numpy Array)
-    x:      numpy.ndarray
-            Input Function - Given as Array (Prefferably Numpy Array)
-    """
-    # The impulse response
-    M = len(h)
-    t = _np.arange(M)
-    # Plot
-    _plt.subplot(121)
-    if (outline): _plt.plot(t, h, color='red')
-    _plt.bar(t, h, color='black')
-    _plt.xticks([0, 5, 9])
-    _plt.ylabel('h')
-    _plt.title('Impulse Response')
-    _plt.grid()
-
-    # The input function
-    N = len(x)
-    s = _np.arange(N)
-    # Plot
-    _plt.subplot(122)
-    if (outline): _plt.plot(s, x, color='red')
-    _plt.bar(s, x, color='black')
-    _plt.xticks([0, 10, 19])
-    _plt.title('Input Function')
-    _plt.grid()
-    _plt.ylabel('x')
-
-    # The output
-    L = M + N - 1
-    w = _np.arange(L)
-    _plt.figure(3)
-    y = _np.convolve(h, x)
-    if (outline): _plt.plot(w, y, color='red')
-    _plt.bar(w, y, color='black')
-    _plt.ylabel('y')
-    _plt.grid()
-    _plt.title('Convolved Output')
-    return _plt
+    return kp, ki, w0L
 
 
 # Define Peak Calculator
@@ -1737,7 +1370,7 @@ def peak(val):
     >>> ep.peak(120)
     169.7056274847714
     """
-    return (_np.sqrt(2) * val)
+    return _np.sqrt(2) * val
 
 
 # Define RMS Calculator
@@ -1757,7 +1390,7 @@ def rms(val):
     >>> ep.rms(169.7)
     119.99602076735711
     """
-    return (val * _np.sqrt(0.5))
+    return val * _np.sqrt(0.5)
 
 
 # Define Normalized Power Spectrum Function
@@ -1805,9 +1438,9 @@ def wrms(func, dw=0.1, NN=100, quad=False, plot=True,
         Sxx = _np.append(Sxx, func(omega[n]))
         Stot = Stot + Sxx[n]
         Sw2 = Sw2 + (omega[n] ** 2) * Sxx[n]
-    if (quad):
+    if quad:
         def intf(w):
-            return (w ** 2 * func(w))
+            return w ** 2 * func(w)
 
         num = integrate(intf, 0, _np.inf)[0]
         den = integrate(func, 0, _np.inf)[0]
@@ -1818,7 +1451,7 @@ def wrms(func, dw=0.1, NN=100, quad=False, plot=True,
         W = _np.sqrt(Sw2 / Stot)
     Wr = _np.around(W, round)
     # Plot Upon Request
-    if (plot):
+    if plot:
         _plt.plot(omega, Sxx)
         _plt.title(title)
         # Evaluate Text Location
@@ -1827,7 +1460,7 @@ def wrms(func, dw=0.1, NN=100, quad=False, plot=True,
         _plt.text(x, y, "Wrms: " + str(Wr))
         _plt.show()
     # Return Calculated RMS Bandwidth
-    return (W)
+    return W
 
 
 # Define Hartley's Equation for Data Capacity
@@ -1851,7 +1484,7 @@ def hartleydata(BW, M):
                 Capacity of channel (in bits per second)
     """
     C = 2 * BW * _np.log2(M)
-    return (C)
+    return C
 
 
 # Define Shannon's Equation For Data Capacity
@@ -1877,214 +1510,7 @@ def shannondata(BW, S, N):
                 Capacity of channel (in bits per second)
     """
     C = BW * _np.log2(1 + S / N)
-    return (C)
-
-
-# Define CRC Generator (Sender Side)
-def crcsender(data, key):
-    """
-    CRC Sender Function.
-
-    Function to generate a CRC-embedded message ready for transmission.
-
-    Contributing Author Credit:
-    Shaurya Uppal
-    Available from: geeksforgeeks.org
-
-    Parameters
-    ----------
-    data:       string of bits
-                The bit-string to be encoded.
-    key:        string of bits
-                Bit-string representing key.
-
-    Returns
-    -------
-    codeword:   string of bits
-                Bit-string representation of
-                encoded message.
-    """
-    # Define Sub-Functions
-    def xor(a, b):
-        # initialize result
-        result = []
-
-        # Traverse all bits, if bits are
-        # same, then XOR is 0, else 1
-        for i in range(1, len(b)):
-            if a[i] == b[i]:
-                result.append('0')
-            else:
-                result.append('1')
-
-        return (''.join(result))
-
-    # Performs Modulo-2 division
-    def mod2div(divident, divisor):
-        # Number of bits to be XORed at a time.
-        pick = len(divisor)
-
-        # Slicing the divident to appropriate
-        # length for particular step
-        tmp = divident[0: pick]
-
-        while pick < len(divident):
-
-            if tmp[0] == '1':
-
-                # replace the divident by the result
-                # of XOR and pull 1 bit down
-                tmp = xor(divisor, tmp) + divident[pick]
-
-            else:  # If leftmost bit is '0'
-
-                # If the leftmost bit of the dividend (or the
-                # part used in each step) is 0, the step cannot
-                # use the regular divisor; we need to use an
-                # all-0s divisor.
-                tmp = xor('0' * pick, tmp) + divident[pick]
-
-                # increment pick to move further
-            pick += 1
-
-        # For the last n bits, we have to carry it out
-        # normally as increased value of pick will cause
-        # Index Out of Bounds.
-        if tmp[0] == '1':
-            tmp = xor(divisor, tmp)
-        else:
-            tmp = xor('0' * pick, tmp)
-
-        checkword = tmp
-        return (checkword)
-
-    # Condition data
-    data = str(data)
-    # Condition Key
-    key = str(key)
-    l_key = len(key)
-
-    # Appends n-1 zeroes at end of data
-    appended_data = data + '0' * (l_key - 1)
-    remainder = mod2div(appended_data, key)
-
-    # Append remainder in the original data
-    codeword = data + remainder
-    return (codeword)
-
-
-# Define CRC Generator (Sender Side)
-def crcremainder(data, key):
-    """
-    CRC Remainder Function.
-
-    Function to calculate the CRC remainder of a CRC message.
-
-    Contributing Author Credit:
-    Shaurya Uppal
-    Available from: geeksforgeeks.org
-
-    Parameters
-    ----------
-    data:       string of bits
-                The bit-string to be decoded.
-    key:        string of bits
-                Bit-string representing key.
-
-    Returns
-    -------
-    remainder: string of bits
-                Bit-string representation of
-                encoded message.
-    """
-    # Define Sub-Functions
-    def xor(a, b):
-        # initialize result
-        result = []
-
-        # Traverse all bits, if bits are
-        # same, then XOR is 0, else 1
-        for i in range(1, len(b)):
-            if a[i] == b[i]:
-                result.append('0')
-            else:
-                result.append('1')
-
-        return (''.join(result))
-
-    # Performs Modulo-2 division
-    def mod2div(divident, divisor):
-        # Number of bits to be XORed at a time.
-        pick = len(divisor)
-
-        # Slicing the divident to appropriate
-        # length for particular step
-        tmp = divident[0: pick]
-
-        while pick < len(divident):
-
-            if tmp[0] == '1':
-
-                # replace the divident by the result
-                # of XOR and pull 1 bit down
-                tmp = xor(divisor, tmp) + divident[pick]
-
-            else:  # If leftmost bit is '0'
-
-                # If the leftmost bit of the dividend (or the
-                # part used in each step) is 0, the step cannot
-                # use the regular divisor; we need to use an
-                # all-0s divisor.
-                tmp = xor('0' * pick, tmp) + divident[pick]
-
-                # increment pick to move further
-            pick += 1
-
-        # For the last n bits, we have to carry it out
-        # normally as increased value of pick will cause
-        # Index Out of Bounds.
-        if tmp[0] == '1':
-            tmp = xor(divisor, tmp)
-        else:
-            tmp = xor('0' * pick, tmp)
-
-        checkword = tmp
-        return (checkword)
-
-    # Condition data
-    data = str(data)
-    # Condition Key
-    key = str(key)
-    l_key = len(key)
-
-    # Appends n-1 zeroes at end of data
-    appended_data = data + '0' * (l_key - 1)
-    remainder = mod2div(appended_data, key)
-
-    return (remainder)
-
-
-# Define String to Bits Function
-def string_to_bits(str):
-    # noqa: D401   "String" is an intended leading word.
-    """
-    String to Bits Converter.
-
-    Converts a Pythonic string to the string's binary representation.
-
-    Parameters
-    ----------
-    str:        string
-                The string to be converted.
-
-    Returns
-    -------
-    data:       string
-                The binary representation of the
-                input string.
-    """
-    data = (''.join(format(ord(x), 'b') for x in str))
-    return (data)
+    return C
 
 
 # Define Per-Unit Impedance Formula
@@ -2113,12 +1539,12 @@ def zpu(S, VLL=None, VLN=None):
     Zbase:      float
                 The per-unit impedance base.
     """
-    if (VLL == None and VLN == None):
+    if VLL is None and VLN is None:
         raise ValueError("ERROR: One voltage must be provided.")
-    if VLL != None:
-        return (VLL ** 2 / S)
+    if VLL is not None:
+        return VLL ** 2 / S
     else:
-        return ((_np.sqrt(3) * VLN) ** 2 / S)
+        return (_np.sqrt(3) * VLN) ** 2 / S
 
 
 # Define Per-Unit Current Formula
@@ -2149,14 +1575,14 @@ def ipu(S, VLL=None, VLN=None, V1phs=None):
     Ibase:      float
                 The per-unit current base.
     """
-    if (VLL == None and VLN == None):
+    if VLL is None and VLN is None:
         raise ValueError("ERROR: One voltage must be provided.")
-    if VLL != None:
-        return (S / (_np.sqrt(3) * VLL))
-    elif VLN != None:
-        return (S / (3 * VLN))
+    if VLL is not None:
+        return S / (_np.sqrt(3) * VLL)
+    elif VLN is not None:
+        return S / (3 * VLN)
     else:
-        return (S / V1phs)
+        return S / V1phs
 
 
 # Define Per-Unit Change of Base Function
@@ -2184,7 +1610,7 @@ def puchgbase(quantity, puB_old, puB_new):
                 New per-unit value.
     """
     pu_new = quantity * puB_old / puB_new
-    return (pu_new)
+    return pu_new
 
 
 # Define Recomposition Function
@@ -2216,7 +1642,7 @@ def zrecompose(z_pu, S3phs, VLL=None, VLN=None):
     zbase = zpu(S3phs, VLL, VLN)
     # Evaluate the impedance
     z = z_pu * zbase
-    return (z)
+    return z
 
 
 # Define X/R Recomposition Function
@@ -2255,15 +1681,15 @@ def rxrecompose(x_pu, XoR, S3phs=None, VLL=None, VLN=None):
     # Compose into z
     z_pu = r_pu + 1j * x_pu
     # Recompose
-    if S3phs == None:
-        return (z_pu)
+    if S3phs is None:
+        return z_pu
     else:
         z = zrecompose(z_pu, S3phs, VLL, VLN)
-        return (z)
+        return z
 
 
 # Define Generator Internal Voltage Calculator
-def geninternalv(I, Zs, Vt, Vgn=None,Zm=None, Zmp=None, Zmpp=None, Ip=None, Ipp=None):
+def geninternalv(I, Zs, Vt, Vgn=None, Zm=None, Zmp=None, Zmpp=None, Ip=None, Ipp=None):
     """
     Electric Generator Internal Voltage Evaluator.
 
@@ -2299,17 +1725,17 @@ def geninternalv(I, Zs, Vt, Vgn=None,Zm=None, Zmp=None, Zmpp=None, Ip=None, Ipp=
                 The internal voltage of the generator.
     """
     # All Parameters Provided
-    if Zmp == Zmpp == Ip == Ipp != None:
-        if Vgn == None:
+    if Zmp == Zmpp == Ip == Ipp is not None:
+        if Vgn is None:
             Vgn = 0
         Ea = Zs * I + Zmp * Ip + Zmpp * Ipp + Vt + Vgn
     # Select Parameters Provided
-    elif Vgn == Zm == Ip == Ipp == None:
+    elif Vgn == Zm == Ip == Ipp is None:
         Ea = Zs * I + Vt
     # Invalid Parameter Set
     else:
         raise ValueError("Invalid Parameter Set")
-    return (Ea)
+    return Ea
 
 
 # FFT Coefficient Calculator Function
@@ -2353,11 +1779,11 @@ def funcfft(func, minfreq=60, maxmult=15, complex=False):
     y = _np.fft.rfft(func(t)) / t.size
     # Return Complex Values
     if complex:
-        return (y)
+        return y
     # Split out useful values
     else:
         y *= 2
-        return (y[0].real, y[1:-1].real, -y[1:-1].imag)
+        return y[0].real, y[1:-1].real, -y[1:-1].imag
 
 
 def sampfft(data, dt, minfreq=60.0, complex=False):
@@ -2412,7 +1838,7 @@ def sampfft(data, dt, minfreq=60.0, complex=False):
     # Split out useful values
     else:
         y *= 2
-        return (y[0].real, y[1:-1].real, -y[1:-1].imag)
+        return y[0].real, y[1:-1].real, -y[1:-1].imag
 
 
 # Define FFT Plotting Function
@@ -2457,7 +1883,7 @@ def fftplot(dc, real, imag=None, title="Fourier Coefficients"):
         label="Real-Terms",
         use_line_collection=True
     )
-    if imag != None:
+    if imag is not None:
         _plt.stem(
             rng,
             imag,
@@ -2513,7 +1939,7 @@ def fftsumplot(dc, real, imag=None, freq=60, xrange=None, npts=1000,
     # Determine the system period (T)
     T = 1 / freq
     # Generate Domain Array
-    if xrange == None:
+    if xrange is None:
         x = _np.linspace(0, T, npts)
     else:
         x = _np.linspace(xrange[0], xrange[1], npts)
@@ -2524,7 +1950,7 @@ def fftsumplot(dc, real, imag=None, freq=60, xrange=None, npts=1000,
         if plotall:
             _plt.plot(x, yout)
         yout += real[k - 1] * _np.cos(k * 2 * _np.pi * x / T)
-        if imag != None:
+        if imag is not None:
             yout += imag[k - 1] * _np.sin(k * 2 * _np.pi * x / T)
     _plt.plot(x, yout)
     _plt.title(title)
@@ -2572,7 +1998,7 @@ def harmonics(real, imag=None, dc=0, freq=60, domain=None):
     # Validate Inputs
     if not isinstance(real, (list, _np.ndarray)):
         raise ValueError("Argument *real* must be array-like.")
-    if imag != None and not isinstance(imag, (list, _np.ndarray)):
+    if imag is not None and not isinstance(imag, (list, _np.ndarray)):
         raise ValueError("Argument *imag* must be array-like.")
     # Calculate Omega
     w = 2 * _np.pi * freq
@@ -2582,7 +2008,7 @@ def harmonics(real, imag=None, dc=0, freq=60, domain=None):
         for k in range(len(real)):
             # Evaluate Current Coefficient
             A = real[k]
-            if imag != None:
+            if imag is not None:
                 B = imag[k]
             else:
                 B = 0
@@ -2593,7 +2019,7 @@ def harmonics(real, imag=None, dc=0, freq=60, domain=None):
         return (out)
 
     if domain is None:
-        return _harmonic_ # Return as callable for external use
+        return _harmonic_  # Return as callable for external use
     else:
         return _harmonic_(domain)
 
@@ -2674,16 +2100,16 @@ def pfcorrection(S, PFold, PFnew, VLL=None, VLN=None, V=None, freq=60):
     Qcorrected = _np.sqrt(Scorrected ** 2 - Pold ** 2)
     Qc = Qold - Qcorrected
     # Evaluate Capacitance Based on Voltage Input
-    if VLL == VLN == V == None:
+    if VLL == VLN == V is None:
         raise ValueError("One voltage must be specified.")
-    elif VLN != None:
+    elif VLN is not None:
         C = Qc / (2 * _np.pi * freq * 3 * VLN ** 2)
     else:
-        if VLL != None:
+        if VLL is not None:
             V = VLL
         C = Qc / (2 * _np.pi * freq * V ** 2)
     # Return Value
-    return (C, Qc)
+    return C, Qc
 
 
 # Define Apparent Power / Voltage / Current Relation Function
@@ -2707,6 +2133,9 @@ def acpiv(S=None, I=None, VLL=None, VLN=None, V=None, PF=None):
                 Line-to-Neutral voltage in volts
     V:          complex, optional
                 Single-phase voltage in volts
+    PF:         float, optional
+                Power factor to condition the apparent power to an appropriate
+                complex value.
 
     Returns
     -------
@@ -2731,43 +2160,51 @@ def acpiv(S=None, I=None, VLL=None, VLN=None, V=None, PF=None):
     PF:         float, optional
                 Supporting argument to convert floating-point
                 apparent power to complex representation.
+
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> ep.acpiv(S=550, V=167)
+    3.2934131736526946
+    >>> ep.acpiv(S=550, I=3.2934131736526946)
+    (96.4174949546675, 55.66666666666667, 167.0)
     """
     # Validate Inputs
-    if S == I == None:
+    if S == I is None:
         raise ValueError("To few arguments.")
     # Convert Apparent Power to Complex
-    if PF != None:
+    if PF is not None:
         S = S * PF + 1j * _np.sqrt(S ** 2 - (S * PF) ** 2)
     # Solve Single-Phase
-    if V != None:
-        if S == None:  # Solve for Apparent Power
+    if V is not None:
+        if S is None:  # Solve for Apparent Power
             S = V * _np.conj(I)
-            return (S)
+            return S
         else:  # Solve for Current
             I = _np.conj(S / V)
-            return (I)
+            return I
     # Solve Line-to-Line
-    elif VLL != None:
-        if S == None:  # Solve for Apparent Power
+    elif VLL is not None:
+        if S is None:  # Solve for Apparent Power
             S = _np.sqrt(3) * VLL * _np.conj(I)
-            return (S)
+            return S
         else:  # Solve for Current
             I = _np.conj(S / (_np.sqrt(3) * VLL))
-            return (I)
+            return I
     # Solve Line-to-Neutral
-    elif VLN != None:
-        if S == None:  # Solve for Apparent Power
+    elif VLN is not None:
+        if S is None:  # Solve for Apparent Power
             S = 3 * VLN * _np.conj(I)
-            return (S)
+            return S
         else:  # Solve for Current
             I = _np.conj(S / (3 * VLN))
-            return (I)
+            return I
     # Solve for Voltages
     else:
         V = S / _np.conj(I)
         VLL = S / (_np.sqrt(3) * _np.conj(I))
         VLN = S / (3 * _np.conj(I))
-        return (VLL, VLN, V)
+        return VLL, VLN, V
 
 
 # Define Primary Ratio Function
@@ -2800,8 +2237,8 @@ def primary(val, Np, Ns=1, invert=False):
                 side according to Np and Ns.
     """
     if invert:
-        return (val * Ns / Np)
-    return (val * Np / Ns)
+        return val * Ns / Np
+    return val * Np / Ns
 
 
 # Define Secondary Ratio Function
@@ -2834,8 +2271,8 @@ def secondary(val, Np, Ns=1, invert=False):
                 side according to Np and Ns.
     """
     if invert:
-        return (val * Np / Ns)
-    return (val * Ns / Np)
+        return val * Np / Ns
+    return val * Ns / Np
 
 
 def tap_changing_transformer(Vgen, Vdis, Pload, Qload, R, X):
@@ -2869,8 +2306,9 @@ def tap_changing_transformer(Vgen, Vdis, Pload, Qload, R, X):
             Turns ration of transformer
     """
     # Evaluate the turns ratio
-    ts = (Vgen*Vgen) / (Vgen*Vdis - (R * Pload + X * Qload) )
+    ts = (Vgen * Vgen) / (Vgen * Vdis - (R * Pload + X * Qload))
     return pow(ts, 0.5)
+
 
 def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
     r"""
@@ -2894,9 +2332,11 @@ def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
     number_capacitors:  int
                         Number of disk capacitors hung to transmission line
     capacitance_ratio:  float
-                        Ratio of disk capacitance and pin to pole air capacitance
+                        Ratio of disk capacitance and pin to pole air
+                        capacitance
     Voltage:            float
-                        Voltage difference between the transmission line and ground
+                        Voltage difference between the transmission line and
+                        ground
 
     Returns
     -------
@@ -2928,9 +2368,12 @@ def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
 
     capacitor_disk_voltages = _np.matmul(_np.linalg.inv(m), v)
 
-    string_efficiency = (Voltage * 100) / (number_capacitors * capacitor_disk_voltages[-1, 0])
+    string_efficiency = (
+        (Voltage * 100) / (number_capacitors * capacitor_disk_voltages[-1, 0])
+    )
 
     return capacitor_disk_voltages, string_efficiency
+
 
 # Define Natural Frequency/Resonant Frequency Calculator
 def natfreq(C, L, Hz=True):
@@ -3011,9 +2454,9 @@ def unbalance(A, B, C, all=False):
     unbalance = mx / avg
     # Return Results
     if all:
-        return (dA / avg, dB / avg, dC / avg)
+        return dA / avg, dB / avg, dC / avg
     else:
-        return (unbalance)
+        return unbalance
 
 
 # Define Cosine Filter Function
@@ -3048,7 +2491,7 @@ def cosfilt(arr, Srate, domain=False):
 
     # Define Cosine Coefficient Function
     def cos(k, Srate):
-        return (_np.cos(2 * _np.pi * k / Srate))
+        return _np.cos(2 * _np.pi * k / Srate)
 
     # Calculate Constant
     const = 2 / Srate
@@ -3063,8 +2506,8 @@ def cosfilt(arr, Srate, domain=False):
     if domain:
         xarray = _np.linspace(Srate + Srate / 4 - 1, len(arr) - 1, len(cosf))
         xarray = xarray / Srate
-        return (cosf, xarray)
-    return (cosf)
+        return cosf, xarray
+    return cosf
 
 
 # Define Sine Filter Function
@@ -3099,7 +2542,7 @@ def sinfilt(arr, Srate, domain=False):
 
     # Define Cosine Coefficient Function
     def sin(k, Srate):
-        return (_np.sin(2 * _np.pi * k / Srate))
+        return _np.sin(2 * _np.pi * k / Srate)
 
     # Calculate Constant
     const = 2 / Srate
@@ -3114,8 +2557,8 @@ def sinfilt(arr, Srate, domain=False):
     if domain:
         xarray = _np.linspace(Srate + Srate / 4 - 1, len(arr) - 1, len(sinf))
         xarray = xarray / Srate
-        return (sinf, xarray)
-    return (sinf)
+        return sinf, xarray
+    return sinf
 
 
 # Define Characteristic Impedance Calculator
@@ -3155,6 +2598,7 @@ def characterz(R, G, L, C, freq=60):
     # Evaluate Zc
     Zc = _np.sqrt((R + 1j * w * L) / (G + 1j * w * C))
     return (Zc)
+
 
 # Define propagation_constants for long transmission line
 def propagation_constants(z, y, length):
@@ -3213,874 +2657,6 @@ def propagation_constants(z, y, length):
     return params
 
 
-# Define Simple Transformer Phase Shift Function
-def xfmphs(style="DY", shift=30):
-    """
-    Electrical Transformer Phase-Shift Calculator.
-
-    Use with transformer orientation to evaluate the phase-shift across a
-    transformer. For example, find the phase shift for a Delta-Wye transformer
-    as seen from the delta side.
-
-    Parameters
-    ----------
-    style:      {'DY','YD','DD','YY'}, optional
-                String that denotes the transformer
-                orientation. default='DY'
-    shift:      float, optional
-                Transformer angle shift, default=30
-
-    Returns
-    -------
-    phase:      complex
-                Phasor including the phase shift and
-                positive or negative characteristic.
-
-    Examples
-    --------
-    >>> import electricpy as ep
-    >>> # Find shift of Delta-Wye Transformer w/ 30° shift
-    >>> shift = ep.xfmphs(style="DY",shift=30)
-    >>> ep.cprint(shift)
-    1.0 ∠ 30.0°
-    """
-    # Define Direction Dictionary
-    orientation = {
-        "DY": 1,
-        "YD": -1,
-        "DD": 0,
-        "YY": 0,
-    }
-    # Find Direction
-    v = orientation[style.upper()]
-    # Calculate Shift
-    phase = _np.exp(1j * _np.radians(v * abs(shift)))
-    # Return
-    return (phase)
-
-
-# Define Induction Machine Thevenin Voltage Calculator
-def indmachvth(Vas, Rs, Lm, Lls=0, Ls=None, freq=60, calcX=True):
-    r"""
-    Induction Machine Thevenin Voltage Calculator.
-
-    Function to calculate the Thevenin equivalent voltage of an
-    induction machine given a specific set of parameters.
-
-    .. math:: V_{th}=\frac{j\omega L_m}{R_s+j\omega(L_{ls}+L_m)}V_{as}
-
-    where:
-
-    .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
-
-    Parameters
-    ----------
-    Vas:        complex
-                Terminal Stator Voltage in Volts
-    Rs:         float
-                Stator resistance in ohms
-    Lm:         float
-                Magnetizing inductance in Henrys
-    Lls:        float, optional
-                Stator leakage inductance in Henrys, default=0
-    Ls:         float, optional
-                Stator inductance in Henrys
-    freq:       float, optional
-                System (electrical) frequency in Hz, default=60
-    calcX:      bool, optional
-                Control argument to force system to calculate
-                system reactances with system frequency, or to
-                treat them as previously-calculated reactances.
-                default=True
-
-    Returns
-    -------
-    Vth:        complex
-                Thevenin-Equivalent voltage (in volts) of induction
-                machine described.
-
-    See Also
-    --------
-    indmachzth:         Induction Machine Thevenin Impedance Calculator
-    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
-    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
-    indmachpkslip:      Induction Machine Peak Slip Calculator
-    indmachpktorq:      Induction Machine Peak Torque Calculator
-    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
-    indmachstarttorq:   Induction Machine Starting Torque Calculator
-    """
-    # Condition Inputs
-    if Ls != None:  # Use Ls instead of Lls
-        Lls = Ls - Lm
-    if calcX:  # Convert Inductances to Reactances
-        w = 2 * _np.pi * freq
-        Lm *= w
-        Lls *= w
-    # Calculate Thevenin Voltage, Return
-    Vth = 1j * Lm / (Rs + 1j * (Lls + Lm)) * Vas
-    return (Vth)
-
-
-# Define Induction Machine Thevenin Impedance Calculator
-def indmachzth(Rs, Lm, Lls=0, Llr=0, Ls=None, Lr=None, freq=60, calcX=True):
-    r"""
-    Induction Machine Thevenin Impedance Calculator.
-
-    Function to calculate the Thevenin equivalent impedance of an
-    induction machine given a specific set of parameters.
-
-    .. math::
-       Z_{th} = \frac{(R_s+j\omega L_{ls})j\omega L_m}
-       {R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}
-
-    where:
-
-    .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
-
-    Parameters
-    ----------
-    Rs:         float
-                Stator resistance in ohms
-    Lm:         float
-                Magnetizing inductance in Henrys
-    Lls:        float, optional
-                Stator leakage inductance in Henrys, default=0
-    Llr:        float, optional
-                Rotor leakage inductance in Henrys, default=0
-    Ls:         float, optional
-                Stator inductance in Henrys
-    Lr:         float, optional
-                Rotor inductance in Henrys
-    freq:       float, optional
-                System (electrical) frequency in Hz, default=60
-    calcX:      bool, optional
-                Control argument to force system to calculate
-                system reactances with system frequency, or to
-                treat them as previously-calculated reactances.
-                default=True
-
-    Returns
-    -------
-    Zth:        complex
-                Thevenin-Equivalent impedance (in ohms) of induction
-                machine described.
-
-    See Also
-    --------
-    indmachvth:         Induction Machine Thevenin Voltage Calculator
-    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
-    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
-    indmachpkslip:      Induction Machine Peak Slip Calculator
-    indmachpktorq:      Induction Machine Peak Torque Calculator
-    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
-    indmachstarttorq:   Induction Machine Starting Torque Calculator
-    """
-    # Condition Inputs
-    if Ls != None:  # Use Ls instead of Lls
-        Lls = Ls - Lm
-    if Lr != None:  # Use Lr instead of Llr
-        Llr = Lr - Lm
-    if calcX:  # Convert Inductances to Reactances
-        w = 2 * _np.pi * freq
-        Lm *= w
-        Lls *= w
-        Llr *= w
-    # Calculate Thevenin Impedance
-    Zth = (Rs + 1j * Lls) * (1j * Lm) / (Rs + 1j * (Lls + Lm)) + 1j * Llr
-    return (Zth)
-
-
-# Define Induction Machine Mechancal Power Calculator
-def indmachpem(slip, Rr, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
-               Llr=0, Ls=None, Lr=None, freq=60, calcX=True):
-    r"""
-    Mechanical Power Calculator for Induction Machines.
-
-    Function to calculate the mechanical power using the thevenin
-    equivalent circuit terms.
-
-    .. math::
-       P_{em}=\frac{|V_{th_{\text{stator}}}|^2\cdot\frac{R_r}{slip}}
-       {\left[\left(\frac{R_r}{slip}+R_{th_{\text{stator}}}\right)^2
-       +X_{th_{\text{stator}}}^2\right]\cdot\omega_{es}}\cdot(1-slip)
-
-    Parameters
-    ----------
-    slip:       float
-                The mechanical/electrical slip factor of the
-                induction machine.
-    Rr:         float
-                Rotor resistance in ohms
-    Vth:        complex, optional
-                Thevenin-equivalent stator voltage of the
-                induction machine, may be calculated internally
-                if given stator voltage and machine parameters.
-    Zth:        complex, optional
-                Thevenin-equivalent inductance (in ohms) of the
-                induction machine, may be calculated internally
-                if given machine parameters.
-    Vas:        complex, optional
-                Terminal Stator Voltage in Volts
-    Rs:         float, optional
-                Stator resistance in ohms
-    Lm:         float, optional
-                Magnetizing inductance in Henrys
-    Lls:        float, optional
-                Stator leakage inductance in Henrys, default=0
-    Llr:        float, optional
-                Rotor leakage inductance in Henrys, default=0
-    Ls:         float, optional
-                Stator inductance in Henrys
-    Lr:         float, optional
-                Rotor inductance in Henrys
-    freq:       float, optional
-                System (electrical) frequency in Hz, default=60
-    calcX:      bool, optional
-                Control argument to force system to calculate
-                system reactances with system frequency, or to
-                treat them as previously-calculated reactances.
-                default=True
-
-    Returns
-    -------
-    Pem:        float
-                Power (in watts) that is produced or consumed
-                by the mechanical portion of the induction machine.
-
-    See Also
-    --------
-    indmachvth:         Induction Machine Thevenin Voltage Calculator
-    indmachzth:         Induction Machine Thevenin Impedance Calculator
-    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
-    indmachpkslip:      Induction Machine Peak Slip Calculator
-    indmachpktorq:      Induction Machine Peak Torque Calculator
-    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
-    indmachstarttorq:   Induction Machine Starting Torque Calculator
-    """
-    # Condition Inputs
-    w = 2 * _np.pi * freq
-    if Ls != None:  # Use Ls instead of Lls
-        Lls = Ls - Lm
-    if Lr != None:  # Use Lr instead of Llr
-        Llr = Lr - Lm
-    if calcX:  # Convert Inductances to Reactances
-        Lm *= w
-        Lls *= w
-        Llr *= w
-    # Test for Valid Input Set
-    if Vth == None:
-        if not all((Vas, Rs, Lm, Lls)):
-            raise ValueError("Invalid Argument Set, too few provided.")
-        # Valid Argument Set, Calculate Vth
-        Vth = indmachvth(Vas, Rs, Lm, Lls, Ls, freq, calcX)
-    if Zth == None:
-        if not all((Rs, Llr, Lm, Lls)):
-            raise ValueError("Invalid Argument Set, too few provided.")
-        # Valid Argument Set, Calculate Zth
-        Zth = indmachzth(Rs, Lm, Lls, Llr, Ls, Lr, freq, calcX)
-    # Use Terms to Calculate Pem
-    Rth = Zth.real
-    Xth = Zth.imag
-    Pem = (abs(Vth) ** 2 * Rr / slip) / (((Rr / slip + Rth) ** 2 + Xth ** 2) * w) * (1 - slip)
-    return (Pem)
-
-
-# Define Induction Machine Torque Calculator
-def indmachtem(slip, Rr, p=0, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
-               Llr=0, Ls=None, Lr=None, wsyn=None, freq=60, calcX=True):
-    r"""
-    Induction Machine Torque Calculator.
-
-    Calculate the torque generated or consumed by an induction
-    machine given the machine parameters of Vth and Zth by use
-    of the equation below.
-
-    .. math::
-       T_{em}=\frac{3|V_{th_{\text{stator}}}|^2}
-       {\left[\left(\frac{R_r}{slip}+R_{th_{\text{stator}}}\right)^2
-       +X_{th_{\text{stator}}}\right]}\frac{R_r}{slip*\omega_{sync}}
-
-    where:
-
-    .. math::
-       \omega_{sync}=\frac{\omega_{es}}{\left(\frac{poles}{2}\right)}
-
-    Parameters
-    ----------
-    slip:       float
-                The mechanical/electrical slip factor of the
-                induction machine.
-    Rr:         float
-                Rotor resistance in ohms
-    p:          int, optional
-                Number of poles in the induction machine
-    Vth:        complex, optional
-                Thevenin-equivalent stator voltage of the
-                induction machine, may be calculated internally
-                if given stator voltage and machine parameters.
-    Zth:        complex, optional
-                Thevenin-equivalent inductance (in ohms) of the
-                induction machine, may be calculated internally
-                if given machine parameters.
-    Vas:        complex, optional
-                Terminal Stator Voltage in Volts
-    Rs:         float, optional
-                Stator resistance in ohms
-    Lm:         float, optional
-                Magnetizing inductance in Henrys
-    Lls:        float, optional
-                Stator leakage inductance in Henrys, default=0
-    Llr:        float, optional
-                Rotor leakage inductance in Henrys, default=0
-    Ls:         float, optional
-                Stator inductance in Henrys
-    Lr:         float, optional
-                Rotor inductance in Henrys
-    wsync:       float, optional
-                Synchronous speed in rad/sec, may be specified
-                directly as a replacement of p (number of poles).
-    freq:       float, optional
-                System (electrical) frequency in Hz, default=60
-    calcX:      bool, optional
-                Control argument to force system to calculate
-                system reactances with system frequency, or to
-                treat them as previously-calculated reactances.
-                default=True
-
-    Returns
-    -------
-    Tem:        float
-                Torque (in Newton-meters) that is produced or consumed
-                by the mechanical portion of the induction machine.
-
-    See Also
-    --------
-    indmachvth:         Induction Machine Thevenin Voltage Calculator
-    indmachzth:         Induction Machine Thevenin Impedance Calculator
-    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
-    indmachpkslip:      Induction Machine Peak Slip Calculator
-    indmachpktorq:      Induction Machine Peak Torque Calculator
-    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
-    indmachstarttorq:   Induction Machine Starting Torque Calculator
-    """
-    # Condition Inputs
-    w = 2 * _np.pi * freq
-    if Ls != None:  # Use Ls instead of Lls
-        Lls = Ls - Lm
-    if Lr != None:  # Use Lr instead of Llr
-        Llr = Lr - Lm
-    if p != 0:  # Calculate Sync. Speed from Num. Poles
-        wsyn = w / (p / 2)
-    if calcX:  # Convert Inductances to Reactances
-        Lm *= w
-        Lls *= w
-        Llr *= w
-    # Test for Valid Input Set
-    if not any((p, wsyn)):
-        raise ValueError("Poles or Synchronous Speed must be specified.")
-    if Vth == None:
-        if not all((Vas, Rs, Lm, Lls)):
-            raise ValueError("Invalid Argument Set, too few provided.")
-        # Valid Argument Set, Calculate Vth
-        Vth = indmachvth(Vas, Rs, Lm, Lls, Ls, freq, calcX)
-    if Zth == None:
-        if not all((Rs, Llr, Lm, Lls)):
-            raise ValueError("Invalid Argument Set, too few provided.")
-        # Valid Argument Set, Calculate Zth
-        Zth = indmachzth(Rs, Lm, Lls, Llr, Ls, Lr, freq, calcX)
-    # Use Terms to Calculate Pem
-    Rth = Zth.real
-    Xth = Zth.imag
-    Tem = 3 * abs(Vth) ** 2 / ((Rr / slip + Rth) ** 2 + Xth) * Rr / (slip * wsyn)
-    return (Tem)
-
-
-# Define Induction Machine Peak Slip Calculator
-def indmachpkslip(Rr, Zth=None, Rs=0, Lm=0, Lls=0, Llr=0, Ls=None,
-                  Lr=None, freq=60, calcX=True):
-    r"""
-    Induction Machine Slip at Peak Torque Calculator.
-
-    Function to calculate the slip encountered by an induction machine
-    with the parameters specified when the machine is generating peak
-    torque. Uses formula as shown below.
-
-    .. math:: \text{slip} = \frac{R_r}{|Z_{th}|}
-
-    where:
-
-    .. math::
-       Z_{th} = \frac{(R_s+j\omega L_{ls})j\omega L_m}
-       {R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}
-
-    Parameters
-    ----------
-    Rr:         float
-                Rotor resistance in ohms
-    Zth:        complex, optional
-                Thevenin-equivalent inductance (in ohms) of the
-                induction machine, may be calculated internally
-                if given machine parameters.
-    Rs:         float, optional
-                Stator resistance in ohms
-    Lm:         float, optional
-                Magnetizing inductance in Henrys
-    Lls:        float, optional
-                Stator leakage inductance in Henrys, default=0
-    Llr:        float, optional
-                Rotor leakage inductance in Henrys, default=0
-    Ls:         float, optional
-                Stator inductance in Henrys
-    Lr:         float, optional
-                Rotor inductance in Henrys
-    freq:       float, optional
-                System (electrical) frequency in Hz, default=60
-    calcX:      bool, optional
-                Control argument to force system to calculate
-                system reactances with system frequency, or to
-                treat them as previously-calculated reactances.
-                default=True
-
-    Returns
-    -------
-    s_peak:     float
-                The peak slip for the induction machine described.
-
-    See Also
-    --------
-    indmachvth:         Induction Machine Thevenin Voltage Calculator
-    indmachzth:         Induction Machine Thevenin Impedance Calculator
-    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
-    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
-    indmachpktorq:      Induction Machine Peak Torque Calculator
-    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
-    indmachstarttorq:   Induction Machine Starting Torque Calculator
-    """
-    # Condition Inputs
-    w = 2 * _np.pi * freq
-    if Ls != None:  # Use Ls instead of Lls
-        Lls = Ls - Lm
-    if Lr != None:  # Use Lr instead of Llr
-        Llr = Lr - Lm
-    if calcX:  # Convert Inductances to Reactances
-        Lm *= w
-        Lls *= w
-        Llr *= w
-    # Test for Valid Input Set
-    if Zth == None:
-        if not all((Rs, Llr, Lm, Lls)):
-            raise ValueError("Invalid Argument Set, too few provided.")
-        # Valid Argument Set, Calculate Zth
-        Zth = indmachzth(Rs, Lm, Lls, Llr, Ls, Lr, freq, calcX)
-    # Calculate Peak Slip
-    s_peak = Rr / abs(Zth)
-    return (s_peak)
-
-
-# Define Induction Machine Phase-A, Rotor Current Calculator
-def indmachiar(Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0,
-               Llr=0, Ls=None, Lr=None, freq=60, calcX=True):
-    r"""
-    Induction Machine Rotor Current Calculator.
-
-    Calculation function to find the phase-A, rotor current for an
-    induction machine given the thevenin voltage and impedance.
-
-    This current is calculated using the following formulas:
-
-    .. math:: I_{a_{\text{rotor}}} = \frac{V_{th}}{|Z_{th}|+Z_{th}}
-
-    where:
-
-    .. math:: V_{th}=\frac{j\omega L_m}{R_s+j\omega(L_{ls}+L_m)}V_{as}
-
-    .. math::
-       Z_{th} = \frac{(R_s+j\omega L_{ls})j\omega L_m}
-       {R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}
-
-    .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
-
-    Parameters
-    ----------
-    Vth:        complex, optional
-                Thevenin-equivalent stator voltage of the
-                induction machine, may be calculated internally
-                if given stator voltage and machine parameters.
-    Zth:        complex, optional
-                Thevenin-equivalent inductance (in ohms) of the
-                induction machine, may be calculated internally
-                if given machine parameters.
-    Vas:        complex, optional
-                Terminal Stator Voltage in Volts
-    Rs:         float, optional
-                Stator resistance in ohms
-    Lm:         float, optional
-                Magnetizing inductance in Henrys
-    Lls:        float, optional
-                Stator leakage inductance in Henrys, default=0
-    Llr:        float, optional
-                Rotor leakage inductance in Henrys, default=0
-    Ls:         float, optional
-                Stator inductance in Henrys
-    Lr:         float, optional
-                Rotor inductance in Henrys
-    freq:       float, optional
-                System (electrical) frequency in Hz, default=60
-    calcX:      bool, optional
-                Control argument to force system to calculate
-                system reactances with system frequency, or to
-                treat them as previously-calculated reactances.
-                default=True
-
-    Returns
-    -------
-    Iar:        complex
-                The rotor, phase-A current in amps.
-
-    See Also
-    --------
-    indmachvth:         Induction Machine Thevenin Voltage Calculator
-    indmachzth:         Induction Machine Thevenin Impedance Calculator
-    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
-    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
-    indmachpkslip:      Induction Machine Peak Slip Calculator
-    indmachpktorq:      Induction Machine Peak Torque Calculator
-    indmachstarttorq:   Induction Machine Starting Torque Calculator
-    """
-    # Condition Inputs
-    w = 2 * _np.pi * freq
-    if Ls != None:  # Use Ls instead of Lls
-        Lls = Ls - Lm
-    if Lr != None:  # Use Lr instead of Llr
-        Llr = Lr - Lm
-    if p != 0:  # Calculate Sync. Speed from Num. Poles
-        wsyn = w / (p / 2)
-    if calcX:  # Convert Inductances to Reactances
-        Lm *= w
-        Lls *= w
-        Llr *= w
-    # Test for Valid Input Set
-    if Vth == None:
-        if not all((Vas, Rs, Lm, Lls)):
-            raise ValueError("Invalid Argument Set, too few provided.")
-        # Valid Argument Set, Calculate Vth
-        Vth = indmachvth(Vas, Rs, Lm, Lls, Ls, freq, calcX)
-    if Zth == None:
-        if not all((Rs, Llr, Lm, Lls)):
-            raise ValueError("Invalid Argument Set, too few provided.")
-        # Valid Argument Set, Calculate Zth
-        Zth = indmachzth(Rs, Lm, Lls, Llr, Ls, Lr, freq, calcX)
-    # Calculate Rotor Current
-    Iar = Vth / (Zth.real + Zth)
-    return (Iar)
-
-
-# Define Induction Machine Peak Torque Calculator
-def indmachpktorq(Rr, s_pk=None, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0,
-                  Lm=0, Lls=0, Llr=0, Ls=None, Lr=None, freq=60, calcX=True):
-    r"""
-    Induction Machine Peak Torque Calculator.
-
-    Calculation function to find the peak torque for an
-    induction machine given the thevenin voltage and impedance.
-
-    This current is calculated using the following formulas:
-
-    .. math::
-       T_{em}=(|I_{a_{\text{rotor}}}|)^2\cdot\frac{R_r}
-       {\text{slip}_{\text{peak}}}
-
-    where:
-
-    .. math:: I_{a_{\text{rotor}}} = \frac{V_{th}}{|Z_{th}|+Z_{th}}
-
-    .. math:: V_{th}=\frac{j\omega L_m}{R_s+j\omega(L_{ls}+L_m)}V_{as}
-
-    .. math::
-       Z_{th} = \frac{(R_s+j\omega L_{ls})j\omega L_m}
-       {R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}
-
-    .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
-
-    Parameters
-    ----------
-    Rr:         float
-                Rotor resistance in Ohms
-    s_pk:       float, optional
-                Peak induction machine slip, may be calculated
-                internally if remaining machine characteristics are
-                provided.
-    Iar:        complex, optional
-                Phase-A, Rotor Current in Amps, may be calculated
-                internally if remaining machine characteristics are
-                provided.
-    Vth:        complex, optional
-                Thevenin-equivalent stator voltage of the
-                induction machine, may be calculated internally
-                if given stator voltage and machine parameters.
-    Zth:        complex, optional
-                Thevenin-equivalent inductance (in ohms) of the
-                induction machine, may be calculated internally
-                if given machine parameters.
-    Vas:        complex, optional
-                Terminal Stator Voltage in Volts
-    Rs:         float, optional
-                Stator resistance in ohms
-    Lm:         float, optional
-                Magnetizing inductance in Henrys
-    Lls:        float, optional
-                Stator leakage inductance in Henrys, default=0
-    Llr:        float, optional
-                Rotor leakage inductance in Henrys, default=0
-    Ls:         float, optional
-                Stator inductance in Henrys
-    Lr:         float, optional
-                Rotor inductance in Henrys
-    freq:       float, optional
-                System (electrical) frequency in Hz, default=60
-    calcX:      bool, optional
-                Control argument to force system to calculate
-                system reactances with system frequency, or to
-                treat them as previously-calculated reactances.
-                default=True
-
-    Returns
-    -------
-    Tpk:        float
-                Peak torque of specified induction machine in
-                newton-meters.
-
-    See Also
-    --------
-    indmachvth:         Induction Machine Thevenin Voltage Calculator
-    indmachzth:         Induction Machine Thevenin Impedance Calculator
-    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
-    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
-    indmachpkslip:      Induction Machine Peak Slip Calculator
-    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
-    indmachstarttorq:   Induction Machine Starting Torque Calculator
-    """
-    # Condition Inputs
-    w = 2 * _np.pi * freq
-    if Ls != None:  # Use Ls instead of Lls
-        Lls = Ls - Lm
-    if Lr != None:  # Use Lr instead of Llr
-        Llr = Lr - Lm
-    if p != 0:  # Calculate Sync. Speed from Num. Poles
-        wsyn = w / (p / 2)
-    if calcX:  # Convert Inductances to Reactances
-        Lm *= w
-        Lls *= w
-        Llr *= w
-    # Test for Valid Input Set
-    if Vth == None:
-        if not all((Vas, Rs, Lm, Lls)):
-            raise ValueError("Invalid Argument Set, too few provided.")
-        # Valid Argument Set, Calculate Vth
-        Vth = indmachvth(Vas, Rs, Lm, Lls, Ls, freq, calcX)
-    if Zth == None:
-        if not all((Rs, Llr, Lm, Lls)):
-            raise ValueError("Invalid Argument Set, too few provided.")
-        # Valid Argument Set, Calculate Zth
-        Zth = indmachzth(Rs, Lm, Lls, Llr, Ls, Lr, freq, calcX)
-    if Iar == None:
-        if not all((Vth, Zth)):
-            raise ValueError("Invalid Argument Set, too few provided.")
-        # Valid Argument Set, Calculate Ias
-        Iar = indmachiar(Vth=Vth, Zth=Zth)
-    if s_pk == None:
-        if not all((Rr, Zth)):
-            raise ValueError("Invalid Argument Set, too few provided.")
-        # Valid Argument Set, Calculate Peak Slip
-        s_pk = indmachpkslip(Rr=Rr, Zth=Zth)
-    # Use Terms to Calculate Peak Torque
-    Tpk = abs(Iar) ** 2 * Rr / s_pk
-    return (Tpk)
-
-
-# Define Induction Machine Starting Torque Calculator
-def indmachstarttorq(Rr, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0,
-                     Lls=0, Llr=0, Ls=None, Lr=None, freq=60, calcX=True):
-    r"""
-    Induction Machine Starting Torque Calculator.
-
-    Calculation function to find the starting torque for an
-    induction machine given the thevenin voltage and impedance.
-
-    This current is calculated using the following formulas:
-
-    .. math::
-       T_{em}=(|I_{a_{\text{rotor}}}|)^2\cdot\frac{R_r}
-       {\text{slip}_{\text{peak}}}
-
-    where:
-
-    .. math:: \text{slip} = 1
-
-    .. math::
-       I_{a_{\text{rotor}}} = \frac{V_{th}}{\frac{R_r}{\text{slip}}+Z_{th}}
-
-    .. math:: V_{th}=\frac{j\omega L_m}{R_s+j\omega(L_{ls}+L_m)}V_{as}
-
-    .. math::
-       Z_{th} = \frac{(R_s+j\omega L_{ls})j\omega L_m}
-       {R_s+j\omega(L_{ls}+L_m)}+j\omega L_{lr}
-
-    .. math:: \omega = \omega_{es} = 2\pi\cdot f_{\text{electric}}
-
-    Parameters
-    ----------
-    Rr:         float
-                Rotor resistance in Ohms
-    Iar:        complex, optional
-                Phase-A, Rotor Current in Amps, may be calculated
-                internally if remaining machine characteristics are
-                provided.
-    Vth:        complex, optional
-                Thevenin-equivalent stator voltage of the
-                induction machine, may be calculated internally
-                if given stator voltage and machine parameters.
-    Zth:        complex, optional
-                Thevenin-equivalent inductance (in ohms) of the
-                induction machine, may be calculated internally
-                if given machine parameters.
-    Vas:        complex, optional
-                Terminal Stator Voltage in Volts
-    Rs:         float, optional
-                Stator resistance in ohms
-    Lm:         float, optional
-                Magnetizing inductance in Henrys
-    Lls:        float, optional
-                Stator leakage inductance in Henrys, default=0
-    Llr:        float, optional
-                Rotor leakage inductance in Henrys, default=0
-    Ls:         float, optional
-                Stator inductance in Henrys
-    Lr:         float, optional
-                Rotor inductance in Henrys
-    freq:       float, optional
-                System (electrical) frequency in Hz, default=60
-    calcX:      bool, optional
-                Control argument to force system to calculate
-                system reactances with system frequency, or to
-                treat them as previously-calculated reactances.
-                default=True
-
-    Returns
-    -------
-    Tstart:     float
-                Peak torque of specified induction machine in
-                newton-meters.
-
-    See Also
-    --------
-    indmachvth:         Induction Machine Thevenin Voltage Calculator
-    indmachzth:         Induction Machine Thevenin Impedance Calculator
-    indmachpem:         Induction Machine Electro-Mechanical Power Calculator
-    indmachtem:         Induction Machine Electro-Mechanical Torque Calculator
-    indmachpkslip:      Induction Machine Peak Slip Calculator
-    indmachpktorq:      Induction Machine Peak Torque Calculator
-    indmachiar:         Induction Machine Phase-A Rotor Current Calculator
-    """
-    # Condition Inputs
-    w = 2 * _np.pi * freq
-    if Ls != None:  # Use Ls instead of Lls
-        Lls = Ls - Lm
-    if Lr != None:  # Use Lr instead of Llr
-        Llr = Lr - Lm
-    if p != 0:  # Calculate Sync. Speed from Num. Poles
-        wsyn = w / (p / 2)
-    if calcX:  # Convert Inductances to Reactances
-        Lm *= w
-        Lls *= w
-        Llr *= w
-    # Slip is 1 (one) for starting
-    slip = 1
-    # Test for Valid Input Set
-    if Vth == None:
-        if not all((Vas, Rs, Lm, Lls)):
-            raise ValueError("Invalid Argument Set, too few provided.")
-        # Valid Argument Set, Calculate Vth
-        Vth = indmachvth(Vas, Rs, Lm, Lls, Ls, freq, calcX)
-    if Zth == None:
-        if not all((Rs, Llr, Lm, Lls)):
-            raise ValueError("Invalid Argument Set, too few provided.")
-        # Valid Argument Set, Calculate Zth
-        Zth = indmachzth(Rs, Lm, Lls, Llr, Ls, Lr, freq, calcX)
-    if Iar == None:
-        if not all((Vth, Zth)):
-            raise ValueError("Invalid Argument Set, too few provided.")
-        # Valid Argument Set, Calculate Ias
-        Iar = Vth / (Rr / slip + Zth)
-    # Use Terms to Calculate Peak Torque
-    Tstart = abs(Iar) ** 2 * Rr / slip
-    return (Tstart)
-
-
-# Define Induction Machine Stator Torque Calculator
-def pstator(Pem, slip):
-    r"""
-    Stator Power Calculator for Induction Machine.
-
-    Given the electromechanical power and the slip,
-    this function will calculate the power related to the
-    stator (provided or consumed).
-
-    .. math:: P_s=\frac{P_{em}}{1-\text{slip}}
-
-    Parameters
-    ----------
-    Pem:        float
-                Electromechanical power in watts.
-    slip:       float
-                Slip factor in rad/sec.
-
-    Returns
-    -------
-    Ps:         float
-                Power related to the stator in watts.
-
-    See Also
-    --------
-    protor:         Rotor Power Calculator for Induction Machines
-    """
-    # Calculate and Return
-    Ps = Pem / (1 - slip)
-    return (Ps)
-
-
-# Define Induction Machine Rotor Torque Calculator
-def protor(Pem, slip):
-    r"""
-    Rotor Power Calculator for Induction Machine.
-
-    Given the electromechanical power and the slip,
-    this function will calculate the power related to the
-    rotor (provided or consumed).
-
-    .. math:: P_r=-\text{slip}\cdot\frac{P_{em}}{1-\text{slip}}
-
-    Parameters
-    ----------
-    Pem:        float
-                Electromechanical power in watts.
-    slip:       float
-                Slip factor in rad/sec.
-
-    Returns
-    -------
-    Pr:         float
-                Power related to the rotor in watts.
-
-    See Also
-    --------
-    pstator:         Stator Power Calculator for Induction Machines
-    """
-    # Calculate and Return
-    Pr = -slip * (Pem / (1 - slip))
-    return (Pr)
-
-
 # Define De Calculator for Transmission Lines
 def de_calc(rho, freq=60):
     r"""
@@ -4110,7 +2686,7 @@ def de_calc(rho, freq=60):
             from set of (SEA, SWAMP, AVG, AVERAGE, DAMP, DRY, SAND, SANDSTONE")
     # Calculate De
     De = De0 * _np.sqrt(rho / freq)
-    return (De)
+    return De
 
 
 # Define Impedance Per Length Calculator
@@ -4174,15 +2750,15 @@ def zperlength(Rd=None, Rself=None, Rac=None, Rgwac=None, De=None,
     Rperlen = 0
     Lperlen = 0
     # Generate Rd
-    if Rd == None:
+    if Rd is None:
         Rd = freq * carson_r
     # Generate Dsgw if Not Provided
-    if Dsgw == None and dia_gw != None:
+    if Dsgw is None and dia_gw is not None:
         Dsgw = _np.exp(-1 / 4) * dia_gw / 2
     # Generate Real Part
     if Rd > 0:
         # Generate Rself if not Provided
-        if Rself == None:
+        if Rself is None:
             # Validate Inputs
             if not all((Rd, Rac)):
                 raise ValueError("Too few arguments")
@@ -4208,11 +2784,11 @@ def zperlength(Rd=None, Rself=None, Rac=None, Rgwac=None, De=None,
         # Validate Inputs
         if not all((Dab, Dbc, Dca)):
             raise ValueError("Distance Terms [Dab,Dbc,Dca] Required")
-        if Ds == None:
+        if Ds is None:
             raise ValueError("Distance Self (Ds) Required")
         # De must be generated
-        if De == None:
-            if rho == None:
+        if De is None:
+            if rho is None:
                 raise ValueError("Too few arguments")
             De = de_calc(rho, freq)
         # Generate LperLength Matrix
@@ -4225,7 +2801,8 @@ def zperlength(Rd=None, Rself=None, Rac=None, Rgwac=None, De=None,
         if all((Rgwac, Dsgw, Dagw, Dbgw, Dcgw)):
             # Append Right-Most Column
             Lperlen = _np.append(Lperlen,
-                                 [[_np.log(De / Dagw)], [_np.log(De / Dbgw)], [_np.log(De / Dcgw)]],
+                                 [[_np.log(De / Dagw)], [_np.log(De / Dbgw)],
+                                  [_np.log(De / Dcgw)]],
                                  axis=1)
             # Append New Row
             Lperlen = _np.append(Lperlen,
@@ -4243,7 +2820,7 @@ def zperlength(Rd=None, Rself=None, Rac=None, Rgwac=None, De=None,
         Zd = Zperlen[3:4, 3:4]
         # Calculate New (3x3) Equivalent Zperlen
         Zperlen = Za - _np.dot(Zb, _np.dot(_np.linalg.inv(Zd), Zc))
-    return (Zperlen)
+    return Zperlen
 
 
 # Define Transposition Matrix Formula
@@ -4292,9 +2869,10 @@ def transposez(Zeq, fabc=1 / 3, fcab=1 / 3, fbca=1 / 3, linelen=1):
     ])
     # Define Inverse Rp Array
     _Rp = _np.linalg.inv(Rp)
-    Zeq = fabc * Zeq + fcab * (_Rp.dot(Zeq.dot(Rp))) + fbca * (Rp.dot(Zeq.dot(_Rp)))
+    Zeq = fabc * Zeq + fcab * (_Rp.dot(Zeq.dot(Rp))) + \
+        fbca * (Rp.dot(Zeq.dot(_Rp)))
     Zeq = Zeq * linelen
-    return (Zeq)
+    return Zeq
 
 
 # Define GMD Calculator
@@ -4323,256 +2901,7 @@ def gmd(Ds, *args):
         gmdx *= dist
     # Apply Root Calculation
     GMD = gmdx ** (1 / root)
-    return (GMD)
-
-
-# Define FOC IM Rated Value Calculator
-def indmachfocratings(Rr, Rs, Lm, Llr=0, Lls=0, Lr=None,
-                      Ls=None, Vdqs=1, Tem=1, wes=1):
-    r"""
-    FOC Ind. Machine Rated Operation Calculator.
-
-    Determines the parameters and characteristics of a Field-
-    Oriented-Controlled Induction Machine operating at its
-    rated limits.
-
-    Parameters
-    ----------
-    Rr:         float
-                Rotor resistance in per-unit-ohms
-    Rs:         float
-                Stator resistance in per-unit-ohms
-    Lm:         float
-                Magnetizing inductance in per-unit-Henrys
-    Llr:        float, optional
-                Rotor leakage inductance in per-unit-Henrys,
-                default=0
-    Lls:        float, optional
-                Stator leakage inductance in per-unit-Henrys,
-                default=0
-    Lr:         float, optional
-                Rotor inductance in per-unit-Henrys
-    Ls:         float, optional
-                Stator inductance in per-unit-Henrys
-    Vdqs:       complex, optional
-                The combined DQ-axis voltage required for rated
-                operation, in per-unit-volts, default=1+j0
-    Tem:        float, optional
-                The mechanical torque required for rated operation,
-                in per-unit-newton-meters, default=1
-    wes:        float, optional
-                The per-unit electrical system frequency, default=1
-
-    Returns
-    -------
-    Idqr:       complex
-                Combined DQ-axis Rotor Current in per-unit-amps
-    Idqs:       complex
-                Combined DQ-axis Stator Current in per-unit-amps
-    LAMdqr:     complex
-                Combined DQ-axis Rotor Flux in per-unit
-    LAMdqs:     complex
-                Combined DQ-axis Stator Flux in per-unit
-    slip_rat:   float
-                Rated Slip as percent of rotational and system frequencies
-    w_rat:      float
-                Rated System frequency in per-unit-rad/sec
-    lamdr_rat:  float
-                Rated D-axis rotor flux in per-unit
-    """
-    # Condition Inputs:
-    if Ls == None:  # Use Lls instead of Ls
-        Ls = Lls + Lm
-    if Lr == None:  # Use Llr instead of Lr
-        Lr = Llr + Lm
-
-    # Define Equations Function as Solver
-    def equations(val):
-        Idr, Iqr, Ids, Iqs, LAMdr, LAMqr, LAMds, LAMqs, wr = val
-        A = (Rs * Ids - wes * LAMqs) - Vdqs
-        B = Rs * Iqs - wes * LAMds
-        C = Rr * Idr - (wes - wr) * LAMqr
-        D = Rr * Iqr + (wes - wr) * LAMdr
-        E = (Ls * Ids + Lm * Idr) - LAMds
-        F = (Ls * Iqs + Lm * Iqr) - LAMqs
-        G = (Lm * Ids + Lr * Idr) - LAMdr
-        H = (Lm * Iqs + Lr * Iqr) - LAMqr
-        I = (Lm / Lr * (LAMdr * Iqs - LAMqr * Ids)) - Tem
-        return (A, B, C, D, E, F, G, H, I)
-
-    # Define Initial Guesses
-    Idr0 = -1
-    Iqr0 = -1
-    Ids0 = 1
-    Iqs0 = 1
-    LAMdr0 = Lm * Ids0 + Lr * Idr0
-    LAMqr0 = Lm * Iqs0 + Lr * Iqr0
-    LAMds0 = Ls * Ids0 + Lm * Idr0
-    LAMqs0 = Ls * Iqs0 + Lm * Iqr0
-    wr = 1
-    # Use Iterative Solver to Find Results
-    Idr, Iqr, Ids, Iqs, LAMdr, LAMqr, LAMds, LAMqs, wr = _fsolve(equations, (
-        Idr0, Iqr0, Ids0, Iqs0, LAMdr0, LAMqr0, LAMds0, LAMqs0, wr))
-    # Calculate Remaining Rating Terms
-    slip_rated = (wes - wr) / wes
-    w_rated = wr
-    lamdr_rated = abs(LAMdr + 1j * LAMqr)
-    return (
-        compose(Idr, Iqr),
-        compose(Ids, Iqs),
-        compose(LAMdr, LAMqr),
-        compose(LAMds, LAMqs),
-        slip_rated,
-        w_rated,
-        lamdr_rated
-    )
-
-
-# Define FOC IM Control Equation Evaluation Function
-def imfoc_control(Tem_cmd, LAMdr_cmd, wr_cmd, Rr, Rs, Lm,
-                  Llr=0, Lls=0, Lr=None, Ls=None, s_err=0):
-    """
-    FOC Ind. Machine Rated Operation Calculator.
-
-    Determines the parameters and characteristics of a Field-
-    Oriented-Controlled Induction Machine operating at its
-    rated limits.
-
-    Parameters
-    ----------
-    Tem_cmd:    float
-                Mechanical torque setpoint in per-unit-newton-meters
-    LAMdr_cmd:  float
-                D-axis flux setpoint in per-unit
-    wr_cmd:     float
-                Mechanical (rotor) speed in per-unit-rad/sec
-    Rr:         float
-                Rotor resistance in per-unit-ohms
-    Rs:         float
-                Stator resistance in per-unit-ohms
-    Lm:         float
-                Magnetizing inductance in per-unit-Henrys
-    Llr:        float, optional
-                Rotor leakage inductance in per-unit-Henrys,
-                default=0
-    Lls:        float, optional
-                Stator leakage inductance in per-unit-Henrys,
-                default=0
-    Lr:         float, optional
-                Rotor inductance in per-unit-Henrys
-    Ls:         float, optional
-                Stator inductance in per-unit-Henrys
-    s_err:      float, optional
-                Error in slip calculation as a percent (e.g. 0.25),
-                default=0
-
-    Returns
-    -------
-    Vdqs:       complex
-                Combined DQ-axis Stator Voltage in per-unit volts
-    Idqr:       complex
-                Combined DQ-axis Rotor Current in per-unit-amps
-    Idqs:       complex
-                Combined DQ-axis Stator Current in per-unit-amps
-    LAMdqr:     complex
-                Combined DQ-axis Rotor Flux in per-unit
-    LAMdqs:     complex
-                Combined DQ-axis Stator Flux in per-unit
-    wslip:      float
-                Machine Slip frequency in per-unit-rad/sec
-    wes:        float
-                The electrical system frequency in per-unit-rad/sec
-    """
-    # Condition Inputs:
-    if Ls == None:  # Use Lls instead of Ls
-        Ls = Lls + Lm
-    if Lr == None:  # Use Llr instead of Lr
-        Lr = Llr + Lm
-    # Calculate Additional Constraints
-    sigma = (1 - Lm ** 2 / (Ls * Lr))
-    accuracy = 1 + s_err
-    # Command Values (Transient and Steady State)
-    Ids = LAMdr_cmd / Lm
-    Iqs = Tem_cmd / ((Lm / Lr) * LAMdr_cmd)
-    wslip = Rr / (Lr * accuracy) * (Lm * Iqs) / LAMdr_cmd
-    wes = wslip + wr_cmd
-    # Stator dq Voltages (Steady State)
-    Vds = Rs * Ids - wes * sigma * Ls * Iqs
-    Vqs = Rs * Iqs - wes * Ls * Ids
-    # Remaining Steady State
-    Iqr = -Lm / Lr * Iqs
-    Idr = 0
-    LAMqr = 0
-    LAMqs = sigma * Ls * Iqs
-    LAMds = Ls * Ids
-    return (
-        compose(Vds, Vqs),
-        compose(Idr, Iqr),
-        compose(Ids, Iqs),
-        compose(LAMdr_cmd, LAMqr),
-        compose(LAMds, LAMqs),
-        wslip,
-        wes
-    )
-
-
-# Define Synch. Machine Eq Calculator
-def synmach_Eq(Vt_pu, Itmag, PF, Ra, Xd, Xq):
-    # noqa: D401   "Synchronous" is an intentional descriptor
-    r"""
-    Synchronous Machine Eq Calculator.
-
-    Given specified parameter set, will calculate
-    the internal voltage on the q-axis (Eq).
-
-    .. math:: E_q=V_{t_{pu}}-\left[R_a\cdot I_{t_{pu}}+
-       j\cdot X_q\cdot I_{t_{pu}}+j(X_d-X_q)\cdot I_{ad}\right]
-
-    where:
-
-    .. math:: I_{t_{pu}}=I_{t_{mag}}\cdot e^{-j(
-       \angle{V_{t_{pu}}}-\cos^{-1}(PF))}
-
-    .. math:: \theta_q=\angle{V_{t_{pu}}-\left(R_a
-       I_{t_{pu}}+j\cdot X_qI_{t_{pu}}\right)
-
-    .. math:: I_{ad}=\left|I_{t_{pu}}\cdot\sin(
-       -\cos^{-1}(PF)+\theta_q)\right|e^{j(\theta_q
-       -90°)}
-
-    Parameters
-    ----------
-    Vt_pu:      complex
-                Terminal voltage in per-unit-volts
-    Itmag:      float
-                Terminal current magnitude in per-
-                unit-amps
-    PF:         float
-                Machine Power Factor, (+)ive values denote
-                leading power factor, (-)ive values denote
-                lagging power factor
-    Ra:         float
-                AC resistance in per-unit-ohms
-    Xd:         float
-                D-axis reactance in per-unit-ohms
-    Xq:         float
-                Q-axis reactance in per-unit-ohms
-
-    Returns
-    -------
-    Eq:         complex
-                Internal Synchronous Machine Voltage
-                in per-unit-volts
-    """
-    # Calculate Required Terms
-    phi = _np.arccos(PF)
-    Itmag = abs(Itmag)
-    It_pu = Itmag * _np.exp(-1j * (_np.angle(Vt_pu) + phi))
-    th_q = _np.angle(Vt_pu - (Ra * It_pu + 1j * Xq * It_pu))
-    Iad = (abs(It_pu) * _np.sin(phi + th_q)) * _np.exp(1j * (th_q - _np.pi / 2))
-    # Calculate Eq
-    Eq = Vt_pu - (Ra * It_pu + 1j * Xq * It_pu + 1j * (Xd - Xq) * Iad)
-    return (Eq)
+    return GMD
 
 
 # Define Power-Factor Voltage/Current Relation
@@ -4607,6 +2936,16 @@ def vipf(V=None, I=None, PF=1, find=''):
                 System power factor, (+)ive values denote
                 leading power factor, (-)ive values denote
                 lagging poer factor; default=1
+
+    Examples
+    --------
+    >>> import electricpy as ep
+    >>> # Demonstrate the generic functionality
+    >>> ep.vipf(V=480, I=ep.phasors.phasor(20, 120))
+    (480, (-9.999999999999996+17.320508075688775j), -0.499999...)
+    >>> # Find the power factor
+    >>> ep.vipf(V=480, I=ep.phasors.phasor(20, 120), find="PF")
+    -0.49999...
     """
     # Test to find Voltage
     if isinstance(V, float) and isinstance(I, complex):
@@ -4626,13 +2965,12 @@ def vipf(V=None, I=None, PF=1, find=''):
     # Return
     find = find.upper()
     if find == 'V':
-        return (V)
-    elif find == 'I':
-        return (I)
-    elif find == 'PF':
-        return (PF)
-    else:
-        return (V, I, PF)
+        return V
+    if find == 'I':
+        return I
+    if find == 'PF':
+        return PF
+    return V, I, PF
 
 
 # Define Synchronous Speed Calculator
@@ -4666,11 +3004,10 @@ def syncspeed(Npol, freq=60, Hz=False, rpm=False):
                 Synchronous Speed of Induction Machine, defaults to units of
                 rad/sec, but may be set to Hertz or RPM if `Hz` or `rpm` set to True.
     """
-    try:
-        wsyn = 2 * _np.pi * freq / (Npol / 2)
-    except ZeroDivisionError:
+    if Npol == 0:
         raise ZeroDivisionError("Poles of an electrical machine \
         can not be zero")
+    wsyn = 2 * _np.pi * freq / (Npol / 2)
     if Hz:
         return (2*freq / (Npol))
     if rpm:
@@ -4732,7 +3069,7 @@ def phs3valpha(VA, VB=0, VC=0):
                 Matches type of inputs.
     """
     # Handle Combined (list/tuple) Input
-    if (isinstance(VA, (tuple, list)) and VB == 0 and VC == 0):
+    if isinstance(VA, (tuple, list)) and VB == 0 and VC == 0:
         if len(VA) != 3:
             raise ValueError("Invalid input set, must "
                              "be list of three elements, three inputs,"
@@ -4743,9 +3080,10 @@ def phs3valpha(VA, VB=0, VC=0):
     else:
         Valpha = VA - VB / 2 - VC / 2
     # Return the Alpha-Voltage
-    return (Valpha)
+    return Valpha
 
-def wireresistance(length=None,diameter=None,rho=16.8*10**-9,R=None):
+
+def wireresistance(length=None, diameter=None, rho=16.8 * 10 ** -9, R=None):
     r"""
     Wire Resistance Calculator.
 
@@ -4778,22 +3116,23 @@ def wireresistance(length=None,diameter=None,rho=16.8*10**-9,R=None):
     R:          [float], optional
                 Wire resistance, unitless.
     """
-    if R == length == diameter == None:
+    if R == length == diameter is None:
         raise ValueError("To few arguments.")
     # Given length and diameter
-    if length != None and diameter != None:
+    if length is not None and diameter is not None:
         # calculating the area
-        A = pi*( diameter ** 2 ) / 4
-        return rho*length/A
+        A = pi * (diameter ** 2) / 4
+        return rho * length / A
     # Given resistance and diameter
-    elif R != None and diameter != None:
+    if R is not None and diameter is not None:
         # calculating the area
-        A = pi*( diameter ** 2 ) / 4
-        return R*A/rho
+        A = pi * (diameter ** 2) / 4
+        return R * A / rho
     # Given resistance and length
-    elif R != None and length != None:
-        A = rho*length/R
-        return _np.sqrt(4*A/pi)
+    if R is not None and length is not None:
+        A = rho * length / R
+        return _np.sqrt(4 * A / pi)
+
 
 def parallel_plate_capacitance(A=None, d=None, e=e0, C=None):
     r"""
@@ -4828,17 +3167,18 @@ def parallel_plate_capacitance(A=None, d=None, e=e0, C=None):
     C:  float, optional
         Capacitance, unitless.
     """
-    if C == A == d == None:
+    if C == A == d is None:
         raise ValueError("To few arguments.")
     # Given area and distance
-    if A != None and d != None:
-        return e*A/d
+    if A is not None and d is not None:
+        return e * A / d
     # Given capacitance and distance
-    elif C != None and d != None:
-        return d*C/e
+    if C is not None and d is not None:
+        return d * C / e
     # Given capacitance and area
-    elif C != None and A != None:
-        return e*A/C
+    if C is not None and A is not None:
+        return e * A / C
+
 
 def solenoid_inductance(A=None, l=None, N=None, u=u0, L=None):
     r"""
@@ -4877,22 +3217,23 @@ def solenoid_inductance(A=None, l=None, N=None, u=u0, L=None):
     L:  float, optional
         Inductance, unitless.
     """
-    if L == A == l == N == None:
+    if L == A == l == N is None:
         raise ValueError("To few arguments.")
     # Given area, length and number of turns
-    if A != None and l != None and N != None:
-        return N**2*u*A/l
+    if A is not None and l is not None and N is not None:
+        return N ** 2 * u * A / l
     # Given inductance, length and number of turns
-    elif L != None and l != None and N != None:
-        return L*l/(N**2*u)
+    if L is not None and l is not None and N is not None:
+        return L * l / (N ** 2 * u)
     # Given inductance, area and number of turns
-    elif L != None and A != None and N != None:
-        return N**2*u*A/L
+    if L is not None and A is not None and N is not None:
+        return N ** 2 * u * A / L
     # Given inductance, area and length
-    elif L != None and A != None and l != None:
-        return _np.sqrt(L*l/(u*A))
+    if L is not None and A is not None and l is not None:
+        return _np.sqrt(L * l / (u * A))
 
-def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
+
+def ic_555_astable(R=None, C=None, freq=None, t_high=None, t_low=None):
     """
     555 Integrated Circuit Calculator.
 
@@ -4923,7 +3264,7 @@ def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
             "t_low": ON time of IC 555
             "t_high": OFF time of IC 555
     """
-    if R!=None and C!=None:
+    if R is not None and C is not None:
         if len(R) != 2:
             raise ValueError(
                 "Monostable 555 IC will have only 2 resitances to be fixed "
@@ -4932,39 +3273,39 @@ def ic_555_astable(R=None,C=None,freq=None,t_high=None,t_low=None):
 
         [R1, R2] = R
 
-        T = _np.log(2)*C*(R1+2*R2)
-        freq = 1/T
-        t_low = _np.log(2)*C*R2
-        t_high = _np.log(2)*C*(R1+R2)
-        duty_cycle = t_high*100/T
+        T = _np.log(2) * C * (R1 + 2 * R2)
+        freq = 1 / T
+        t_low = _np.log(2) * C * R2
+        t_high = _np.log(2) * C * (R1 + R2)
+        duty_cycle = t_high * 100 / T
 
         return {
-            'time_period':T,
-            'frequency':freq,
-            'duty_cycle':duty_cycle,
-            't_low':t_low,
-            't_high':t_high
+            'time_period': T,
+            'frequency': freq,
+            'duty_cycle': duty_cycle,
+            't_low': t_low,
+            't_high': t_high
         }
 
-    elif t_high!=None and t_low!=None and C!=None:
+    if t_high is not None and t_low is not None and C is not None:
 
-        x2 = t_low/C*_np.log(2)
-        x1 = t_high/C*_np.log(2)
-        T = t_high+t_low
-        freq = 1/(T)
-        duty_cycle = t_high/(T)
+        x2 = t_low / C * _np.log(2)
+        x1 = t_high / C * _np.log(2)
+        T = t_high + t_low
+        freq = 1 / (T)
+        duty_cycle = t_high / (T)
 
         return {
-            'time_period':T,
-            'frequency':freq,
-            'duty_cycle':duty_cycle,
-            'R1':x1-x2,
-            'R2':x2
+            'time_period': T,
+            'frequency': freq,
+            'duty_cycle': duty_cycle,
+            'R1': x1 - x2,
+            'R2': x2
         }
-    else:
-        raise TypeError("Not enough parqmeters are passed")
+    raise TypeError("Not enough parqmeters are passed")
 
-def ic_555_monostable(R=None,C=None,freq=None,t_high=None,t_low=None):
+
+def ic_555_monostable(R=None, C=None, freq=None, t_high=None, t_low=None):
     """
     555 Integrated Circuit Calculator.
 
@@ -4995,36 +3336,29 @@ def ic_555_monostable(R=None,C=None,freq=None,t_high=None,t_low=None):
             "t_low": ON time of IC 555
             "t_high": OFF time of IC 555
     """
-    T = t_high+t_low
+    T = t_high + t_low
     if R is None:
-        try:
-            assert C!=None and T!=None
-        except AssertionError:
+        if not (C is not None and T is not None):
             raise ValueError(
                 "To find Resitance, Capacitance and delay time should be "
                 "provided"
             )
-        return T/(_np.log(3)*C)
-    elif C is None:
-        try:
-            assert R!=None and T!=None
-        except AssertionError:
+        return T / (_np.log(3) * C)
+    if C is None:
+        if not (R is not None and T is not None):
             raise ValueError(
                 "To find Capacitance , Resistance and delay time should be "
                 "provided"
             )
-        return T/(_np.log(3)*R)
+        return T / (_np.log(3) * R)
 
-    elif T is None:
-
-        try:
-            assert R!=None and T!=None
-        except AssertionError:
+    if T is None:
+        if not (R is not None and T is not None):
             raise ValueError(
                 "To find Time delay , Resistance and Capacitance should be "
                 "provided"
             )
-        return R*C*_np.log(3)
+        return R * C * _np.log(3)
 
 
 def t_attenuator(Adb, Z0):
@@ -5051,12 +3385,13 @@ def t_attenuator(Adb, Z0):
     R1: float T attenuator R1
     R2: float T attenuator R2
     """
-    x = Adb/20
+    x = Adb / 20
 
-    R1 = Z0*(_np.power(10, x)-1)/(_np.power(10, x)+1)
-    R2 = 2*Z0*_np.power(10, x)/(_np.power(10, 2*x)-1)
+    R1 = Z0 * (_np.power(10, x) - 1) / (_np.power(10, x) + 1)
+    R2 = 2 * Z0 * _np.power(10, x) / (_np.power(10, 2 * x) - 1)
 
-    return R1,R2
+    return R1, R2
+
 
 def pi_attenuator(Adb, Z0):
     r"""
@@ -5080,10 +3415,143 @@ def pi_attenuator(Adb, Z0):
     R1: float π attenuator R1
     R2: float π attenuator R2
     """
-    x = Adb/20
+    x = Adb / 20
 
-    R1 = Z0*(_np.power(10, x)+1)/(_np.power(10, x)-1)
-    R2 = (Z0/2)*(_np.power(10, x) - (1/(_np.power(10, x))))
+    R1 = Z0 * (_np.power(10, x) + 1) / (_np.power(10, x) - 1)
+    R2 = (Z0 / 2) * (_np.power(10, x) - (1 / (_np.power(10, x))))
 
-    return R1,R2
+    return R1, R2
+
+
+# Calculate Zener Diode Resistor
+def zener_diode_required_resistor(Vin, Vo, I):
+    r"""
+    Zener diode required resistance function .
+
+    A zener diode is uses to allow current to flow "backwards" when the zener
+    voltage is reached. This function use to calculate the required resistor
+    value following below formula:
+
+    .. math:: R = \frac{V_{in(min)} - V_{out}}{I_{load}+0.01}
+
+    .. image:: /static/zenerdiode.png
+
+    Parameters
+    ----------
+    Vin:        float
+                Minimum input Voltage in Volt
+    Vo:         float
+                Output Voltage in Volt
+    I:          float
+                Load Current in Ampere
+
+    Returns
+    -------
+    R:          float
+                Load Resistance in Ohm
+    """
+    # Solve Load Resistance
+    R = (Vin - Vo) / (I+0.01)
+    return (R)
+
+# Calculate Zener Diode Power
+
+
+def zener_diode_power(Vin, Vo, R):
+    r"""
+    Zener diode power loss function.
+
+    A zener diode is uses to allow current to flow "backwards" when the zener
+    voltage is reached. This function use to calculate the power in resistor
+    following below formula:
+
+    .. math:: P_R = \frac{(V_{out} - V_{in(max)})^2}{R}
+
+    .. image:: /static/zenerdiode.png
+
+    Parameters
+    ----------
+    Vin:        float
+                Maximum input Voltage in Volt
+    Vo:         float
+                Output Voltage in Volt
+    R:          float
+                Load Resistance in Ohm
+
+    Returns
+    -------
+    P:          float
+                Power on resistance in Watt
+    """
+    # Validate Inputs
+    if R == 0:
+        raise ValueError("Resistance Value can not be zero")
+
+    # Solve Load Resistance
+    P = ((Vo - Vin) ** 2) / R
+    return (P)
+
+
+def lm317(r1, r2, v_out):
+    r"""
+    LM317 linear voltage regulator solver.
+
+    The LM317 is a linear voltage regulator that can be adjusted to supply a
+    specific output voltage. The LM317 has three pins, adjust, output and input.
+    The LM317 is often connected as in the image below. [1]_
+
+
+    .. image:: https://www.basictables.com/media/lm317-circuit.png
+
+
+    Formula to Calculate Output Voltage, R1, R2:
+
+    .. math:: V_{out} = 1.25 * (1+\frac{R2}{R1})
+
+    .. math:: R1 = \frac{1.25*R2}{V_{out}-1.25}
+
+    .. math:: R2 = \frac{R1*V_{out}}{1.25 - R1}
+
+    Parameters
+    ----------
+    v_out: float, Optional
+           Output Voltage in LM317 in Volts
+    r1:    float, Optional
+           r1 is resistance and is measured in ohm
+    r2:    float, Optional
+           r2 is resistance and is measured in ohm
+
+    Returns
+    -------
+    v_out: float
+           v_out is the output voltage and is measured in volt (V)
+    r1:    float
+           r1 is resistance and is measured in ohm
+    r2:    float
+           r2 is resistance and is measured in ohm
+
+
+    .. [1] Electronial, "LM317" BasicTables, Accessed May, 2022
+       https://www.basictables.com/electronics/lm317
+    """
+    if r1 is not None and r2 is not None:
+        # Returns Voltage
+        return 1.25 * (1 + (r2 / r1))
+
+    if r2 is not None and v_out is not None:
+        # Returns R1
+        return (1.25 * r2) / (v_out - 1.25)
+
+    if r1 is not None and v_out is not None:
+        # Returns R2
+        return ((r1 * v_out) / 1.25) - r1
+
+    raise ValueError("Invalid arguments")
+
+
+# Define Module Specific Variables
+_name_ = NAME
+_version_ = VERSION
+__version__ = _version_  # Alias Version for User Ease
+
 # END OF FILE

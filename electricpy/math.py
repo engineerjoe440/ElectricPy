@@ -1,6 +1,6 @@
 ################################################################################
 """
-`electricpy` Package - `math` Module.
+Common Mathematic Functions for Electrical Engineering.
 
 >>> from electricpy import math as epmath
 
@@ -13,10 +13,10 @@ to aid in scientific calculations.
 """
 ################################################################################
 
-# Import Required Packages
 import numpy as _np
 import scipy.signal as _sig
 from scipy.integrate import quad as integrate
+
 
 # Define convolution function
 def convolve(tuple):
@@ -58,15 +58,16 @@ def step(t):
     >>> import numpy as np
     >>> from electricpy.math import step
     >>> t = np.array([-10, -8, -5, -3, 0, 1, 2, 5, 7, 15])
-    >>> x = step(t)
-    array([0, 0, 0, 0, 1, 1, 1, 1, 1, 1])
+    >>> step(t)
+    array([0., 0., 0., 0., 1., 1., 1., 1., 1., 1.])
 
     Parameters
     ----------
     t:  arraylike
         Time samples for which the step response should be generated.
     """
-    return (_np.heaviside(t, 1))
+    return _np.heaviside(t, 1)
+
 
 # Arbitrary Waveform RMS Calculating Function
 def funcrms(func, T):
@@ -92,6 +93,7 @@ def funcrms(func, T):
     integral, _ = integrate(fn, 0, T)
     return _np.sqrt(1 / T * integral)
 
+
 # Define Gaussian Function
 def gaussian(x, mu=0, sigma=1):
     """
@@ -115,6 +117,7 @@ def gaussian(x, mu=0, sigma=1):
     """
     return (1 / (sigma * _np.sqrt(2 * _np.pi)) *
             _np.exp(-(x - mu) ** 2 / (2 * sigma ** 2)))
+
 
 # Define Gaussian Distribution Function
 def gausdist(x, mu=0, sigma=1):
@@ -142,7 +145,8 @@ def gausdist(x, mu=0, sigma=1):
     """
     # Define Integrand
     def integrand(sq):
-        return (_np.exp(-sq ** 2 / 2))
+        return _np.exp(-sq ** 2 / 2)
+
     try:
         lx = len(x)  # Find length of Input
     except:
@@ -157,9 +161,10 @@ def gausdist(x, mu=0, sigma=1):
         result = 1 / _np.sqrt(2 * _np.pi) * integral[0]  # Evaluate Result
         F[i] = result
     # Return only the 0-th value if there's only 1 value available
-    if (len(F) == 1):
+    if len(F) == 1:
         F = F[0]
-    return (F)
+    return F
+
 
 # Define Probability Density Function
 def probdensity(func, x, x0=0, scale=True):
@@ -199,15 +204,16 @@ def probdensity(func, x, x0=0, scale=True):
     for i in range(lx):
         sumx = _np.append(sumx, integrate(func, x0, x[i])[0])
     # Return only the 0-th value if there's only 1 value available
-    if (len(sumx) == 1):
+    if len(sumx) == 1:
         sumx = sumx[0]
     else:
-        if (scale == True):
+        if scale:
             mx = sumx.max()
             sumx /= mx
-        elif (scale != False):
+        elif scale != False:
             sumx /= scale
-    return (sumx)
+    return sumx
+
 
 # Define Real FFT Evaluation Function
 def rfft(arr, dt=0.01, absolute=True, resample=True):
@@ -242,17 +248,17 @@ def rfft(arr, dt=0.01, absolute=True, resample=True):
         fourier = abs(_np.fft.rfft(arr))
     else:
         fourier = _np.fft.rfft(arr)
-    if resample == True:
+    if resample:
         # Evaluate the Downsampling Ratio
         dn = int(dt * len(arr))
         # Downsample to remove unnecessary points
         fixedfft = filter.dnsample(fourier, dn)
         return (fixedfft)
-    elif resample == False:
+    elif not resample:
         return (fourier)
     else:
         # Condition Resample Value
         resample = int(resample)
         # Downsample to remove unnecessary points
         fixedfft = filter.dnsample(fourier, resample)
-        return (fixedfft)
+        return fixedfft

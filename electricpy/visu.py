@@ -1,18 +1,309 @@
 ################################################################################
 """
-`electricpy.visu` - Support for plotting and visualizations.
+Visualizations Specifically for Electrical Engineering.
 
 Filled with plotting functions and visualization tools for electrical engineers,
 this module is designed to assist engineers visualize their designs.
 """
 ################################################################################
 
+import cmath as _c
+
 import numpy as _np
+import matplotlib as _matplotlib
 import matplotlib.pyplot as _plt
-import cmath
-from electricpy import geometry
+
+from electricpy import powerset, geometry
 from electricpy.geometry import Point
 from electricpy.geometry.circle import Circle
+
+
+
+# Define Power Triangle Function
+def powertriangle(P=None, Q=None, S=None, PF=None, color="red",
+                  text="Power Triangle", printval=False):
+    """
+    Power Triangle Plotting Function.
+
+    This function is designed to draw a power triangle given
+    values for the complex power system.
+
+    .. image:: /static/PowerTriangle.png
+
+    Parameters
+    ----------
+    P:          float
+                Real Power, unitless, default=None
+    Q:          float
+                Reactive Power, unitless, default=None
+    S:          float
+                Apparent Power, unitless, default=None
+    PF:         float
+                Power Factor, unitless, provided as a decimal value, lagging is
+                positive, leading is negative; default=None
+    color:      string, optional
+                The color of the power triangle lines, default="red"
+    text:       string, optional
+                The title of the power triangle plot, default="Power Triangle"
+    printval:   bool, optional
+                Control argument to allow the numeric values to be printed on
+                the plot, default="False"
+
+    Returns
+    -------
+    matplotlib.pyplot:  Plotting object to be used for additional configuration
+                        or plotting.
+    """
+    # Calculate all values if not all are provided
+    if P is None or Q is None or S is None or PF is None:
+        P, Q, S, PF = powerset(P, Q, S, PF)
+
+    # Generate Lines
+    p_line_x = [0, P]
+    p_line_y = [0, 0]
+    q_line_x = [P, P]
+    q_line_y = [0, Q]
+    s_line_x = [0, P]
+    s_line_y = [0, Q]
+
+    # Plot Power Triangle
+    _plt.figure(1)
+    _plt.title(text)
+    _plt.plot(p_line_x, p_line_y, color=color)
+    _plt.plot(q_line_x, q_line_y, color=color)
+    _plt.plot(s_line_x, s_line_y, color=color)
+    _plt.xlabel("Real Power (W)")
+    _plt.ylabel("Reactive Power (VAR)")
+    maximum = max(abs(P), abs(Q))
+
+    if P > 0:
+        _plt.xlim(0, maximum * 1.1)
+        x = maximum
+    else:
+        _plt.xlim(-maximum * 1.1, 0)
+        x = -maximum
+    if Q > 0:
+        _plt.ylim(0, maximum * 1.1)
+        y = maximum
+    else:
+        _plt.ylim(-maximum * 1.1, 0)
+        y = -maximum
+    if PF > 0:
+        power_factor_text = "Lagging"
+    else:
+        power_factor_text = "Leading"
+    # Print all values if asked to
+    if printval:
+        _plt.text(
+            x/20,
+            y*4/5,
+            (
+                f"P:   {P} W\n"
+                f"Q:   {Q} VAR\n"
+                f"S:   {S} VA\n"
+                f"PF:  {abs(PF)} {power_factor_text}\n"
+                f"ΘPF: {_np.degrees(_np.arccos(PF))}° {power_factor_text}"
+            ),
+            color=color
+        )
+    return _plt
+
+
+# Define Convolution Bar-Graph Function:
+def convbar(h, x, outline=True):
+    """
+    Convolution Bar-Graph Plotter Function.
+
+    Generates plots of each of two input arrays as bar-graphs, then
+    generates a convolved bar-graph of the two inputs to demonstrate
+    and illustrate convolution, typically for an educational purpose.
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> import electricpy.visu as visu
+    >>> h = np.array([0, 1, 1, 1, 0])
+    >>> x = np.array([0, 1, 1, 1, 0])
+    >>> visu.convbar(h, x)
+
+    .. image:: /static/convbar-example.png
+
+    Parameters
+    ----------
+    h:      numpy.ndarray
+            Impulse Response - Given as Array (Prefferably Numpy Array)
+    x:      numpy.ndarray
+            Input Function - Given as Array (Prefferably Numpy Array)
+    """
+    # The impulse response
+    M = len(h)
+    t = _np.arange(M)
+    # Plot
+    _plt.subplot(121)
+    if outline:
+        _plt.plot(t, h, color='red')
+    _plt.bar(t, h, color='black')
+    _plt.xticks([0, 5, 9])
+    _plt.ylabel('h')
+    _plt.title('Impulse Response')
+    _plt.grid()
+
+    # The input function
+    N = len(x)
+    s = _np.arange(N)
+    # Plot
+    _plt.subplot(122)
+    if outline:
+        _plt.plot(s, x, color='red')
+    _plt.bar(s, x, color='black')
+    _plt.xticks([0, 10, 19])
+    _plt.title('Input Function')
+    _plt.grid()
+    _plt.ylabel('x')
+
+    # The output
+    L = M + N - 1
+    w = _np.arange(L)
+    _plt.figure(3)
+    y = _np.convolve(h, x)
+    if outline:
+        _plt.plot(w, y, color='red')
+    _plt.bar(w, y, color='black')
+    _plt.ylabel('y')
+    _plt.grid()
+    _plt.title('Convolved Output')
+    return _plt
+
+
+# Define Phasor Plot Generator
+def phasorplot(phasors, title="Phasor Diagram", legend=False, bg=None,
+               colors=None, radius=None, linewidth=None, size=None,
+               label=False, labels=False, tolerance=None):
+    """
+    Phasor Plotting Function.
+
+    This function is designed to plot a phasor-diagram with angles in degrees
+    for up to 12 phasor sets (more may be used if additional colors are set).
+    Phasors must be passed as a complex number set, (e.g.
+    [ m+ja, m+ja, m+ja, ... , m+ja ] ).
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> from electricpy import phasors
+    >>> from electricpy import visu
+    >>> voltages = np.array([
+    ...     [67,0],
+    ...     [45,-120],
+    ...     [52,120]
+    ... ])
+    >>> phasors = phasors.phasorlist(voltages)
+    >>> plt = visu.phasorplot(phasors, colors=["red", "green", "blue"])
+    >>> plt.show()
+
+    .. image:: /static/PhasorPlot.png
+
+    Parameters
+    ----------
+    phasors:    list of complex
+                The set of phasors to be plotted.
+    title:      string, optional
+                The Plot Title, default="Phasor Diagram"
+    legend:     bool, optional
+                Control argument to enable displaying the legend, must be passed
+                as an array or list of strings. `label` and `labels` are mimic-
+                arguments and will perform similar operation, default=False
+    bg:         string, optional
+                Background-Color control, default="#d5de9c"
+    radius:     float, optional
+                The diagram radius, unless specified, automatically scales
+    colors:     list of str, optional
+                List of hexidecimal color strings denoting the line colors to
+                use.
+    size:       float, optional
+                Control argument for figure size. default=None
+    linewidth:  float, optional
+                Control argument to declare the line thickness. default=None
+    tolerance:  float, optional
+                Minimum magnitude to plot, anything less than tolerance will be
+                plotted as a single point at the origin, by default, the
+                tolerance is scaled to be 1/25-th the maximum radius. To disable
+                the tolerance, simply provide either False or -1.
+
+    Returns
+    -------
+    matplotlib.pyplot:  Plotting object to be used for additional configuration
+                        or plotting.
+    """
+    # Load Complex Values if Necessary
+    try:
+        len(phasors)
+    except TypeError:
+        phasors = [phasors]
+    # Manage Colors
+    if colors is None:
+        colors = [
+            "#FF0000", "#800000", "#FFFF00", "#808000", "#00ff00", "#008000",
+            "#00ffff", "#008080", "#0000ff", "#000080", "#ff00ff", "#800080"
+        ]
+    # Scale Radius
+    if radius is None:
+        radius = _np.abs(phasors).max()
+    # Set Tolerance
+    if tolerance is None:
+        tolerance = radius / 25
+    elif tolerance is False:
+        tolerance = -1
+    # Set Background Color
+    if bg is None:
+        bg = "#FFFFFF"
+    # Load labels if handled in other argument
+    if label:
+        legend = label
+    if labels:
+        legend = labels
+    # Check for more phasors than colors
+    if len(phasors) > len(colors):
+        raise ValueError(
+            "ERROR: Too many phasors provided. Specify more line colors."
+        )
+
+    if size is None:
+        # Force square figure and square axes
+        width, height = _matplotlib.rcParams['figure.figsize']
+        size = min(width, height)
+    # Make a square figure
+    fig = _plt.figure(figsize=(size, size))
+    ax = fig.add_axes([0.1, 0.1, 0.8, 0.8], polar=True, facecolor=bg)
+    _plt.grid(True)
+
+    # Plot the diagram
+    _plt.title(title + "\n")
+    arrows = []
+    for i, phasor in enumerate(phasors):
+        mag, ang_r = _c.polar(phasor)
+        # Plot with labels
+        if legend:
+            if mag > tolerance:
+                arrows.append(
+                    _plt.arrow(0, 0, ang_r, mag, color=colors[i],
+                                  label=legend[i], linewidth=linewidth)
+                )
+            else:
+                arrows.append(
+                    _plt.plot(0, 0, 'o', markersize=linewidth * 3,
+                                 label=legend[i], color=colors[i])
+                )
+        # Plot without labels
+        else:
+            _plt.arrow(0, 0, ang_r, mag, color=colors[i], linewidth=linewidth)
+    if legend:
+        _plt.legend(arrows, legend)
+    # Set Minimum and Maximum Radius Terms
+    ax.set_rmax(radius)
+    ax.set_rmin(0)
+    return _plt
+
 
 class InductionMotorCircle:
     """
@@ -52,7 +343,7 @@ class InductionMotorCircle:
     output_power:       int
                         Desired power output from the induction motor
     torque_ration:      float
-                        Ration between rotor resitance to stator resistance
+                        Ration between rotor resistance to stator resistance
                         (i.e., R2/R1)
     frequency:          int
                         AC supply frequency
@@ -61,11 +352,11 @@ class InductionMotorCircle:
     """
 
     def __init__(self, no_load_data, blocked_rotor_data, output_power,
-                torque_ration=1, frequency=50, poles=4):
+                 torque_ration=1, frequency=50, poles=4):
         """Primary Entrypoint."""
         self.no_load_data = no_load_data
         self.blocked_rotor_data = blocked_rotor_data
-        self.f = frequency
+        self.frequency = frequency
         self.operating_power = output_power
         self.torque_ratio = torque_ration
         self.poles = poles
@@ -147,11 +438,11 @@ class InductionMotorCircle:
         # Full load output
         _plt.plot(
             [self.secondary_current_line[0][1],
-            self.secondary_current_line[0][1]],
+             self.secondary_current_line[0][1]],
             [self.secondary_current_line[1][1], self.center_y])
         # Diameter of the circle
         _plt.plot([self.center_x - self.radius, self.center_x + self.radius],
-                [self.center_y, self.center_y], ls='-.')
+                  [self.center_y, self.center_y], ls='-.')
         # Max torque line
         _plt.plot(
             [self.center_x, self.torque_max_x],
@@ -215,7 +506,7 @@ class InductionMotorCircle:
         rotor_cu_loss = total_cu_loss - stator_cu_loss
 
         rotor_output = self.power_y * self.power_scale - \
-                    (rotor_cu_loss + stator_cu_loss + no_load_losses)
+                       (rotor_cu_loss + stator_cu_loss + no_load_losses)
 
         slip = rotor_cu_loss / rotor_output
 
@@ -345,12 +636,13 @@ class InductionMotorCircle:
         p_y_2 = center_y + self.radius * _np.sin(beta_1)
         return [p_x_1, p_y_1], [p_x_2, p_y_2]
 
+
 class PowerCircle:
     r"""
     Plot Power Circle Diagram of Transmission System.
 
     This class is designed to plot the power circle diagram of a transmission
-    system both sending and reciving ends.
+    system both sending and receiving ends.
 
     Examples
     --------
@@ -409,21 +701,21 @@ class PowerCircle:
                  D: complex = None) -> None:
         r"""Initialize the class."""
         if C is not None:
-            assert abs(A*D - B*C - 1) < 1e-6, "ABCD Matrix is not a valid ABCD Matrix"
+            assert abs(A * D - B * C - 1) < 1e-6, "ABCD Matrix is not a valid ABCD Matrix"
 
         if power_circle_type.lower() == "receiving":
 
-            if A != None and B != None and Vr != None:
+            if A is not None and B is not None and Vr is not None:
                 self.radius, self.center, self.operating_point = PowerCircle._build_circle(A, B, "receiving_end", Vr,
-                Pr, Qr, Sr, power_factor, Vs)
+                                                                                           Pr, Qr, Sr, power_factor, Vs)
             else:
                 raise ValueError("Not enough attributes to build circle")
 
         elif power_circle_type.lower() == "sending":
 
-            if B != None and D != None and Vs != None:
+            if B is not None and D is not None and Vs is not None:
                 self.radius, self.center, self.operating_point = PowerCircle._build_circle(D, B, "sending_end", Vs,
-                Ps, Qs, Ss, power_factor, Vr)
+                                                                                           Ps, Qs, Ss, power_factor, Vr)
             else:
                 raise ValueError("Not enough attributes to build power circle")
 
@@ -434,90 +726,92 @@ class PowerCircle:
         self.parameters = locals()
 
     @staticmethod
-    def _build_circle(a1, a2, circle_type, V, P = None, Q = None, S = None, power_factor = None, V_ref = None):
+    def _build_circle(a1, a2, circle_type, V, P=None, Q=None, S=None, power_factor=None, V_ref=None):
 
-        k = (abs(V)**2)*abs(a1)/abs(a2)
-        alpha = cmath.phase(a1)
-        beta = cmath.phase(a2)
+        k = (abs(V) ** 2) * abs(a1) / abs(a2)
+        alpha = _c.phase(a1)
+        beta = _c.phase(a2)
 
         if circle_type == "receiving_end":
-            center = Point(-k*cmath.cos(alpha - beta), -k*cmath.sin(alpha - beta))
+            center = Point(-k * _c.cos(alpha - beta), -k * _c.sin(alpha - beta))
 
         elif circle_type == "sending_end":
-            center = Point(k*cmath.cos(alpha -beta), -k*cmath.sin(alpha - beta))
+            center = Point(k * _c.cos(alpha - beta), -k * _c.sin(alpha - beta))
 
-        if V_ref != None and P != None and Q != None:
-            radius = abs(V)*abs(V_ref)/(abs(a2))
+        if V_ref is not None and P is not None and Q is not None:
+            radius = abs(V) * abs(V_ref) / (abs(a2))
             operation_point = Point(P, Q)
 
-        elif V_ref != None and S != None:
-            radius = abs(V)*abs(V_ref)/(abs(a2))
+        elif V_ref is not None and S is not None:
+            radius = abs(V) * abs(V_ref) / (abs(a2))
             operation_point = Point(S.real, S.imag)
 
-        elif P != None and Q != None:
+        elif P is not None and Q is not None:
             radius = geometry.distance(center, Point(P, Q))
             operation_point = Point(P, Q)
 
-        elif S != None:
+        elif S is not None:
             radius = geometry.distance(center, Point(S.real, S.imag))
             operation_point = Point(S.real, S.imag)
 
-        elif P != None and power_factor != None:
+        elif P is not None and power_factor is not None:
 
-            Q = P*cmath.sqrt(1/power_factor**2 - 1).real
+            Q = P * _c.sqrt(1 / power_factor ** 2 - 1).real
 
             if power_factor < 0:
-                Q = -Q
+                Q = -1 * Q
 
             radius = geometry.distance(center, Point(P, Q))
             operation_point = Point(P, Q)
 
-        elif Q != None and power_factor != None:
-            P = Q/cmath.sqrt(1/power_factor**2 - 1).real
+        elif Q is not None and power_factor is not None:
+            P = Q / _c.sqrt(1 / power_factor ** 2 - 1).real
             radius = geometry.distance(center, Point(P, Q))
             operation_point = Point(P, Q)
 
         else:
-            raise AttributeError("Enought attributes to calculate not found")
+            raise AttributeError(
+                "Not enough attributes found to perform calculation"
+            )
 
         return radius, center, operation_point
 
     def _cal_parameters(self, type1, type2):
 
-        if self.parameters['V'+type2] == None:
-            self.parameters['V' + type2] = abs(self.parameters['B'])*self.radius/self.parameters['V' + type1]
+        if self.parameters['V' + type2] is None:
+            self.parameters['V' + type2] = abs(self.parameters['B']) * self.radius / self.parameters['V' + type1]
 
-        if self.parameters['P'+type1] == None:
+        if self.parameters['P' + type1] is None:
             self.parameters['P' + type1] = self.operating_point.x
 
-        if self.parameters['Q'+type1] == None:
+        if self.parameters['Q' + type1] is None:
             self.parameters['Q' + type1] = self.operating_point.y
 
-        if self.parameters['S'+type1] == None:
-            self.parameters['S' + type1] = self.operating_point.x + 1j*self.operating_point.y
+        if self.parameters['S' + type1] == None:
+            self.parameters['S' + type1] = self.operating_point.x + 1j * self.operating_point.y
 
-        if self.parameters['power_factor'] == None:
-            self.parameters['power_factor'] = self.operating_point.y/self.operating_point.x
+        if self.parameters['power_factor'] is None:
+            self.parameters['power_factor'] = self.operating_point.y / self.operating_point.x
 
         if type1 == 'r' and type2 == 's':
-            self.parameters["Vs"] = self.parameters['B']*self.parameters["Sr"] + self.parameters["A"] * abs(self.parameters["Vr"])**2
-            self.parameters["Vs"] = self.parameters["Vs"]/self.parameters["Vr"].conjugate()
+            self.parameters["Vs"] = self.parameters['B'] * self.parameters["Sr"] + self.parameters["A"] * abs(
+                self.parameters["Vr"]) ** 2
+            self.parameters["Vs"] = self.parameters["Vs"] / self.parameters["Vr"].conjugate()
 
         elif type1 == 's' and type2 == 'r':
-            self.parameters["Vr"] = -self.parameters['B']*self.parameters["Ss"] + self.parameters["D"] * abs(self.parameters["Vs"])**2
-            self.parameters["Vr"] = self.parameters["Vr"]/self.parameters["Vs"].conjugate()
+            self.parameters["Vr"] = -self.parameters['B'] * self.parameters["Ss"] + self.parameters["D"] * abs(
+                self.parameters["Vs"]) ** 2
+            self.parameters["Vr"] = self.parameters["Vr"] / self.parameters["Vs"].conjugate()
 
     def print_data(self):
         r"""Print the data of the circle."""
-        if self.operating_point == None:
+        if self.operating_point is None:
             return self.center, self.radius
 
         if self.parameters["power_circle_type"] == "receiving":
-
             self._cal_parameters("r", "s")
 
         if self.parameters["power_circle_type"] == "sending":
-
             self._cal_parameters("s", "r")
 
         for key, value in self.parameters.items():
@@ -526,11 +820,9 @@ class PowerCircle:
     def __call__(self) -> dict:
         r"""Return the data of the circle."""
         if self.parameters["power_circle_type"] == "receiving":
-
             self._cal_parameters("r", "s")
 
         if self.parameters["power_circle_type"] == "sending":
-
             self._cal_parameters("s", "r")
 
         return self.parameters
@@ -551,7 +843,7 @@ class PowerCircle:
         op_x = self.operating_point.x
         op_y = self.operating_point.y
 
-        #plot Circle and Diameter
+        # plot Circle and Diameter
         _plt.plot(circle_x, circle_y)
         _plt.plot([c_x - self.radius, c_x + self.radius], [c_y, c_y], 'g--')
         _plt.plot([c_x, c_x], [c_y - self.radius, c_y + self.radius], 'g--')
@@ -567,11 +859,12 @@ class PowerCircle:
         _plt.grid()
         return _plt
 
+
 def receiving_end_power_circle(Vr: complex = None, A: complex = None,
-                               B: complex = None, Pr:float = None,
+                               B: complex = None, Pr: float = None,
                                Qr: float = None, Sr: complex = None,
                                power_factor: float = None, Vs: complex = None
-                            ) -> PowerCircle :
+                               ) -> PowerCircle:
     """
     Construct Receiving End Power Circle.
 
@@ -613,7 +906,7 @@ def receiving_end_power_circle(Vr: complex = None, A: complex = None,
     Receiving End Power Circle: PowerCircle
     """
     try:
-        assert Vr != None and A != None and B != None
+        assert Vr is not None and A is not None and B is not None
     except AssertionError:
         raise ValueError(
             "Not enough attributes to build Receiving end power circle at least"
@@ -621,12 +914,12 @@ def receiving_end_power_circle(Vr: complex = None, A: complex = None,
         )
 
     if not (
-        ((Pr != None and Qr != None) or (Sr != None and power_factor != None))
-        or
-        (
-            (Pr != None and power_factor != None) or
-            (Qr != None and power_factor != None)
-        )):
+            ((Pr is not None and Qr is not None) or (Sr is not None and power_factor is not None))
+            or
+            (
+                    (Pr is not None and power_factor is not None) or
+                    (Qr is not None and power_factor is not None)
+            )):
         raise ValueError(
             "Not enough attributes for marking an operating point on Receiving "
             "End Power Circle"
@@ -646,11 +939,12 @@ def receiving_end_power_circle(Vr: complex = None, A: complex = None,
         }
     )
 
+
 def sending_end_power_circle(Vs: complex = None, B: complex = None,
-                             D: complex = None, Ps:float = None,
-                             Qs:float = None, Ss: complex = None,
+                             D: complex = None, Ps: float = None,
+                             Qs: float = None, Ss: complex = None,
                              power_factor: float = None, Vr: complex = None
-                            ) -> PowerCircle:
+                             ) -> PowerCircle:
     """
     Construct Receiving End Power Circle.
 
@@ -677,19 +971,19 @@ def sending_end_power_circle(Vs: complex = None, B: complex = None,
     -------
     Sending End Power Circle: PowerCircle
     """
-    if not (Vs != None and B != None and D != None):
+    if not (Vs is not None and B is not None and D is not None):
         raise ValueError(
             "Not enough attributes to build Sending end power circle at least "
             "provide `Vs`, `B`, `D`"
         )
 
     if not (
-        ((Ps != None and Qs != None) or (Ss != None and power_factor != None))
-        or
-        (
-            (Ps != None and power_factor != None) or
-            (Qs != None and power_factor != None)
-        )):
+            ((Ps is not None and Qs is not None) or (Ss is not None and power_factor is not None))
+            or
+            (
+                    (Ps is not None and power_factor is not None) or
+                    (Qs is not None and power_factor is not None)
+            )):
         raise ValueError(
             "Not enough attributes for marking an operating point on Sending "
             "End Power Circle"

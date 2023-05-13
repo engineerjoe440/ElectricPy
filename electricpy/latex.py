@@ -1,6 +1,6 @@
 ################################################################################
 """
-`electricpy` Package - `latex` Module.
+LaTeX Support Module to help Generate LaTeX formatted Math Symbols and Formulas.
 
 >>> from electricpy import latex
 
@@ -13,10 +13,9 @@ to aid in scientific calculations.
 """
 ################################################################################
 
-# Import Required Packages
-import numpy as _np
 import cmath as _c
 
+import numpy as _np
 
 
 # Define Complex LaTeX Generator
@@ -64,7 +63,7 @@ def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
         mag = _np.around(mag, round)  # Round
         ang = _np.around(ang, round)  # Round
         latex = str(mag) + '∠' + str(ang) + '°'
-        return (latex)
+        return latex
 
     def rectstring(val, round):
         real = _np.around(val.real, round)  # Round
@@ -73,7 +72,7 @@ def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
             latex = str(real) + "+j" + str(imag)
         else:
             latex = str(real) + "-j" + str(abs(imag))
-        return (latex)
+        return latex
 
     # Interpret as numpy array if simple list
     if isinstance(val, list):
@@ -83,7 +82,7 @@ def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
         shp = val.shape
         try:
             row, col = shp  # Interpret Shape of Object
-        except:
+        except ValueError:
             row = shp[0]
             col = 1
         _ = val.size
@@ -203,7 +202,7 @@ def tflatex(sys, sysp=None, var='s', predollar=True,
                     pass  # Don't Do Anything
                 else:
                     strg += var + r'^{' + str(xpnt) + r'}'
-        return (strg)
+        return strg
 
     # Generate Total TF String
     latex = r'\frac{' + genstring(num) + r'}{'
@@ -217,4 +216,4 @@ def tflatex(sys, sysp=None, var='s', predollar=True,
         latex = dollar + latex
     if postdollar:
         latex = latex + dollar
-    return (latex)
+    return latex

@@ -4,7 +4,7 @@
 
 >>> import electricpy.geometry as geometry
 
-This Package help to handle coordinate geometry calculatios which are required
+This Package help to handle coordinate geometry calculations which are required
 for plotting various graphs in electrical engineering.
 
 Built to support operations similar to Numpy and Scipy, this package is designed

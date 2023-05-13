@@ -1,0 +1,49 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "electricpy"
+description = "Electrical Engineering Functions in Python"
+readme = "README.md"
+requires-python = ">=3.7"
+authors = [
+    {name = "Joe Stanley", email = "engineerjoe440@yahoo.com"},
+    {name = "Lakshmikanth Ayyadevara"},
+    {name = "Khan Asfi Reza", email = "khanasfireza10@gmail.com"},
+    {name = "Arthur Lorencini Bergamaschi", email = "arthur.lorencini@gmail.com"},
+    {name = "Miguel Zabala"},
+    {name = "Soham Ratnaparkhi", email = "soham.ratnaparkhi@gmail.com"},
+    {name = "I Wayan Kurniawan"},
+    {name = "Ankush", email = "ankush.opensource@gmail.com"},
+    {name = "Tanvir Riyad"}
+]
+maintainers = [
+    {name = "Joe Stanley", email = "engineerjoe440@yahoo.com"}
+]
+license = {file = "LICENSE"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+dynamic = ["version"]
+
+dependencies = [
+    "NumPy",
+    "matplotlib",
+    "SciPy",
+    "SymPy",
+    "numdifftools",
+]
+
+[project.optional-dependencies]
+numerical = ["numdifftools"]
+fault = ["arcflash"]
+full = ["numdifftools", "arcflash"]
+
+[project.urls]
+Home = "https://electricpy.readthedocs.io/en/latest/index.html"
+Repository = "https://github.com/engineerjoe440/ElectricPy"
+Issues = "https://github.com/engineerjoe440/ElectricPy/issues"
+Documentation = "https://electricpy.readthedocs.io/en/latest/"
