@@ -54,10 +54,11 @@ notebooks!)
 
 ## Installing / Getting Started
 
-1. Install ElectricPy with `pip`
+1. ElectricPy has a few basic installation options for use with `pip`. For most
+common users, use the following command to install ElectricPy with `pip`
 
 ```
-pip install electricpy
+pip install electricpy[full]
 ```
   
 2. Check installation success in Python environment:
@@ -103,7 +104,16 @@ and installing locally.
 - [matplotlib](https://matplotlib.org/)
 - [SciPy](https://scipy.org/)
 - [SymPy](https://www.sympy.org/en/index.html)
+
+#### Optional Dependencies
+
+For numerical analysis (install with `pip install electricpy[numerical]`):
+
 - [numdifftools](https://numdifftools.readthedocs.io/en/latest/)
+
+For fault analysis (install with `pip install electricpy[fault]`)
+
+- [arcflash](https://github.com/LiaungYip/arcflash)
 
 
 ## Get Involved / Contribute
