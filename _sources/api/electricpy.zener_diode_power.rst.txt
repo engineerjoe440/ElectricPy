@@ -1,0 +1,6 @@
+electricpy.zener\_diode\_power
+==============================
+
+.. currentmodule:: electricpy
+
+.. autofunction:: zener_diode_power

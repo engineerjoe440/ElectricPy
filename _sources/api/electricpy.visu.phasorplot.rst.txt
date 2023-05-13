@@ -1,0 +1,6 @@
+electricpy.visu.phasorplot
+==========================
+
+.. currentmodule:: electricpy.visu
+
+.. autofunction:: phasorplot

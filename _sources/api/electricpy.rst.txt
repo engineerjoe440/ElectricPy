@@ -25,17 +25,9 @@
     
     characterz
     
-    coldjunction
-    
-    convbar
-    
     cosfilt
     
     cprint
-    
-    crcremainder
-    
-    crcsender
     
     curdiv
     
@@ -61,26 +53,6 @@
     
     ic_555_monostable
     
-    imfoc_control
-    
-    indmachfocratings
-    
-    indmachiar
-    
-    indmachpem
-    
-    indmachpkslip
-    
-    indmachpktorq
-    
-    indmachstarttorq
-    
-    indmachtem
-    
-    indmachvth
-    
-    indmachzth
-    
     induction_machine_slip
     
     instpower
@@ -91,6 +63,8 @@
     
     led_resistor
     
+    lm317
+    
     machslip
     
     motorstartcap
@@ -98,6 +72,8 @@
     natfreq
     
     nlinpf
+    
+    non_linear_pf
     
     parallel_plate_capacitance
     
@@ -117,23 +93,15 @@
     
     powerset
     
-    powertriangle
-    
     primary
     
     propagation_constants
-    
-    protor
-    
-    pstator
     
     puchgbase
     
     reactance
     
     rms
-    
-    rtdtemp
     
     rxrecompose
     
@@ -143,29 +111,23 @@
     
     shannondata
     
+    short_circuit_current
+    
     sinfilt
     
     slew_rate
     
     solenoid_inductance
     
-    string_to_bits
-    
     suspension_insulators
     
     syncspeed
-    
-    synmach_Eq
     
     t_attenuator
     
     tap_changing_transformer
     
     tcycle
-    
-    thermocouple
-    
-    transformertest
     
     transposez
     
@@ -183,9 +145,11 @@
     
     wrms
     
-    xfmphs
-    
     zdecompose
+    
+    zener_diode_power
+    
+    zener_diode_required_resistor
     
     zperlength
     

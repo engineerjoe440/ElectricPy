@@ -13,30 +13,3 @@
 
 
 
-
-.. rubric:: Functions
-
-.. autosummary::
-    :toctree: .
-    
-    compose
-    
-    parallelz
-    
-    phase
-    
-    phasor
-    
-    phasordata
-    
-    phasorlist
-    
-    phasorplot
-    
-    phasorz
-    
-    phs
-    
-    vectarray
-    
-

@@ -35,6 +35,8 @@
     
     distmeasz
     
+    double_phase_to_ground_fault
+    
     faultratio
     
     genlossfield
@@ -52,6 +54,8 @@
     instoc
     
     iopirt
+    
+    phase_to_phase_fault
     
     phs1g
     
@@ -79,6 +83,10 @@
     
     scMVA
     
+    short_circuit_mva
+    
+    single_phase_to_ground_fault
+    
     symrmsfaultcur
     
     synmach_Iasym
@@ -90,6 +98,8 @@
     tdradial
     
     thermaltime
+    
+    three_phase_fault
     
     tocreset
     

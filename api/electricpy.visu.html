@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -46,7 +47,7 @@
   
   
   
-    <title>electricpy.visu &#8212; electricpy 0.2.2 documentation</title>
+    <title>electricpy.visu &#8212; electricpy 0.3.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/material.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -80,7 +81,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../index.html" title="electricpy 0.2.2 documentation"
+        <a href="../index.html" title="electricpy 0.3.0 documentation"
            class="md-header-nav__button md-logo">
           
             &nbsp;
@@ -166,7 +167,7 @@
   <nav class="md-tabs" data-md-component="tabs">
     <div class="md-tabs__inner md-grid">
       <ul class="md-tabs__list">
-          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">electricpy 0.2.2 documentation</a></li>
+          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">electricpy 0.3.0 documentation</a></li>
           <li class="md-tabs__item"><a href="../electricpyapi.html" class="md-tabs__link">ElectricPy API</a></li>
       </ul>
     </div>
@@ -179,13 +180,13 @@
               <div class="md-sidebar__inner">
                 <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../index.html" title="electricpy 0.2.2 documentation" class="md-nav__button md-logo">
+    <a href="../index.html" title="electricpy 0.3.0 documentation" class="md-nav__button md-logo">
       
         <img src="../_static/" alt=" logo" width="48" height="48">
       
     </a>
     <a href="../index.html"
-       title="electricpy 0.2.2 documentation">ElectricPy</a>
+       title="electricpy 0.3.0 documentation">ElectricPy</a>
   </label>
     <div class="md-nav__source">
       <a href="https://github.com/engineerjoe440/ElectricPy/" title="Go to repository" class="md-source" data-md-source="github">
@@ -374,7 +375,7 @@
   <section id="electricpy-visu">
 <h1 id="api-electricpy-visu--page-root">electricpy.visu<a class="headerlink" href="#api-electricpy-visu--page-root" title="Permalink to this heading">¶</a></h1>
 <p class="rubric">Description</p>
-<span class="target" id="module-electricpy.visu"></span><p><cite>electricpy.visu</cite> - Support for plotting and visualizations.</p>
+<span class="target" id="module-electricpy.visu"></span><p>Visualizations Specifically for Electrical Engineering.</p>
 <p>Filled with plotting functions and visualization tools for electrical engineers,
 this module is designed to assist engineers visualize their designs.</p>
 <p class="rubric">Classes</p>
@@ -391,10 +392,19 @@ this module is designed to assist engineers visualize their designs.</p>
 <p class="rubric">Functions</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.visu.receiving_end_power_circle.html#electricpy.visu.receiving_end_power_circle" title="electricpy.visu.receiving_end_power_circle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">receiving_end_power_circle</span></code></a>([Vr, A, B, Pr, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.visu.convbar.html#electricpy.visu.convbar" title="electricpy.visu.convbar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convbar</span></code></a>(h, x[, outline])</p></td>
+<td><p>Convolution Bar-Graph Plotter Function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.visu.phasorplot.html#electricpy.visu.phasorplot" title="electricpy.visu.phasorplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasorplot</span></code></a>(phasors[, title, legend, bg, ...])</p></td>
+<td><p>Phasor Plotting Function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.visu.powertriangle.html#electricpy.visu.powertriangle" title="electricpy.visu.powertriangle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">powertriangle</span></code></a>([P, Q, S, PF, color, text, ...])</p></td>
+<td><p>Power Triangle Plotting Function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.visu.receiving_end_power_circle.html#electricpy.visu.receiving_end_power_circle" title="electricpy.visu.receiving_end_power_circle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">receiving_end_power_circle</span></code></a>([Vr, A, B, Pr, ...])</p></td>
 <td><p>Construct Receiving End Power Circle.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.visu.sending_end_power_circle.html#electricpy.visu.sending_end_power_circle" title="electricpy.visu.sending_end_power_circle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sending_end_power_circle</span></code></a>([Vs, B, D, Ps, Qs, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.visu.sending_end_power_circle.html#electricpy.visu.sending_end_power_circle" title="electricpy.visu.sending_end_power_circle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sending_end_power_circle</span></code></a>([Vs, B, D, Ps, Qs, ...])</p></td>
 <td><p>Construct Receiving End Power Circle.</p></td>
 </tr>
 </tbody>
@@ -448,7 +458,7 @@ this module is designed to assist engineers visualize their designs.</p>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

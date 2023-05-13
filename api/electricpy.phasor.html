@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -46,7 +47,7 @@
   
   
   
-    <title>electricpy.phasor &#8212; electricpy 0.2.2 documentation</title>
+    <title>electricpy.phasor &#8212; electricpy 0.3.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/material.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -55,7 +56,7 @@
     <link rel="icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.phasor.compose" href="electricpy.phasor.compose.html" />
+    <link rel="next" title="electricpy.sim" href="electricpy.sim.html" />
     <link rel="prev" title="electricpy.passive.vcapdischarge" href="electricpy.passive.vcapdischarge.html" />
   
    
@@ -80,7 +81,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../index.html" title="electricpy 0.2.2 documentation"
+        <a href="../index.html" title="electricpy 0.3.0 documentation"
            class="md-header-nav__button md-logo">
           
             &nbsp;
@@ -166,7 +167,7 @@
   <nav class="md-tabs" data-md-component="tabs">
     <div class="md-tabs__inner md-grid">
       <ul class="md-tabs__list">
-          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">electricpy 0.2.2 documentation</a></li>
+          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">electricpy 0.3.0 documentation</a></li>
           <li class="md-tabs__item"><a href="../electricpyapi.html" class="md-tabs__link">ElectricPy API</a></li>
       </ul>
     </div>
@@ -179,13 +180,13 @@
               <div class="md-sidebar__inner">
                 <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../index.html" title="electricpy 0.2.2 documentation" class="md-nav__button md-logo">
+    <a href="../index.html" title="electricpy 0.3.0 documentation" class="md-nav__button md-logo">
       
         <img src="../_static/" alt=" logo" width="48" height="48">
       
     </a>
     <a href="../index.html"
-       title="electricpy 0.2.2 documentation">ElectricPy</a>
+       title="electricpy 0.3.0 documentation">ElectricPy</a>
   </label>
     <div class="md-nav__source">
       <a href="https://github.com/engineerjoe440/ElectricPy/" title="Go to repository" class="md-source" data-md-source="github">
@@ -374,50 +375,50 @@
   <section id="electricpy-phasor">
 <h1 id="api-electricpy-phasor--page-root">electricpy.phasor<a class="headerlink" href="#api-electricpy-phasor--page-root" title="Permalink to this heading">¶</a></h1>
 <p class="rubric">Description</p>
-<span class="target" id="module-electricpy.phasor"></span><p><cite>electricpy</cite> Package - <cite>phasors</cite> Module.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">phasor</span>
+<span class="target" id="module-electricpy.phasor"></span><p>Complex Phasor Generator.</p>
+<p>Generates the standard Pythonic complex representation
+of a phasor voltage or current when given the magnitude
+and angle of the specific voltage or current.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param mag<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The Magnitude of the Voltage/Current</p>
+</dd>
+<dt class="field-even">type mag<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+<dt class="field-odd">param ang<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The Angle (in degrees) of the Voltage/Current</p>
+</dd>
+<dt class="field-even">type ang<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+<dt class="field-odd">returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>phasor</strong> – Standard Pythonic Complex Representation of
+the specified voltage or current.</p>
+</dd>
+<dt class="field-even">rtype<span class="colon">:</span></dt>
+<dd class="field-even"><p>complex</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">phasors</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">phasor</span><span class="p">(</span><span class="mi">67</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span> <span class="c1"># 67 volts at angle 120 degrees</span>
+<span class="go">(-33.499999999999986+58.02370205355739j)</span>
 </pre></div>
 </div>
-<p>Filled with calculators, evaluators, and plotting functions related to
-electrical phasors, this package will provide a wide array of capabilities to
-any electrical engineer.</p>
-<p>Built to support operations similar to Numpy and Scipy, this package is designed
-to aid in scientific calculations.</p>
-<p class="rubric">Functions</p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.phasor.compose.html#electricpy.phasor.compose" title="electricpy.phasor.compose"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compose</span></code></a>(*arr)</p></td>
-<td><p>Complex Composition Function.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.phasor.parallelz.html#electricpy.phasor.parallelz" title="electricpy.phasor.parallelz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parallelz</span></code></a>(*args)</p></td>
-<td><p>Parallel Impedance Calculator.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.phasor.phase.html#electricpy.phasor.phase" title="electricpy.phasor.phase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phase</span></code></a>(ang)</p></td>
-<td><p>Complex Phase Angle Generator.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.phasor.phasor.html#electricpy.phasor.phasor" title="electricpy.phasor.phasor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasor</span></code></a>(mag[, ang])</p></td>
-<td><p>Complex Phasor Generator.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.phasor.phasordata.html#electricpy.phasor.phasordata" title="electricpy.phasor.phasordata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasordata</span></code></a>(mn[, mx, npts, mag, ang, freq, ...])</p></td>
-<td><p>Complex Phasor Data Generator.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.phasor.phasorlist.html#electricpy.phasor.phasorlist" title="electricpy.phasor.phasorlist"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasorlist</span></code></a>(arr)</p></td>
-<td><p>Complex Phasor Generator for 2-D Array or 2-D List.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.phasor.phasorplot.html#electricpy.phasor.phasorplot" title="electricpy.phasor.phasorplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasorplot</span></code></a>(phasor[, title, legend, bg, ...])</p></td>
-<td><p>Phasor Plotting Function.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.phasor.phasorz.html#electricpy.phasor.phasorz" title="electricpy.phasor.phasorz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phasorz</span></code></a>([C, L, freq, complex])</p></td>
-<td><p>Phasor Impedance Generator.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.phasor.phs.html#electricpy.phasor.phs" title="electricpy.phasor.phs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phs</span></code></a>(ang)</p></td>
-<td><p>Complex Phase Angle Generator.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.phasor.vectarray.html#electricpy.phasor.vectarray" title="electricpy.phasor.vectarray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vectarray</span></code></a>(arr[, degrees, flatarray])</p></td>
-<td><p>Format Complex as Array of Magnitude/Angle Pairs.</p></td>
-</tr>
-</tbody>
-</table>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="electricpy.cprint.html#electricpy.cprint" title="electricpy.cprint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">electricpy.cprint</span></code></a></dt><dd><p>Complex Variable Printing Function</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">electricpy.phasors.phasorlist</span></code></dt><dd><p>Phasor Generator for List or Array</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">electricpy.phasors.phasorz</span></code></dt><dd><p>Impedance Phasor Generator</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">electricpy.phasors.phs</span></code></dt><dd><p>Complex Phase Angle Generator</p>
+</dd>
+</dl>
+</div>
 </section>
 
 
@@ -444,12 +445,12 @@ to aid in scientific calculations.</p>
             </a>
           
           
-            <a href="electricpy.phasor.compose.html" title="electricpy.phasor.compose"
+            <a href="electricpy.sim.html" title="electricpy.sim"
                class="md-flex md-footer-nav__link md-footer-nav__link--next"
                rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
                 class="md-flex__ellipsis"> <span
-                class="md-footer-nav__direction"> Next </span> electricpy.phasor.compose </span>
+                class="md-footer-nav__direction"> Next </span> electricpy.sim </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink"><i
                 class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
@@ -467,7 +468,7 @@ to aid in scientific calculations.</p>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

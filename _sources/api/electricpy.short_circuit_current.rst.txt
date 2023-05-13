@@ -1,0 +1,6 @@
+electricpy.short\_circuit\_current
+==================================
+
+.. currentmodule:: electricpy
+
+.. autofunction:: short_circuit_current

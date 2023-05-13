@@ -1,0 +1,6 @@
+electricpy.fault.short\_circuit\_mva
+====================================
+
+.. currentmodule:: electricpy.fault
+
+.. autofunction:: short_circuit_mva

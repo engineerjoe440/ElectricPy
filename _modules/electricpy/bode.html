@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -45,7 +46,7 @@
   
   
   
-    <title>electricpy.bode &#8212; electricpy 0.2.2 documentation</title>
+    <title>electricpy.bode &#8212; electricpy 0.3.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/material.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -77,7 +78,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../../index.html" title="electricpy 0.2.2 documentation"
+        <a href="../../index.html" title="electricpy 0.3.0 documentation"
            class="md-header-nav__button md-logo">
           
             &nbsp;
@@ -163,7 +164,7 @@
   <nav class="md-tabs" data-md-component="tabs">
     <div class="md-tabs__inner md-grid">
       <ul class="md-tabs__list">
-          <li class="md-tabs__item"><a href="../../index.html" class="md-tabs__link">electricpy 0.2.2 documentation</a></li>
+          <li class="md-tabs__item"><a href="../../index.html" class="md-tabs__link">electricpy 0.3.0 documentation</a></li>
           <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">Module code</a></li>
           <li class="md-tabs__item"><a href="../electricpy.html" class="md-tabs__link">electricpy</a></li>
       </ul>
@@ -177,13 +178,13 @@
               <div class="md-sidebar__inner">
                 <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../../index.html" title="electricpy 0.2.2 documentation" class="md-nav__button md-logo">
+    <a href="../../index.html" title="electricpy 0.3.0 documentation" class="md-nav__button md-logo">
       
         <img src="../../_static/" alt=" logo" width="48" height="48">
       
     </a>
     <a href="../../index.html"
-       title="electricpy 0.2.2 documentation">ElectricPy</a>
+       title="electricpy 0.3.0 documentation">ElectricPy</a>
   </label>
     <div class="md-nav__source">
       <a href="https://github.com/engineerjoe440/ElectricPy/" title="Go to repository" class="md-source" data-md-source="github">
@@ -359,54 +360,55 @@
   <h1 id="modules-electricpy-bode--page-root">Source code for electricpy.bode</h1><div class="highlight"><pre>
 <span></span><span class="c1">################################################################################</span>
 <span class="sd">"""</span>
-<span class="sd">`electricpy.bode`  -  Bode Plotting Module.</span>
+<span class="sd">Bode Plotting Functionality for ElectricPy Package.</span>
 
 <span class="sd">&gt;&gt;&gt; from electricpy import bode</span>
 <span class="sd">"""</span>
 <span class="c1">################################################################################</span>
 
-<span class="c1"># Import External Dependencies</span>
+<span class="kn">from</span> <span class="nn">cmath</span> <span class="kn">import</span> <span class="n">exp</span> <span class="k">as</span> <span class="n">_exp</span>
+
+
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">_plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">_np</span>
 <span class="kn">import</span> <span class="nn">scipy.signal</span> <span class="k">as</span> <span class="nn">_sig</span>
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">pi</span> <span class="k">as</span> <span class="n">_pi</span>
-<span class="kn">from</span> <span class="nn">cmath</span> <span class="kn">import</span> <span class="n">exp</span> <span class="k">as</span> <span class="n">_exp</span>
 
-<span class="c1"># Import Local Dependencies</span>
 <span class="kn">from</span> <span class="nn">electricpy.math</span> <span class="kn">import</span> <span class="n">convolve</span>
 
 <span class="c1"># Define System Conditioning Function</span>
-<span class="k">def</span> <span class="nf">_sys_condition</span><span class="p">(</span><span class="n">system</span><span class="p">,</span><span class="n">feedback</span><span class="p">):</span>
-    <span class="k">if</span> <span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">system</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="p">):</span>        <span class="c1"># System found to be num and den</span>
+<span class="k">def</span> <span class="nf">_sys_condition</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">feedback</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">system</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># System found to be num and den</span>
         <span class="n">num</span> <span class="o">=</span> <span class="n">system</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">den</span> <span class="o">=</span> <span class="n">system</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="c1"># Convolve numerator or denominator as needed</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">num</span><span class="p">))</span> <span class="o">==</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="n">num</span> <span class="o">=</span> <span class="n">convolve</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>        <span class="c1"># Convolve terms in numerator</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">den</span><span class="p">))</span> <span class="o">==</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="n">den</span> <span class="o">=</span> <span class="n">convolve</span><span class="p">(</span><span class="n">den</span><span class="p">)</span>        <span class="c1"># Convolve terms in denominator</span>
-        <span class="k">if</span> <span class="n">feedback</span><span class="p">:</span> <span class="c1"># If asked to add the numerator to the denominator</span>
-            <span class="n">ld</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">den</span><span class="p">)</span> <span class="c1"># Length of denominator</span>
-            <span class="n">ln</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="c1"># Length of numerator</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">ld</span> <span class="o">&gt;</span> <span class="n">ln</span><span class="p">):</span>
-                <span class="n">num</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">ld</span><span class="o">-</span><span class="n">ln</span><span class="p">),</span><span class="n">num</span><span class="p">)</span> <span class="c1"># Pad beginning with zeros</span>
-            <span class="k">if</span><span class="p">(</span><span class="n">ld</span> <span class="o">&lt;</span> <span class="n">ln</span><span class="p">):</span>
-                <span class="n">den</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">ln</span><span class="o">-</span><span class="n">ld</span><span class="p">),</span><span class="n">den</span><span class="p">)</span> <span class="c1"># Pad beginning with zeros</span>
-            <span class="n">den</span> <span class="o">=</span> <span class="n">den</span> <span class="o">+</span> <span class="n">num</span> <span class="c1"># Add numerator and denominator</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span> <span class="n">num</span> <span class="p">)</span> <span class="p">):</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
-                <span class="n">num</span> <span class="o">=</span> <span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>        <span class="c1"># Slice zeros off the front of the numerator</span>
-                <span class="k">break</span>                 <span class="c1"># Break out of for loop</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span> <span class="n">den</span> <span class="p">)</span> <span class="p">):</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">den</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
-                <span class="n">den</span> <span class="o">=</span> <span class="n">den</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>        <span class="c1"># Slice zeros off the front of the denominator</span>
-                <span class="k">break</span>                 <span class="c1"># Break out of for loop</span>
-        <span class="n">system</span> <span class="o">=</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">den</span><span class="p">)</span>  <span class="c1"># Repack system</span>
-    <span class="k">return</span><span class="p">(</span><span class="n">system</span><span class="p">)</span> <span class="c1"># Return the conditioned system</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">num</span><span class="p">))</span> <span class="o">==</span> <span class="nb">tuple</span><span class="p">:</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="n">convolve</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>  <span class="c1"># Convolve terms in numerator</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">den</span><span class="p">))</span> <span class="o">==</span> <span class="nb">tuple</span><span class="p">:</span>
+            <span class="n">den</span> <span class="o">=</span> <span class="n">convolve</span><span class="p">(</span><span class="n">den</span><span class="p">)</span>  <span class="c1"># Convolve terms in denominator</span>
+        <span class="k">if</span> <span class="n">feedback</span><span class="p">:</span>  <span class="c1"># If asked to add the numerator to the denominator</span>
+            <span class="n">ld</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">den</span><span class="p">)</span>  <span class="c1"># Length of denominator</span>
+            <span class="n">ln</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>  <span class="c1"># Length of numerator</span>
+            <span class="k">if</span> <span class="n">ld</span> <span class="o">&gt;</span> <span class="n">ln</span><span class="p">:</span>
+                <span class="n">num</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">ld</span> <span class="o">-</span> <span class="n">ln</span><span class="p">),</span> <span class="n">num</span><span class="p">)</span>  <span class="c1"># Pad beginning with zeros</span>
+            <span class="k">if</span> <span class="n">ld</span> <span class="o">&lt;</span> <span class="n">ln</span><span class="p">:</span>
+                <span class="n">den</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">ln</span> <span class="o">-</span> <span class="n">ld</span><span class="p">),</span> <span class="n">den</span><span class="p">)</span>  <span class="c1"># Pad beginning with zeros</span>
+            <span class="n">den</span> <span class="o">=</span> <span class="n">den</span> <span class="o">+</span> <span class="n">num</span>  <span class="c1"># Add numerator and denominator</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">num</span> <span class="o">=</span> <span class="n">num</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>  <span class="c1"># Slice zeros off the front of the numerator</span>
+                <span class="k">break</span>  <span class="c1"># Break out of for loop</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">den</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">den</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">den</span> <span class="o">=</span> <span class="n">den</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>  <span class="c1"># Slice zeros off the front of the denominator</span>
+                <span class="k">break</span>  <span class="c1"># Break out of for loop</span>
+        <span class="n">system</span> <span class="o">=</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">den</span><span class="p">)</span>  <span class="c1"># Repack system</span>
+    <span class="k">return</span> <span class="n">system</span>  <span class="c1"># Return the conditioned system</span>
+
 
 <span class="c1"># Define System Bode Plotting Function</span>
-<div class="viewcode-block" id="bode"><a class="viewcode-back" href="../../api/electricpy.bode.bode.html#electricpy.bode.bode">[docs]</a><span class="k">def</span> <span class="nf">bode</span><span class="p">(</span><span class="n">system</span><span class="p">,</span><span class="n">mn</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span><span class="n">mx</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">npts</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span><span class="n">xlim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ylim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">sv</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-         <span class="n">disp3db</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">lowcut</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">magnitude</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">angle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">freqaxis</span><span class="o">=</span><span class="s2">"rad"</span><span class="p">):</span>
+<div class="viewcode-block" id="bode"><a class="viewcode-back" href="../../api/electricpy.bode.bode.html#electricpy.bode.bode">[docs]</a><span class="k">def</span> <span class="nf">bode</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">mn</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">mx</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sv</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+         <span class="n">disp3db</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lowcut</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">magnitude</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">freqaxis</span><span class="o">=</span><span class="s2">"rad"</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    System Bode Plotting Function.</span>
 
@@ -453,72 +455,77 @@
 <span class="sd">                    radians, default is radians (rad)</span>
 <span class="sd">    """</span>
     <span class="c1"># Condition system input to ensure proper execution</span>
-    <span class="n">system</span> <span class="o">=</span> <span class="n">_sys_condition</span><span class="p">(</span><span class="n">system</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">system</span> <span class="o">=</span> <span class="n">_sys_condition</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
     <span class="c1"># Condition min and max freq terms</span>
     <span class="n">degrees</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="k">if</span> <span class="n">freqaxis</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"deg"</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="c1"># degrees requested</span>
+    <span class="k">if</span> <span class="n">freqaxis</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"deg"</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>  <span class="c1"># degrees requested</span>
         <span class="n">degrees</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="c1"># Scale Degrees to Radians for calculation</span>
-        <span class="n">mn</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">mn</span>
-        <span class="n">mx</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">mx</span>
-    <span class="n">mn</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">mn</span><span class="p">)</span> <span class="c1"># find the _exponent value</span>
-    <span class="n">mx</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">mx</span><span class="p">)</span> <span class="c1"># find the _exponent value</span>
+        <span class="n">mn</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">mn</span>
+        <span class="n">mx</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">mx</span>
+    <span class="n">mn</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">mn</span><span class="p">)</span>  <span class="c1"># find the _exponent value</span>
+    <span class="n">mx</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">mx</span><span class="p">)</span>  <span class="c1"># find the _exponent value</span>
 
     <span class="c1"># Generate the frequency range to calculate over</span>
-    <span class="n">wover</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="n">mn</span><span class="p">,</span><span class="n">mx</span><span class="p">,</span><span class="n">npts</span><span class="p">)</span>
+    <span class="n">wover</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="n">mn</span><span class="p">,</span> <span class="n">mx</span><span class="p">,</span> <span class="n">npts</span><span class="p">)</span>
 
     <span class="c1"># Calculate the bode system</span>
     <span class="n">w</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">ang</span> <span class="o">=</span> <span class="n">_sig</span><span class="o">.</span><span class="n">bode</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">wover</span><span class="p">)</span>
 
-    <span class="c1"># Plot Magnitude</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">magnitude</span><span class="p">):</span>
-        <span class="n">magTitle</span> <span class="o">=</span> <span class="s2">"Magnitude "</span><span class="o">+</span><span class="n">title</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">magTitle</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">degrees</span><span class="p">:</span> <span class="c1"># Plot in degrees</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span> <span class="n">mag</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_plot</span><span class="p">(</span><span class="n">plot_title</span><span class="p">,</span> <span class="n">y_label</span><span class="p">):</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">plot_title</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">y_label</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">degrees</span><span class="p">:</span>  <span class="c1"># Plot in degrees</span>
+            <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span> <span class="n">ang</span><span class="p">)</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Frequency (Hz)"</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span> <span class="c1"># Plot in radians</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">mag</span><span class="p">)</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Frequency (rad/sec)"</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">"log"</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s2">"both"</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Magnitude (dB)"</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">disp3db</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">lowcut</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">lowcut</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">xlim</span><span class="o">!=</span><span class="kc">False</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">ylim</span><span class="o">!=</span><span class="kc">False</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">sv</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">magTitle</span><span class="o">+</span><span class="s2">".png"</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-    <span class="c1"># Plot Angle</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">angle</span><span class="p">):</span>
-        <span class="n">angTitle</span> <span class="o">=</span> <span class="s2">"Angle "</span><span class="o">+</span><span class="n">title</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">angTitle</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">degrees</span><span class="p">:</span> <span class="c1"># Plot in degrees</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span> <span class="n">ang</span><span class="p">)</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Frequency (Hz)"</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span> <span class="c1"># Plot in radians</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># Plot in radians</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">ang</span><span class="p">)</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Frequency (rad/sec)"</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">"log"</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s2">"both"</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Angle (degrees)"</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">xlim</span><span class="o">!=</span><span class="kc">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">xlim</span><span class="p">:</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">ylim</span><span class="o">!=</span><span class="kc">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ylim</span><span class="p">:</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">sv</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">angTitle</span><span class="o">+</span><span class="s2">".png"</span><span class="p">)</span>
+            <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">title</span> <span class="o">+</span> <span class="s2">".png"</span><span class="p">)</span>
+
+    <span class="c1"># Plot Magnitude</span>
+    <span class="k">if</span> <span class="n">magnitude</span><span class="p">:</span>
+        <span class="n">magTitle</span> <span class="o">=</span> <span class="s2">"Magnitude "</span> <span class="o">+</span> <span class="n">title</span>
+        <span class="n">_plot</span><span class="p">(</span><span class="n">magTitle</span><span class="p">,</span> <span class="s2">"Magnitude (DB)"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">disp3db</span><span class="p">:</span>
+            <span class="n">_plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">lowcut</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">_plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">lowcut</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># Plot Angle</span>
+    <span class="k">if</span> <span class="n">angle</span><span class="p">:</span>
+        <span class="n">angTitle</span> <span class="o">=</span> <span class="s2">"Angle "</span> <span class="o">+</span> <span class="n">title</span>
+        <span class="n">_plot</span><span class="p">(</span><span class="n">angTitle</span><span class="p">,</span> <span class="s2">"Angle (degrees)"</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="sbode"><a class="viewcode-back" href="../../api/electricpy.bode.sbode.html#electricpy.bode.sbode">[docs]</a><span class="k">def</span> <span class="nf">sbode</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">NN</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span><span class="n">xlim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ylim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">mn</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">mx</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
-          <span class="n">sv</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">disp3db</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">lowcut</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">magnitude</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">angle</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+<span class="k">def</span> <span class="nf">_magnitude_plot</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">disp3db</span><span class="p">,</span> <span class="n">lowcut</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">,</span> <span class="n">sv</span><span class="p">):</span>
+    <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span> <span class="o">+</span> <span class="s2">" Magnitude"</span><span class="p">)</span>
+    <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s1">'both'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">disp3db</span><span class="p">:</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">lowcut</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">lowcut</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">xlim</span><span class="p">:</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ylim</span><span class="p">:</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">sv</span><span class="p">:</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">title</span> <span class="o">+</span> <span class="s2">" Magnitude.png"</span><span class="p">)</span>
+    <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="sbode"><a class="viewcode-back" href="../../api/electricpy.bode.sbode.html#electricpy.bode.sbode">[docs]</a><span class="k">def</span> <span class="nf">sbode</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">NN</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mn</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">mx</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+          <span class="n">sv</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">disp3db</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lowcut</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">magnitude</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    S-Domain Bode Plotting Function.</span>
 
@@ -553,52 +560,40 @@
 <span class="sd">    angle:          bool, optional</span>
 <span class="sd">                    Control argument to enable plotting of angle, default=True</span>
 <span class="sd">    """</span>
-    <span class="n">W</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mn</span><span class="p">,</span><span class="n">mx</span><span class="p">,</span><span class="n">NN</span><span class="p">)</span>
-    <span class="n">H</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">NN</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">complex</span><span class="p">)</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mn</span><span class="p">,</span> <span class="n">mx</span><span class="p">,</span> <span class="n">NN</span><span class="p">)</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">NN</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">_np</span><span class="o">.</span><span class="n">complex</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">NN</span><span class="p">):</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">W</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">NN</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">W</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
         <span class="n">H</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">magnitude</span><span class="p">):</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">W</span><span class="p">,</span><span class="mi">20</span><span class="o">*</span><span class="n">_np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">H</span><span class="p">)),</span><span class="s1">'k'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">magnitude</span><span class="p">:</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">H</span><span class="p">)),</span> <span class="s1">'k'</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'|H| dB'</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Frequency (rad/sec)'</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="o">+</span><span class="s2">" Magnitude"</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s1">'both'</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">disp3db</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">lowcut</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">lowcut</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">xlim</span><span class="o">!=</span><span class="kc">False</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">ylim</span><span class="o">!=</span><span class="kc">False</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">sv</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">title</span><span class="o">+</span><span class="s2">" Magnitude.png"</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="n">_magnitude_plot</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">disp3db</span><span class="p">,</span> <span class="n">lowcut</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">,</span> <span class="n">sv</span><span class="p">)</span>
 
     <span class="n">aaa</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NN</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">aaa</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">_pi</span><span class="p">:</span>
-            <span class="n">aaa</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">aaa</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">_pi</span>
+            <span class="n">aaa</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">aaa</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_pi</span>
 
-    <span class="k">if</span><span class="p">(</span><span class="n">angle</span><span class="p">):</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="o">+</span><span class="s2">" Phase"</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">W</span><span class="p">,(</span><span class="mi">180</span><span class="o">/</span><span class="n">_pi</span><span class="p">)</span><span class="o">*</span><span class="n">aaa</span><span class="p">,</span><span class="s1">'k'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">angle</span><span class="p">:</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span> <span class="o">+</span> <span class="s2">" Phase"</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="p">(</span><span class="mi">180</span> <span class="o">/</span> <span class="n">_pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">aaa</span><span class="p">,</span> <span class="s1">'k'</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'H phase (degrees)'</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Frequency (rad/sec)'</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s1">'both'</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">xlim</span><span class="o">!=</span><span class="kc">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">xlim</span><span class="p">:</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">ylim</span><span class="o">!=</span><span class="kc">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ylim</span><span class="p">:</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">sv</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">title</span><span class="o">+</span><span class="s2">" Phase.png"</span><span class="p">)</span>
+            <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">title</span> <span class="o">+</span> <span class="s2">" Phase.png"</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="zbode"><a class="viewcode-back" href="../../api/electricpy.bode.zbode.html#electricpy.bode.zbode">[docs]</a><span class="k">def</span> <span class="nf">zbode</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">NN</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span><span class="n">mn</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">mx</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">_pi</span><span class="p">,</span><span class="n">xlim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ylim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-          <span class="n">approx</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">sv</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">disp3db</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">lowcut</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">magnitude</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<div class="viewcode-block" id="zbode"><a class="viewcode-back" href="../../api/electricpy.bode.zbode.html#electricpy.bode.zbode">[docs]</a><span class="k">def</span> <span class="nf">zbode</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">NN</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">mn</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">mx</span><span class="o">=</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_pi</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+          <span class="n">approx</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sv</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">disp3db</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lowcut</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">magnitude</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
           <span class="n">angle</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Z-Domain Bode Plotting Function.</span>
@@ -618,7 +613,7 @@
 <span class="sd">                    The minimum phi value to be generated, default=0</span>
 <span class="sd">    mx:             float, optional</span>
 <span class="sd">                    The maximum phi value to be generated, default=2*pi</span>
-<span class="sd">    approx:         bool, optional</span>
+<span class="sd">    approx:         bool, optional, callable</span>
 <span class="sd">                    Control argument to specify whether input funciton</span>
 <span class="sd">                    should be treated as Z-Domain function or approximated</span>
 <span class="sd">                    Z-Domain function. default=False</span>
@@ -643,54 +638,42 @@
 <span class="sd">    angle:          bool, optional</span>
 <span class="sd">                    Control argument to enable plotting of angle, default=True</span>
 <span class="sd">    """</span>
-    <span class="n">phi</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mn</span><span class="p">,</span><span class="n">mx</span><span class="p">,</span><span class="n">NN</span><span class="p">)</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mn</span><span class="p">,</span> <span class="n">mx</span><span class="p">,</span> <span class="n">NN</span><span class="p">)</span>
 
-    <span class="n">H</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">NN</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">complex</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">NN</span><span class="p">):</span>
-        <span class="n">z</span> <span class="o">=</span> <span class="n">_exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">phi</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">approx</span><span class="o">!=</span><span class="kc">False</span><span class="p">):</span> <span class="c1"># Approximated Z-Domain</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="n">approx</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">dt</span><span class="p">)</span> <span class="c1"># Pass current z-value and dt</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">NN</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">_np</span><span class="o">.</span><span class="n">complex</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">NN</span><span class="p">):</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">_exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">phi</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">approx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="n">approx</span><span class="p">):</span>
+            <span class="c1"># Approximated Z-Domain</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">approx</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>  <span class="c1"># Pass current z-value and dt</span>
             <span class="n">H</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span> <span class="c1"># Z-Domain Transfer Function Provided</span>
-            <span class="n">H</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">dt</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># Z-Domain Transfer Function Provided</span>
+            <span class="n">H</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
 
-    <span class="k">if</span><span class="p">(</span><span class="n">magnitude</span><span class="p">):</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">((</span><span class="mi">180</span><span class="o">/</span><span class="n">_pi</span><span class="p">)</span><span class="o">*</span><span class="n">phi</span><span class="p">,</span><span class="mi">20</span><span class="o">*</span><span class="n">_np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">H</span><span class="p">)),</span><span class="s1">'k'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">magnitude</span><span class="p">:</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">((</span><span class="mi">180</span> <span class="o">/</span> <span class="n">_pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">phi</span><span class="p">,</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">H</span><span class="p">)),</span> <span class="s1">'k'</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'|H| dB'</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Frequency (degrees)'</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="o">+</span><span class="s2">" Magnitude"</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s1">'both'</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">disp3db</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">lowcut</span><span class="o">!=</span><span class="kc">None</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">lowcut</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">xlim</span><span class="o">!=</span><span class="kc">False</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">ylim</span><span class="o">!=</span><span class="kc">False</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">sv</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">title</span><span class="o">+</span><span class="s2">" Magnitude.png"</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="n">_magnitude_plot</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">disp3db</span><span class="p">,</span> <span class="n">lowcut</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="p">,</span> <span class="n">sv</span><span class="p">)</span>
 
     <span class="n">aaa</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NN</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">aaa</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">_pi</span><span class="p">:</span>
-            <span class="n">aaa</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">aaa</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">_pi</span>
+            <span class="n">aaa</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">aaa</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_pi</span>
 
-    <span class="k">if</span><span class="p">(</span><span class="n">angle</span><span class="p">):</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">((</span><span class="mi">180</span><span class="o">/</span><span class="n">_pi</span><span class="p">)</span><span class="o">*</span><span class="n">phi</span><span class="p">,(</span><span class="mi">180</span><span class="o">/</span><span class="n">_pi</span><span class="p">)</span><span class="o">*</span><span class="n">aaa</span><span class="p">,</span><span class="s1">'k'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">angle</span><span class="p">:</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">((</span><span class="mi">180</span> <span class="o">/</span> <span class="n">_pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">phi</span><span class="p">,</span> <span class="p">(</span><span class="mi">180</span> <span class="o">/</span> <span class="n">_pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">aaa</span><span class="p">,</span> <span class="s1">'k'</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'H (degrees)'</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s1">'both'</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Frequency (degrees)'</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="o">+</span><span class="s2">" Phase"</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">xlim</span><span class="o">!=</span><span class="kc">False</span><span class="p">:</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span> <span class="o">+</span> <span class="s2">" Phase"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">xlim</span><span class="p">:</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">ylim</span><span class="o">!=</span><span class="kc">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ylim</span><span class="p">:</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">sv</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">title</span><span class="o">+</span><span class="s2">" Phase.png"</span><span class="p">)</span>
+            <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">title</span> <span class="o">+</span> <span class="s2">" Phase.png"</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
-
 
 <span class="c1"># End of BODE.PY</span>
 </pre></div>
@@ -717,7 +700,7 @@
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

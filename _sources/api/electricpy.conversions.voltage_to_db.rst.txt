@@ -1,0 +1,6 @@
+electricpy.conversions.voltage\_to\_db
+======================================
+
+.. currentmodule:: electricpy.conversions
+
+.. autofunction:: voltage_to_db
