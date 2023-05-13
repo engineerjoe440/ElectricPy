@@ -28,6 +28,7 @@ classifiers = [
     "Operating System :: OS Independent"
 ]
 dynamic = ["version"]
+
 dependencies = [
     "NumPy",
     "matplotlib",
@@ -35,6 +36,11 @@ dependencies = [
     "SymPy",
     "numdifftools",
 ]
+
+[project.optional-dependencies]
+numerical = ["numdifftools"]
+fault = ["arcflash"]
+full = ["numdifftools", "arcflash"]
 
 [project.urls]
 Home = "https://electricpy.readthedocs.io/en/latest/index.html"
