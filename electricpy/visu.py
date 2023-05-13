@@ -7,9 +7,8 @@ this module is designed to assist engineers visualize their designs.
 """
 ################################################################################
 
-import cmath
-
 import cmath as _c
+
 import numpy as _np
 import matplotlib as _matplotlib
 import matplotlib.pyplot as _plt
@@ -60,47 +59,53 @@ def powertriangle(P=None, Q=None, S=None, PF=None, color="red",
         P, Q, S, PF = powerset(P, Q, S, PF)
 
     # Generate Lines
-    Plnx = [0, P]
-    Plny = [0, 0]
-    Qlnx = [P, P]
-    Qlny = [0, Q]
-    Slnx = [0, P]
-    Slny = [0, Q]
+    p_line_x = [0, P]
+    p_line_y = [0, 0]
+    q_line_x = [P, P]
+    q_line_y = [0, Q]
+    s_line_x = [0, P]
+    s_line_y = [0, Q]
 
     # Plot Power Triangle
     _plt.figure(1)
     _plt.title(text)
-    _plt.plot(Plnx, Plny, color=color)
-    _plt.plot(Qlnx, Qlny, color=color)
-    _plt.plot(Slnx, Slny, color=color)
+    _plt.plot(p_line_x, p_line_y, color=color)
+    _plt.plot(q_line_x, q_line_y, color=color)
+    _plt.plot(s_line_x, s_line_y, color=color)
     _plt.xlabel("Real Power (W)")
     _plt.ylabel("Reactive Power (VAR)")
-    mx = max(abs(P), abs(Q))
+    maximum = max(abs(P), abs(Q))
 
     if P > 0:
-        _plt.xlim(0, mx * 1.1)
-        x = mx
+        _plt.xlim(0, maximum * 1.1)
+        x = maximum
     else:
-        _plt.xlim(-mx * 1.1, 0)
-        x = -mx
+        _plt.xlim(-maximum * 1.1, 0)
+        x = -maximum
     if Q > 0:
-        _plt.ylim(0, mx * 1.1)
-        y = mx
+        _plt.ylim(0, maximum * 1.1)
+        y = maximum
     else:
-        _plt.ylim(-mx * 1.1, 0)
-        y = -mx
+        _plt.ylim(-maximum * 1.1, 0)
+        y = -maximum
     if PF > 0:
-        PFtext = " Lagging"
+        power_factor_text = "Lagging"
     else:
-        PFtext = " Leading"
-    text = "P:   " + str(P) + " W\n"
-    text = text + "Q:   " + str(Q) + " VAR\n"
-    text = text + "S:   " + str(S) + " VA\n"
-    text = text + "PF:  " + str(abs(PF)) + PFtext + "\n"
-    text = text + "ΘPF: " + str(_np.degrees(_np.arccos(PF))) + "°" + PFtext
+        power_factor_text = "Leading"
     # Print all values if asked to
     if printval:
-        _plt.text(x / 20, y * 4 / 5, text, color=color)
+        _plt.text(
+            x/20,
+            y*4/5,
+            (
+                f"P:   {P} W\n"
+                f"Q:   {Q} VAR\n"
+                f"S:   {S} VA\n"
+                f"PF:  {abs(PF)} {power_factor_text}\n"
+                f"ΘPF: {_np.degrees(_np.arccos(PF))}° {power_factor_text}"
+            ),
+            color=color
+        )
     return _plt
 
 
@@ -247,20 +252,18 @@ def phasorplot(phasors, title="Phasor Diagram", legend=False, bg=None,
     # Set Tolerance
     if tolerance is None:
         tolerance = radius / 25
-    elif tolerance == False:
+    elif tolerance is False:
         tolerance = -1
     # Set Background Color
     if bg is None:
         bg = "#FFFFFF"
     # Load labels if handled in other argument
-    if label != False:
+    if label:
         legend = label
-    if labels != False:
+    if labels:
         legend = labels
     # Check for more phasors than colors
-    numphs = len(phasors)
-    numclr = len(colors)
-    if numphs > numclr:
+    if len(phasors) > len(colors):
         raise ValueError(
             "ERROR: Too many phasors provided. Specify more line colors."
         )
@@ -276,23 +279,26 @@ def phasorplot(phasors, title="Phasor Diagram", legend=False, bg=None,
 
     # Plot the diagram
     _plt.title(title + "\n")
-    handles = _np.array([])  # Empty array for plot handles
-    for i in range(numphs):
-        mag, ang_r = _c.polar(phasors[i])
+    arrows = []
+    for i, phasor in enumerate(phasors):
+        mag, ang_r = _c.polar(phasor)
         # Plot with labels
         if legend:
             if mag > tolerance:
-                hand = _plt.arrow(0, 0, ang_r, mag, color=colors[i],
+                arrows.append(
+                    _plt.arrow(0, 0, ang_r, mag, color=colors[i],
                                   label=legend[i], linewidth=linewidth)
+                )
             else:
-                hand = _plt.plot(0, 0, 'o', markersize=linewidth * 3,
+                arrows.append(
+                    _plt.plot(0, 0, 'o', markersize=linewidth * 3,
                                  label=legend[i], color=colors[i])
-            handles = _np.append(handles, [hand])
+                )
         # Plot without labels
         else:
             _plt.arrow(0, 0, ang_r, mag, color=colors[i], linewidth=linewidth)
     if legend:
-        _plt.legend(handles, legend)
+        _plt.legend(arrows, legend)
     # Set Minimum and Maximum Radius Terms
     ax.set_rmax(radius)
     ax.set_rmin(0)
@@ -337,7 +343,7 @@ class InductionMotorCircle:
     output_power:       int
                         Desired power output from the induction motor
     torque_ration:      float
-                        Ration between rotor resitance to stator resistance
+                        Ration between rotor resistance to stator resistance
                         (i.e., R2/R1)
     frequency:          int
                         AC supply frequency
@@ -350,7 +356,7 @@ class InductionMotorCircle:
         """Primary Entrypoint."""
         self.no_load_data = no_load_data
         self.blocked_rotor_data = blocked_rotor_data
-        self.f = frequency
+        self.frequency = frequency
         self.operating_power = output_power
         self.torque_ratio = torque_ration
         self.poles = poles
@@ -636,7 +642,7 @@ class PowerCircle:
     Plot Power Circle Diagram of Transmission System.
 
     This class is designed to plot the power circle diagram of a transmission
-    system both sending and reciving ends.
+    system both sending and receiving ends.
 
     Examples
     --------
@@ -723,14 +729,14 @@ class PowerCircle:
     def _build_circle(a1, a2, circle_type, V, P=None, Q=None, S=None, power_factor=None, V_ref=None):
 
         k = (abs(V) ** 2) * abs(a1) / abs(a2)
-        alpha = cmath.phase(a1)
-        beta = cmath.phase(a2)
+        alpha = _c.phase(a1)
+        beta = _c.phase(a2)
 
         if circle_type == "receiving_end":
-            center = Point(-k * cmath.cos(alpha - beta), -k * cmath.sin(alpha - beta))
+            center = Point(-k * _c.cos(alpha - beta), -k * _c.sin(alpha - beta))
 
         elif circle_type == "sending_end":
-            center = Point(k * cmath.cos(alpha - beta), -k * cmath.sin(alpha - beta))
+            center = Point(k * _c.cos(alpha - beta), -k * _c.sin(alpha - beta))
 
         if V_ref is not None and P is not None and Q is not None:
             radius = abs(V) * abs(V_ref) / (abs(a2))
@@ -750,21 +756,23 @@ class PowerCircle:
 
         elif P is not None and power_factor is not None:
 
-            Q = P * cmath.sqrt(1 / power_factor ** 2 - 1).real
+            Q = P * _c.sqrt(1 / power_factor ** 2 - 1).real
 
             if power_factor < 0:
-                Q = -Q
+                Q = -1 * Q
 
             radius = geometry.distance(center, Point(P, Q))
             operation_point = Point(P, Q)
 
         elif Q is not None and power_factor is not None:
-            P = Q / cmath.sqrt(1 / power_factor ** 2 - 1).real
+            P = Q / _c.sqrt(1 / power_factor ** 2 - 1).real
             radius = geometry.distance(center, Point(P, Q))
             operation_point = Point(P, Q)
 
         else:
-            raise AttributeError("Enought attributes to calculate not found")
+            raise AttributeError(
+                "Not enough attributes found to perform calculation"
+            )
 
         return radius, center, operation_point
 

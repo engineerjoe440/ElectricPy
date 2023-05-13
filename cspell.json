@@ -5,12 +5,18 @@
     "dictionaries": [],
     "words": [
         "electricpy",
+        "epmath",
+        "fsolve",
         "matplotlib",
         "parallelz",
         "phasor",
+        "phasorlist",
+        "phasorplot",
         "phasors",
+        "powerset",
         "pyplot",
-        "scipy"
+        "scipy",
+        "visu"
     ],
     "ignoreWords": [],
     "import": []

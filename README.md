@@ -153,7 +153,6 @@ opportunity to take advantage of this project.
 For more information regarding this resource, please contact Joe Stanley
 
 - <engineerjoe440@yahoo.com>
-- <joe_stanley@selinc.com>
 
 ## License and Usage
 

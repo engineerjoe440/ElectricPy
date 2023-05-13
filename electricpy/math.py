@@ -13,7 +13,6 @@ to aid in scientific calculations.
 """
 ################################################################################
 
-# Import Required Packages
 import numpy as _np
 import scipy.signal as _sig
 from scipy.integrate import quad as integrate
