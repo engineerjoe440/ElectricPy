@@ -22,15 +22,13 @@ import matplotlib.pyplot as _plt
 import numpy as _np
 from scipy.integrate import quad as integrate
 
-from electricpy.version import NAME, VERSION
-from electricpy.constants import *
-from electricpy.phasors import phasor, parallelz
+from .version import NAME, VERSION
+from .constants import *
+from .phasors import phasor, parallelz
 
 __version__ = VERSION
 
 # Define Cycle Time Function
-
-
 def tcycle(ncycles=1, freq=60):
     r"""
     Time of Electrical Cycles.
