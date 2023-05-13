@@ -1,6 +1,0 @@
-electricpy.non\_linear\_pf
-==========================
-
-.. currentmodule:: electricpy
-
-.. autofunction:: non_linear_pf

@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -47,7 +46,7 @@
   
   
   
-    <title>electricpy.fault &#8212; electricpy 0.3.0 documentation</title>
+    <title>electricpy.fault &#8212; electricpy 0.2.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/material.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -81,7 +80,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../index.html" title="electricpy 0.3.0 documentation"
+        <a href="../index.html" title="electricpy 0.2.2 documentation"
            class="md-header-nav__button md-logo">
           
             &nbsp;
@@ -167,7 +166,7 @@
   <nav class="md-tabs" data-md-component="tabs">
     <div class="md-tabs__inner md-grid">
       <ul class="md-tabs__list">
-          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">electricpy 0.3.0 documentation</a></li>
+          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">electricpy 0.2.2 documentation</a></li>
           <li class="md-tabs__item"><a href="../electricpyapi.html" class="md-tabs__link">ElectricPy API</a></li>
       </ul>
     </div>
@@ -180,13 +179,13 @@
               <div class="md-sidebar__inner">
                 <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../index.html" title="electricpy 0.3.0 documentation" class="md-nav__button md-logo">
+    <a href="../index.html" title="electricpy 0.2.2 documentation" class="md-nav__button md-logo">
       
         <img src="../_static/" alt=" logo" width="48" height="48">
       
     </a>
     <a href="../index.html"
-       title="electricpy 0.3.0 documentation">ElectricPy</a>
+       title="electricpy 0.2.2 documentation">ElectricPy</a>
   </label>
     <div class="md-nav__source">
       <a href="https://github.com/engineerjoe440/ElectricPy/" title="Go to repository" class="md-source" data-md-source="github">
@@ -375,7 +374,7 @@
   <section id="electricpy-fault">
 <h1 id="api-electricpy-fault--page-root">electricpy.fault<a class="headerlink" href="#api-electricpy-fault--page-root" title="Permalink to this heading">¶</a></h1>
 <p class="rubric">Description</p>
-<span class="target" id="module-electricpy.fault"></span><p>Electrical Power Engineering Faults Calculations.</p>
+<span class="target" id="module-electricpy.fault"></span><p><cite>electricpy.fault</cite> - Electrical Power Engineering Faults Calculations.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">fault</span>
 </pre></div>
 </div>
@@ -406,38 +405,32 @@
 <tr class="row-even"><td><p><a class="reference internal" href="electricpy.fault.distmeasz.html#electricpy.fault.distmeasz" title="electricpy.fault.distmeasz"><code class="xref py py-obj docutils literal notranslate"><span class="pre">distmeasz</span></code></a>(VLNmeas, If, Ip, Ipp[, CTR, VTR, ...])</p></td>
 <td><p>Distance Element Measured Impedance Function.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.fault.double_phase_to_ground_fault.html#electricpy.fault.double_phase_to_ground_fault" title="electricpy.fault.double_phase_to_ground_fault"><code class="xref py py-obj docutils literal notranslate"><span class="pre">double_phase_to_ground_fault</span></code></a>(Vth, Zseq[, ...])</p></td>
-<td><p>Double-Line-to-Ground Fault Calculator.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.fault.faultratio.html#electricpy.fault.faultratio" title="electricpy.fault.faultratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">faultratio</span></code></a>(I, Ipickup[, CTR])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.fault.faultratio.html#electricpy.fault.faultratio" title="electricpy.fault.faultratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">faultratio</span></code></a>(I, Ipickup[, CTR])</p></td>
 <td><p>Fault Multiple of Pickup (Ratio) Calculator.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.fault.genlossfield.html#electricpy.fault.genlossfield" title="electricpy.fault.genlossfield"><code class="xref py py-obj docutils literal notranslate"><span class="pre">genlossfield</span></code></a>(Xd, Xpd[, Zbase, CTR, VTR])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.fault.genlossfield.html#electricpy.fault.genlossfield" title="electricpy.fault.genlossfield"><code class="xref py py-obj docutils literal notranslate"><span class="pre">genlossfield</span></code></a>(Xd, Xpd[, Zbase, CTR, VTR])</p></td>
 <td><p>Electric Generator Loss of Field Function.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.fault.highzmini.html#electricpy.fault.highzmini" title="electricpy.fault.highzmini"><code class="xref py py-obj docutils literal notranslate"><span class="pre">highzmini</span></code></a>(N, Ie[, Irly, Vset, Rrly, Imov, CTR])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.fault.highzmini.html#electricpy.fault.highzmini" title="electricpy.fault.highzmini"><code class="xref py py-obj docutils literal notranslate"><span class="pre">highzmini</span></code></a>(N, Ie[, Irly, Vset, Rrly, Imov, CTR])</p></td>
 <td><p>Minimum Current for High Impedance Protection Calculator.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.fault.highzvpickup.html#electricpy.fault.highzvpickup" title="electricpy.fault.highzvpickup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">highzvpickup</span></code></a>(I, RL, Rct[, CTR, threephase, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.fault.highzvpickup.html#electricpy.fault.highzvpickup" title="electricpy.fault.highzvpickup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">highzvpickup</span></code></a>(I, RL, Rct[, CTR, threephase, ...])</p></td>
 <td><p>High Impedance Pickup Setting Function.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.fault.indmacheigenvalues.html#electricpy.fault.indmacheigenvalues" title="electricpy.fault.indmacheigenvalues"><code class="xref py py-obj docutils literal notranslate"><span class="pre">indmacheigenvalues</span></code></a>(Lr, Ls, Lm, Rr, Rs[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.fault.indmacheigenvalues.html#electricpy.fault.indmacheigenvalues" title="electricpy.fault.indmacheigenvalues"><code class="xref py py-obj docutils literal notranslate"><span class="pre">indmacheigenvalues</span></code></a>(Lr, Ls, Lm, Rr, Rs[, ...])</p></td>
 <td><p>Induction Machine Eigenvalue Calculator.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.fault.indmachphs3sc.html#electricpy.fault.indmachphs3sc" title="electricpy.fault.indmachphs3sc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">indmachphs3sc</span></code></a>(t, Is0, Lr, Ls, Lm, Rr, Rs[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.fault.indmachphs3sc.html#electricpy.fault.indmachphs3sc" title="electricpy.fault.indmachphs3sc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">indmachphs3sc</span></code></a>(t, Is0, Lr, Ls, Lm, Rr, Rs[, ...])</p></td>
 <td><p>Induction Machine 3-Phase SC Calculator.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.fault.indmachphs3torq.html#electricpy.fault.indmachphs3torq" title="electricpy.fault.indmachphs3torq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">indmachphs3torq</span></code></a>(t, Is0, Lr, Ls, Lm, Rr, Rs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.fault.indmachphs3torq.html#electricpy.fault.indmachphs3torq" title="electricpy.fault.indmachphs3torq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">indmachphs3torq</span></code></a>(t, Is0, Lr, Ls, Lm, Rr, Rs)</p></td>
 <td><p>Induction Machine 3-Phase Torque Calculator.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.fault.instoc.html#electricpy.fault.instoc" title="electricpy.fault.instoc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">instoc</span></code></a>(Imin[, CTR, Ki])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.fault.instoc.html#electricpy.fault.instoc" title="electricpy.fault.instoc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">instoc</span></code></a>(Imin[, CTR, Ki])</p></td>
 <td><p>Instantaneous OverCurrent Pickup Calculator.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.fault.iopirt.html#electricpy.fault.iopirt" title="electricpy.fault.iopirt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iopirt</span></code></a>(IpriHV, IpriLV, TAPHV, TAPLV[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.fault.iopirt.html#electricpy.fault.iopirt" title="electricpy.fault.iopirt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iopirt</span></code></a>(IpriHV, IpriLV, TAPHV, TAPLV[, ...])</p></td>
 <td><p>Operate/Restraint Current Calculator.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.fault.phase_to_phase_fault.html#electricpy.fault.phase_to_phase_fault" title="electricpy.fault.phase_to_phase_fault"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phase_to_phase_fault</span></code></a>(Vth, Zseq[, Rf, ...])</p></td>
-<td><p>Line-to-Line Fault Calculator.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="electricpy.fault.phs1g.html#electricpy.fault.phs1g" title="electricpy.fault.phs1g"><code class="xref py py-obj docutils literal notranslate"><span class="pre">phs1g</span></code></a>(Vth, Zseq[, Rf, sequence, reference])</p></td>
 <td><p>Single-Phase-to-Ground Fault Calculator.</p></td>
@@ -478,12 +471,6 @@
 <tr class="row-even"><td><p><a class="reference internal" href="electricpy.fault.scMVA.html#electricpy.fault.scMVA" title="electricpy.fault.scMVA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scMVA</span></code></a>([Zth, Isc, Vth])</p></td>
 <td><p>Short-Circuit MVA Calculator.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.fault.short_circuit_mva.html#electricpy.fault.short_circuit_mva" title="electricpy.fault.short_circuit_mva"><code class="xref py py-obj docutils literal notranslate"><span class="pre">short_circuit_mva</span></code></a>([Zth, Isc, Vth])</p></td>
-<td><p>Short-Circuit MVA Calculator.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.fault.single_phase_to_ground_fault.html#electricpy.fault.single_phase_to_ground_fault" title="electricpy.fault.single_phase_to_ground_fault"><code class="xref py py-obj docutils literal notranslate"><span class="pre">single_phase_to_ground_fault</span></code></a>(Vth, Zseq[, ...])</p></td>
-<td><p>Single-Phase-to-Ground Fault Calculator.</p></td>
-</tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="electricpy.fault.symrmsfaultcur.html#electricpy.fault.symrmsfaultcur" title="electricpy.fault.symrmsfaultcur"><code class="xref py py-obj docutils literal notranslate"><span class="pre">symrmsfaultcur</span></code></a>(V, R, X[, t, freq])</p></td>
 <td><p>Symmetrical/RMS Current Calculator.</p></td>
 </tr>
@@ -502,19 +489,16 @@
 <tr class="row-even"><td><p><a class="reference internal" href="electricpy.fault.thermaltime.html#electricpy.fault.thermaltime" title="electricpy.fault.thermaltime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">thermaltime</span></code></a>(In, Ibase, tbase)</p></td>
 <td><p>Thermal Time Limit Calculator.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.fault.three_phase_fault.html#electricpy.fault.three_phase_fault" title="electricpy.fault.three_phase_fault"><code class="xref py py-obj docutils literal notranslate"><span class="pre">three_phase_fault</span></code></a>(Vth, Zseq[, Rf, sequence, ...])</p></td>
-<td><p>Three-Phase Fault Calculator.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.fault.tocreset.html#electricpy.fault.tocreset" title="electricpy.fault.tocreset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tocreset</span></code></a>(I, Ipickup, TD[, curve, CTR])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.fault.tocreset.html#electricpy.fault.tocreset" title="electricpy.fault.tocreset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tocreset</span></code></a>(I, Ipickup, TD[, curve, CTR])</p></td>
 <td><p>Time OverCurrent Reset Time Function.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.fault.toctriptime.html#electricpy.fault.toctriptime" title="electricpy.fault.toctriptime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">toctriptime</span></code></a>(I, Ipickup, TD[, curve, CTR])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.fault.toctriptime.html#electricpy.fault.toctriptime" title="electricpy.fault.toctriptime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">toctriptime</span></code></a>(I, Ipickup, TD[, curve, CTR])</p></td>
 <td><p>Time OverCurrent Trip Time Function.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="electricpy.fault.transmismatch.html#electricpy.fault.transmismatch" title="electricpy.fault.transmismatch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transmismatch</span></code></a>(I1, I2, tap1, tap2)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.fault.transmismatch.html#electricpy.fault.transmismatch" title="electricpy.fault.transmismatch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transmismatch</span></code></a>(I1, I2, tap1, tap2)</p></td>
 <td><p>Electrical Transformer TAP Mismatch Function.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="electricpy.fault.trvresistor.html#electricpy.fault.trvresistor" title="electricpy.fault.trvresistor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trvresistor</span></code></a>(C, L, reduction[, Rd0, wd0, tpk0])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="electricpy.fault.trvresistor.html#electricpy.fault.trvresistor" title="electricpy.fault.trvresistor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trvresistor</span></code></a>(C, L, reduction[, Rd0, wd0, tpk0])</p></td>
 <td><p>Transient Recovery Voltage (TRV) Reduction Resistor Function.</p></td>
 </tr>
 </tbody>
@@ -568,7 +552,7 @@
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

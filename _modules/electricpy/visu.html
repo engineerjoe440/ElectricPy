@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -46,7 +45,7 @@
   
   
   
-    <title>electricpy.visu &#8212; electricpy 0.3.0 documentation</title>
+    <title>electricpy.visu &#8212; electricpy 0.2.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/material.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -78,7 +77,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../../index.html" title="electricpy 0.3.0 documentation"
+        <a href="../../index.html" title="electricpy 0.2.2 documentation"
            class="md-header-nav__button md-logo">
           
             &nbsp;
@@ -164,7 +163,7 @@
   <nav class="md-tabs" data-md-component="tabs">
     <div class="md-tabs__inner md-grid">
       <ul class="md-tabs__list">
-          <li class="md-tabs__item"><a href="../../index.html" class="md-tabs__link">electricpy 0.3.0 documentation</a></li>
+          <li class="md-tabs__item"><a href="../../index.html" class="md-tabs__link">electricpy 0.2.2 documentation</a></li>
           <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">Module code</a></li>
           <li class="md-tabs__item"><a href="../electricpy.html" class="md-tabs__link">electricpy</a></li>
       </ul>
@@ -178,13 +177,13 @@
               <div class="md-sidebar__inner">
                 <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../../index.html" title="electricpy 0.3.0 documentation" class="md-nav__button md-logo">
+    <a href="../../index.html" title="electricpy 0.2.2 documentation" class="md-nav__button md-logo">
       
         <img src="../../_static/" alt=" logo" width="48" height="48">
       
     </a>
     <a href="../../index.html"
-       title="electricpy 0.3.0 documentation">ElectricPy</a>
+       title="electricpy 0.2.2 documentation">ElectricPy</a>
   </label>
     <div class="md-nav__source">
       <a href="https://github.com/engineerjoe440/ElectricPy/" title="Go to repository" class="md-source" data-md-source="github">
@@ -360,304 +359,19 @@
   <h1 id="modules-electricpy-visu--page-root">Source code for electricpy.visu</h1><div class="highlight"><pre>
 <span></span><span class="c1">################################################################################</span>
 <span class="sd">"""</span>
-<span class="sd">Visualizations Specifically for Electrical Engineering.</span>
+<span class="sd">`electricpy.visu` - Support for plotting and visualizations.</span>
 
 <span class="sd">Filled with plotting functions and visualization tools for electrical engineers,</span>
 <span class="sd">this module is designed to assist engineers visualize their designs.</span>
 <span class="sd">"""</span>
 <span class="c1">################################################################################</span>
 
-<span class="kn">import</span> <span class="nn">cmath</span>
-
-<span class="kn">import</span> <span class="nn">cmath</span> <span class="k">as</span> <span class="nn">_c</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">_np</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">_matplotlib</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">_plt</span>
-
-<span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">powerset</span><span class="p">,</span> <span class="n">geometry</span>
+<span class="kn">import</span> <span class="nn">cmath</span>
+<span class="kn">from</span> <span class="nn">electricpy</span> <span class="kn">import</span> <span class="n">geometry</span>
 <span class="kn">from</span> <span class="nn">electricpy.geometry</span> <span class="kn">import</span> <span class="n">Point</span>
 <span class="kn">from</span> <span class="nn">electricpy.geometry.circle</span> <span class="kn">import</span> <span class="n">Circle</span>
-
-
-
-<span class="c1"># Define Power Triangle Function</span>
-<div class="viewcode-block" id="powertriangle"><a class="viewcode-back" href="../../api/electricpy.visu.powertriangle.html#electricpy.visu.powertriangle">[docs]</a><span class="k">def</span> <span class="nf">powertriangle</span><span class="p">(</span><span class="n">P</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">PF</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span>
-                  <span class="n">text</span><span class="o">=</span><span class="s2">"Power Triangle"</span><span class="p">,</span> <span class="n">printval</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Power Triangle Plotting Function.</span>
-
-<span class="sd">    This function is designed to draw a power triangle given</span>
-<span class="sd">    values for the complex power system.</span>
-
-<span class="sd">    .. image:: /static/PowerTriangle.png</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    P:          float</span>
-<span class="sd">                Real Power, unitless, default=None</span>
-<span class="sd">    Q:          float</span>
-<span class="sd">                Reactive Power, unitless, default=None</span>
-<span class="sd">    S:          float</span>
-<span class="sd">                Apparent Power, unitless, default=None</span>
-<span class="sd">    PF:         float</span>
-<span class="sd">                Power Factor, unitless, provided as a decimal value, lagging is</span>
-<span class="sd">                positive, leading is negative; default=None</span>
-<span class="sd">    color:      string, optional</span>
-<span class="sd">                The color of the power triangle lines, default="red"</span>
-<span class="sd">    text:       string, optional</span>
-<span class="sd">                The title of the power triangle plot, default="Power Triangle"</span>
-<span class="sd">    printval:   bool, optional</span>
-<span class="sd">                Control argument to allow the numeric values to be printed on</span>
-<span class="sd">                the plot, default="False"</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    matplotlib.pyplot:  Plotting object to be used for additional configuration</span>
-<span class="sd">                        or plotting.</span>
-<span class="sd">    """</span>
-    <span class="c1"># Calculate all values if not all are provided</span>
-    <span class="k">if</span> <span class="n">P</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">Q</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">S</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">PF</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">PF</span> <span class="o">=</span> <span class="n">powerset</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">PF</span><span class="p">)</span>
-
-    <span class="c1"># Generate Lines</span>
-    <span class="n">Plnx</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">P</span><span class="p">]</span>
-    <span class="n">Plny</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-    <span class="n">Qlnx</span> <span class="o">=</span> <span class="p">[</span><span class="n">P</span><span class="p">,</span> <span class="n">P</span><span class="p">]</span>
-    <span class="n">Qlny</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">Q</span><span class="p">]</span>
-    <span class="n">Slnx</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">P</span><span class="p">]</span>
-    <span class="n">Slny</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">Q</span><span class="p">]</span>
-
-    <span class="c1"># Plot Power Triangle</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Plnx</span><span class="p">,</span> <span class="n">Plny</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Qlnx</span><span class="p">,</span> <span class="n">Qlny</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Slnx</span><span class="p">,</span> <span class="n">Slny</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Real Power (W)"</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Reactive Power (VAR)"</span><span class="p">)</span>
-    <span class="n">mx</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">P</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Q</span><span class="p">))</span>
-
-    <span class="k">if</span> <span class="n">P</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">mx</span> <span class="o">*</span> <span class="mf">1.1</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">mx</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="n">mx</span> <span class="o">*</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="n">mx</span>
-    <span class="k">if</span> <span class="n">Q</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">mx</span> <span class="o">*</span> <span class="mf">1.1</span><span class="p">)</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">mx</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="n">mx</span> <span class="o">*</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="n">mx</span>
-    <span class="k">if</span> <span class="n">PF</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">PFtext</span> <span class="o">=</span> <span class="s2">" Lagging"</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">PFtext</span> <span class="o">=</span> <span class="s2">" Leading"</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="s2">"P:   "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">P</span><span class="p">)</span> <span class="o">+</span> <span class="s2">" W</span><span class="se">\n</span><span class="s2">"</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span> <span class="o">+</span> <span class="s2">"Q:   "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span> <span class="o">+</span> <span class="s2">" VAR</span><span class="se">\n</span><span class="s2">"</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span> <span class="o">+</span> <span class="s2">"S:   "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="o">+</span> <span class="s2">" VA</span><span class="se">\n</span><span class="s2">"</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span> <span class="o">+</span> <span class="s2">"PF:  "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">PF</span><span class="p">))</span> <span class="o">+</span> <span class="n">PFtext</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span> <span class="o">+</span> <span class="s2">"ΘPF: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">PF</span><span class="p">)))</span> <span class="o">+</span> <span class="s2">"°"</span> <span class="o">+</span> <span class="n">PFtext</span>
-    <span class="c1"># Print all values if asked to</span>
-    <span class="k">if</span> <span class="n">printval</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mi">20</span><span class="p">,</span> <span class="n">y</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">/</span> <span class="mi">5</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">_plt</span></div>
-
-
-<span class="c1"># Define Convolution Bar-Graph Function:</span>
-<div class="viewcode-block" id="convbar"><a class="viewcode-back" href="../../api/electricpy.visu.convbar.html#electricpy.visu.convbar">[docs]</a><span class="k">def</span> <span class="nf">convbar</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">outline</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Convolution Bar-Graph Plotter Function.</span>
-
-<span class="sd">    Generates plots of each of two input arrays as bar-graphs, then</span>
-<span class="sd">    generates a convolved bar-graph of the two inputs to demonstrate</span>
-<span class="sd">    and illustrate convolution, typically for an educational purpose.</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">    &gt;&gt;&gt; import electricpy.visu as visu</span>
-<span class="sd">    &gt;&gt;&gt; h = np.array([0, 1, 1, 1, 0])</span>
-<span class="sd">    &gt;&gt;&gt; x = np.array([0, 1, 1, 1, 0])</span>
-<span class="sd">    &gt;&gt;&gt; visu.convbar(h, x)</span>
-
-<span class="sd">    .. image:: /static/convbar-example.png</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    h:      numpy.ndarray</span>
-<span class="sd">            Impulse Response - Given as Array (Prefferably Numpy Array)</span>
-<span class="sd">    x:      numpy.ndarray</span>
-<span class="sd">            Input Function - Given as Array (Prefferably Numpy Array)</span>
-<span class="sd">    """</span>
-    <span class="c1"># The impulse response</span>
-    <span class="n">M</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-    <span class="c1"># Plot</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">outline</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'h'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Impulse Response'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-
-    <span class="c1"># The input function</span>
-    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-    <span class="c1"># Plot</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">outline</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">19</span><span class="p">])</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Input Function'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'x'</span><span class="p">)</span>
-
-    <span class="c1"># The output</span>
-    <span class="n">L</span> <span class="o">=</span> <span class="n">M</span> <span class="o">+</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="n">w</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">outline</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'y'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Convolved Output'</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">_plt</span></div>
-
-
-<span class="c1"># Define Phasor Plot Generator</span>
-<div class="viewcode-block" id="phasorplot"><a class="viewcode-back" href="../../api/electricpy.visu.phasorplot.html#electricpy.visu.phasorplot">[docs]</a><span class="k">def</span> <span class="nf">phasorplot</span><span class="p">(</span><span class="n">phasors</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Phasor Diagram"</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-               <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-               <span class="n">label</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Phasor Plotting Function.</span>
-
-<span class="sd">    This function is designed to plot a phasor-diagram with angles in degrees</span>
-<span class="sd">    for up to 12 phasor sets (more may be used if additional colors are set).</span>
-<span class="sd">    Phasors must be passed as a complex number set, (e.g.</span>
-<span class="sd">    [ m+ja, m+ja, m+ja, ... , m+ja ] ).</span>
-
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
-<span class="sd">    &gt;&gt;&gt; from electricpy import phasors</span>
-<span class="sd">    &gt;&gt;&gt; from electricpy import visu</span>
-<span class="sd">    &gt;&gt;&gt; voltages = np.array([</span>
-<span class="sd">    ...     [67,0],</span>
-<span class="sd">    ...     [45,-120],</span>
-<span class="sd">    ...     [52,120]</span>
-<span class="sd">    ... ])</span>
-<span class="sd">    &gt;&gt;&gt; phasors = phasors.phasorlist(voltages)</span>
-<span class="sd">    &gt;&gt;&gt; plt = visu.phasorplot(phasors, colors=["red", "green", "blue"])</span>
-<span class="sd">    &gt;&gt;&gt; plt.show()</span>
-
-<span class="sd">    .. image:: /static/PhasorPlot.png</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    phasors:    list of complex</span>
-<span class="sd">                The set of phasors to be plotted.</span>
-<span class="sd">    title:      string, optional</span>
-<span class="sd">                The Plot Title, default="Phasor Diagram"</span>
-<span class="sd">    legend:     bool, optional</span>
-<span class="sd">                Control argument to enable displaying the legend, must be passed</span>
-<span class="sd">                as an array or list of strings. `label` and `labels` are mimic-</span>
-<span class="sd">                arguments and will perform similar operation, default=False</span>
-<span class="sd">    bg:         string, optional</span>
-<span class="sd">                Background-Color control, default="#d5de9c"</span>
-<span class="sd">    radius:     float, optional</span>
-<span class="sd">                The diagram radius, unless specified, automatically scales</span>
-<span class="sd">    colors:     list of str, optional</span>
-<span class="sd">                List of hexidecimal color strings denoting the line colors to</span>
-<span class="sd">                use.</span>
-<span class="sd">    size:       float, optional</span>
-<span class="sd">                Control argument for figure size. default=None</span>
-<span class="sd">    linewidth:  float, optional</span>
-<span class="sd">                Control argument to declare the line thickness. default=None</span>
-<span class="sd">    tolerance:  float, optional</span>
-<span class="sd">                Minimum magnitude to plot, anything less than tolerance will be</span>
-<span class="sd">                plotted as a single point at the origin, by default, the</span>
-<span class="sd">                tolerance is scaled to be 1/25-th the maximum radius. To disable</span>
-<span class="sd">                the tolerance, simply provide either False or -1.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    matplotlib.pyplot:  Plotting object to be used for additional configuration</span>
-<span class="sd">                        or plotting.</span>
-<span class="sd">    """</span>
-    <span class="c1"># Load Complex Values if Necessary</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="nb">len</span><span class="p">(</span><span class="n">phasors</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-        <span class="n">phasors</span> <span class="o">=</span> <span class="p">[</span><span class="n">phasors</span><span class="p">]</span>
-    <span class="c1"># Manage Colors</span>
-    <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="s2">"#FF0000"</span><span class="p">,</span> <span class="s2">"#800000"</span><span class="p">,</span> <span class="s2">"#FFFF00"</span><span class="p">,</span> <span class="s2">"#808000"</span><span class="p">,</span> <span class="s2">"#00ff00"</span><span class="p">,</span> <span class="s2">"#008000"</span><span class="p">,</span>
-            <span class="s2">"#00ffff"</span><span class="p">,</span> <span class="s2">"#008080"</span><span class="p">,</span> <span class="s2">"#0000ff"</span><span class="p">,</span> <span class="s2">"#000080"</span><span class="p">,</span> <span class="s2">"#ff00ff"</span><span class="p">,</span> <span class="s2">"#800080"</span>
-        <span class="p">]</span>
-    <span class="c1"># Scale Radius</span>
-    <span class="k">if</span> <span class="n">radius</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">radius</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">phasors</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-    <span class="c1"># Set Tolerance</span>
-    <span class="k">if</span> <span class="n">tolerance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">tolerance</span> <span class="o">=</span> <span class="n">radius</span> <span class="o">/</span> <span class="mi">25</span>
-    <span class="k">elif</span> <span class="n">tolerance</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
-        <span class="n">tolerance</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="c1"># Set Background Color</span>
-    <span class="k">if</span> <span class="n">bg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">bg</span> <span class="o">=</span> <span class="s2">"#FFFFFF"</span>
-    <span class="c1"># Load labels if handled in other argument</span>
-    <span class="k">if</span> <span class="n">label</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
-        <span class="n">legend</span> <span class="o">=</span> <span class="n">label</span>
-    <span class="k">if</span> <span class="n">labels</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
-        <span class="n">legend</span> <span class="o">=</span> <span class="n">labels</span>
-    <span class="c1"># Check for more phasors than colors</span>
-    <span class="n">numphs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">phasors</span><span class="p">)</span>
-    <span class="n">numclr</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">numphs</span> <span class="o">&gt;</span> <span class="n">numclr</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">"ERROR: Too many phasors provided. Specify more line colors."</span>
-        <span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="c1"># Force square figure and square axes</span>
-        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">_matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'figure.figsize'</span><span class="p">]</span>
-        <span class="n">size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
-    <span class="c1"># Make a square figure</span>
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">_plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span>
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span> <span class="n">polar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">bg</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-
-    <span class="c1"># Plot the diagram</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
-    <span class="n">handles</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>  <span class="c1"># Empty array for plot handles</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numphs</span><span class="p">):</span>
-        <span class="n">mag</span><span class="p">,</span> <span class="n">ang_r</span> <span class="o">=</span> <span class="n">_c</span><span class="o">.</span><span class="n">polar</span><span class="p">(</span><span class="n">phasors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="c1"># Plot with labels</span>
-        <span class="k">if</span> <span class="n">legend</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">mag</span> <span class="o">&gt;</span> <span class="n">tolerance</span><span class="p">:</span>
-                <span class="n">hand</span> <span class="o">=</span> <span class="n">_plt</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ang_r</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-                                  <span class="n">label</span><span class="o">=</span><span class="n">legend</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">linewidth</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">hand</span> <span class="o">=</span> <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'o'</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="n">linewidth</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span>
-                                 <span class="n">label</span><span class="o">=</span><span class="n">legend</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="n">handles</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="p">[</span><span class="n">hand</span><span class="p">])</span>
-        <span class="c1"># Plot without labels</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ang_r</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">linewidth</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">legend</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">legend</span><span class="p">)</span>
-    <span class="c1"># Set Minimum and Maximum Radius Terms</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_rmax</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_rmin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">_plt</span></div>
-
 
 <div class="viewcode-block" id="InductionMotorCircle"><a class="viewcode-back" href="../../api/electricpy.visu.InductionMotorCircle.html#electricpy.visu.InductionMotorCircle">[docs]</a><span class="k">class</span> <span class="nc">InductionMotorCircle</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
@@ -706,7 +420,7 @@
 <span class="sd">    """</span>
 
 <div class="viewcode-block" id="InductionMotorCircle.__init__"><a class="viewcode-back" href="../../api/electricpy.visu.InductionMotorCircle.html#electricpy.visu.InductionMotorCircle.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">no_load_data</span><span class="p">,</span> <span class="n">blocked_rotor_data</span><span class="p">,</span> <span class="n">output_power</span><span class="p">,</span>
-                 <span class="n">torque_ration</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">poles</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+                <span class="n">torque_ration</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">poles</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Primary Entrypoint."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">no_load_data</span> <span class="o">=</span> <span class="n">no_load_data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">blocked_rotor_data</span> <span class="o">=</span> <span class="n">blocked_rotor_data</span>
@@ -792,11 +506,11 @@
         <span class="c1"># Full load output</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
             <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
-             <span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]],</span>
             <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">])</span>
         <span class="c1"># Diameter of the circle</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">],</span>
-                  <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s1">'-.'</span><span class="p">)</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s1">'-.'</span><span class="p">)</span>
         <span class="c1"># Max torque line</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
             <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">torque_max_x</span><span class="p">],</span>
@@ -860,7 +574,7 @@
         <span class="n">rotor_cu_loss</span> <span class="o">=</span> <span class="n">total_cu_loss</span> <span class="o">-</span> <span class="n">stator_cu_loss</span>
 
         <span class="n">rotor_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_y</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_scale</span> <span class="o">-</span> \
-                       <span class="p">(</span><span class="n">rotor_cu_loss</span> <span class="o">+</span> <span class="n">stator_cu_loss</span> <span class="o">+</span> <span class="n">no_load_losses</span><span class="p">)</span>
+                    <span class="p">(</span><span class="n">rotor_cu_loss</span> <span class="o">+</span> <span class="n">stator_cu_loss</span> <span class="o">+</span> <span class="n">no_load_losses</span><span class="p">)</span>
 
         <span class="n">slip</span> <span class="o">=</span> <span class="n">rotor_cu_loss</span> <span class="o">/</span> <span class="n">rotor_output</span>
 
@@ -990,7 +704,6 @@
         <span class="n">p_y_2</span> <span class="o">=</span> <span class="n">center_y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">beta_1</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">p_x_1</span><span class="p">,</span> <span class="n">p_y_1</span><span class="p">],</span> <span class="p">[</span><span class="n">p_x_2</span><span class="p">,</span> <span class="n">p_y_2</span><span class="p">]</span></div>
 
-
 <div class="viewcode-block" id="PowerCircle"><a class="viewcode-back" href="../../api/electricpy.visu.PowerCircle.html#electricpy.visu.PowerCircle">[docs]</a><span class="k">class</span> <span class="nc">PowerCircle</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Plot Power Circle Diagram of Transmission System.</span>
@@ -1055,21 +768,21 @@
                  <span class="n">D</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">"""Initialize the class."""</span>
         <span class="k">if</span> <span class="n">C</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A</span> <span class="o">*</span> <span class="n">D</span> <span class="o">-</span> <span class="n">B</span> <span class="o">*</span> <span class="n">C</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="s2">"ABCD Matrix is not a valid ABCD Matrix"</span>
+            <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="o">*</span><span class="n">D</span> <span class="o">-</span> <span class="n">B</span><span class="o">*</span><span class="n">C</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="s2">"ABCD Matrix is not a valid ABCD Matrix"</span>
 
         <span class="k">if</span> <span class="n">power_circle_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"receiving"</span><span class="p">:</span>
 
-            <span class="k">if</span> <span class="n">A</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">B</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Vr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">A</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">B</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Vr</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span> <span class="o">=</span> <span class="n">PowerCircle</span><span class="o">.</span><span class="n">_build_circle</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="s2">"receiving_end"</span><span class="p">,</span> <span class="n">Vr</span><span class="p">,</span>
-                                                                                           <span class="n">Pr</span><span class="p">,</span> <span class="n">Qr</span><span class="p">,</span> <span class="n">Sr</span><span class="p">,</span> <span class="n">power_factor</span><span class="p">,</span> <span class="n">Vs</span><span class="p">)</span>
+                <span class="n">Pr</span><span class="p">,</span> <span class="n">Qr</span><span class="p">,</span> <span class="n">Sr</span><span class="p">,</span> <span class="n">power_factor</span><span class="p">,</span> <span class="n">Vs</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Not enough attributes to build circle"</span><span class="p">)</span>
 
         <span class="k">elif</span> <span class="n">power_circle_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"sending"</span><span class="p">:</span>
 
-            <span class="k">if</span> <span class="n">B</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">D</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Vs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">B</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">D</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Vs</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span> <span class="o">=</span> <span class="n">PowerCircle</span><span class="o">.</span><span class="n">_build_circle</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="s2">"sending_end"</span><span class="p">,</span> <span class="n">Vs</span><span class="p">,</span>
-                                                                                           <span class="n">Ps</span><span class="p">,</span> <span class="n">Qs</span><span class="p">,</span> <span class="n">Ss</span><span class="p">,</span> <span class="n">power_factor</span><span class="p">,</span> <span class="n">Vr</span><span class="p">)</span>
+                <span class="n">Ps</span><span class="p">,</span> <span class="n">Qs</span><span class="p">,</span> <span class="n">Ss</span><span class="p">,</span> <span class="n">power_factor</span><span class="p">,</span> <span class="n">Vr</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Not enough attributes to build power circle"</span><span class="p">)</span>
 
@@ -1080,37 +793,37 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span></div>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_build_circle</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">circle_type</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">power_factor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">V_ref</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_build_circle</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">circle_type</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Q</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">power_factor</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">V_ref</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 
-        <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">V</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="nb">abs</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span>
         <span class="n">alpha</span> <span class="o">=</span> <span class="n">cmath</span><span class="o">.</span><span class="n">phase</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span>
         <span class="n">beta</span> <span class="o">=</span> <span class="n">cmath</span><span class="o">.</span><span class="n">phase</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">circle_type</span> <span class="o">==</span> <span class="s2">"receiving_end"</span><span class="p">:</span>
-            <span class="n">center</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">cmath</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span> <span class="o">-</span> <span class="n">beta</span><span class="p">),</span> <span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">cmath</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alpha</span> <span class="o">-</span> <span class="n">beta</span><span class="p">))</span>
+            <span class="n">center</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">cmath</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span> <span class="o">-</span> <span class="n">beta</span><span class="p">),</span> <span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">cmath</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alpha</span> <span class="o">-</span> <span class="n">beta</span><span class="p">))</span>
 
         <span class="k">elif</span> <span class="n">circle_type</span> <span class="o">==</span> <span class="s2">"sending_end"</span><span class="p">:</span>
-            <span class="n">center</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">cmath</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span> <span class="o">-</span> <span class="n">beta</span><span class="p">),</span> <span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="n">cmath</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alpha</span> <span class="o">-</span> <span class="n">beta</span><span class="p">))</span>
+            <span class="n">center</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">k</span><span class="o">*</span><span class="n">cmath</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span> <span class="o">-</span><span class="n">beta</span><span class="p">),</span> <span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">cmath</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alpha</span> <span class="o">-</span> <span class="n">beta</span><span class="p">))</span>
 
-        <span class="k">if</span> <span class="n">V_ref</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">P</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Q</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">radius</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">V_ref</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">a2</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">V_ref</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">P</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Q</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">radius</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">V</span><span class="p">)</span><span class="o">*</span><span class="nb">abs</span><span class="p">(</span><span class="n">V_ref</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">a2</span><span class="p">))</span>
             <span class="n">operation_point</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span>
 
-        <span class="k">elif</span> <span class="n">V_ref</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">S</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">radius</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">V_ref</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">a2</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">V_ref</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">S</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">radius</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">V</span><span class="p">)</span><span class="o">*</span><span class="nb">abs</span><span class="p">(</span><span class="n">V_ref</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">a2</span><span class="p">))</span>
             <span class="n">operation_point</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span>
 
-        <span class="k">elif</span> <span class="n">P</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Q</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">P</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Q</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">radius</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">Point</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">))</span>
             <span class="n">operation_point</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span>
 
-        <span class="k">elif</span> <span class="n">S</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">S</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">radius</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">Point</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">imag</span><span class="p">))</span>
             <span class="n">operation_point</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span>
 
-        <span class="k">elif</span> <span class="n">P</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">P</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
 
-            <span class="n">Q</span> <span class="o">=</span> <span class="n">P</span> <span class="o">*</span> <span class="n">cmath</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">power_factor</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+            <span class="n">Q</span> <span class="o">=</span> <span class="n">P</span><span class="o">*</span><span class="n">cmath</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">power_factor</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
 
             <span class="k">if</span> <span class="n">power_factor</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">Q</span> <span class="o">=</span> <span class="o">-</span><span class="n">Q</span>
@@ -1118,8 +831,8 @@
             <span class="n">radius</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">Point</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">))</span>
             <span class="n">operation_point</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span>
 
-        <span class="k">elif</span> <span class="n">Q</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">P</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">/</span> <span class="n">cmath</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">power_factor</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+        <span class="k">elif</span> <span class="n">Q</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">P</span> <span class="o">=</span> <span class="n">Q</span><span class="o">/</span><span class="n">cmath</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">power_factor</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
             <span class="n">radius</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">Point</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">))</span>
             <span class="n">operation_point</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span>
 
@@ -1130,40 +843,40 @@
 
     <span class="k">def</span> <span class="nf">_cal_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type1</span><span class="p">,</span> <span class="n">type2</span><span class="p">):</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'V'</span> <span class="o">+</span> <span class="n">type2</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'V'</span> <span class="o">+</span> <span class="n">type2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'B'</span><span class="p">])</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'V'</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'V'</span><span class="o">+</span><span class="n">type2</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'V'</span> <span class="o">+</span> <span class="n">type2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'B'</span><span class="p">])</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'V'</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'P'</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'P'</span><span class="o">+</span><span class="n">type1</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'P'</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">x</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'Q'</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'Q'</span><span class="o">+</span><span class="n">type1</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'Q'</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">y</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'S'</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'S'</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">y</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'S'</span><span class="o">+</span><span class="n">type1</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'S'</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">y</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'power_factor'</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'power_factor'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">y</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">x</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'power_factor'</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'power_factor'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">y</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">x</span>
 
         <span class="k">if</span> <span class="n">type1</span> <span class="o">==</span> <span class="s1">'r'</span> <span class="ow">and</span> <span class="n">type2</span> <span class="o">==</span> <span class="s1">'s'</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'B'</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Sr"</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">]</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'B'</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Sr"</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">]</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">]</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span>
 
         <span class="k">elif</span> <span class="n">type1</span> <span class="o">==</span> <span class="s1">'s'</span> <span class="ow">and</span> <span class="n">type2</span> <span class="o">==</span> <span class="s1">'r'</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'B'</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Ss"</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"D"</span><span class="p">]</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">]</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'B'</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Ss"</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"D"</span><span class="p">]</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">]</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">]</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">print_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">"""Print the data of the circle."""</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"power_circle_type"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"receiving"</span><span class="p">:</span>
+
             <span class="bp">self</span><span class="o">.</span><span class="n">_cal_parameters</span><span class="p">(</span><span class="s2">"r"</span><span class="p">,</span> <span class="s2">"s"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"power_circle_type"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"sending"</span><span class="p">:</span>
+
             <span class="bp">self</span><span class="o">.</span><span class="n">_cal_parameters</span><span class="p">(</span><span class="s2">"s"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -1172,9 +885,11 @@
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">"""Return the data of the circle."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"power_circle_type"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"receiving"</span><span class="p">:</span>
+
             <span class="bp">self</span><span class="o">.</span><span class="n">_cal_parameters</span><span class="p">(</span><span class="s2">"r"</span><span class="p">,</span> <span class="s2">"s"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"power_circle_type"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"sending"</span><span class="p">:</span>
+
             <span class="bp">self</span><span class="o">.</span><span class="n">_cal_parameters</span><span class="p">(</span><span class="s2">"s"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span>
@@ -1195,7 +910,7 @@
         <span class="n">op_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">x</span>
         <span class="n">op_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">y</span>
 
-        <span class="c1"># plot Circle and Diameter</span>
+        <span class="c1">#plot Circle and Diameter</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">circle_x</span><span class="p">,</span> <span class="n">circle_y</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">c_x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="n">c_x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">],</span> <span class="p">[</span><span class="n">c_y</span><span class="p">,</span> <span class="n">c_y</span><span class="p">],</span> <span class="s1">'g--'</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">c_x</span><span class="p">,</span> <span class="n">c_x</span><span class="p">],</span> <span class="p">[</span><span class="n">c_y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="n">c_y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">],</span> <span class="s1">'g--'</span><span class="p">)</span>
@@ -1211,12 +926,11 @@
         <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">_plt</span></div>
 
-
 <div class="viewcode-block" id="receiving_end_power_circle"><a class="viewcode-back" href="../../api/electricpy.visu.receiving_end_power_circle.html#electricpy.visu.receiving_end_power_circle">[docs]</a><span class="k">def</span> <span class="nf">receiving_end_power_circle</span><span class="p">(</span><span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">A</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                               <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Pr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                               <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Pr</span><span class="p">:</span><span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                                <span class="n">Qr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Sr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                                <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span>
-                               <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PowerCircle</span><span class="p">:</span>
+                            <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PowerCircle</span> <span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Construct Receiving End Power Circle.</span>
 
@@ -1258,7 +972,7 @@
 <span class="sd">    Receiving End Power Circle: PowerCircle</span>
 <span class="sd">    """</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">assert</span> <span class="n">Vr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">A</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">B</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">assert</span> <span class="n">Vr</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">A</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">B</span> <span class="o">!=</span> <span class="kc">None</span>
     <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="s2">"Not enough attributes to build Receiving end power circle at least"</span>
@@ -1266,12 +980,12 @@
         <span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span>
-            <span class="p">((</span><span class="n">Pr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Qr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">Sr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">))</span>
-            <span class="ow">or</span>
-            <span class="p">(</span>
-                    <span class="p">(</span><span class="n">Pr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span>
-                    <span class="p">(</span><span class="n">Qr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
-            <span class="p">)):</span>
+        <span class="p">((</span><span class="n">Pr</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Qr</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">Sr</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="ow">or</span>
+        <span class="p">(</span>
+            <span class="p">(</span><span class="n">Pr</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span>
+            <span class="p">(</span><span class="n">Qr</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="s2">"Not enough attributes for marking an operating point on Receiving "</span>
             <span class="s2">"End Power Circle"</span>
@@ -1291,12 +1005,11 @@
         <span class="p">}</span>
     <span class="p">)</span></div>
 
-
 <div class="viewcode-block" id="sending_end_power_circle"><a class="viewcode-back" href="../../api/electricpy.visu.sending_end_power_circle.html#electricpy.visu.sending_end_power_circle">[docs]</a><span class="k">def</span> <span class="nf">sending_end_power_circle</span><span class="p">(</span><span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                             <span class="n">D</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Ps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                             <span class="n">Qs</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Ss</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                             <span class="n">D</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Ps</span><span class="p">:</span><span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                             <span class="n">Qs</span><span class="p">:</span><span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Ss</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                              <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span>
-                             <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PowerCircle</span><span class="p">:</span>
+                            <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PowerCircle</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Construct Receiving End Power Circle.</span>
 
@@ -1323,19 +1036,19 @@
 <span class="sd">    -------</span>
 <span class="sd">    Sending End Power Circle: PowerCircle</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">Vs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">B</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">D</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">Vs</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">B</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">D</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="s2">"Not enough attributes to build Sending end power circle at least "</span>
             <span class="s2">"provide `Vs`, `B`, `D`"</span>
         <span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span>
-            <span class="p">((</span><span class="n">Ps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Qs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">Ss</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">))</span>
-            <span class="ow">or</span>
-            <span class="p">(</span>
-                    <span class="p">(</span><span class="n">Ps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span>
-                    <span class="p">(</span><span class="n">Qs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
-            <span class="p">)):</span>
+        <span class="p">((</span><span class="n">Ps</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Qs</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">Ss</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="ow">or</span>
+        <span class="p">(</span>
+            <span class="p">(</span><span class="n">Ps</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span>
+            <span class="p">(</span><span class="n">Qs</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="p">)):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="s2">"Not enough attributes for marking an operating point on Sending "</span>
             <span class="s2">"End Power Circle"</span>
@@ -1380,7 +1093,7 @@
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

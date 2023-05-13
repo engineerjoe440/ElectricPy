@@ -1,6 +1,0 @@
-electricpy.conversions.db\_to\_vref
-===================================
-
-.. currentmodule:: electricpy.conversions
-
-.. autofunction:: db_to_vref

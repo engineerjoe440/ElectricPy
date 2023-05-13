@@ -41,5 +41,4 @@ Contents:
    PyPI <https://pypi.org/project/electricpy>
 
 
-.. include:: ../README.md
-   :parser: myst_parser.sphinx_
+.. mdinclude:: ../README.md

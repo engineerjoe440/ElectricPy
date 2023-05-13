@@ -1,6 +1,0 @@
-electricpy.visu.convbar
-=======================
-
-.. currentmodule:: electricpy.visu
-
-.. autofunction:: convbar

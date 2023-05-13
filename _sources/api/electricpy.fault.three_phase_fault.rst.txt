@@ -1,6 +1,0 @@
-electricpy.fault.three\_phase\_fault
-====================================
-
-.. currentmodule:: electricpy.fault
-
-.. autofunction:: three_phase_fault

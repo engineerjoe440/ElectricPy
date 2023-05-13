@@ -1,6 +1,0 @@
-electricpy.fault.phase\_to\_phase\_fault
-========================================
-
-.. currentmodule:: electricpy.fault
-
-.. autofunction:: phase_to_phase_fault

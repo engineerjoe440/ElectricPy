@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -47,18 +46,17 @@
   
   
   
-    <title>electricpy.conversions.btu_to_kwh &#8212; electricpy 0.3.0 documentation</title>
+    <title>electricpy.conversions.btu_to_kwh &#8212; electricpy 0.2.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/material.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.conversions.db_to_voltage" href="electricpy.conversions.db_to_voltage.html" />
+    <link rel="next" title="electricpy.conversions.dbmw_to_dbw" href="electricpy.conversions.dbmw_to_dbw.html" />
     <link rel="prev" title="electricpy.conversions.btu" href="electricpy.conversions.btu.html" />
   
    
@@ -83,7 +81,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../index.html" title="electricpy 0.3.0 documentation"
+        <a href="../index.html" title="electricpy 0.2.2 documentation"
            class="md-header-nav__button md-logo">
           
             &nbsp;
@@ -169,7 +167,7 @@
   <nav class="md-tabs" data-md-component="tabs">
     <div class="md-tabs__inner md-grid">
       <ul class="md-tabs__list">
-          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">electricpy 0.3.0 documentation</a></li>
+          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">electricpy 0.2.2 documentation</a></li>
           <li class="md-tabs__item"><a href="../electricpyapi.html" class="md-tabs__link">ElectricPy API</a></li>
           <li class="md-tabs__item"><a href="electricpy.conversions.html" class="md-tabs__link">electricpy.conversions</a></li>
       </ul>
@@ -183,13 +181,13 @@
               <div class="md-sidebar__inner">
                 <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../index.html" title="electricpy 0.3.0 documentation" class="md-nav__button md-logo">
+    <a href="../index.html" title="electricpy 0.2.2 documentation" class="md-nav__button md-logo">
       
         <img src="../_static/" alt=" logo" width="48" height="48">
       
     </a>
     <a href="../index.html"
-       title="electricpy 0.3.0 documentation">ElectricPy</a>
+       title="electricpy 0.2.2 documentation">ElectricPy</a>
   </label>
     <div class="md-nav__source">
       <a href="https://github.com/engineerjoe440/ElectricPy/" title="Go to repository" class="md-source" data-md-source="github">
@@ -368,8 +366,8 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="electricpy.conversions.btu_to_kwh">
 <span class="sig-prename descclassname"><span class="pre">electricpy.conversions.</span></span><span class="sig-name descname"><span class="pre">btu_to_kwh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">BTU</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/conversions.html#btu_to_kwh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.conversions.btu_to_kwh" title="Permalink to this definition">¶</a></dt>
-<dd><p>BTU to Kilo-Watt-Hours Function.</p>
-<p>Converts BTU (British Thermal Units) to kWh (kilo-Watt-hours).</p>
+<dd><p>BTU to Killo-Watt-Hours Function.</p>
+<p>Converts BTU (British Thermal Units) to kWh (killo-Watt-hours).</p>
 <div class="math notranslate nohighlight">
 \[\text{kWh} = \frac{\text{BTU}}{3412.14}\]</div>
 <p>Same as <cite>kwh</cite>.</p>
@@ -378,7 +376,7 @@
 <dd class="field-odd"><p><strong>BTU</strong> (<em>float</em>) – The number of British Thermal Units</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>kWh</strong> – The number of kilo-Watt-hours</p>
+<dd class="field-even"><p><strong>kWh</strong> – The number of killo-Watt-hours</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -411,12 +409,12 @@
             </a>
           
           
-            <a href="electricpy.conversions.db_to_voltage.html" title="electricpy.conversions.db_to_voltage"
+            <a href="electricpy.conversions.dbmw_to_dbw.html" title="electricpy.conversions.dbmw_to_dbw"
                class="md-flex md-footer-nav__link md-footer-nav__link--next"
                rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
                 class="md-flex__ellipsis"> <span
-                class="md-footer-nav__direction"> Next </span> electricpy.conversions.db_to_voltage </span>
+                class="md-footer-nav__direction"> Next </span> electricpy.conversions.dbmw_to_dbw </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink"><i
                 class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
@@ -434,7 +432,7 @@
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

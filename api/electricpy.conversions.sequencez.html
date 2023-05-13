@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -47,18 +46,17 @@
   
   
   
-    <title>electricpy.conversions.sequencez &#8212; electricpy 0.3.0 documentation</title>
+    <title>electricpy.conversions.sequencez &#8212; electricpy 0.2.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/material.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="electricpy.conversions.voltage_to_db" href="electricpy.conversions.voltage_to_db.html" />
+    <link rel="next" title="electricpy.conversions.watts" href="electricpy.conversions.watts.html" />
     <link rel="prev" title="electricpy.conversions.seq_to_phs" href="electricpy.conversions.seq_to_phs.html" />
   
    
@@ -83,7 +81,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex navheader">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../index.html" title="electricpy 0.3.0 documentation"
+        <a href="../index.html" title="electricpy 0.2.2 documentation"
            class="md-header-nav__button md-logo">
           
             &nbsp;
@@ -169,7 +167,7 @@
   <nav class="md-tabs" data-md-component="tabs">
     <div class="md-tabs__inner md-grid">
       <ul class="md-tabs__list">
-          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">electricpy 0.3.0 documentation</a></li>
+          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">electricpy 0.2.2 documentation</a></li>
           <li class="md-tabs__item"><a href="../electricpyapi.html" class="md-tabs__link">ElectricPy API</a></li>
           <li class="md-tabs__item"><a href="electricpy.conversions.html" class="md-tabs__link">electricpy.conversions</a></li>
       </ul>
@@ -183,13 +181,13 @@
               <div class="md-sidebar__inner">
                 <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../index.html" title="electricpy 0.3.0 documentation" class="md-nav__button md-logo">
+    <a href="../index.html" title="electricpy 0.2.2 documentation" class="md-nav__button md-logo">
       
         <img src="../_static/" alt=" logo" width="48" height="48">
       
     </a>
     <a href="../index.html"
-       title="electricpy 0.3.0 documentation">ElectricPy</a>
+       title="electricpy 0.2.2 documentation">ElectricPy</a>
   </label>
     <div class="md-nav__source">
       <a href="https://github.com/engineerjoe440/ElectricPy/" title="Go to repository" class="md-source" data-md-source="github">
@@ -367,7 +365,7 @@
 <h1 id="api-electricpy-conversions-sequencez--page-root">electricpy.conversions.sequencez<a class="headerlink" href="#api-electricpy-conversions-sequencez--page-root" title="Permalink to this heading">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="electricpy.conversions.sequencez">
-<span class="sig-prename descclassname"><span class="pre">electricpy.conversions.</span></span><span class="sig-name descname"><span class="pre">sequencez</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Zabc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'A'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rounds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/conversions.html#sequencez"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.conversions.sequencez" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">electricpy.conversions.</span></span><span class="sig-name descname"><span class="pre">sequencez</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Zabc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'A'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolve</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/conversions.html#sequencez"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.conversions.sequencez" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sequence Impedance Calculator.</p>
 <p>Accepts the phase (ABC-domain) impedances for a
 system and calculates the sequence (012-domain)
@@ -383,28 +381,28 @@ combine terms into the set of [Z0, Z1, Z2].</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>Zabc</strong> (<em>numpy.array</em><em> of </em><em>complex</em>) – 2-D (3x3) matrix of complex values
-representing the pharo impedance
+<li><p><strong>Zabc</strong> (<em>numpy.ndarray</em><em> of </em><em>complex</em>) – 2-D (3x3) matrix of complex values
+representing the phasor impedances
 in the ABC-domain.</p></li>
 <li><p><strong>reference</strong> (<em>{'A'</em><em>, </em><em>'B'</em><em>, </em><em>'C'}</em>) – Single character denoting the reference,
 default=’A’</p></li>
 <li><p><strong>resolve</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force the function to
-evaluate the individual sequence impedance
+evaluate the individual sequence impedances
 [Z0, Z1, Z2], default=False</p></li>
 <li><p><strong>diag</strong> (<em>bool</em><em>, </em><em>optional</em>) – Control argument to force the function to
 reduce the matrix to its diagonal terms.</p></li>
-<li><p><strong>rounds</strong> (<em>int</em><em>, </em><em>optional</em>) – Integer denoting number of decimal places
+<li><p><strong>round</strong> (<em>int</em><em>, </em><em>optional</em>) – Integer denoting number of decimal places
 resulting matrix should be rounded to.
 default=3</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>Z012</strong> – 2-D (3x3) matrix of complex values
-representing the sequence impedance
+representing the sequence impedances
 in the 012-domain</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>numpy.array of complex</p>
+<dd class="field-odd"><p>numpy.ndarray of complex</p>
 </dd>
 </dl>
 <div class="admonition seealso">
@@ -443,12 +441,12 @@ in the 012-domain</p>
             </a>
           
           
-            <a href="electricpy.conversions.voltage_to_db.html" title="electricpy.conversions.voltage_to_db"
+            <a href="electricpy.conversions.watts.html" title="electricpy.conversions.watts"
                class="md-flex md-footer-nav__link md-footer-nav__link--next"
                rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
                 class="md-flex__ellipsis"> <span
-                class="md-footer-nav__direction"> Next </span> electricpy.conversions.voltage_to_db </span>
+                class="md-footer-nav__direction"> Next </span> electricpy.conversions.watts </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink"><i
                 class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
@@ -466,7 +464,7 @@ in the 012-domain</p>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>
