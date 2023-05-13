@@ -451,9 +451,10 @@ notebooks!)</p></li>
 <section id="installing-getting-started">
 <h4 id="installing-getting-started">Installing / Getting Started<a class="headerlink" href="#installing-getting-started" title="Permalink to this heading">¶</a></h4>
 <ol class="arabic simple">
-<li><p>Install ElectricPy with <code class="docutils literal notranslate"><span class="pre">pip</span></code></p></li>
+<li><p>ElectricPy has a few basic installation options for use with <code class="docutils literal notranslate"><span class="pre">pip</span></code>. For most
+common users, use the following command to install ElectricPy with <code class="docutils literal notranslate"><span class="pre">pip</span></code></p></li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">electricpy</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">electricpy</span><span class="p">[</span><span class="n">full</span><span class="p">]</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="2">
@@ -505,8 +506,18 @@ and installing locally.</p>
 <li><p><a class="reference external" href="https://matplotlib.org/">matplotlib</a></p></li>
 <li><p><a class="reference external" href="https://scipy.org/">SciPy</a></p></li>
 <li><p><a class="reference external" href="https://www.sympy.org/en/index.html">SymPy</a></p></li>
+</ul>
+<section id="optional-dependencies">
+<h6 id="optional-dependencies">Optional Dependencies<a class="headerlink" href="#optional-dependencies" title="Permalink to this heading">¶</a></h6>
+<p>For numerical analysis (install with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">electricpy[numerical]</span></code>):</p>
+<ul class="simple">
 <li><p><a class="reference external" href="https://numdifftools.readthedocs.io/en/latest/">numdifftools</a></p></li>
 </ul>
+<p>For fault analysis (install with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">electricpy[fault]</span></code>)</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/LiaungYip/arcflash">arcflash</a></p></li>
+</ul>
+</section>
 </section>
 </section>
 <section id="get-involved-contribute">
