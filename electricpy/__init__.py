@@ -13,26 +13,22 @@ to aid in scientific calculations.
 ################################################################################
 
 
-from .version import NAME, VERSION
 import cmath as _c
 from inspect import getframeinfo as _getframeinfo
 from inspect import stack as _stack
 from warnings import showwarning as _showwarning
 
 import matplotlib.pyplot as _plt
-# Import Supporting Modules
 import numpy as _np
 from scipy.integrate import quad as integrate
 
-# Import Submodules
+from .version import NAME, VERSION
 from .constants import *
 from .phasors import phasor, parallelz
 
 __version__ = VERSION
 
 # Define Cycle Time Function
-
-
 def tcycle(ncycles=1, freq=60):
     r"""
     Time of Electrical Cycles.

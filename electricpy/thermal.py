@@ -7,12 +7,9 @@ this module is designed to assist engineers visualize their designs.
 """
 ################################################################################
 
-
-# Import Supporting Modules
 import numpy as _np
 
-# Import Submodules
-from .constants import *
+from electricpy.constants import *
 
 # Define Cold-Junction-Voltage Calculator
 def coldjunction(Tcj, coupletype="K", To=None, Vo=None, P1=None, P2=None,

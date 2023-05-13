@@ -6,14 +6,12 @@ Electrical Power Engineering Faults Calculations.
 """
 ################################################################################
 
-# Import Necessary Dependencies
 import numpy as _np
 import matplotlib.pyplot as _plt
 from scipy.optimize import fsolve as _fsolve
 
-# Import Local Dependencies
-from .constants import *
-from .conversions import seq_to_abc
+from electricpy.constants import *
+from electricpy.conversions import seq_to_abc
 
 
 def _phaseroll(M012, reference):

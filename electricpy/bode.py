@@ -8,12 +8,12 @@ Bode Plotting Functionality for ElectricPy Package.
 
 from cmath import exp as _exp
 
-# Import External Dependencies
+
 import matplotlib.pyplot as _plt
 import numpy as _np
 import scipy.signal as _sig
 from numpy import pi as _pi
-# Import Local Dependencies
+
 from electricpy.math import convolve
 
 # Define System Conditioning Function
