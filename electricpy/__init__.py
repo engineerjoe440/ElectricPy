@@ -13,18 +13,16 @@ to aid in scientific calculations.
 ################################################################################
 
 
-from .version import NAME, VERSION
 import cmath as _c
 from inspect import getframeinfo as _getframeinfo
 from inspect import stack as _stack
 from warnings import showwarning as _showwarning
 
 import matplotlib.pyplot as _plt
-# Import Supporting Modules
 import numpy as _np
 from scipy.integrate import quad as integrate
 
-# Import Submodules
+from electricpy.version import NAME, VERSION
 from electricpy.constants import *
 from electricpy.phasors import phasor, parallelz
 

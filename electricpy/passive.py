@@ -5,6 +5,7 @@ Functions and Formulas Related to Passive Electrical Components (R/L/C).
 Filled with methods related capacitors.
 """
 ################################################################################
+
 import numpy as _np
 
 

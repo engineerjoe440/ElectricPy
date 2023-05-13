@@ -7,5 +7,6 @@
 This file is to keep track of Name, Current Version of electricpy for CI and CD
 """
 ################################################################################
+
 NAME = "electricpy"
 VERSION = "0.3.0"

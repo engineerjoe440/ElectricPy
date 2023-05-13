@@ -6,13 +6,11 @@ Electrical machines formulas for transformers, motors, generators, etc.
 """
 ################################################################################
 
-# Required Imports
 import cmath as _c
 import numpy as _np
 from scipy.optimize import fsolve as _fsolve
 
-# Import Locals
-from .phasors import compose
+from electricpy.phasors import compose
 
 
 # Define Transformer Short-Circuit/Open-Circuit Function

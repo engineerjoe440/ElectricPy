@@ -12,7 +12,6 @@ to aid in scientific calculations.
 """
 ################################################################################
 
-# Import Local Requirements
 from electricpy.constants import WATTS_PER_HP, Aabc, A012, KWH_PER_BTU
 
 # Import Required Packages
