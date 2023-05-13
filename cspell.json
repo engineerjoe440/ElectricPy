@@ -1,0 +1,17 @@
+{
+    "version": "0.2",
+    "ignorePaths": [],
+    "dictionaryDefinitions": [],
+    "dictionaries": [],
+    "words": [
+        "electricpy",
+        "matplotlib",
+        "parallelz",
+        "phasor",
+        "phasors",
+        "pyplot",
+        "scipy"
+    ],
+    "ignoreWords": [],
+    "import": []
+}

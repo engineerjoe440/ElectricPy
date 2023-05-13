@@ -25,8 +25,8 @@ import numpy as _np
 from scipy.integrate import quad as integrate
 
 # Import Submodules
-from .constants import *
-from .phasors import phasor, parallelz
+from electricpy.constants import *
+from electricpy.phasors import phasor, parallelz
 
 __version__ = VERSION
 
