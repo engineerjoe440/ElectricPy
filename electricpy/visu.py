@@ -1133,6 +1133,23 @@ class SeriesRLC():
 
     .. math:: \text{quality_factor} = 2\pi \frac{\text{freq}}{R}
 
+
+    Given the characteristics listed below, and the Python code described in the
+    associated example, the following plot will be generated.
+    
+    * Resistance: 5 ohms
+    * Inductance: 0.4 henreys
+    * Capacitance: 25.3e-6 farads
+
+    .. image:: /static/series-rlc-r5-l0.4.png
+
+
+    * Resistance: 10 ohms
+    * Inductance: 0.5 henreys
+    * Capacitance: 25.3e-6 farads
+
+    .. image:: /static/series-rlc-r10-l0.5.png
+
     
     Examples
     --------
@@ -1141,21 +1158,32 @@ class SeriesRLC():
     ...     resistance=5, inductance=0.4, capacitance=25.3e-6, frequency=50
     ... )
     >>> rlc_component.resonance_frequency
-    0.0
+    50.029927713857425
     >>> rlc_component.bandwidth
     0.0
+    >>> plot_1 = rlc_component.graph(
+    ...     lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000
+    ... )
+    >>> plot_1.show()
+    >>> plot_2 = SeriesRLC(
+    ...     resistance=10, inductance=0.5, capacitance=25.3e-6, frequency=50
+    ... ).graph(
+    ...     lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000
+    ... )
+    >>> plot_2.show()
 
 
     Parameters
     ----------
-    resistance: float
-                Resistance (in Ohm) of the circuit.
-    inductance: float
-                Inductance (in Henry) of the circuit.
-    capacitance: float
-                Capacitance (in Hz) of the circuit.
-    frequency:  float
-                Frequency (in Hz) at which the output gain should be evaluated.
+    resistance:     float
+                    Resistance (in Ohm) of the circuit.
+    inductance:     float
+                    Inductance (in Henry) of the circuit.
+    capacitance:    float
+                    Capacitance (in Hz) of the circuit.
+    frequency:      float
+                    Frequency (in Hz) at which the output gain should be
+                    evaluated.
     """
 
     def __init__(
@@ -1241,37 +1269,6 @@ class SeriesRLC():
     ):
         """
         Generate a Plot to Represent all Data Respective of the RLC Circuit.
-
-        Given the characteristics listed below, and the Python code described in
-        the associated example, the following plot will be generated.
-
-        Examples
-        --------
-        >>> from electricpy.visu import SeriesRLC
-        >>> plot_1 = SeriesRLC(
-        ...     resistance=5, inductance=0.4, capacitance=25.3e-6, frequency=50
-        ... ).graph(
-        ...     lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000
-        ... )
-        >>> plot_1.show()
-        >>> plot_2 = SeriesRLC(
-        ...     resistance=10, inductance=0.5, capacitance=25.3e-6, frequency=50
-        ... ).graph(
-        ...     lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000
-        ... )
-        >>> plot_2.show()
-
-        * Resistance: 5 ohms
-        * Inductance: 0.4 henreys
-        * Capacitance: 25.3e-6 farads
-
-        .. image:: /static/series-rlc-r5-l0.4.png
-
-        * Resistance: 10 ohms
-        * Inductance: 0.5 henreys
-        * Capacitance: 25.3e-6 farads
-
-        .. image:: /static/series-rlc-r10-l0.5.png
 
         Parameters
         ----------
