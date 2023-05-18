@@ -87,7 +87,7 @@ def render_convbar_example():
     visu.convbar(h, x)
 
 @canvas_capture("series-rlc-r5-l0.4")
-def render_series_rlc():
+def render_series_rlc_5_ohm():
     """Render the Series RLC Circuit's Visualization."""
     visu.SeriesRLC(
         resistance=5,
@@ -97,7 +97,7 @@ def render_series_rlc():
     ).graph(lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000)
 
 @canvas_capture("series-rlc-r10-l0.5")
-def render_series_rlc():
+def render_series_rlc_10_ohm():
     """Render the Series RLC Circuit's Visualization."""
     visu.SeriesRLC(
         resistance=10,
@@ -115,6 +115,8 @@ def main():
     render_receiving_end_power_circle()
     render_receiving_power_circle()
     render_convbar_example()
+    render_series_rlc_5_ohm()
+    render_series_rlc_10_ohm()
 
 
 # Entrypoint
