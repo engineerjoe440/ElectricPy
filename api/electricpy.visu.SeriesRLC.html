@@ -388,12 +388,14 @@ associated example, the following plot will be generated.</p>
 <li><p>Resistance: 5 ohms</p></li>
 <li><p>Inductance: 0.4 henreys</p></li>
 <li><p>Capacitance: 25.3e-6 farads</p></li>
+<li><p>Frequency: 50 Hz</p></li>
 </ul>
 <img alt="../_images/series-rlc-r5-l0.4.png" src="../_images/series-rlc-r5-l0.4.png"/>
 <ul class="simple">
 <li><p>Resistance: 10 ohms</p></li>
 <li><p>Inductance: 0.5 henreys</p></li>
 <li><p>Capacitance: 25.3e-6 farads</p></li>
+<li><p>Frequency: 50 Hz</p></li>
 </ul>
 <img alt="../_images/series-rlc-r10-l0.5.png" src="../_images/series-rlc-r10-l0.5.png"/>
 <p class="rubric">Examples</p>
@@ -412,7 +414,8 @@ associated example, the following plot will be generated.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plot_2</span> <span class="o">=</span> <span class="n">SeriesRLC</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">resistance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">inductance</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">capacitance</span><span class="o">=</span><span class="mf">25.3e-6</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">50</span>
 <span class="gp">... </span><span class="p">)</span><span class="o">.</span><span class="n">graph</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">lower_frequency_cut</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">upper_frequency_cut</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">1000</span>
+<span class="gp">... </span>    <span class="n">lower_frequency_cut</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">upper_frequency_cut</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">show_legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plot_2</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>

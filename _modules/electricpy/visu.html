@@ -1500,6 +1500,7 @@
 <span class="sd">    * Resistance: 5 ohms</span>
 <span class="sd">    * Inductance: 0.4 henreys</span>
 <span class="sd">    * Capacitance: 25.3e-6 farads</span>
+<span class="sd">    * Frequency: 50 Hz</span>
 
 <span class="sd">    .. image:: /static/series-rlc-r5-l0.4.png</span>
 
@@ -1507,6 +1508,7 @@
 <span class="sd">    * Resistance: 10 ohms</span>
 <span class="sd">    * Inductance: 0.5 henreys</span>
 <span class="sd">    * Capacitance: 25.3e-6 farads</span>
+<span class="sd">    * Frequency: 50 Hz</span>
 
 <span class="sd">    .. image:: /static/series-rlc-r10-l0.5.png</span>
 
@@ -1528,7 +1530,8 @@
 <span class="sd">    &gt;&gt;&gt; plot_2 = SeriesRLC(</span>
 <span class="sd">    ...     resistance=10, inductance=0.5, capacitance=25.3e-6, frequency=50</span>
 <span class="sd">    ... ).graph(</span>
-<span class="sd">    ...     lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000</span>
+<span class="sd">    ...     lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000,</span>
+<span class="sd">    ...     show_legend=True,</span>
 <span class="sd">    ... )</span>
 <span class="sd">    &gt;&gt;&gt; plot_2.show()</span>
 
@@ -1680,7 +1683,7 @@
         <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">half_power_gain</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">"_nolegend_"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"v"</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">"_nolegend_"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"^"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">show_legend</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">legend</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">'best'</span><span class="p">)</span>
+            <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">legend</span><span class="p">(),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">'best'</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">_plt</span></div>
 <span class="c1"># END</span>
 </pre></div>
