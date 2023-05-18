@@ -53,6 +53,8 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="icon" href="../_static/ElectricpyLogo.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -366,7 +368,31 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="electricpy.visu.SeriesRLC">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">electricpy.visu.</span></span><span class="sig-name descname"><span class="pre">SeriesRLC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resistance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inductance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capacitance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/electricpy/visu.html#SeriesRLC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#electricpy.visu.SeriesRLC" title="Permalink to this definition">¶</a></dt>
-<dd><p>Frequency Response for a Traditional RLC (Resistive, Inductive, Capacitive) Load.</p>
+<dd><p>Frequency Response for an RLC (Resistive, Inductive, Capacitive) Load.</p>
+<p>Generate unique information about an RLC circuit. Using this class, you may
+generate a variety of useful statistics including resonance frequency,
+bandwidth, lower and upper cuttoff frequencies, and more. Each of the
+specific parameters are evaluated as follows.</p>
+<p><strong>Resonance Frequency:</strong></p>
+<div class="math notranslate nohighlight">
+\[\text{resonance_frequency} = \frac{1}{\sqrt{L * C} \cdot 2 \pi}\]</div>
+<p><strong>Bandwidth:</strong></p>
+<div class="math notranslate nohighlight">
+\[\text{bandwidth} = \frac{R}{L \cdot 2 \pi}\]</div>
+<p><strong>Quality Factor:</strong></p>
+<div class="math notranslate nohighlight">
+\[\text{quality_factor} = 2\pi \frac{\text{freq}}{R}\]</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy.visu</span> <span class="kn">import</span> <span class="n">SeriesRLC</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rlc_component</span> <span class="o">=</span> <span class="n">SeriesRLC</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">resistance</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">inductance</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">capacitance</span><span class="o">=</span><span class="mf">25.3e-6</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">50</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rlc_component</span><span class="o">.</span><span class="n">resonance_frequency</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rlc_component</span><span class="o">.</span><span class="n">bandwidth</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -395,7 +421,7 @@
 <td><p>Generate a Legend for the Graph.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">output_gain</span></code>(frequency)</p></td>
-<td><p>Evaluate Output Gain of the Described RLC Circuit at a Particular Frequency.</p></td>
+<td><p>Evaluate Output Gain of Described RLC Circuit at a Particular Frequency.</p></td>
 </tr>
 </tbody>
 </table>

@@ -1471,7 +1471,40 @@
 
 
 <div class="viewcode-block" id="SeriesRLC"><a class="viewcode-back" href="../../api/electricpy.visu.SeriesRLC.html#electricpy.visu.SeriesRLC">[docs]</a><span class="k">class</span> <span class="nc">SeriesRLC</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">"""Frequency Response for a Traditional RLC (Resistive, Inductive, Capacitive) Load.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Frequency Response for an RLC (Resistive, Inductive, Capacitive) Load.</span>
+
+<span class="sd">    Generate unique information about an RLC circuit. Using this class, you may</span>
+<span class="sd">    generate a variety of useful statistics including resonance frequency,</span>
+<span class="sd">    bandwidth, lower and upper cuttoff frequencies, and more. Each of the</span>
+<span class="sd">    specific parameters are evaluated as follows.</span>
+
+<span class="sd">    **Resonance Frequency:**</span>
+
+<span class="sd">    .. math:: \text{resonance_frequency} = \frac{1}{\sqrt{L * C} \cdot 2 \pi}</span>
+
+<span class="sd">    </span>
+<span class="sd">    **Bandwidth:**</span>
+
+<span class="sd">    .. math:: \text{bandwidth} = \frac{R}{L \cdot 2 \pi}</span>
+
+<span class="sd">    </span>
+<span class="sd">    **Quality Factor:**</span>
+
+<span class="sd">    .. math:: \text{quality_factor} = 2\pi \frac{\text{freq}}{R}</span>
+
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from electricpy.visu import SeriesRLC</span>
+<span class="sd">    &gt;&gt;&gt; rlc_component = SeriesRLC(</span>
+<span class="sd">    ...     resistance=5, inductance=0.4, capacitance=25.3e-6, frequency=50</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt; rlc_component.resonance_frequency</span>
+<span class="sd">    0.0</span>
+<span class="sd">    &gt;&gt;&gt; rlc_component.bandwidth</span>
+<span class="sd">    0.0</span>
+
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -1486,7 +1519,11 @@
 <span class="sd">    """</span>
 
 <div class="viewcode-block" id="SeriesRLC.__init__"><a class="viewcode-back" href="../../api/electricpy.visu.SeriesRLC.html#electricpy.visu.SeriesRLC.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">resistance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">inductance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">capacitance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">frequency</span><span class="p">:</span> <span class="nb">float</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">resistance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">inductance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">capacitance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">frequency</span><span class="p">:</span> <span class="nb">float</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""Form the Frequency Response Analysis System."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">resistance</span> <span class="o">=</span> <span class="n">resistance</span>
@@ -1527,12 +1564,13 @@
 
     <span class="k">def</span> <span class="nf">output_gain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequency</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
-<span class="sd">        Evaluate Output Gain of the Described RLC Circuit at a Particular Frequency.</span>
+<span class="sd">        Evaluate Output Gain of Described RLC Circuit at a Particular Frequency.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        frequency:  float</span>
-<span class="sd">                    Frequency (in Hz) at which the output gain should be evaluated.</span>
+<span class="sd">                    Frequency (in Hz) at which the output gain should be</span>
+<span class="sd">                    evaluated.</span>
 <span class="sd">        """</span>
         <span class="n">ang_frq</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">frequency</span>
         <span class="n">current_impedence</span> <span class="o">=</span> <span class="p">(</span>
@@ -1545,29 +1583,70 @@
 <span class="w">        </span><span class="sd">"""Generate a Legend for the Graph."""</span>
         <span class="n">f1</span><span class="p">,</span> <span class="n">f2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_cutoff_frequency</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_cutoff_frequency</span>
         <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resonance_frequency</span>
-        <span class="k">return</span><span class="p">[</span>
-                <span class="s2">"Gain"</span><span class="p">,</span>
-                <span class="sa">f</span><span class="s2">"Resonance frequency (</span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2">Hz)"</span><span class="p">,</span>
-                <span class="sa">f</span><span class="s2">"Lower cutoff frequency (</span><span class="si">{</span><span class="n">f1</span><span class="si">}</span><span class="s2">Hz)"</span><span class="p">,</span>
-                <span class="sa">f</span><span class="s2">"Upper cutoff frequency (</span><span class="si">{</span><span class="n">f2</span><span class="si">}</span><span class="s2">Hz)"</span><span class="p">,</span>
-                <span class="sa">f</span><span class="s2">"Bandwidth (</span><span class="si">{</span><span class="n">f2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">f1</span><span class="si">}</span><span class="s2">Hz)"</span><span class="p">,</span>
-                <span class="sa">f</span><span class="s2">"Quality factor </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">quality_factor</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
-            <span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="s2">"Gain"</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">"Resonance frequency (</span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2">Hz)"</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">"Lower cutoff frequency (</span><span class="si">{</span><span class="n">f1</span><span class="si">}</span><span class="s2">Hz)"</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">"Upper cutoff frequency (</span><span class="si">{</span><span class="n">f2</span><span class="si">}</span><span class="s2">Hz)"</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">"Bandwidth (</span><span class="si">{</span><span class="n">f2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">f1</span><span class="si">}</span><span class="s2">Hz)"</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">"Quality factor </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">quality_factor</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">graph</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">lower_frequency_cut</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">upper_frequency_cut</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">10000</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">lower_frequency_cut</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">upper_frequency_cut</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span>
+        <span class="n">show_legend</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Generate a Plot to Represent all Data Respective of the RLC Circuit.</span>
 
+<span class="sd">        Given the characteristics listed below, and the Python code described in</span>
+<span class="sd">        the associated example, the following plot will be generated.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; from electricpy.visu import SeriesRLC</span>
+<span class="sd">        &gt;&gt;&gt; plot_1 = SeriesRLC(</span>
+<span class="sd">        ...     resistance=5, inductance=0.4, capacitance=25.3e-6, frequency=50</span>
+<span class="sd">        ... ).graph(</span>
+<span class="sd">        ...     lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; plot_1.show()</span>
+<span class="sd">        &gt;&gt;&gt; plot_2 = SeriesRLC(</span>
+<span class="sd">        ...     resistance=10, inductance=0.5, capacitance=25.3e-6, frequency=50</span>
+<span class="sd">        ... ).graph(</span>
+<span class="sd">        ...     lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000</span>
+<span class="sd">        ... )</span>
+<span class="sd">        &gt;&gt;&gt; plot_2.show()</span>
+
+<span class="sd">        * Resistance: 5 ohms</span>
+<span class="sd">        * Inductance: 0.4 henreys</span>
+<span class="sd">        * Capacitance: 25.3e-6 farads</span>
+
+<span class="sd">        .. image:: /static/series-rlc-r5-l0.4.png</span>
+
+<span class="sd">        * Resistance: 10 ohms</span>
+<span class="sd">        * Inductance: 0.5 henreys</span>
+<span class="sd">        * Capacitance: 25.3e-6 farads</span>
+
+<span class="sd">        .. image:: /static/series-rlc-r10-l0.5.png</span>
+
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        lower_frequency_cut:    float</span>
-<span class="sd">                Minimum frequency to demonstrate as a boundary of the X-axis of the plot.</span>
+<span class="sd">                                Minimum frequency to demonstrate as a boundary</span>
+<span class="sd">                                of the X-axis of the plot.</span>
 <span class="sd">        upper_frequency_cut:    float</span>
-<span class="sd">                Maximum frequency to demonstrate as a boundary of the X-axis of the plot.</span>
-<span class="sd">        samples:    float</span>
-<span class="sd">                Number of samples over which the plot should be formed.</span>
+<span class="sd">                                Maximum frequency to demonstrate as a boundary</span>
+<span class="sd">                                of the X-axis of the plot.</span>
+<span class="sd">        samples:                float, optional</span>
+<span class="sd">                                Number of samples over which the plot should be</span>
+<span class="sd">                                formed. Defaults to 1000.</span>
+<span class="sd">        show_legend:            bool, optional</span>
+<span class="sd">                                Control to enable or disable the display of the</span>
+<span class="sd">                                legend. Defaults to False.</span>
 <span class="sd">        """</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">lower_frequency_cut</span><span class="p">,</span> <span class="n">upper_frequency_cut</span><span class="p">,</span> <span class="n">samples</span><span class="p">)</span>
 
@@ -1603,17 +1682,8 @@
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">half_power_gain</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Quality factor"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"black"</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">half_power_gain</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">"_nolegend_"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"v"</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">"_nolegend_"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"^"</span><span class="p">)</span>
-        <span class="c1"># _plt.legend(</span>
-        <span class="c1">#     [</span>
-        <span class="c1">#         "Gain",</span>
-        <span class="c1">#         f"Resonance frequency ({f}Hz)",</span>
-        <span class="c1">#         f"Lower cutoff frequency ({f1}Hz)",</span>
-        <span class="c1">#         f"Upper cutoff frequency ({f2}Hz)",</span>
-        <span class="c1">#         f"Bandwidth ({f2 - f1}Hz)",</span>
-        <span class="c1">#         f"Quality factor {self.quality_factor}",</span>
-        <span class="c1">#     ],</span>
-        <span class="c1">#     loc='best'</span>
-        <span class="c1"># )</span>
+        <span class="k">if</span> <span class="n">show_legend</span><span class="p">:</span>
+            <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">legend</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">'best'</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">_plt</span></div>
 <span class="c1"># END</span>
 </pre></div>
