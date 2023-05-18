@@ -52,6 +52,11 @@ notebooks!)
 |-------------|----------------|------------------------|
 | ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/develop/docsource/static/PhasorPlot.png) | ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/develop/docsource/static/PowerTriangle.png) | ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/develop/docsource/static/InductionMotorCircleExample.png) |
 
+
+| RLC Frequency Response |                | Receiving Power Circle |
+|------------------------|----------------|------------------------|
+| ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/develop/docsource/static/series-rlc-r5-l0.4.png) |  | ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/develop/docsource/static/ReceivingPowerCircleExample.png) |
+
 ## Installing / Getting Started
 
 1. ElectricPy has a few basic installation options for use with `pip`. For most
