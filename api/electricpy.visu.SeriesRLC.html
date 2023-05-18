@@ -382,15 +382,39 @@ specific parameters are evaluated as follows.</p>
 <p><strong>Quality Factor:</strong></p>
 <div class="math notranslate nohighlight">
 \[\text{quality_factor} = 2\pi \frac{\text{freq}}{R}\]</div>
+<p>Given the characteristics listed below, and the Python code described in the
+associated example, the following plot will be generated.</p>
+<ul class="simple">
+<li><p>Resistance: 5 ohms</p></li>
+<li><p>Inductance: 0.4 henreys</p></li>
+<li><p>Capacitance: 25.3e-6 farads</p></li>
+</ul>
+<img alt="static/series-rlc-r5-l0.4.png" src="static/series-rlc-r5-l0.4.png"/>
+<ul class="simple">
+<li><p>Resistance: 10 ohms</p></li>
+<li><p>Inductance: 0.5 henreys</p></li>
+<li><p>Capacitance: 25.3e-6 farads</p></li>
+</ul>
+<img alt="static/series-rlc-r10-l0.5.png" src="static/series-rlc-r10-l0.5.png"/>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">electricpy.visu</span> <span class="kn">import</span> <span class="n">SeriesRLC</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rlc_component</span> <span class="o">=</span> <span class="n">SeriesRLC</span><span class="p">(</span>
 <span class="gp">... </span>    <span class="n">resistance</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">inductance</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">capacitance</span><span class="o">=</span><span class="mf">25.3e-6</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">50</span>
 <span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rlc_component</span><span class="o">.</span><span class="n">resonance_frequency</span>
-<span class="go">0.0</span>
+<span class="go">50.029927713857425</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rlc_component</span><span class="o">.</span><span class="n">bandwidth</span>
 <span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plot_1</span> <span class="o">=</span> <span class="n">rlc_component</span><span class="o">.</span><span class="n">graph</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">lower_frequency_cut</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">upper_frequency_cut</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">1000</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plot_1</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plot_2</span> <span class="o">=</span> <span class="n">SeriesRLC</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">resistance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">inductance</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">capacitance</span><span class="o">=</span><span class="mf">25.3e-6</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">50</span>
+<span class="gp">... </span><span class="p">)</span><span class="o">.</span><span class="n">graph</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">lower_frequency_cut</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">upper_frequency_cut</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">1000</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plot_2</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -399,7 +423,8 @@ specific parameters are evaluated as follows.</p>
 <li><p><strong>resistance</strong> (<em>float</em>) – Resistance (in Ohm) of the circuit.</p></li>
 <li><p><strong>inductance</strong> (<em>float</em>) – Inductance (in Henry) of the circuit.</p></li>
 <li><p><strong>capacitance</strong> (<em>float</em>) – Capacitance (in Hz) of the circuit.</p></li>
-<li><p><strong>frequency</strong> (<em>float</em>) – Frequency (in Hz) at which the output gain should be evaluated.</p></li>
+<li><p><strong>frequency</strong> (<em>float</em>) – Frequency (in Hz) at which the output gain should be
+evaluated.</p></li>
 </ul>
 </dd>
 </dl>

@@ -1493,6 +1493,23 @@
 
 <span class="sd">    .. math:: \text{quality_factor} = 2\pi \frac{\text{freq}}{R}</span>
 
+
+<span class="sd">    Given the characteristics listed below, and the Python code described in the</span>
+<span class="sd">    associated example, the following plot will be generated.</span>
+<span class="sd">    </span>
+<span class="sd">    * Resistance: 5 ohms</span>
+<span class="sd">    * Inductance: 0.4 henreys</span>
+<span class="sd">    * Capacitance: 25.3e-6 farads</span>
+
+<span class="sd">    .. image:: /static/series-rlc-r5-l0.4.png</span>
+
+
+<span class="sd">    * Resistance: 10 ohms</span>
+<span class="sd">    * Inductance: 0.5 henreys</span>
+<span class="sd">    * Capacitance: 25.3e-6 farads</span>
+
+<span class="sd">    .. image:: /static/series-rlc-r10-l0.5.png</span>
+
 <span class="sd">    </span>
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -1501,21 +1518,32 @@
 <span class="sd">    ...     resistance=5, inductance=0.4, capacitance=25.3e-6, frequency=50</span>
 <span class="sd">    ... )</span>
 <span class="sd">    &gt;&gt;&gt; rlc_component.resonance_frequency</span>
-<span class="sd">    0.0</span>
+<span class="sd">    50.029927713857425</span>
 <span class="sd">    &gt;&gt;&gt; rlc_component.bandwidth</span>
 <span class="sd">    0.0</span>
+<span class="sd">    &gt;&gt;&gt; plot_1 = rlc_component.graph(</span>
+<span class="sd">    ...     lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt; plot_1.show()</span>
+<span class="sd">    &gt;&gt;&gt; plot_2 = SeriesRLC(</span>
+<span class="sd">    ...     resistance=10, inductance=0.5, capacitance=25.3e-6, frequency=50</span>
+<span class="sd">    ... ).graph(</span>
+<span class="sd">    ...     lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt; plot_2.show()</span>
 
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    resistance: float</span>
-<span class="sd">                Resistance (in Ohm) of the circuit.</span>
-<span class="sd">    inductance: float</span>
-<span class="sd">                Inductance (in Henry) of the circuit.</span>
-<span class="sd">    capacitance: float</span>
-<span class="sd">                Capacitance (in Hz) of the circuit.</span>
-<span class="sd">    frequency:  float</span>
-<span class="sd">                Frequency (in Hz) at which the output gain should be evaluated.</span>
+<span class="sd">    resistance:     float</span>
+<span class="sd">                    Resistance (in Ohm) of the circuit.</span>
+<span class="sd">    inductance:     float</span>
+<span class="sd">                    Inductance (in Henry) of the circuit.</span>
+<span class="sd">    capacitance:    float</span>
+<span class="sd">                    Capacitance (in Hz) of the circuit.</span>
+<span class="sd">    frequency:      float</span>
+<span class="sd">                    Frequency (in Hz) at which the output gain should be</span>
+<span class="sd">                    evaluated.</span>
 <span class="sd">    """</span>
 
 <div class="viewcode-block" id="SeriesRLC.__init__"><a class="viewcode-back" href="../../api/electricpy.visu.SeriesRLC.html#electricpy.visu.SeriesRLC.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -1601,37 +1629,6 @@
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Generate a Plot to Represent all Data Respective of the RLC Circuit.</span>
-
-<span class="sd">        Given the characteristics listed below, and the Python code described in</span>
-<span class="sd">        the associated example, the following plot will be generated.</span>
-
-<span class="sd">        Examples</span>
-<span class="sd">        --------</span>
-<span class="sd">        &gt;&gt;&gt; from electricpy.visu import SeriesRLC</span>
-<span class="sd">        &gt;&gt;&gt; plot_1 = SeriesRLC(</span>
-<span class="sd">        ...     resistance=5, inductance=0.4, capacitance=25.3e-6, frequency=50</span>
-<span class="sd">        ... ).graph(</span>
-<span class="sd">        ...     lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000</span>
-<span class="sd">        ... )</span>
-<span class="sd">        &gt;&gt;&gt; plot_1.show()</span>
-<span class="sd">        &gt;&gt;&gt; plot_2 = SeriesRLC(</span>
-<span class="sd">        ...     resistance=10, inductance=0.5, capacitance=25.3e-6, frequency=50</span>
-<span class="sd">        ... ).graph(</span>
-<span class="sd">        ...     lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000</span>
-<span class="sd">        ... )</span>
-<span class="sd">        &gt;&gt;&gt; plot_2.show()</span>
-
-<span class="sd">        * Resistance: 5 ohms</span>
-<span class="sd">        * Inductance: 0.4 henreys</span>
-<span class="sd">        * Capacitance: 25.3e-6 farads</span>
-
-<span class="sd">        .. image:: /static/series-rlc-r5-l0.4.png</span>
-
-<span class="sd">        * Resistance: 10 ohms</span>
-<span class="sd">        * Inductance: 0.5 henreys</span>
-<span class="sd">        * Capacitance: 25.3e-6 farads</span>
-
-<span class="sd">        .. image:: /static/series-rlc-r10-l0.5.png</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
