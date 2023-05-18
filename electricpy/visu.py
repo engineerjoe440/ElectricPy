@@ -1114,7 +1114,7 @@ class SeriesRLC():
     """Frequency Response for a Traditional RLC (Resistive, Inductive, Capacitive) Load.
 
     Parameters
-    -----------
+    ----------
     resistance: float
                 Resistance (in Ohm) of the circuit.
     inductance: float
@@ -1170,7 +1170,7 @@ class SeriesRLC():
         Evaluate Output Gain of the Described RLC Circuit at a Particular Frequency.
 
         Parameters
-        -----------
+        ----------
         frequency:  float
                     Frequency (in Hz) at which the output gain should be evaluated.
         """
