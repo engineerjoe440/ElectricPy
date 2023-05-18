@@ -12,16 +12,17 @@ import cmath as _c
 import numpy as _np
 import matplotlib as _matplotlib
 import matplotlib.pyplot as _plt
+import matplotlib.colors as mcolors
 
 from electricpy import powerset, geometry
 from electricpy.geometry import Point
 from electricpy.geometry.circle import Circle
 
 
-
 # Define Power Triangle Function
-def powertriangle(P=None, Q=None, S=None, PF=None, color="red",
-                  text="Power Triangle", printval=False):
+def powertriangle(
+    P=None, Q=None, S=None, PF=None, color="red", text="Power Triangle", printval=False
+):
     """
     Power Triangle Plotting Function.
 
@@ -95,8 +96,8 @@ def powertriangle(P=None, Q=None, S=None, PF=None, color="red",
     # Print all values if asked to
     if printval:
         _plt.text(
-            x/20,
-            y*4/5,
+            x / 20,
+            y * 4 / 5,
             (
                 f"P:   {P} W\n"
                 f"Q:   {Q} VAR\n"
@@ -104,7 +105,7 @@ def powertriangle(P=None, Q=None, S=None, PF=None, color="red",
                 f"PF:  {abs(PF)} {power_factor_text}\n"
                 f"ΘPF: {_np.degrees(_np.arccos(PF))}° {power_factor_text}"
             ),
-            color=color
+            color=color,
         )
     return _plt
 
@@ -141,11 +142,11 @@ def convbar(h, x, outline=True):
     # Plot
     _plt.subplot(121)
     if outline:
-        _plt.plot(t, h, color='red')
-    _plt.bar(t, h, color='black')
+        _plt.plot(t, h, color="red")
+    _plt.bar(t, h, color="black")
     _plt.xticks([0, 5, 9])
-    _plt.ylabel('h')
-    _plt.title('Impulse Response')
+    _plt.ylabel("h")
+    _plt.title("Impulse Response")
     _plt.grid()
 
     # The input function
@@ -154,12 +155,12 @@ def convbar(h, x, outline=True):
     # Plot
     _plt.subplot(122)
     if outline:
-        _plt.plot(s, x, color='red')
-    _plt.bar(s, x, color='black')
+        _plt.plot(s, x, color="red")
+    _plt.bar(s, x, color="black")
     _plt.xticks([0, 10, 19])
-    _plt.title('Input Function')
+    _plt.title("Input Function")
     _plt.grid()
-    _plt.ylabel('x')
+    _plt.ylabel("x")
 
     # The output
     L = M + N - 1
@@ -167,18 +168,28 @@ def convbar(h, x, outline=True):
     _plt.figure(3)
     y = _np.convolve(h, x)
     if outline:
-        _plt.plot(w, y, color='red')
-    _plt.bar(w, y, color='black')
-    _plt.ylabel('y')
+        _plt.plot(w, y, color="red")
+    _plt.bar(w, y, color="black")
+    _plt.ylabel("y")
     _plt.grid()
-    _plt.title('Convolved Output')
+    _plt.title("Convolved Output")
     return _plt
 
 
 # Define Phasor Plot Generator
-def phasorplot(phasors, title="Phasor Diagram", legend=False, bg=None,
-               colors=None, radius=None, linewidth=None, size=None,
-               label=False, labels=False, tolerance=None):
+def phasorplot(
+    phasors,
+    title="Phasor Diagram",
+    legend=False,
+    bg=None,
+    colors=None,
+    radius=None,
+    linewidth=None,
+    size=None,
+    label=False,
+    labels=False,
+    tolerance=None,
+):
     """
     Phasor Plotting Function.
 
@@ -243,8 +254,18 @@ def phasorplot(phasors, title="Phasor Diagram", legend=False, bg=None,
     # Manage Colors
     if colors is None:
         colors = [
-            "#FF0000", "#800000", "#FFFF00", "#808000", "#00ff00", "#008000",
-            "#00ffff", "#008080", "#0000ff", "#000080", "#ff00ff", "#800080"
+            "#FF0000",
+            "#800000",
+            "#FFFF00",
+            "#808000",
+            "#00ff00",
+            "#008000",
+            "#00ffff",
+            "#008080",
+            "#0000ff",
+            "#000080",
+            "#ff00ff",
+            "#800080",
         ]
     # Scale Radius
     if radius is None:
@@ -264,13 +285,11 @@ def phasorplot(phasors, title="Phasor Diagram", legend=False, bg=None,
         legend = labels
     # Check for more phasors than colors
     if len(phasors) > len(colors):
-        raise ValueError(
-            "ERROR: Too many phasors provided. Specify more line colors."
-        )
+        raise ValueError("ERROR: Too many phasors provided. Specify more line colors.")
 
     if size is None:
         # Force square figure and square axes
-        width, height = _matplotlib.rcParams['figure.figsize']
+        width, height = _matplotlib.rcParams["figure.figsize"]
         size = min(width, height)
     # Make a square figure
     fig = _plt.figure(figsize=(size, size))
@@ -286,13 +305,26 @@ def phasorplot(phasors, title="Phasor Diagram", legend=False, bg=None,
         if legend:
             if mag > tolerance:
                 arrows.append(
-                    _plt.arrow(0, 0, ang_r, mag, color=colors[i],
-                                  label=legend[i], linewidth=linewidth)
+                    _plt.arrow(
+                        0,
+                        0,
+                        ang_r,
+                        mag,
+                        color=colors[i],
+                        label=legend[i],
+                        linewidth=linewidth,
+                    )
                 )
             else:
                 arrows.append(
-                    _plt.plot(0, 0, 'o', markersize=linewidth * 3,
-                                 label=legend[i], color=colors[i])
+                    _plt.plot(
+                        0,
+                        0,
+                        "o",
+                        markersize=linewidth * 3,
+                        label=legend[i],
+                        color=colors[i],
+                    )
                 )
         # Plot without labels
         else:
@@ -351,8 +383,15 @@ class InductionMotorCircle:
                         Pole count of induction Motor
     """
 
-    def __init__(self, no_load_data, blocked_rotor_data, output_power,
-                 torque_ration=1, frequency=50, poles=4):
+    def __init__(
+        self,
+        no_load_data,
+        blocked_rotor_data,
+        output_power,
+        torque_ration=1,
+        frequency=50,
+        poles=4,
+    ):
         """Primary Entrypoint."""
         self.no_load_data = no_load_data
         self.blocked_rotor_data = blocked_rotor_data
@@ -362,17 +401,17 @@ class InductionMotorCircle:
         self.poles = poles
         self.sync_speed = 120 * frequency / poles  # rpm
 
-        v0 = no_load_data['V0']
-        i0 = no_load_data['I0']
-        w0 = no_load_data['W0']
+        v0 = no_load_data["V0"]
+        i0 = no_load_data["I0"]
+        w0 = no_load_data["W0"]
 
         self.no_load_pf = w0 / (_np.sqrt(3) * v0 * i0)
         theta0 = _np.arccos(self.no_load_pf)
 
         # get short circuit power factor and Current at slip=1
-        vsc = blocked_rotor_data['Vsc']
-        isc = blocked_rotor_data['Isc']
-        wsc = blocked_rotor_data['Wsc']
+        vsc = blocked_rotor_data["Vsc"]
+        isc = blocked_rotor_data["Isc"]
+        wsc = blocked_rotor_data["Wsc"]
 
         self.blocked_rotor_pf = wsc / (_np.sqrt(3) * vsc * isc)
         theta_sc = _np.arccos(self.blocked_rotor_pf)
@@ -384,19 +423,16 @@ class InductionMotorCircle:
         # isc is the current at reduced voltage
         # calculate current at rated voltage
         isc = v0 * isc / vsc
-        self.no_load_line = [
-            [0, i0 * _np.cos(theta0)],
-            [0, i0 * _np.sin(theta0)]
-        ]
+        self.no_load_line = [[0, i0 * _np.cos(theta0)], [0, i0 * _np.sin(theta0)]]
         self.full_load_line = [
             [0, isc * _np.cos(theta_sc)],
-            [0, isc * _np.sin(theta_sc)]
+            [0, isc * _np.sin(theta_sc)],
         ]
 
         # secondary current line
         self.secondary_current_line = [
             [i0 * _np.cos(theta0), isc * _np.cos(theta_sc)],
-            [i0 * _np.sin(theta0), isc * _np.sin(theta_sc)]
+            [i0 * _np.sin(theta0), isc * _np.sin(theta_sc)],
         ]
 
         [[x1, x2], [y1, y2]] = self.secondary_current_line
@@ -407,11 +443,10 @@ class InductionMotorCircle:
         self.center, self.radius = self.compute_circle_params()
         [self.center_x, self.center_y] = self.center
         self.p_max = self.radius * _np.cos(self.theta) - (
-                self.radius - self.radius * _np.sin(self.theta)
+            self.radius - self.radius * _np.sin(self.theta)
         ) * _np.tan(self.theta)
         self.torque_line, self.torque_point = self.get_torque_line()
-        self.torque_max, self.torque_max_x, self.torque_max_y = \
-            self.get_torque_max()
+        self.torque_max, self.torque_max_x, self.torque_max_y = self.get_torque_max()
         # Take low slip point
         _, [self.power_x, self.power_y] = self.get_output_power()
         self.data = self.compute_efficiency()
@@ -424,68 +459,81 @@ class InductionMotorCircle:
     def plot(self):
         """Plot the Induction Motor Circle Diagram."""
         [circle_x, circle_y] = InductionMotorCircle.__get_circle(
-            self.center,
-            self.radius,
-            semi=True
+            self.center, self.radius, semi=True
         )
         _plt.plot(circle_x, circle_y)
 
         InductionMotorCircle.__plot_line(self.no_load_line)
         InductionMotorCircle.__plot_line(self.secondary_current_line)
-        InductionMotorCircle.__plot_line(self.full_load_line, ls='-.')
-        InductionMotorCircle.__plot_line(self.torque_line, ls='-.')
+        InductionMotorCircle.__plot_line(self.full_load_line, ls="-.")
+        InductionMotorCircle.__plot_line(self.torque_line, ls="-.")
 
         # Full load output
         _plt.plot(
-            [self.secondary_current_line[0][1],
-             self.secondary_current_line[0][1]],
-            [self.secondary_current_line[1][1], self.center_y])
+            [self.secondary_current_line[0][1], self.secondary_current_line[0][1]],
+            [self.secondary_current_line[1][1], self.center_y],
+        )
         # Diameter of the circle
-        _plt.plot([self.center_x - self.radius, self.center_x + self.radius],
-                  [self.center_y, self.center_y], ls='-.')
+        _plt.plot(
+            [self.center_x - self.radius, self.center_x + self.radius],
+            [self.center_y, self.center_y],
+            ls="-.",
+        )
         # Max torque line
         _plt.plot(
             [self.center_x, self.torque_max_x],
-            [self.center_y, self.torque_max_y], ls='-.')
+            [self.center_y, self.torque_max_y],
+            ls="-.",
+        )
         # Max Output Power line
         _plt.plot(
             [self.center_x, self.center_x - self.radius * _np.sin(self.theta)],
             [self.center_y, self.center_y + self.radius * _np.cos(self.theta)],
-            ls='-.'
+            ls="-.",
         )
         # Operating Point
-        _plt.plot([0, self.power_x], [0, self.power_y], c='black')
+        _plt.plot([0, self.power_x], [0, self.power_y], c="black")
 
-        _plt.scatter(self.power_x, self.power_y, marker='X', c='red', label='_nolegend_')
+        _plt.scatter(
+            self.power_x, self.power_y, marker="X", c="red", label="_nolegend_"
+        )
         # mark the center of the circle
-        _plt.scatter(self.center_x, self.center_y, marker='*', c='blue', label='_nolegend_')
+        _plt.scatter(
+            self.center_x, self.center_y, marker="*", c="blue", label="_nolegend_"
+        )
         _plt.scatter(
             self.center_x - self.radius * _np.sin(self.theta),
             self.center_y + self.radius * _np.cos(self.theta),
-            linewidths=3, c='black', marker='*',label='_nolegend_'
+            linewidths=3,
+            c="black",
+            marker="*",
+            label="_nolegend_",
         )
         _plt.scatter(
             self.torque_max_x,
             self.torque_max_y,
             linewidths=3,
-            c='black',
-            marker='*', label='_nolegend_'
+            c="black",
+            marker="*",
+            label="_nolegend_",
         )
 
         _plt.title("Induction Motor Circle Diagram")
         _plt.grid()
-        _plt.legend([
-            'I2 locus',
-            'No Load Current',
-            'Output Line',
-            'Blocked Rotor Current',
-            'Torque line',
-            'Full Load Losses',
-            'Diameter',
-            'Maximum Torque',
-            'Maximum Output Power',
-            f'Operating Power {self.operating_power}'
-        ])
+        _plt.legend(
+            [
+                "I2 locus",
+                "No Load Current",
+                "Output Line",
+                "Blocked Rotor Current",
+                "Torque line",
+                "Full Load Losses",
+                "Diameter",
+                "Maximum Torque",
+                "Maximum Output Power",
+                f"Operating Power {self.operating_power}",
+            ]
+        )
         return _plt
 
     def compute_efficiency(self):
@@ -496,32 +544,35 @@ class InductionMotorCircle:
         compute_slope = InductionMotorCircle.compute_slope
 
         torque_slope = compute_slope(self.torque_line)
-        stator_cu_loss = (self.power_x - no_load_x) * \
-                         torque_slope * self.power_scale
+        stator_cu_loss = (self.power_x - no_load_x) * torque_slope * self.power_scale
 
         rotor_current_slope = compute_slope(self.secondary_current_line)
-        total_cu_loss = (self.power_x - no_load_x) * \
-                        rotor_current_slope * self.power_scale
+        total_cu_loss = (
+            (self.power_x - no_load_x) * rotor_current_slope * self.power_scale
+        )
 
         rotor_cu_loss = total_cu_loss - stator_cu_loss
 
-        rotor_output = self.power_y * self.power_scale - \
-                       (rotor_cu_loss + stator_cu_loss + no_load_losses)
+        rotor_output = self.power_y * self.power_scale - (
+            rotor_cu_loss + stator_cu_loss + no_load_losses
+        )
 
         slip = rotor_cu_loss / rotor_output
 
         self.rotor_speed = self.sync_speed * (1 - slip)
 
         data = {
-            'no_load_loss': no_load_losses,
-            'rotor_copper_loss': rotor_cu_loss,
-            'stator_copper_loss': stator_cu_loss,
-            'rotor_output': rotor_output,
-            'slip': slip,
-            'stator_rmf_speed (RPM)': self.sync_speed,
-            'rotor_speed (RMP)': self.rotor_speed,
-            'power_factor': (self.power_y / _np.sqrt(self.power_x ** 2 + self.power_y ** 2)),
-            'efficiency': f"{rotor_output * 100 / (self.power_y * self.power_scale)} %"
+            "no_load_loss": no_load_losses,
+            "rotor_copper_loss": rotor_cu_loss,
+            "stator_copper_loss": stator_cu_loss,
+            "rotor_output": rotor_output,
+            "slip": slip,
+            "stator_rmf_speed (RPM)": self.sync_speed,
+            "rotor_speed (RMP)": self.rotor_speed,
+            "power_factor": (
+                self.power_y / _np.sqrt(self.power_x**2 + self.power_y**2)
+            ),
+            "efficiency": f"{rotor_output * 100 / (self.power_y * self.power_scale)} %",
         }
         return data
 
@@ -553,16 +604,16 @@ class InductionMotorCircle:
         return x, y
 
     @staticmethod
-    def __plot_line(line, mark_start=True, mark_end=True, ls='-', marker=None):
+    def __plot_line(line, mark_start=True, mark_end=True, ls="-", marker=None):
         """Supporting function to plot a line."""
         [x, y] = line
         [x1, x2] = x
         [y1, y2] = y
         _plt.plot(x, y, ls=ls)
         if mark_start:
-            _plt.scatter(x1, y1, marker=marker, label='_nolegend_')
+            _plt.scatter(x1, y1, marker=marker, label="_nolegend_")
         if mark_end:
-            _plt.scatter(x2, y2, marker=marker, label='_nolegend_')
+            _plt.scatter(x2, y2, marker=marker, label="_nolegend_")
 
     def compute_circle_params(self):
         """Compute the parameters of induction motor circle."""
@@ -589,7 +640,7 @@ class InductionMotorCircle:
         [y1, y2] = y
         alpha = _np.arctan((y2 - y1) / (x2 - x1))
         torque_max = self.radius * _np.cos(alpha) - (
-                self.radius - self.radius * _np.sin(alpha)
+            self.radius - self.radius * _np.sin(alpha)
         ) * _np.tan(alpha)
         torque_max_x = self.center_x - self.radius * _np.sin(alpha)
         torque_max_y = self.center_y + self.radius * _np.cos(alpha)
@@ -624,8 +675,13 @@ class InductionMotorCircle:
 
         [[_, no_load_x], [_, _]] = self.no_load_line
         beta = _np.arcsin(
-            (self.operating_power / self.power_scale + (center_x - no_load_x) * _np.tan(alpha)) *
-            _np.cos(alpha) / self.radius)
+            (
+                self.operating_power / self.power_scale
+                + (center_x - no_load_x) * _np.tan(alpha)
+            )
+            * _np.cos(alpha)
+            / self.radius
+        )
         beta_0 = alpha + beta
         beta_1 = -alpha + beta
         # high slip
@@ -693,29 +749,52 @@ class PowerCircle:
                         Transmission System ABCD Parameters, D, default = None
     """
 
-    def __init__(self, power_circle_type: str, power_factor: float = None,
-                 Vr: complex = None, Vs: complex = None,
-                 Pr: float = None, Qr: float = None, Sr: complex = None,
-                 Ps: float = None, Qs: float = None, Ss: complex = None,
-                 A: complex = None, B: complex = None, C: complex = None,
-                 D: complex = None) -> None:
+    def __init__(
+        self,
+        power_circle_type: str,
+        power_factor: float = None,
+        Vr: complex = None,
+        Vs: complex = None,
+        Pr: float = None,
+        Qr: float = None,
+        Sr: complex = None,
+        Ps: float = None,
+        Qs: float = None,
+        Ss: complex = None,
+        A: complex = None,
+        B: complex = None,
+        C: complex = None,
+        D: complex = None,
+    ) -> None:
         r"""Initialize the class."""
         if C is not None:
-            assert abs(A * D - B * C - 1) < 1e-6, "ABCD Matrix is not a valid ABCD Matrix"
+            assert (
+                abs(A * D - B * C - 1) < 1e-6
+            ), "ABCD Matrix is not a valid ABCD Matrix"
 
         if power_circle_type.lower() == "receiving":
 
             if A is not None and B is not None and Vr is not None:
-                self.radius, self.center, self.operating_point = PowerCircle._build_circle(A, B, "receiving_end", Vr,
-                                                                                           Pr, Qr, Sr, power_factor, Vs)
+                (
+                    self.radius,
+                    self.center,
+                    self.operating_point,
+                ) = PowerCircle._build_circle(
+                    A, B, "receiving_end", Vr, Pr, Qr, Sr, power_factor, Vs
+                )
             else:
                 raise ValueError("Not enough attributes to build circle")
 
         elif power_circle_type.lower() == "sending":
 
             if B is not None and D is not None and Vs is not None:
-                self.radius, self.center, self.operating_point = PowerCircle._build_circle(D, B, "sending_end", Vs,
-                                                                                           Ps, Qs, Ss, power_factor, Vr)
+                (
+                    self.radius,
+                    self.center,
+                    self.operating_point,
+                ) = PowerCircle._build_circle(
+                    D, B, "sending_end", Vs, Ps, Qs, Ss, power_factor, Vr
+                )
             else:
                 raise ValueError("Not enough attributes to build power circle")
 
@@ -726,7 +805,9 @@ class PowerCircle:
         self.parameters = locals()
 
     @staticmethod
-    def _build_circle(a1, a2, circle_type, V, P=None, Q=None, S=None, power_factor=None, V_ref=None):
+    def _build_circle(
+        a1, a2, circle_type, V, P=None, Q=None, S=None, power_factor=None, V_ref=None
+    ):
 
         k = (abs(V) ** 2) * abs(a1) / abs(a2)
         alpha = _c.phase(a1)
@@ -756,7 +837,7 @@ class PowerCircle:
 
         elif P is not None and power_factor is not None:
 
-            Q = P * _c.sqrt(1 / power_factor ** 2 - 1).real
+            Q = P * _c.sqrt(1 / power_factor**2 - 1).real
 
             if power_factor < 0:
                 Q = -1 * Q
@@ -765,43 +846,55 @@ class PowerCircle:
             operation_point = Point(P, Q)
 
         elif Q is not None and power_factor is not None:
-            P = Q / _c.sqrt(1 / power_factor ** 2 - 1).real
+            P = Q / _c.sqrt(1 / power_factor**2 - 1).real
             radius = geometry.distance(center, Point(P, Q))
             operation_point = Point(P, Q)
 
         else:
-            raise AttributeError(
-                "Not enough attributes found to perform calculation"
-            )
+            raise AttributeError("Not enough attributes found to perform calculation")
 
         return radius, center, operation_point
 
     def _cal_parameters(self, type1, type2):
 
-        if self.parameters['V' + type2] is None:
-            self.parameters['V' + type2] = abs(self.parameters['B']) * self.radius / self.parameters['V' + type1]
+        if self.parameters["V" + type2] is None:
+            self.parameters["V" + type2] = (
+                abs(self.parameters["B"]) * self.radius / self.parameters["V" + type1]
+            )
 
-        if self.parameters['P' + type1] is None:
-            self.parameters['P' + type1] = self.operating_point.x
+        if self.parameters["P" + type1] is None:
+            self.parameters["P" + type1] = self.operating_point.x
 
-        if self.parameters['Q' + type1] is None:
-            self.parameters['Q' + type1] = self.operating_point.y
+        if self.parameters["Q" + type1] is None:
+            self.parameters["Q" + type1] = self.operating_point.y
 
-        if self.parameters['S' + type1] == None:
-            self.parameters['S' + type1] = self.operating_point.x + 1j * self.operating_point.y
+        if self.parameters["S" + type1] == None:
+            self.parameters["S" + type1] = (
+                self.operating_point.x + 1j * self.operating_point.y
+            )
 
-        if self.parameters['power_factor'] is None:
-            self.parameters['power_factor'] = self.operating_point.y / self.operating_point.x
+        if self.parameters["power_factor"] is None:
+            self.parameters["power_factor"] = (
+                self.operating_point.y / self.operating_point.x
+            )
 
-        if type1 == 'r' and type2 == 's':
-            self.parameters["Vs"] = self.parameters['B'] * self.parameters["Sr"] + self.parameters["A"] * abs(
-                self.parameters["Vr"]) ** 2
-            self.parameters["Vs"] = self.parameters["Vs"] / self.parameters["Vr"].conjugate()
+        if type1 == "r" and type2 == "s":
+            self.parameters["Vs"] = (
+                self.parameters["B"] * self.parameters["Sr"]
+                + self.parameters["A"] * abs(self.parameters["Vr"]) ** 2
+            )
+            self.parameters["Vs"] = (
+                self.parameters["Vs"] / self.parameters["Vr"].conjugate()
+            )
 
-        elif type1 == 's' and type2 == 'r':
-            self.parameters["Vr"] = -self.parameters['B'] * self.parameters["Ss"] + self.parameters["D"] * abs(
-                self.parameters["Vs"]) ** 2
-            self.parameters["Vr"] = self.parameters["Vr"] / self.parameters["Vs"].conjugate()
+        elif type1 == "s" and type2 == "r":
+            self.parameters["Vr"] = (
+                -self.parameters["B"] * self.parameters["Ss"]
+                + self.parameters["D"] * abs(self.parameters["Vs"]) ** 2
+            )
+            self.parameters["Vr"] = (
+                self.parameters["Vr"] / self.parameters["Vs"].conjugate()
+            )
 
     def print_data(self):
         r"""Print the data of the circle."""
@@ -845,26 +938,29 @@ class PowerCircle:
 
         # plot Circle and Diameter
         _plt.plot(circle_x, circle_y)
-        _plt.plot([c_x - self.radius, c_x + self.radius], [c_y, c_y], 'g--')
-        _plt.plot([c_x, c_x], [c_y - self.radius, c_y + self.radius], 'g--')
+        _plt.plot([c_x - self.radius, c_x + self.radius], [c_y, c_y], "g--")
+        _plt.plot([c_x, c_x], [c_y - self.radius, c_y + self.radius], "g--")
 
-        _plt.plot([c_x, op_x], [c_y, op_y], 'y*-.')
-        _plt.plot([op_x, op_x], [op_y, c_y], 'b*-.')
-        _plt.scatter(op_x, op_y, marker='*', color='r')
-        _plt.title(
-            f"{self.parameters['power_circle_type'].capitalize()} Power Circle"
-        )
+        _plt.plot([c_x, op_x], [c_y, op_y], "y*-.")
+        _plt.plot([op_x, op_x], [op_y, c_y], "b*-.")
+        _plt.scatter(op_x, op_y, marker="*", color="r")
+        _plt.title(f"{self.parameters['power_circle_type'].capitalize()} Power Circle")
         _plt.xlabel("Active Power")
         _plt.ylabel("Reactive Power")
         _plt.grid()
         return _plt
 
 
-def receiving_end_power_circle(Vr: complex = None, A: complex = None,
-                               B: complex = None, Pr: float = None,
-                               Qr: float = None, Sr: complex = None,
-                               power_factor: float = None, Vs: complex = None
-                               ) -> PowerCircle:
+def receiving_end_power_circle(
+    Vr: complex = None,
+    A: complex = None,
+    B: complex = None,
+    Pr: float = None,
+    Qr: float = None,
+    Sr: complex = None,
+    power_factor: float = None,
+    Vs: complex = None,
+) -> PowerCircle:
     """
     Construct Receiving End Power Circle.
 
@@ -914,12 +1010,15 @@ def receiving_end_power_circle(Vr: complex = None, A: complex = None,
         )
 
     if not (
-            ((Pr is not None and Qr is not None) or (Sr is not None and power_factor is not None))
-            or
-            (
-                    (Pr is not None and power_factor is not None) or
-                    (Qr is not None and power_factor is not None)
-            )):
+        (
+            (Pr is not None and Qr is not None)
+            or (Sr is not None and power_factor is not None)
+        )
+        or (
+            (Pr is not None and power_factor is not None)
+            or (Qr is not None and power_factor is not None)
+        )
+    ):
         raise ValueError(
             "Not enough attributes for marking an operating point on Receiving "
             "End Power Circle"
@@ -928,23 +1027,28 @@ def receiving_end_power_circle(Vr: complex = None, A: complex = None,
     return PowerCircle(
         "receiving",
         **{
-            'Vr': Vr,
-            'A': A,
-            'B': B,
-            'Pr': Pr,
-            'Qr': Qr,
-            'Sr': Sr,
-            'Vs': Vs,
-            'power_factor': power_factor
-        }
+            "Vr": Vr,
+            "A": A,
+            "B": B,
+            "Pr": Pr,
+            "Qr": Qr,
+            "Sr": Sr,
+            "Vs": Vs,
+            "power_factor": power_factor,
+        },
     )
 
 
-def sending_end_power_circle(Vs: complex = None, B: complex = None,
-                             D: complex = None, Ps: float = None,
-                             Qs: float = None, Ss: complex = None,
-                             power_factor: float = None, Vr: complex = None
-                             ) -> PowerCircle:
+def sending_end_power_circle(
+    Vs: complex = None,
+    B: complex = None,
+    D: complex = None,
+    Ps: float = None,
+    Qs: float = None,
+    Ss: complex = None,
+    power_factor: float = None,
+    Vr: complex = None,
+) -> PowerCircle:
     """
     Construct Receiving End Power Circle.
 
@@ -978,12 +1082,15 @@ def sending_end_power_circle(Vs: complex = None, B: complex = None,
         )
 
     if not (
-            ((Ps is not None and Qs is not None) or (Ss is not None and power_factor is not None))
-            or
-            (
-                    (Ps is not None and power_factor is not None) or
-                    (Qs is not None and power_factor is not None)
-            )):
+        (
+            (Ps is not None and Qs is not None)
+            or (Ss is not None and power_factor is not None)
+        )
+        or (
+            (Ps is not None and power_factor is not None)
+            or (Qs is not None and power_factor is not None)
+        )
+    ):
         raise ValueError(
             "Not enough attributes for marking an operating point on Sending "
             "End Power Circle"
@@ -992,15 +1099,161 @@ def sending_end_power_circle(Vs: complex = None, B: complex = None,
     return PowerCircle(
         "sending",
         **{
-            'Vr': Vr,
-            'B': B,
-            'D': D,
-            'Ps': Ps,
-            'Qs': Qs,
-            'Ss': Ss,
-            'Vs': Vs,
-            'power_factor': power_factor
-        }
+            "Vr": Vr,
+            "B": B,
+            "D": D,
+            "Ps": Ps,
+            "Qs": Qs,
+            "Ss": Ss,
+            "Vs": Vs,
+            "power_factor": power_factor,
+        },
     )
 
+
+class SeriesRLC():
+    """Frequency Response for a Traditional RLC (Resistive, Inductive, Capacitive) Load.
+
+    Parameters
+    -----------
+    resistance: float
+                Resistance (in Ohm) of the circuit.
+    inductance: float
+                Inductance (in Henry) of the circuit.
+    capacitance: float
+                Capacitance (in Hz) of the circuit.
+    frequency:  float
+                Frequency (in Hz) at which the output gain should be evaluated.
+    """
+
+    def __init__(
+        self, resistance: float, inductance: float, capacitance: float, frequency: float
+    ) -> None:
+        """Form the Frequency Response Analysis System."""
+        self.resistance = resistance
+        self.inductance = inductance
+        self.capacitance = capacitance
+        self.frequency = frequency
+
+    @property
+    def resonance_frequency(self):
+        """Resonance Frequency (in Hz) of the Described RLC Circuit."""
+        return 1 / (_np.sqrt(self.inductance * self.capacitance) * 2 * _np.pi)
+
+    @property
+    def bandwidth(self):
+        """Bandwidth of the Described RLC Circuit."""
+        return self.resistance / (2 * _np.pi * self.inductance)
+
+    @property
+    def quality_factor(self):
+        """Quality Factor of the Described RLC Circuit."""
+        return 2 * _np.pi * self.frequency / self.resistance
+
+    @property
+    def lower_cutoff_frequency(self):
+        """Lower Cutoff Frequency (in Hz) of the Described RLC Circuit."""
+        x = (-self.resistance) / (2 * self.inductance)
+        resonance_angular_frequency = 2 * _np.pi * self.resonance_frequency
+
+        return (x + _np.sqrt(x**2 + resonance_angular_frequency**2)) / (2 * _np.pi)
+
+    @property
+    def upper_cutoff_frequency(self):
+        """Upper Cutoff Frequency (in Hz) of the Described RLC Circuit."""
+        x = (self.resistance) / (2 * self.inductance)
+        resonance_angular_frequency = 2 * _np.pi * self.resonance_frequency
+
+        return (x + _np.sqrt(x**2 + resonance_angular_frequency**2)) / (2 * _np.pi)
+
+    def output_gain(self, frequency: float):
+        """
+        Evaluate Output Gain of the Described RLC Circuit at a Particular Frequency.
+
+        Parameters
+        -----------
+        frequency:  float
+                    Frequency (in Hz) at which the output gain should be evaluated.
+        """
+        ang_frq = 2 * _np.pi * frequency
+        current_impedence = (
+            self.resistance**2
+            + (ang_frq * self.inductance - 1 / (ang_frq * self.capacitance)) ** 2
+        )
+        return (self.resistance) / (_np.sqrt(current_impedence))
+
+    def legend(self):
+        """ Generate a Legend for the Graph."""
+        f1, f2 = self.lower_cutoff_frequency, self.upper_cutoff_frequency
+        f = self.resonance_frequency
+        return[
+                "Gain",
+                f"Resonance frequency ({f}Hz)",
+                f"Lower cutoff frequency ({f1}Hz)",
+                f"Upper cutoff frequency ({f2}Hz)",
+                f"Bandwidth ({f2 - f1}Hz)",
+                f"Quality factor {self.quality_factor}",
+            ]
+
+    def graph(
+        self, lower_frequency_cut: float, upper_frequency_cut: float, samples=10000
+    ):
+        """
+        Generate a Plot to Represent all Data Respective of the RLC Circuit.
+
+        Parameters
+        ----------
+        lower_frequency_cut:    float
+                Minimum frequency to demonstrate as a boundary of the X-axis of the plot.
+        upper_frequency_cut:    float
+                Maximum frequency to demonstrate as a boundary of the X-axis of the plot.
+        samples:    float
+                Number of samples over which the plot should be formed.
+        """
+        x = _np.linspace(lower_frequency_cut, upper_frequency_cut, samples)
+
+        y = self.output_gain(x)
+
+        _plt.title("Frequency response of series RLC circuit")
+        _plt.grid(visible=True)
+
+        _plt.plot(x, y, label="Gain")
+        _plt.ylabel("Gain")
+        _plt.xlabel("Frequency (Hz)")
+        f1, f2 = self.lower_cutoff_frequency, self.upper_cutoff_frequency
+        f = self.resonance_frequency
+        _plt.scatter(
+            [f1, f2],
+            [_np.sqrt(0.5), _np.sqrt(0.5)],
+            marker="*",
+            c="black",
+            label="_nolegend_",
+        )
+
+        half_power_gain = _np.sqrt(0.5)
+
+        _plt.plot([f, f], [0, 1], ls="-.")
+        _plt.plot([f1, f1], [half_power_gain, 0], ls="-.")
+        _plt.plot([f2, f2], [half_power_gain, 0], ls="-.")
+        _plt.plot([f1, f2], [half_power_gain, half_power_gain], ls="-.")
+
+        _plt.plot(
+            [0, f], [half_power_gain, half_power_gain], label="_nolegend_", ls="--"
+        )
+        _plt.plot([0, f], [1, 1], label="_nolegend_", ls="--")
+        _plt.plot([0, 0], [half_power_gain, 1], label="Quality factor", c="black")
+        _plt.scatter([0], [half_power_gain], label="_nolegend_", c="black", marker="v")
+        _plt.scatter([0], [1], label="_nolegend_", c="black", marker="^")
+        # _plt.legend(
+        #     [
+        #         "Gain",
+        #         f"Resonance frequency ({f}Hz)",
+        #         f"Lower cutoff frequency ({f1}Hz)",
+        #         f"Upper cutoff frequency ({f2}Hz)",
+        #         f"Bandwidth ({f2 - f1}Hz)",
+        #         f"Quality factor {self.quality_factor}",
+        #     ],
+        #     loc='best'
+        # )
+        return _plt
 # END
