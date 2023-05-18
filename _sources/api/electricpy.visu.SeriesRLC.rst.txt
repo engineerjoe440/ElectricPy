@@ -1,0 +1,35 @@
+electricpy.visu.SeriesRLC
+=========================
+
+.. currentmodule:: electricpy.visu
+
+.. autoclass:: SeriesRLC
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SeriesRLC.__init__
+      ~SeriesRLC.graph
+      ~SeriesRLC.legend
+      ~SeriesRLC.output_gain
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SeriesRLC.bandwidth
+      ~SeriesRLC.lower_cutoff_frequency
+      ~SeriesRLC.quality_factor
+      ~SeriesRLC.resonance_frequency
+      ~SeriesRLC.upper_cutoff_frequency
+   
+   

@@ -378,10 +378,10 @@
 <span class="kn">from</span> <span class="nn">electricpy.geometry.circle</span> <span class="kn">import</span> <span class="n">Circle</span>
 
 
-
 <span class="c1"># Define Power Triangle Function</span>
-<div class="viewcode-block" id="powertriangle"><a class="viewcode-back" href="../../api/electricpy.visu.powertriangle.html#electricpy.visu.powertriangle">[docs]</a><span class="k">def</span> <span class="nf">powertriangle</span><span class="p">(</span><span class="n">P</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">PF</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span>
-                  <span class="n">text</span><span class="o">=</span><span class="s2">"Power Triangle"</span><span class="p">,</span> <span class="n">printval</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="powertriangle"><a class="viewcode-back" href="../../api/electricpy.visu.powertriangle.html#electricpy.visu.powertriangle">[docs]</a><span class="k">def</span> <span class="nf">powertriangle</span><span class="p">(</span>
+    <span class="n">P</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">PF</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">"Power Triangle"</span><span class="p">,</span> <span class="n">printval</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Power Triangle Plotting Function.</span>
 
@@ -455,8 +455,8 @@
     <span class="c1"># Print all values if asked to</span>
     <span class="k">if</span> <span class="n">printval</span><span class="p">:</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
-            <span class="n">x</span><span class="o">/</span><span class="mi">20</span><span class="p">,</span>
-            <span class="n">y</span><span class="o">*</span><span class="mi">4</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">x</span> <span class="o">/</span> <span class="mi">20</span><span class="p">,</span>
+            <span class="n">y</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">/</span> <span class="mi">5</span><span class="p">,</span>
             <span class="p">(</span>
                 <span class="sa">f</span><span class="s2">"P:   </span><span class="si">{</span><span class="n">P</span><span class="si">}</span><span class="s2"> W</span><span class="se">\n</span><span class="s2">"</span>
                 <span class="sa">f</span><span class="s2">"Q:   </span><span class="si">{</span><span class="n">Q</span><span class="si">}</span><span class="s2"> VAR</span><span class="se">\n</span><span class="s2">"</span>
@@ -464,7 +464,7 @@
                 <span class="sa">f</span><span class="s2">"PF:  </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">PF</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">power_factor_text</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
                 <span class="sa">f</span><span class="s2">"ΘPF: </span><span class="si">{</span><span class="n">_np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">PF</span><span class="p">))</span><span class="si">}</span><span class="s2">° </span><span class="si">{</span><span class="n">power_factor_text</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">),</span>
-            <span class="n">color</span><span class="o">=</span><span class="n">color</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">_plt</span></div>
 
@@ -501,11 +501,11 @@
     <span class="c1"># Plot</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">outline</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">)</span>
+    <span class="n">_plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"black"</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'h'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Impulse Response'</span><span class="p">)</span>
+    <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"h"</span><span class="p">)</span>
+    <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Impulse Response"</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 
     <span class="c1"># The input function</span>
@@ -514,12 +514,12 @@
     <span class="c1"># Plot</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">outline</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">)</span>
+    <span class="n">_plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"black"</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">19</span><span class="p">])</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Input Function'</span><span class="p">)</span>
+    <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Input Function"</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'x'</span><span class="p">)</span>
+    <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>
 
     <span class="c1"># The output</span>
     <span class="n">L</span> <span class="o">=</span> <span class="n">M</span> <span class="o">+</span> <span class="n">N</span> <span class="o">-</span> <span class="mi">1</span>
@@ -527,18 +527,28 @@
     <span class="n">_plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">outline</span><span class="p">:</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">)</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'y'</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">)</span>
+    <span class="n">_plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"black"</span><span class="p">)</span>
+    <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"y"</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-    <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Convolved Output'</span><span class="p">)</span>
+    <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Convolved Output"</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_plt</span></div>
 
 
 <span class="c1"># Define Phasor Plot Generator</span>
-<div class="viewcode-block" id="phasorplot"><a class="viewcode-back" href="../../api/electricpy.visu.phasorplot.html#electricpy.visu.phasorplot">[docs]</a><span class="k">def</span> <span class="nf">phasorplot</span><span class="p">(</span><span class="n">phasors</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Phasor Diagram"</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-               <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-               <span class="n">label</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="phasorplot"><a class="viewcode-back" href="../../api/electricpy.visu.phasorplot.html#electricpy.visu.phasorplot">[docs]</a><span class="k">def</span> <span class="nf">phasorplot</span><span class="p">(</span>
+    <span class="n">phasors</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">"Phasor Diagram"</span><span class="p">,</span>
+    <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">bg</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">radius</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Phasor Plotting Function.</span>
 
@@ -603,8 +613,18 @@
     <span class="c1"># Manage Colors</span>
     <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="s2">"#FF0000"</span><span class="p">,</span> <span class="s2">"#800000"</span><span class="p">,</span> <span class="s2">"#FFFF00"</span><span class="p">,</span> <span class="s2">"#808000"</span><span class="p">,</span> <span class="s2">"#00ff00"</span><span class="p">,</span> <span class="s2">"#008000"</span><span class="p">,</span>
-            <span class="s2">"#00ffff"</span><span class="p">,</span> <span class="s2">"#008080"</span><span class="p">,</span> <span class="s2">"#0000ff"</span><span class="p">,</span> <span class="s2">"#000080"</span><span class="p">,</span> <span class="s2">"#ff00ff"</span><span class="p">,</span> <span class="s2">"#800080"</span>
+            <span class="s2">"#FF0000"</span><span class="p">,</span>
+            <span class="s2">"#800000"</span><span class="p">,</span>
+            <span class="s2">"#FFFF00"</span><span class="p">,</span>
+            <span class="s2">"#808000"</span><span class="p">,</span>
+            <span class="s2">"#00ff00"</span><span class="p">,</span>
+            <span class="s2">"#008000"</span><span class="p">,</span>
+            <span class="s2">"#00ffff"</span><span class="p">,</span>
+            <span class="s2">"#008080"</span><span class="p">,</span>
+            <span class="s2">"#0000ff"</span><span class="p">,</span>
+            <span class="s2">"#000080"</span><span class="p">,</span>
+            <span class="s2">"#ff00ff"</span><span class="p">,</span>
+            <span class="s2">"#800080"</span><span class="p">,</span>
         <span class="p">]</span>
     <span class="c1"># Scale Radius</span>
     <span class="k">if</span> <span class="n">radius</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -624,13 +644,11 @@
         <span class="n">legend</span> <span class="o">=</span> <span class="n">labels</span>
     <span class="c1"># Check for more phasors than colors</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">phasors</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">colors</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">"ERROR: Too many phasors provided. Specify more line colors."</span>
-        <span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"ERROR: Too many phasors provided. Specify more line colors."</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># Force square figure and square axes</span>
-        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">_matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">'figure.figsize'</span><span class="p">]</span>
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">_matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">"figure.figsize"</span><span class="p">]</span>
         <span class="n">size</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
     <span class="c1"># Make a square figure</span>
     <span class="n">fig</span> <span class="o">=</span> <span class="n">_plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span>
@@ -646,13 +664,26 @@
         <span class="k">if</span> <span class="n">legend</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">mag</span> <span class="o">&gt;</span> <span class="n">tolerance</span><span class="p">:</span>
                 <span class="n">arrows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="n">_plt</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ang_r</span><span class="p">,</span> <span class="n">mag</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-                                  <span class="n">label</span><span class="o">=</span><span class="n">legend</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">linewidth</span><span class="p">)</span>
+                    <span class="n">_plt</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="n">ang_r</span><span class="p">,</span>
+                        <span class="n">mag</span><span class="p">,</span>
+                        <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                        <span class="n">label</span><span class="o">=</span><span class="n">legend</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                        <span class="n">linewidth</span><span class="o">=</span><span class="n">linewidth</span><span class="p">,</span>
+                    <span class="p">)</span>
                 <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">arrows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                    <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'o'</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="n">linewidth</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span>
-                                 <span class="n">label</span><span class="o">=</span><span class="n">legend</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="mi">0</span><span class="p">,</span>
+                        <span class="s2">"o"</span><span class="p">,</span>
+                        <span class="n">markersize</span><span class="o">=</span><span class="n">linewidth</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span>
+                        <span class="n">label</span><span class="o">=</span><span class="n">legend</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                        <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                    <span class="p">)</span>
                 <span class="p">)</span>
         <span class="c1"># Plot without labels</span>
         <span class="k">else</span><span class="p">:</span>
@@ -711,8 +742,15 @@
 <span class="sd">                        Pole count of induction Motor</span>
 <span class="sd">    """</span>
 
-<div class="viewcode-block" id="InductionMotorCircle.__init__"><a class="viewcode-back" href="../../api/electricpy.visu.InductionMotorCircle.html#electricpy.visu.InductionMotorCircle.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">no_load_data</span><span class="p">,</span> <span class="n">blocked_rotor_data</span><span class="p">,</span> <span class="n">output_power</span><span class="p">,</span>
-                 <span class="n">torque_ration</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">poles</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+<div class="viewcode-block" id="InductionMotorCircle.__init__"><a class="viewcode-back" href="../../api/electricpy.visu.InductionMotorCircle.html#electricpy.visu.InductionMotorCircle.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">no_load_data</span><span class="p">,</span>
+        <span class="n">blocked_rotor_data</span><span class="p">,</span>
+        <span class="n">output_power</span><span class="p">,</span>
+        <span class="n">torque_ration</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">frequency</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+        <span class="n">poles</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Primary Entrypoint."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">no_load_data</span> <span class="o">=</span> <span class="n">no_load_data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">blocked_rotor_data</span> <span class="o">=</span> <span class="n">blocked_rotor_data</span>
@@ -722,17 +760,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">poles</span> <span class="o">=</span> <span class="n">poles</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sync_speed</span> <span class="o">=</span> <span class="mi">120</span> <span class="o">*</span> <span class="n">frequency</span> <span class="o">/</span> <span class="n">poles</span>  <span class="c1"># rpm</span>
 
-        <span class="n">v0</span> <span class="o">=</span> <span class="n">no_load_data</span><span class="p">[</span><span class="s1">'V0'</span><span class="p">]</span>
-        <span class="n">i0</span> <span class="o">=</span> <span class="n">no_load_data</span><span class="p">[</span><span class="s1">'I0'</span><span class="p">]</span>
-        <span class="n">w0</span> <span class="o">=</span> <span class="n">no_load_data</span><span class="p">[</span><span class="s1">'W0'</span><span class="p">]</span>
+        <span class="n">v0</span> <span class="o">=</span> <span class="n">no_load_data</span><span class="p">[</span><span class="s2">"V0"</span><span class="p">]</span>
+        <span class="n">i0</span> <span class="o">=</span> <span class="n">no_load_data</span><span class="p">[</span><span class="s2">"I0"</span><span class="p">]</span>
+        <span class="n">w0</span> <span class="o">=</span> <span class="n">no_load_data</span><span class="p">[</span><span class="s2">"W0"</span><span class="p">]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">no_load_pf</span> <span class="o">=</span> <span class="n">w0</span> <span class="o">/</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">v0</span> <span class="o">*</span> <span class="n">i0</span><span class="p">)</span>
         <span class="n">theta0</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">no_load_pf</span><span class="p">)</span>
 
         <span class="c1"># get short circuit power factor and Current at slip=1</span>
-        <span class="n">vsc</span> <span class="o">=</span> <span class="n">blocked_rotor_data</span><span class="p">[</span><span class="s1">'Vsc'</span><span class="p">]</span>
-        <span class="n">isc</span> <span class="o">=</span> <span class="n">blocked_rotor_data</span><span class="p">[</span><span class="s1">'Isc'</span><span class="p">]</span>
-        <span class="n">wsc</span> <span class="o">=</span> <span class="n">blocked_rotor_data</span><span class="p">[</span><span class="s1">'Wsc'</span><span class="p">]</span>
+        <span class="n">vsc</span> <span class="o">=</span> <span class="n">blocked_rotor_data</span><span class="p">[</span><span class="s2">"Vsc"</span><span class="p">]</span>
+        <span class="n">isc</span> <span class="o">=</span> <span class="n">blocked_rotor_data</span><span class="p">[</span><span class="s2">"Isc"</span><span class="p">]</span>
+        <span class="n">wsc</span> <span class="o">=</span> <span class="n">blocked_rotor_data</span><span class="p">[</span><span class="s2">"Wsc"</span><span class="p">]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">blocked_rotor_pf</span> <span class="o">=</span> <span class="n">wsc</span> <span class="o">/</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">vsc</span> <span class="o">*</span> <span class="n">isc</span><span class="p">)</span>
         <span class="n">theta_sc</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blocked_rotor_pf</span><span class="p">)</span>
@@ -744,19 +782,16 @@
         <span class="c1"># isc is the current at reduced voltage</span>
         <span class="c1"># calculate current at rated voltage</span>
         <span class="n">isc</span> <span class="o">=</span> <span class="n">v0</span> <span class="o">*</span> <span class="n">isc</span> <span class="o">/</span> <span class="n">vsc</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">no_load_line</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i0</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta0</span><span class="p">)],</span>
-            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i0</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta0</span><span class="p">)]</span>
-        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">no_load_line</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i0</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta0</span><span class="p">)],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i0</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta0</span><span class="p">)]]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">full_load_line</span> <span class="o">=</span> <span class="p">[</span>
             <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">isc</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta_sc</span><span class="p">)],</span>
-            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">isc</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta_sc</span><span class="p">)]</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">isc</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta_sc</span><span class="p">)],</span>
         <span class="p">]</span>
 
         <span class="c1"># secondary current line</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span> <span class="o">=</span> <span class="p">[</span>
             <span class="p">[</span><span class="n">i0</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta0</span><span class="p">),</span> <span class="n">isc</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta_sc</span><span class="p">)],</span>
-            <span class="p">[</span><span class="n">i0</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta0</span><span class="p">),</span> <span class="n">isc</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta_sc</span><span class="p">)]</span>
+            <span class="p">[</span><span class="n">i0</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta0</span><span class="p">),</span> <span class="n">isc</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta_sc</span><span class="p">)],</span>
         <span class="p">]</span>
 
         <span class="p">[[</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">],</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span>
@@ -767,11 +802,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_circle_params</span><span class="p">()</span>
         <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">p_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">)</span>
         <span class="p">)</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">torque_line</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">torque_point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_torque_line</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">torque_max</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">torque_max_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">torque_max_y</span> <span class="o">=</span> \
-            <span class="bp">self</span><span class="o">.</span><span class="n">get_torque_max</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">torque_max</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">torque_max_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">torque_max_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_torque_max</span><span class="p">()</span>
         <span class="c1"># Take low slip point</span>
         <span class="n">_</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">power_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_y</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_output_power</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_efficiency</span><span class="p">()</span></div>
@@ -784,68 +818,81 @@
     <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Plot the Induction Motor Circle Diagram."""</span>
         <span class="p">[</span><span class="n">circle_x</span><span class="p">,</span> <span class="n">circle_y</span><span class="p">]</span> <span class="o">=</span> <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">__get_circle</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span>
-            <span class="n">semi</span><span class="o">=</span><span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="n">semi</span><span class="o">=</span><span class="kc">True</span>
         <span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">circle_x</span><span class="p">,</span> <span class="n">circle_y</span><span class="p">)</span>
 
         <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">__plot_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">no_load_line</span><span class="p">)</span>
         <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">__plot_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span><span class="p">)</span>
-        <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">__plot_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">full_load_line</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">'-.'</span><span class="p">)</span>
-        <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">__plot_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">torque_line</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">'-.'</span><span class="p">)</span>
+        <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">__plot_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">full_load_line</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"-."</span><span class="p">)</span>
+        <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">__plot_line</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">torque_line</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"-."</span><span class="p">)</span>
 
         <span class="c1"># Full load output</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
-             <span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]],</span>
-            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">])</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]],</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">],</span>
+        <span class="p">)</span>
         <span class="c1"># Diameter of the circle</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">],</span>
-                  <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s1">'-.'</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">],</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">],</span>
+            <span class="n">ls</span><span class="o">=</span><span class="s2">"-."</span><span class="p">,</span>
+        <span class="p">)</span>
         <span class="c1"># Max torque line</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
             <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">torque_max_x</span><span class="p">],</span>
-            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">torque_max_y</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s1">'-.'</span><span class="p">)</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">torque_max_y</span><span class="p">],</span>
+            <span class="n">ls</span><span class="o">=</span><span class="s2">"-."</span><span class="p">,</span>
+        <span class="p">)</span>
         <span class="c1"># Max Output Power line</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
             <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">)],</span>
             <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">)],</span>
-            <span class="n">ls</span><span class="o">=</span><span class="s1">'-.'</span>
+            <span class="n">ls</span><span class="o">=</span><span class="s2">"-."</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="c1"># Operating Point</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_x</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_y</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">'black'</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_x</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_y</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">"black"</span><span class="p">)</span>
 
-        <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">power_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'X'</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">'red'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'_nolegend_'</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">power_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"X"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"_nolegend_"</span>
+        <span class="p">)</span>
         <span class="c1"># mark the center of the circle</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'*'</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">'blue'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'_nolegend_'</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">center_x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"*"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"blue"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"_nolegend_"</span>
+        <span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">),</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">theta</span><span class="p">),</span>
-            <span class="n">linewidths</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'*'</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">'_nolegend_'</span>
+            <span class="n">linewidths</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">c</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s2">"*"</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">"_nolegend_"</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">torque_max_x</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">torque_max_y</span><span class="p">,</span>
             <span class="n">linewidths</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-            <span class="n">c</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span>
-            <span class="n">marker</span><span class="o">=</span><span class="s1">'*'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'_nolegend_'</span>
+            <span class="n">c</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s2">"*"</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">"_nolegend_"</span><span class="p">,</span>
         <span class="p">)</span>
 
         <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Induction Motor Circle Diagram"</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span>
-            <span class="s1">'I2 locus'</span><span class="p">,</span>
-            <span class="s1">'No Load Current'</span><span class="p">,</span>
-            <span class="s1">'Output Line'</span><span class="p">,</span>
-            <span class="s1">'Blocked Rotor Current'</span><span class="p">,</span>
-            <span class="s1">'Torque line'</span><span class="p">,</span>
-            <span class="s1">'Full Load Losses'</span><span class="p">,</span>
-            <span class="s1">'Diameter'</span><span class="p">,</span>
-            <span class="s1">'Maximum Torque'</span><span class="p">,</span>
-            <span class="s1">'Maximum Output Power'</span><span class="p">,</span>
-            <span class="sa">f</span><span class="s1">'Operating Power </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">operating_power</span><span class="si">}</span><span class="s1">'</span>
-        <span class="p">])</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="s2">"I2 locus"</span><span class="p">,</span>
+                <span class="s2">"No Load Current"</span><span class="p">,</span>
+                <span class="s2">"Output Line"</span><span class="p">,</span>
+                <span class="s2">"Blocked Rotor Current"</span><span class="p">,</span>
+                <span class="s2">"Torque line"</span><span class="p">,</span>
+                <span class="s2">"Full Load Losses"</span><span class="p">,</span>
+                <span class="s2">"Diameter"</span><span class="p">,</span>
+                <span class="s2">"Maximum Torque"</span><span class="p">,</span>
+                <span class="s2">"Maximum Output Power"</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"Operating Power </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">operating_power</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
         <span class="k">return</span> <span class="n">_plt</span>
 
     <span class="k">def</span> <span class="nf">compute_efficiency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -856,32 +903,35 @@
         <span class="n">compute_slope</span> <span class="o">=</span> <span class="n">InductionMotorCircle</span><span class="o">.</span><span class="n">compute_slope</span>
 
         <span class="n">torque_slope</span> <span class="o">=</span> <span class="n">compute_slope</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">torque_line</span><span class="p">)</span>
-        <span class="n">stator_cu_loss</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">power_x</span> <span class="o">-</span> <span class="n">no_load_x</span><span class="p">)</span> <span class="o">*</span> \
-                         <span class="n">torque_slope</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_scale</span>
+        <span class="n">stator_cu_loss</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">power_x</span> <span class="o">-</span> <span class="n">no_load_x</span><span class="p">)</span> <span class="o">*</span> <span class="n">torque_slope</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_scale</span>
 
         <span class="n">rotor_current_slope</span> <span class="o">=</span> <span class="n">compute_slope</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">secondary_current_line</span><span class="p">)</span>
-        <span class="n">total_cu_loss</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">power_x</span> <span class="o">-</span> <span class="n">no_load_x</span><span class="p">)</span> <span class="o">*</span> \
-                        <span class="n">rotor_current_slope</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_scale</span>
+        <span class="n">total_cu_loss</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">power_x</span> <span class="o">-</span> <span class="n">no_load_x</span><span class="p">)</span> <span class="o">*</span> <span class="n">rotor_current_slope</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_scale</span>
+        <span class="p">)</span>
 
         <span class="n">rotor_cu_loss</span> <span class="o">=</span> <span class="n">total_cu_loss</span> <span class="o">-</span> <span class="n">stator_cu_loss</span>
 
-        <span class="n">rotor_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_y</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_scale</span> <span class="o">-</span> \
-                       <span class="p">(</span><span class="n">rotor_cu_loss</span> <span class="o">+</span> <span class="n">stator_cu_loss</span> <span class="o">+</span> <span class="n">no_load_losses</span><span class="p">)</span>
+        <span class="n">rotor_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_y</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_scale</span> <span class="o">-</span> <span class="p">(</span>
+            <span class="n">rotor_cu_loss</span> <span class="o">+</span> <span class="n">stator_cu_loss</span> <span class="o">+</span> <span class="n">no_load_losses</span>
+        <span class="p">)</span>
 
         <span class="n">slip</span> <span class="o">=</span> <span class="n">rotor_cu_loss</span> <span class="o">/</span> <span class="n">rotor_output</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">rotor_speed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sync_speed</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">slip</span><span class="p">)</span>
 
         <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">'no_load_loss'</span><span class="p">:</span> <span class="n">no_load_losses</span><span class="p">,</span>
-            <span class="s1">'rotor_copper_loss'</span><span class="p">:</span> <span class="n">rotor_cu_loss</span><span class="p">,</span>
-            <span class="s1">'stator_copper_loss'</span><span class="p">:</span> <span class="n">stator_cu_loss</span><span class="p">,</span>
-            <span class="s1">'rotor_output'</span><span class="p">:</span> <span class="n">rotor_output</span><span class="p">,</span>
-            <span class="s1">'slip'</span><span class="p">:</span> <span class="n">slip</span><span class="p">,</span>
-            <span class="s1">'stator_rmf_speed (RPM)'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sync_speed</span><span class="p">,</span>
-            <span class="s1">'rotor_speed (RMP)'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotor_speed</span><span class="p">,</span>
-            <span class="s1">'power_factor'</span><span class="p">:</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">power_y</span> <span class="o">/</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">power_x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_y</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)),</span>
-            <span class="s1">'efficiency'</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">rotor_output</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">power_y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">power_scale</span><span class="p">)</span><span class="si">}</span><span class="s2"> %"</span>
+            <span class="s2">"no_load_loss"</span><span class="p">:</span> <span class="n">no_load_losses</span><span class="p">,</span>
+            <span class="s2">"rotor_copper_loss"</span><span class="p">:</span> <span class="n">rotor_cu_loss</span><span class="p">,</span>
+            <span class="s2">"stator_copper_loss"</span><span class="p">:</span> <span class="n">stator_cu_loss</span><span class="p">,</span>
+            <span class="s2">"rotor_output"</span><span class="p">:</span> <span class="n">rotor_output</span><span class="p">,</span>
+            <span class="s2">"slip"</span><span class="p">:</span> <span class="n">slip</span><span class="p">,</span>
+            <span class="s2">"stator_rmf_speed (RPM)"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sync_speed</span><span class="p">,</span>
+            <span class="s2">"rotor_speed (RMP)"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">rotor_speed</span><span class="p">,</span>
+            <span class="s2">"power_factor"</span><span class="p">:</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">power_y</span> <span class="o">/</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">power_x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="p">),</span>
+            <span class="s2">"efficiency"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">rotor_output</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">power_y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">power_scale</span><span class="p">)</span><span class="si">}</span><span class="s2"> %"</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">data</span>
 
@@ -913,16 +963,16 @@
         <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">__plot_line</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">mark_start</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mark_end</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">'-'</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__plot_line</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">mark_start</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mark_end</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"-"</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Supporting function to plot a line."""</span>
         <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">line</span>
         <span class="p">[</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
         <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="n">ls</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">mark_start</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'_nolegend_'</span><span class="p">)</span>
+            <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"_nolegend_"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">mark_end</span><span class="p">:</span>
-            <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'_nolegend_'</span><span class="p">)</span>
+            <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">marker</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"_nolegend_"</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">compute_circle_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""Compute the parameters of induction motor circle."""</span>
@@ -949,7 +999,7 @@
         <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
         <span class="n">alpha</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">arctan</span><span class="p">((</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">))</span>
         <span class="n">torque_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
         <span class="p">)</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
         <span class="n">torque_max_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
         <span class="n">torque_max_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">center_y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
@@ -984,8 +1034,13 @@
 
         <span class="p">[[</span><span class="n">_</span><span class="p">,</span> <span class="n">no_load_x</span><span class="p">],</span> <span class="p">[</span><span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">no_load_line</span>
         <span class="n">beta</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span>
-            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">operating_power</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_scale</span> <span class="o">+</span> <span class="p">(</span><span class="n">center_x</span> <span class="o">-</span> <span class="n">no_load_x</span><span class="p">)</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">alpha</span><span class="p">))</span> <span class="o">*</span>
-            <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span>
+            <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">operating_power</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_scale</span>
+                <span class="o">+</span> <span class="p">(</span><span class="n">center_x</span> <span class="o">-</span> <span class="n">no_load_x</span><span class="p">)</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+            <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span>
+        <span class="p">)</span>
         <span class="n">beta_0</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span>
         <span class="n">beta_1</span> <span class="o">=</span> <span class="o">-</span><span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span>
         <span class="c1"># high slip</span>
@@ -1053,29 +1108,52 @@
 <span class="sd">                        Transmission System ABCD Parameters, D, default = None</span>
 <span class="sd">    """</span>
 
-<div class="viewcode-block" id="PowerCircle.__init__"><a class="viewcode-back" href="../../api/electricpy.visu.PowerCircle.html#electricpy.visu.PowerCircle.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">power_circle_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">Pr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Qr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Sr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">Ps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Qs</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Ss</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">A</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">C</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">D</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="PowerCircle.__init__"><a class="viewcode-back" href="../../api/electricpy.visu.PowerCircle.html#electricpy.visu.PowerCircle.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">power_circle_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Pr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Qr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Sr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Ps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Qs</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Ss</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">A</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">C</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">D</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">"""Initialize the class."""</span>
         <span class="k">if</span> <span class="n">C</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">A</span> <span class="o">*</span> <span class="n">D</span> <span class="o">-</span> <span class="n">B</span> <span class="o">*</span> <span class="n">C</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="s2">"ABCD Matrix is not a valid ABCD Matrix"</span>
+            <span class="k">assert</span> <span class="p">(</span>
+                <span class="nb">abs</span><span class="p">(</span><span class="n">A</span> <span class="o">*</span> <span class="n">D</span> <span class="o">-</span> <span class="n">B</span> <span class="o">*</span> <span class="n">C</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span>
+            <span class="p">),</span> <span class="s2">"ABCD Matrix is not a valid ABCD Matrix"</span>
 
         <span class="k">if</span> <span class="n">power_circle_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"receiving"</span><span class="p">:</span>
 
             <span class="k">if</span> <span class="n">A</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">B</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Vr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span> <span class="o">=</span> <span class="n">PowerCircle</span><span class="o">.</span><span class="n">_build_circle</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="s2">"receiving_end"</span><span class="p">,</span> <span class="n">Vr</span><span class="p">,</span>
-                                                                                           <span class="n">Pr</span><span class="p">,</span> <span class="n">Qr</span><span class="p">,</span> <span class="n">Sr</span><span class="p">,</span> <span class="n">power_factor</span><span class="p">,</span> <span class="n">Vs</span><span class="p">)</span>
+                <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="p">,</span>
+                <span class="p">)</span> <span class="o">=</span> <span class="n">PowerCircle</span><span class="o">.</span><span class="n">_build_circle</span><span class="p">(</span>
+                    <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="s2">"receiving_end"</span><span class="p">,</span> <span class="n">Vr</span><span class="p">,</span> <span class="n">Pr</span><span class="p">,</span> <span class="n">Qr</span><span class="p">,</span> <span class="n">Sr</span><span class="p">,</span> <span class="n">power_factor</span><span class="p">,</span> <span class="n">Vs</span>
+                <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Not enough attributes to build circle"</span><span class="p">)</span>
 
         <span class="k">elif</span> <span class="n">power_circle_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"sending"</span><span class="p">:</span>
 
             <span class="k">if</span> <span class="n">B</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">D</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Vs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span> <span class="o">=</span> <span class="n">PowerCircle</span><span class="o">.</span><span class="n">_build_circle</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="s2">"sending_end"</span><span class="p">,</span> <span class="n">Vs</span><span class="p">,</span>
-                                                                                           <span class="n">Ps</span><span class="p">,</span> <span class="n">Qs</span><span class="p">,</span> <span class="n">Ss</span><span class="p">,</span> <span class="n">power_factor</span><span class="p">,</span> <span class="n">Vr</span><span class="p">)</span>
+                <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">center</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="p">,</span>
+                <span class="p">)</span> <span class="o">=</span> <span class="n">PowerCircle</span><span class="o">.</span><span class="n">_build_circle</span><span class="p">(</span>
+                    <span class="n">D</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="s2">"sending_end"</span><span class="p">,</span> <span class="n">Vs</span><span class="p">,</span> <span class="n">Ps</span><span class="p">,</span> <span class="n">Qs</span><span class="p">,</span> <span class="n">Ss</span><span class="p">,</span> <span class="n">power_factor</span><span class="p">,</span> <span class="n">Vr</span>
+                <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Not enough attributes to build power circle"</span><span class="p">)</span>
 
@@ -1086,7 +1164,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">()</span></div>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_build_circle</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">circle_type</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">power_factor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">V_ref</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_build_circle</span><span class="p">(</span>
+        <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">circle_type</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">P</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">power_factor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">V_ref</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
 
         <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span> <span class="o">/</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a2</span><span class="p">)</span>
         <span class="n">alpha</span> <span class="o">=</span> <span class="n">_c</span><span class="o">.</span><span class="n">phase</span><span class="p">(</span><span class="n">a1</span><span class="p">)</span>
@@ -1116,7 +1196,7 @@
 
         <span class="k">elif</span> <span class="n">P</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-            <span class="n">Q</span> <span class="o">=</span> <span class="n">P</span> <span class="o">*</span> <span class="n">_c</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">power_factor</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+            <span class="n">Q</span> <span class="o">=</span> <span class="n">P</span> <span class="o">*</span> <span class="n">_c</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">power_factor</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
 
             <span class="k">if</span> <span class="n">power_factor</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">Q</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">Q</span>
@@ -1125,43 +1205,55 @@
             <span class="n">operation_point</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span>
 
         <span class="k">elif</span> <span class="n">Q</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">P</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">/</span> <span class="n">_c</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">power_factor</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
+            <span class="n">P</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">/</span> <span class="n">_c</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">power_factor</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">real</span>
             <span class="n">radius</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">Point</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">))</span>
             <span class="n">operation_point</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
-                <span class="s2">"Not enough attributes found to perform calculation"</span>
-            <span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">"Not enough attributes found to perform calculation"</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">radius</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">operation_point</span>
 
     <span class="k">def</span> <span class="nf">_cal_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type1</span><span class="p">,</span> <span class="n">type2</span><span class="p">):</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'V'</span> <span class="o">+</span> <span class="n">type2</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'V'</span> <span class="o">+</span> <span class="n">type2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'B'</span><span class="p">])</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'V'</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"V"</span> <span class="o">+</span> <span class="n">type2</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"V"</span> <span class="o">+</span> <span class="n">type2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"B"</span><span class="p">])</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"V"</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span>
+            <span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'P'</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'P'</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">x</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"P"</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"P"</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">x</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'Q'</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'Q'</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">y</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Q"</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Q"</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">y</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'S'</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'S'</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">y</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"S"</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"S"</span> <span class="o">+</span> <span class="n">type1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">y</span>
+            <span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'power_factor'</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'power_factor'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">y</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">x</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"power_factor"</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"power_factor"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">y</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">operating_point</span><span class="o">.</span><span class="n">x</span>
+            <span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">type1</span> <span class="o">==</span> <span class="s1">'r'</span> <span class="ow">and</span> <span class="n">type2</span> <span class="o">==</span> <span class="s1">'s'</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'B'</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Sr"</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">]</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">type1</span> <span class="o">==</span> <span class="s2">"r"</span> <span class="ow">and</span> <span class="n">type2</span> <span class="o">==</span> <span class="s2">"s"</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"B"</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Sr"</span><span class="p">]</span>
+                <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">]</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span>
+            <span class="p">)</span>
 
-        <span class="k">elif</span> <span class="n">type1</span> <span class="o">==</span> <span class="s1">'s'</span> <span class="ow">and</span> <span class="n">type2</span> <span class="o">==</span> <span class="s1">'r'</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'B'</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Ss"</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"D"</span><span class="p">]</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">]</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">type1</span> <span class="o">==</span> <span class="s2">"s"</span> <span class="ow">and</span> <span class="n">type2</span> <span class="o">==</span> <span class="s2">"r"</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"B"</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Ss"</span><span class="p">]</span>
+                <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"D"</span><span class="p">]</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vr"</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"Vs"</span><span class="p">]</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span>
+            <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">print_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">"""Print the data of the circle."""</span>
@@ -1205,26 +1297,29 @@
 
         <span class="c1"># plot Circle and Diameter</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">circle_x</span><span class="p">,</span> <span class="n">circle_y</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">c_x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="n">c_x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">],</span> <span class="p">[</span><span class="n">c_y</span><span class="p">,</span> <span class="n">c_y</span><span class="p">],</span> <span class="s1">'g--'</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">c_x</span><span class="p">,</span> <span class="n">c_x</span><span class="p">],</span> <span class="p">[</span><span class="n">c_y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="n">c_y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">],</span> <span class="s1">'g--'</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">c_x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="n">c_x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">],</span> <span class="p">[</span><span class="n">c_y</span><span class="p">,</span> <span class="n">c_y</span><span class="p">],</span> <span class="s2">"g--"</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">c_x</span><span class="p">,</span> <span class="n">c_x</span><span class="p">],</span> <span class="p">[</span><span class="n">c_y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="n">c_y</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">],</span> <span class="s2">"g--"</span><span class="p">)</span>
 
-        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">c_x</span><span class="p">,</span> <span class="n">op_x</span><span class="p">],</span> <span class="p">[</span><span class="n">c_y</span><span class="p">,</span> <span class="n">op_y</span><span class="p">],</span> <span class="s1">'y*-.'</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">op_x</span><span class="p">,</span> <span class="n">op_x</span><span class="p">],</span> <span class="p">[</span><span class="n">op_y</span><span class="p">,</span> <span class="n">c_y</span><span class="p">],</span> <span class="s1">'b*-.'</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">op_x</span><span class="p">,</span> <span class="n">op_y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'*'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'r'</span><span class="p">)</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'power_circle_type'</span><span class="p">]</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2"> Power Circle"</span>
-        <span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">c_x</span><span class="p">,</span> <span class="n">op_x</span><span class="p">],</span> <span class="p">[</span><span class="n">c_y</span><span class="p">,</span> <span class="n">op_y</span><span class="p">],</span> <span class="s2">"y*-."</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">op_x</span><span class="p">,</span> <span class="n">op_x</span><span class="p">],</span> <span class="p">[</span><span class="n">op_y</span><span class="p">,</span> <span class="n">c_y</span><span class="p">],</span> <span class="s2">"b*-."</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">op_x</span><span class="p">,</span> <span class="n">op_y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"*"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"r"</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">'power_circle_type'</span><span class="p">]</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2"> Power Circle"</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Active Power"</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Reactive Power"</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">_plt</span></div>
 
 
-<div class="viewcode-block" id="receiving_end_power_circle"><a class="viewcode-back" href="../../api/electricpy.visu.receiving_end_power_circle.html#electricpy.visu.receiving_end_power_circle">[docs]</a><span class="k">def</span> <span class="nf">receiving_end_power_circle</span><span class="p">(</span><span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">A</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                               <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Pr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                               <span class="n">Qr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Sr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                               <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span>
-                               <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PowerCircle</span><span class="p">:</span>
+<div class="viewcode-block" id="receiving_end_power_circle"><a class="viewcode-back" href="../../api/electricpy.visu.receiving_end_power_circle.html#electricpy.visu.receiving_end_power_circle">[docs]</a><span class="k">def</span> <span class="nf">receiving_end_power_circle</span><span class="p">(</span>
+    <span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">A</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Pr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Qr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Sr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PowerCircle</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Construct Receiving End Power Circle.</span>
 
@@ -1274,12 +1369,15 @@
         <span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span>
-            <span class="p">((</span><span class="n">Pr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Qr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">Sr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">))</span>
-            <span class="ow">or</span>
-            <span class="p">(</span>
-                    <span class="p">(</span><span class="n">Pr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span>
-                    <span class="p">(</span><span class="n">Qr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
-            <span class="p">)):</span>
+        <span class="p">(</span>
+            <span class="p">(</span><span class="n">Pr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Qr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="p">(</span><span class="n">Sr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="ow">or</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">Pr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="p">(</span><span class="n">Qr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="s2">"Not enough attributes for marking an operating point on Receiving "</span>
             <span class="s2">"End Power Circle"</span>
@@ -1288,23 +1386,28 @@
     <span class="k">return</span> <span class="n">PowerCircle</span><span class="p">(</span>
         <span class="s2">"receiving"</span><span class="p">,</span>
         <span class="o">**</span><span class="p">{</span>
-            <span class="s1">'Vr'</span><span class="p">:</span> <span class="n">Vr</span><span class="p">,</span>
-            <span class="s1">'A'</span><span class="p">:</span> <span class="n">A</span><span class="p">,</span>
-            <span class="s1">'B'</span><span class="p">:</span> <span class="n">B</span><span class="p">,</span>
-            <span class="s1">'Pr'</span><span class="p">:</span> <span class="n">Pr</span><span class="p">,</span>
-            <span class="s1">'Qr'</span><span class="p">:</span> <span class="n">Qr</span><span class="p">,</span>
-            <span class="s1">'Sr'</span><span class="p">:</span> <span class="n">Sr</span><span class="p">,</span>
-            <span class="s1">'Vs'</span><span class="p">:</span> <span class="n">Vs</span><span class="p">,</span>
-            <span class="s1">'power_factor'</span><span class="p">:</span> <span class="n">power_factor</span>
-        <span class="p">}</span>
+            <span class="s2">"Vr"</span><span class="p">:</span> <span class="n">Vr</span><span class="p">,</span>
+            <span class="s2">"A"</span><span class="p">:</span> <span class="n">A</span><span class="p">,</span>
+            <span class="s2">"B"</span><span class="p">:</span> <span class="n">B</span><span class="p">,</span>
+            <span class="s2">"Pr"</span><span class="p">:</span> <span class="n">Pr</span><span class="p">,</span>
+            <span class="s2">"Qr"</span><span class="p">:</span> <span class="n">Qr</span><span class="p">,</span>
+            <span class="s2">"Sr"</span><span class="p">:</span> <span class="n">Sr</span><span class="p">,</span>
+            <span class="s2">"Vs"</span><span class="p">:</span> <span class="n">Vs</span><span class="p">,</span>
+            <span class="s2">"power_factor"</span><span class="p">:</span> <span class="n">power_factor</span><span class="p">,</span>
+        <span class="p">},</span>
     <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="sending_end_power_circle"><a class="viewcode-back" href="../../api/electricpy.visu.sending_end_power_circle.html#electricpy.visu.sending_end_power_circle">[docs]</a><span class="k">def</span> <span class="nf">sending_end_power_circle</span><span class="p">(</span><span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                             <span class="n">D</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Ps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                             <span class="n">Qs</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Ss</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                             <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span>
-                             <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PowerCircle</span><span class="p">:</span>
+<div class="viewcode-block" id="sending_end_power_circle"><a class="viewcode-back" href="../../api/electricpy.visu.sending_end_power_circle.html#electricpy.visu.sending_end_power_circle">[docs]</a><span class="k">def</span> <span class="nf">sending_end_power_circle</span><span class="p">(</span>
+    <span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">D</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Ps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Qs</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Ss</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PowerCircle</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Construct Receiving End Power Circle.</span>
 
@@ -1338,12 +1441,15 @@
         <span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span>
-            <span class="p">((</span><span class="n">Ps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Qs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">Ss</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">))</span>
-            <span class="ow">or</span>
-            <span class="p">(</span>
-                    <span class="p">(</span><span class="n">Ps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span>
-                    <span class="p">(</span><span class="n">Qs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
-            <span class="p">)):</span>
+        <span class="p">(</span>
+            <span class="p">(</span><span class="n">Ps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Qs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="p">(</span><span class="n">Ss</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="ow">or</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">Ps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="p">(</span><span class="n">Qs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">power_factor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="s2">"Not enough attributes for marking an operating point on Sending "</span>
             <span class="s2">"End Power Circle"</span>
@@ -1352,17 +1458,163 @@
     <span class="k">return</span> <span class="n">PowerCircle</span><span class="p">(</span>
         <span class="s2">"sending"</span><span class="p">,</span>
         <span class="o">**</span><span class="p">{</span>
-            <span class="s1">'Vr'</span><span class="p">:</span> <span class="n">Vr</span><span class="p">,</span>
-            <span class="s1">'B'</span><span class="p">:</span> <span class="n">B</span><span class="p">,</span>
-            <span class="s1">'D'</span><span class="p">:</span> <span class="n">D</span><span class="p">,</span>
-            <span class="s1">'Ps'</span><span class="p">:</span> <span class="n">Ps</span><span class="p">,</span>
-            <span class="s1">'Qs'</span><span class="p">:</span> <span class="n">Qs</span><span class="p">,</span>
-            <span class="s1">'Ss'</span><span class="p">:</span> <span class="n">Ss</span><span class="p">,</span>
-            <span class="s1">'Vs'</span><span class="p">:</span> <span class="n">Vs</span><span class="p">,</span>
-            <span class="s1">'power_factor'</span><span class="p">:</span> <span class="n">power_factor</span>
-        <span class="p">}</span>
+            <span class="s2">"Vr"</span><span class="p">:</span> <span class="n">Vr</span><span class="p">,</span>
+            <span class="s2">"B"</span><span class="p">:</span> <span class="n">B</span><span class="p">,</span>
+            <span class="s2">"D"</span><span class="p">:</span> <span class="n">D</span><span class="p">,</span>
+            <span class="s2">"Ps"</span><span class="p">:</span> <span class="n">Ps</span><span class="p">,</span>
+            <span class="s2">"Qs"</span><span class="p">:</span> <span class="n">Qs</span><span class="p">,</span>
+            <span class="s2">"Ss"</span><span class="p">:</span> <span class="n">Ss</span><span class="p">,</span>
+            <span class="s2">"Vs"</span><span class="p">:</span> <span class="n">Vs</span><span class="p">,</span>
+            <span class="s2">"power_factor"</span><span class="p">:</span> <span class="n">power_factor</span><span class="p">,</span>
+        <span class="p">},</span>
     <span class="p">)</span></div>
 
+
+<div class="viewcode-block" id="SeriesRLC"><a class="viewcode-back" href="../../api/electricpy.visu.SeriesRLC.html#electricpy.visu.SeriesRLC">[docs]</a><span class="k">class</span> <span class="nc">SeriesRLC</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Frequency Response for a Traditional RLC (Resistive, Inductive, Capacitive) Load.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    resistance: float</span>
+<span class="sd">                Resistance (in Ohm) of the circuit.</span>
+<span class="sd">    inductance: float</span>
+<span class="sd">                Inductance (in Henry) of the circuit.</span>
+<span class="sd">    capacitance: float</span>
+<span class="sd">                Capacitance (in Hz) of the circuit.</span>
+<span class="sd">    frequency:  float</span>
+<span class="sd">                Frequency (in Hz) at which the output gain should be evaluated.</span>
+<span class="sd">    """</span>
+
+<div class="viewcode-block" id="SeriesRLC.__init__"><a class="viewcode-back" href="../../api/electricpy.visu.SeriesRLC.html#electricpy.visu.SeriesRLC.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">resistance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">inductance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">capacitance</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">frequency</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Form the Frequency Response Analysis System."""</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resistance</span> <span class="o">=</span> <span class="n">resistance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inductance</span> <span class="o">=</span> <span class="n">inductance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">capacitance</span> <span class="o">=</span> <span class="n">capacitance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frequency</span> <span class="o">=</span> <span class="n">frequency</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">resonance_frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Resonance Frequency (in Hz) of the Described RLC Circuit."""</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inductance</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">capacitance</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">bandwidth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Bandwidth of the Described RLC Circuit."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">resistance</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inductance</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">quality_factor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Quality Factor of the Described RLC Circuit."""</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">frequency</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">resistance</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">lower_cutoff_frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Lower Cutoff Frequency (in Hz) of the Described RLC Circuit."""</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">resistance</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inductance</span><span class="p">)</span>
+        <span class="n">resonance_angular_frequency</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">resonance_frequency</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">resonance_angular_frequency</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">upper_cutoff_frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Upper Cutoff Frequency (in Hz) of the Described RLC Circuit."""</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resistance</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inductance</span><span class="p">)</span>
+        <span class="n">resonance_angular_frequency</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">resonance_frequency</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">resonance_angular_frequency</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">output_gain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequency</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Evaluate Output Gain of the Described RLC Circuit at a Particular Frequency.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        frequency:  float</span>
+<span class="sd">                    Frequency (in Hz) at which the output gain should be evaluated.</span>
+<span class="sd">        """</span>
+        <span class="n">ang_frq</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">frequency</span>
+        <span class="n">current_impedence</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">resistance</span><span class="o">**</span><span class="mi">2</span>
+            <span class="o">+</span> <span class="p">(</span><span class="n">ang_frq</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inductance</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">ang_frq</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">capacitance</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resistance</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">current_impedence</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">legend</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Generate a Legend for the Graph."""</span>
+        <span class="n">f1</span><span class="p">,</span> <span class="n">f2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_cutoff_frequency</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_cutoff_frequency</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resonance_frequency</span>
+        <span class="k">return</span><span class="p">[</span>
+                <span class="s2">"Gain"</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"Resonance frequency (</span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2">Hz)"</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"Lower cutoff frequency (</span><span class="si">{</span><span class="n">f1</span><span class="si">}</span><span class="s2">Hz)"</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"Upper cutoff frequency (</span><span class="si">{</span><span class="n">f2</span><span class="si">}</span><span class="s2">Hz)"</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"Bandwidth (</span><span class="si">{</span><span class="n">f2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">f1</span><span class="si">}</span><span class="s2">Hz)"</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"Quality factor </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">quality_factor</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+            <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">graph</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">lower_frequency_cut</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">upper_frequency_cut</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">samples</span><span class="o">=</span><span class="mi">10000</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Generate a Plot to Represent all Data Respective of the RLC Circuit.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        lower_frequency_cut:    float</span>
+<span class="sd">                Minimum frequency to demonstrate as a boundary of the X-axis of the plot.</span>
+<span class="sd">        upper_frequency_cut:    float</span>
+<span class="sd">                Maximum frequency to demonstrate as a boundary of the X-axis of the plot.</span>
+<span class="sd">        samples:    float</span>
+<span class="sd">                Number of samples over which the plot should be formed.</span>
+<span class="sd">        """</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">lower_frequency_cut</span><span class="p">,</span> <span class="n">upper_frequency_cut</span><span class="p">,</span> <span class="n">samples</span><span class="p">)</span>
+
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_gain</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Frequency response of series RLC circuit"</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Gain"</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Gain"</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Frequency (Hz)"</span><span class="p">)</span>
+        <span class="n">f1</span><span class="p">,</span> <span class="n">f2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_cutoff_frequency</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_cutoff_frequency</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resonance_frequency</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">],</span>
+            <span class="p">[</span><span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)],</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s2">"*"</span><span class="p">,</span>
+            <span class="n">c</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">"_nolegend_"</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">half_power_gain</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">f</span><span class="p">,</span> <span class="n">f</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"-."</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">f1</span><span class="p">,</span> <span class="n">f1</span><span class="p">],</span> <span class="p">[</span><span class="n">half_power_gain</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"-."</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">f2</span><span class="p">,</span> <span class="n">f2</span><span class="p">],</span> <span class="p">[</span><span class="n">half_power_gain</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"-."</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">],</span> <span class="p">[</span><span class="n">half_power_gain</span><span class="p">,</span> <span class="n">half_power_gain</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"-."</span><span class="p">)</span>
+
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">f</span><span class="p">],</span> <span class="p">[</span><span class="n">half_power_gain</span><span class="p">,</span> <span class="n">half_power_gain</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">"_nolegend_"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"--"</span>
+        <span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">f</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">"_nolegend_"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"--"</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">half_power_gain</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Quality factor"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"black"</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">half_power_gain</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">"_nolegend_"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"v"</span><span class="p">)</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">"_nolegend_"</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">"^"</span><span class="p">)</span>
+        <span class="c1"># _plt.legend(</span>
+        <span class="c1">#     [</span>
+        <span class="c1">#         "Gain",</span>
+        <span class="c1">#         f"Resonance frequency ({f}Hz)",</span>
+        <span class="c1">#         f"Lower cutoff frequency ({f1}Hz)",</span>
+        <span class="c1">#         f"Upper cutoff frequency ({f2}Hz)",</span>
+        <span class="c1">#         f"Bandwidth ({f2 - f1}Hz)",</span>
+        <span class="c1">#         f"Quality factor {self.quality_factor}",</span>
+        <span class="c1">#     ],</span>
+        <span class="c1">#     loc='best'</span>
+        <span class="c1"># )</span>
+        <span class="k">return</span> <span class="n">_plt</span></div>
 <span class="c1"># END</span>
 </pre></div>
 
