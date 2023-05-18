@@ -1111,7 +1111,40 @@ def sending_end_power_circle(
 
 
 class SeriesRLC():
-    """Frequency Response for a Traditional RLC (Resistive, Inductive, Capacitive) Load.
+    r"""
+    Frequency Response for an RLC (Resistive, Inductive, Capacitive) Load.
+
+    Generate unique information about an RLC circuit. Using this class, you may
+    generate a variety of useful statistics including resonance frequency,
+    bandwidth, lower and upper cuttoff frequencies, and more. Each of the
+    specific parameters are evaluated as follows.
+
+    **Resonance Frequency:**
+
+    .. math:: \text{resonance_frequency} = \frac{1}{\sqrt{L * C} \cdot 2 \pi}
+
+    
+    **Bandwidth:**
+
+    .. math:: \text{bandwidth} = \frac{R}{L \cdot 2 \pi}
+
+    
+    **Quality Factor:**
+
+    .. math:: \text{quality_factor} = 2\pi \frac{\text{freq}}{R}
+
+    
+    Examples
+    --------
+    >>> from electricpy.visu import SeriesRLC
+    >>> rlc_component = SeriesRLC(
+    ...     resistance=5, inductance=0.4, capacitance=25.3e-6, frequency=50
+    ... )
+    >>> rlc_component.resonance_frequency
+    0.0
+    >>> rlc_component.bandwidth
+    0.0
+
 
     Parameters
     ----------
@@ -1126,7 +1159,11 @@ class SeriesRLC():
     """
 
     def __init__(
-        self, resistance: float, inductance: float, capacitance: float, frequency: float
+        self,
+        resistance: float,
+        inductance: float,
+        capacitance: float,
+        frequency: float
     ) -> None:
         """Form the Frequency Response Analysis System."""
         self.resistance = resistance
@@ -1167,12 +1204,13 @@ class SeriesRLC():
 
     def output_gain(self, frequency: float):
         """
-        Evaluate Output Gain of the Described RLC Circuit at a Particular Frequency.
+        Evaluate Output Gain of Described RLC Circuit at a Particular Frequency.
 
         Parameters
         ----------
         frequency:  float
-                    Frequency (in Hz) at which the output gain should be evaluated.
+                    Frequency (in Hz) at which the output gain should be
+                    evaluated.
         """
         ang_frq = 2 * _np.pi * frequency
         current_impedence = (
@@ -1185,29 +1223,74 @@ class SeriesRLC():
         """Generate a Legend for the Graph."""
         f1, f2 = self.lower_cutoff_frequency, self.upper_cutoff_frequency
         f = self.resonance_frequency
-        return[
-                "Gain",
-                f"Resonance frequency ({f}Hz)",
-                f"Lower cutoff frequency ({f1}Hz)",
-                f"Upper cutoff frequency ({f2}Hz)",
-                f"Bandwidth ({f2 - f1}Hz)",
-                f"Quality factor {self.quality_factor}",
-            ]
+        return [
+            "Gain",
+            f"Resonance frequency ({f}Hz)",
+            f"Lower cutoff frequency ({f1}Hz)",
+            f"Upper cutoff frequency ({f2}Hz)",
+            f"Bandwidth ({f2 - f1}Hz)",
+            f"Quality factor {self.quality_factor}",
+        ]
 
     def graph(
-        self, lower_frequency_cut: float, upper_frequency_cut: float, samples=10000
+        self,
+        lower_frequency_cut: float,
+        upper_frequency_cut: float,
+        samples: int = 10000,
+        show_legend: bool = False,
     ):
         """
         Generate a Plot to Represent all Data Respective of the RLC Circuit.
 
+        Given the characteristics listed below, and the Python code described in
+        the associated example, the following plot will be generated.
+
+        * Resistance: 5 ohms
+        * Inductance: 0.4 henreys
+        * Capacitance: 25.3e-6 farads
+
+        Examples
+        --------
+        >>> from electricpy.visu import SeriesRLC
+        >>> plot = SeriesRLC(
+        ...     resistance=5, inductance=0.4, capacitance=25.3e-6, frequency=50
+        ... ).graph(
+        ...     lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000
+        ... )
+        >>> plot.show()
+
+        .. image:: /static/series-rlc-r5-l0.4.png
+
+        * Resistance: 10 ohms
+        * Inductance: 0.5 henreys
+        * Capacitance: 25.3e-6 farads
+
+        Examples
+        --------
+        >>> from electricpy.visu import SeriesRLC
+        >>> plot = SeriesRLC(
+        ...     resistance=10, inductance=0.5, capacitance=25.3e-6, frequency=50
+        ... ).graph(
+        ...     lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000
+        ... )
+        >>> plot.show()
+
+        .. image:: /static/series-rlc-r10-l0.5.png
+
         Parameters
         ----------
         lower_frequency_cut:    float
-                Minimum frequency to demonstrate as a boundary of the X-axis of the plot.
+                                Minimum frequency to demonstrate as a boundary
+                                of the X-axis of the plot.
         upper_frequency_cut:    float
-                Maximum frequency to demonstrate as a boundary of the X-axis of the plot.
-        samples:    float
-                Number of samples over which the plot should be formed.
+                                Maximum frequency to demonstrate as a boundary
+                                of the X-axis of the plot.
+        samples:                float, optional
+                                Number of samples over which the plot should be
+                                formed. Defaults to 1000.
+        show_legend:            bool, optional
+                                Control to enable or disable the display of the
+                                legend. Defaults to False.
         """
         x = _np.linspace(lower_frequency_cut, upper_frequency_cut, samples)
 
@@ -1243,16 +1326,7 @@ class SeriesRLC():
         _plt.plot([0, 0], [half_power_gain, 1], label="Quality factor", c="black")
         _plt.scatter([0], [half_power_gain], label="_nolegend_", c="black", marker="v")
         _plt.scatter([0], [1], label="_nolegend_", c="black", marker="^")
-        # _plt.legend(
-        #     [
-        #         "Gain",
-        #         f"Resonance frequency ({f}Hz)",
-        #         f"Lower cutoff frequency ({f1}Hz)",
-        #         f"Upper cutoff frequency ({f2}Hz)",
-        #         f"Bandwidth ({f2 - f1}Hz)",
-        #         f"Quality factor {self.quality_factor}",
-        #     ],
-        #     loc='best'
-        # )
+        if show_legend:
+            _plt.legend(self.legend, loc='best')
         return _plt
 # END

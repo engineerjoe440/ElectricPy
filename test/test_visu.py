@@ -13,12 +13,19 @@ class Test_visualization:
         blocked_rotor_test_data = {'Vsc': 200, 'Isc': 50, 'Wsc': 7100}
         ratio = 1  # stator copper loss/ rotor copper loss
         output_power = 15000
-        # InductionMotorCircle(open_circuit_test_data, blocked_rotor_test_data, output_power, torque_ration=ratio)
-        #
-        MotorCircle = InductionMotorCircle(open_circuit_test_data, blocked_rotor_test_data,
-                            output_power, torque_ration=ratio, frequency=50, poles=4)
+        MotorCircle = InductionMotorCircle(
+            open_circuit_test_data,
+            blocked_rotor_test_data,
+            output_power,
+            torque_ration=ratio,
+            frequency=50,
+            poles=4
+        )
 
-        assert_almost_equal(MotorCircle()['no_load_loss'], open_circuit_test_data['W0'])
+        assert_almost_equal(
+            MotorCircle()['no_load_loss'],
+            open_circuit_test_data['W0']
+        )
 
     def test_power_circle(self):
         from electricpy.visu import receiving_end_power_circle
@@ -39,11 +46,15 @@ class Test_visualization:
         from electricpy.visu import SeriesRLC
 
         # test RLC
-        rlc_obj1 = SeriesRLC(resistance=5, inductance=0.4, capacitance=25.3e-6, frequency=50)
+        rlc_obj1 = SeriesRLC(
+            resistance=5, inductance=0.4, capacitance=25.3e-6, frequency=50
+        )
 
         # gh1 = rlc_obj1.graph(lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000)
 
-        rlc_obj2 = SeriesRLC(resistance=10, inductance=0.5, capacitance=25.3e-6, frequency=50)
+        rlc_obj2 = SeriesRLC(
+            resistance=10, inductance=0.5, capacitance=25.3e-6, frequency=50
+        )
 
         # gh2 = rlc_obj2.graph(lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000)
 

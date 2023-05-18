@@ -86,6 +86,26 @@ def render_convbar_example():
     x = np.array([0, 1, 1, 1, 0])
     visu.convbar(h, x)
 
+@canvas_capture("series-rlc-r5-l0.4")
+def render_series_rlc():
+    """Render the Series RLC Circuit's Visualization."""
+    visu.SeriesRLC(
+        resistance=5,
+        inductance=0.4,
+        capacitance=25.3e-6,
+        frequency=50
+    ).graph(lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000)
+
+@canvas_capture("series-rlc-r10-l0.5")
+def render_series_rlc():
+    """Render the Series RLC Circuit's Visualization."""
+    visu.SeriesRLC(
+        resistance=10,
+        inductance=0.5,
+        capacitance=25.3e-6,
+        frequency=50
+    ).graph(lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000)
+
 def main():
     """Run all of the Image Generators."""
     # Add function calls here as new rendering functions are added
