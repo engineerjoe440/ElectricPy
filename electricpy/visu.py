@@ -1160,7 +1160,7 @@ class SeriesRLC():
     >>> rlc_component.resonance_frequency
     50.029927713857425
     >>> rlc_component.bandwidth
-    0.0
+    1.9894367886486917
     >>> plot_1 = rlc_component.graph(
     ...     lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000
     ... )
