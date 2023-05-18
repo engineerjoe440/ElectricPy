@@ -1140,6 +1140,7 @@ class SeriesRLC():
     * Resistance: 5 ohms
     * Inductance: 0.4 henreys
     * Capacitance: 25.3e-6 farads
+    * Frequency: 50 Hz
 
     .. image:: /static/series-rlc-r5-l0.4.png
 
@@ -1147,6 +1148,7 @@ class SeriesRLC():
     * Resistance: 10 ohms
     * Inductance: 0.5 henreys
     * Capacitance: 25.3e-6 farads
+    * Frequency: 50 Hz
 
     .. image:: /static/series-rlc-r10-l0.5.png
 
@@ -1168,7 +1170,8 @@ class SeriesRLC():
     >>> plot_2 = SeriesRLC(
     ...     resistance=10, inductance=0.5, capacitance=25.3e-6, frequency=50
     ... ).graph(
-    ...     lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000
+    ...     lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000,
+    ...     show_legend=True,
     ... )
     >>> plot_2.show()
 

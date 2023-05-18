@@ -104,7 +104,12 @@ def render_series_rlc_10_ohm():
         inductance=0.5,
         capacitance=25.3e-6,
         frequency=50
-    ).graph(lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000)
+    ).graph(
+        lower_frequency_cut=0.1,
+        upper_frequency_cut=100,
+        samples=1000,
+        show_legend=True
+    )
 
 def main():
     """Run all of the Image Generators."""
