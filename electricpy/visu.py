@@ -1323,6 +1323,6 @@ class SeriesRLC():
         _plt.scatter([0], [half_power_gain], label="_nolegend_", c="black", marker="v")
         _plt.scatter([0], [1], label="_nolegend_", c="black", marker="^")
         if show_legend:
-            _plt.legend(self.legend, loc='best')
+            _plt.legend(self.legend(), loc='best')
         return _plt
 # END
