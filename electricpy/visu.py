@@ -12,7 +12,6 @@ import cmath as _c
 import numpy as _np
 import matplotlib as _matplotlib
 import matplotlib.pyplot as _plt
-import matplotlib.colors as mcolors
 
 from electricpy import powerset, geometry
 from electricpy.geometry import Point
@@ -1183,7 +1182,7 @@ class SeriesRLC():
         return (self.resistance) / (_np.sqrt(current_impedence))
 
     def legend(self):
-        """ Generate a Legend for the Graph."""
+        """Generate a Legend for the Graph."""
         f1, f2 = self.lower_cutoff_frequency, self.upper_cutoff_frequency
         f = self.resonance_frequency
         return[
