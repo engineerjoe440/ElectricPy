@@ -50,12 +50,12 @@ notebooks!)
 
 | Phasor Plot | Power Triangle | Induction Motor Circle |
 |-------------|----------------|------------------------|
-| ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/blob/gh-pages/_images/PhasorPlot.png) | ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/blob/gh-pages/_images/PowerTriangle.png) | ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/blob/gh-pages/_images/InductionMotorCircleExample.png) |
+| ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/PhasorPlot.png) | ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/PowerTriangle.png) | ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/InductionMotorCircleExample.png) |
 
 
 | RLC Frequency Response |                | Receiving Power Circle |
 |------------------------|----------------|------------------------|
-| ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/series-rlc-r5-l0.4.png) |  | ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/blob/gh-pages/_images/ReceivingPowerCircleExample.png) |
+| ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/series-rlc-r5-l0.4.png) |  | ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/ReceivingPowerCircleExample.png) |
 
 ## Installing / Getting Started
 
