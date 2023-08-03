@@ -9,7 +9,7 @@ import cmath as _c
 
 class Phasor(complex):
     """
-    Phasor Class - An extension of the Python complex type for scientific work.
+    An extension of the Python `complex` type for work in polar coordinates.
 
     This class can be used in place of, or alongside the standard `complex` type
     in Python to represent complex numbers as phasors (magnitude and angle) for
@@ -85,6 +85,7 @@ class Phasor(complex):
             round(self.ang, ndigits=ndigits)
         )
     
+    @staticmethod
     def from_arraylike(arraylike):
         """
         Phasor Constructor for Casting from Array Like Object.
