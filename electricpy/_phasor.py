@@ -3,6 +3,7 @@
 ################################################################################
 
 # Import Required Packages
+import sys as _sys
 import numpy as _np
 import cmath as _c
 
@@ -73,6 +74,8 @@ class Phasor(complex):
     def __str__(self):
         """Stringlify the Phasor."""
         angle_denotion = "∠"
+        if _sys.stdout.encoding != "utf-8":
+            angle_denotion = "/_"
         return f"{self.mag} {angle_denotion} {self.ang}°"
     
     def __round__(self, ndigits=0):
