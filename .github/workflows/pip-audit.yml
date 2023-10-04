@@ -1,0 +1,11 @@
+jobs:
+  selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: install
+        run: python -m pip install .
+      - uses: pypa/gh-action-pip-audit@v1.0.8
+        with:
+          # NOTE: this can be `.`, for the current directory
+          inputs: .
