@@ -1,118 +1,148 @@
-<!DOCTYPE html>
 
-<html lang="en">
+
+<!doctype html>
+<html lang="en" class="no-js">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="lang:clipboard.copy" content="Copy to clipboard">
-  <meta name="lang:clipboard.copied" content="Copied to clipboard">
-  <meta name="lang:search.language" content="en">
-  <meta name="lang:search.pipeline.stopwords" content="True">
-  <meta name="lang:search.pipeline.trimmer" content="True">
-  <meta name="lang:search.result.none" content="No matching documents">
-  <meta name="lang:search.result.one" content="1 matching document">
-  <meta name="lang:search.result.other" content="# matching documents">
-  <meta name="lang:search.tokenizer" content="[\s\-]+">
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="_static/ElectricpyLogo.svg">
+    
+    
+      
+        <title>None - electricpy 0.4.0 documentation</title>
+      
+    
+    
+      
+        
+        
+      
+      
 
-  
-    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+    
+    
+    
+      
+        
+        
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+        <link rel="stylesheet" type="text/css" href="_static/sphinx_immaterial_theme.af531f03affe68837.min.css?v=2410bb73" />
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
 
-    <style>
-      body,
-      input {
-        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
-      }
-
-      code,
-      kbd,
-      pre {
-        font-family: "Roboto Mono", "Courier New", Courier, monospace
-      }
-    </style>
-  
-
-  <link rel="stylesheet" href="_static/stylesheets/application.css"/>
-  <link rel="stylesheet" href="_static/stylesheets/application-palette.css"/>
-  <link rel="stylesheet" href="_static/stylesheets/application-fixes.css"/>
-  
-  <link rel="stylesheet" href="_static/fonts/material-icons.css"/>
-  
-  <meta name="theme-color" content="#3f51b5">
-  <script src="_static/javascripts/modernizr.js"></script>
-  
-  
-  
-    <title>Index &#8212; electricpy 0.4.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=83e35b93" />
-    <link rel="stylesheet" type="text/css" href="_static/material.css?v=79c92029" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=4e78f113"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
-    <link rel="icon" href="_static/ElectricpyLogo.svg"/>
-    <link rel="index" title="Index" href="#" />
-    <link rel="search" title="Search" href="search.html" />
-  
-   
-
+    
+    
+    
   </head>
-  <body dir=ltr
-        data-md-color-primary=blue data-md-color-accent=light-blue>
   
-  <svg class="md-svg">
-    <defs data-children-count="0">
-      
-      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
-      
-    </defs>
-  </svg>
   
-  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
-  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
-  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
-  <a href="#genindex" tabindex="1" class="md-skip"> Skip to content </a>
-  <header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid">
-    <div class="md-flex navheader">
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="index.html" title="electricpy 0.4.0 documentation"
-           class="md-header-nav__button md-logo">
-          
-            &nbsp;
-          
-        </a>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
-      </div>
-      <div class="md-flex__cell md-flex__cell--stretch">
-        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-          <span class="md-header-nav__topic">ElectricPy</span>
-          <span class="md-header-nav__topic"> Index </span>
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="blue">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="index.html" title="electricpy 0.4.0 documentation" class="md-header__button md-logo" aria-label="electricpy 0.4.0 documentation" data-md-component="logo">
+      <img src="_static/ElectricpyLogo.svg" alt="logo">
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            electricpy 0.4.0 documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              None
+            
+          </span>
         </div>
       </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
         
-<div class="md-search" data-md-component="search" role="dialog">
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
-    <form class="md-search__form" action="search.html" method="get" name="search">
-      <input type="text" class="md-search__input" name="q" placeholder="Search"
-             autocapitalize="off" autocomplete="off" spellcheck="false"
-             data-md-component="query" data-md-state="active">
-      <label class="md-icon md-search__icon" for="__search"></label>
-      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
-        &#xE5CD;
-      </button>
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="result">
+        <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            Type to start searching
+            Initializing search
           </div>
           <ol class="md-search-result__list"></ol>
         </div>
@@ -120,950 +150,242 @@
     </div>
   </div>
 </div>
-
-      </div>
-      
-        <div class="md-flex__cell md-flex__cell--shrink">
-          <div class="md-header-nav__source">
-            <a href="https://github.com/engineerjoe440/ElectricPy/" title="Go to repository" class="md-source" data-md-source="github">
-
-    <div class="md-source__icon">
-      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
-        <use xlink:href="#__github" width="24" height="24"></use>
-      </svg>
-    </div>
-  
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/engineerjoe440/ElectricPy/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
   <div class="md-source__repository">
     ElectricPy
   </div>
 </a>
-          </div>
-        </div>
-      
-      
-  
-  <script src="_static/javascripts/version_dropdown.js"></script>
-  <script>
-    var json_loc = ""versions.json"",
-        target_loc = "../",
-        text = "Versions";
-    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
-  </script>
-  
-
-    </div>
+      </div>
+    
   </nav>
+  
 </header>
-
-  
-  <div class="md-container">
     
-    
-    
-  <nav class="md-tabs" data-md-component="tabs">
-    <div class="md-tabs__inner md-grid">
-      <ul class="md-tabs__list">
-          <li class="md-tabs__item"><a href="index.html" class="md-tabs__link">electricpy 0.4.0 documentation</a></li>
-      </ul>
-    </div>
-  </nav>
-    <main class="md-main">
-      <div class="md-main__inner md-grid" data-md-component="container">
+    <div class="md-container" data-md-component="container">
+      
+      
+      
+      
         
-          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-            <div class="md-sidebar__scrollwrap">
-              <div class="md-sidebar__inner">
-                <nav class="md-nav md-nav--primary" data-md-level="0">
-  <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="index.html" title="electricpy 0.4.0 documentation" class="md-nav__button md-logo">
+          
+        
       
-        <img src="_static/" alt=" logo" width="48" height="48">
-      
-    </a>
-    <a href="index.html"
-       title="electricpy 0.4.0 documentation">ElectricPy</a>
-  </label>
-    <div class="md-nav__source">
-      <a href="https://github.com/engineerjoe440/ElectricPy/" title="Go to repository" class="md-source" data-md-source="github">
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
 
-    <div class="md-source__icon">
-      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="28" height="28">
-        <use xlink:href="#__github" width="24" height="24"></use>
-      </svg>
-    </div>
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="electricpy 0.4.0 documentation" class="md-nav__button md-logo" aria-label="electricpy 0.4.0 documentation" data-md-component="logo">
+      <img src="_static/ElectricpyLogo.svg" alt="logo">
+    </a>
+    electricpy 0.4.0 documentation
+  </label>
   
+    <div class="md-nav__source">
+      <a href="https://github.com/engineerjoe440/ElectricPy/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
   <div class="md-source__repository">
     ElectricPy
   </div>
 </a>
     </div>
   
-  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
 
   
-  <ul class="md-nav__list">
+  
+  
+  
     <li class="md-nav__item">
-    
-    
-      <a href="electricpyapi.html" class="md-nav__link">ElectricPy API</a>
-      <ul class="md-nav__list"> 
-    <li class="md-nav__item">
-    
-    
-      <a href="api/electricpy.html" class="md-nav__link">electricpy</a>
-      
-    
+      <a href="electricpyapi.html" class="md-nav__link">
+        <span class="md-ellipsis">Electric<wbr>Py API</span>
+      </a>
     </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="api/electricpy.bode.html" class="md-nav__link">electricpy.bode</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="api/electricpy.conversions.html" class="md-nav__link">electricpy.conversions</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="api/electricpy.fault.html" class="md-nav__link">electricpy.fault</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="api/electricpy.latex.html" class="md-nav__link">electricpy.latex</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="api/electricpy.math.html" class="md-nav__link">electricpy.math</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="api/electricpy.passive.html" class="md-nav__link">electricpy.passive</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="api/electricpy.phasor.html" class="md-nav__link">electricpy.phasor</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="api/electricpy.sim.html" class="md-nav__link">electricpy.sim</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="api/electricpy.visu.html" class="md-nav__link">electricpy.visu</a>
-      
-    
-    </li></ul>
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="constants.html" class="md-nav__link">Constants</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="additionalresources.html" class="md-nav__link">Additional Resources</a>
-      <ul class="md-nav__list"> 
-    <li class="md-nav__item">
-    
-    
-      <a href="additionalresources.html#generic-and-data-science" class="md-nav__link">Generic and Data Science</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="additionalresources.html#electrical-engineering-focus" class="md-nav__link">Electrical Engineering Focus</a>
-      
-    
-    </li></ul>
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="changes.html" class="md-nav__link">Recent Changes</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="https://github.com/engineerjoe440/ElectricPy" class="md-nav__link">Github</a>
-      
-    
-    </li>
-    <li class="md-nav__item">
-    
-    
-      <a href="https://pypi.org/project/electricpy" class="md-nav__link">PyPI</a>
-      
-    
-    </li>
-  </ul>
   
 
-</nav>
-              </div>
-            </div>
-          </div>
-          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-            <div class="md-sidebar__scrollwrap">
-              <div class="md-sidebar__inner">
-                
-<nav class="md-nav md-nav--secondary">
-  <ul class="md-nav__list" data-md-scrollfix="">
     
+      
+      
+      
 
-<li id="searchbox" class="md-nav__item"></li>
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="constants.html" class="md-nav__link">
+        <span class="md-ellipsis">Constants</span>
+      </a>
+    </li>
+  
 
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="additionalresources.html" class="md-nav__link">
+        <span class="md-ellipsis">Additional Resources</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="changes.html" class="md-nav__link">
+        <span class="md-ellipsis">Recent Changes</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/engineerjoe440/ElectricPy" class="md-nav__link">
+        <span class="md-ellipsis">Github</span>
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://pypi.org/project/electricpy" class="md-nav__link">
+        <span class="md-ellipsis">Py<wbr>PI</span>
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        
-        <div class="md-content">
-          <article class="md-content__inner md-typeset" role="main">
             
-
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- <a href="#_"><strong>_</strong></a>
- | <a href="#A"><strong>A</strong></a>
- | <a href="#B"><strong>B</strong></a>
- | <a href="#C"><strong>C</strong></a>
- | <a href="#D"><strong>D</strong></a>
- | <a href="#E"><strong>E</strong></a>
- | <a href="#F"><strong>F</strong></a>
- | <a href="#G"><strong>G</strong></a>
- | <a href="#H"><strong>H</strong></a>
- | <a href="#I"><strong>I</strong></a>
- | <a href="#K"><strong>K</strong></a>
- | <a href="#L"><strong>L</strong></a>
- | <a href="#M"><strong>M</strong></a>
- | <a href="#N"><strong>N</strong></a>
- | <a href="#P"><strong>P</strong></a>
- | <a href="#R"><strong>R</strong></a>
- | <a href="#S"><strong>S</strong></a>
- | <a href="#T"><strong>T</strong></a>
- | <a href="#U"><strong>U</strong></a>
- | <a href="#V"><strong>V</strong></a>
- | <a href="#W"><strong>W</strong></a>
- | <a href="#Z"><strong>Z</strong></a>
- 
-</div>
-<h2 id="_">_</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.visu.InductionMotorCircle.html#electricpy.visu.InductionMotorCircle.__init__">__init__() (electricpy.visu.InductionMotorCircle method)</a>
-
-      <ul>
-        <li><a href="api/electricpy.visu.PowerCircle.html#electricpy.visu.PowerCircle.__init__">(electricpy.visu.PowerCircle method)</a>
-</li>
-        <li><a href="api/electricpy.visu.SeriesRLC.html#electricpy.visu.SeriesRLC.__init__">(electricpy.visu.SeriesRLC method)</a>
-</li>
-      </ul></li>
-  </ul></td>
-</tr></table>
-
-<h2 id="A">A</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.conversions.abc_to_seq.html#electricpy.conversions.abc_to_seq">abc_to_seq() (in module electricpy.conversions)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.acpiv.html#electricpy.acpiv">acpiv() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.passive.air_core_inductance.html#electricpy.passive.air_core_inductance">air_core_inductance() (in module electricpy.passive)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="B">B</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.bode.bode.html#electricpy.bode.bode">bode() (in module electricpy.bode)</a>
-</li>
-      <li><a href="api/electricpy.bridge_impedance.html#electricpy.bridge_impedance">bridge_impedance() (in module electricpy)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.conversions.btu.html#electricpy.conversions.btu">btu() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.conversions.btu_to_kwh.html#electricpy.conversions.btu_to_kwh">btu_to_kwh() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.fault.busvolt.html#electricpy.fault.busvolt">busvolt() (in module electricpy.fault)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="C">C</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.passive.capbacktoback.html#electricpy.passive.capbacktoback">capbacktoback() (in module electricpy.passive)</a>
-</li>
-      <li><a href="api/electricpy.passive.capenergy.html#electricpy.passive.capenergy">capenergy() (in module electricpy.passive)</a>
-</li>
-      <li><a href="api/electricpy.passive.captransfer.html#electricpy.passive.captransfer">captransfer() (in module electricpy.passive)</a>
-</li>
-      <li><a href="api/electricpy.characterz.html#electricpy.characterz">characterz() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.latex.clatex.html#electricpy.latex.clatex">clatex() (in module electricpy.latex)</a>
-</li>
-      <li><a href="api/electricpy.visu.convbar.html#electricpy.visu.convbar">convbar() (in module electricpy.visu)</a>
-</li>
-      <li><a href="api/electricpy.math.convolve.html#electricpy.math.convolve">convolve() (in module electricpy.math)</a>
-</li>
-      <li><a href="api/electricpy.fault.correctedcurrents.html#electricpy.fault.correctedcurrents">correctedcurrents() (in module electricpy.fault)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.cosfilt.html#electricpy.cosfilt">cosfilt() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.cprint.html#electricpy.cprint">cprint() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.fault.ct_cclass.html#electricpy.fault.ct_cclass">ct_cclass() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fault.ct_satratburden.html#electricpy.fault.ct_satratburden">ct_satratburden() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fault.ct_saturation.html#electricpy.fault.ct_saturation">ct_saturation() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fault.ct_timetosat.html#electricpy.fault.ct_timetosat">ct_timetosat() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fault.ct_vpeak.html#electricpy.fault.ct_vpeak">ct_vpeak() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.curdiv.html#electricpy.curdiv">curdiv() (in module electricpy)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="D">D</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.conversions.db_to_voltage.html#electricpy.conversions.db_to_voltage">db_to_voltage() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.conversions.db_to_vref.html#electricpy.conversions.db_to_vref">db_to_vref() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.conversions.dbmw_to_dbw.html#electricpy.conversions.dbmw_to_dbw">dbmw_to_dbw() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.conversions.dbmw_to_watts.html#electricpy.conversions.dbmw_to_watts">dbmw_to_watts() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.conversions.dbw_to_dbmw.html#electricpy.conversions.dbw_to_dbmw">dbw_to_dbmw() (in module electricpy.conversions)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.conversions.dbw_to_watts.html#electricpy.conversions.dbw_to_watts">dbw_to_watts() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.de_calc.html#electricpy.de_calc">de_calc() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.sim.digifiltersim.html#electricpy.sim.digifiltersim">digifiltersim() (in module electricpy.sim)</a>
-</li>
-      <li><a href="api/electricpy.fault.distmeasz.html#electricpy.fault.distmeasz">distmeasz() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fault.double_phase_to_ground_fault.html#electricpy.fault.double_phase_to_ground_fault">double_phase_to_ground_fault() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.dynetz.html#electricpy.dynetz">dynetz() (in module electricpy)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="E">E</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li>
-    electricpy
-
-      <ul>
-        <li><a href="api/electricpy.html#module-electricpy">module</a>
-</li>
-      </ul></li>
-      <li>
-    electricpy.bode
-
-      <ul>
-        <li><a href="api/electricpy.bode.html#module-electricpy.bode">module</a>
-</li>
-      </ul></li>
-      <li>
-    electricpy.conversions
-
-      <ul>
-        <li><a href="api/electricpy.conversions.html#module-electricpy.conversions">module</a>
-</li>
-      </ul></li>
-      <li>
-    electricpy.fault
-
-      <ul>
-        <li><a href="api/electricpy.fault.html#module-electricpy.fault">module</a>
-</li>
-      </ul></li>
-      <li>
-    electricpy.latex
-
-      <ul>
-        <li><a href="api/electricpy.latex.html#module-electricpy.latex">module</a>
-</li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li>
-    electricpy.math
-
-      <ul>
-        <li><a href="api/electricpy.math.html#module-electricpy.math">module</a>
-</li>
-      </ul></li>
-      <li>
-    electricpy.passive
-
-      <ul>
-        <li><a href="api/electricpy.passive.html#module-electricpy.passive">module</a>
-</li>
-      </ul></li>
-      <li>
-    electricpy.phasor
-
-      <ul>
-        <li><a href="api/electricpy.phasor.html#module-electricpy.phasor">module</a>
-</li>
-      </ul></li>
-      <li>
-    electricpy.sim
-
-      <ul>
-        <li><a href="api/electricpy.sim.html#module-electricpy.sim">module</a>
-</li>
-      </ul></li>
-      <li>
-    electricpy.visu
-
-      <ul>
-        <li><a href="api/electricpy.visu.html#module-electricpy.visu">module</a>
-</li>
-      </ul></li>
-  </ul></td>
-</tr></table>
-
-<h2 id="F">F</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.passive.farads.html#electricpy.passive.farads">farads() (in module electricpy.passive)</a>
-</li>
-      <li><a href="api/electricpy.fault.faultratio.html#electricpy.fault.faultratio">faultratio() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fftplot.html#electricpy.fftplot">fftplot() (in module electricpy)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.fftsumplot.html#electricpy.fftsumplot">fftsumplot() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.funcfft.html#electricpy.funcfft">funcfft() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.math.funcrms.html#electricpy.math.funcrms">funcrms() (in module electricpy.math)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="G">G</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.math.gausdist.html#electricpy.math.gausdist">gausdist() (in module electricpy.math)</a>
-</li>
-      <li><a href="api/electricpy.math.gaussian.html#electricpy.math.gaussian">gaussian() (in module electricpy.math)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.geninternalv.html#electricpy.geninternalv">geninternalv() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.fault.genlossfield.html#electricpy.fault.genlossfield">genlossfield() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.gmd.html#electricpy.gmd">gmd() (in module electricpy)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="H">H</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.harmonics.html#electricpy.harmonics">harmonics() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.hartleydata.html#electricpy.hartleydata">hartleydata() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.conversions.hertz.html#electricpy.conversions.hertz">hertz() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.fault.highzmini.html#electricpy.fault.highzmini">highzmini() (in module electricpy.fault)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.fault.highzvpickup.html#electricpy.fault.highzvpickup">highzvpickup() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.conversions.horsepower.html#electricpy.conversions.horsepower">horsepower() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.conversions.hp_to_watts.html#electricpy.conversions.hp_to_watts">hp_to_watts() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.conversions.hz_to_rad.html#electricpy.conversions.hz_to_rad">hz_to_rad() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.conversions.hz_to_rpm.html#electricpy.conversions.hz_to_rpm">hz_to_rpm() (in module electricpy.conversions)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="I">I</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.ic_555_astable.html#electricpy.ic_555_astable">ic_555_astable() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.ic_555_monostable.html#electricpy.ic_555_monostable">ic_555_monostable() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.fault.indmacheigenvalues.html#electricpy.fault.indmacheigenvalues">indmacheigenvalues() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fault.indmachphs3sc.html#electricpy.fault.indmachphs3sc">indmachphs3sc() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fault.indmachphs3torq.html#electricpy.fault.indmachphs3torq">indmachphs3torq() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.induction_machine_slip.html#electricpy.induction_machine_slip">induction_machine_slip() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.visu.InductionMotorCircle.html#electricpy.visu.InductionMotorCircle">InductionMotorCircle (class in electricpy.visu)</a>
-</li>
-      <li><a href="api/electricpy.passive.inductive_voltdiv.html#electricpy.passive.inductive_voltdiv">inductive_voltdiv() (in module electricpy.passive)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.passive.inductorcharge.html#electricpy.passive.inductorcharge">inductorcharge() (in module electricpy.passive)</a>
-</li>
-      <li><a href="api/electricpy.passive.inductordischarge.html#electricpy.passive.inductordischarge">inductordischarge() (in module electricpy.passive)</a>
-</li>
-      <li><a href="api/electricpy.passive.inductorenergy.html#electricpy.passive.inductorenergy">inductorenergy() (in module electricpy.passive)</a>
-</li>
-      <li><a href="api/electricpy.fault.instoc.html#electricpy.fault.instoc">instoc() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.instpower.html#electricpy.instpower">instpower() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.fault.iopirt.html#electricpy.fault.iopirt">iopirt() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.ipu.html#electricpy.ipu">ipu() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.iscrl.html#electricpy.iscrl">iscrl() (in module electricpy)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="K">K</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.conversions.kwh.html#electricpy.conversions.kwh">kwh() (in module electricpy.conversions)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.conversions.kwh_to_btu.html#electricpy.conversions.kwh_to_btu">kwh_to_btu() (in module electricpy.conversions)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="L">L</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.led_resistor.html#electricpy.led_resistor">led_resistor() (in module electricpy)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.lm317.html#electricpy.lm317">lm317() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.passive.loadedvcapdischarge.html#electricpy.passive.loadedvcapdischarge">loadedvcapdischarge() (in module electricpy.passive)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="M">M</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.machslip.html#electricpy.machslip">machslip() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.sim.mbuspowerflow.html#electricpy.sim.mbuspowerflow">mbuspowerflow() (in module electricpy.sim)</a>
-</li>
-      <li>
-    module
-
-      <ul>
-        <li><a href="api/electricpy.html#module-electricpy">electricpy</a>
-</li>
-        <li><a href="api/electricpy.bode.html#module-electricpy.bode">electricpy.bode</a>
-</li>
-        <li><a href="api/electricpy.conversions.html#module-electricpy.conversions">electricpy.conversions</a>
-</li>
-        <li><a href="api/electricpy.fault.html#module-electricpy.fault">electricpy.fault</a>
-</li>
-        <li><a href="api/electricpy.latex.html#module-electricpy.latex">electricpy.latex</a>
-</li>
-        <li><a href="api/electricpy.math.html#module-electricpy.math">electricpy.math</a>
-</li>
-        <li><a href="api/electricpy.passive.html#module-electricpy.passive">electricpy.passive</a>
-</li>
-        <li><a href="api/electricpy.phasor.html#module-electricpy.phasor">electricpy.phasor</a>
-</li>
-        <li><a href="api/electricpy.sim.html#module-electricpy.sim">electricpy.sim</a>
-</li>
-        <li><a href="api/electricpy.visu.html#module-electricpy.visu">electricpy.visu</a>
-</li>
-      </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.motorstartcap.html#electricpy.motorstartcap">motorstartcap() (in module electricpy)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="N">N</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.natfreq.html#electricpy.natfreq">natfreq() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.sim.NewtonRaphson.html#electricpy.sim.NewtonRaphson">NewtonRaphson() (in module electricpy.sim)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.nlinpf.html#electricpy.nlinpf">nlinpf() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.non_linear_pf.html#electricpy.non_linear_pf">non_linear_pf() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.sim.nr_pq.html#electricpy.sim.nr_pq">nr_pq() (in module electricpy.sim)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="P">P</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.sim.parabolic_response.html#electricpy.sim.parabolic_response">parabolic_response() (in module electricpy.sim)</a>
-</li>
-      <li><a href="api/electricpy.parallel_plate_capacitance.html#electricpy.parallel_plate_capacitance">parallel_plate_capacitance() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.peak.html#electricpy.peak">peak() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.pfcorrection.html#electricpy.pfcorrection">pfcorrection() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.fault.phase_to_phase_fault.html#electricpy.fault.phase_to_phase_fault">phase_to_phase_fault() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.phaseline.html#electricpy.phaseline">phaseline() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.visu.phasorplot.html#electricpy.visu.phasorplot">phasorplot() (in module electricpy.visu)</a>
-</li>
-      <li><a href="api/electricpy.fault.phs1g.html#electricpy.fault.phs1g">phs1g() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fault.phs1mvasc.html#electricpy.fault.phs1mvasc">phs1mvasc() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fault.phs2.html#electricpy.fault.phs2">phs2() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fault.phs2g.html#electricpy.fault.phs2g">phs2g() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fault.phs3.html#electricpy.fault.phs3">phs3() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fault.phs3mvasc.html#electricpy.fault.phs3mvasc">phs3mvasc() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.phs3valpha.html#electricpy.phs3valpha">phs3valpha() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.conversions.phs_to_seq.html#electricpy.conversions.phs_to_seq">phs_to_seq() (in module electricpy.conversions)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.pi_attenuator.html#electricpy.pi_attenuator">pi_attenuator() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.fault.pickup.html#electricpy.fault.pickup">pickup() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fault.pktransrecvolt.html#electricpy.fault.pktransrecvolt">pktransrecvolt() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fault.poleopen1.html#electricpy.fault.poleopen1">poleopen1() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fault.poleopen2.html#electricpy.fault.poleopen2">poleopen2() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.visu.PowerCircle.html#electricpy.visu.PowerCircle">PowerCircle (class in electricpy.visu)</a>
-</li>
-      <li><a href="api/electricpy.powerflow.html#electricpy.powerflow">powerflow() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.powerimpedance.html#electricpy.powerimpedance">powerimpedance() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.powerset.html#electricpy.powerset">powerset() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.visu.powertriangle.html#electricpy.visu.powertriangle">powertriangle() (in module electricpy.visu)</a>
-</li>
-      <li><a href="api/electricpy.primary.html#electricpy.primary">primary() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.math.probdensity.html#electricpy.math.probdensity">probdensity() (in module electricpy.math)</a>
-</li>
-      <li><a href="api/electricpy.propagation_constants.html#electricpy.propagation_constants">propagation_constants() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.fault.protectiontap.html#electricpy.fault.protectiontap">protectiontap() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.puchgbase.html#electricpy.puchgbase">puchgbase() (in module electricpy)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="R">R</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.conversions.rad_to_hz.html#electricpy.conversions.rad_to_hz">rad_to_hz() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.conversions.rad_to_rpm.html#electricpy.conversions.rad_to_rpm">rad_to_rpm() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.conversions.radsec.html#electricpy.conversions.radsec">radsec() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.sim.ramp_response.html#electricpy.sim.ramp_response">ramp_response() (in module electricpy.sim)</a>
-</li>
-      <li><a href="api/electricpy.reactance.html#electricpy.reactance">reactance() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.visu.receiving_end_power_circle.html#electricpy.visu.receiving_end_power_circle">receiving_end_power_circle() (in module electricpy.visu)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.passive.rectifiercap.html#electricpy.passive.rectifiercap">rectifiercap() (in module electricpy.passive)</a>
-</li>
-      <li><a href="api/electricpy.fault.residcomp.html#electricpy.fault.residcomp">residcomp() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.math.rfft.html#electricpy.math.rfft">rfft() (in module electricpy.math)</a>
-</li>
-      <li><a href="api/electricpy.rms.html#electricpy.rms">rms() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.conversions.rpm_to_hz.html#electricpy.conversions.rpm_to_hz">rpm_to_hz() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.conversions.rpm_to_rad.html#electricpy.conversions.rpm_to_rad">rpm_to_rad() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.rxrecompose.html#electricpy.rxrecompose">rxrecompose() (in module electricpy)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="S">S</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.sampfft.html#electricpy.sampfft">sampfft() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.bode.sbode.html#electricpy.bode.sbode">sbode() (in module electricpy.bode)</a>
-</li>
-      <li><a href="api/electricpy.fault.scMVA.html#electricpy.fault.scMVA">scMVA() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.secondary.html#electricpy.secondary">secondary() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.visu.sending_end_power_circle.html#electricpy.visu.sending_end_power_circle">sending_end_power_circle() (in module electricpy.visu)</a>
-</li>
-      <li><a href="api/electricpy.conversions.seq_to_abc.html#electricpy.conversions.seq_to_abc">seq_to_abc() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.conversions.seq_to_phs.html#electricpy.conversions.seq_to_phs">seq_to_phs() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.conversions.sequencez.html#electricpy.conversions.sequencez">sequencez() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.visu.SeriesRLC.html#electricpy.visu.SeriesRLC">SeriesRLC (class in electricpy.visu)</a>
-</li>
-      <li><a href="api/electricpy.shannondata.html#electricpy.shannondata">shannondata() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.short_circuit_current.html#electricpy.short_circuit_current">short_circuit_current() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.fault.short_circuit_mva.html#electricpy.fault.short_circuit_mva">short_circuit_mva() (in module electricpy.fault)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.sinfilt.html#electricpy.sinfilt">sinfilt() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.fault.single_phase_to_ground_fault.html#electricpy.fault.single_phase_to_ground_fault">single_phase_to_ground_fault() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.slew_rate.html#electricpy.slew_rate">slew_rate() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.solenoid_inductance.html#electricpy.solenoid_inductance">solenoid_inductance() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.sim.statespace.html#electricpy.sim.statespace">statespace() (in module electricpy.sim)</a>
-</li>
-      <li><a href="api/electricpy.math.step.html#electricpy.math.step">step() (in module electricpy.math)</a>
-</li>
-      <li><a href="api/electricpy.sim.step_response.html#electricpy.sim.step_response">step_response() (in module electricpy.sim)</a>
-</li>
-      <li><a href="api/electricpy.suspension_insulators.html#electricpy.suspension_insulators">suspension_insulators() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.fault.symrmsfaultcur.html#electricpy.fault.symrmsfaultcur">symrmsfaultcur() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.syncspeed.html#electricpy.syncspeed">syncspeed() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.fault.synmach_Iasym.html#electricpy.fault.synmach_Iasym">synmach_Iasym() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fault.synmach_ifault.html#electricpy.fault.synmach_ifault">synmach_ifault() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fault.synmach_Isym.html#electricpy.fault.synmach_Isym">synmach_Isym() (in module electricpy.fault)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="T">T</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.t_attenuator.html#electricpy.t_attenuator">t_attenuator() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.tap_changing_transformer.html#electricpy.tap_changing_transformer">tap_changing_transformer() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.tcycle.html#electricpy.tcycle">tcycle() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.fault.tdradial.html#electricpy.fault.tdradial">tdradial() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.latex.tflatex.html#electricpy.latex.tflatex">tflatex() (in module electricpy.latex)</a>
-</li>
-      <li><a href="api/electricpy.fault.thermaltime.html#electricpy.fault.thermaltime">thermaltime() (in module electricpy.fault)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.fault.three_phase_fault.html#electricpy.fault.three_phase_fault">three_phase_fault() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.passive.timedischarge.html#electricpy.passive.timedischarge">timedischarge() (in module electricpy.passive)</a>
-</li>
-      <li><a href="api/electricpy.fault.tocreset.html#electricpy.fault.tocreset">tocreset() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fault.toctriptime.html#electricpy.fault.toctriptime">toctriptime() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.fault.transmismatch.html#electricpy.fault.transmismatch">transmismatch() (in module electricpy.fault)</a>
-</li>
-      <li><a href="api/electricpy.transposez.html#electricpy.transposez">transposez() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.fault.trvresistor.html#electricpy.fault.trvresistor">trvresistor() (in module electricpy.fault)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="U">U</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.unbalance.html#electricpy.unbalance">unbalance() (in module electricpy)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="V">V</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.passive.vcapcharge.html#electricpy.passive.vcapcharge">vcapcharge() (in module electricpy.passive)</a>
-</li>
-      <li><a href="api/electricpy.passive.vcapdischarge.html#electricpy.passive.vcapdischarge">vcapdischarge() (in module electricpy.passive)</a>
-</li>
-      <li><a href="api/electricpy.vipf.html#electricpy.vipf">vipf() (in module electricpy)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.conversions.voltage_to_db.html#electricpy.conversions.voltage_to_db">voltage_to_db() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.voltdiv.html#electricpy.voltdiv">voltdiv() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.vscdcbus.html#electricpy.vscdcbus">vscdcbus() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.vscgains.html#electricpy.vscgains">vscgains() (in module electricpy)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="W">W</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.conversions.watts.html#electricpy.conversions.watts">watts() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.conversions.watts_to_dbmw.html#electricpy.conversions.watts_to_dbmw">watts_to_dbmw() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.conversions.watts_to_dbw.html#electricpy.conversions.watts_to_dbw">watts_to_dbw() (in module electricpy.conversions)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.conversions.watts_to_hp.html#electricpy.conversions.watts_to_hp">watts_to_hp() (in module electricpy.conversions)</a>
-</li>
-      <li><a href="api/electricpy.wireresistance.html#electricpy.wireresistance">wireresistance() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.wrms.html#electricpy.wrms">wrms() (in module electricpy)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="Z">Z</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.bode.zbode.html#electricpy.bode.zbode">zbode() (in module electricpy.bode)</a>
-</li>
-      <li><a href="api/electricpy.zdecompose.html#electricpy.zdecompose">zdecompose() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.zener_diode_power.html#electricpy.zener_diode_power">zener_diode_power() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.zener_diode_required_resistor.html#electricpy.zener_diode_required_resistor">zener_diode_required_resistor() (in module electricpy)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/electricpy.zperlength.html#electricpy.zperlength">zperlength() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.zpu.html#electricpy.zpu">zpu() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.zrecompose.html#electricpy.zrecompose">zrecompose() (in module electricpy)</a>
-</li>
-      <li><a href="api/electricpy.zsource.html#electricpy.zsource">zsource() (in module electricpy)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-
-
-          </article>
-        </div>
-      </div>
-    </main>
-  </div>
-  <footer class="md-footer">
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-          
-          
-        </a>
-        
-      </nav>
-    </div>
-    <div class="md-footer-meta md-typeset">
-      <div class="md-footer-meta__inner md-grid">
-        <div class="md-footer-copyright">
-          <div class="md-footer-copyright__highlight">
-              &#169; Copyright 2022, Joe Stanley.
+            
               
-          </div>
-            Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
-             and
-            <a href="https://github.com/bashtage/sphinx-material/">Material for
-              Sphinx</a>
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset" role="main">
+                  
+
+
+None
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
         </div>
-      </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  
+  
+  <div class="md-footer-meta md-typeset">
+    
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-footer-copyright__highlight">
+        &#169; Copyright 2022, Joe Stanley.
+        
     </div>
-  </footer>
-  <script src="_static/javascripts/application.js"></script>
-  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
+  
+    Created using
+    <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+    7.2.6.
+     and
+    <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
+  
+</div>
+      
+    </div>
+    
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+      
+        <script src="_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js?v=8ec58cb5"></script>
+    
   </body>
 </html>
