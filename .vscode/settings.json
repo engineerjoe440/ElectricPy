@@ -1,16 +1,7 @@
 {
-    "python.linting.pylintEnabled": false,
-    "python.linting.enabled": true,
-    "python.linting.pydocstyleEnabled": true,
-    "python.linting.ignorePatterns": [
-        "test/test_*.py",
-        "test/__init__.py",
-        "script.py",
-    ],
     "editor.rulers": [
     80, 120
     ],
-    "restructuredtext.linter.disabled": true,
     "python.testing.pytestArgs": [
         "-m",
         "test"
@@ -22,7 +13,5 @@
     },
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
-    "python.testing.cwd": "${workspaceRoot}",
-    "python.formatting.provider": "autopep8",
-    "autoDocstring.docstringFormat": "numpy"
+    "python.testing.cwd": "${workspaceRoot}"
 }
