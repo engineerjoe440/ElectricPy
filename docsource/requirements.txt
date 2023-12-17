@@ -4,7 +4,7 @@ numpydoc
 myst-parser[linkify]
 sphinx-sitemap
 sphinx-git
-sphinx-material
+sphinx-immaterial
 coverage-badge
 numpy
 matplotlib
