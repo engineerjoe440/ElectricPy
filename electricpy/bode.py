@@ -22,9 +22,9 @@ def _sys_condition(system, feedback):
         num = system[0]
         den = system[1]
         # Convolve numerator or denominator as needed
-        if str(type(num)) == tuple:
+        if isinstance(num, tuple):
             num = convolve(num)  # Convolve terms in numerator
-        if str(type(den)) == tuple:
+        if isinstance(den, tuple):
             den = convolve(den)  # Convolve terms in denominator
         if feedback:  # If asked to add the numerator to the denominator
             ld = len(den)  # Length of denominator
@@ -99,11 +99,21 @@ def bode(system, mn=0.001, mx=1000, npts=100, title="", xlim=False, ylim=False, 
 
     # Condition min and max freq terms
     degrees = False
-    if freqaxis.lower().find("deg") != -1:  # degrees requested
+    # Backwards-compatible: historically "deg" here behaved like "Hz"
+    if freqaxis.lower().find("hz") != -1 or freqaxis.lower().find("deg") != -1:
         degrees = True
-        # Scale Degrees to Radians for calculation
+        # Scale Hz to rad/sec for calculation
         mn = 2 * _np.pi * mn
         mx = 2 * _np.pi * mx
+
+    # Prevent invalid log10 values
+    if mn <= 0:
+        mn = 1e-12
+    if mx <= 0:
+        mx = 1e-12
+    if mx <= mn:
+        raise ValueError("mx must be greater than mn")
+
     mn = _np.log10(mn)  # find the _exponent value
     mx = _np.log10(mx)  # find the _exponent value
 
@@ -113,14 +123,14 @@ def bode(system, mn=0.001, mx=1000, npts=100, title="", xlim=False, ylim=False, 
     # Calculate the bode system
     w, mag, ang = _sig.bode(system, wover)
 
-    def _plot(plot_title, y_label):
+    def _plot(plot_title, y_label, ydata):
         _plt.title(plot_title)
         _plt.ylabel(y_label)
-        if degrees:  # Plot in degrees
-            _plt.plot(w / (2 * _np.pi), ang)
+        if degrees:  # Plot in Hz
+            _plt.plot(w / (2 * _np.pi), ydata)
             _plt.xlabel("Frequency (Hz)")
         else:  # Plot in radians
-            _plt.plot(w, ang)
+            _plt.plot(w, ydata)
             _plt.xlabel("Frequency (rad/sec)")
         _plt.xscale("log")
         _plt.grid(which="both")
@@ -129,12 +139,12 @@ def bode(system, mn=0.001, mx=1000, npts=100, title="", xlim=False, ylim=False, 
         if ylim:
             _plt.ylim(ylim)
         if sv:
-            _plt.savefig(title + ".png")
+            _plt.savefig(plot_title + ".png")
 
     # Plot Magnitude
     if magnitude:
         magTitle = "Magnitude " + title
-        _plot(magTitle, "Magnitude (DB)")
+        _plot(magTitle, "Magnitude (DB)", mag)
         if disp3db:
             _plt.axhline(-3)
         if lowcut is not None:
@@ -144,7 +154,7 @@ def bode(system, mn=0.001, mx=1000, npts=100, title="", xlim=False, ylim=False, 
     # Plot Angle
     if angle:
         angTitle = "Angle " + title
-        _plot(angTitle, "Angle (degrees)")
+        _plot(angTitle, "Angle (degrees)", ang)
         _plt.show()
 
 
@@ -200,8 +210,14 @@ def sbode(f, NN=1000, title="", xlim=False, ylim=False, mn=0, mx=1000,
     angle:          bool, optional
                     Control argument to enable plotting of angle, default=True
     """
-    W = _np.linspace(mn, mx, NN)
-    H = _np.zeros(NN, dtype=_np.complex)
+    # Avoid log(0) on semilog plots
+    if mn <= 0:
+        mn_plot = 1e-12
+    else:
+        mn_plot = mn
+
+    W = _np.linspace(mn_plot, mx, NN)
+    H = _np.zeros(NN, dtype=complex)
 
     for n in range(0, NN):
         s = 1j * W[n]
@@ -278,9 +294,15 @@ def zbode(f, dt=0.01, NN=1000, title="", mn=0, mx=2 * _pi, xlim=False, ylim=Fals
     angle:          bool, optional
                     Control argument to enable plotting of angle, default=True
     """
-    phi = _np.linspace(mn, mx, NN)
+    # Avoid log(0) on semilog plots
+    if mn <= 0:
+        mn_plot = 1e-12
+    else:
+        mn_plot = mn
 
-    H = _np.zeros(NN, dtype=_np.complex)
+    phi = _np.linspace(mn_plot, mx, NN)
+
+    H = _np.zeros(NN, dtype=complex)
     for n in range(0, NN):
         z = _exp(1j * phi[n])
         if approx is not False and callable(approx):
@@ -288,7 +310,7 @@ def zbode(f, dt=0.01, NN=1000, title="", mn=0, mx=2 * _pi, xlim=False, ylim=Fals
             s = approx(z, dt)  # Pass current z-value and dt
             H[n] = f(s)
         else:  # Z-Domain Transfer Function Provided
-            H[n] = dt * f(z)
+            H[n] = f(z)
 
     if magnitude:
         _plt.semilogx((180 / _pi) * phi, 20 * _np.log10(abs(H)), 'k')
