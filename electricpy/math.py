@@ -18,6 +18,29 @@ import scipy.signal as _sig
 from scipy.integrate import quad as integrate
 
 
+# Internal downsample helper (used by rfft)
+def _dnsample(arr, n):
+    """
+    Downsample an array by integer factor n using slicing.
+
+    Parameters
+    ----------
+    arr:    arraylike
+            Input array
+    n:      int
+            Downsample factor (>=1)
+
+    Returns
+    -------
+    out:    numpy.ndarray
+            Downsampled array
+    """
+    n = int(n)
+    if n <= 1:
+        return _np.asarray(arr)
+    return _np.asarray(arr)[::n]
+
+
 # Define convolution function
 def convolve(tuple):
     """
@@ -36,6 +59,10 @@ def convolve(tuple):
     c:          The convolved set of the individual terms.
                 i.e. numpy.ndarray([ x1, x2, x3, ..., xn ])
     """
+    if tuple is None:
+        raise ValueError("convolve() requires a tuple of at least two terms.")
+    if len(tuple) < 2:
+        raise ValueError("convolve() requires a tuple of at least two terms.")
     c = _sig.convolve(tuple[0], tuple[1])
     if (len(tuple) > 2):
         # Iterate starting with second element and continuing
@@ -89,6 +116,8 @@ def funcrms(func, T):
     -------
     RMS:    The RMS value of the function (f) over the interval ( 0, T )
     """
+    if T is None or T <= 0:
+        raise ValueError("funcrms() requires a positive, non-zero period T.")
     fn = lambda x: func(x) ** 2
     integral, _ = integrate(fn, 0, T)
     return _np.sqrt(1 / T * integral)
@@ -115,6 +144,8 @@ def gaussian(x, mu=0, sigma=1):
     -------
     Computed gaussian (numpy.ndarray) of the input x
     """
+    if sigma == 0:
+        raise ValueError("gaussian() requires sigma != 0.")
     return (1 / (sigma * _np.sqrt(2 * _np.pi)) *
             _np.exp(-(x - mu) ** 2 / (2 * sigma ** 2)))
 
@@ -143,13 +174,16 @@ def gausdist(x, mu=0, sigma=1):
             Computed distribution of the gausian function at the
             points specified by (array) x
     """
+    if sigma == 0:
+        raise ValueError("gausdist() requires sigma != 0.")
+
     # Define Integrand
     def integrand(sq):
         return _np.exp(-sq ** 2 / 2)
 
     try:
         lx = len(x)  # Find length of Input
-    except:
+    except TypeError:
         lx = 1  # Length 1
         x = [x]  # Pack into list
     F = _np.zeros(lx, dtype=_np.float64)
@@ -197,7 +231,7 @@ def probdensity(func, x, x0=0, scale=True):
     sumx = _np.array([])
     try:
         lx = len(x)  # Find length of Input
-    except:
+    except TypeError:
         lx = 1  # Length 1
         x = [x]  # Pack into list
     # Recursively Find Probability Density
@@ -207,10 +241,15 @@ def probdensity(func, x, x0=0, scale=True):
     if len(sumx) == 1:
         sumx = sumx[0]
     else:
-        if scale:
+        if scale is True:
             mx = sumx.max()
-            sumx /= mx
-        elif scale != False:
+            if mx != 0:
+                sumx /= mx
+        elif scale is False:
+            pass
+        else:
+            if scale == 0:
+                raise ValueError("probdensity() scale must be True, False, or a non-zero number.")
             sumx /= scale
     return sumx
 
@@ -243,22 +282,33 @@ def rfft(arr, dt=0.01, absolute=True, resample=True):
     -------
     FFT Array
     """
+    if dt is None or dt <= 0:
+        raise ValueError("rfft() requires a positive, non-zero dt.")
+    if arr is None:
+        raise ValueError("rfft() requires a valid input array.")
+    arr = _np.asarray(arr)
+
     # Calculate with Absolute Values
     if absolute:
         fourier = abs(_np.fft.rfft(arr))
     else:
         fourier = _np.fft.rfft(arr)
-    if resample:
+
+    if resample is True:
         # Evaluate the Downsampling Ratio
         dn = int(dt * len(arr))
+        if dn <= 0:
+            dn = 1
         # Downsample to remove unnecessary points
-        fixedfft = filter.dnsample(fourier, dn)
+        fixedfft = _dnsample(fourier, dn)
         return (fixedfft)
-    elif not resample:
+    elif resample is False:
         return (fourier)
     else:
         # Condition Resample Value
         resample = int(resample)
+        if resample <= 0:
+            resample = 1
         # Downsample to remove unnecessary points
-        fixedfft = filter.dnsample(fourier, resample)
+        fixedfft = _dnsample(fourier, resample)
         return fixedfft
