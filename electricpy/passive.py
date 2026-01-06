@@ -108,9 +108,13 @@ def captransfer(t, Vs, R, Cs, Cd):
                 Final voltage that both capacitors settle to.
     """
     if t < 0:
-        raise ValueError("Time must be greater than zero.")
+        raise ValueError("Time must be greater than or equal to zero.")
+    if (Cs + Cd) == 0:
+        raise ValueError("Sum of Source and Destination Capacitance must be non-zero.")
     try:
         tau = (R * Cs * Cd) / (Cs + Cd)
+        if tau == 0:
+            raise ValueError("Invalid parameters: resulting time constant is zero.")
         rvolt = Vs * _np.exp(-t / tau)
     except ZeroDivisionError:
         raise ZeroDivisionError("Sum of Source and Destination Capacitance must be non-zero.")
@@ -133,7 +137,11 @@ def capbacktoback(C1, C2, Lm, VLN=None, VLL=None):
     Parameters
     ----------
     C1:         float
-                The capacitance of the
+                Energized capacitor bank capacitance.
+    C2:         float
+                De-energized capacitor bank capacitance.
+    Lm:         float
+                Equivalent inductance in the transient path.
     VLN:        float, exclusive
                 The line-to-neutral voltage experienced by
                 any one of the (three) capacitors in the
@@ -149,6 +157,17 @@ def capbacktoback(C1, C2, Lm, VLN=None, VLL=None):
     ifreq:      float
                 Transient current frequency
     """
+    if (VLN is None) and (VLL is None):
+        raise ValueError("Either VLN or VLL must be provided.")
+    if (VLN is not None) and (VLL is not None):
+        raise ValueError("Provide only one of VLN or VLL, not both.")
+    if VLN is not None:
+        VLL = _np.sqrt(3) * VLN
+    if (C1 + C2) == 0:
+        raise ValueError("C1 + C2 must be non-zero.")
+    if Lm == 0:
+        raise ValueError("Lm must be non-zero.")
+
     # Evaluate Max Current
     imax = _np.sqrt(2 / 3) * VLL * _np.sqrt((C1 * C2) / ((C1 + C2) * Lm))
     # Evaluate Inrush Current Frequency
@@ -240,7 +259,16 @@ def loadedvcapdischarge(t, vo, C, P):
     Vt:         float
                 Voltage of capacitor at time t.
     """
-    Vt = _np.sqrt(vo ** 2 - 2 * P * t / C)
+    if t < 0:
+        raise ValueError("Time must be greater than or equal to zero.")
+    if C == 0:
+        raise ValueError("Capacitance must be non-zero.")
+    if P < 0:
+        raise ValueError("Load power must be non-negative.")
+    rad = vo ** 2 - 2 * P * t / C
+    if rad < 0:
+        raise ValueError("Requested time exceeds discharge limit for given parameters.")
+    Vt = _np.sqrt(rad)
     return Vt
 
 
@@ -274,21 +302,58 @@ def timedischarge(Vinit, Vmin, C, P, dt=1e-3, RMS=True, Eremain=False):
     Returns time to discharge from Vinit to Vmin in seconds.
     May also return remaining energy in capacitor if Eremain=True
     """
-    t = 0  # start at time t=0
+    if dt <= 0:
+        raise ValueError("dt must be greater than zero.")
+    if C == 0:
+        raise ValueError("Capacitance must be non-zero.")
+    if P < 0:
+        raise ValueError("Load power must be non-negative.")
+
     if RMS:
         vo = Vinit * _np.sqrt(2)  # convert RMS to peak
+        vmin_cmp = Vmin * _np.sqrt(2)
     else:
         vo = Vinit
-    vc = loadedvcapdischarge(t, vo, C, P)  # set initial cap voltage
-    while vc >= Vmin:
-        t = t + dt  # increment the time
-        vcp = vc  # save previous voltage
-        vc = loadedvcapdischarge(t, vo, C, P)  # calc. new voltage
+        vmin_cmp = Vmin
+
+    if P == 0:
+        if vo < vmin_cmp:
+            if Eremain:
+                return 0.0, capenergy(C, vo)
+            else:
+                return 0.0
+        if Eremain:
+            return _np.inf, capenergy(C, vo)
+        else:
+            return _np.inf
+
+    if vo < 0 or vmin_cmp < 0:
+        raise ValueError("Voltages must be non-negative.")
+    if vo < vmin_cmp:
+        if Eremain:
+            return 0.0, capenergy(C, vo)
+        else:
+            return 0.0
+
+    # Analytic discharge time from: V(t)^2 = vo^2 - 2*P*t/C
+    t_exact = (C * (vo ** 2 - vmin_cmp ** 2)) / (2 * P)
+
+    # Keep original behavior: return time snapped to step boundary (previous step)
+    if not _np.isfinite(t_exact):
+        if Eremain:
+            return _np.inf, capenergy(C, vo)
+        else:
+            return _np.inf
+
+    t_step = _np.floor(t_exact / dt) * dt
+    if t_step < 0:
+        t_step = 0.0
+
     if Eremain:
-        E = capenergy(C, vcp)  # calc. energy
-        return t - dt, E
+        E = capenergy(C, vmin_cmp)
+        return t_step, E
     else:
-        return t - dt
+        return t_step
 
 
 # Define Rectifier Capacitor Calculator
@@ -374,6 +439,12 @@ def inductorcharge(t, Vs, R, L):
     Il:         float
                 Current through inductor at time t.
     """
+    if t < 0:
+        raise ValueError("Time must be greater than or equal to zero.")
+    if L == 0:
+        raise ValueError("Inductance must be non-zero.")
+    if R == 0:
+        raise ValueError("Resistance must be non-zero.")
     Vl = Vs * _np.exp(-R * t / L)
     Il = Vs / R * (1 - _np.exp(-R * t / L))
     return Vl, Il
@@ -409,6 +480,10 @@ def inductordischarge(t, Io, R, L):
     Il:         float
                 Current through inductor at time t.
     """
+    if t < 0:
+        raise ValueError("Time must be greater than or equal to zero.")
+    if L == 0:
+        raise ValueError("Inductance must be non-zero.")
     Il = Io * _np.exp(-R * t / L)
     Vl = Io * R * (1 - _np.exp(-R * t / L))
     return (Vl, Il)
@@ -438,6 +513,8 @@ def air_core_inductance(d: float, coil_l: float, n: int):
     """
     k1 = (1000 * d ** 2) * n ** 2
     k2 = (457418 * d) + (1016127 * coil_l)
+    if k2 == 0:
+        raise ValueError("Invalid parameters: denominator evaluates to zero.")
     return k1 / k2
 
 
@@ -450,7 +527,7 @@ def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
     and the other one is connected from the output to ground. You can also use
     other components like resistors and inductors.
 
-    .. math:: V_{out} = \frac{V_{in}*L1}{L1+L2}
+    .. math:: V_{out} = \frac{V_{in}*L2}{L1+L2}
 
     .. image:: /static/inductive-voltage-divider-circuit.png
 
@@ -487,12 +564,20 @@ def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
             Value of the inductor below the output voltage
     """
     if Vin is not None and L1 is not None and L2 is not None:
-        Vout = (Vin * L1) / (L1 + L2)
+        if (L1 + L2) == 0:
+            raise ValueError("ERROR: L1 + L2 must be non-zero.")
+        Vout = (Vin * L2) / (L1 + L2)
     elif Vout is not None and L1 is not None and L2 is not None:
-        Vin = (Vout) * (L1 + L2) / (L1)
+        if L2 == 0:
+            raise ValueError("ERROR: L2 must be non-zero.")
+        Vin = (Vout) * (L1 + L2) / (L2)
     elif Vin is not None and Vout is not None and L2 is not None:
+        if Vout == 0:
+            raise ValueError("ERROR: Vout must be non-zero.")
         L1 = L2 * (Vin - Vout) / (Vout)
     elif Vin is not None and Vout is not None and L1 is not None:
+        if (Vin - Vout) == 0:
+            raise ValueError("ERROR: Vin - Vout must be non-zero.")
         L2 = L1 * Vout / (Vin - Vout)
     else:
         raise ValueError("ERROR: Invalid Parameters or too few" +
