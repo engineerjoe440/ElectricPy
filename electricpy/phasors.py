@@ -127,9 +127,18 @@ def phasorz(C=None, L=None, freq=60, complex=True):
     Z:      complex
             The ohmic impedance of either C or L (respectively).
     """
+    if (C is None) and (L is None):
+        raise ValueError("Either C or L must be provided.")
+    if (C is not None) and (L is not None):
+        raise ValueError("Provide only one of C or L, not both.")
     w = 2 * _np.pi * freq
+    if w == 0:
+        raise ValueError("freq must be non-zero.")
+
     # C Given in ohms, return as Z
     if C is not None:
+        if C == 0:
+            raise ValueError("C must be non-zero.")
         Z = -1 / (w * C)
     # L Given in ohms, return as Z
     if L is not None:
@@ -181,8 +190,6 @@ def phasorlist(arr):
     electricpy.phasors.vectarray:    Magnitude/Angle Array Pairing Function
     electricpy.phasors.phasorz:      Impedance Phasor Generator
     """
-    # Use List Comprehension to Process
-
     # Return Array
     return _np.array([phasor(i) for i in arr])
 
@@ -223,14 +230,10 @@ def vectarray(arr, degrees=True, flatarray=False):
     electricpy.phasors.phasor:       Phasor Generating Function
     electricpy.phasors.phasorlist:   Phasor Generator for List or Array
     """
-    # Iteratively Append Arrays to the Base
-
     def vector_cast(num):
         mag, ang = _c.polar(num)
-
         if degrees:
             ang = _np.degrees(ang)
-
         return [mag, ang]
 
     polararr = _np.array([vector_cast(num) for num in arr])
@@ -277,7 +280,7 @@ def phasordata(mn, mx=None, npts=1000, mag=1, ang=0, freq=60,
                 The resultant data array.
     """
     # Test Inputs for Min/Max
-    if mx == None:
+    if mx is None:
         # No Minimum provided, use Value as Maximum
         mx = mn
         mn = 0
@@ -313,7 +316,7 @@ def compose(*arr):
 
     - [ real, imag]
     - [ [ real1, ..., realn ], [ imag1, ..., imagn ] ]
-    - [ [ real1, imag1 ], ..., [ realn, imagn ] ]
+    - [ [ real1, imag1 ], ..., [ realn, imag2 ] ]
 
     Will always return values in form:
 
@@ -347,7 +350,7 @@ def compose(*arr):
             raise ValueError("Invalid Array Shape, must be 2xN or Nx2.")
         # Successfully Generated Array, Return
         return (retarr)
-    except:  # 1-Dimension Array
+    except Exception:  # 1-Dimension Array
         length = arr.size
         # Test for invalid Array Size
         if length != 2:
@@ -380,31 +383,33 @@ def parallelz(*args):
     Zp:     complex
             The calculated parallel impedance of the input tuple.
     """
-    # Gather length (number of elements in tuple)
-    L = len(args)
-    if L == 1:
-        Z = args[0]  # Only One Tuple Provided
-        try:
-            L = len(Z)
-            if L == 1:
-                Zp = Z[0]  # Only one impedance, burried in tuple
-            else:
-                # Inversely add the first two elements in tuple
-                Zp = (1 / Z[0] + 1 / Z[1]) ** (-1)
-                # If there are more than two elements, add them all inversely
-                if L > 2:
-                    for i in range(2, L):
-                        Zp = (1 / Zp + 1 / Z[i]) ** (-1)
-        except ValueError or IndexError:
-            Zp = Z  # Only one impedance
+    # Normalize input: allow parallelz([Z1,Z2,...]) or parallelz(Z1,Z2,...)
+    if len(args) == 0:
+        raise ValueError("At least one impedance must be provided.")
+    if len(args) == 1 and isinstance(args[0], (tuple, list, _np.ndarray)):
+        Z = args[0]
     else:
-        Z = args  # Set of Args acts as Tuple
-        # Inversely add the first two elements in tuple
-        Zp = (1 / Z[0] + 1 / Z[1]) ** (-1)
-        # If there are more than two elements, add them all inversely
-        if L > 2:
-            for i in range(2, L):
-                Zp = (1 / Zp + 1 / Z[i]) ** (-1)
+        Z = args
+
+    try:
+        L = len(Z)
+    except Exception:
+        return Z
+
+    if L == 0:
+        raise ValueError("At least one impedance must be provided.")
+    if L == 1:
+        return Z[0]
+
+    # Inverse-sum method with explicit zero checks
+    invsum = 0
+    for Zi in Z:
+        if Zi == 0:
+            raise ValueError("Impedance values must be non-zero for parallel combination.")
+        invsum += 1 / Zi
+    if invsum == 0:
+        raise ValueError("Invalid impedances: reciprocal sum evaluates to zero.")
+    Zp = 1 / invsum
     return Zp
 
 # END
