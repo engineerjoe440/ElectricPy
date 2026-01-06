@@ -54,6 +54,7 @@ def coldjunction(Tcj, coupletype="K", To=None, Vo=None, P1=None, P2=None,
     """
     # Condition Inputs
     coupletype = coupletype.upper()
+
     # Validate Temperature Range
     if coupletype == "B":
         if not (0 < Tcj < 70):
@@ -61,25 +62,44 @@ def coldjunction(Tcj, coupletype="K", To=None, Vo=None, P1=None, P2=None,
     else:
         if not (-20 < Tcj < 70):
             raise ValueError("Temperature out of range.")
+
     # Define Constant Lookup System
     lookup = ["B", "E", "J", "K", "N", "R", "S", "T"]
     if not (coupletype in lookup):
         raise ValueError("Invalid Thermocouple Type")
     index = lookup.index(coupletype)
-    # Define Constant Dictionary
-    # Load Data Into Terms
-    parameters = {}
+
+    # NOTE:
+    # The original implementation always overwrote any user-provided To/Vo/P*/Q*
+    # because it unconditionally loaded constants from COLD_JUNCTION_DATA.
+    # Here we preserve explicit user inputs when provided, and only fall back
+    # to defaults for missing values.
+
+    # Load default constants for this thermocouple type
+    defaults = {}
     for var in COLD_JUNCTION_DATA.keys():
-        parameters[var] = parameters.get(var, None) or COLD_JUNCTION_DATA[var][index]
-    To, Vo, P1, P2, P3, P4, Q1, Q2 = [parameters[key] for key in COLD_JUNCTION_KEYS]
+        defaults[var] = COLD_JUNCTION_DATA[var][index]
+
+    # Use user-provided values when not None, otherwise use defaults
+    To = To if To is not None else defaults["To"]
+    Vo = Vo if Vo is not None else defaults["Vo"]
+    P1 = P1 if P1 is not None else defaults["P1"]
+    P2 = P2 if P2 is not None else defaults["P2"]
+    P3 = P3 if P3 is not None else defaults["P3"]
+    P4 = P4 if P4 is not None else defaults["P4"]
+    Q1 = Q1 if Q1 is not None else defaults["Q1"]
+    Q2 = Q2 if Q2 is not None else defaults["Q2"]
+
     # Define Formula Terms
     tx = (Tcj - To)
     num = tx * (P1 + tx * (P2 + tx * (P3 + P4 * tx)))
     den = 1 + tx * (Q1 + Q2 * tx)
     Vcj = Vo + num / den
+
     # Round Value if Allowed
     if round is not None:
         Vcj = _np.around(Vcj, round)
+
     # Return in milivolts
     return Vcj * m
 
@@ -136,18 +156,23 @@ def thermocouple(V, coupletype="K", fahrenheit=False, cjt=None, To=None,
     """
     # Condition Inputs
     coupletype = coupletype.upper()
-    V = V / m  # Scale volts to milivolts
-    # Determine Cold-Junction-Voltage
-    if cjt is not None:
-        Vcj = coldjunction(cjt, coupletype, To, Vo, P1, P2, P3, P4, Q1, Q2, round)
-        V += Vcj / m
+
+    # Work in millivolts internally
+    V = V / m  # Scale volts to milivolts (m is milli scaling constant)
+
     # Define Constant Lookup System
     lookup = ["B", "E", "J", "K", "N", "R", "S", "T"]
     if not (coupletype in lookup):
         raise ValueError("Invalid Thermocouple Type")
-    # Determine Array Selection
+
+    # Determine Cold-Junction-Voltage and apply compensation (in mV)
+    if cjt is not None:
+        Vcj_mV = coldjunction(cjt, coupletype, To, Vo, P1, P2, P3, P4, Q1, Q2, round=None)
+        V += Vcj_mV  # V is in mV, so add mV directly
+
+    # Determine Array Selection (bounds are stored in millivolts)
     vset = THERMO_COUPLE_VOLTAGES[coupletype]
-    if V < vset[0] * m:
+    if V < vset[0]:
         raise ValueError("Voltage Below Lower Bound")
     elif vset[0] <= V < vset[1]:
         select = 0
@@ -163,15 +188,29 @@ def thermocouple(V, coupletype="K", fahrenheit=False, cjt=None, To=None,
         raise ValueError("Voltage Above Upper Bound")
     else:
         raise ValueError("Internal Error!")
-    # Load Data Into Terms
-    parameters = {}
+
+    # Load default constants for this thermocouple type and segment
+    defaults = {}
     for i, key in enumerate(THERMO_COUPLE_KEYS):
-        parameters[key] = parameters.get(key, None) or THERMO_COUPLE_DATA[coupletype][i][select]
-    Vo, To, P1, P2, P3, P4, Q1, Q2, Q3 = [parameters[key] for key in THERMO_COUPLE_KEYS]
+        defaults[key] = THERMO_COUPLE_DATA[coupletype][i][select]
+
+    # Preserve user-provided constants if present; otherwise use defaults
+    Vo = Vo if Vo is not None else defaults["Vo"]
+    To = To if To is not None else defaults["To"]
+    P1 = P1 if P1 is not None else defaults["P1"]
+    P2 = P2 if P2 is not None else defaults["P2"]
+    P3 = P3 if P3 is not None else defaults["P3"]
+    P4 = P4 if P4 is not None else defaults["P4"]
+    Q1 = Q1 if Q1 is not None else defaults["Q1"]
+    Q2 = Q2 if Q2 is not None else defaults["Q2"]
+    Q3 = Q3 if Q3 is not None else defaults["Q3"]
+
     # Calculate Temperature in Degrees C
-    num = (V - Vo) * (P1 + (V - Vo) * (P2 + (V - Vo) * (P3 + P4 * (V - Vo))))
-    den = 1 + (V - Vo) * (Q1 + (V - Vo) * (Q2 + Q3 * (V - Vo)))
+    dv = (V - Vo)
+    num = dv * (P1 + dv * (P2 + dv * (P3 + P4 * dv)))
+    den = 1 + dv * (Q1 + dv * (Q2 + Q3 * dv))
     temp = To + num / den
+
     # Return Temperature
     if fahrenheit:
         temp = (temp * 9 / 5) + 32
@@ -216,6 +255,14 @@ def rtdtemp(RT, rtdtype="PT100", fahrenheit=False, Rref=None, Tref=None,
     temp:       float
                 Calculated temperature, defaults to degrees Celsius.
     """
+    # Condition Inputs
+    rtdtype = rtdtype.upper()
+
+    # Validate rtdtype when defaults are used
+    if (Rref is None) or (a is None):
+        if rtdtype not in RTD_TYPES:
+            raise ValueError("Invalid RTD Type")
+
     # Load Variables
     if Rref is None:
         Rref = RTD_TYPES[rtdtype][0]
@@ -223,10 +270,12 @@ def rtdtemp(RT, rtdtype="PT100", fahrenheit=False, Rref=None, Tref=None,
         Tref = 0
     if a is None:
         a = RTD_TYPES[rtdtype][1]
+
     # Define Terms
     num = RT - Rref + Rref * a * Tref
     den = Rref * a
     temp = num / den
+
     # Return Temperature
     if fahrenheit:
         temp = (temp * 9 / 5) + 32
