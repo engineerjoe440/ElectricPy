@@ -18,6 +18,82 @@ import cmath as _c
 import numpy as _np
 
 
+def _is_complex_scalar(x):
+    return isinstance(x, (complex, _np.complexfloating))
+
+
+def _fmt_number(x, ndigits=3):
+    """
+    Format real/complex numbers for LaTeX without adding dollar signs.
+    Keeps output compact and avoids '+-' artifacts.
+    """
+    if _is_complex_scalar(x):
+        xr = float(_np.real(x))
+        xi = float(_np.imag(x))
+        xr_r = _np.around(xr, ndigits)
+        xi_r = _np.around(xi, ndigits)
+
+        if _np.isclose(xi_r, 0.0, atol=10 ** (-(ndigits + 1))):
+            # Pure real
+            return str(xr_r)
+        if _np.isclose(xr_r, 0.0, atol=10 ** (-(ndigits + 1))):
+            # Pure imaginary
+            if xi_r >= 0:
+                return r'\mathrm{j}' + str(abs(xi_r))
+            return r'-\mathrm{j}' + str(abs(xi_r))
+
+        # Full complex
+        if xi_r >= 0:
+            return str(xr_r) + r'+\mathrm{j}' + str(abs(xi_r))
+        return str(xr_r) + r'-\mathrm{j}' + str(abs(xi_r))
+
+    # Real numeric
+    try:
+        xr = float(x)
+    except Exception:
+        return str(x)
+
+    xr_r = _np.around(xr, ndigits)
+    return str(xr_r)
+
+
+def _fmt_poly_term(coeff, power, var='s', ndigits=3):
+    """
+    Format a single polynomial term (no sign), e.g. "3s^{2}", "s", "5".
+    coeff is assumed positive magnitude here.
+    """
+    # Decide if coefficient should be shown
+    show_coeff = True
+    if power > 0:
+        if _is_complex_scalar(coeff):
+            # If complex, always show it (wrapped)
+            pass
+        else:
+            try:
+                if _np.isclose(float(coeff), 1.0, atol=10 ** (-(ndigits + 1))):
+                    show_coeff = False
+            except Exception:
+                pass
+
+    coeff_str = _fmt_number(coeff, ndigits)
+
+    # Wrap complex coefficients for readability when multiplied by variable
+    if _is_complex_scalar(coeff) and power > 0:
+        coeff_str = r'\left(' + coeff_str + r'\right)'
+
+    if power == 0:
+        return coeff_str
+
+    if power == 1:
+        if show_coeff:
+            return coeff_str + var
+        return var
+
+    if show_coeff:
+        return coeff_str + var + r'^{' + str(power) + r'}'
+    return var + r'^{' + str(power) + r'}'
+
+
 # Define Complex LaTeX Generator
 def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
            double=False):
@@ -27,34 +103,6 @@ def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
     Function to generate a LaTeX string of complex value(s)
     in either polar or rectangular form. May generate both dollar
     signs.
-
-    Parameters
-    ----------
-    val:        complex
-                The complex value to be printed, if value
-                is a list or numpy array, the result will be
-                demonstrated as a matrix.
-    round:      int, optional
-                Control to specify number of decimal places
-                that should displayed. default=True
-    polar:      bool, optional
-                Control argument to force result into polar
-                coordinates instead of rectangular. default=True
-    predollar:  bool, optional
-                Control argument to enable/disable the dollar
-                sign before the string. default=True
-    postdollar: bool, optional
-                Control argument to enable/disable the dollar
-                sign after the string. default=True
-    double:     bool, optional
-                Control argument to specify whether or not
-                LaTeX dollar signs should be double or single,
-                default=False
-
-    Returns
-    -------
-    latex:      str
-                LaTeX string for the complex value.
     """
     # Define Interpretation Functions
     def polarstring(val, round):
@@ -62,16 +110,16 @@ def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
         ang = _np.degrees(ang_r)  # Convert to degrees
         mag = _np.around(mag, round)  # Round
         ang = _np.around(ang, round)  # Round
-        latex = str(mag) + '∠' + str(ang) + '°'
+        latex = str(mag) + r'\angle' + str(ang) + r'^{\circ}'
         return latex
 
     def rectstring(val, round):
-        real = _np.around(val.real, round)  # Round
-        imag = _np.around(val.imag, round)  # Round
+        real = _np.around(_np.real(val), round)  # Round
+        imag = _np.around(_np.imag(val), round)  # Round
         if imag > 0:
-            latex = str(real) + "+j" + str(imag)
+            latex = str(real) + r"+\mathrm{j}" + str(imag)
         else:
-            latex = str(real) + "-j" + str(abs(imag))
+            latex = str(real) + r"-\mathrm{j}" + str(abs(imag))
         return latex
 
     # Interpret as numpy array if simple list
@@ -109,7 +157,7 @@ def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
                     latex += rectstring(val[ri], round)
         # Close Matrix
         latex += r'\end{bmatrix}'
-    elif isinstance(val, complex):
+    elif _is_complex_scalar(val):
         # Treat as Polar When Directed
         if polar:
             latex = polarstring(val, round)
@@ -138,43 +186,6 @@ def tflatex(sys, sysp=None, var='s', predollar=True,
     LaTeX string generating function to create a transfer
     function string in LaTeX. Particularly useful for
     demonstrating systems in Interactive Python Notebooks.
-
-    Parameters
-    ----------
-    sys:        list
-                If provided in conjunction with optional
-                parameter `sysp`, the parameter `sys` will
-                act as the numerator set. Otherwise, can be
-                passed as a list containing two sublists,
-                the first being the numerator set, and the
-                second being the denominator set.
-    sysp:       list, optional
-                If provided, this input will act as the
-                denominator of the transfer function.
-    var:        str, optional
-                The variable that should be printed for each
-                term (i.e. 's' or 'j\omega'). default='s'
-    predollar:  bool, optional
-                Control argument to enable/disable the dollar
-                sign before the string. default=True
-    postdollar: bool, optional
-                Control argument to enable/disable the dollar
-                sign after the string. default=True
-    double:     bool, optional
-                Control argument to specify whether or not
-                LaTeX dollar signs should be double or single,
-                default=False
-    tolerance:  float, optional
-                The floating point tolerance cutoff to evaluate
-                each term against. If the absolute value of the
-                particular term is greater than the tolerance,
-                the value will be printed, if not, it will not
-                be printed. default=1e-8
-
-    Returns
-    -------
-    latex:      str
-                LaTeX string for the transfer function.
     """
     # Collect Numerator and Denominator Terms
     if isinstance(sysp, (list, tuple, _np.ndarray)):
@@ -185,24 +196,53 @@ def tflatex(sys, sysp=None, var='s', predollar=True,
 
     # Generate String Function
     def genstring(val):
+        val = list(val)
         length = len(val)
-        strg = ''
+        terms = []
         for i, v in enumerate(val):
-            # Add Each Term to String
             if abs(v) > tolerance:
-                # Add '+' Symbol After Each Term
-                if i != 0:
-                    strg += r'+'
-                strg += str(v)
-                # Determine Exponent
-                xpnt = length - i - 1
-                if xpnt == 1:
-                    strg += var
-                elif xpnt == 0:
-                    pass  # Don't Do Anything
+                power = length - i - 1
+
+                # Determine sign and magnitude
+                sign = '+'
+                v_mag = v
+                if _is_complex_scalar(v):
+                    # Use real part for sign only when imag ~ 0, otherwise keep as-is (no sign extraction)
+                    vr = _np.real(v)
+                    vi = _np.imag(v)
+                    if _np.isclose(vi, 0.0, atol=tolerance) and (vr < 0):
+                        sign = '-'
+                        v_mag = -v
+                    else:
+                        # complex (or imag not ~0): do not force sign splitting; treat as one coefficient
+                        sign = '+'
+                        v_mag = v
                 else:
-                    strg += var + r'^{' + str(xpnt) + r'}'
-        return strg
+                    try:
+                        if float(v) < 0:
+                            sign = '-'
+                            v_mag = -v
+                    except Exception:
+                        sign = '+'
+                        v_mag = v
+
+                term = _fmt_poly_term(v_mag, power, var=var, ndigits=3)
+                terms.append((sign, term))
+
+        if not terms:
+            return '0'
+
+        # Build string with correct leading sign handling
+        out = ''
+        for idx, (sgn, term) in enumerate(terms):
+            if idx == 0:
+                if sgn == '-':
+                    out += r'-' + term
+                else:
+                    out += term
+            else:
+                out += (r'+' if sgn == '+' else r'-') + term
+        return out
 
     # Generate Total TF String
     latex = r'\frac{' + genstring(num) + r'}{'
