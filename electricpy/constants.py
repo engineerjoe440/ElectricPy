@@ -12,7 +12,10 @@ import cmath as _c
 
 # Define Electrical Engineering Constants
 pi = _np.pi  #: PI Constant 3.14159...
+tau = 2 * _np.pi  #: TAU Constant 2π
+
 a = _c.rect(1, _np.radians(120))  #: 'A' Operator for Symmetrical Components
+
 p = 1e-12  #: Pico Multiple      (10^-12)
 n = 1e-9  #: Nano Multiple       (10^-9)
 u = 1e-6  #: Micro (mu) Multiple (10^-6)
@@ -20,15 +23,31 @@ m = 1e-3  #: Mili Multiple       (10^-3)
 k = 1e+3  #: Kili Multiple       (10^3)
 M = 1e+6  #: Mega Multiple       (10^6)
 G = 1e+9  #: Giga Multiple       (10^9)
-u0 = 4 * _np.pi * 10 ** (-7)  #: µ0 (mu-not)       4πE-7
-e0 = 8.8541878128e-12  #: ε0 (epsilon-not)  8.854E-12
-carson_r = 9.869e-7  #: Carson's Ristance Constant  8.869E-7
+
+u0 = 4 * _np.pi * 10 ** (-7)  #: µ0 (mu-naught)     4πE-7
+e0 = 8.8541878128e-12  #: ε0 (epsilon-naught)  8.8541878128E-12
+
+# Common aliases (do not remove - used by many references)
+mu0 = u0
+epsilon0 = e0
+
+# NOTE: The value here is kept as-is; the prior comment had a typo/mismatch.
+carson_r = 9.869e-7  #: Carson's Resistance Constant  9.869E-7
+
 De0 = 2160  #: De Constant for Use with Transmission Impedance Calculations =2160
+
 NAN = float('nan')
 VLLcVLN = _c.rect(_np.sqrt(3), _np.radians(30))  # Conversion Operator
 ILcIP = _c.rect(_np.sqrt(3), _np.radians(30))  # Conversion Operator
+
 WATTS_PER_HP = 745.699872
-KWH_PER_BTU = 3412.14
+
+# Energy conversion:
+# 1 kWh = 3412.14 BTU (approx)
+BTU_PER_KWH = 3412.14
+KWH_PER_BTU = 1.0 / BTU_PER_KWH
+# Backwards-compatibility for legacy code that relied on the old (misnamed) value:
+KWH_PER_BTU_LEGACY = BTU_PER_KWH
 
 # Define Symmetrical Component Matricies
 Aabc = 1 / 3 * _np.array([[1, 1, 1],  # Convert ABC to 012
@@ -37,6 +56,7 @@ Aabc = 1 / 3 * _np.array([[1, 1, 1],  # Convert ABC to 012
 A012 = _np.array([[1, 1, 1],  # Convert 012 to ABC
                   [1, a ** 2, a],  # (i.e. sequence to phase)
                   [1, a, a ** 2]])
+
 # Define Clarke Component Matricies
 Cabc = _np.sqrt(2 / 3) * _np.array([
     [1, -1 / 2, -1 / 2],  # Convert ABC to alpha/beta/gamma
@@ -48,6 +68,7 @@ Cxyz = _np.array([
     [-1 / _np.sqrt(6), 1 / _np.sqrt(2), 1 / _np.sqrt(3)],
     [-1 / _np.sqrt(6), -1 / _np.sqrt(2), 1 / _np.sqrt(3)]
 ])
+
 # Define Park Components Matricies
 _rad = lambda th: _np.radians(th)
 _Pdq0_im = lambda th: _np.sqrt(2 / 3) * _np.array([
@@ -97,6 +118,7 @@ resistivity_rho = {
     'nichrome': 1000,
     'constantan': 490,
 }
+
 THERMO_COUPLE_DATA = {
     "J": [
         [-6.4936529E+01, 2.5066947E+02, 6.4950262E+02, 9.2510550E+02, 1.0511294E+03],
@@ -191,6 +213,7 @@ THERMO_COUPLE_DATA = {
         [-4.5209805E-01, -1.0774995E-02, 0.0, 0.0]
     ]
 }
+
 THERMO_COUPLE_KEYS = ['To', 'Vo', 'P1', 'P2', 'P3', 'P4', 'Q1', 'Q2', 'Q3']
 THERMO_COUPLE_VOLTAGES = {
     "J": [-8.095, 0, 21.840, 45.494, 57.953, 69.553],
