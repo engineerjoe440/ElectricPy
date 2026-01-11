@@ -107,6 +107,9 @@ def test_equation_and_parametric_errors():
     assert "x^2 + y^2" in eq
     assert " - 2*x" in eq
     assert " - 4*y" in eq
+    assert " - 4" in eq
+    assert c.radius == 3
+    
     with pytest.raises(ValueError):
         list(c.parametric_equation(theta_resolution=0))
     with pytest.raises(ValueError):
