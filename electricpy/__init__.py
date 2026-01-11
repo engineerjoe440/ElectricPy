@@ -699,23 +699,19 @@ def short_circuit_current(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
 
     # Calculate Asymmetrical (total) Current if t is not None
     if t is not None and f is not None:
-        # Calculate RMS if none of the angular values are provided
-        if alpha is None and omega is None:
-            # Calculate tau
-            tau = t / (1 / 60)
+        # RMS asymmetry / factor calculation (does not require alpha)
+        if alpha is None:
+            # cycles elapsed at frequency f
+            tau = t * f
             K = _np.sqrt(1 + 2 * _np.exp(-4 * _np.pi * tau / (X / R)))
             IAC = abs(V / Z)
             Irms = K * IAC
             # Return Values
             return Irms, IAC, K
-        elif alpha is None or omega is None:
+        elif omega is None:
             raise ValueError("ERROR: Inappropriate Arguments Provided.")
         # Calculate Instantaneous if all angular values provided
         else:
-            # Convert Degrees to Radians
-            omega = _np.radians(omega)
-            alpha = _np.radians(alpha)
-            theta = _np.radians(theta)
             # Calculate T
             T = X / (2 * _np.pi * f * R)  # seconds
             # Calculate iAC and iDC
@@ -1118,30 +1114,40 @@ def zsource(S, V, XoR, Sbase=None, Vbase=None, perunit=True):
                 Will be returned in ohmic (not per-unit) value if
                 *perunit* argument is specified as False.
     """
+    # Preserve original S and V for later back-conversion
+    _S_in = S
+    _V_in = V
+
     # Force Sbase and Vbase if needed
     if Vbase is None:
         Vbase = V
     if Sbase is None:
         Sbase = S
+
     # Prevent scaling if per-unit already applied
-    if Vbase:
+    if Vbase is True:
         Vbase = 1
-    if Sbase:
+    if Sbase is True:
         Sbase = 1
+
     # Set to per-unit
     Spu = S / Sbase
     Vpu = V / Vbase
+
     # Evaluate Zsource Magnitude
-    Zsource_pu = Vpu ** 2 / Spu
+    Zmag_pu = Vpu ** 2 / Spu
+
     # Evaluate the angle
     nu = _np.degrees(_np.arctan(XoR))
+
     # Conditionally Evaluate Phasor Impedance
     if isinstance(nu, (list, _np.ndarray)):
         Zsource_pu = []
         for angle in nu:
-            Zsource_pu.append(phasors(Zsource_pu, angle))
+            Zsource_pu.append(phasor(Zmag_pu, angle))
     else:
-        Zsource_pu = phasors(Zsource_pu, nu)
+        Zsource_pu = phasor(Zmag_pu, nu)
+
     if not perunit:
         Zsource = Zsource_pu * Vbase ** 2 / Sbase
         return Zsource
@@ -1724,17 +1730,22 @@ def geninternalv(I, Zs, Vt, Vgn=None, Zm=None, Zmp=None, Zmpp=None, Ip=None, Ipp
     Ea:         complex
                 The internal voltage of the generator.
     """
-    # All Parameters Provided
-    if Zmp == Zmpp == Ip == Ipp is not None:
-        if Vgn is None:
-            Vgn = 0
+    if Vgn is None:
+        Vgn = 0
+    # Two-mutual model
+    if (Zmp is not None) or (Zmpp is not None) or (Ip is not None) or (Ipp is not None):
+        if not ((Zmp is not None) and (Zmpp is not None) and (Ip is not None) and (Ipp is not None)):
+            raise ValueError("Invalid Parameter Set")
         Ea = Zs * I + Zmp * Ip + Zmpp * Ipp + Vt + Vgn
-    # Select Parameters Provided
-    elif Vgn == Zm == Ip == Ipp is None:
-        Ea = Zs * I + Vt
-    # Invalid Parameter Set
-    else:
-        raise ValueError("Invalid Parameter Set")
+        return Ea
+    # Single-mutual model (legacy support)
+    if (Zm is not None) or (Ip is not None):
+        if not ((Zm is not None) and (Ip is not None)):
+            raise ValueError("Invalid Parameter Set")
+        Ea = Zs * I + Zm * Ip + Vt + Vgn
+        return Ea
+    # No mutual model
+    Ea = Zs * I + Vt + Vgn
     return Ea
 
 
@@ -1815,20 +1826,32 @@ def sampfft(data, dt, minfreq=60.0, complex=False):
     B:          list of float
                 The imaginary components from the FFT.
     """
-    # Calculate Terms
-    FR = 1 / (dt * len(data))
-    NN = 1 // (dt * minfreq)
+    # Validate Inputs
+    if dt <= 0:
+        raise ValueError("dt must be positive.")
+    if len(data) < 2:
+        raise ValueError("data must contain at least two samples.")
+
+    # Fundamental frequency represented by full record length
+    Trec = dt * len(data)
+    f0 = 1 / Trec
+
+    # Determine number of samples needed to represent minfreq (one period)
+    NN = int(_np.round(1 / (dt * minfreq)))
+
     # Test for Invalid System
-    if FR > minfreq:
+    if f0 > minfreq:
         raise ValueError(
             "Too few data samples to evaluate FFT at specified minimum "
             "frequency."
         )
-    elif FR == minfreq:
+    elif f0 == minfreq:
         # Evaluate FFT
         y = _np.fft.rfft(data) / len(data)
     else:
         # Slice data array to appropriate fundamental frequency
+        if NN <= 0:
+            raise ValueError("Invalid minfreq/dt combination.")
         cut_data = data[:int(NN)]
         # Evaluate FFT
         y = _np.fft.rfft(cut_data) / len(cut_data)
@@ -3288,19 +3311,27 @@ def ic_555_astable(R=None, C=None, freq=None, t_high=None, t_low=None):
         }
 
     if t_high is not None and t_low is not None and C is not None:
-
-        x2 = t_low / C * _np.log(2)
-        x1 = t_high / C * _np.log(2)
+        r2 = t_low / (_np.log(2) * C)
+        r1 = (t_high / (_np.log(2) * C)) - r2
         T = t_high + t_low
-        freq = 1 / (T)
-        duty_cycle = t_high / (T)
+        freq = 1 / T
+        duty_cycle = t_high * 100 / T
 
         return {
             'time_period': T,
             'frequency': freq,
             'duty_cycle': duty_cycle,
-            'R1': x1 - x2,
-            'R2': x2
+            'R1': r1,
+            'R2': r2
+        }
+
+    if freq is not None and C is not None:
+        T = 1 / freq
+        r_sum = T / (_np.log(2) * C)
+        return {
+            'time_period': T,
+            'frequency': freq,
+            'R1_plus_2R2': r_sum
         }
     raise TypeError("Not enough parqmeters are passed")
 
@@ -3336,7 +3367,14 @@ def ic_555_monostable(R=None, C=None, freq=None, t_high=None, t_low=None):
             "t_low": ON time of IC 555
             "t_high": OFF time of IC 555
     """
-    T = t_high + t_low
+    if t_high is not None:
+        T = t_high
+    elif t_low is not None:
+        T = t_low
+    elif freq is not None:
+        T = 1 / freq
+    else:
+        T = None
     if R is None:
         if not (C is not None and T is not None):
             raise ValueError(
@@ -3353,12 +3391,13 @@ def ic_555_monostable(R=None, C=None, freq=None, t_high=None, t_low=None):
         return T / (_np.log(3) * R)
 
     if T is None:
-        if not (R is not None and T is not None):
+        if not (R is not None and C is not None):
             raise ValueError(
                 "To find Time delay , Resistance and Capacitance should be "
                 "provided"
             )
         return R * C * _np.log(3)
+    return T
 
 
 def t_attenuator(Adb, Z0):
@@ -3510,7 +3549,7 @@ def lm317(r1, r2, v_out):
 
     .. math:: R1 = \frac{1.25*R2}{V_{out}-1.25}
 
-    .. math:: R2 = \frac{R1*V_{out}}{1.25 - R1}
+    .. math:: R2 = R1 * (\frac{V_{out}}{1.25} - 1)
 
     Parameters
     ----------
