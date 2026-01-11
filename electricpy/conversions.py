@@ -95,7 +95,8 @@ def kwh_to_btu(kWh):
     BTU:        float
                 The number of British Thermal Units
     """
-    return kWh * KWH_PER_BTU
+    # constants.KWH_PER_BTU is kWh per BTU, so invert to get BTU per kWh
+    return kWh / KWH_PER_BTU
 
 
 btu = kwh_to_btu  # Make Duplicate Name
@@ -121,7 +122,7 @@ def btu_to_kwh(BTU):
     kWh:        float
                 The number of kilo-Watt-hours
     """
-    return BTU / KWH_PER_BTU
+    return BTU * KWH_PER_BTU
 
 
 kwh = btu_to_kwh  # Make Duplicate Name
@@ -204,7 +205,7 @@ def abc_to_seq(Mabc, reference='A'):
     Converts phase-based values to sequence
     components.
 
-    .. math:: M_{\text{012}}=A_{\text{012}}\cdot M_{\text{ABC}}
+    .. math:: M_{\text{012}}=A_{\text{abc}}\cdot M_{\text{ABC}}
 
     Same as phs_to_seq.
 
@@ -224,7 +225,7 @@ def abc_to_seq(Mabc, reference='A'):
     See Also
     --------
     seq_to_abc: Sequence to Phase Conversion
-    sequence:  Phase Impedance to Sequence Converter
+    sequencez:  Phase Impedance to Sequence Converter
 
     Examples
     --------
@@ -243,9 +244,9 @@ def abc_to_seq(Mabc, reference='A'):
     if reference == 'A':
         M = Aabc
     elif reference == 'B':
-        M = _np.roll(Aabc, 1, 0)
+        M = _np.roll(Aabc, 1, 1)
     elif reference == 'C':
-        M = _np.roll(Aabc, 2, 0)
+        M = _np.roll(Aabc, 2, 1)
     else:
         raise ValueError("Invalid Phase Reference.")
     return M.dot(Mabc)
@@ -263,7 +264,7 @@ def seq_to_abc(M012, reference='A'):
     Converts sequence-based values to phase
     components.
 
-    .. math:: M_{\text{ABC}}=A_{\text{012}}^{-1}\cdot M_{\text{012}}
+    .. math:: M_{\text{ABC}}=A_{\text{012}}\cdot M_{\text{012}}
 
     Same as seq_to_phs.
 
@@ -283,21 +284,7 @@ def seq_to_abc(M012, reference='A'):
     See Also
     --------
     abc_to_seq: Phase to Sequence Conversion
-    sequence:  Phase Impedance to Sequence Converter
-
-    Examples
-    --------
-    >>> import electricpy as ep
-    >>> import electricpy.conversions as conv
-    >>> abc_matrix = [
-    ...     ep.phasor(167, 0),
-    ...     ep.phasor(167, -120),
-    ...     ep.phasor(167, -240),
-    ... ]
-    >>> seq_quantities = conv.abc_to_seq(abc_matrix)
-    >>> # Will return a list approximately equal to: [0+0j, 167+0j, 0+0j]
-    >>> phs_quantities = conv.seq_to_abc(seq_quantities)
-    >>> # Returned Phase Quantities will Approximately Equal the Original Values
+    sequencez:  Phase Impedance to Sequence Converter
     """
     # Compute Dot Product
     M = A012.dot(M012)
@@ -331,17 +318,17 @@ def sequencez(Zabc, reference='A', resolve=False, diag=False, rounds=3):
 
     When resolve is False:
 
-    .. math:: Z_{\text{012-M}}=A_{\text{012}}^{-1}Z_{\text{ABC}}A_{\text{012}}
+    .. math:: Z_{\text{012}} = A_{\text{abc}}\cdot Z_{\text{ABC}}\cdot A_{\text{012}}
 
     When resolve is True:
 
-    .. math:: Z_{\text{012}}=A_{\text{012}}Z_{\text{ABC}}A_{\text{012}}^{-1}
+    .. math:: Z_{\text{012}} = A_{\text{012}}\cdot Z_{\text{ABC}}\cdot A_{\text{abc}}
 
     Parameters
     ----------
     Zabc:       numpy.array of complex
                 2-D (3x3) matrix of complex values
-                representing the pharo impedance
+                representing the phase impedance
                 in the ABC-domain.
     reference:  {'A', 'B', 'C'}
                 Single character denoting the reference,
@@ -353,6 +340,7 @@ def sequencez(Zabc, reference='A', resolve=False, diag=False, rounds=3):
     diag:       bool, optional
                 Control argument to force the function to
                 reduce the matrix to its diagonal terms.
+                default=False
     rounds:      int, optional
                 Integer denoting number of decimal places
                 resulting matrix should be rounded to.
@@ -375,20 +363,27 @@ def sequencez(Zabc, reference='A', resolve=False, diag=False, rounds=3):
     roll_rate = {'A': 0, 'B': 1, 'C': 2}
     # Test Validity
     if reference not in roll_rate:
-        raise ValueError("Invalad Phase Reference")
+        raise ValueError("Invalid Phase Reference")
     # Determine Roll Factor
     roll = roll_rate[reference]
-    # Evaluate Matrices
-    M012 = _np.roll(A012, roll, 0)
-    min_v = _np.linalg.inv(M012)
-    # Compute Sequence Impedance
-    if resolve:
-        Z012 = M012.dot(Zabc.dot(min_v))
+
+    Zabc = _np.asarray(Zabc)
+    # Adjust transform matrices for reference selection to match abc_to_seq/seq_to_abc behavior.
+    if roll == 0:
+        Aabc_ref = Aabc
+        A012_ref = A012
     else:
-        Z012 = min_v.dot(Zabc.dot(M012))
-    # Reduce to Diagonal Terms if Needed
-    if diag:
-        Z012 = [Z012[0][0], Z012[1][1], Z012[2][2]]
+        Aabc_ref = _np.roll(Aabc, roll, axis=1)
+        A012_ref = _np.roll(A012, roll, axis=0)
+
+    # Standard: Z012 = Aabc * Zabc * A012
+    Z012 = Aabc_ref.dot(Zabc.dot(A012_ref))
+
+    # If resolve requested, return diagonal terms [Z0, Z1, Z2]
+    if diag or resolve:
+        Zdiag = [Z012[0][0], Z012[1][1], Z012[2][2]]
+        return _np.around(Zdiag, rounds)
+
     return _np.around(Z012, rounds)
 
 
@@ -672,13 +667,13 @@ def db_to_vref(db, voltage):
     return voltage * _np.power(10, -(db / 20))
 
 
-# Define Decibel to reference Voltage
+# Define Decibel to Voltage
 def db_to_voltage(db, ref_voltage):
     """
-    Decibel to Reference Voltage.
+    Decibel to Voltage.
 
-    Given decibel and voltage, this function will evaluate
-    the power of reference voltage.
+    Given decibel and reference voltage, this function will evaluate
+    the voltage.
 
     Parameters
     ----------
@@ -692,6 +687,6 @@ def db_to_voltage(db, ref_voltage):
     voltage:         float
                      Voltage
     """
-    return ref_voltage * _np.power(10, -(db / 20))
+    return ref_voltage * _np.power(10, (db / 20))
 
 # END
