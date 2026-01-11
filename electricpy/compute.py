@@ -54,6 +54,11 @@ def largest_integer(numBits, signed=True):
     >>> cmp.largest_integer(32, signed=True)
     2147483647
     """
+    if numBits is None:
+        raise ValueError("numBits must be a positive integer.")
+    numBits = int(numBits)
+    if numBits <= 0:
+        raise ValueError("numBits must be a positive integer.")
     # Use Signed or Unsigned Formula
     if signed:
         return int(2 ** (numBits - 1) - 1)
@@ -123,7 +128,7 @@ def crcsender(data, key):
                 # part used in each step) is 0, the step cannot
                 # use the regular divisor; we need to use an
                 # all-0s divisor.
-                tmp = xor('0' * pick, tmp) + divident[pick]
+                tmp = xor('0' * len(divisor), tmp) + divident[pick]
 
                 # increment pick to move further
             pick += 1
@@ -134,7 +139,7 @@ def crcsender(data, key):
         if tmp[0] == '1':
             tmp = xor(divisor, tmp)
         else:
-            tmp = xor('0' * pick, tmp)
+            tmp = xor('0' * len(divisor), tmp)
 
         checkword = tmp
         return checkword
@@ -143,6 +148,17 @@ def crcsender(data, key):
     data = str(data)
     # Condition Key
     key = str(key)
+
+    # Basic validation
+    if len(key) < 2:
+        raise ValueError("CRC key must be at least 2 bits long.")
+    if set(data) - set('01'):
+        raise ValueError("CRC data must be a string of bits containing only '0' and '1'.")
+    if set(key) - set('01'):
+        raise ValueError("CRC key must be a string of bits containing only '0' and '1'.")
+    if key[0] != '1':
+        raise ValueError("CRC key must start with '1' (highest-order term present).")
+
     l_key = len(key)
 
     # Appends n-1 zeroes at end of data
@@ -216,7 +232,7 @@ def crcremainder(data, key):
                 # part used in each step) is 0, the step cannot
                 # use the regular divisor; we need to use an
                 # all-0s divisor.
-                tmp = xor('0' * pick, tmp) + divident[pick]
+                tmp = xor('0' * len(divisor), tmp) + divident[pick]
 
                 # increment pick to move further
             pick += 1
@@ -227,7 +243,7 @@ def crcremainder(data, key):
         if tmp[0] == '1':
             tmp = xor(divisor, tmp)
         else:
-            tmp = xor('0' * pick, tmp)
+            tmp = xor('0' * len(divisor), tmp)
 
         checkword = tmp
         return checkword
@@ -236,6 +252,17 @@ def crcremainder(data, key):
     data = str(data)
     # Condition Key
     key = str(key)
+
+    # Basic validation
+    if len(key) < 2:
+        raise ValueError("CRC key must be at least 2 bits long.")
+    if set(data) - set('01'):
+        raise ValueError("CRC data must be a string of bits containing only '0' and '1'.")
+    if set(key) - set('01'):
+        raise ValueError("CRC key must be a string of bits containing only '0' and '1'.")
+    if key[0] != '1':
+        raise ValueError("CRC key must start with '1' (highest-order term present).")
+
     l_key = len(key)
 
     # Appends n-1 zeroes at end of data
@@ -264,7 +291,7 @@ def string_to_bits(str):
                 The binary representation of the
                 input string.
     """
-    data = (''.join(format(ord(x), 'b') for x in str))
+    data = (''.join(format(ord(x), '08b') for x in str))
     return data
 
 # END
