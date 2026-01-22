@@ -8,7 +8,6 @@
 
 [![sphinx](https://github.com/engineerjoe440/ElectricPy/actions/workflows/sphinx-build.yml/badge.svg?branch=master)](https://github.com/engineerjoe440/ElectricPy/actions/workflows/sphinx-build.yml)
 [![Documentation Status](https://readthedocs.org/projects/electricpy/badge/?version=latest)](https://electricpy.readthedocs.io/en/latest/?badge=latest)
-![Tox Import Test](https://github.com/engineerjoe440/ElectricPy/workflows/Tox%20Tests/badge.svg)
 
 [![pytest](https://github.com/engineerjoe440/ElectricPy/actions/workflows/pytest.yml/badge.svg?branch=master)](https://github.com/engineerjoe440/ElectricPy/actions/workflows/pytest.yml)
 [![pydocstyle](https://github.com/engineerjoe440/ElectricPy/actions/workflows/pydocstyle.yml/badge.svg?branch=master)](https://github.com/engineerjoe440/ElectricPy/actions/workflows/pydocstyle.yml)
@@ -31,12 +30,6 @@ material compiled with the intent of being used primarily for research,
 development, education, and exploration in the realm of electrical engineering.
 
 Check out our full documentation: https://electricpy.readthedocs.io/en/latest/
-
-<a title="Fabián Alexis, CC BY-SA 3.0 &lt;https://creativecommons.org/licenses/by-sa/3.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Antu_dialog-warning.svg"><img width="25px" alt="Antu dialog-warning" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Antu_dialog-warning.svg/512px-Antu_dialog-warning.svg.png"></a> **Documentation has recently been updated to use [ReadTheDocs](https://readthedocs.org/)**
-
-GitHub Pages are still active, and will continue to be for the forseeable
-future, but they're intended for developmental updates rather than primary
-documentation.
 
 ## Features
 
