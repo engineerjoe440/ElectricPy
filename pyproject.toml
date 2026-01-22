@@ -30,10 +30,10 @@ classifiers = [
 dynamic = ["version"]
 
 dependencies = [
-    "numpy >= 2.0.0",
+    "numpy",
     "matplotlib",
-    "SciPy",
-    "SymPy",
+    "scipy",
+    "sympy",
     "numdifftools",
 ]
 
