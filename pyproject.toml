@@ -48,7 +48,6 @@ dev = [
     "pygments >= 2.18.0",
     "wheel",
     "sphinx",
-    "numpydoc",
     "myst-parser[linkify]",
     "sphinx-sitemap",
     "sphinx-git",

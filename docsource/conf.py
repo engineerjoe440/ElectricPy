@@ -38,7 +38,7 @@ except:
 # -- Project information -----------------------------------------------------
 
 project = 'electricpy'
-copyright = '2022, Joe Stanley'
+copyright = '2026, Joe Stanley'
 author = 'Joe Stanley'
 
 # The full version, including alpha/beta/rc tags
@@ -56,8 +56,6 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.autosummary',
     'sphinx.ext.viewcode',
-    'numpydoc',
-    'sphinx_git',
     'myst_parser',
     'sphinx_immaterial',
 ]
