@@ -41,11 +41,24 @@ dependencies = [
 numerical = ["numdifftools"]
 fault = ["arcflash"]
 full = ["numdifftools", "arcflash"]
-test = [
+dev = [
     "pytest >=2.7.3",
     "xdoctest >= 1.1.3",
     "pytest-pydocstyle >= 2.3.2",
     "pygments >= 2.18.0",
+    "wheel",
+    "sphinx",
+    "numpydoc",
+    "myst-parser[linkify]",
+    "sphinx-sitemap",
+    "sphinx-git",
+    "sphinx-immaterial",
+    "coverage-badge",
+    "numpy",
+    "matplotlib",
+    "scipy",
+    "sympy",
+    "numdifftools",
 ]
 
 [tool.pytest.ini_options]
