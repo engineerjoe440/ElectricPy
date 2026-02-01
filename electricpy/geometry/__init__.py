@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
-from typing import Iterable, Iterator, Optional, Tuple, Union
+from typing import Iterator, Tuple, Union
 
 
 Number = Union[int, float]
@@ -24,6 +24,8 @@ Number = Union[int, float]
 
 def _as_float(x) -> float:
     """
+    Cast as a float.
+
     Coerce numeric-like values (including complex with ~0 imag) to float.
     This defends against accidental cmath usage elsewhere in the library.
     """
@@ -40,7 +42,8 @@ def _is_close(a: float, b: float, *, rel_tol: float = 1e-9, abs_tol: float = 1e-
 
 @dataclass(frozen=False)
 class Point:
-    """A point in 2D space.
+    """
+    A point in 2D space.
 
     Parameters
     ----------
@@ -49,6 +52,7 @@ class Point:
     y : float
         The y coordinate of the point
     """
+
     x: float
     y: float
 
@@ -78,18 +82,18 @@ class Point:
         return _is_close(self.x, other.x, rel_tol=tol, abs_tol=tol) and _is_close(self.y, other.y, rel_tol=tol, abs_tol=tol)
 
     def __repr__(self) -> str:
+        """Developer representation of the Point."""
         return f"Point({self.x}, {self.y})"
 
     def __str__(self) -> str:
+        """Representation of the Point."""
         return f"({self.x}, {self.y})"
 
 
 @dataclass(frozen=False)
 class Line:
-    """A line in 2D space in the form:
+    """A line in 2D space in the form (`ax + by + c = 0`)."""
 
-        ax + by + c = 0
-    """
     a: float
     b: float
     c: float
@@ -149,6 +153,8 @@ class Line:
 
     def normalized(self) -> Tuple[float, float, float]:
         """
+        Normalize the geometry coefficients.
+
         Return a normalized (a,b,c) such that sqrt(a^2+b^2)=1 and sign is stable.
         This helps with comparisons and distances.
         """
@@ -178,6 +184,8 @@ class Line:
 
     def __eq__(self, other: object) -> bool:
         """
+        Evaluate the equality of geometric object.
+
         Exact-ish equality (proportional coefficients), but using normalization for
         better behavior than raw ratio checks. This is safer than the original.
         """
@@ -186,10 +194,11 @@ class Line:
         return self.is_close(other, tol=1e-9)
 
     def __repr__(self) -> str:
+        """Developer representation of the Line."""
         return f"Line({self.a}, {self.b}, {self.c})"
 
     def __str__(self) -> str:
-        # Keep a readable form; avoid division by zero when possible.
+        """Keep a readable form; avoid division by zero when possible."""
         if _is_close(self.a, 0.0):
             # by + c = 0 => y = -c/b
             return f"y = {-self.c / self.b}"
@@ -220,8 +229,8 @@ def angle_btw_lines(l1: Line, l2: Line) -> float:
         raise ValueError("Cannot compute angle for degenerate line.")
 
     # Clamp to [-1,1] to protect against tiny numeric drift
-    cosang = max(-1.0, min(1.0, dot / (n1 * n2)))
-    ang = math.acos(cosang)
+    cosine_angle = max(-1.0, min(1.0, dot / (n1 * n2)))
+    ang = math.acos(cosine_angle)
 
     # Return acute angle
     if ang > math.pi / 2:

@@ -126,7 +126,7 @@ def capbacktoback(C1, C2, Lm, VLN=None, VLL=None):
     Function to calculate the maximum current and the
     frequency of the inrush current of two capacitors
     connected in parallel when one (energized) capacitor
-    is switched into another (non-engergized) capacitor.
+    is switched into another (non-energized) capacitor.
 
     .. note:: This formula is only valid for three-phase systems.
 
@@ -443,7 +443,7 @@ def air_core_inductance(d: float, coil_l: float, n: int):
 
 def air_core_required_length(d: float, L: float, n: int):
     r"""
-    Compute Required Length of Air Core Inductor
+    Compute Required Length of Air Core Inductor.
 
     .. math:: l = \frac{1000 d^2 n^2 - 457418 d L}{1016127 L}
 
@@ -467,7 +467,7 @@ def air_core_required_length(d: float, L: float, n: int):
 
 def air_core_required_diameter(coil_l: float, L: float, n: int):
     r"""
-    Compute Diameter of Air Core Inductor
+    Compute Diameter of Air Core Inductor.
 
     .. math:: 1000 n^2 d^2 - 457418 L d - 1016127 L l = 0
 
@@ -496,7 +496,7 @@ def air_core_required_diameter(coil_l: float, L: float, n: int):
 
 def air_core_required_num_turns(d: float, coil_l: float, L: float):
     r"""
-    Compute Required Number of Turns of Air Core Inductor
+    Compute Required Number of Turns of Air Core Inductor.
 
     .. math:: n = \sqrt{\frac{L(1016127 l + 457418 d)}{1000 d^2}}
 
