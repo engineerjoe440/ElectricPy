@@ -212,7 +212,7 @@ def step_response(system, npts=1000, dt=0.01, combine=True, xlim=False,
     _plt.grid()
     _plt.legend()
     _plt.xlabel("Time (seconds)")
-    if xlim != False:
+    if not xlim:
         _plt.xlim(xlim)
     _plt.subplot(122)
     _plt.title(errtitle)
@@ -220,10 +220,10 @@ def step_response(system, npts=1000, dt=0.01, combine=True, xlim=False,
     _plt.grid()
     _plt.legend()
     _plt.xlabel("Time (seconds)")
-    if xlim != False:
+    if not xlim:
         _plt.xlim(xlim)
     _plt.subplots_adjust(wspace=0.3)
-    if filename != None:
+    if filename is not None:
         _plt.savefig(filename)
     return _plt
 
@@ -297,7 +297,7 @@ def ramp_response(system, npts=1000, dt=0.01, combine=True, xlim=False,
     _plt.grid()
     _plt.legend()
     _plt.xlabel("Time (seconds)")
-    if xlim != False:
+    if not xlim:
         _plt.xlim(xlim)
     _plt.subplot(122)
     _plt.title(errtitle)
@@ -305,10 +305,10 @@ def ramp_response(system, npts=1000, dt=0.01, combine=True, xlim=False,
     _plt.grid()
     _plt.legend()
     _plt.xlabel("Time (seconds)")
-    if xlim != False:
+    if not xlim:
         _plt.xlim(xlim)
     _plt.subplots_adjust(wspace=0.3)
-    if filename != None:
+    if filename is not None:
         _plt.savefig(filename)
     return _plt
 
@@ -381,7 +381,7 @@ def parabolic_response(system, npts=1000, dt=0.01, combine=True, xlim=False,
     _plt.grid()
     _plt.legend()
     _plt.xlabel("Time (seconds)")
-    if xlim != False:
+    if not xlim:
         _plt.xlim(xlim)
     _plt.subplot(122)
     _plt.title(errtitle)
@@ -389,10 +389,10 @@ def parabolic_response(system, npts=1000, dt=0.01, combine=True, xlim=False,
     _plt.grid()
     _plt.legend()
     _plt.xlabel("Time (seconds)")
-    if xlim != False:
+    if not xlim:
         _plt.xlim(xlim)
     _plt.subplots_adjust(wspace=0.3)
-    if filename != None:
+    if filename is not None:
         _plt.savefig(filename)
     return _plt
 
@@ -652,58 +652,58 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
 
     # Plot Forcing Functions
     if (plotforcing):
-        fffig = _plt.figure("Forcing Functions")
+        _ = _plt.figure("Forcing Functions")
         if fnc > 1:
             for x in range(fnc):
                 _plt.plot(TT, fn_arr[x], label="f" + str(x + 1))
         else:
             _plt.plot(TT, fn_arr, label="f1")
-        if xlim != False:
+        if not xlim:
             _plt.xlim(xlim)
-        if ylim != False:
+        if not ylim:
             _plt.ylim(ylim)
         _plt.title("Forcing Functions " + title)
         _plt.xlabel("Time (seconds)")
         _plt.legend(title="Forcing Functions")
         _plt.grid()
-        if filename != None:
+        if filename is not None:
             _plt.savefig('Simulation Forcing Functions.png')
         if plotstate:
             _plt.show()
 
     # Plot each state-variable over time
-    stvfig = _plt.figure("State Variables")
+    _ = _plt.figure("State Variables")
     for x in range(xtim_len):
         _plt.plot(TT, xtim[x], label="x" + str(x + 1))
-    if xlim != False:
+    if not xlim:
         _plt.xlim(xlim)
-    if ylim != False:
+    if not ylim:
         _plt.ylim(ylim)
     _plt.title("Simulated Output Terms " + soltype[solution] + title)
     _plt.xlabel("Time (seconds)")
     _plt.legend(title="State Variable")
     _plt.grid()
-    if filename != None:
+    if filename is not None:
         _plt.savefig('Simulation Terms.png')
     if plotstate:
         _plt.show()
 
     # Plot combined output
     if (plotresult and solution == 3):
-        cofig = _plt.figure("Combined Output")
+        _ = _plt.figure("Combined Output")
         C = _np.asarray(C)  # convert back to array for operation
         for i in range(cC):
             yout = yout + xtim[i] * C[0][i]  # Sum all st-space var mult. by their coeff
         yout = _np.asarray(yout)  # convert output to array for plotting purposes
         _plt.plot(TT, yout[0])
-        if xlim != False:
+        if not xlim:
             _plt.xlim(xlim)
-        if ylim != False:
+        if not ylim:
             _plt.ylim(ylim)
         _plt.title("Combined Output " + title)
         _plt.xlabel("Time (seconds)")
         _plt.grid()
-        if filename != None:
+        if filename is not None:
             _plt.savefig('Simulation Combined Output.png')
         if plotresult:
             _plt.show()
@@ -958,7 +958,6 @@ def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False)
     Q_funcs = []
     P_strgs = []
     Q_strgs = []
-    Vi_list = []
     lists = [P_strgs, Q_strgs]
     i = 0  # Index
     ii = 0  # String Index
@@ -986,12 +985,12 @@ def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False)
         Padd = False
         Qadd = False
         for _j in range(N):
-            if P_list[_k] == None:
+            if P_list[_k] is None:
                 continue  # Don't Generate Requirements for Slack Bus
             if (_k != _j) and not Padd:  # Skip i,i Terms
                 ang_len += 1
                 Padd = True
-            if (_k != _j) and (Q_list[_k] != None) and not Qadd:
+            if (_k != _j) and (Q_list[_k] is not None) and not Qadd:
                 mag_len += 1
                 Qadd = True
     Vxdim = ang_len + mag_len
@@ -1006,20 +1005,21 @@ def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False)
             # Add New Entry To Lists
             for LST in lists:
                 LST.append(None)
-            if P_list[_k] == None:
+            if P_list[_k] is None:
                 continue  # Don't Generate Requirements for Slack Bus
             # Collect Other Terms
             Yind = "[{}][{}]".format(_k, _j)
-            if verbose: print("K:", _k, "\tJ:", _j)
+            if verbose:
+                print("K:", _k, "\tJ:", _j)
             # Generate Voltage-Related Strings
             if _k != _j:  # Skip i,i Terms
                 # Generate K-Related Strings
-                if V_list[_k][0] == None:  # The Vk magnitude is unknown
+                if V_list[_k][0] is None:  # The Vk magnitude is unknown
                     Vkm = "Vx[{}]".format(_k + ang_len - magoff * _k)  # Use Variable Magnitude
                     Vka = "Vx[{}]".format(_k - angoff)  # Use Variable Angle
                 else:  # The Vk magnitude is known
                     Vkm = "V_list[{}][0]".format(_k)  # Load Magnitude
-                    if V_list[_k][1] == None:  # The Vj angle is unknown
+                    if V_list[_k][1] is None:  # The Vj angle is unknown
                         Vka = "Vx[{}]".format(_k - angoff)  # Use Variable Angle
                     else:
                         Vka = "V_list[{}][1]".format(_k)  # Load Angle
@@ -1035,7 +1035,8 @@ def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False)
                         Vja = "V_list[{}][1]".format(_j)  # Load Angle
                 # Generate String and Append to List of Functions
                 P_strgs[i] = (Pstr.format(Vkm, Vka, Vjm, Vja, Yind))
-                if verbose: print("New P-String:", P_strgs[i])
+                if verbose:
+                    print("New P-String:", P_strgs[i])
                 # Generate Q Requirement
                 if Q_list[_k] is not None:
                     # Generate String and Append to List of Functions
@@ -1045,7 +1046,8 @@ def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False)
                     else:
                         Qgen = ""
                     Q_strgs[i] = (Qstr.format(Vkm, Vka, Vjm, Vja, Yind, Qgen))
-                    if verbose: print("New Q-String:", Q_strgs[i])
+                    if verbose:
+                        print("New Q-String:", Q_strgs[i])
             # Increment Index at Each Interior Level
             i += 1
         tempPstr = "P_funcs.append(lambda Vx: -P_list[{0}]".format(_k)
@@ -1060,10 +1062,12 @@ def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False)
         tempPstr += ")"
         tempQstr += ")"
         if any(P_strgs[ii:i]):
-            if verbose: print("Full P-Func Str:", tempPstr)
+            if verbose:
+                print("Full P-Func Str:", tempPstr)
             exec(tempPstr)
         if any(Q_strgs[ii:i]):
-            if verbose: print("Full Q-Func Str:", tempQstr)
+            if verbose:
+                print("Full Q-Func Str:", tempQstr)
             exec(tempQstr)
         ii = i  # Increase Lower Index
     retset = (P_funcs, Q_funcs)
