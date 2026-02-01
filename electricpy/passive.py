@@ -441,6 +441,83 @@ def air_core_inductance(d: float, coil_l: float, n: int):
     return k1 / k2
 
 
+def air_core_required_length(d: float, L: float, n: int):
+    r"""
+    Compute Required Length of Air Core Inductor
+
+    .. math:: l = \frac{1000 d^2 n^2 - 457418 d L}{1016127 L}
+
+    Parameters
+    ----------
+    d:      float
+            Coil diameter, measured in meters
+    L:      float
+            Inductance of air core inductor in Henry's (H)
+    n:      int
+            Number of inductor turns
+
+    Returns
+    -------
+    float   Coil length, measured in meters
+    """
+    k1 = (1000 * d ** 2 * n ** 2) - (457418 * d * L)
+    k2 = 1016127 * L
+    return k1 / k2
+
+
+def air_core_required_diameter(coil_l: float, L: float, n: int):
+    r"""
+    Compute Diameter of Air Core Inductor
+
+    .. math:: 1000 n^2 d^2 - 457418 L d - 1016127 L l = 0
+
+    The diameter is obtained by solving the quadratic equation above.
+
+    Parameters
+    ----------
+    coil_l: float
+            Coil length, measured in meters
+    L:      float
+            Inductance of air core inductor in Henry's (H)
+    n:      int
+            Number of inductor turns
+
+    Returns
+    -------
+    float   Coil diameter, measured in meters
+    """
+    a = 1000 * n ** 2
+    b = -457418 * L
+    c = -1016127 * L * coil_l
+    disc = b ** 2 - 4 * a * c
+    d = (-b + _np.sqrt(disc)) / (2 * a)
+    return d
+
+
+def air_core_required_num_turns(d: float, coil_l: float, L: float):
+    r"""
+    Compute Required Number of Turns of Air Core Inductor
+
+    .. math:: n = \sqrt{\frac{L(1016127 l + 457418 d)}{1000 d^2}}
+
+    Parameters
+    ----------
+    d:      float
+            Coil diameter, measured in meters
+    coil_l: float
+            Coil length, measured in meters
+    L:      float
+            Inductance of air core inductor in Henry's (H)
+
+    Returns
+    -------
+    float   Number of inductor turns
+    """
+    k1 = L * ((1016127 * coil_l) + (457418 * d))
+    k2 = 1000 * d ** 2
+    return _np.sqrt(k1 / k2)
+
+
 def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
     r"""
     Inductive voltage divider.
