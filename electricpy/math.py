@@ -49,7 +49,7 @@ def step(t):
     r"""
     Step Function [ u(t) ].
 
-    Simple implimentation of numpy.heaviside function to provide standard
+    Simple implementation of numpy.heaviside function to provide standard
     step-function as specified to be zero at :math:`x < 0`, and one at
     :math:`x \geq 0`.
 
@@ -75,7 +75,7 @@ def funcrms(func, T):
     Root-Mean-Square (RMS) Evaluator for Callable Functions.
 
     Integral-based RMS calculator, evaluates the RMS value
-    of a repetative signal (f) given the signal's specific
+    of a repetitive signal (f) given the signal's specific
     period (T)
 
     Parameters
@@ -89,8 +89,7 @@ def funcrms(func, T):
     -------
     RMS:    The RMS value of the function (f) over the interval ( 0, T )
     """
-    fn = lambda x: func(x) ** 2
-    integral, _ = integrate(fn, 0, T)
+    integral, _ = integrate(lambda x: func(x) ** 2, 0, T)
     return _np.sqrt(1 / T * integral)
 
 
@@ -140,7 +139,7 @@ def gausdist(x, mu=0, sigma=1):
     Returns
     -------
     F:      numpy.ndarray
-            Computed distribution of the gausian function at the
+            Computed distribution of the gaussian function at the
             points specified by (array) x
     """
     # Define Integrand
@@ -149,7 +148,7 @@ def gausdist(x, mu=0, sigma=1):
 
     try:
         lx = len(x)  # Find length of Input
-    except:
+    except TypeError:
         lx = 1  # Length 1
         x = [x]  # Pack into list
     F = _np.zeros(lx, dtype=_np.float64)
@@ -157,7 +156,7 @@ def gausdist(x, mu=0, sigma=1):
         x_tmp = x[i]
         # Evaluate X (altered by mu and sigma)
         X = (x_tmp - mu) / sigma
-        integral = integrate(integrand, _np.NINF, X)  # Integrate
+        integral = integrate(integrand, -_np.inf, X)  # Integrate
         result = 1 / _np.sqrt(2 * _np.pi) * integral[0]  # Evaluate Result
         F[i] = result
     # Return only the 0-th value if there's only 1 value available
@@ -197,7 +196,7 @@ def probdensity(func, x, x0=0, scale=True):
     sumx = _np.array([])
     try:
         lx = len(x)  # Find length of Input
-    except:
+    except TypeError:
         lx = 1  # Length 1
         x = [x]  # Pack into list
     # Recursively Find Probability Density
@@ -210,7 +209,7 @@ def probdensity(func, x, x0=0, scale=True):
         if scale:
             mx = sumx.max()
             sumx /= mx
-        elif scale != False:
+        elif not scale:
             sumx /= scale
     return sumx
 
@@ -220,7 +219,7 @@ def rfft(arr, dt=0.01, absolute=True, resample=True):
     """
     RFFT Function.
 
-    This function is designed to evaluat the real FFT
+    This function is designed to evaluate the real FFT
     of a input signal in the form of an array or list.
 
     Parameters
@@ -252,13 +251,13 @@ def rfft(arr, dt=0.01, absolute=True, resample=True):
         # Evaluate the Downsampling Ratio
         dn = int(dt * len(arr))
         # Downsample to remove unnecessary points
-        fixedfft = filter.dnsample(fourier, dn)
-        return (fixedfft)
+        fixed_fft = filter.dnsample(fourier, dn)
+        return fixed_fft
     elif not resample:
-        return (fourier)
+        return fourier
     else:
         # Condition Resample Value
         resample = int(resample)
         # Downsample to remove unnecessary points
-        fixedfft = filter.dnsample(fourier, resample)
-        return fixedfft
+        fixed_fft = filter.dnsample(fourier, resample)
+        return fixed_fft

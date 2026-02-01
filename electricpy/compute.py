@@ -264,7 +264,20 @@ def string_to_bits(str):
                 The binary representation of the
                 input string.
     """
-    data = (''.join(format(ord(x), 'b') for x in str))
-    return data
+    data = ''.join(format(ord(x), 'b') for x in str)
+
+    # If empty, return as-is
+    if len(data) == 0:
+        return data
+
+    # If length is already a power of two, return unchanged
+    n = len(data)
+    if n & (n - 1) == 0:
+        return data
+
+    # Compute next power of two and pad with leading zeros
+    next_pow = 1 << n.bit_length()
+    pad_len = next_pow - n
+    return '0' * pad_len + data
 
 # END
