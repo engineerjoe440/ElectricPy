@@ -250,6 +250,7 @@ def phasorplot(
         len(phasors)
     except TypeError:
         phasors = [phasors]
+
     # Manage Colors
     if colors is None:
         colors = [
@@ -266,22 +267,38 @@ def phasorplot(
             "#ff00ff",
             "#800080",
         ]
+
     # Scale Radius
     if radius is None:
         radius = _np.abs(phasors).max()
+
     # Set Tolerance
     if tolerance is None:
         tolerance = radius / 25
     elif tolerance is False:
         tolerance = -1
+
     # Set Background Color
     if bg is None:
         bg = "#FFFFFF"
+
     # Load labels if handled in other argument
     if label:
         legend = label
     if labels:
         legend = labels
+
+    # NOTE:
+    # Original behavior: if legend is True (bool), later code indexes legend[i],
+    # causing a TypeError. Here we normalize:
+    # - False/None -> no legend
+    # - True -> auto-generate labels "Phasor 1", "Phasor 2", ...
+    # - list/tuple -> use as provided
+    if legend is True:
+        legend = [f"Phasor {i+1}" for i in range(len(phasors))]
+    elif legend in (False, None):
+        legend = False
+
     # Check for more phasors than colors
     if len(phasors) > len(colors):
         raise ValueError("ERROR: Too many phasors provided. Specify more line colors.")
@@ -290,6 +307,7 @@ def phasorplot(
         # Force square figure and square axes
         width, height = _matplotlib.rcParams["figure.figsize"]
         size = min(width, height)
+
     # Make a square figure
     fig = _plt.figure(figsize=(size, size))
     ax = fig.add_axes([0.1, 0.1, 0.8, 0.8], polar=True, facecolor=bg)
@@ -300,6 +318,7 @@ def phasorplot(
     arrows = []
     for i, phasor in enumerate(phasors):
         mag, ang_r = _c.polar(phasor)
+
         # Plot with labels
         if legend:
             if mag > tolerance:
@@ -315,21 +334,28 @@ def phasorplot(
                     )
                 )
             else:
+                # NOTE:
+                # linewidth can be None; original code did linewidth*3, which breaks.
+                # Keep behavior but guard None.
+                ms = linewidth * 3 if linewidth is not None else None
                 arrows.append(
                     _plt.plot(
                         0,
                         0,
                         "o",
-                        markersize=linewidth * 3,
+                        markersize=ms,
                         label=legend[i],
                         color=colors[i],
                     )
                 )
+
         # Plot without labels
         else:
             _plt.arrow(0, 0, ang_r, mag, color=colors[i], linewidth=linewidth)
+
     if legend:
         _plt.legend(arrows, legend)
+
     # Set Minimum and Maximum Radius Terms
     ax.set_rmax(radius)
     ax.set_rmin(0)
@@ -872,10 +898,24 @@ class PowerCircle:
                 self.operating_point.x + 1j * self.operating_point.y
             )
 
+        # NOTE:
+        # Original code set power_factor = Q/P which is not power factor.
+        # Power factor = cos(phi) = P/|S|. Sign convention typically uses Q sign
+        # (lagging +Q, leading -Q). Here we compute signed PF as P/|S| with the
+        # sign of Q retained.
         if self.parameters["power_factor"] is None:
-            self.parameters["power_factor"] = (
-                self.operating_point.y / self.operating_point.x
-            )
+            Pval = self.operating_point.x
+            Qval = self.operating_point.y
+            Sabs = _np.sqrt(Pval**2 + Qval**2)
+            if Sabs == 0:
+                self.parameters["power_factor"] = 0
+            else:
+                pf = Pval / Sabs
+                if Qval < 0:
+                    pf = -abs(pf)
+                else:
+                    pf = abs(pf)
+                self.parameters["power_factor"] = pf
 
         if type1 == "r" and type2 == "s":
             self.parameters["Vs"] = (
@@ -1008,15 +1048,19 @@ def receiving_end_power_circle(
             " provide `Vr`, `A`, `B`"
         )
 
+    # NOTE:
+    # Original validation required (Sr is not None and power_factor is not None),
+    # which isn't necessary to mark an operating point when Sr alone is provided.
+    # Keep accepted combinations:
+    # - (Pr and Qr)
+    # - (Sr)
+    # - (Pr and power_factor)
+    # - (Qr and power_factor)
     if not (
-        (
-            (Pr is not None and Qr is not None)
-            or (Sr is not None and power_factor is not None)
-        )
-        or (
-            (Pr is not None and power_factor is not None)
-            or (Qr is not None and power_factor is not None)
-        )
+        (Pr is not None and Qr is not None)
+        or (Sr is not None)
+        or (Pr is not None and power_factor is not None)
+        or (Qr is not None and power_factor is not None)
     ):
         raise ValueError(
             "Not enough attributes for marking an operating point on Receiving "
@@ -1080,15 +1124,12 @@ def sending_end_power_circle(
             "provide `Vs`, `B`, `D`"
         )
 
+    # Same fix as receiving_end_power_circle: Ss alone is sufficient.
     if not (
-        (
-            (Ps is not None and Qs is not None)
-            or (Ss is not None and power_factor is not None)
-        )
-        or (
-            (Ps is not None and power_factor is not None)
-            or (Qs is not None and power_factor is not None)
-        )
+        (Ps is not None and Qs is not None)
+        or (Ss is not None)
+        or (Ps is not None and power_factor is not None)
+        or (Qs is not None and power_factor is not None)
     ):
         raise ValueError(
             "Not enough attributes for marking an operating point on Sending "
@@ -1290,6 +1331,8 @@ class SeriesRLC():
         """
         x = _np.linspace(lower_frequency_cut, upper_frequency_cut, samples)
 
+        # NOTE:
+        # output_gain expects scalar or array; it already vectorizes with numpy.
         y = self.output_gain(x)
 
         _plt.title("Frequency response of series RLC circuit")
