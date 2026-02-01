@@ -253,6 +253,14 @@ def string_to_bits(str):
 
     Converts a Pythonic string to the string's binary representation.
 
+    Examples
+    --------
+    >>> from electricpy import compute as cmp
+    >>> cmp.string_to_bits("A")
+    '01000001'
+    >>> cmp.string_to_bits("Hello")
+    '0000010010001100101110110011011001101111'
+
     Parameters
     ----------
     str:        string
@@ -266,18 +274,11 @@ def string_to_bits(str):
     """
     data = ''.join(format(ord(x), 'b') for x in str)
 
-    # If empty, return as-is
-    if len(data) == 0:
-        return data
+    # Pad to Nearest Byte
+    offset = len(data) % 8
+    if offset != 0:
+        data = (8 - offset) * '0' + data
 
-    # If length is already a power of two, return unchanged
-    n = len(data)
-    if n & (n - 1) == 0:
-        return data
-
-    # Compute next power of two and pad with leading zeros
-    next_pow = 1 << n.bit_length()
-    pad_len = next_pow - n
-    return '0' * pad_len + data
+    return data
 
 # END
