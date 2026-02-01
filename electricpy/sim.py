@@ -79,7 +79,8 @@ def digifiltersim(fin, filter, freqs, NN=1000, dt=0.01, title="",
     figsize:    tuple, optional
                 The figure dimensions for each subplot, default=None
     """
-    if (figsize != None): _plt.figure(figsize=figsize)
+    if figsize is not None:
+        _plt.figure(figsize=figsize)
     flen = len(freqs)
     for i in range(flen):
         # Gather frequency
@@ -94,7 +95,7 @@ def digifiltersim(fin, filter, freqs, NN=1000, dt=0.01, title="",
             x[k] = fin(k * dt, freq)
 
         # Identify how many rows were provided
-        sz = filter.size
+        sz = len(filter) if isinstance(filter, (tuple, list)) else filter.size
         if (sz < 5):
             raise ValueError("ERROR: Too few filter arguments provided. " +
                              "Refer to documentation for proper format.")
@@ -131,10 +132,11 @@ def digifiltersim(fin, filter, freqs, NN=1000, dt=0.01, title="",
         _plt.plot(ytime, 'k', label="Output")
         _plt.title(title)
         _plt.grid(which='both')
-        if legend: _plt.legend(title="Frequency = " + str(freq) + "Hz")
-        if xlim != False:
+        if legend:
+            _plt.legend(title="Frequency = " + str(freq) + "Hz")
+        if not xlim:
             _plt.xlim(xlim)
-        elif xmxscale != None:
+        elif xmxscale is not None:
             _plt.xlim((0, xmxscale / (freq * dt)))
 
     _plt.tight_layout()
