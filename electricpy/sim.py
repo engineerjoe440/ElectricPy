@@ -93,6 +93,9 @@ def digifiltersim(fin, filter, freqs, NN=1000, dt=0.01, title="",
         for k in range(NN):
             x[k] = fin(k * dt, freq)
 
+        # Ensure filter is a numpy array for .size and .shape usage
+        filter = _np.asarray(filter)
+
         # Identify how many rows were provided
         sz = filter.size
         if (sz < 5):
@@ -100,8 +103,12 @@ def digifiltersim(fin, filter, freqs, NN=1000, dt=0.01, title="",
                              "Refer to documentation for proper format.")
         elif (sz == 5):
             rows = 1
+            filter = _np.reshape(filter, (1, 5))
         else:
             rows, cols = filter.shape
+            if cols != 5:
+                raise ValueError("ERROR: Invalid filter shape, expected Nx5.")
+
         # Operate with each individual filter set
         x_tmp = _np.copy(x)
         nsteps = NN - 4
@@ -120,6 +127,10 @@ def digifiltersim(fin, filter, freqs, NN=1000, dt=0.01, title="",
                         B0 * x_tmp[T] + B1 * x_tmp[T - 1] + B2 * x_tmp[T - 2])
             # Copy New output into temporary input
             x_tmp = _np.copy(y)
+
+            # Reset y for next cascade stage to avoid carryover from prior stage
+            y = _np.zeros(NN)
+
         # Copy finalized output into *ytime* for plotting
         ytime = _np.copy(x_tmp)
         # Plot Filtered Output
@@ -193,9 +204,8 @@ def step_response(system, npts=1000, dt=0.01, combine=True, xlim=False,
     for i in range(npts):
         step[i] = 1.0
 
-    # Simulate Response for each input (step, ramp, parabola)
-    # All 'x' values are variables that are considered don't-care
-    x, y1, x = _sig.lsim((system), step, TT)
+    # Simulate Response
+    t_out, y1, x = _sig.lsim((system), step, TT)
 
     # Calculate error over all points
     for k in range(npts):
@@ -278,9 +288,8 @@ def ramp_response(system, npts=1000, dt=0.01, combine=True, xlim=False,
     for i in range(npts):
         ramp[i] = (dt * i)
 
-    # Simulate Response for each input (step, ramp, parabola)
-    # All 'x' values are variables that are considered don't-care
-    x, y2, x = _sig.lsim((system), ramp, TT)
+    # Simulate Response
+    t_out, y2, x = _sig.lsim((system), ramp, TT)
 
     # Calculate error over all points
     for k in range(npts):
@@ -362,9 +371,8 @@ def parabolic_response(system, npts=1000, dt=0.01, combine=True, xlim=False,
     for i in range(npts):
         parabola[i] = (dt * i) ** (2)
 
-    # Simulate Response for each input (step, ramp, parabola)
-    # All 'x' values are variables that are considered don't-care
-    x, y3, x = _sig.lsim((system), parabola, TT)
+    # Simulate Response
+    t_out, y3, x = _sig.lsim((system), parabola, TT)
 
     # Calculate error over all points
     for k in range(npts):
@@ -499,6 +507,12 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
               "simpts=" + str(simpts), " Autocorrecting simpts to be NN-1.")
         simpts = NN - 1
 
+    # Normalize plotting flags: default to False if not explicitly True
+    if plotforcing is None:
+        plotforcing = False
+    if plotresult is None:
+        plotresult = False
+
     # Test for C and D matricies
     if isinstance(C, typetest) and isinstance(D, typetest):
         solution = 3  # Set to solve and plot complete output
@@ -520,7 +534,7 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
     if callable(func):  # if f is a function, test as one
         mF = func(1)  # f should return: int, float, tuple, _np.arr, _np.matrix
     elif isinstance(func, (tuple, list)):  # if f is tupple of arguments
-        if callable(func[0]):  # if first argument is a function
+        if len(func) > 0 and callable(func[0]):  # if first argument is a function
             c_funcs = c_func_concat(func)  # concatinate functions into one
             mF = "MultiFunctions"  # label as multiple concatenated functions
         else:
@@ -564,6 +578,23 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
                          "\n or numpy.matrixlib.defmatrix.matrix. Nor does function " +
                          "\ncontain tuple of function handles. Please review function.")
 
+    # Normalize forcing function to always return a column matrix for consistent math
+    def _fn_col_matrix(T):
+        y = fn(T)
+        if isinstance(y, _np.matrixlib.defmatrix.matrix):
+            m = _np.asmatrix(y)
+        elif isinstance(y, _np.ndarray):
+            m = _np.asmatrix(y)
+        elif isinstance(y, tuple):
+            m = _np.asmatrix(y)
+        elif isinstance(y, (int, float, _np.float64)):
+            m = _np.asmatrix([y])
+        else:
+            m = _np.asmatrix(y)
+        if m.shape[1] != 1:
+            m = _np.matrix.reshape(m, (m.size, 1))
+        return m
+
     # Test for size correlation between matricies
     if (cA != rA):  # A isn't nxn matrix
         raise ValueError("Matrix 'A' is not NxN matrix.")
@@ -571,22 +602,25 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
         if (B.size % rA) == 0:  # Elements in B divisible by rows in A
             _warn("WARNING: Reshaping 'B' matrix to match 'A' matrix.")
             B = _np.matrix.reshape(B, (rA, int(B.size / rA)))  # Reshape Matrix
+            rB, cB = B.shape
         else:
             raise ValueError("'A' matrix dimensions don't match 'B' matrix dimensions.")
     elif (rA != rx):  # A and x matricies don't have same number of rows
         if (x.size % rA) == 0:  # Elements in x divisible by rows in A
             _warn("WARNING: Reshaping 'x' matrix to match 'A' matrix.")
             x = _np.matrix.reshape(x, (rA, 1))  # Reshape Matrix
+            rx, cx = x.shape
         else:
             raise ValueError("'A' matrix dimensions don't match 'B' matrix dimensions.")
     elif (cB != rF) or (cF != 1):  # Forcing Function matrix doesn't match B matrix
         raise ValueError("'B' matrix dimensions don't match forcing function dimensions.")
-    elif (solution == 3) and (cC != cA) or (rC != 1):  # Number of elements in C don't meet requirements
+    elif ((solution == 3) and ((cC != cA) or (rC != 1))):  # Number of elements in C don't meet requirements
         raise ValueError("'C' matrix dimensions don't match state-space variable dimensions.")
-    elif (solution == 3) and ((cD != rF) or (rD != 1)):  # Number of elements in D don't meet requirements
+    elif ((solution == 3) and ((cD != rF) or (rD != 1))):  # Number of elements in D don't meet requirements
         if (cD == rD) and (cD == 1) and (D[0] == 0):  # D matrix is set to [0]
             D = _np.asmatrix(_np.zeros(rF))  # Re-create D to meet requirements
             _warn("WARNING: Autogenerating 'D' matrix of zeros to match forcing functions.")
+            rD, cD = D.shape
         else:
             raise ValueError("'D' matrix dimensions don't match forcing function dimensions.")
 
@@ -597,7 +631,7 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
     # Start by defining Constants
     T = 0
     TT = _np.arange(0, (dt * (NN)), dt)
-    yout = 0
+    yout = _np.zeros(NN)
 
     # Define list of strings for plot output
     soltype = ["(Zero-Input)", "(Zero-State)", "(Complete Simulation)", "(Complete Sim., Combined Output)"]
@@ -631,20 +665,28 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
     for i in range(0, simpts):
         for n in range(xtim_len):
             xtim[n][i] = x[n]  # xtim[state-variable][domain] = x[state-variable]
+
         # Create Forcing Function output
+        if solution == 0:
+            fcol = None
+        else:
+            fcol = _fn_col_matrix(T)
 
         if fnc > 1:  # More than one forcing function
             for n in range(fnc):
-                fn_arr[n][i] = _np.asarray(fn(T))[n][0]
+                fn_arr[n][i] = _np.asarray(fcol)[n][0]
         else:  # only one forcing function
-            fn_arr[i] = fn(T)
+            if solution != 0:
+                fn_arr[i] = _np.asarray(fcol)[0][0]
+            else:
+                fn_arr[i] = 0
 
         if solution == 0:  # Zero-input, no added function input
             x = x + dt * A * x
         else:  # Zero-state or Total, add function input
-            x = x + dt * A * x + dt * B * fn(T)
+            x = x + dt * A * x + dt * B * fcol
             if solution == 3:
-                yout = yout + dt * D * fn(T)
+                yout[i] = _np.asarray((D * fcol))[0][0]
 
         T = T + dt  # Add discrete increment to T
 
@@ -690,10 +732,11 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
     if (plotresult and solution == 3):
         cofig = _plt.figure("Combined Output")
         C = _np.asarray(C)  # convert back to array for operation
+        ysum = _np.zeros(NN)
         for i in range(cC):
-            yout = yout + xtim[i] * C[0][i]  # Sum all st-space var mult. by their coeff
-        yout = _np.asarray(yout)  # convert output to array for plotting purposes
-        _plt.plot(TT, yout[0])
+            ysum = ysum + xtim[i] * C[0][i]  # Sum all st-space var mult. by their coeff
+        ysum = ysum + yout
+        _plt.plot(TT, ysum)
         if xlim != False:
             _plt.xlim(xlim)
         if ylim != False:
@@ -750,43 +793,26 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
                         The number of iterations completed before returning
                         either due to solution being found, or max iterations
                         being surpassed.
-
-    Examples
-    --------
-    >>> # doctest: +SKIP
-    >>> import numpy as np
-    >>> from electricpy import sim # Import Simulation Submodule
-    >>> def F(x):
-    ...     matr = np.array([[x[1]*10*np.sin(x[0])+2],
-    ...         [x[1]*(-10)*np.cos(x[0])+x[1]**2*10+1]])
-    ...     return(matr)
-    >>> def J(x):
-    ...     matr = np.array([[10*x[1]*np.cos(x[0]), 10*np.sin(x[0])],
-    ...         [10*x[1]*np.sin(x[0]), -10*np.cos(x[0])+20*x[1]]])
-    ...     return(matr)
-    >>> # Now compute Newton-Raphson
-    >>> X0 = [0, 1]
-    >>> results, iter = sim.NewtonRaphson(F,J,X0)
-    >>> print(results)
-    [-0.236,0.8554]
-    >>> print(iter) # Iteration Counter
-    4
-
-    See Also
-    --------
-    nr_pq:              Newton-Raphson System Generator
-    mbuspowerflow:      Multi-Bus Power Flow Calculator
-
     """
+    # Ensure X0 is numpy array for vector math
+    X0 = _np.asarray(X0, dtype=_np.float64)
+
     # Test for one-variable inputs
     if isinstance(F(X0), (int, float, _np.float64)):  # System is size-1
         if not isinstance(J(X0), (int, float, _np.float64)):  # Jacobian isn't size-1
             raise ValueError("ERROR: The Jacobian isn't size-1.")
         return newton(F, X0, J)
 
+    # Condition outputs to arrays
+    def _asvec(v):
+        v = _np.asarray(v, dtype=_np.float64)
+        return v.reshape(-1)
+
     # Test for valid argument sizes
-    f0sz = len(F(X0))
-    j0sz = len(J(X0))
+    F_value = _asvec(F(X0))
+    J_value = _np.asarray(J(X0), dtype=_np.float64)
+    f0sz = F_value.size
+    j0sz = J_value.shape[0]
     if f0sz != j0sz:  # Size mismatch
         raise ValueError("ERROR: The arguments return arrays or lists" +
                          " of different sizes: f0=" + str(f0sz) + "; j0=" + str(j0sz))
@@ -799,27 +825,27 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
         i = _np.eye(a, a)
         return _np.linalg.lstsq(m, i, rcond=None)[0]
 
-    F_value = F(X0)
     F_norm = _np.linalg.norm(F_value, ord=2)  # L2 norm of vector
     iteration_counter = 0
     teps = eps
+    userhasbeenwarned = False
+
     while abs(F_norm) > teps and iteration_counter < mxiter:
         try:  # Try Solve Operation
-            delta = _np.linalg.solve(J(X0), -F_value)
+            delta = _np.linalg.solve(_np.asarray(J(X0), dtype=_np.float64), -F_value)
             teps = eps  # Change Test Epsilon if Needed
         except _np.linalg.LinAlgError:  # Use Least Square if Error
             # Warn User, but only Once
-            try:
-                tst = userhasbeenwarned
-            except NameError:
+            if not userhasbeenwarned:
                 userhasbeenwarned = True
                 _warn("WARNING: Singular matrix, attempting LSQ method.")
             # Calculate Delta Using Least-Squares Inverse
-            delta = - inv(J(X0)).dot(F_value)
+            delta = - inv(_np.asarray(J(X0), dtype=_np.float64)).dot(F_value)
             # Change Epsilon Test
             teps = lsq_eps
+
         X0 = X0 + delta
-        F_value = F(X0)
+        F_value = _asvec(F(X0))
         F_norm = _np.linalg.norm(F_value, ord=2)
         iteration_counter += 1
 
@@ -836,85 +862,6 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
 def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False):
     """
     Newton Raphson Real/Reactive Power Function Generator.
-
-    Given specified parameters, will generate the necessary real and reactive
-    power functions necessary to compute the system's power flow.
-
-    Parameters
-    ----------
-    Ybus:       array_like
-                Postitive Sequence Y-Bus Matrix for Network.
-    V_set:      list of list of float
-                List of known and unknown voltages.
-                Known voltages should be provided as
-                a list of floating values in the form of:
-                [mag, ang], unknown voltages should
-                be provided as None.
-    P_set:      list of float
-                List of known and unknown real powers.
-                Known powers should be provided as
-                a floating point value, unknown powers
-                should be provided as None. Generated power
-                should be noted as positive, consumed power
-                should be noted as negative.
-    Q_set:      list of float
-                List of known and unknown reactive powers.
-                Known powers should be provided as
-                a floating point value, unknown powers
-                should be provided as None. Generated power
-                should be noted as positive, consumed power
-                should be noted as negative.
-    extend:     bool, optional
-                Control argument to format returned value as
-                singular function handle or lists of function
-                handles. default=True; singular function
-    argshape:   bool, optional
-                Control argument to force return of the voltage
-                argument array as a tuple of: (Θ-len, V-len).
-                default=False
-    verbose:    bool, optional
-                Control argument to print verbose information
-                about function generation, useful for debugging.
-                default=False
-
-    Returns
-    -------
-    retset:     array_like
-                An array of function handles corresponding to
-                the appropriate voltage magnitude and angle
-                calculation functions based on the real and
-                reactive power values. Function(s) will accept
-                an argument of the form:
-                [Θ1, Θ2,..., Θn, V1, V2,..., Vm]
-                where n is the number of busses with unknown
-                voltage angle, and m is the number of busses
-                with unknown voltage magnitude.
-
-    Examples
-    --------
-    >>> # doctest: +SKIP
-    >>> import numpy as np
-    >>> from electricpy import sim # Import Simulation Submodule
-    >>> ybustest = [[-10j,10j],
-    ...             [10j,-10j]]
-    >>> Vlist = [[1,0],[None,None]] # We don't know the voltage or angle at bus 2
-    >>> Plist = [None,-2.0] # 2pu watts consumed
-    >>> Qlist = [None,-1.0] # 1pu vars consumed
-    >>> F = nr_pq(ybustest,Vlist,Plist,Qlist)
-    >>> X0 = [0,1] # Define Initial Conditions
-    >>> J = sim.jacobian(F) # Find Jacobian
-    >>> # Now use Newton-Raphson to Solve
-    >>> results, iter = sim.NewtonRaphson(F,J,X0)
-    >>> print(results)
-    [-0.236,0.8554]
-    >>> print(iter) # Iteration Counter
-    4
-
-    See Also
-    --------
-    NewtonRaphson:      Newton-Raphson System Solver
-    mbuspowerflow:      Multi-Bus Power Flow Calculator
-
     """
     # Condition Inputs
     Ybus = _np.asarray(Ybus)
@@ -1081,103 +1028,6 @@ def mbuspowerflow(Ybus, Vknown, Pknown, Qknown, X0='flatstart', eps=1e-4,
                   slackbus=0, lsq_eps=0.25):
     """
     Multi-Bus Power Flow Calculator.
-
-    Function wrapper to simplify the evaluation of a power flow calculation.
-    Determines the function array (F) and the Jacobian array (J) and uses the
-    Newton-Raphson method to iteratively evaluate the system to converge to a
-    solution.
-
-    Parameters
-    ----------
-    Ybus:       array_like
-                Postitive Sequence Y-Bus Matrix for Network.
-    Vknown:     list of list of float
-                List of known and unknown voltages.
-                Known voltages should be provided as
-                a list of floating values in the form of:
-                [mag, ang], unknown voltages should
-                be provided as None.
-    Pknown:     list of float
-                List of known and unknown real powers.
-                Known powers should be provided as
-                a floating point value, unknown powers
-                should be provided as None. Generated power
-                should be noted as positive, consumed power
-                should be noted as negative.
-    Qknown:     list of float
-                List of known and unknown reactive powers.
-                Known powers should be provided as
-                a floating point value, unknown powers
-                should be provided as None. Generated power
-                should be noted as positive, consumed power
-                should be noted as negative.
-    X0:         {'flatstart', list of float}, optional
-                Initial conditions/Initial guess. May be set
-                to 'flatstart' to force function to generate
-                flat voltages and angles of 1∠0°. Must be
-                specified in the form:
-                [Θ1, Θ2,..., Θn, V1, V2,..., Vm]
-                where n is the number of busses with unknown
-                voltage angle, and m is the number of busses
-                with unknown voltage magnitude.
-    eps:        float, optional
-                Epsilon - The error value, default=0.0001
-    mxiter:     int, optional
-                Maximum Iterations - The highest number of
-                iterations allowed, default=100
-    returnct:   bool, optional
-                Control argument to force function to return
-                the iteration counter from the Newton-Raphson
-                solution. default=False
-    degrees:    bool, optional
-                Control argument to force returned angles to
-                degrees. default=True
-    split:      bool, optional
-                Control argument to force returned array to
-                split into lists of magnitudes and angles.
-                default=False
-    slackbus:   int, optional
-                Control argument to specify the bus index for
-                the slack bus. If the slack bus is not positioned
-                at bus index 1 (default), this control can be
-                used to reformat the data sets to a format
-                necessary for proper generation and Newton
-                Raphson computation. Must be zero-based.
-                default=0
-    lsq_eps:    float, optional
-                Least Squares Method (Failover) Epsilon - the error value.
-                default=0.25
-
-
-    .. image:: /static/mbuspowerflow_example.png
-
-    Examples
-    --------
-    >>> # doctest: +SKIP
-    >>> # Perform Power-Flow Analysis for Figure
-    >>> import numpy as np
-    >>> from electricpy import sim # Import Simulation Submodule
-    >>> ybustest = [[-10j,10j],
-    ...             [10j,-10j]]
-    >>> Vlist = [[1,0],[None,None]] # We don't know the voltage or angle at bus 2
-    >>> Plist = [None,-2.0] # 2pu watts consumed
-    >>> Qlist = [None,-1.0] # 1pu vars consumed
-    >>> sim.mbuspowerflow(
-    ...     ybustest,
-    ...     Vlist,
-    ...     Plist,
-    ...     Qlist,
-    ...     degrees=True,
-    ...     split=True,
-    ...     returnct=True
-    ... )
-    ([array([-13.52185223]), array([ 0.85537271])], 4)
-
-    See Also
-    --------
-    NewtonRaphson:          Newton-Raphson System Solver
-    nr_pq:                  Newton-Raphson System Generator
-    electricpy.powerflow:   Simple (2-bus) Power Flow Calculator
     """
     # Identify Lack of Support
     if not __NUMDIFFTOOL_SUPPORT__:
@@ -1198,21 +1048,28 @@ def mbuspowerflow(Ybus, Vknown, Pknown, Qknown, X0='flatstart', eps=1e-4,
         Qknown = _np.roll(Qknown, (len(Qknown) - slackbus), 0).tolist()
     # Generate F Function Array
     F, shp = nr_pq(Ybus, Vknown, Pknown, Qknown, True, True, False)
+
+    ang_len, mag_len = shp
+
     # Handle Flat-Start Condition
     if X0 == 'flatstart':
-        ang_len, mag_len = shp
         X0 = _np.append(_np.zeros(ang_len), _np.ones(mag_len))
+
     # Evaluate Jacobian
     J = jacobian(F)
+
     # Compute Newton-Raphson
     nr_result, iter_count = NewtonRaphson(F, J, X0, eps, mxiter, lsq_eps)
+
     # Convert to Degrees if Necessary
     if degrees:
         for i in range(ang_len):
             nr_result[i] = _np.degrees(nr_result[i])
+
     # Split into Mag/Ang Arrays if Necessary
     if split:
         nr_result = [nr_result[:ang_len], nr_result[-mag_len:]]
+
     # Return with Iteration Counter
     if returnct:
         return nr_result, iter_count
