@@ -280,6 +280,7 @@ def timedischarge(Vinit, Vmin, C, P, dt=1e-3, RMS=True, Eremain=False):
     else:
         vo = Vinit
     vc = loadedvcapdischarge(t, vo, C, P)  # set initial cap voltage
+    vcp = vc  # initialize previous voltage for Eremain calculation
     while vc >= Vmin:
         t = t + dt  # increment the time
         vcp = vc  # save previous voltage
