@@ -5,6 +5,8 @@ from numpy.testing import assert_almost_equal
 # Electricpy Imports
 from electricpy import powerflow
 from electricpy import phasor
+from electricpy import reactance
+from electricpy import tcycle
 from electricpy.passive import air_core_inductance
 
 def test_bridge_impedance():
@@ -454,3 +456,13 @@ class TestAirCoreInductor:
 
         expected_result = 0.42755
         self.check_result(expected_result)
+
+
+def test_tcycle_validation():
+    with pytest.raises(ValueError):
+        tcycle(1, freq=-60)
+
+
+def test_reactance_inductive():
+    result = reactance(5, freq=60)
+    assert result > 0
