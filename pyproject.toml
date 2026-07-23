@@ -59,6 +59,7 @@ dev = [
     "sphinx-git",
     "sphinx-immaterial",
     "genbadge[coverage]",
+    "coverage",
     "numpy",
     "matplotlib",
     "scipy",
