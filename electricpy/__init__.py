@@ -700,9 +700,9 @@ def short_circuit_current(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
     if t is not None and f is not None:
         # Calculate RMS if no alpha (angle) provided
         if alpha is None:
-            # Calculate tau using the provided frequency
-            tau = t * f
-            K = _np.sqrt(1 + 2 * _np.exp(-4 * _np.pi * tau / (X / R)))
+            # Number of cycles elapsed at the provided frequency
+            t_cycles = t * f
+            K = _np.sqrt(1 + 2 * _np.exp(-4 * _np.pi * t_cycles / (X / R)))
             IAC = abs(V / Z)
             Irms = K * IAC
             # Return Values
