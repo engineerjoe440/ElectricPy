@@ -698,17 +698,15 @@ def short_circuit_current(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
 
     # Calculate Asymmetrical (total) Current if t is not None
     if t is not None and f is not None:
-        # Calculate RMS if none of the angular values are provided
-        if alpha is None and omega is None:
-            # Calculate tau
-            tau = t / (1 / 60)
+        # Calculate RMS if no alpha (angle) provided
+        if alpha is None:
+            # Calculate tau using the provided frequency
+            tau = t * f
             K = _np.sqrt(1 + 2 * _np.exp(-4 * _np.pi * tau / (X / R)))
             IAC = abs(V / Z)
             Irms = K * IAC
             # Return Values
             return Irms, IAC, K
-        if alpha is None or omega is None:
-            raise ValueError("ERROR: Inappropriate Arguments Provided.")
         # Calculate Instantaneous if all angular values provided
         # Convert Degrees to Radians
         omega = _np.radians(omega)
@@ -2330,11 +2328,11 @@ def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
 
     Returns
     -------
-    string_efficiency:          float
-                                String efficiency of capacitive disks
-    capacitor_disk_voltages:    float
+    capacitor_disk_voltages:    numpy.ndarray
                                 Voltage across each capacitive disk starting
                                 from top to bottom
+    string_efficiency:          float
+                                String efficiency of capacitive disks
     """
     _m = _np.zeros((number_capacitors, number_capacitors))
     # Iterate over capacitors
@@ -2362,7 +2360,7 @@ def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
         (Voltage * 100) / (number_capacitors * capacitor_disk_voltages[-1, 0])
     )
 
-    return string_efficiency, capacitor_disk_voltages
+    return capacitor_disk_voltages, string_efficiency
 
 
 # Define Natural Frequency/Resonant Frequency Calculator
@@ -3280,11 +3278,11 @@ def ic_555_astable(R=None, C=None, freq=None, t_high=None, t_low=None):
 
     if t_high is not None and t_low is not None and C is not None:
 
-        x2 = t_low / C * _np.log(2)
-        x1 = t_high / C * _np.log(2)
+        x2 = t_low / (_np.log(2) * C)
+        x1 = t_high / (_np.log(2) * C)
         T = t_high + t_low
         freq = 1 / (T)
-        duty_cycle = t_high / (T)
+        duty_cycle = t_high * 100 / T
 
         return {
             'time_period': T,
@@ -3293,10 +3291,15 @@ def ic_555_astable(R=None, C=None, freq=None, t_high=None, t_low=None):
             'R1': x1 - x2,
             'R2': x2
         }
-    raise TypeError("Not enough parqmeters are passed")
+
+    if freq is not None and C is not None:
+        T = 1 / freq
+        R1_plus_2R2 = T / (_np.log(2) * C)
+        return {'R1_plus_2R2': R1_plus_2R2}
+
+    raise TypeError("Not enough parameters are passed")
 
 
-# pylint: disable-next=inconsistent-return-statements
 def ic_555_monostable(R=None, C=None, t_high=None, t_low=None):
     """
     555 Integrated Circuit Calculator.
@@ -3309,25 +3312,21 @@ def ic_555_monostable(R=None, C=None, t_high=None, t_low=None):
 
     Parameters
     ----------
-    R:      list[float, float] or tuple(float, float), optional
-            List of 2 resistor which are need in configuring IC 555.
+    R:      float, optional
+            Resistance used in configuring IC 555.
     C:      float, optional
             Capacitance between Threshold Pin and ground
-    # f removed.
     t_high: float, optional
-            ON time of IC 555
+            Pulse width (ON time) of IC 555
     t_low:  float, optional
-            OFF time of IC 555
+            OFF time (not used in monostable mode)
 
     Returns
     -------
-    dict:   "time_period": Time period of oscillating IC 555
-            "frequency": frequency of oscilation of IC 555
-            "duty_cycle": ration between ON time and total time
-            "t_low": ON time of IC 555
-            "t_high": OFF time of IC 555
+    float:  The solved parameter (R, C, or T=R*C*log(3)) depending on which
+            argument is None.
     """
-    T = t_high + t_low
+    T = t_high
     if R is None:
         if not (C is not None and T is not None):
             raise ValueError(
@@ -3342,14 +3341,7 @@ def ic_555_monostable(R=None, C=None, t_high=None, t_low=None):
                 "provided"
             )
         return T / (_np.log(3) * R)
-
-    if T is None:
-        if not (R is not None and T is not None):
-            raise ValueError(
-                "To find Time delay , Resistance and Capacitance should be "
-                "provided"
-            )
-        return R * C * _np.log(3)
+    return R * C * _np.log(3)
 
 
 def t_attenuator(Adb, Z0):

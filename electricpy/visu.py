@@ -477,7 +477,7 @@ class InductionMotorCircle:
         self.data = self.compute_efficiency()
 
     def __call__(self):
-        __doc__ = self.__doc__  # noqa: D102, F841
+        """Return the computed efficiency data for the induction motor circle."""
         return self.data
 
     def plot(self):
