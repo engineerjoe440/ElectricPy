@@ -158,8 +158,6 @@ opportunity to take advantage of this project.
 * Shaurya Uppal | Online Code Contributor
 * Paul Ortman | Power Quality Engineer - Idaho Power | Instructor - U of Idaho
 
-> *and*
-
 <a href="https://github.com/engineerjoe440/electricpy/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=engineerjoe440/electricpy" alt="contributors">
 </a>
