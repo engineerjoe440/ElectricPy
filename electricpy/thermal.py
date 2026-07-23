@@ -9,7 +9,15 @@ this module is designed to assist engineers visualize their designs.
 
 import numpy as _np
 
-from electricpy.constants import *
+from electricpy.constants import (
+    COLD_JUNCTION_DATA,
+    COLD_JUNCTION_KEYS,
+    RTD_TYPES,
+    THERMO_COUPLE_DATA,
+    THERMO_COUPLE_KEYS,
+    THERMO_COUPLE_VOLTAGES,
+    m,
+)
 
 # Define Cold-Junction-Voltage Calculator
 def coldjunction(Tcj, coupletype="K", To=None, Vo=None, P1=None, P2=None,
@@ -63,14 +71,14 @@ def coldjunction(Tcj, coupletype="K", To=None, Vo=None, P1=None, P2=None,
             raise ValueError("Temperature out of range.")
     # Define Constant Lookup System
     lookup = ["B", "E", "J", "K", "N", "R", "S", "T"]
-    if not (coupletype in lookup):
+    if coupletype not in lookup:
         raise ValueError("Invalid Thermocouple Type")
     index = lookup.index(coupletype)
     # Define Constant Dictionary
     # Load Data Into Terms
     parameters = {}
-    for var in COLD_JUNCTION_DATA.keys():
-        parameters[var] = parameters.get(var, None) or COLD_JUNCTION_DATA[var][index]
+    for var, values in COLD_JUNCTION_DATA.items():
+        parameters[var] = parameters.get(var, None) or values[index]
     To, Vo, P1, P2, P3, P4, Q1, Q2 = [parameters[key] for key in COLD_JUNCTION_KEYS]
     # Define Formula Terms
     tx = (Tcj - To)
@@ -143,13 +151,13 @@ def thermocouple(V, coupletype="K", fahrenheit=False, cjt=None, To=None,
         V += Vcj / m
     # Define Constant Lookup System
     lookup = ["B", "E", "J", "K", "N", "R", "S", "T"]
-    if not (coupletype in lookup):
+    if coupletype not in lookup:
         raise ValueError("Invalid Thermocouple Type")
     # Determine Array Selection
     vset = THERMO_COUPLE_VOLTAGES[coupletype]
     if V < vset[0] * m:
         raise ValueError("Voltage Below Lower Bound")
-    elif vset[0] <= V < vset[1]:
+    if vset[0] <= V < vset[1]:
         select = 0
     elif vset[1] <= V < vset[2]:
         select = 1
@@ -175,7 +183,8 @@ def thermocouple(V, coupletype="K", fahrenheit=False, cjt=None, To=None,
     # Return Temperature
     if fahrenheit:
         temp = (temp * 9 / 5) + 32
-    temp = _np.around(temp, round)
+    if round is not None:
+        temp = _np.around(temp, round)
     return temp
 
 
@@ -230,7 +239,8 @@ def rtdtemp(RT, rtdtype="PT100", fahrenheit=False, Rref=None, Tref=None,
     # Return Temperature
     if fahrenheit:
         temp = (temp * 9 / 5) + 32
-    temp = _np.around(temp, round)
+    if round is not None:
+        temp = _np.around(temp, round)
     return temp
 
 # END

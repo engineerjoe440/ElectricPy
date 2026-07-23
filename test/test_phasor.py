@@ -5,6 +5,7 @@ from electricpy.phasors import vectarray
 from numpy.testing import assert_almost_equal
 
 def test_phasor():
+    """Validate phasor behavior."""
     magnitude = 10
     # basic angles test case 0
     z1 = phasor(magnitude, 0)
@@ -36,6 +37,7 @@ def test_phasor():
 class TestPhs():
 
     def test_0(self):
+        """Validate phs scenario 0."""
         inputs = [0, 90, 180, 270, 360]
 
         outputs = [phs(x) for x in inputs]
@@ -45,6 +47,7 @@ class TestPhs():
             assert_almost_equal(x, y)
 
     def test_1(self):
+        """Validate phs scenario 1."""
         inputs = [30, 45, 60, 135]
 
         outputs = [phs(x) for x in inputs]
@@ -56,6 +59,7 @@ class TestPhs():
 class TestVectarray():
 
     def test_0(self):
+        """Validate vectarray scenario 0."""
 
         A = [2+3j, 4+5j, 6+7j, 8+9j]
         B = vectarray(A)
@@ -65,6 +69,7 @@ class TestVectarray():
         np.testing.assert_array_almost_equal(B, B_test)
 
     def test_1(self):
+        """Validate vectarray scenario 1."""
 
         A = np.random.random(size = 16)
         B = vectarray(A)

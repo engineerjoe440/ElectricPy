@@ -126,7 +126,7 @@ class Triangle:
         radicand = s * (s - self.a) * (s - self.b) * (s - self.c)
 
         # Clamp tiny negatives caused by floating-point error.
-        if radicand < 0 and radicand > -self._tol:
+        if -self._tol < radicand < 0:
             radicand = 0.0
 
         if radicand < -self._tol:

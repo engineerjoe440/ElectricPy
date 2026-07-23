@@ -132,12 +132,12 @@ class Circle:
         """
         return Line.construct(p, self.center)
 
-    def is_tangent(self, l: Line, *, tol: float = 1e-9) -> bool:
+    def is_tangent(self, l: Line, *, tol: float = 1e-9) -> bool:  # noqa: E741
         """Return True if the line is tangent to the circle (within tolerance)."""
         d = l.distance(self.center)
         return _is_close(d, self.radius, rel_tol=tol, abs_tol=tol)
 
-    def is_normal(self, l: Line, *, tol: float = 1e-9) -> bool:
+    def is_normal(self, l: Line, *, tol: float = 1e-9) -> bool:  # noqa: E741
         """
         Line passes through the circle's center (within tolerance).
 
@@ -311,7 +311,7 @@ class Circle:
 
         # h = half-chord length
         h2 = r1 * r1 - a * a
-        if h2 < 0 and h2 > -tol:
+        if -tol < h2 < 0:
             h2 = 0.0  # clamp tiny negatives due to numeric error
         if h2 < -tol:
             return None  # numeric safety; should not happen if cases above handled
@@ -362,7 +362,7 @@ class Circle:
 
     def __hash__(self) -> int:
         """Hash for Circle."""
-        return hash((self.center, self.radius))
+        return hash((self.center.x, self.center.y, self.radius))
 
 
 def construct(p0: Point, p1: Point, p2: Point) -> Circle:

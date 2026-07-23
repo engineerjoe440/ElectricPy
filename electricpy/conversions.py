@@ -12,10 +12,8 @@ to aid in scientific calculations.
 """
 ################################################################################
 
-from electricpy.constants import WATTS_PER_HP, Aabc, A012, KWH_PER_BTU
-
-# Import Required Packages
 import numpy as _np
+from electricpy.constants import A012, Aabc, KWH_PER_BTU, WATTS_PER_HP
 
 
 # Define HP to Watts Calculation
@@ -148,7 +146,7 @@ def rad_to_hz(radians):
     -------
     hertz:      float
                 The frequency (represented in Hertz)
-    
+
     Examples
     --------
     >>> from electricpy import pi
@@ -183,7 +181,7 @@ def hz_to_rad(hz):
     -------
     radians:    float
                 The frequency (represented in radians/sec)
-    
+
     Examples
     --------
     >>> from electricpy import conversions as conv
@@ -299,19 +297,17 @@ def seq_to_abc(M012, reference='A'):
     >>> phs_quantities = conv.seq_to_abc(seq_quantities)
     >>> # Returned Phase Quantities will Approximately Equal the Original Values
     """
-    # Compute Dot Product
-    M = A012.dot(M012)
     # Condition Reference:
     reference = reference.upper()
     if reference == 'A':
-        pass
+        M = Aabc
     elif reference == 'B':
-        M = _np.roll(M, 1, 0)
+        M = _np.roll(Aabc, 1, 0)
     elif reference == 'C':
-        M = _np.roll(M, 2, 0)
+        M = _np.roll(Aabc, 2, 0)
     else:
         raise ValueError("Invalid Phase Reference.")
-    return M
+    return _np.linalg.inv(M).dot(M012)
 
 
 # Define Second Name for seq_to_abc
@@ -409,7 +405,7 @@ def rad_to_rpm(rad):
     -------
     rpm:        float
                 The angular velocity in revolutions-per-minute (RPM)
-    
+
     Examples
     --------
     >>> from electricpy import pi
@@ -438,7 +434,7 @@ def rpm_to_rad(rpm):
     -------
     rad:        float
                 The angular velocity in radians-per-second
-    
+
     Examples
     --------
     >>> from electricpy import pi

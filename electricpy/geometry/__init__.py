@@ -273,15 +273,14 @@ def section(p1: Point, p2: Point, ratio: Union[Tuple[Number, Number], float]) ->
     if isinstance(ratio, (int, float)):
         t = _as_float(ratio)
         return Point(p1.x + t * (p2.x - p1.x), p1.y + t * (p2.y - p1.y))
-    else:
-        m, n = ratio
-        m = _as_float(m)
-        n = _as_float(n)
-        if _is_close(m + n, 0.0):
-            raise ZeroDivisionError("Invalid ratio: m+n must be nonzero.")
-        # Preserve original convention: m corresponds to p2 weight, n to p1 weight via:
-        # p = (n*p1 + m*p2)/(m+n)
-        return Point((n * p1.x + m * p2.x) / (m + n), (n * p1.y + m * p2.y) / (m + n))
+    m, n = ratio
+    m = _as_float(m)
+    n = _as_float(n)
+    if _is_close(m + n, 0.0):
+        raise ZeroDivisionError("Invalid ratio: m+n must be nonzero.")
+    # Preserve original convention: m corresponds to p2 weight, n to p1 weight via:
+    # p = (n*p1 + m*p2)/(m+n)
+    return Point((n * p1.x + m * p2.x) / (m + n), (n * p1.y + m * p2.y) / (m + n))
 
 
 def midpoint(p1: Point, p2: Point) -> Point:

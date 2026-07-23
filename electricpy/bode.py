@@ -34,13 +34,13 @@ def _sys_condition(system, feedback):
             if ld < ln:
                 den = _np.append(_np.zeros(ln - ld), den)  # Pad beginning with zeros
             den = den + num  # Add numerator and denominator
-        for i in range(len(num)):
-            if num[i] != 0:
-                num = num[i:]  # Slice zeros off the front of the numerator
+        for ind, val in enumerate(num):
+            if val != 0:
+                num = num[ind:]  # Slice zeros off the front of the numerator
                 break  # Break out of for loop
-        for i in range(len(den)):
-            if den[i] != 0:
-                den = den[i:]  # Slice zeros off the front of the denominator
+        for ind, val in enumerate(den):
+            if val != 0:
+                den = den[ind:]  # Slice zeros off the front of the denominator
                 break  # Break out of for loop
         system = (num, den)  # Repack system
     return system  # Return the conditioned system

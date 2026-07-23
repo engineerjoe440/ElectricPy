@@ -3,7 +3,8 @@
 ################################################################################
 
 import os
-import math, cmath
+import math
+import cmath
 import numpy as np
 import electricpy as ep
 from electricpy import visu

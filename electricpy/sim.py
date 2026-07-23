@@ -81,6 +81,7 @@ def digifiltersim(fin, filter, freqs, NN=1000, dt=0.01, title="",
     """
     if figsize is not None:
         _plt.figure(figsize=figsize)
+    filter = _np.asarray(filter)
     flen = len(freqs)
     for i in range(flen):
         # Gather frequency
@@ -95,26 +96,28 @@ def digifiltersim(fin, filter, freqs, NN=1000, dt=0.01, title="",
             x[k] = fin(k * dt, freq)
 
         # Identify how many rows were provided
-        sz = len(filter) if isinstance(filter, (tuple, list)) else filter.size
-        if (sz < 5):
+        sz = len(filter) if isinstance(filter, (tuple, list, _np.ndarray)) else filter.size
+        if sz < 5:
             raise ValueError("ERROR: Too few filter arguments provided. " +
                              "Refer to documentation for proper format.")
-        elif (sz == 5):
+        if sz == 5:
             rows = 1
+            filter_rows = filter.reshape(1, 5)
         else:
-            rows, cols = filter.shape
+            rows, _ = filter.shape
+            filter_rows = filter
         # Operate with each individual filter set
         x_tmp = _np.copy(x)
-        nsteps = NN - 4
+        n_steps = NN - 4
         for row_n in range(rows):
-            row = filter[row_n]  # Capture individual row
+            row = filter_rows[row_n]  # Capture individual row
             A1 = row[0]
             A2 = row[1]
             B0 = row[2]
             B1 = row[3]
             B2 = row[4]
             T = 3
-            for _ in range(nsteps):
+            for _ in range(n_steps):
                 T = T + 1
                 # Apply Filtering Specified by Individual Row
                 y[T] = (A1 * y[T - 1] + A2 * y[T - 2] +
@@ -196,8 +199,7 @@ def step_response(system, npts=1000, dt=0.01, combine=True, xlim=False,
         step[i] = 1.0
 
     # Simulate Response for each input (step, ramp, parabola)
-    # All 'x' values are variables that are considered don't-care
-    x, y1, x = _sig.lsim((system), step, TT)
+    _, y1, _ = _sig.lsim((system), step, TT)
 
     # Calculate error over all points
     for k in range(npts):
@@ -281,8 +283,7 @@ def ramp_response(system, npts=1000, dt=0.01, combine=True, xlim=False,
         ramp[i] = (dt * i)
 
     # Simulate Response for each input (step, ramp, parabola)
-    # All 'x' values are variables that are considered don't-care
-    x, y2, x = _sig.lsim((system), ramp, TT)
+    _, y2, _ = _sig.lsim((system), ramp, TT)
 
     # Calculate error over all points
     for k in range(npts):
@@ -365,8 +366,7 @@ def parabolic_response(system, npts=1000, dt=0.01, combine=True, xlim=False,
         parabola[i] = (dt * i) ** (2)
 
     # Simulate Response for each input (step, ramp, parabola)
-    # All 'x' values are variables that are considered don't-care
-    x, y3, x = _sig.lsim((system), parabola, TT)
+    _, y3, _ = _sig.lsim((system), parabola, TT)
 
     # Calculate error over all points
     for k in range(npts):
@@ -474,13 +474,17 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
 
     # Define Function Concatinator Class
     class c_func_concat:
+        """Concatenate multiple scalar forcing functions into one vector output."""
+
         def __init__(self, funcs):  # Initialize class with tupple of functions
+            """Store the supplied callables in index order for later evaluation."""
             self.nfuncs = len(funcs)  # Determine how many functions are in tuple
             self.func_reg = {}  # Create empty keyed list of function handles
             for key in range(self.nfuncs):  # Iterate adding to key
                 self.func_reg[key] = funcs[key]  # Fill keyed list with functions
 
         def func_c(self, x):  # Concatenated Function
+            """Evaluate each stored function at ``x`` and return a column matrix."""
             rets = _np.array([])  # Create blank numpy array to store function outputs
             for i in range(self.nfuncs):
                 y = self.func_reg[i](x)  # Calculate each function at value x
@@ -519,6 +523,7 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
     D = _np.asmatrix(D)
 
     # Create values for input testing
+    c_funcs = None
     if callable(func):  # if f is a function, test as one
         mF = func(1)  # f should return: int, float, tuple, _np.arr, _np.matrix
     elif isinstance(func, (tuple, list)):  # if f is tupple of arguments
@@ -547,10 +552,14 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
     rF, cF = 1, 1  # Defualt for a function returning one value
 
     if isinstance(mF, tuple):  # If function returns tuple
-        fn = lambda x: tuple_to_matrix(x, func)  # Use conversion function
+        def fn(x):
+            return tuple_to_matrix(x, func)
+
         rF, cF = fn(1).shape  # Prepare for further testing
     elif isinstance(mF, _np.ndarray):  # If function returns numpy array
-        fn = lambda x: nparr_to_matrix(x, func)  # Use conversion function
+        def fn(x):
+            return nparr_to_matrix(x, func)
+
         rF, cF = fn(1).shape  # Prepare for further testing
     elif isinstance(mF, (int, float, _np.float64)):  # If function returns int or float or numpy float
         fn = func  # Pass function handle
@@ -560,16 +569,18 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
     elif (mF == "MultiFunctions"):  # There are multiple functions in one argument
         fn = c_funcs.func_c  # Gather function handle from function concatenation class
         rF, cF = fn(1).shape  # Prepare for further testing
-    elif (mF == "NA"):  # Function doesn't meet requirements
-        raise ValueError("Forcing function does not meet requirements." +
-                         "\nFunction doesn't return data type: int, float, numpy.ndarray" +
-                         "\n or numpy.matrixlib.defmatrix.matrix. Nor does function " +
-                         "\ncontain tuple of function handles. Please review function.")
+    elif mF == "NA":  # Function doesn't meet requirements
+        raise ValueError(
+            "Forcing function does not meet requirements." +
+            "\nFunction doesn't return data type: int, float, numpy.ndarray" +
+            "\n or numpy.matrixlib.defmatrix.matrix. Nor does function " +
+            "\ncontain tuple of function handles. Please review function."
+        )
 
     # Test for size correlation between matricies
     if (cA != rA):  # A isn't nxn matrix
         raise ValueError("Matrix 'A' is not NxN matrix.")
-    elif (rA != rB):  # A and B matricies don't have same number of rows
+    if (rA != rB):  # A and B matricies don't have same number of rows
         if (B.size % rA) == 0:  # Elements in B divisible by rows in A
             _warn("WARNING: Reshaping 'B' matrix to match 'A' matrix.")
             B = _np.matrix.reshape(B, (rA, int(B.size / rA)))  # Reshape Matrix
@@ -583,9 +594,9 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
             raise ValueError("'A' matrix dimensions don't match 'B' matrix dimensions.")
     elif (cB != rF) or (cF != 1):  # Forcing Function matrix doesn't match B matrix
         raise ValueError("'B' matrix dimensions don't match forcing function dimensions.")
-    elif (solution == 3) and (cC != cA) or (rC != 1):  # Number of elements in C don't meet requirements
+    if (solution == 3) and (cC != cA) or (rC != 1):  # Number of elements in C don't meet requirements
         raise ValueError("'C' matrix dimensions don't match state-space variable dimensions.")
-    elif (solution == 3) and ((cD != rF) or (rD != 1)):  # Number of elements in D don't meet requirements
+    if (solution == 3) and ((cD != rF) or (rD != 1)):  # Number of elements in D don't meet requirements
         if (cD == rD) and (cD == 1) and (D[0] == 0):  # D matrix is set to [0]
             D = _np.asmatrix(_np.zeros(rF))  # Re-create D to meet requirements
             _warn("WARNING: Autogenerating 'D' matrix of zeros to match forcing functions.")
@@ -654,8 +665,8 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
     if (plotforcing):
         _ = _plt.figure("Forcing Functions")
         if fnc > 1:
-            for x in range(fnc):
-                _plt.plot(TT, fn_arr[x], label="f" + str(x + 1))
+            for index in range(fnc):
+                _plt.plot(TT, fn_arr[index], label="f" + str(index + 1))
         else:
             _plt.plot(TT, fn_arr, label="f1")
         if not xlim:
@@ -673,8 +684,8 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
 
     # Plot each state-variable over time
     _ = _plt.figure("State Variables")
-    for x in range(xtim_len):
-        _plt.plot(TT, xtim[x], label="x" + str(x + 1))
+    for index in range(xtim_len):
+        _plt.plot(TT, xtim[index], label="x" + str(index + 1))
     if not xlim:
         _plt.xlim(xlim)
     if not ylim:
@@ -805,16 +816,15 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
     F_norm = _np.linalg.norm(F_value, ord=2)  # L2 norm of vector
     iteration_counter = 0
     teps = eps
+    user_has_been_warned = False
     while abs(F_norm) > teps and iteration_counter < mxiter:
         try:  # Try Solve Operation
             delta = _np.linalg.solve(J(X0), -F_value)
             teps = eps  # Change Test Epsilon if Needed
         except _np.linalg.LinAlgError:  # Use Least Square if Error
             # Warn User, but only Once
-            try:
-                tst = userhasbeenwarned
-            except NameError:
-                userhasbeenwarned = True
+            if not user_has_been_warned:
+                user_has_been_warned = True
                 _warn("WARNING: Singular matrix, attempting LSQ method.")
             # Calculate Delta Using Least-Squares Inverse
             delta = - inv(J(X0)).dot(F_value)
@@ -937,13 +947,17 @@ def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False)
 
     # Define Function Concatinator Class
     class c_func_concat:
+        """Concatenate multiple scalar forcing functions into one vector output."""
+
         def __init__(self, funcs):  # Initialize class with tupple of functions
+            """Store the supplied callables in index order for later evaluation."""
             self.nfuncs = len(funcs)  # Determine how many functions are in tuple
             self.func_reg = {}  # Create empty keyed list of function handles
             for key in range(self.nfuncs):  # Iterate adding to key
                 self.func_reg[key] = funcs[key]  # Fill keyed list with functions
 
         def func_c(self, x):  # Concatenated Function
+            """Evaluate each stored function at ``x`` and return a flat array."""
             rets = _np.array([])  # Create blank numpy array to store function outputs
             for i in range(self.nfuncs):
                 y = self.func_reg[i](x)  # Calculate each function at value x
@@ -1008,31 +1022,31 @@ def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False)
             if P_list[_k] is None:
                 continue  # Don't Generate Requirements for Slack Bus
             # Collect Other Terms
-            Yind = "[{}][{}]".format(_k, _j)
+            Yind = f"[{_k}][{_j}]"
             if verbose:
                 print("K:", _k, "\tJ:", _j)
             # Generate Voltage-Related Strings
             if _k != _j:  # Skip i,i Terms
                 # Generate K-Related Strings
                 if V_list[_k][0] is None:  # The Vk magnitude is unknown
-                    Vkm = "Vx[{}]".format(_k + ang_len - magoff * _k)  # Use Variable Magnitude
-                    Vka = "Vx[{}]".format(_k - angoff)  # Use Variable Angle
+                    Vkm = f"Vx[{_k + ang_len - magoff * _k}]"  # Use Variable Magnitude
+                    Vka = f"Vx[{_k - angoff}]"  # Use Variable Angle
                 else:  # The Vk magnitude is known
-                    Vkm = "V_list[{}][0]".format(_k)  # Load Magnitude
+                    Vkm = f"V_list[{_k}][0]"  # Load Magnitude
                     if V_list[_k][1] is None:  # The Vj angle is unknown
-                        Vka = "Vx[{}]".format(_k - angoff)  # Use Variable Angle
+                        Vka = f"Vx[{_k - angoff}]"  # Use Variable Angle
                     else:
-                        Vka = "V_list[{}][1]".format(_k)  # Load Angle
+                        Vka = f"V_list[{_k}][1]"  # Load Angle
                 # Generate J-Related Strings
                 if V_list[_j][0] is None:  # The Vj magnitude is unknown
-                    Vjm = "Vx[{}]".format(_j + ang_len - magoff * _j)  # Use Variable Magnitude
-                    Vja = "Vx[{}]".format(_j - angoff)  # Use Variable Angle
+                    Vjm = f"Vx[{_j + ang_len - magoff * _j}]"  # Use Variable Magnitude
+                    Vja = f"Vx[{_j - angoff}]"  # Use Variable Angle
                 else:  # The Vj magnitude is known
-                    Vjm = "V_list[{}][0]".format(_j)  # Load Magnitude
+                    Vjm = f"V_list[{_j}][0]"  # Load Magnitude
                     if V_list[_j][1] is None:  # The Vj angle is unknown
-                        Vja = "Vx[{}]".format(_j - angoff)  # Use Variable Angle
+                        Vja = f"Vx[{_j - angoff}]"  # Use Variable Angle
                     else:
-                        Vja = "V_list[{}][1]".format(_j)  # Load Angle
+                        Vja = f"V_list[{_j}][1]"  # Load Angle
                 # Generate String and Append to List of Functions
                 P_strgs[i] = (Pstr.format(Vkm, Vka, Vjm, Vja, Yind))
                 if verbose:
@@ -1042,7 +1056,7 @@ def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False)
                     # Generate String and Append to List of Functions
                     if newentry:
                         newentry = False
-                        Qgen = "-Vx[{0}]**2*YBUS[{0}][{0}].imag".format(_k)
+                        Qgen = f"-Vx[{_k}]**2*YBUS[{_k}][{_k}].imag"
                     else:
                         Qgen = ""
                     Q_strgs[i] = (Qstr.format(Vkm, Vka, Vjm, Vja, Yind, Qgen))
@@ -1050,8 +1064,8 @@ def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False)
                         print("New Q-String:", Q_strgs[i])
             # Increment Index at Each Interior Level
             i += 1
-        tempPstr = "P_funcs.append(lambda Vx: -P_list[{0}]".format(_k)
-        tempQstr = "Q_funcs.append(lambda Vx: -Q_list[{0}]".format(_k)
+        tempPstr = f"P_funcs.append(lambda Vx: -P_list[{_k}]"
+        tempQstr = f"Q_funcs.append(lambda Vx: -Q_list[{_k}]"
         for _i in range(ii, i):
             P = P_strgs[_i]
             Q = Q_strgs[_i]
@@ -1203,10 +1217,13 @@ def mbuspowerflow(Ybus, Vknown, Pknown, Qknown, X0='flatstart', eps=1e-4,
         Pknown = _np.roll(Pknown, (len(Pknown) - slackbus), 0).tolist()
         Qknown = _np.roll(Qknown, (len(Qknown) - slackbus), 0).tolist()
     # Generate F Function Array
-    F, shp = nr_pq(Ybus, Vknown, Pknown, Qknown, True, True, False)
+    nr_out = nr_pq(Ybus, Vknown, Pknown, Qknown, True, True, False)
+    F = nr_out[0]
+    shp = nr_out[1]
+    ang_len = shp[0]
+    mag_len = shp[1]
     # Handle Flat-Start Condition
     if X0 == 'flatstart':
-        ang_len, mag_len = shp
         X0 = _np.append(_np.zeros(ang_len), _np.ones(mag_len))
     # Evaluate Jacobian
     J = jacobian(F)

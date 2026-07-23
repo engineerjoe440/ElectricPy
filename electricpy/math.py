@@ -89,6 +89,8 @@ def funcrms(func, T):
     -------
     RMS:    The RMS value of the function (f) over the interval ( 0, T )
     """
+    if T <= 0:
+        raise ValueError("T must be greater than zero")
     integral, _ = integrate(lambda x: func(x) ** 2, 0, T)
     return _np.sqrt(1 / T * integral)
 
@@ -114,6 +116,8 @@ def gaussian(x, mu=0, sigma=1):
     -------
     Computed gaussian (numpy.ndarray) of the input x
     """
+    if sigma == 0:
+        raise ValueError("sigma must be non-zero")
     return (1 / (sigma * _np.sqrt(2 * _np.pi)) *
             _np.exp(-(x - mu) ** 2 / (2 * sigma ** 2)))
 
@@ -253,11 +257,10 @@ def rfft(arr, dt=0.01, absolute=True, resample=True):
         # Downsample to remove unnecessary points
         fixed_fft = filter.dnsample(fourier, dn)
         return fixed_fft
-    elif not resample:
+    if not resample:
         return fourier
-    else:
-        # Condition Resample Value
-        resample = int(resample)
-        # Downsample to remove unnecessary points
-        fixed_fft = filter.dnsample(fourier, resample)
-        return fixed_fft
+    # Condition Resample Value
+    resample = int(resample)
+    # Downsample to remove unnecessary points
+    fixed_fft = filter.dnsample(fourier, resample)
+    return fixed_fft

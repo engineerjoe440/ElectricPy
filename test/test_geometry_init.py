@@ -5,6 +5,7 @@ import electricpy.geometry as geometry
 
 
 def test_as_float_and_is_close():
+    """Validate as float and is close behavior."""
     assert geometry._as_float(1) == 1.0
     assert geometry._as_float(1.25) == 1.25
     assert geometry._as_float(1 + 1e-13j) == 1.0
@@ -16,6 +17,7 @@ def test_as_float_and_is_close():
 
 
 def test_point_protocols_and_comparison():
+    """Validate point protocols and comparison behavior."""
     p1 = geometry.Point(1, 2)
     p2 = geometry.Point(1, 2)
     p3 = geometry.Point(1.0 + 1e-10, 2.0)
@@ -32,6 +34,7 @@ def test_point_protocols_and_comparison():
 
 
 def test_line_basic_operations():
+    """Validate line basic operations behavior."""
     p1 = geometry.Point(0, 0)
     p2 = geometry.Point(1, 1)
     line = geometry.line_equation(p1, p2)
@@ -60,6 +63,7 @@ def test_line_basic_operations():
 
 
 def test_line_vertical_horizontal_and_intersection():
+    """Validate line vertical horizontal and intersection behavior."""
     vertical = geometry.Line(1, 0, -2)
     horizontal = geometry.Line(0, 1, -3)
 
@@ -89,6 +93,7 @@ def test_line_vertical_horizontal_and_intersection():
 
 
 def test_line_helpers_and_geometry_functions():
+    """Validate line helpers and geometry functions behavior."""
     p1 = geometry.Point(0, 0)
     p2 = geometry.Point(3, 4)
 
@@ -111,6 +116,7 @@ def test_line_helpers_and_geometry_functions():
 
 
 def test_line_distance_and_reflection():
+    """Validate line distance and reflection behavior."""
     line = geometry.Line(0, 1, 0)
     p = geometry.Point(0, 2)
 
@@ -127,6 +133,7 @@ def test_line_distance_and_reflection():
 
 
 def test_perpendicular_bisector_and_line_equation_errors():
+    """Validate error handling for perpendicular bisector and line equation errors."""
     p1 = geometry.Point(0, 0)
     p2 = geometry.Point(2, 0)
     bisector = geometry.perpendicular_bisector(p1, p2)
@@ -140,6 +147,7 @@ def test_perpendicular_bisector_and_line_equation_errors():
 
 
 def test_angle_between_lines():
+    """Validate angle between lines behavior."""
     horizontal = geometry.Line(0, 1, 0)
     vertical = geometry.Line(1, 0, 0)
     angle = geometry.angle_btw_lines(horizontal, vertical)
@@ -154,6 +162,7 @@ def test_angle_between_lines():
 
 
 def test_degenerate_line_errors():
+    """Validate error handling for degenerate line errors."""
     with pytest.raises(AssertionError):
         geometry.Line(0, 0, 1)
 

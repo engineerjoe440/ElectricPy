@@ -109,11 +109,10 @@ def captransfer(t, Vs, R, Cs, Cd):
     """
     if t < 0:
         raise ValueError("Time must be greater than zero.")
-    try:
-        tau = (R * Cs * Cd) / (Cs + Cd)
-        rvolt = Vs * _np.exp(-t / tau)
-    except ZeroDivisionError:
-        raise ZeroDivisionError("Sum of Source and Destination Capacitance must be non-zero.")
+    if Cs + Cd == 0:
+        raise ValueError("Sum of Source and Destination Capacitance must be non-zero.")
+    tau = (R * Cs * Cd) / (Cs + Cd)
+    rvolt = Vs * _np.exp(-t / tau)
     vfinal = Vs * Cs / (Cs + Cd)
     return rvolt, vfinal
 
@@ -149,6 +148,10 @@ def capbacktoback(C1, C2, Lm, VLN=None, VLL=None):
     ifreq:      float
                 Transient current frequency
     """
+    if VLL is None and VLN is None:
+        raise ValueError("Must provide either VLN or VLL.")
+    if VLL is None:
+        VLL = _np.sqrt(3) * VLN
     # Evaluate Max Current
     imax = _np.sqrt(2 / 3) * VLL * _np.sqrt((C1 * C2) / ((C1 + C2) * Lm))
     # Evaluate Inrush Current Frequency
@@ -287,8 +290,7 @@ def timedischarge(Vinit, Vmin, C, P, dt=1e-3, RMS=True, Eremain=False):
     if Eremain:
         E = capenergy(C, vcp)  # calc. energy
         return t - dt, E
-    else:
-        return t - dt
+    return t - dt
 
 
 # Define Rectifier Capacitor Calculator
@@ -321,7 +323,7 @@ def rectifiercap(Iload, fswitch, dVout):
 
 
 # Define Inductor Energy Formula
-def inductorenergy(L, I):
+def inductorenergy(L, I):  # noqa: E741
     r"""
     Energy Stored in Inductor Formula.
 
@@ -579,13 +581,12 @@ def inductive_voltdiv(Vin=None, Vout=None, L1=None, L2=None, find=''):
 
     if find == 'vin':
         return Vin
-    elif find == 'vout':
+    if find == 'vout':
         return Vout
-    elif find == 'l1':
+    if find == 'l1':
         return L1
-    elif find == 'l2':
+    if find == 'l2':
         return L2
-    else:
-        return Vin, Vout, L1, L2
+    return Vin, Vout, L1, L2
 
 # END

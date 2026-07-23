@@ -5,6 +5,7 @@ from electricpy import fault
 
 
 def test_single_phase_to_ground_fault_sequence():
+    """Validate single phase to ground fault sequence behavior."""
     v_th = 1
     z_seq = (1, 1, 1)
     result = fault.single_phase_to_ground_fault(v_th, z_seq)
@@ -14,6 +15,7 @@ def test_single_phase_to_ground_fault_sequence():
 
 
 def test_phase_to_phase_fault_sequence():
+    """Validate phase to phase fault sequence behavior."""
     v_th = 1
     z_seq = (1, 1, 1)
     result = fault.phase_to_phase_fault(v_th, z_seq)
@@ -21,6 +23,7 @@ def test_phase_to_phase_fault_sequence():
 
 
 def test_three_phase_fault_sequence():
+    """Validate three phase fault sequence behavior."""
     v_th = 1
     z_seq = (1, 1, 1)
     result = fault.three_phase_fault(v_th, z_seq)

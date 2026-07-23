@@ -39,7 +39,7 @@ def largest_integer(numBits, signed=True):
     signed:     bool, optional
                 Control to specify whether the value should be evaluated for
                 signed, or unsigned, integers. Defaults to True.
-    
+
     Returns
     -------
     int:        The maximum value that can be stored in an integer of numBits.
@@ -54,11 +54,12 @@ def largest_integer(numBits, signed=True):
     >>> cmp.largest_integer(32, signed=True)
     2147483647
     """
+    if numBits <= 0:
+        raise ValueError("numBits must be greater than zero")
     # Use Signed or Unsigned Formula
     if signed:
         return int(2 ** (numBits - 1) - 1)
-    else:
-        return int(2 ** (numBits) - 1)
+    return int(2 ** numBits - 1)
 
 
 # Define CRC Generator (Sender Side)

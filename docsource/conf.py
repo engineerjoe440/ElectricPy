@@ -14,7 +14,7 @@ sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 print(parent_dir)
 
 # Generate all Documentation Images
-from render_images import main as render_images
+from render_images import main as render_images  # noqa: E402
 render_images()
 
 # Gather Version Information from Python File
@@ -25,15 +25,6 @@ with open(initfile) as fh:
     # Version Breakdown:
     # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
     print("Sphinx HTML Build For:", name,"   Version:", ver)
-
-
-# Verify Import
-try:
-    import electricpy
-except:
-    print("Couldn't import `electricpy` module!")
-    sys.exit(9)
-
 
 # -- Project information -----------------------------------------------------
 

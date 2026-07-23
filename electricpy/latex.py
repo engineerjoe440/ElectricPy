@@ -69,9 +69,9 @@ def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
         real = _np.around(val.real, round)  # Round
         imag = _np.around(val.imag, round)  # Round
         if imag > 0:
-            latex = str(real) + "+j" + str(imag)
+            latex = str(real) + "+\\mathrm{j}" + str(imag)
         else:
-            latex = str(real) + "-j" + str(abs(imag))
+            latex = str(real) + "-\\mathrm{j}" + str(abs(imag))
         return latex
 
     # Interpret as numpy array if simple list
