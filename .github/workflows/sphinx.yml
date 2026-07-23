@@ -6,7 +6,7 @@ on: [push]
 
 # https://gist.github.com/c-bata/ed5e7b7f8015502ee5092a3e77937c99
 jobs:
-  build-and-delpoy:
+  build-and-deploy:
     name: Build
     runs-on: ubuntu-latest
     steps:
@@ -17,7 +17,7 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v3
         with:
-          python-version: "3.12"
+          python-version: "3.14"
       # I don't know where the "run" thing is documented.
       - name: Install dependencies
         run: |
