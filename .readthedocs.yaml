@@ -23,7 +23,10 @@ sphinx:
 # formats:
 #    - pdf
 
-# Optionally declare the Python requirements required to build your docs
+# Install project and docs toolchain from pyproject optional dependencies
 python:
    install:
-   - requirements: docsource/requirements.txt
+      - method: pip
+        path: .
+        extra_requirements:
+          - dev
