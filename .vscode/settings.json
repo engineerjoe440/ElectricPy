@@ -28,5 +28,13 @@
     },
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
-    "python.testing.cwd": "${workspaceRoot}"
+    "python.testing.cwd": "${workspaceRoot}",
+    "markdownlint.config": {
+        "MD033": {
+            "allowed_elements": [
+                "a",
+                "img"
+            ]
+        }
+    }
 }
