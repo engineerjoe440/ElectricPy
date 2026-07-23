@@ -1,11 +1,15 @@
 
 
+
 <!doctype html>
 <html lang="en" class="no-js">
   <head>
     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
       
       
       
@@ -19,11 +23,13 @@
     
       
         
-        
       
       
 
+
     
+    
+      
     
     
       
@@ -32,8 +38,8 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.af531f03affe68837.min.css?v=2410bb73" />
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.74c816e3f9967dd6e.min.css?v=6cfe2491" />
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -53,9 +59,6 @@
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="blue">
   
     
-    
-      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
-    
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
@@ -69,13 +72,16 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../../index.html" title="electricpy 0.4.0 documentation" class="md-header__button md-logo" aria-label="electricpy 0.4.0 documentation" data-md-component="logo">
       <img src="../../_static/ElectricpyLogo.svg" alt="logo">
     </a>
     <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -94,32 +100,40 @@
       </div>
     </div>
     
-      <form class="md-header__option" data-md-component="palette">
-        
-          
-          
-          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
-          
-            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
-            </label>
-          
-        
-          
-          
-          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
-          
-            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
-            </label>
-          
-        
-      </form>
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
     
       <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
       </label>
       <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
@@ -127,24 +141,27 @@
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -156,7 +173,7 @@
         <a href="https://github.com/engineerjoe440/ElectricPy/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
   </div>
   <div class="md-source__repository">
     ElectricPy
@@ -188,6 +205,7 @@
                     
 
 
+
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../../index.html" title="electricpy 0.4.0 documentation" class="md-nav__button md-logo" aria-label="electricpy 0.4.0 documentation" data-md-component="logo">
@@ -200,7 +218,7 @@
       <a href="https://github.com/engineerjoe440/ElectricPy/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
   </div>
   <div class="md-source__repository">
     ElectricPy
@@ -212,15 +230,22 @@
     
       
       
-      
-
+  
   
   
   
   
     <li class="md-nav__item">
       <a href="../../electricpyapi.html" class="md-nav__link">
-        <span class="md-ellipsis">Electric<wbr>Py API</span>
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Electric<wbr>Py API</span>
+    
+  </span>
+  
+
       </a>
     </li>
   
@@ -228,15 +253,22 @@
     
       
       
-      
-
+  
   
   
   
   
     <li class="md-nav__item">
       <a href="../../constants.html" class="md-nav__link">
-        <span class="md-ellipsis">Constants</span>
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Constants</span>
+    
+  </span>
+  
+
       </a>
     </li>
   
@@ -244,15 +276,22 @@
     
       
       
-      
-
+  
   
   
   
   
     <li class="md-nav__item">
       <a href="../../additionalresources.html" class="md-nav__link">
-        <span class="md-ellipsis">Additional Resources</span>
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Additional Resources</span>
+    
+  </span>
+  
+
       </a>
     </li>
   
@@ -260,31 +299,22 @@
     
       
       
-      
-
   
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../changes.html" class="md-nav__link">
-        <span class="md-ellipsis">Recent Changes</span>
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
   
   
   
   
     <li class="md-nav__item">
       <a href="https://github.com/engineerjoe440/ElectricPy" class="md-nav__link">
-        <span class="md-ellipsis">Github</span>
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Github</span>
+    
+  </span>
+  
+
       </a>
     </li>
   
@@ -292,15 +322,22 @@
     
       
       
-      
-
+  
   
   
   
   
     <li class="md-nav__item">
       <a href="https://pypi.org/project/electricpy" class="md-nav__link">
-        <span class="md-ellipsis">Py<wbr>PI</span>
+        
+  
+  
+  <span class="md-ellipsis">
+    <span>Py<wbr>PI</span>
+    
+  </span>
+  
+
       </a>
     </li>
   
@@ -332,6 +369,8 @@
           
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset" role="main">
+                
+                
                   
 
 
@@ -344,27 +383,27 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="c1">################################################################################</span>
 
-<span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span> <span class="k">as</span> <span class="n">_warn</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn</span> <span class="k">as</span> <span class="n">_warn</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">_plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_plt</span>
 <span class="c1"># Import Required External Dependencies</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">_np</span>
-<span class="kn">import</span> <span class="nn">scipy.signal</span> <span class="k">as</span> <span class="nn">_sig</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">newton</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_sig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">newton</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">numdifftools</span> <span class="kn">import</span> <span class="n">Jacobian</span> <span class="k">as</span> <span class="n">jacobian</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">numdifftools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Jacobian</span> <span class="k">as</span> <span class="n">jacobian</span>
     <span class="n">__NUMDIFFTOOL_SUPPORT__</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="n">__NUMDIFFTOOL_SUPPORT__</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="c1"># Import Local Dependencies</span>
-<span class="kn">from</span> <span class="nn">electricpy.bode</span> <span class="kn">import</span> <span class="n">_sys_condition</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">electricpy.bode</span><span class="w"> </span><span class="kn">import</span> <span class="n">_sys_condition</span>
 
 
 <span class="c1"># Define Digital Filter Simulator Function</span>
 <div class="viewcode-block" id="digifiltersim">
 <a class="viewcode-back" href="../../api/electricpy.sim.digifiltersim.html#electricpy.sim.digifiltersim">[docs]</a>
-<span class="k">def</span> <span class="nf">digifiltersim</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="nb">filter</span><span class="p">,</span> <span class="n">freqs</span><span class="p">,</span> <span class="n">NN</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">digifiltersim</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="nb">filter</span><span class="p">,</span> <span class="n">freqs</span><span class="p">,</span> <span class="n">NN</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
                   <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">xmxscale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Digital Filter Simulator.</span>
@@ -419,7 +458,9 @@
 <span class="sd">    figsize:    tuple, optional</span>
 <span class="sd">                The figure dimensions for each subplot, default=None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">figsize</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">):</span> <span class="n">_plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">figsize</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+    <span class="nb">filter</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="nb">filter</span><span class="p">)</span>
     <span class="n">flen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">freqs</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">flen</span><span class="p">):</span>
         <span class="c1"># Gather frequency</span>
@@ -434,26 +475,28 @@
             <span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">fin</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">dt</span><span class="p">,</span> <span class="n">freq</span><span class="p">)</span>
 
         <span class="c1"># Identify how many rows were provided</span>
-        <span class="n">sz</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">size</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">sz</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">):</span>
+        <span class="n">sz</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">filter</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">filter</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">))</span> <span class="k">else</span> <span class="nb">filter</span><span class="o">.</span><span class="n">size</span>
+        <span class="k">if</span> <span class="n">sz</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ERROR: Too few filter arguments provided. &quot;</span> <span class="o">+</span>
                              <span class="s2">&quot;Refer to documentation for proper format.&quot;</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="p">(</span><span class="n">sz</span> <span class="o">==</span> <span class="mi">5</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">sz</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
             <span class="n">rows</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">filter_rows</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">shape</span>
+            <span class="n">rows</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="nb">filter</span><span class="o">.</span><span class="n">shape</span>
+            <span class="n">filter_rows</span> <span class="o">=</span> <span class="nb">filter</span>
         <span class="c1"># Operate with each individual filter set</span>
         <span class="n">x_tmp</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">nsteps</span> <span class="o">=</span> <span class="n">NN</span> <span class="o">-</span> <span class="mi">4</span>
+        <span class="n">n_steps</span> <span class="o">=</span> <span class="n">NN</span> <span class="o">-</span> <span class="mi">4</span>
         <span class="k">for</span> <span class="n">row_n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
-            <span class="n">row</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">[</span><span class="n">row_n</span><span class="p">]</span>  <span class="c1"># Capture individual row</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="n">filter_rows</span><span class="p">[</span><span class="n">row_n</span><span class="p">]</span>  <span class="c1"># Capture individual row</span>
             <span class="n">A1</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">A2</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">B0</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
             <span class="n">B1</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
             <span class="n">B2</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
             <span class="n">T</span> <span class="o">=</span> <span class="mi">3</span>
-            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsteps</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
                 <span class="n">T</span> <span class="o">=</span> <span class="n">T</span> <span class="o">+</span> <span class="mi">1</span>
                 <span class="c1"># Apply Filtering Specified by Individual Row</span>
                 <span class="n">y</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">A1</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="n">T</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">A2</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="n">T</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span>
@@ -471,10 +514,11 @@
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ytime</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Output&quot;</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">legend</span><span class="p">:</span> <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Frequency = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;Hz&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">xlim</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">legend</span><span class="p">:</span>
+            <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Frequency = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;Hz&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">xlim</span><span class="p">:</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">xmxscale</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">xmxscale</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">xmxscale</span> <span class="o">/</span> <span class="p">(</span><span class="n">freq</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)))</span>
 
     <span class="n">_plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -485,7 +529,7 @@
 <span class="c1"># Define Step Response Simulator Function</span>
 <div class="viewcode-block" id="step_response">
 <a class="viewcode-back" href="../../api/electricpy.sim.step_response.html#electricpy.sim.step_response">[docs]</a>
-<span class="k">def</span> <span class="nf">step_response</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">step_response</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                   <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Step Response&quot;</span><span class="p">,</span> <span class="n">errtitle</span><span class="o">=</span><span class="s2">&quot;Step Response Error&quot;</span><span class="p">,</span>
                   <span class="n">resplabel</span><span class="o">=</span><span class="s2">&quot;Step Response&quot;</span><span class="p">,</span> <span class="n">funclabel</span><span class="o">=</span><span class="s2">&quot;Step Function&quot;</span><span class="p">,</span>
                   <span class="n">errlabel</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -537,8 +581,7 @@
         <span class="n">step</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
 
     <span class="c1"># Simulate Response for each input (step, ramp, parabola)</span>
-    <span class="c1"># All &#39;x&#39; values are variables that are considered don&#39;t-care</span>
-    <span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">_sig</span><span class="o">.</span><span class="n">lsim</span><span class="p">((</span><span class="n">system</span><span class="p">),</span> <span class="n">step</span><span class="p">,</span> <span class="n">TT</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_sig</span><span class="o">.</span><span class="n">lsim</span><span class="p">((</span><span class="n">system</span><span class="p">),</span> <span class="n">step</span><span class="p">,</span> <span class="n">TT</span><span class="p">)</span>
 
     <span class="c1"># Calculate error over all points</span>
     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npts</span><span class="p">):</span>
@@ -553,7 +596,7 @@
     <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (seconds)&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">xlim</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">xlim</span><span class="p">:</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">errtitle</span><span class="p">)</span>
@@ -561,10 +604,10 @@
     <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (seconds)&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">xlim</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">xlim</span><span class="p">:</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">filename</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_plt</span></div>
 
@@ -573,7 +616,7 @@
 <span class="c1"># Define Ramp Response Simulator Function</span>
 <div class="viewcode-block" id="ramp_response">
 <a class="viewcode-back" href="../../api/electricpy.sim.ramp_response.html#electricpy.sim.ramp_response">[docs]</a>
-<span class="k">def</span> <span class="nf">ramp_response</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ramp_response</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                   <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Ramp Response&quot;</span><span class="p">,</span> <span class="n">errtitle</span><span class="o">=</span><span class="s2">&quot;Ramp Response Error&quot;</span><span class="p">,</span>
                   <span class="n">resplabel</span><span class="o">=</span><span class="s2">&quot;Ramp Response&quot;</span><span class="p">,</span> <span class="n">funclabel</span><span class="o">=</span><span class="s2">&quot;Ramp Function&quot;</span><span class="p">,</span>
                   <span class="n">errlabel</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -625,8 +668,7 @@
         <span class="n">ramp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">dt</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span>
 
     <span class="c1"># Simulate Response for each input (step, ramp, parabola)</span>
-    <span class="c1"># All &#39;x&#39; values are variables that are considered don&#39;t-care</span>
-    <span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">_sig</span><span class="o">.</span><span class="n">lsim</span><span class="p">((</span><span class="n">system</span><span class="p">),</span> <span class="n">ramp</span><span class="p">,</span> <span class="n">TT</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_sig</span><span class="o">.</span><span class="n">lsim</span><span class="p">((</span><span class="n">system</span><span class="p">),</span> <span class="n">ramp</span><span class="p">,</span> <span class="n">TT</span><span class="p">)</span>
 
     <span class="c1"># Calculate error over all points</span>
     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npts</span><span class="p">):</span>
@@ -641,7 +683,7 @@
     <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (seconds)&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">xlim</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">xlim</span><span class="p">:</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">errtitle</span><span class="p">)</span>
@@ -649,10 +691,10 @@
     <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (seconds)&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">xlim</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">xlim</span><span class="p">:</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">filename</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_plt</span></div>
 
@@ -660,7 +702,7 @@
 <span class="c1"># Define Parabolic Response Simulator Function</span>
 <div class="viewcode-block" id="parabolic_response">
 <a class="viewcode-back" href="../../api/electricpy.sim.parabolic_response.html#electricpy.sim.parabolic_response">[docs]</a>
-<span class="k">def</span> <span class="nf">parabolic_response</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">parabolic_response</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Parabolic Response&quot;</span><span class="p">,</span> <span class="n">errtitle</span><span class="o">=</span><span class="s2">&quot;Parabolic Response Error&quot;</span><span class="p">,</span>
                        <span class="n">resplabel</span><span class="o">=</span><span class="s2">&quot;Parabolic Response&quot;</span><span class="p">,</span> <span class="n">funclabel</span><span class="o">=</span><span class="s2">&quot;Parabolic Function&quot;</span><span class="p">,</span>
                        <span class="n">errlabel</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -712,8 +754,7 @@
         <span class="n">parabola</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">dt</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
     <span class="c1"># Simulate Response for each input (step, ramp, parabola)</span>
-    <span class="c1"># All &#39;x&#39; values are variables that are considered don&#39;t-care</span>
-    <span class="n">x</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">_sig</span><span class="o">.</span><span class="n">lsim</span><span class="p">((</span><span class="n">system</span><span class="p">),</span> <span class="n">parabola</span><span class="p">,</span> <span class="n">TT</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_sig</span><span class="o">.</span><span class="n">lsim</span><span class="p">((</span><span class="n">system</span><span class="p">),</span> <span class="n">parabola</span><span class="p">,</span> <span class="n">TT</span><span class="p">)</span>
 
     <span class="c1"># Calculate error over all points</span>
     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npts</span><span class="p">):</span>
@@ -728,7 +769,7 @@
     <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (seconds)&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">xlim</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">xlim</span><span class="p">:</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">errtitle</span><span class="p">)</span>
@@ -736,10 +777,10 @@
     <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (seconds)&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">xlim</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">xlim</span><span class="p">:</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">filename</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_plt</span></div>
 
@@ -748,7 +789,7 @@
 <span class="c1"># Define State Space Simulator</span>
 <div class="viewcode-block" id="statespace">
 <a class="viewcode-back" href="../../api/electricpy.sim.statespace.html#electricpy.sim.statespace">[docs]</a>
-<span class="k">def</span> <span class="nf">statespace</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">simpts</span><span class="o">=</span><span class="mi">9999</span><span class="p">,</span> <span class="n">NN</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">statespace</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">simpts</span><span class="o">=</span><span class="mi">9999</span><span class="p">,</span> <span class="n">NN</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
                <span class="n">xlim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ret</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plotstate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                <span class="n">plotforcing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plotresult</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -808,14 +849,14 @@
     <span class="c1"># 3=total, output ( Both ICs and FFs, also plot combined output )</span>
 
     <span class="c1"># Tuple to Matrix Converter</span>
-    <span class="k">def</span> <span class="nf">tuple_to_matrix</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">yx</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tuple_to_matrix</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">yx</span><span class="p">):</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">yx</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># Evaluate function at specified point</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">asmatrix</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>  <span class="c1"># Convert tuple output to matrix</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># Transpose matrix</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
     <span class="c1"># Numpy Array to Matrix Converter</span>
-    <span class="k">def</span> <span class="nf">nparr_to_matrix</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">yx</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">nparr_to_matrix</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">yx</span><span class="p">):</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">yx</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># Evaluate function at specified point</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">asmatrix</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>  <span class="c1"># Convert _np.arr output to matrix</span>
         <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># If there is more than 1 column</span>
@@ -823,14 +864,18 @@
         <span class="k">return</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
     <span class="c1"># Define Function Concatinator Class</span>
-    <span class="k">class</span> <span class="nc">c_func_concat</span><span class="p">:</span>
-        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">funcs</span><span class="p">):</span>  <span class="c1"># Initialize class with tupple of functions</span>
+    <span class="k">class</span><span class="w"> </span><span class="nc">c_func_concat</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Concatenate multiple scalar forcing functions into one vector output.&quot;&quot;&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">funcs</span><span class="p">):</span>  <span class="c1"># Initialize class with tupple of functions</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Store the supplied callables in index order for later evaluation.&quot;&quot;&quot;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nfuncs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>  <span class="c1"># Determine how many functions are in tuple</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">func_reg</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Create empty keyed list of function handles</span>
             <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nfuncs</span><span class="p">):</span>  <span class="c1"># Iterate adding to key</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">func_reg</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">funcs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>  <span class="c1"># Fill keyed list with functions</span>
 
-        <span class="k">def</span> <span class="nf">func_c</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>  <span class="c1"># Concatenated Function</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">func_c</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>  <span class="c1"># Concatenated Function</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Evaluate each stored function at ``x`` and return a column matrix.&quot;&quot;&quot;</span>
             <span class="n">rets</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>  <span class="c1"># Create blank numpy array to store function outputs</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nfuncs</span><span class="p">):</span>
                 <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_reg</span><span class="p">[</span><span class="n">i</span><span class="p">](</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># Calculate each function at value x</span>
@@ -869,6 +914,7 @@
     <span class="n">D</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">asmatrix</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
 
     <span class="c1"># Create values for input testing</span>
+    <span class="n">c_funcs</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>  <span class="c1"># if f is a function, test as one</span>
         <span class="n">mF</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># f should return: int, float, tuple, _np.arr, _np.matrix</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>  <span class="c1"># if f is tupple of arguments</span>
@@ -897,10 +943,14 @@
     <span class="n">rF</span><span class="p">,</span> <span class="n">cF</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>  <span class="c1"># Defualt for a function returning one value</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mF</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>  <span class="c1"># If function returns tuple</span>
-        <span class="n">fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">tuple_to_matrix</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span>  <span class="c1"># Use conversion function</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">tuple_to_matrix</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span>
+
         <span class="n">rF</span><span class="p">,</span> <span class="n">cF</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>  <span class="c1"># Prepare for further testing</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mF</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>  <span class="c1"># If function returns numpy array</span>
-        <span class="n">fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">nparr_to_matrix</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span>  <span class="c1"># Use conversion function</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">fn</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">nparr_to_matrix</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span>
+
         <span class="n">rF</span><span class="p">,</span> <span class="n">cF</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>  <span class="c1"># Prepare for further testing</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mF</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">float64</span><span class="p">)):</span>  <span class="c1"># If function returns int or float or numpy float</span>
         <span class="n">fn</span> <span class="o">=</span> <span class="n">func</span>  <span class="c1"># Pass function handle</span>
@@ -910,16 +960,18 @@
     <span class="k">elif</span> <span class="p">(</span><span class="n">mF</span> <span class="o">==</span> <span class="s2">&quot;MultiFunctions&quot;</span><span class="p">):</span>  <span class="c1"># There are multiple functions in one argument</span>
         <span class="n">fn</span> <span class="o">=</span> <span class="n">c_funcs</span><span class="o">.</span><span class="n">func_c</span>  <span class="c1"># Gather function handle from function concatenation class</span>
         <span class="n">rF</span><span class="p">,</span> <span class="n">cF</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>  <span class="c1"># Prepare for further testing</span>
-    <span class="k">elif</span> <span class="p">(</span><span class="n">mF</span> <span class="o">==</span> <span class="s2">&quot;NA&quot;</span><span class="p">):</span>  <span class="c1"># Function doesn&#39;t meet requirements</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Forcing function does not meet requirements.&quot;</span> <span class="o">+</span>
-                         <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Function doesn&#39;t return data type: int, float, numpy.ndarray&quot;</span> <span class="o">+</span>
-                         <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> or numpy.matrixlib.defmatrix.matrix. Nor does function &quot;</span> <span class="o">+</span>
-                         <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">contain tuple of function handles. Please review function.&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">mF</span> <span class="o">==</span> <span class="s2">&quot;NA&quot;</span><span class="p">:</span>  <span class="c1"># Function doesn&#39;t meet requirements</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Forcing function does not meet requirements.&quot;</span> <span class="o">+</span>
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Function doesn&#39;t return data type: int, float, numpy.ndarray&quot;</span> <span class="o">+</span>
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> or numpy.matrixlib.defmatrix.matrix. Nor does function &quot;</span> <span class="o">+</span>
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">contain tuple of function handles. Please review function.&quot;</span>
+        <span class="p">)</span>
 
     <span class="c1"># Test for size correlation between matricies</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">cA</span> <span class="o">!=</span> <span class="n">rA</span><span class="p">):</span>  <span class="c1"># A isn&#39;t nxn matrix</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Matrix &#39;A&#39; is not NxN matrix.&quot;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="p">(</span><span class="n">rA</span> <span class="o">!=</span> <span class="n">rB</span><span class="p">):</span>  <span class="c1"># A and B matricies don&#39;t have same number of rows</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">rA</span> <span class="o">!=</span> <span class="n">rB</span><span class="p">):</span>  <span class="c1"># A and B matricies don&#39;t have same number of rows</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">size</span> <span class="o">%</span> <span class="n">rA</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Elements in B divisible by rows in A</span>
             <span class="n">_warn</span><span class="p">(</span><span class="s2">&quot;WARNING: Reshaping &#39;B&#39; matrix to match &#39;A&#39; matrix.&quot;</span><span class="p">)</span>
             <span class="n">B</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">matrix</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="p">(</span><span class="n">rA</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">B</span><span class="o">.</span><span class="n">size</span> <span class="o">/</span> <span class="n">rA</span><span class="p">)))</span>  <span class="c1"># Reshape Matrix</span>
@@ -933,9 +985,9 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;A&#39; matrix dimensions don&#39;t match &#39;B&#39; matrix dimensions.&quot;</span><span class="p">)</span>
     <span class="k">elif</span> <span class="p">(</span><span class="n">cB</span> <span class="o">!=</span> <span class="n">rF</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">cF</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">):</span>  <span class="c1"># Forcing Function matrix doesn&#39;t match B matrix</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;B&#39; matrix dimensions don&#39;t match forcing function dimensions.&quot;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="p">(</span><span class="n">solution</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">cC</span> <span class="o">!=</span> <span class="n">cA</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">rC</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">):</span>  <span class="c1"># Number of elements in C don&#39;t meet requirements</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">solution</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">cC</span> <span class="o">!=</span> <span class="n">cA</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">rC</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">):</span>  <span class="c1"># Number of elements in C don&#39;t meet requirements</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;C&#39; matrix dimensions don&#39;t match state-space variable dimensions.&quot;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="p">(</span><span class="n">solution</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="ow">and</span> <span class="p">((</span><span class="n">cD</span> <span class="o">!=</span> <span class="n">rF</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">rD</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)):</span>  <span class="c1"># Number of elements in D don&#39;t meet requirements</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">solution</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="ow">and</span> <span class="p">((</span><span class="n">cD</span> <span class="o">!=</span> <span class="n">rF</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">rD</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)):</span>  <span class="c1"># Number of elements in D don&#39;t meet requirements</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">cD</span> <span class="o">==</span> <span class="n">rD</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">cD</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>  <span class="c1"># D matrix is set to [0]</span>
             <span class="n">D</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">asmatrix</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">rF</span><span class="p">))</span>  <span class="c1"># Re-create D to meet requirements</span>
             <span class="n">_warn</span><span class="p">(</span><span class="s2">&quot;WARNING: Autogenerating &#39;D&#39; matrix of zeros to match forcing functions.&quot;</span><span class="p">)</span>
@@ -1002,58 +1054,58 @@
 
     <span class="c1"># Plot Forcing Functions</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">plotforcing</span><span class="p">):</span>
-        <span class="n">fffig</span> <span class="o">=</span> <span class="n">_plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="s2">&quot;Forcing Functions&quot;</span><span class="p">)</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">_plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="s2">&quot;Forcing Functions&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">fnc</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fnc</span><span class="p">):</span>
-                <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">TT</span><span class="p">,</span> <span class="n">fn_arr</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;f&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fnc</span><span class="p">):</span>
+                <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">TT</span><span class="p">,</span> <span class="n">fn_arr</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;f&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">TT</span><span class="p">,</span> <span class="n">fn_arr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;f1&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">xlim</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">xlim</span><span class="p">:</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">ylim</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ylim</span><span class="p">:</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Forcing Functions &quot;</span> <span class="o">+</span> <span class="n">title</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (seconds)&quot;</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Forcing Functions&quot;</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">filename</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;Simulation Forcing Functions.png&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">plotstate</span><span class="p">:</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
     <span class="c1"># Plot each state-variable over time</span>
-    <span class="n">stvfig</span> <span class="o">=</span> <span class="n">_plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="s2">&quot;State Variables&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">xtim_len</span><span class="p">):</span>
-        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">TT</span><span class="p">,</span> <span class="n">xtim</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;x&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">xlim</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">_plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="s2">&quot;State Variables&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">xtim_len</span><span class="p">):</span>
+        <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">TT</span><span class="p">,</span> <span class="n">xtim</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;x&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">xlim</span><span class="p">:</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">ylim</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ylim</span><span class="p">:</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Simulated Output Terms &quot;</span> <span class="o">+</span> <span class="n">soltype</span><span class="p">[</span><span class="n">solution</span><span class="p">]</span> <span class="o">+</span> <span class="n">title</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (seconds)&quot;</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;State Variable&quot;</span><span class="p">)</span>
     <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">filename</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;Simulation Terms.png&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">plotstate</span><span class="p">:</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
     <span class="c1"># Plot combined output</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">plotresult</span> <span class="ow">and</span> <span class="n">solution</span> <span class="o">==</span> <span class="mi">3</span><span class="p">):</span>
-        <span class="n">cofig</span> <span class="o">=</span> <span class="n">_plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="s2">&quot;Combined Output&quot;</span><span class="p">)</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">_plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="s2">&quot;Combined Output&quot;</span><span class="p">)</span>
         <span class="n">C</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>  <span class="c1"># convert back to array for operation</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cC</span><span class="p">):</span>
             <span class="n">yout</span> <span class="o">=</span> <span class="n">yout</span> <span class="o">+</span> <span class="n">xtim</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">C</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># Sum all st-space var mult. by their coeff</span>
         <span class="n">yout</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">yout</span><span class="p">)</span>  <span class="c1"># convert output to array for plotting purposes</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">TT</span><span class="p">,</span> <span class="n">yout</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">xlim</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">xlim</span><span class="p">:</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">xlim</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">ylim</span> <span class="o">!=</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ylim</span><span class="p">:</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Combined Output &quot;</span> <span class="o">+</span> <span class="n">title</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (seconds)&quot;</span><span class="p">)</span>
         <span class="n">_plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">filename</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;Simulation Combined Output.png&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">plotresult</span><span class="p">:</span>
             <span class="n">_plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -1067,7 +1119,7 @@
 <span class="c1"># Define Newton-Raphson Calculator</span>
 <div class="viewcode-block" id="NewtonRaphson">
 <a class="viewcode-back" href="../../api/electricpy.sim.NewtonRaphson.html#electricpy.sim.NewtonRaphson">[docs]</a>
-<span class="k">def</span> <span class="nf">NewtonRaphson</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">X0</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">mxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">lsq_eps</span><span class="o">=</span><span class="mf">0.25</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">NewtonRaphson</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">X0</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">mxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">lsq_eps</span><span class="o">=</span><span class="mf">0.25</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Newton Raphson Calculator.</span>
 
@@ -1147,7 +1199,7 @@
                          <span class="s2">&quot; of different sizes: f0=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">f0sz</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;; j0=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">j0sz</span><span class="p">))</span>
 
     <span class="c1"># Define Internal Inversion System</span>
-    <span class="k">def</span> <span class="nf">inv</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inv</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
         <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">shape</span>
         <span class="k">if</span> <span class="n">a</span> <span class="o">!=</span> <span class="n">b</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Only square matrices are invertible.&quot;</span><span class="p">)</span>
@@ -1158,16 +1210,15 @@
     <span class="n">F_norm</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">F_value</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># L2 norm of vector</span>
     <span class="n">iteration_counter</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">teps</span> <span class="o">=</span> <span class="n">eps</span>
+    <span class="n">user_has_been_warned</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">F_norm</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">teps</span> <span class="ow">and</span> <span class="n">iteration_counter</span> <span class="o">&lt;</span> <span class="n">mxiter</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>  <span class="c1"># Try Solve Operation</span>
             <span class="n">delta</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">J</span><span class="p">(</span><span class="n">X0</span><span class="p">),</span> <span class="o">-</span><span class="n">F_value</span><span class="p">)</span>
             <span class="n">teps</span> <span class="o">=</span> <span class="n">eps</span>  <span class="c1"># Change Test Epsilon if Needed</span>
         <span class="k">except</span> <span class="n">_np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>  <span class="c1"># Use Least Square if Error</span>
             <span class="c1"># Warn User, but only Once</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">tst</span> <span class="o">=</span> <span class="n">userhasbeenwarned</span>
-            <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
-                <span class="n">userhasbeenwarned</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">user_has_been_warned</span><span class="p">:</span>
+                <span class="n">user_has_been_warned</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="n">_warn</span><span class="p">(</span><span class="s2">&quot;WARNING: Singular matrix, attempting LSQ method.&quot;</span><span class="p">)</span>
             <span class="c1"># Calculate Delta Using Least-Squares Inverse</span>
             <span class="n">delta</span> <span class="o">=</span> <span class="o">-</span> <span class="n">inv</span><span class="p">(</span><span class="n">J</span><span class="p">(</span><span class="n">X0</span><span class="p">))</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">F_value</span><span class="p">)</span>
@@ -1191,7 +1242,7 @@
 <span class="c1"># Define Newton-Raphson P/Q Evaluator</span>
 <div class="viewcode-block" id="nr_pq">
 <a class="viewcode-back" href="../../api/electricpy.sim.nr_pq.html#electricpy.sim.nr_pq">[docs]</a>
-<span class="k">def</span> <span class="nf">nr_pq</span><span class="p">(</span><span class="n">Ybus</span><span class="p">,</span> <span class="n">V_set</span><span class="p">,</span> <span class="n">P_set</span><span class="p">,</span> <span class="n">Q_set</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">argshape</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">nr_pq</span><span class="p">(</span><span class="n">Ybus</span><span class="p">,</span> <span class="n">V_set</span><span class="p">,</span> <span class="n">P_set</span><span class="p">,</span> <span class="n">Q_set</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">argshape</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Newton Raphson Real/Reactive Power Function Generator.</span>
 
@@ -1292,14 +1343,18 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Over-Constrained System&quot;</span><span class="p">)</span>
 
     <span class="c1"># Define Function Concatinator Class</span>
-    <span class="k">class</span> <span class="nc">c_func_concat</span><span class="p">:</span>
-        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">funcs</span><span class="p">):</span>  <span class="c1"># Initialize class with tupple of functions</span>
+    <span class="k">class</span><span class="w"> </span><span class="nc">c_func_concat</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Concatenate multiple scalar forcing functions into one vector output.&quot;&quot;&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">funcs</span><span class="p">):</span>  <span class="c1"># Initialize class with tupple of functions</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Store the supplied callables in index order for later evaluation.&quot;&quot;&quot;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nfuncs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>  <span class="c1"># Determine how many functions are in tuple</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">func_reg</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Create empty keyed list of function handles</span>
             <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nfuncs</span><span class="p">):</span>  <span class="c1"># Iterate adding to key</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">func_reg</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">funcs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>  <span class="c1"># Fill keyed list with functions</span>
 
-        <span class="k">def</span> <span class="nf">func_c</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>  <span class="c1"># Concatenated Function</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">func_c</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>  <span class="c1"># Concatenated Function</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Evaluate each stored function at ``x`` and return a flat array.&quot;&quot;&quot;</span>
             <span class="n">rets</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>  <span class="c1"># Create blank numpy array to store function outputs</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nfuncs</span><span class="p">):</span>
                 <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_reg</span><span class="p">[</span><span class="n">i</span><span class="p">](</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># Calculate each function at value x</span>
@@ -1314,7 +1369,6 @@
     <span class="n">Q_funcs</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">P_strgs</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">Q_strgs</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">Vi_list</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">lists</span> <span class="o">=</span> <span class="p">[</span><span class="n">P_strgs</span><span class="p">,</span> <span class="n">Q_strgs</span><span class="p">]</span>
     <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Index</span>
     <span class="n">ii</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># String Index</span>
@@ -1342,12 +1396,12 @@
         <span class="n">Padd</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">Qadd</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">for</span> <span class="n">_j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">P_list</span><span class="p">[</span><span class="n">_k</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">P_list</span><span class="p">[</span><span class="n">_k</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">continue</span>  <span class="c1"># Don&#39;t Generate Requirements for Slack Bus</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">_k</span> <span class="o">!=</span> <span class="n">_j</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">Padd</span><span class="p">:</span>  <span class="c1"># Skip i,i Terms</span>
                 <span class="n">ang_len</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">Padd</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">_k</span> <span class="o">!=</span> <span class="n">_j</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">Q_list</span><span class="p">[</span><span class="n">_k</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">Qadd</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">_k</span> <span class="o">!=</span> <span class="n">_j</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">Q_list</span><span class="p">[</span><span class="n">_k</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">Qadd</span><span class="p">:</span>
                 <span class="n">mag_len</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">Qadd</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">Vxdim</span> <span class="o">=</span> <span class="n">ang_len</span> <span class="o">+</span> <span class="n">mag_len</span>
@@ -1362,50 +1416,53 @@
             <span class="c1"># Add New Entry To Lists</span>
             <span class="k">for</span> <span class="n">LST</span> <span class="ow">in</span> <span class="n">lists</span><span class="p">:</span>
                 <span class="n">LST</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">P_list</span><span class="p">[</span><span class="n">_k</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">P_list</span><span class="p">[</span><span class="n">_k</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">continue</span>  <span class="c1"># Don&#39;t Generate Requirements for Slack Bus</span>
             <span class="c1"># Collect Other Terms</span>
-            <span class="n">Yind</span> <span class="o">=</span> <span class="s2">&quot;[</span><span class="si">{}</span><span class="s2">][</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_k</span><span class="p">,</span> <span class="n">_j</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;K:&quot;</span><span class="p">,</span> <span class="n">_k</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">J:&quot;</span><span class="p">,</span> <span class="n">_j</span><span class="p">)</span>
+            <span class="n">Yind</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">_k</span><span class="si">}</span><span class="s2">][</span><span class="si">{</span><span class="n">_j</span><span class="si">}</span><span class="s2">]&quot;</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;K:&quot;</span><span class="p">,</span> <span class="n">_k</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">J:&quot;</span><span class="p">,</span> <span class="n">_j</span><span class="p">)</span>
             <span class="c1"># Generate Voltage-Related Strings</span>
             <span class="k">if</span> <span class="n">_k</span> <span class="o">!=</span> <span class="n">_j</span><span class="p">:</span>  <span class="c1"># Skip i,i Terms</span>
                 <span class="c1"># Generate K-Related Strings</span>
-                <span class="k">if</span> <span class="n">V_list</span><span class="p">[</span><span class="n">_k</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># The Vk magnitude is unknown</span>
-                    <span class="n">Vkm</span> <span class="o">=</span> <span class="s2">&quot;Vx[</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_k</span> <span class="o">+</span> <span class="n">ang_len</span> <span class="o">-</span> <span class="n">magoff</span> <span class="o">*</span> <span class="n">_k</span><span class="p">)</span>  <span class="c1"># Use Variable Magnitude</span>
-                    <span class="n">Vka</span> <span class="o">=</span> <span class="s2">&quot;Vx[</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_k</span> <span class="o">-</span> <span class="n">angoff</span><span class="p">)</span>  <span class="c1"># Use Variable Angle</span>
+                <span class="k">if</span> <span class="n">V_list</span><span class="p">[</span><span class="n">_k</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># The Vk magnitude is unknown</span>
+                    <span class="n">Vkm</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Vx[</span><span class="si">{</span><span class="n">_k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ang_len</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">magoff</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_k</span><span class="si">}</span><span class="s2">]&quot;</span>  <span class="c1"># Use Variable Magnitude</span>
+                    <span class="n">Vka</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Vx[</span><span class="si">{</span><span class="n">_k</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">angoff</span><span class="si">}</span><span class="s2">]&quot;</span>  <span class="c1"># Use Variable Angle</span>
                 <span class="k">else</span><span class="p">:</span>  <span class="c1"># The Vk magnitude is known</span>
-                    <span class="n">Vkm</span> <span class="o">=</span> <span class="s2">&quot;V_list[</span><span class="si">{}</span><span class="s2">][0]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_k</span><span class="p">)</span>  <span class="c1"># Load Magnitude</span>
-                    <span class="k">if</span> <span class="n">V_list</span><span class="p">[</span><span class="n">_k</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># The Vj angle is unknown</span>
-                        <span class="n">Vka</span> <span class="o">=</span> <span class="s2">&quot;Vx[</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_k</span> <span class="o">-</span> <span class="n">angoff</span><span class="p">)</span>  <span class="c1"># Use Variable Angle</span>
+                    <span class="n">Vkm</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;V_list[</span><span class="si">{</span><span class="n">_k</span><span class="si">}</span><span class="s2">][0]&quot;</span>  <span class="c1"># Load Magnitude</span>
+                    <span class="k">if</span> <span class="n">V_list</span><span class="p">[</span><span class="n">_k</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># The Vj angle is unknown</span>
+                        <span class="n">Vka</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Vx[</span><span class="si">{</span><span class="n">_k</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">angoff</span><span class="si">}</span><span class="s2">]&quot;</span>  <span class="c1"># Use Variable Angle</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="n">Vka</span> <span class="o">=</span> <span class="s2">&quot;V_list[</span><span class="si">{}</span><span class="s2">][1]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_k</span><span class="p">)</span>  <span class="c1"># Load Angle</span>
+                        <span class="n">Vka</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;V_list[</span><span class="si">{</span><span class="n">_k</span><span class="si">}</span><span class="s2">][1]&quot;</span>  <span class="c1"># Load Angle</span>
                 <span class="c1"># Generate J-Related Strings</span>
                 <span class="k">if</span> <span class="n">V_list</span><span class="p">[</span><span class="n">_j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># The Vj magnitude is unknown</span>
-                    <span class="n">Vjm</span> <span class="o">=</span> <span class="s2">&quot;Vx[</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_j</span> <span class="o">+</span> <span class="n">ang_len</span> <span class="o">-</span> <span class="n">magoff</span> <span class="o">*</span> <span class="n">_j</span><span class="p">)</span>  <span class="c1"># Use Variable Magnitude</span>
-                    <span class="n">Vja</span> <span class="o">=</span> <span class="s2">&quot;Vx[</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_j</span> <span class="o">-</span> <span class="n">angoff</span><span class="p">)</span>  <span class="c1"># Use Variable Angle</span>
+                    <span class="n">Vjm</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Vx[</span><span class="si">{</span><span class="n">_j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ang_len</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">magoff</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_j</span><span class="si">}</span><span class="s2">]&quot;</span>  <span class="c1"># Use Variable Magnitude</span>
+                    <span class="n">Vja</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Vx[</span><span class="si">{</span><span class="n">_j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">angoff</span><span class="si">}</span><span class="s2">]&quot;</span>  <span class="c1"># Use Variable Angle</span>
                 <span class="k">else</span><span class="p">:</span>  <span class="c1"># The Vj magnitude is known</span>
-                    <span class="n">Vjm</span> <span class="o">=</span> <span class="s2">&quot;V_list[</span><span class="si">{}</span><span class="s2">][0]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_j</span><span class="p">)</span>  <span class="c1"># Load Magnitude</span>
+                    <span class="n">Vjm</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;V_list[</span><span class="si">{</span><span class="n">_j</span><span class="si">}</span><span class="s2">][0]&quot;</span>  <span class="c1"># Load Magnitude</span>
                     <span class="k">if</span> <span class="n">V_list</span><span class="p">[</span><span class="n">_j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># The Vj angle is unknown</span>
-                        <span class="n">Vja</span> <span class="o">=</span> <span class="s2">&quot;Vx[</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_j</span> <span class="o">-</span> <span class="n">angoff</span><span class="p">)</span>  <span class="c1"># Use Variable Angle</span>
+                        <span class="n">Vja</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Vx[</span><span class="si">{</span><span class="n">_j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">angoff</span><span class="si">}</span><span class="s2">]&quot;</span>  <span class="c1"># Use Variable Angle</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="n">Vja</span> <span class="o">=</span> <span class="s2">&quot;V_list[</span><span class="si">{}</span><span class="s2">][1]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_j</span><span class="p">)</span>  <span class="c1"># Load Angle</span>
+                        <span class="n">Vja</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;V_list[</span><span class="si">{</span><span class="n">_j</span><span class="si">}</span><span class="s2">][1]&quot;</span>  <span class="c1"># Load Angle</span>
                 <span class="c1"># Generate String and Append to List of Functions</span>
                 <span class="n">P_strgs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">Pstr</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Vkm</span><span class="p">,</span> <span class="n">Vka</span><span class="p">,</span> <span class="n">Vjm</span><span class="p">,</span> <span class="n">Vja</span><span class="p">,</span> <span class="n">Yind</span><span class="p">))</span>
-                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;New P-String:&quot;</span><span class="p">,</span> <span class="n">P_strgs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;New P-String:&quot;</span><span class="p">,</span> <span class="n">P_strgs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
                 <span class="c1"># Generate Q Requirement</span>
                 <span class="k">if</span> <span class="n">Q_list</span><span class="p">[</span><span class="n">_k</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="c1"># Generate String and Append to List of Functions</span>
                     <span class="k">if</span> <span class="n">newentry</span><span class="p">:</span>
                         <span class="n">newentry</span> <span class="o">=</span> <span class="kc">False</span>
-                        <span class="n">Qgen</span> <span class="o">=</span> <span class="s2">&quot;-Vx[</span><span class="si">{0}</span><span class="s2">]**2*YBUS[</span><span class="si">{0}</span><span class="s2">][</span><span class="si">{0}</span><span class="s2">].imag&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_k</span><span class="p">)</span>
+                        <span class="n">Qgen</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;-Vx[</span><span class="si">{</span><span class="n">_k</span><span class="si">}</span><span class="s2">]**2*YBUS[</span><span class="si">{</span><span class="n">_k</span><span class="si">}</span><span class="s2">][</span><span class="si">{</span><span class="n">_k</span><span class="si">}</span><span class="s2">].imag&quot;</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">Qgen</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
                     <span class="n">Q_strgs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">Qstr</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Vkm</span><span class="p">,</span> <span class="n">Vka</span><span class="p">,</span> <span class="n">Vjm</span><span class="p">,</span> <span class="n">Vja</span><span class="p">,</span> <span class="n">Yind</span><span class="p">,</span> <span class="n">Qgen</span><span class="p">))</span>
-                    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;New Q-String:&quot;</span><span class="p">,</span> <span class="n">Q_strgs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;New Q-String:&quot;</span><span class="p">,</span> <span class="n">Q_strgs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
             <span class="c1"># Increment Index at Each Interior Level</span>
             <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">tempPstr</span> <span class="o">=</span> <span class="s2">&quot;P_funcs.append(lambda Vx: -P_list[</span><span class="si">{0}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_k</span><span class="p">)</span>
-        <span class="n">tempQstr</span> <span class="o">=</span> <span class="s2">&quot;Q_funcs.append(lambda Vx: -Q_list[</span><span class="si">{0}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">_k</span><span class="p">)</span>
+        <span class="n">tempPstr</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;P_funcs.append(lambda Vx: -P_list[</span><span class="si">{</span><span class="n">_k</span><span class="si">}</span><span class="s2">]&quot;</span>
+        <span class="n">tempQstr</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Q_funcs.append(lambda Vx: -Q_list[</span><span class="si">{</span><span class="n">_k</span><span class="si">}</span><span class="s2">]&quot;</span>
         <span class="k">for</span> <span class="n">_i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ii</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
             <span class="n">P</span> <span class="o">=</span> <span class="n">P_strgs</span><span class="p">[</span><span class="n">_i</span><span class="p">]</span>
             <span class="n">Q</span> <span class="o">=</span> <span class="n">Q_strgs</span><span class="p">[</span><span class="n">_i</span><span class="p">]</span>
@@ -1416,10 +1473,12 @@
         <span class="n">tempPstr</span> <span class="o">+=</span> <span class="s2">&quot;)&quot;</span>
         <span class="n">tempQstr</span> <span class="o">+=</span> <span class="s2">&quot;)&quot;</span>
         <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">P_strgs</span><span class="p">[</span><span class="n">ii</span><span class="p">:</span><span class="n">i</span><span class="p">]):</span>
-            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Full P-Func Str:&quot;</span><span class="p">,</span> <span class="n">tempPstr</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Full P-Func Str:&quot;</span><span class="p">,</span> <span class="n">tempPstr</span><span class="p">)</span>
             <span class="n">exec</span><span class="p">(</span><span class="n">tempPstr</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">Q_strgs</span><span class="p">[</span><span class="n">ii</span><span class="p">:</span><span class="n">i</span><span class="p">]):</span>
-            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Full Q-Func Str:&quot;</span><span class="p">,</span> <span class="n">tempQstr</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Full Q-Func Str:&quot;</span><span class="p">,</span> <span class="n">tempQstr</span><span class="p">)</span>
             <span class="n">exec</span><span class="p">(</span><span class="n">tempQstr</span><span class="p">)</span>
         <span class="n">ii</span> <span class="o">=</span> <span class="n">i</span>  <span class="c1"># Increase Lower Index</span>
     <span class="n">retset</span> <span class="o">=</span> <span class="p">(</span><span class="n">P_funcs</span><span class="p">,</span> <span class="n">Q_funcs</span><span class="p">)</span>
@@ -1437,7 +1496,7 @@
 <span class="c1"># Define Multi-Bus Power Flow Calculator</span>
 <div class="viewcode-block" id="mbuspowerflow">
 <a class="viewcode-back" href="../../api/electricpy.sim.mbuspowerflow.html#electricpy.sim.mbuspowerflow">[docs]</a>
-<span class="k">def</span> <span class="nf">mbuspowerflow</span><span class="p">(</span><span class="n">Ybus</span><span class="p">,</span> <span class="n">Vknown</span><span class="p">,</span> <span class="n">Pknown</span><span class="p">,</span> <span class="n">Qknown</span><span class="p">,</span> <span class="n">X0</span><span class="o">=</span><span class="s1">&#39;flatstart&#39;</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mbuspowerflow</span><span class="p">(</span><span class="n">Ybus</span><span class="p">,</span> <span class="n">Vknown</span><span class="p">,</span> <span class="n">Pknown</span><span class="p">,</span> <span class="n">Qknown</span><span class="p">,</span> <span class="n">X0</span><span class="o">=</span><span class="s1">&#39;flatstart&#39;</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span>
                   <span class="n">mxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">returnct</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                   <span class="n">slackbus</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">lsq_eps</span><span class="o">=</span><span class="mf">0.25</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1558,10 +1617,13 @@
         <span class="n">Pknown</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">Pknown</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Pknown</span><span class="p">)</span> <span class="o">-</span> <span class="n">slackbus</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
         <span class="n">Qknown</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">Qknown</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Qknown</span><span class="p">)</span> <span class="o">-</span> <span class="n">slackbus</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
     <span class="c1"># Generate F Function Array</span>
-    <span class="n">F</span><span class="p">,</span> <span class="n">shp</span> <span class="o">=</span> <span class="n">nr_pq</span><span class="p">(</span><span class="n">Ybus</span><span class="p">,</span> <span class="n">Vknown</span><span class="p">,</span> <span class="n">Pknown</span><span class="p">,</span> <span class="n">Qknown</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">nr_out</span> <span class="o">=</span> <span class="n">nr_pq</span><span class="p">(</span><span class="n">Ybus</span><span class="p">,</span> <span class="n">Vknown</span><span class="p">,</span> <span class="n">Pknown</span><span class="p">,</span> <span class="n">Qknown</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="n">nr_out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">shp</span> <span class="o">=</span> <span class="n">nr_out</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">ang_len</span> <span class="o">=</span> <span class="n">shp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">mag_len</span> <span class="o">=</span> <span class="n">shp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="c1"># Handle Flat-Start Condition</span>
     <span class="k">if</span> <span class="n">X0</span> <span class="o">==</span> <span class="s1">&#39;flatstart&#39;</span><span class="p">:</span>
-        <span class="n">ang_len</span><span class="p">,</span> <span class="n">mag_len</span> <span class="o">=</span> <span class="n">shp</span>
         <span class="n">X0</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">ang_len</span><span class="p">),</span> <span class="n">_np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">mag_len</span><span class="p">))</span>
     <span class="c1"># Evaluate Jacobian</span>
     <span class="n">J</span> <span class="o">=</span> <span class="n">jacobian</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
@@ -1587,6 +1649,16 @@
 
 
 
+
+
+  
+  
+
+
+
+
+
+
                 
               </article>
             </div>
@@ -1606,13 +1678,13 @@
       <div class="md-copyright">
   
     <div class="md-footer-copyright__highlight">
-        &#169; Copyright 2022, Joe Stanley.
+        &#169; Copyright 2026, Joe Stanley.
         
     </div>
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    7.2.6.
+    9.1.0.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
@@ -1628,10 +1700,11 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
       
-        <script src="../../_static/sphinx_immaterial_theme.f9d9eeeb247ace16c.min.js?v=8ec58cb5"></script>
+        <script src="../../_static/sphinx_immaterial_theme.32136f45f91ae6956.min.js?v=a7a9472a"></script>
     
   </body>
 </html>

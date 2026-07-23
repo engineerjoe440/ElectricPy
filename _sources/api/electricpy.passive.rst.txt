@@ -21,6 +21,12 @@
     
     air_core_inductance
     
+    air_core_required_diameter
+    
+    air_core_required_length
+    
+    air_core_required_num_turns
+    
     capbacktoback
     
     capenergy

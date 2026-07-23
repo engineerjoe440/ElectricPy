@@ -1,0 +1,6 @@
+electricpy.passive.air\_core\_required\_num\_turns
+==================================================
+
+.. currentmodule:: electricpy.passive
+
+.. autofunction:: air_core_required_num_turns

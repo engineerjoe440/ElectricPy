@@ -1,0 +1,6 @@
+electricpy.passive.air\_core\_required\_length
+==============================================
+
+.. currentmodule:: electricpy.passive
+
+.. autofunction:: air_core_required_length
