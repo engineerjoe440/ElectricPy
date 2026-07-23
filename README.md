@@ -55,7 +55,7 @@ notebooks!)
 | ----------- | -------------- | ---------------------- |
 | ![phasor plot](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/PhasorPlot.png) | ![power triangle](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/PowerTriangle.png) | ![induction motor circle](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/InductionMotorCircleExample.png) |
 
-| RLC Frequency Response | Placeholder | Receiving Power Circle |
+| RLC Frequency Response | - | Receiving Power Circle |
 | --- | --- | --- |
 | ![series rlc response](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/series-rlc-r5-l0.4.png) | - | ![receiving power circle](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/ReceivingPowerCircleExample.png) |
 
