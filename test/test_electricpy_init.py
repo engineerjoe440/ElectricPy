@@ -6,6 +6,7 @@ import electricpy as ep
 
 
 def test_tcycle_and_reactance():
+    """Validate tcycle and reactance behavior."""
     assert ep.tcycle(1, freq=60) == pytest.approx(1 / 60)
     assert ep.tcycle([1, 2], freq=[50, 100]) == pytest.approx(np.array([0.02, 0.02]))
 
@@ -25,6 +26,7 @@ def test_tcycle_and_reactance():
 
 
 def test_cprint_and_phaseline():
+    """Validate cprint and phaseline behavior."""
     arr = np.array([ep.phasor(1, 0), ep.phasor(2, 90)])
     out = ep.cprint(arr, label="V", unit="V", printval=False, ret=True)
     assert out.shape == (2, 2)
@@ -65,6 +67,7 @@ def test_cprint_and_phaseline():
 
 
 def test_power_and_slew_helpers():
+    """Validate power and slew helpers behavior."""
     assert ep.powerset(P=4, Q=3, find="S") == pytest.approx(5.0)
     assert ep.powerset(P=4, Q=-3, find="PF") == pytest.approx(-0.8)
     assert ep.powerset(S=5, PF=0.8, find="P") == pytest.approx(4.0)
@@ -86,6 +89,7 @@ def test_power_and_slew_helpers():
 
 
 def test_pf_and_short_circuit():
+    """Validate pf and short circuit behavior."""
     assert ep.non_linear_pf(PFtrue=None, PFdist=0.8, PFdisp=0.9) == pytest.approx(0.72)
     assert ep.non_linear_pf(PFtrue=0.72, PFdist=None, PFdisp=0.9) == pytest.approx(0.8)
     assert ep.non_linear_pf(PFtrue=0.72, PFdist=0.8, PFdisp=None) == pytest.approx(0.9)
@@ -113,6 +117,7 @@ def test_pf_and_short_circuit():
 
 
 def test_dividers_and_basic_helpers():
+    """Validate dividers and basic helpers behavior."""
     assert ep.voltdiv(12, 4, 8) == pytest.approx(8.0)
     assert ep.voltdiv(12, 6, 12, Rload=12) == pytest.approx(6.0)
 
@@ -129,6 +134,7 @@ def test_dividers_and_basic_helpers():
 
 
 def test_electricpy_init_line_coverage_smoke():
+    """Validate electricpy init line coverage smoke behavior."""
     path = ep.__file__
     with open(path, "r", encoding="utf-8") as handle:
         total_lines = len(handle.read().splitlines())

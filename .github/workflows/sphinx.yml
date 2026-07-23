@@ -17,25 +17,25 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v3
         with:
-          python-version: "3.11"
+          python-version: "3.12"
       # I don't know where the "run" thing is documented.
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           cp logo/ElectricpyLogo.svg docsource/static/ElectricpyLogo.svg
-          pip install -r docsource/requirements.txt
       - name: Build Sphinx docs
         if: success()
         run: |
-          pip install .
-          python3 -c "import electricpy; print('electricpy.__file__')"
+          python -m pip install .[dev]
+          python -c "import electricpy; print(electricpy.__file__)"
           sphinx-build -M html docsource docs
       - name: Generate Coverage Badge
         if: success()
         run: |
-          pip install -r test/requirements.txt
-          coverage run --source=./electricpy -m pytest
-          coverage-badge -o docs/html/coverage.svg
+          python -m pip install coverage genbadge pytest
+          python -m coverage run --source=./electricpy -m pytest
+          python -m coverage xml -o coverage.xml
+          python -m genbadge.main coverage -i coverage.xml -o docs/html/coverage.svg
 
       # https://github.com/marketplace/actions/github-pages
       #- if: success()

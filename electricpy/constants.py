@@ -7,8 +7,8 @@ Defenition of all required constants and matricies for
 """
 ################################################################################
 
-import numpy as _np
 import cmath as _c
+import numpy as _np
 
 # Define Electrical Engineering Constants
 pi = _np.pi  #: PI Constant 3.14159...
@@ -49,17 +49,24 @@ Cxyz = _np.array([
     [-1 / _np.sqrt(6), -1 / _np.sqrt(2), 1 / _np.sqrt(3)]
 ])
 # Define Park Components Matricies
-_rad = lambda th: _np.radians(th)
-_Pdq0_im = lambda th: _np.sqrt(2 / 3) * _np.array([
-    [_np.cos(_rad(th)), _np.cos(_rad(th) - 2 * pi / 3), _np.cos(_rad(th) + 2 * pi / 3)],
-    [-_np.sin(_rad(th)), -_np.sin(_rad(th) - 2 * pi / 3), -_np.sin(_rad(th) + 2 * pi / 3)],
-    [_np.sqrt(2) / 2, _np.sqrt(2) / 2, _np.sqrt(2) / 2]
-])
-_Pabc_im = lambda th: _np.sqrt(2 / 3) * _np.array([
-    [_np.cos(_rad(th)), -_np.sin(_rad(th)), _np.sqrt(2) / 2],
-    [_np.cos(_rad(th) - 2 * pi / 3), -_np.sin(_rad(th) - 2 * pi / 3), _np.sqrt(2) / 2],
-    [_np.cos(_rad(th) + 2 * pi / 3), -_np.sin(_rad(th) + 2 * pi / 3), _np.sqrt(2) / 2]
-])
+def _rad(th):
+    return _np.radians(th)
+
+
+def _Pdq0_im(th):
+    return _np.sqrt(2 / 3) * _np.array([
+        [_np.cos(_rad(th)), _np.cos(_rad(th) - 2 * pi / 3), _np.cos(_rad(th) + 2 * pi / 3)],
+        [-_np.sin(_rad(th)), -_np.sin(_rad(th) - 2 * pi / 3), -_np.sin(_rad(th) + 2 * pi / 3)],
+        [_np.sqrt(2) / 2, _np.sqrt(2) / 2, _np.sqrt(2) / 2]
+    ])
+
+
+def _Pabc_im(th):
+    return _np.sqrt(2 / 3) * _np.array([
+        [_np.cos(_rad(th)), -_np.sin(_rad(th)), _np.sqrt(2) / 2],
+        [_np.cos(_rad(th) - 2 * pi / 3), -_np.sin(_rad(th) - 2 * pi / 3), _np.sqrt(2) / 2],
+        [_np.cos(_rad(th) + 2 * pi / 3), -_np.sin(_rad(th) + 2 * pi / 3), _np.sqrt(2) / 2]
+    ])
 Pdq0 = 2 / 3 * _np.array([[0, -_np.sqrt(3 / 2), _np.sqrt(3 / 2)],
                           [1, -1 / 2, -1 / 2],
                           [1 / 2, 1 / 2, 1 / 2]])

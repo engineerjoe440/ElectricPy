@@ -10,11 +10,11 @@ import numpy as _np
 import matplotlib.pyplot as _plt
 from scipy.optimize import fsolve as _fsolve
 
-from electricpy.constants import *
+from electricpy.constants import XFMD1, XFMD11, XFM12, XFMY0
 from electricpy.conversions import seq_to_abc
 
 
-def _phaseroll(M012, reference):
+def _phase_roll(M012, reference):
     # Compute Dot Product
     return seq_to_abc(M012, reference)
 
@@ -67,7 +67,7 @@ def single_phase_to_ground_fault(Vth, Zseq, Rf=0, sequence=True, reference='A'):
     Ifault = _np.array([Ifault, Ifault, Ifault])
     # Prepare Value for return
     if not sequence:
-        Ifault = _phaseroll(Ifault, reference)  # Convert to ABC-Domain
+        Ifault = _phase_roll(Ifault, reference)  # Convert to ABC-Domain
     # Return Value
     return Ifault
 
@@ -125,7 +125,7 @@ def double_phase_to_ground_fault(Vth, Zseq, Rf=0, sequence=True, reference='A'):
     Ifault = _np.array([If0, If1, If2])
     # Return Currents
     if not sequence:
-        Ifault = _phaseroll(Ifault, reference)  # Convert to ABC-Domain
+        Ifault = _phase_roll(Ifault, reference)  # Convert to ABC-Domain
     return Ifault
 
 # Alias Original Name
@@ -182,7 +182,7 @@ def phase_to_phase_fault(Vth, Zseq, Rf=0, sequence=True, reference='A'):
     Ifault = _np.array([If0, If1, If2])
     # Return Currents
     if not sequence:
-        Ifault = _phaseroll(Ifault, reference)  # Convert to ABC-Domain
+        Ifault = _phase_roll(Ifault, reference)  # Convert to ABC-Domain
     return Ifault
 
 # Alias Original Name
@@ -233,7 +233,7 @@ def three_phase_fault(Vth, Zseq, Rf=0, sequence=True, reference='A'):
     Ifault = _np.array([0, Ifault, 0])
     # Prepare to Return Value
     if not sequence:
-        Ifault = _phaseroll(Ifault, reference)  # Convert to ABC-Domain
+        Ifault = _phase_roll(Ifault, reference)  # Convert to ABC-Domain
     return Ifault
 
 # Alias Original Name
@@ -288,7 +288,7 @@ def poleopen1(Vth, Zseq, sequence=True, reference='A'):
     Ifault = _np.array([If0, If1, If2])
     # Return Currents
     if not sequence:
-        Ifault = _phaseroll(Ifault, reference)  # Convert to ABC-Domain
+        Ifault = _phase_roll(Ifault, reference)  # Convert to ABC-Domain
     return Ifault
 
 
@@ -340,7 +340,7 @@ def poleopen2(Vth, Zseq, sequence=True, reference='A'):
     Ifault = _np.array([If0, If1, If2])
     # Return Currents
     if not sequence:
-        Ifault = _phaseroll(Ifault, reference)  # Convert to ABC-Domain
+        Ifault = _phase_roll(Ifault, reference)  # Convert to ABC-Domain
     return Ifault
 
 
@@ -405,6 +405,7 @@ scMVA = short_circuit_mva
 
 
 # Define Explicitly 3-Phase MVAsc Calculator
+# pylint: disable-next=unused-argument
 def phs3mvasc(Vth, Zseq, Rf=0, Sbase=1):
     r"""
     Three-Phase MVA Short-Circuit Calculator.
@@ -541,7 +542,7 @@ def busvolt(k, n, Vpf, Z0, Z1, Z2, If, sequence=True, reference='A'):
     # Perform Calculation
     Vf = Vfmat - Zmat.dot(If)
     if not sequence:
-        Vf = _phaseroll(Vf, reference)  # Convert to ABC-Domain
+        Vf = _phase_roll(Vf, reference)  # Convert to ABC-Domain
     return Vf
 
 
@@ -709,7 +710,7 @@ def ct_satratburden(Inom, VArat=None, ANSIv=None, ALF=20, ):
     # Validate Inputs
     if VArat is None and ANSIv is None:
         raise ValueError("VArat or ANSIv must be specified.")
-    elif VArat is None:
+    if VArat is None:
         # Calculate VArat from ANSIv
         VArat = Inom * ANSIv / (20)
     # Determine Vsaturation
@@ -744,7 +745,7 @@ def ct_vpeak(Zb, Ip, CTR):
 
 
 # Define Saturation Time Calculator
-def ct_timetosat(Vknee, XoR, Rb, CTR, Imax, ts=None, npts=100, freq=60,
+def ct_timetosat(Vknee, XoR, Rb, Imax, ts=None, npts=100, freq=60,
                  plot=False):
     r"""
     Electrical Current Transformer (CT) Time to Saturation Function.
@@ -760,8 +761,7 @@ def ct_timetosat(Vknee, XoR, Rb, CTR, Imax, ts=None, npts=100, freq=60,
                 The X-over-R ratio of the system.
     Rb:         float
                 The total burden resistance in ohms.
-    CTR:        float
-                The CT Ratio (primary/secondary, N) to be used.
+    # CTR parameter removed
     Imax:       float
                 The (maximum) current magnitude to use for calculation,
                 typically the fault current.
@@ -922,7 +922,7 @@ def trvresistor(C, L, reduction, Rd0=500, wd0=260e3, tpk0=10e-6):
 
 
 # Define Time-Overcurrent Trip Time Function
-def toctriptime(I, Ipickup, TD, curve="U1", CTR=1):
+def toctriptime(I, Ipickup, TD, curve="U1", CTR=1):  # noqa: E741
     """
     Time OverCurrent Trip Time Function.
 
@@ -974,7 +974,7 @@ def toctriptime(I, Ipickup, TD, curve="U1", CTR=1):
 
 
 # Define Time Overcurrent Reset Time Function
-def tocreset(I, Ipickup, TD, curve="U1", CTR=1):
+def tocreset(I, Ipickup, TD, curve="U1", CTR=1):  # noqa: E741
     """
     Time OverCurrent Reset Time Function.
 
@@ -1047,7 +1047,7 @@ def pickup(Iloadmax, Ifaultmin, scale=0, printout=False, units="A"):
     """
     IL2 = 2 * Iloadmax
     IF2 = Ifaultmin / 2
-    exponent = len(str(IL2).split('.')[0])
+    exponent = len(str(IL2).split('.', maxsplit=1)[0])
     setpoint = _np.ceil(IL2 * 10 ** (-exponent + 1 + scale)) * 10 ** (exponent - 1 - scale)
     if printout:
         print("Range Min:", IL2, units, "\t\tRange Max:", IF2, units)
@@ -1061,8 +1061,9 @@ def pickup(Iloadmax, Ifaultmin, scale=0, printout=False, units="A"):
 
 
 # Define Time-Dial Coordination Function
-def tdradial(I, CTI, Ipu_up, Ipu_dn=0, TDdn=0, curve="U1", scale=2, freq=60,
-             CTR_up=1, CTR_dn=1, tfixed=None):
+def tdradial(  # noqa: E741
+    I, CTI, Ipu_up, Ipu_dn=0, TDdn=0, curve="U1", scale=2, freq=60,  # noqa: E741
+    CTR_up=1, CTR_dn=1, tfixed=None):
     """
     Radial Time Dial Coordination Function.
 
@@ -1346,7 +1347,7 @@ def symrmsfaultcur(V, R, X, t=1 / 60, freq=60):
 
 
 # Define Relay M Formula
-def faultratio(I, Ipickup, CTR=1):
+def faultratio(I, Ipickup, CTR=1):  # noqa: E741
     """
     Fault Multiple of Pickup (Ratio) Calculator.
 
@@ -1461,7 +1462,7 @@ def distmeasz(VLNmeas, If, Ip, Ipp, CTR=1, VTR=1, k0=None, z1=None, z0=None,
                 The "measured" impedance as calculated by the relay.
     """
     # Validate Residual Compensation Inputs
-    if k0 == z1 == z0 is None:
+    if all(param is None for param in (k0, z1, z0)):
         raise ValueError("Residual compensation arguments must be set.")
     if k0 is None and (z1 is None or z0 is None):
         raise ValueError("Both *z1* and *z0* must be specified.")
@@ -1471,9 +1472,9 @@ def distmeasz(VLNmeas, If, Ip, Ipp, CTR=1, VTR=1, k0=None, z1=None, z0=None,
     # Convert Primary Units to Secondary
     V = VLNmeas / VTR
     Ir = (If + Ip + Ipp) / CTR
-    I = If / CTR
+    fault_current = If / CTR
     # Calculate Measured Impedance
-    Zmeas = V / (I + k0 * Ir)
+    Zmeas = V / (fault_current + k0 * Ir)
     return Zmeas
 
 
@@ -1509,8 +1510,9 @@ def transmismatch(I1, I2, tap1, tap2):
 
 
 # Define High-Impedance Bus Protection Pickup Function
-def highzvpickup(I, RL, Rct, CTR=1, threephase=False, Ks=1.5,
-                 Vstd=400, Kd=0.5):
+def highzvpickup(  # noqa: E741
+    I, RL, Rct, CTR=1, threephase=False, Ks=1.5,  # noqa: E741
+    Vstd=400, Kd=0.5):
     """
     High Impedance Pickup Setting Function.
 
@@ -1550,7 +1552,8 @@ def highzvpickup(I, RL, Rct, CTR=1, threephase=False, Ks=1.5,
     """
     # Condition Based on threephase Argument
     n = 2
-    if threephase: n = 1
+    if threephase:
+        n = 1
     # Evaluate Secure Voltage Pickup
     Vsens = Ks * (n * RL + Rct) * I / CTR
     # Evaluate Dependible Voltage Pickup
@@ -1591,7 +1594,7 @@ def highzmini(N, Ie, Irly=None, Vset=None, Rrly=2000, Imov=0, CTR=1):
                 bus protection element pickup.
     """
     # Validate Inputs
-    if Irly == Vset is None:
+    if Irly is None and Vset is None:
         raise ValueError("Relay Current Required.")
     # Condition Inputs
     Ie = abs(Ie)
@@ -1763,8 +1766,8 @@ def synmach_Isym(t, Eq, Xd, Xdp, Xdpp, Tdp, Tdpp):
     """
     # Calculate Time-Constant Term
     t_c = (
-        1 / Xd + 
-        (1 / Xdp - 1 / Xd) * _np.exp(-t / Tdp) + 
+        1 / Xd +
+        (1 / Xdp - 1 / Xd) * _np.exp(-t / Tdp) +
         (1 / Xdpp - 1 / Xdp) * _np.exp(-t / Tdpp)
     )
     # Calculate Fault Current

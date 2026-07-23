@@ -477,8 +477,7 @@ class InductionMotorCircle:
         self.data = self.compute_efficiency()
 
     def __call__(self):
-        # noqa: D102
-        __doc__ = self.__doc__
+        """Return the computed efficiency data for the induction motor circle."""
         return self.data
 
     def plot(self):
@@ -843,6 +842,8 @@ class PowerCircle:
 
         elif circle_type == "sending_end":
             center = Point(k * _c.cos(alpha - beta), -k * _c.sin(alpha - beta))
+        else:
+            raise ValueError("Invalid circle_type")
 
         if V_ref is not None and P is not None and Q is not None:
             radius = abs(V) * abs(V_ref) / (abs(a2))
@@ -893,7 +894,7 @@ class PowerCircle:
         if self.parameters["Q" + type1] is None:
             self.parameters["Q" + type1] = self.operating_point.y
 
-        if self.parameters["S" + type1] == None:
+        if self.parameters["S" + type1] is None:
             self.parameters["S" + type1] = (
                 self.operating_point.x + 1j * self.operating_point.y
             )
@@ -948,6 +949,7 @@ class PowerCircle:
 
         for key, value in self.parameters.items():
             print(key, " => ", value)
+        return None
 
     def __call__(self) -> dict:
         r"""Return the data of the circle."""
@@ -1042,11 +1044,11 @@ def receiving_end_power_circle(
     """
     try:
         assert Vr is not None and A is not None and B is not None
-    except AssertionError:
+    except AssertionError as exc:
         raise ValueError(
             "Not enough attributes to build Receiving end power circle at least"
             " provide `Vr`, `A`, `B`"
-        )
+        ) from exc
 
     # NOTE:
     # Original validation required (Sr is not None and power_factor is not None),
@@ -1164,12 +1166,12 @@ class SeriesRLC():
 
     .. math:: \text{resonance_frequency} = \frac{1}{\sqrt{L * C} \cdot 2 \pi}
 
-    
+
     **Bandwidth:**
 
     .. math:: \text{bandwidth} = \frac{R}{L \cdot 2 \pi}
 
-    
+
     **Quality Factor:**
 
     .. math:: \text{quality_factor} = 2\pi \frac{\text{freq}}{R}
@@ -1177,7 +1179,7 @@ class SeriesRLC():
 
     Given the characteristics listed below, and the Python code described in the
     associated example, the following plot will be generated.
-    
+
     * Resistance: 5 ohms
     * Inductance: 0.4 henreys
     * Capacitance: 25.3e-6 farads
@@ -1193,7 +1195,7 @@ class SeriesRLC():
 
     .. image:: /static/series-rlc-r10-l0.5.png
 
-    
+
     Examples
     --------
     >>> from electricpy.visu import SeriesRLC

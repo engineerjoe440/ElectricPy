@@ -10,11 +10,11 @@ REPO = 'electricpy'
 try:
     import electricpy as ep
 except ImportError:
-    import os, sys
+    import os
+    import sys
     sys.path.insert(0, os.getcwd())
     import electricpy as ep
 
-import requests
 
 response = requests.get(f"https://api.github.com/repos/{USERNAME}/{REPO}/releases/latest")
 try:

@@ -1,28 +1,37 @@
+# ElectricPy
+
 <a href="https://electricpy.readthedocs.io/en/latest/">
   <img src="https://raw.githubusercontent.com/engineerjoe440/ElectricPy/master/logo/ElectricpyLogo.svg" width="200" alt="logo" align="right">
 </a>
 
-# ElectricPy
+> *Electrical-Engineering-for-Python*
 
-*Electrical-Engineering-for-Python*
-
+<!-- Documentation -->
 [![sphinx](https://github.com/engineerjoe440/ElectricPy/actions/workflows/sphinx-build.yml/badge.svg?branch=master)](https://github.com/engineerjoe440/ElectricPy/actions/workflows/sphinx-build.yml)
 [![Documentation Status](https://readthedocs.org/projects/electricpy/badge/?version=latest)](https://electricpy.readthedocs.io/en/latest/?badge=latest)
-![Tox Import Test](https://github.com/engineerjoe440/ElectricPy/workflows/Tox%20Tests/badge.svg)
 
+<!-- Testing -->
 [![pytest](https://github.com/engineerjoe440/ElectricPy/actions/workflows/pytest.yml/badge.svg?branch=master)](https://github.com/engineerjoe440/ElectricPy/actions/workflows/pytest.yml)
 [![pydocstyle](https://github.com/engineerjoe440/ElectricPy/actions/workflows/pydocstyle.yml/badge.svg?branch=master)](https://github.com/engineerjoe440/ElectricPy/actions/workflows/pydocstyle.yml)
 ![Coverage](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/coverage.svg)
 
-[![](https://img.shields.io/pypi/v/electricpy.svg?color=blue&logo=pypi&logoColor=white)](https://pypi.org/project/electricpy/)
-[![](https://pepy.tech/badge/electricpy)](https://pepy.tech/project/electricpy)
-[![](https://img.shields.io/github/stars/engineerjoe440/electricpy?logo=github)](https://github.com/engineerjoe440/electricpy/)
-[![](https://img.shields.io/pypi/l/electricpy.svg?color=blue)](https://github.com/engineerjoe440/electricpy/blob/master/LICENSE.txt)
+<!-- General About -->
+[![PyPI Link](https://img.shields.io/pypi/v/electricpy.svg?color=blue&logo=pypi&logoColor=white)](https://pypi.org/project/electricpy/)
+[![download count](https://pepy.tech/badge/electricpy)](https://pepy.tech/project/electricpy)
+[![github stars count](https://img.shields.io/github/stars/engineerjoe440/electricpy?logo=github)](https://github.com/engineerjoe440/electricpy/)
+[![license](https://img.shields.io/pypi/l/electricpy.svg?color=blue)](https://github.com/engineerjoe440/electricpy/blob/master/LICENSE.txt)
 
+<!-- Python Support -->
+[![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-3100/)
+[![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3120/)
+[![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/downloads/release/python-3130/)
+[![Python 3.14](https://img.shields.io/badge/python-3.14-blue.svg)](https://www.python.org/downloads/release/python-3140/)
+
+<!-- Social -->
 [![Matrix](https://img.shields.io/matrix/electricpy:stanleysolutionsn.com?label=%23electricpy:stanleysolutionsnw.com&logo=matrix&server_fqdn=matrix.stanleysolutionsnw.com&style=for-the-badge)](https://matrix.to/#/#electricpy:stanleysolutionsnw.com)
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/engineerjoe440)
-
 
 Python Libraries with functions and constants related to electrical engineering.
 
@@ -30,13 +39,7 @@ The functions and constants that make up these modules represent a library of
 material compiled with the intent of being used primarily for research,
 development, education, and exploration in the realm of electrical engineering.
 
-Check out our full documentation: https://electricpy.readthedocs.io/en/latest/
-
-<a title="Fabián Alexis, CC BY-SA 3.0 &lt;https://creativecommons.org/licenses/by-sa/3.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Antu_dialog-warning.svg"><img width="25px" alt="Antu dialog-warning" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Antu_dialog-warning.svg/512px-Antu_dialog-warning.svg.png"></a> **Documentation has recently been updated to use [ReadTheDocs](https://readthedocs.org/)**
-
-GitHub Pages are still active, and will continue to be for the forseeable
-future, but they're intended for developmental updates rather than primary
-documentation.
+Check out our full documentation: [https://electricpy.readthedocs.io/en/latest/](https://electricpy.readthedocs.io/en/latest/)
 
 ## Features
 
@@ -49,40 +52,39 @@ notebooks!)
 ### Samples Generated with ElectricPy
 
 | Phasor Plot | Power Triangle | Induction Motor Circle |
-|-------------|----------------|------------------------|
-| ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/PhasorPlot.png) | ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/PowerTriangle.png) | ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/InductionMotorCircleExample.png) |
+| ----------- | -------------- | ---------------------- |
+| ![phasor plot](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/PhasorPlot.png) | ![power triangle](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/PowerTriangle.png) | ![induction motor circle](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/InductionMotorCircleExample.png) |
 
-
-| RLC Frequency Response |                | Receiving Power Circle |
-|------------------------|----------------|------------------------|
-| ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/series-rlc-r5-l0.4.png) |  | ![](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/ReceivingPowerCircleExample.png) |
+| RLC Frequency Response | - | Receiving Power Circle |
+| --- | --- | --- |
+| ![series rlc response](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/series-rlc-r5-l0.4.png) | - | ![receiving power circle](https://raw.githubusercontent.com/engineerjoe440/ElectricPy/gh-pages/_images/ReceivingPowerCircleExample.png) |
 
 ## Installing / Getting Started
 
 1. ElectricPy has a few basic installation options for use with `pip`. For most
-common users, use the following command to install ElectricPy with `pip`
+   common users, use the following command to install ElectricPy with `pip`
 
-```
-pip install electricpy[full]
-```
-  
+   ```bash
+   pip install electricpy[full]
+   ```
+
 2. Check installation success in Python environment:
 
-```python
-import electricpy
-electricpy._version_
-```
+   ```python
+   import electricpy
+   electricpy._version_
+   ```
 
 3. Start using the electrical engineering formulas
 
-```python
->>> import electricpy as ep
->>> voltage = ep.phasor(67, 120) # 67 volts at angle 120 degrees
->>> voltage
-(-33.499999999999986+58.02370205355739j)
->>> ep.cprint(voltage)
-67.0 ∠ 120.0°
-```
+   ```python
+   >>> import electricpy as ep
+   >>> voltage = ep.phasor(67, 120) # 67 volts at angle 120 degrees
+   >>> voltage
+   (-33.499999999999986+58.02370205355739j)
+   >>> ep.cprint(voltage)
+   67.0 ∠ 120.0°
+   ```
 
 ### Installing from Source
 
@@ -90,7 +92,7 @@ If you're looking to get the "latest and greatest" from electricpy, you'll want
 to install directly from GitHub, you can do that one of two ways, the easiest of
 which is to simply issue the following command for `pip`
 
-```
+```bash
 pip install git+https://github.com/engineerjoe440/ElectricPy.git
 ```
 
@@ -99,27 +101,26 @@ and installing locally.
 
 1. Clone/Download Source Code from [GitHub Repository](https://github.com/engineerjoe440/ElectricPy)
 2. Open Terminal and Navigate to Folder with `cd` Commands:
-  - `cd <path\to\containing\folder>\electricpy`
+   * `cd <path\to\containing\folder>\electricpy`
 3. Use Python to Install Module from `setup.py`:
-  - `pip install .`
+   * `pip install .`
 
 ### Dependencies
 
-- [NumPy](https://numpy.org/)
-- [matplotlib](https://matplotlib.org/)
-- [SciPy](https://scipy.org/)
-- [SymPy](https://www.sympy.org/en/index.html)
+* [NumPy](https://numpy.org/)
+* [matplotlib](https://matplotlib.org/)
+* [SciPy](https://scipy.org/)
+* [SymPy](https://www.sympy.org/en/index.html)
 
 #### Optional Dependencies
 
 For numerical analysis (install with `pip install electricpy[numerical]`):
 
-- [numdifftools](https://numdifftools.readthedocs.io/en/latest/)
+* [numdifftools](https://numdifftools.readthedocs.io/en/latest/)
 
 For fault analysis (install with `pip install electricpy[fault]`)
 
-- [arcflash](https://github.com/LiaungYip/arcflash)
-
+* [arcflash](https://github.com/LiaungYip/arcflash)
 
 ## Get Involved / Contribute
 
@@ -145,19 +146,19 @@ opportunity to take advantage of this project.
 
 **Come [chat about ElectricPy](https://matrix.to/#/#electricpy:stanleysolutionsnw.com)**
 
-### Special thanks to...
+### Special Thanks
 
-- Stephen Weeks | Student - U of Idaho
-- Jeremy Perhac | Student - U of Idaho
-- Daniel Allen | Student - Universtiy of Idaho
-- Dr. Dennis Sullivan | Proffessor - U of Idaho
-- Dr. Brian Johnson | Proffessor - U of Idaho
-- Dr. Joe Law | Proffessor - U of Idaho
-- StackOverflow user gg349
-- Shaurya Uppal | Online Code Contributor
-- Paul Ortman | Power Quality Engineer - Idaho Power | Instructor - U of Idaho
+* Stephen Weeks | Student - U of Idaho
+* Jeremy Perhac | Student - U of Idaho
+* Daniel Allen | Student - Universtiy of Idaho
+* Dr. Dennis Sullivan | Proffessor - U of Idaho
+* Dr. Brian Johnson | Proffessor - U of Idaho
+* Dr. Joe Law | Proffessor - U of Idaho
+* StackOverflow user gg349
+* Shaurya Uppal | Online Code Contributor
+* Paul Ortman | Power Quality Engineer - Idaho Power | Instructor - U of Idaho
 
-*and*
+> *and*
 
 <a href="https://github.com/engineerjoe440/electricpy/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=engineerjoe440/electricpy" alt="contributors">
@@ -167,7 +168,7 @@ opportunity to take advantage of this project.
 
 For more information regarding this resource, please contact Joe Stanley
 
-- <engineerjoe440@yahoo.com>
+* <engineerjoe440@yahoo.com>
 
 ## License and Usage
 

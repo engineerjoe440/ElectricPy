@@ -39,7 +39,7 @@ def largest_integer(numBits, signed=True):
     signed:     bool, optional
                 Control to specify whether the value should be evaluated for
                 signed, or unsigned, integers. Defaults to True.
-    
+
     Returns
     -------
     int:        The maximum value that can be stored in an integer of numBits.
@@ -54,11 +54,12 @@ def largest_integer(numBits, signed=True):
     >>> cmp.largest_integer(32, signed=True)
     2147483647
     """
+    if numBits <= 0:
+        raise ValueError("numBits must be greater than zero")
     # Use Signed or Unsigned Formula
     if signed:
         return int(2 ** (numBits - 1) - 1)
-    else:
-        return int(2 ** (numBits) - 1)
+    return int(2 ** numBits - 1)
 
 
 # Define CRC Generator (Sender Side)
@@ -253,6 +254,14 @@ def string_to_bits(str):
 
     Converts a Pythonic string to the string's binary representation.
 
+    Examples
+    --------
+    >>> from electricpy import compute as cmp
+    >>> cmp.string_to_bits("A")
+    '01000001'
+    >>> cmp.string_to_bits("Hello")
+    '0000010010001100101110110011011001101111'
+
     Parameters
     ----------
     str:        string
@@ -264,7 +273,13 @@ def string_to_bits(str):
                 The binary representation of the
                 input string.
     """
-    data = (''.join(format(ord(x), 'b') for x in str))
+    data = ''.join(format(ord(x), 'b') for x in str)
+
+    # Pad to Nearest Byte
+    offset = len(data) % 8
+    if offset != 0:
+        data = (8 - offset) * '0' + data
+
     return data
 
 # END

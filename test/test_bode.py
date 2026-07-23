@@ -8,6 +8,7 @@ from electricpy import bode as ep_bode
 
 
 def test_sys_condition_feedback_padding():
+    """Validate sys condition feedback padding behavior."""
     num = np.array([1.0, 0.0])
     den = np.array([1.0, 1.0, 0.0])
     conditioned_num, conditioned_den = ep_bode._sys_condition((num, den), True)
@@ -18,12 +19,16 @@ def test_sys_condition_feedback_padding():
 
 
 def test_bode_validates_frequency_range():
+    """Validate bode validates frequency range behavior."""
     system = (np.array([1.0]), np.array([1.0, 1.0]))
     with pytest.raises(ValueError):
         ep_bode.bode(system, mn=10, mx=1, magnitude=False, angle=False)
 
 
 def test_sbode_returns_plot_module():
-    func = lambda s: 1 / (s + 1)
+    """Validate sbode returns plot module behavior."""
+    def func(s):
+        return 1 / (s + 1)
+
     plot_module = ep_bode.sbode(func, NN=10, mn=1, mx=10, magnitude=False, angle=False)
     assert plot_module is None

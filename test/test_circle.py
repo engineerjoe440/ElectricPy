@@ -9,6 +9,7 @@ from electricpy.geometry import Line, Point
 
 class TestArea:
     def test_0(self):
+        """Validate area scenario 0."""
 
         c = Circle((0, 0), 1)
         assert c.area() == cmath.pi
@@ -17,6 +18,7 @@ class TestArea:
         assert c.area() == cmath.pi * 4
 
     def test_1(self):
+        """Validate area scenario 1."""
 
         c = Circle((0, 0), 1.1)
         assert c.area() == cmath.pi * 1.1**2
@@ -27,6 +29,7 @@ class TestArea:
 
 class TestCircumference:
     def test_0(self):
+        """Validate circumference scenario 0."""
 
         c = Circle((0, 0), 1)
         assert c.circumference() == cmath.pi * 2
@@ -35,6 +38,7 @@ class TestCircumference:
         assert c.circumference() == cmath.pi * 4
 
     def test_1(self):
+        """Validate circumference scenario 1."""
 
         c = Circle((0, 0), 1.1)
         assert c.circumference() == cmath.pi * 2.2
@@ -45,6 +49,7 @@ class TestCircumference:
 
 class TestTangent:
     def test_0(self):
+        """Validate tangent scenario 0."""
         c = Circle((0, 0), 1)
 
         assert c.tangent(Point(0, 1)) == Line(0, 1, -1)
@@ -53,6 +58,7 @@ class TestTangent:
         assert c.tangent(Point(-1, 0)) == Line(-1, 0, -1)
 
     def test_1(self):
+        """Validate tangent scenario 1."""
 
         from test import compare_lines
 
@@ -67,6 +73,7 @@ class TestTangent:
 
 class TestNormal:
     def test_0(self):
+        """Validate normal scenario 0."""
         c = Circle((0, 0), 1)
 
         assert c.normal(Point(0, 1)) == Line(1, 0, 0)
@@ -75,6 +82,7 @@ class TestNormal:
         assert c.normal(Point(-1, 0)) == Line(0, 1, 0)
 
     def test_1(self):
+        """Validate normal scenario 1."""
 
         from test import compare_lines
 
@@ -87,6 +95,7 @@ class TestNormal:
 
 
 def test_contains_point_and_tangent_validation():
+    """Validate error handling for contains point and tangent validation."""
     c = Circle((0, 0), 2)
     assert c.contains_point(Point(2, 0))
     with pytest.raises(ValueError):
@@ -102,6 +111,7 @@ def test_contains_point_and_tangent_validation():
 
 
 def test_equation_and_parametric_errors():
+    """Validate error handling for equation and parametric errors."""
     c = Circle((1, 2), 3)
     eq = c.equation()
     assert "x^2 + y^2" in eq
@@ -109,7 +119,7 @@ def test_equation_and_parametric_errors():
     assert " - 4*y" in eq
     assert " - 4" in eq
     assert c.radius == 3
-    
+
     with pytest.raises(ValueError):
         list(c.parametric_equation(theta_resolution=0))
     with pytest.raises(ValueError):
@@ -133,6 +143,7 @@ def test_equation_and_parametric_errors():
 
 
 def test_sector_and_intersection_cases():
+    """Validate sector and intersection cases behavior."""
     c1 = Circle((0, 0), 1)
     c2 = Circle((2, 0), 1)
     assert c1.sector_length(cmath.pi) == cmath.pi
@@ -162,6 +173,7 @@ def test_sector_and_intersection_cases():
 
 
 def test_construct_circle():
+    """Validate construct circle behavior."""
     p0 = Point(1, 0)
     p1 = Point(0, 1)
     p2 = Point(-1, 0)
@@ -173,6 +185,7 @@ def test_construct_circle():
 
 
 def test_point_coercion_and_repr():
+    """Validate point coercion and repr behavior."""
     pt = circle_mod._as_point((1, 2))
     assert isinstance(pt, Point)
     assert pt == Point(1, 2)
@@ -199,6 +212,7 @@ def test_point_coercion_and_repr():
 
 
 def test_circle_init_validation_and_normal_error():
+    """Validate error handling for circle init validation and normal error."""
     with pytest.raises(TypeError):
         Circle((0, 0), "bad")
     with pytest.raises(ValueError):

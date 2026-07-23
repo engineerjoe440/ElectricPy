@@ -10,6 +10,7 @@ from electricpy import tcycle
 from electricpy.passive import air_core_inductance
 
 def test_bridge_impedance():
+    """Validate bridge impedance behavior."""
     # Perfectly Balanced Wheat Stone Bridge
     from electricpy import bridge_impedance
 
@@ -52,6 +53,7 @@ def test_bridge_impedance():
     assert_almost_equal(zeq, zactual)
 
 def test_dynetz():
+    """Validate dynetz behavior."""
 
     from electricpy import dynetz
     z1 = complex(3, 3)
@@ -67,6 +69,7 @@ def test_dynetz():
     assert (za, zb, zc) == (3 * z1, 3 * z2, 3 * z3)
 
 def test_powerset():
+    """Validate powerset behavior."""
 
     from electricpy import powerset
 
@@ -88,8 +91,8 @@ def test_powerset():
     assert_almost_equal(PF, 0.6)
 
 def test_voltdiv():
+    """Validate voltdiv behavior."""
     from electricpy import voltdiv
-    from electricpy import phasors
 
     # Test case 0 R1 == R2 == Rload
     Vin = 10
@@ -131,6 +134,7 @@ def test_suspension_insulators():
     assert_almost_equal(string_efficiency, string_efficiency_actual, decimal=2)
 
 def test_propagation_constants():
+    """Validate propagation constants behavior."""
 
     from electricpy import propagation_constants
     z = complex(0.5, 0.9)
@@ -144,14 +148,17 @@ def test_propagation_constants():
     assert_almost_equal(params_dict['beta'], beta_cal, decimal = 4)
 
 def test_funcrms():
+    """Validate funcrms behavior."""
 
     from electricpy.math import funcrms
 
-    f = lambda x:np.sin(x)
+    def f(x):
+        return np.sin(x)
 
     assert_almost_equal(funcrms(f,np.pi), 1/np.sqrt(2))
 
 def test_convolve():
+    """Validate convolve behavior."""
 
     from electricpy.math import convolve
     A = (1,1,1)
@@ -160,6 +167,7 @@ def test_convolve():
     assert ([1,2,3,2,1] == convolve((A,B))).all()
 
 def test_ic_555_astable():
+    """Validate ic 555 astable behavior."""
 
     from electricpy import ic_555_astable
 
@@ -176,6 +184,7 @@ def test_ic_555_astable():
     assert_almost_equal(result['t_high'], 1.386*10**-5, decimal = 3)
 
 def test_slew_rate():
+    """Validate slew rate behavior."""
 
     from electricpy import slew_rate
 
@@ -188,6 +197,7 @@ def test_slew_rate():
     assert_almost_equal(1/(np.pi*2), freq)
 
 def test_t_attenuator():
+    """Validate t attenuator behavior."""
     Adb = 1
     Z0 = 1
 
@@ -199,6 +209,7 @@ def test_t_attenuator():
     assert_almost_equal(R2, 8.6673, decimal = 3)
 
 def test_pi_attenuator():
+    """Validate pi attenuator behavior."""
     Adb = 1
     Z0 = 1
 
@@ -209,6 +220,7 @@ def test_pi_attenuator():
     assert_almost_equal(R2, 0.11538, decimal = 3)
 
 def test_inductor_voltdiv():
+    """Validate inductor voltdiv behavior."""
 
     from electricpy.passive import inductive_voltdiv
 
@@ -247,6 +259,7 @@ def test_inductor_voltdiv():
     assert(L1 == 1)
 
 def test_induction_machine_slip():
+    """Validate induction machine slip behavior."""
     from electricpy import induction_machine_slip
 
     Nr = 1200
@@ -267,6 +280,7 @@ def test_induction_machine_slip():
     assert induction_machine_slip(0, freq=freq, poles=p) == 1
 
 def test_parallel_plate_capacitance():
+    """Validate parallel plate capacitance behavior."""
     from electricpy import parallel_plate_capacitance
 
     # Test 1: In the free space (by default e=e0=8.8542E-12)
@@ -297,6 +311,7 @@ def test_parallel_plate_capacitance():
     assert_almost_equal(parallel_plate_capacitance(C=C2, A=A2, e=e2), d2)
 
 def test_solenoid_inductance():
+    """Validate solenoid inductance behavior."""
     from electricpy import solenoid_inductance
 
     # Test 1: In the free space (by default u=u0=4πE-7)
@@ -333,6 +348,7 @@ def test_solenoid_inductance():
     assert_almost_equal(solenoid_inductance(L=L2, A=A2, N=N2, u=u2), l2)
 
 def test_syncspeed():
+    """Validate syncspeed behavior."""
     from electricpy import syncspeed
     assert syncspeed(4, freq = 60, rpm = True) == 1800
     assert syncspeed(4, freq = 60, Hz = True) == 30
@@ -341,7 +357,8 @@ def test_syncspeed():
         can not be zero"):
         syncspeed(0)
 
-def test_tcycle():
+def test_tcycle_repeated():
+    """Validate tcycle repeated behavior."""
     from electricpy import tcycle
 
     # Test 0
@@ -372,6 +389,7 @@ def test_tcycle():
         tcycle(ncycles=[1, 2, 3, 4], freq = [-2, -3, 4, 5])
 
 def test_nr_pqd():
+    """Validate nr pqd behavior."""
     from electricpy import sim
     from numpy.testing import assert_array_almost_equal
     ybustest = [[-10j,10j],
@@ -388,6 +406,7 @@ def test_nr_pqd():
     assert iter == 4 # Iteration Counter
 
 def test_tcycle():
+    """Validate tcycle behavior."""
     from electricpy import tcycle
 
     # Test 0
@@ -420,6 +439,7 @@ def test_tcycle():
 class TestPowerflow():
 
     def test_0(self):
+        """Validate powerflow scenario 0."""
         Vsend = phasor(1.01, 30)
         Vrecv = phasor(1, 0)
         Xline = 0.2
@@ -428,6 +448,7 @@ class TestPowerflow():
         assert_almost_equal(ans, 2.525)
 
     def test_1(self):
+        """Validate powerflow scenario 1."""
         Vsend = 1.01
         Vrecv = 1
         Xline = 0.2
@@ -442,6 +463,7 @@ class TestAirCoreInductor:
         assert_almost_equal(computed_result, expected_result, decimal = 3)
 
     def test_0(self):
+        """Validate air core inductor scenario 0."""
         self.coil_diameter = 1e-3
         self.coil_length = 1e-3
         self.turn = 1000
@@ -450,6 +472,7 @@ class TestAirCoreInductor:
         self.check_result(expected_result)
 
     def test_1(self):
+        """Validate air core inductor scenario 1."""
         self.coil_diameter = 1e-2
         self.coil_length = 1e-2
         self.turn = 251
@@ -459,10 +482,12 @@ class TestAirCoreInductor:
 
 
 def test_tcycle_validation():
+    """Validate error handling for tcycle validation."""
     with pytest.raises(ValueError):
         tcycle(1, freq=-60)
 
 
 def test_reactance_inductive():
+    """Validate reactance inductive behavior."""
     result = reactance(5, freq=60)
     assert result > 0

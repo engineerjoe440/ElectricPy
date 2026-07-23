@@ -1,7 +1,6 @@
 ################################################################################
 """
-electricpy.geometry.triangle - Collection of methods which operate on Cartesian
-triangles.
+electricpy.geometry.triangle - Collection of methods for Cartesian triangles.
 
 >>> import electricpy.geometry.triangle as triangle
 
@@ -12,7 +11,7 @@ which are required for plotting various graphs in electrical engineering.
 
 from __future__ import annotations
 
-from typing import Iterable, Optional, Sequence, Tuple, Union
+from typing import Tuple, Union
 import math
 
 from electricpy.geometry import Point, Line
@@ -42,9 +41,7 @@ def _is_close(a: float, b: float, *, rel_tol: float = 1e-9, abs_tol: float = 1e-
 
 
 def _triangle_twice_area(p0: Point, p1: Point, p2: Point) -> float:
-    """
-    Return twice the signed area (cross product magnitude).
-    """
+    """Return twice the signed area (cross product magnitude)."""
     return (p1.x - p0.x) * (p2.y - p0.y) - (p1.y - p0.y) * (p2.x - p0.x)
 
 
@@ -115,9 +112,7 @@ class Triangle:
         return self.a + self.b + self.c
 
     def perimeters(self) -> float:
-        """
-        Backward-compatible alias for perimeter().
-        """
+        """Backward-compatible alias for perimeter()."""
         return self.perimeter()
 
     def area(self) -> float:
@@ -131,7 +126,7 @@ class Triangle:
         radicand = s * (s - self.a) * (s - self.b) * (s - self.c)
 
         # Clamp tiny negatives caused by floating-point error.
-        if radicand < 0 and radicand > -self._tol:
+        if -self._tol < radicand < 0:
             radicand = 0.0
 
         if radicand < -self._tol:
@@ -151,9 +146,9 @@ class Triangle:
 
     def in_center(self) -> Point:
         """
-        Return the incenter of the triangle.
+        Return the in_center of the triangle.
 
-        The incenter is the weighted average of vertices by the lengths of
+        The in_center is the weighted average of vertices by the lengths of
         the opposite sides. With our naming:
           a = |p0-p1| opposite vertex p2
           b = |p1-p2| opposite vertex p0
@@ -172,7 +167,7 @@ class Triangle:
 
     def in_radius(self) -> float:
         """
-        Return the inradius of the triangle.
+        Return the in_radius of the triangle.
 
         r = A / s where s is semiperimeter.
         """
@@ -184,12 +179,12 @@ class Triangle:
 
     def ortho_center(self) -> Point:
         """
-        Return the orthocenter of the triangle.
+        Return the ortho_center of the triangle.
 
         Construct two altitudes:
         - altitude from p0 to line through p1-p2
         - altitude from p1 to line through p0-p2
-        Their intersection is the orthocenter.
+        Their intersection is the ortho_center.
 
         Requires Line objects returned by geometry.line_equation to support:
         - foot_perpendicular(Point) -> Point
@@ -207,7 +202,7 @@ class Triangle:
 
     def circum_center(self) -> Point:
         """
-        Return the circumcenter of the triangle.
+        Return the circum_center of the triangle.
 
         Intersection of perpendicular bisectors of two sides.
         """
@@ -217,13 +212,13 @@ class Triangle:
 
     def circum_radius(self) -> float:
         """
-        Return the circumradius of the triangle.
+        Return the circum_radius of the triangle.
 
         R = abc / (4A)
         """
         A = self.area()
         if _is_close(A, 0.0, abs_tol=self._tol):
-            raise ValueError("Degenerate triangle: area is zero, circumradius undefined")
+            raise ValueError("Degenerate triangle: area is zero, circum_radius undefined")
         return (self.a * self.b * self.c) / (4.0 * A)
 
     # -------------------------------------------------------------------------
@@ -231,7 +226,9 @@ class Triangle:
     # -------------------------------------------------------------------------
     def __is_valid(self) -> bool:
         """
-        Validate triangle:
+        Validate triangle.
+
+        Checks:
         - triangle inequality with tolerance
         - non-collinear (non-degenerate) using cross-product area test
         """

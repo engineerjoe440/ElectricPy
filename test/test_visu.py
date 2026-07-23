@@ -1,12 +1,11 @@
 import math
 import cmath
-from matplotlib.legend import Legend
-import matplotlib.pyplot as plt
 from numpy.testing import assert_almost_equal
 
 class Test_visualization:
 
     def test_induction_motor_circle(self):
+        """Validate induction motor circle behavior."""
         from electricpy.visu import InductionMotorCircle
 
         open_circuit_test_data = {'V0': 400, 'I0': 9, 'W0': 1310}
@@ -28,6 +27,7 @@ class Test_visualization:
         )
 
     def test_power_circle(self):
+        """Validate power circle behavior."""
         from electricpy.visu import receiving_end_power_circle
         data = {
             "A" : cmath.rect(0.895, math.radians(1.4)),
@@ -42,6 +42,7 @@ class Test_visualization:
         assert_almost_equal(abs(power_circle()['Vs']), 224.909, decimal = 3)
 
     def test_rlc_frequency_response(self):
+        """Validate rlc frequency response behavior."""
         # import RLC from electricpy.visu
         from electricpy.visu import SeriesRLC
 
@@ -49,12 +50,14 @@ class Test_visualization:
         rlc_obj1 = SeriesRLC(
             resistance=5, inductance=0.4, capacitance=25.3e-6, frequency=50
         )
+        assert rlc_obj1 is not None
 
         # gh1 = rlc_obj1.graph(lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000)
 
         rlc_obj2 = SeriesRLC(
             resistance=10, inductance=0.5, capacitance=25.3e-6, frequency=50
         )
+        assert rlc_obj2 is not None
 
         # gh2 = rlc_obj2.graph(lower_frequency_cut=0.1, upper_frequency_cut=100, samples=1000)
 
@@ -62,5 +65,3 @@ class Test_visualization:
         # plt.gca().add_artist(gh2.legend(rlc_obj2.legend(), title=f"(R, L, C) => (10, 0.5 25.3e-6)", loc='upper left'))
 
         # plt.show()
-
-

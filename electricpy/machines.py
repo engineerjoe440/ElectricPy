@@ -54,6 +54,7 @@ def transformertest(Poc=False, Voc=False, Ioc=False, Psc=False, Vsc=False,
     """
     SC = False
     OC = False
+    Req = Xeq = Rc = Xm = None
     # Given Open-Circuit Values
     if (Poc is not None) and (Voc is not None) and (Ioc is not None):
         PF = Poc / (Voc * Ioc)
@@ -71,14 +72,13 @@ def transformertest(Poc=False, Voc=False, Ioc=False, Psc=False, Vsc=False,
     # Return All if Found
     if OC and SC:
         return (Req, Xeq, Rc, Xm)
-    elif OC:
+    if OC:
         return (Rc, Xm)
-    elif SC:
+    if SC:
         return (Req, Xeq)
-    else:
-        raise ValueError(
-            "Not enough arguments were provided for transformertest."
-        )
+    raise ValueError(
+        "Not enough arguments were provided for transformertest."
+    )
 
 
 # Define Simple Transformer Phase Shift Function
@@ -126,7 +126,7 @@ def phase_shift_transformer(style="DY", shift=30):
     # Find Direction
     v = orientation[style.upper()]
     # Calculate Shift
-    phase = _np.exp(1j * _np.radians(v * abs(shift)))
+    phase = _np.exp(1j * _np.radians(v * shift))
     # Return
     return (phase)
 
@@ -553,7 +553,7 @@ def indmachpkslip(Rr, Zth=None, Rs=0, Lm=0, Lls=0, Llr=0, Ls=None,
 
 
 # Define Induction Machine Phase-A, Rotor Current Calculator
-def indmachiar(poles=0, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0, Llr=0,
+def indmachiar(Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0, Llr=0,
                Ls=None, Lr=None, freq=60, calcX=True):
     r"""
     Induction Machine Rotor Current Calculator.
@@ -577,8 +577,7 @@ def indmachiar(poles=0, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0, Llr=0,
 
     Parameters
     ----------
-    poles:      int, optional
-                Number of poles for the induction machine.
+    # Removed poles.
     Vth:        complex, optional
                 Thevenin-equivalent stator voltage of the
                 induction machine, may be calculated internally
@@ -630,8 +629,6 @@ def indmachiar(poles=0, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0, Llr=0,
         Lls = Ls - Lm
     if Lr is not None:  # Use Lr instead of Llr
         Llr = Lr - Lm
-    if poles != 0:  # Calculate Sync. Speed from Num. Poles
-        wsyn = w / (poles / 2)
     if calcX:  # Convert Inductances to Reactances
         Lm *= w
         Lls *= w
@@ -653,7 +650,7 @@ def indmachiar(poles=0, Vth=None, Zth=None, Vas=0, Rs=0, Lm=0, Lls=0, Llr=0,
 
 
 # Define Induction Machine Peak Torque Calculator
-def indmachpktorq(Rr, poles=0, s_pk=None, Iar=None, Vth=None, Zth=None, Vas=0,
+def indmachpktorq(Rr, s_pk=None, Iar=None, Vth=None, Zth=None, Vas=0,
                   Rs=0, Lm=0, Lls=0, Llr=0, Ls=None, Lr=None, freq=60,
                   calcX=True):
     r"""
@@ -684,8 +681,7 @@ def indmachpktorq(Rr, poles=0, s_pk=None, Iar=None, Vth=None, Zth=None, Vas=0,
     ----------
     Rr:         float
                 Rotor resistance in Ohms
-    poles:      int, optional
-                Number of poles for the induction machine.
+    # Removed poles.
     s_pk:       float, optional
                 Peak induction machine slip, may be calculated
                 internally if remaining machine characteristics are
@@ -746,8 +742,6 @@ def indmachpktorq(Rr, poles=0, s_pk=None, Iar=None, Vth=None, Zth=None, Vas=0,
         Lls = Ls - Lm
     if Lr is not None:  # Use Lr instead of Llr
         Llr = Lr - Lm
-    if poles != 0:  # Calculate Sync. Speed from Num. Poles
-        wsyn = w / (poles / 2)
     if calcX:  # Convert Inductances to Reactances
         Lm *= w
         Lls *= w
@@ -779,7 +773,7 @@ def indmachpktorq(Rr, poles=0, s_pk=None, Iar=None, Vth=None, Zth=None, Vas=0,
 
 
 # Define Induction Machine Starting Torque Calculator
-def indmachstarttorq(Rr, poles=0, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0,
+def indmachstarttorq(Rr, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0,
                      Lm=0, Lls=0, Llr=0, Ls=None, Lr=None, freq=60, calcX=True):
     r"""
     Induction Machine Starting Torque Calculator.
@@ -812,8 +806,7 @@ def indmachstarttorq(Rr, poles=0, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0,
     ----------
     Rr:         float
                 Rotor resistance in Ohms
-    poles:      int, optional
-                Number of poles for the induction machine.
+    # Removed poles.
     Iar:        complex, optional
                 Phase-A, Rotor Current in Amps, may be calculated
                 internally if remaining machine characteristics are
@@ -870,8 +863,6 @@ def indmachstarttorq(Rr, poles=0, Iar=None, Vth=None, Zth=None, Vas=0, Rs=0,
         Lls = Ls - Lm
     if Lr is not None:  # Use Lr instead of Llr
         Llr = Lr - Lm
-    if poles != 0:  # Calculate Sync. Speed from Num. Poles
-        wsyn = w / (poles / 2)
     if calcX:  # Convert Inductances to Reactances
         Lm *= w
         Lls *= w
@@ -1034,8 +1025,8 @@ def indmachfocratings(Rr, Rs, Lm, Llr=0, Lls=0, Lr=None,
         F = (Ls * Iqs + Lm * Iqr) - LAMqs
         G = (Lm * Ids + Lr * Idr) - LAMdr
         H = (Lm * Iqs + Lr * Iqr) - LAMqr
-        I = (Lm / Lr * (LAMdr * Iqs - LAMqr * Ids)) - Tem
-        return A, B, C, D, E, F, G, H, I
+        torque_balance = (Lm / Lr * (LAMdr * Iqs - LAMqr * Ids)) - Tem
+        return A, B, C, D, E, F, G, H, torque_balance
 
     # Define Initial Guesses
     Idr0 = -1

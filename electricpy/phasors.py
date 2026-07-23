@@ -13,8 +13,9 @@ to aid in scientific calculations.
 """
 ################################################################################
 
-import numpy as _np
 import cmath as _c
+
+import numpy as _np
 
 
 # Define Phase Angle Generator
@@ -135,13 +136,15 @@ def phasorz(C=None, L=None, freq=60, complex=True):
     if w == 0:
         raise ValueError("freq must be non-zero.")
 
+    Z = None
+
     # C Given in ohms, return as Z
     if C is not None:
         if C == 0:
             raise ValueError("C must be non-zero.")
         Z = -1 / (w * C)
     # L Given in ohms, return as Z
-    if L is not None:
+    elif L is not None:
         Z = w * L
     # If asked for imaginary number
     if complex:
@@ -339,25 +342,27 @@ def compose(*arr):
     try:
         row, col = arr.shape
         # Passed Test, Valid Shape
-        retarr = _np.array([])  # Empty Return Array
+        return_array = _np.array([])  # Empty Return Array
         # Now, Determine whether is type 2 or 3
         if col == 2:  # Type 3
             for i in range(row):  # Iterate over each row
                 item = arr[i][0] + 1j * arr[i][1]
-                retarr = _np.append(retarr, item)
+                return_array = _np.append(return_array, item)
         elif row == 2:  # Type 2
             for i in range(col):  # Iterate over each column
                 item = arr[0][i] + 1j * arr[1][i]
-                retarr = _np.append(retarr, item)
+                return_array = _np.append(return_array, item)
         else:
             raise ValueError("Invalid Array Shape, must be 2xN or Nx2.")
         # Successfully Generated Array, Return
-        return (retarr)
-    except Exception:  # 1-Dimension Array
+        return (return_array)
+    except IndexError as exc:  # 1-Dimension Array
         length = arr.size
         # Test for invalid Array Size
         if length != 2:
-            raise ValueError("Invalid Array Size, Saw Length of " + str(length))
+            raise ValueError(
+                "Invalid Array Size, Saw Length of " + str(length)
+            ) from exc
         # Valid Size, Calculate and Return
         return arr[0] + 1j * arr[1]
 
@@ -396,7 +401,7 @@ def parallelz(*args):
 
     try:
         L = len(Z)
-    except Exception:
+    except (AttributeError, TypeError):
         return Z
 
     if L == 0:
@@ -405,14 +410,14 @@ def parallelz(*args):
         return Z[0]
 
     # Inverse-sum method with explicit zero checks
-    invsum = 0
+    inverted_sum = 0
     for Zi in Z:
         if Zi == 0:
             raise ValueError("Impedance values must be non-zero for parallel combination.")
-        invsum += 1 / Zi
-    if invsum == 0:
+        inverted_sum += 1 / Zi
+    if inverted_sum == 0:
         raise ValueError("Invalid impedances: reciprocal sum evaluates to zero.")
-    Zp = 1 / invsum
+    Zp = 1 / inverted_sum
     return Zp
 
 # END

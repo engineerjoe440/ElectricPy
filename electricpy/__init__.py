@@ -23,7 +23,8 @@ import numpy as _np
 from scipy.integrate import quad as integrate
 
 from .version import NAME, VERSION
-from .constants import *
+from .constants import *  # noqa: F403, F401
+from .constants import RHO_VALUES, De0, VLLcVLN, ILcIP, carson_r, u0, pi, e0
 from .phasors import phasor, parallelz
 
 __version__ = VERSION
@@ -79,8 +80,7 @@ def tcycle(ncycles=1, freq=60):
     # Return
     if isinstance(time, _np.ndarray) and len(time) == 1:
         return time[0]
-    else:
-        return time
+    return time
 
 # Define Reactance Calculator
 
@@ -300,8 +300,8 @@ def cprint(val, unit=None, label=None, title=None,
         else:
             raise ValueError("Invalid Unit")
         # Generate Default Arrays
-        printarr = _np.array([])  # Empty array
-        numarr = _np.array([])  # Empty array
+        print_array = _np.array([])  # Empty array
+        num_array = _np.array([])  # Empty array
         # Operate on List/Array
         for i in range(row):
             _val = val[i]
@@ -311,40 +311,40 @@ def cprint(val, unit=None, label=None, title=None,
             ang = _np.degrees(ang_r)  # Convert to degrees
             mag = _np.around(mag, decimals)  # Round
             ang = _np.around(ang, decimals)  # Round
-            strg = ""
+            string = ""
             if _label is not None:
-                strg += _label + " "
-            strg += str(mag) + " ∠ " + str(ang) + "°"
+                string += _label + " "
+            string += str(mag) + " ∠ " + str(ang) + "°"
             if _unit is not None:
-                strg += " " + _unit
-            printarr = _np.append(printarr, strg)
-            numarr = _np.append(numarr, [mag, ang])
+                string += " " + _unit
+            print_array = _np.append(print_array, string)
+            num_array = _np.append(num_array, [mag, ang])
         # Reshape Arrays
-        printarr = _np.reshape(printarr, (row, col))
-        numarr = _np.reshape(numarr, (sz, 2))
+        print_array = _np.reshape(print_array, (row, col))
+        num_array = _np.reshape(num_array, (sz, 2))
         # Print
         if printval and row == 1:
             if title is not None:
                 print(title)
-            print(strg)
+            print(string)
         elif printval and pretty:
-            strg = ''
+            string = ''
             start = True
-            for i in printarr:
+            for i in print_array:
                 if not start:
-                    strg += '\n'
-                strg += str(i[0])
+                    string += '\n'
+                string += str(i[0])
                 start = False
             if title is not None:
                 print(title)
-            print(strg)
+            print(string)
         elif printval:
             if title is not None:
                 print(title)
-            print(printarr)
+            print(print_array)
         # Return if Necessary
         if ret:
-            return (numarr)
+            return (num_array)
     elif isinstance(val, (int, float, complex)):
         # Handle Invalid Unit/Label
         if unit is not None and not isinstance(unit, str):
@@ -355,22 +355,23 @@ def cprint(val, unit=None, label=None, title=None,
         ang = _np.degrees(ang_r)  # Convert to degrees
         mag = _np.around(mag, decimals)  # Round
         ang = _np.around(ang, decimals)  # Round
-        strg = ""
+        string = ""
         if label is not None:
-            strg += label + " "
-        strg += str(mag) + " ∠ " + str(ang) + "°"
+            string += label + " "
+        string += str(mag) + " ∠ " + str(ang) + "°"
         if unit is not None:
-            strg += " " + unit
+            string += " " + unit
         # Print values (by default)
         if printval:
             if title is not None:
                 print(title)
-            print(strg)
+            print(string)
         # Return values when requested
         if ret:
             return ([mag, ang])
     else:
         raise ValueError("Invalid Input Type")
+    return None
 
 
 # Define Phase/Line Converter
@@ -425,7 +426,7 @@ def phaseline(VLL=None, VLN=None, Iline=None, Iphase=None, realonly=None,
     7967.434 ∠ -30.0°
     """
     # Monitor for deprecated input
-    if 'complex' in kwargs.keys():
+    if 'complex' in kwargs:
         if realonly is None:
             realonly = not kwargs['complex']
         caller = _getframeinfo(_stack()[1][0])
@@ -544,14 +545,13 @@ def powerset(P=None, Q=None, S=None, PF=None, find=''):
     find = find.upper()
     if find == 'P':
         return P
-    elif find == 'Q':
+    if find == 'Q':
         return Q
-    elif find == 'S':
+    if find == 'S':
         return S
-    elif find == 'PF':
+    if find == 'PF':
         return PF
-    else:
-        return P, Q, S, PF
+    return P, Q, S, PF
 
 
 def slew_rate(V=None, freq=None, SR=None, find=''):
@@ -593,12 +593,11 @@ def slew_rate(V=None, freq=None, SR=None, find=''):
                          " parameters given to calculate.")
     if find == 'V':
         return V
-    elif find == 'freq':
+    if find == 'freq':
         return freq
-    elif find == 'SR':
+    if find == 'SR':
         return SR
-    else:
-        return V, freq, SR
+    return V, freq, SR
 
 
 # Define Non-Linear Power Factor Calculator
@@ -699,38 +698,34 @@ def short_circuit_current(V, Z, t=None, f=None, mxcurrent=True, alpha=None):
 
     # Calculate Asymmetrical (total) Current if t is not None
     if t is not None and f is not None:
-        # Calculate RMS if none of the angular values are provided
-        if alpha is None and omega is None:
-            # Calculate tau
-            tau = t / (1 / 60)
-            K = _np.sqrt(1 + 2 * _np.exp(-4 * _np.pi * tau / (X / R)))
+        # Calculate RMS if no alpha (angle) provided
+        if alpha is None:
+            # Number of cycles elapsed at the provided frequency
+            t_cycles = t * f
+            K = _np.sqrt(1 + 2 * _np.exp(-4 * _np.pi * t_cycles / (X / R)))
             IAC = abs(V / Z)
             Irms = K * IAC
             # Return Values
             return Irms, IAC, K
-        elif alpha is None or omega is None:
-            raise ValueError("ERROR: Inappropriate Arguments Provided.")
         # Calculate Instantaneous if all angular values provided
-        else:
-            # Convert Degrees to Radians
-            omega = _np.radians(omega)
-            alpha = _np.radians(alpha)
-            theta = _np.radians(theta)
-            # Calculate T
-            T = X / (2 * _np.pi * f * R)  # seconds
-            # Calculate iAC and iDC
-            iAC = _np.sqrt(2) * V / Z * _np.sin(omega * t + alpha - theta)
-            iDC = -_np.sqrt(2) * V / Z * \
-                _np.sin(alpha - theta) * _np.exp(-t / T)
-            i = iAC + iDC
-            # Return Values
-            return i, iAC, iDC, T
-    elif (t is not None and f is None) or (t is None and f is not None):
+        # Convert Degrees to Radians
+        omega = _np.radians(omega)
+        alpha = _np.radians(alpha)
+        theta = _np.radians(theta)
+        # Calculate T
+        T = X / (2 * _np.pi * f * R)  # seconds
+        # Calculate iAC and iDC
+        iAC = _np.sqrt(2) * V / Z * _np.sin(omega * t + alpha - theta)
+        iDC = -_np.sqrt(2) * V / Z * \
+            _np.sin(alpha - theta) * _np.exp(-t / T)
+        i = iAC + iDC
+        # Return Values
+        return i, iAC, iDC, T
+    if (t is not None and f is None) or (t is None and f is not None):
         raise ValueError("ERROR: Inappropriate Arguments Provided.\n" +
                          "Must provide both t and f or neither.")
-    else:
-        Iac = abs(V / Z)
-        return Iac
+    Iac = abs(V / Z)
+    return Iac
 
 
 # Alias to original Name
@@ -847,8 +842,7 @@ def curdiv(Ri, Rset, Vin=None, Iin=None, Vout=False, combine=True):
     if Vout:  # Asked for voltage across resistor of interest
         Vi = Ii * Ri
         return Ii, Vi
-    else:
-        return Ii
+    return Ii
 
 
 # Induction Machine Slip
@@ -988,6 +982,7 @@ def dynetz(delta=None, wye=None, round=None):
         if round is not None:
             Zset = _np.around(Zset, round)
         return Zset  # Return Wye Impedances
+
     if delta is None and wye is not None:
         Z1, Z2, Z3 = wye  # Gather particular impedances
         Zmultsum = Z1 * Z2 + Z2 * Z3 + Z3 * Z1
@@ -998,6 +993,7 @@ def dynetz(delta=None, wye=None, round=None):
         if round is not None:
             Zset = _np.around(Zset, round)
         return Zset  # Return Delta Impedances
+    raise ValueError("ERROR: Either delta or wye impedances must be specified.")
 
 
 # calculating impedance of bridge network
@@ -1139,9 +1135,9 @@ def zsource(S, V, XoR, Sbase=None, Vbase=None, perunit=True):
     if isinstance(nu, (list, _np.ndarray)):
         Zsource_pu = []
         for angle in nu:
-            Zsource_pu.append(phasors(Zsource_pu, angle))
+            Zsource_pu.append(phasor(Zsource_pu, angle))
     else:
-        Zsource_pu = phasors(Zsource_pu, nu)
+        Zsource_pu = phasor(Zsource_pu, nu)
     if not perunit:
         Zsource = Zsource_pu * Vbase ** 2 / Sbase
         return Zsource
@@ -1433,11 +1429,11 @@ def wrms(func, dw=0.1, NN=100, quad=False, plot=True,
     Stot = Sw2 = 0
     # Power Density Spectrum
     Sxx = _np.array([])
-    for n in range(NN):
+    for _n in range(NN):
         # Calculate Power Density Spectrum
-        Sxx = _np.append(Sxx, func(omega[n]))
-        Stot = Stot + Sxx[n]
-        Sw2 = Sw2 + (omega[n] ** 2) * Sxx[n]
+        Sxx = _np.append(Sxx, func(omega[_n]))
+        Stot = Stot + Sxx[_n]
+        Sw2 = Sw2 + (omega[_n] ** 2) * Sxx[_n]
     if quad:
         def intf(w):
             return w ** 2 * func(w)
@@ -1464,6 +1460,7 @@ def wrms(func, dw=0.1, NN=100, quad=False, plot=True,
 
 
 # Define Hartley's Equation for Data Capacity
+# pylint: disable-next=redefined-outer-name
 def hartleydata(BW, M):
     """
     Hartley Data Function.
@@ -1543,8 +1540,7 @@ def zpu(S, VLL=None, VLN=None):
         raise ValueError("ERROR: One voltage must be provided.")
     if VLL is not None:
         return VLL ** 2 / S
-    else:
-        return (_np.sqrt(3) * VLN) ** 2 / S
+    return (_np.sqrt(3) * VLN) ** 2 / S
 
 
 # Define Per-Unit Current Formula
@@ -1579,10 +1575,9 @@ def ipu(S, VLL=None, VLN=None, V1phs=None):
         raise ValueError("ERROR: One voltage must be provided.")
     if VLL is not None:
         return S / (_np.sqrt(3) * VLL)
-    elif VLN is not None:
+    if VLN is not None:
         return S / (3 * VLN)
-    else:
-        return S / V1phs
+    return S / V1phs
 
 
 # Define Per-Unit Change of Base Function
@@ -1683,9 +1678,8 @@ def rxrecompose(x_pu, XoR, S3phs=None, VLL=None, VLN=None):
     # Recompose
     if S3phs is None:
         return z_pu
-    else:
-        z = zrecompose(z_pu, S3phs, VLL, VLN)
-        return z
+    z = zrecompose(z_pu, S3phs, VLL, VLN)
+    return z
 
 
 # Define Generator Internal Voltage Calculator
@@ -1725,12 +1719,12 @@ def geninternalv(I, Zs, Vt, Vgn=None, Zm=None, Zmp=None, Zmpp=None, Ip=None, Ipp
                 The internal voltage of the generator.
     """
     # All Parameters Provided
-    if Zmp == Zmpp == Ip == Ipp is not None:
+    if all(param is not None for param in (Zmp, Zmpp, Ip, Ipp)):
         if Vgn is None:
             Vgn = 0
         Ea = Zs * I + Zmp * Ip + Zmpp * Ipp + Vt + Vgn
     # Select Parameters Provided
-    elif Vgn == Zm == Ip == Ipp is None:
+    elif all(param is None for param in (Vgn, Zm, Ip, Ipp)):
         Ea = Zs * I + Vt
     # Invalid Parameter Set
     else:
@@ -1781,9 +1775,8 @@ def funcfft(func, minfreq=60, maxmult=15, complex=False):
     if complex:
         return y
     # Split out useful values
-    else:
-        y *= 2
-        return y[0].real, y[1:-1].real, -y[1:-1].imag
+    y *= 2
+    return y[0].real, y[1:-1].real, -y[1:-1].imag
 
 
 def sampfft(data, dt, minfreq=60.0, complex=False):
@@ -1824,7 +1817,7 @@ def sampfft(data, dt, minfreq=60.0, complex=False):
             "Too few data samples to evaluate FFT at specified minimum "
             "frequency."
         )
-    elif FR == minfreq:
+    if FR == minfreq:
         # Evaluate FFT
         y = _np.fft.rfft(data) / len(data)
     else:
@@ -1836,9 +1829,8 @@ def sampfft(data, dt, minfreq=60.0, complex=False):
     if complex:
         return (y)
     # Split out useful values
-    else:
-        y *= 2
-        return y[0].real, y[1:-1].real, -y[1:-1].imag
+    y *= 2
+    return y[0].real, y[1:-1].real, -y[1:-1].imag
 
 
 # Define FFT Plotting Function
@@ -1946,12 +1938,12 @@ def fftsumplot(dc, real, imag=None, freq=60, xrange=None, npts=1000,
     # Initialize output with DC term
     yout = _np.ones(len(x)) * dc
     # Plot each iteration of the Fourier Series
-    for k in range(1, N):
+    for _k in range(1, N):
         if plotall:
             _plt.plot(x, yout)
-        yout += real[k - 1] * _np.cos(k * 2 * _np.pi * x / T)
+        yout += real[_k - 1] * _np.cos(_k * 2 * _np.pi * x / T)
         if imag is not None:
-            yout += imag[k - 1] * _np.sin(k * 2 * _np.pi * x / T)
+            yout += imag[_k - 1] * _np.sin(_k * 2 * _np.pi * x / T)
     _plt.plot(x, yout)
     _plt.title(title)
     _plt.xlabel("Time (seconds)")
@@ -2005,23 +1997,20 @@ def harmonics(real, imag=None, dc=0, freq=60, domain=None):
 
     def _harmonic_(t):
         out = dc
-        for k in range(len(real)):
-            # Evaluate Current Coefficient
-            A = real[k]
+        for index, A in enumerate(real):
             if imag is not None:
-                B = imag[k]
+                B = imag[index]
             else:
                 B = 0
-            m = k + 1
+            multiplier = index + 1
             # Calculate Output
-            out += A * _np.cos(m * w * t) + B * _np.sin(m * w * t)
+            out += A * _np.cos(multiplier * w * t) + B * _np.sin(multiplier * w * t)
         # Return Value
         return (out)
 
     if domain is None:
         return _harmonic_  # Return as callable for external use
-    else:
-        return _harmonic_(domain)
+    return _harmonic_(domain)
 
 
 # Define Single Phase Motor Startup Capacitor Formula
@@ -2100,9 +2089,9 @@ def pfcorrection(S, PFold, PFnew, VLL=None, VLN=None, V=None, freq=60):
     Qcorrected = _np.sqrt(Scorrected ** 2 - Pold ** 2)
     Qc = Qold - Qcorrected
     # Evaluate Capacitance Based on Voltage Input
-    if VLL == VLN == V is None:
+    if all(param is None for param in (VLL, VLN, V)):
         raise ValueError("One voltage must be specified.")
-    elif VLN is not None:
+    if VLN is not None:
         C = Qc / (2 * _np.pi * freq * 3 * VLN ** 2)
     else:
         if VLL is not None:
@@ -2170,7 +2159,7 @@ def acpiv(S=None, I=None, VLL=None, VLN=None, V=None, PF=None):
     (96.4174949546675, 55.66666666666667, 167.0)
     """
     # Validate Inputs
-    if S == I is None:
+    if S is None and I is None:
         raise ValueError("To few arguments.")
     # Convert Apparent Power to Complex
     if PF is not None:
@@ -2180,31 +2169,30 @@ def acpiv(S=None, I=None, VLL=None, VLN=None, V=None, PF=None):
         if S is None:  # Solve for Apparent Power
             S = V * _np.conj(I)
             return S
-        else:  # Solve for Current
-            I = _np.conj(S / V)
-            return I
+        # Solve for Current
+        I = _np.conj(S / V)
+        return I
     # Solve Line-to-Line
-    elif VLL is not None:
+    if VLL is not None:
         if S is None:  # Solve for Apparent Power
             S = _np.sqrt(3) * VLL * _np.conj(I)
             return S
-        else:  # Solve for Current
-            I = _np.conj(S / (_np.sqrt(3) * VLL))
-            return I
+        # Solve for Current
+        I = _np.conj(S / (_np.sqrt(3) * VLL))
+        return I
     # Solve Line-to-Neutral
-    elif VLN is not None:
+    if VLN is not None:
         if S is None:  # Solve for Apparent Power
             S = 3 * VLN * _np.conj(I)
             return S
-        else:  # Solve for Current
-            I = _np.conj(S / (3 * VLN))
-            return I
+        # Solve for Current
+        I = _np.conj(S / (3 * VLN))
+        return I
     # Solve for Voltages
-    else:
-        V = S / _np.conj(I)
-        VLL = S / (_np.sqrt(3) * _np.conj(I))
-        VLN = S / (3 * _np.conj(I))
-        return VLL, VLN, V
+    V = S / _np.conj(I)
+    VLL = S / (_np.sqrt(3) * _np.conj(I))
+    VLN = S / (3 * _np.conj(I))
+    return VLL, VLN, V
 
 
 # Define Primary Ratio Function
@@ -2340,33 +2328,33 @@ def suspension_insulators(number_capacitors, capacitance_ratio, Voltage):
 
     Returns
     -------
-    string_efficiency:          float
-                                String efficiency of capacitive disks
-    capacitor_disk_voltages:    float
+    capacitor_disk_voltages:    numpy.ndarray
                                 Voltage across each capacitive disk starting
                                 from top to bottom
+    string_efficiency:          float
+                                String efficiency of capacitive disks
     """
-    m = _np.zeros((number_capacitors, number_capacitors))
+    _m = _np.zeros((number_capacitors, number_capacitors))
     # Iterate over capacitors
     for i in range(number_capacitors - 1):
         # Iterate over capacitors
         for j in range(number_capacitors - 1):
             # If inner iteration is less than outer iteration
             if i >= j:
-                m[i, j] = 1 / capacitance_ratio
+                _m[i, j] = 1 / capacitance_ratio
 
     for i in range(number_capacitors - 1):
-        m[i, i] = (1 + 1 / capacitance_ratio)
+        _m[i, i] = (1 + 1 / capacitance_ratio)
 
-        m[i, i + 1] = -1
+        _m[i, i + 1] = -1
 
-    m[number_capacitors - 1, :] = 1
+    _m[number_capacitors - 1, :] = 1
 
     v = _np.zeros((number_capacitors, 1))
 
     v[number_capacitors - 1, 0] = Voltage
 
-    capacitor_disk_voltages = _np.matmul(_np.linalg.inv(m), v)
+    capacitor_disk_voltages = _np.matmul(_np.linalg.inv(_m), v)
 
     string_efficiency = (
         (Voltage * 100) / (number_capacitors * capacitor_disk_voltages[-1, 0])
@@ -2451,12 +2439,11 @@ def unbalance(A, B, C, all=False):
     # Gather Maximum Variation
     mx = max(dA, dB, dC)
     # Calculate Maximum Variation
-    unbalance = mx / avg
+    result = mx / avg
     # Return Results
     if all:
         return dA / avg, dB / avg, dC / avg
-    else:
-        return unbalance
+    return result
 
 
 # Define Cosine Filter Function
@@ -2490,16 +2477,16 @@ def cosfilt(arr, Srate, domain=False):
     ind = _np.arange(Srate - 1, len(arr) - 1)
 
     # Define Cosine Coefficient Function
-    def cos(k, Srate):
-        return _np.cos(2 * _np.pi * k / Srate)
+    def cos(_k, Srate):
+        return _np.cos(2 * _np.pi * _k / Srate)
 
     # Calculate Constant
     const = 2 / Srate
     # Iteratively Calculate
     cosf = 0
-    for k in range(0, Srate - 1):
-        slc = (ind - (Srate - 1)) + k
-        cosf += cos(k, Srate) * arr[slc]
+    for _k in range(0, Srate - 1):
+        slc = (ind - (Srate - 1)) + _k
+        cosf += cos(_k, Srate) * arr[slc]
     # Scale
     cosf = const * cosf
     # Return Cosine-Filtered Array
@@ -2540,20 +2527,20 @@ def sinfilt(arr, Srate, domain=False):
     # Evaluate index set
     ind = _np.arange(Srate - 1, len(arr) - 1)
 
-    # Define Cosine Coefficient Function
-    def sin(k, Srate):
-        return _np.sin(2 * _np.pi * k / Srate)
+    # Define Sine Coefficient Function
+    def sin(_k, Srate):
+        return _np.sin(2 * _np.pi * _k / Srate)
 
     # Calculate Constant
     const = 2 / Srate
     # Iteratively Calculate
     sinf = 0
-    for k in range(0, Srate - 1):
-        slc = (ind - (Srate - 1)) + k
-        sinf += sin(k, Srate) * arr[slc]
+    for _k in range(0, Srate - 1):
+        slc = (ind - (Srate - 1)) + _k
+        sinf += sin(_k, Srate) * arr[slc]
     # Scale
     sinf = const * sinf
-    # Return Cosine-Filtered Array
+    # Return Sine-Filtered Array
     if domain:
         xarray = _np.linspace(Srate + Srate / 4 - 1, len(arr) - 1, len(sinf))
         xarray = xarray / Srate
@@ -2562,12 +2549,13 @@ def sinfilt(arr, Srate, domain=False):
 
 
 # Define Characteristic Impedance Calculator
+# pylint: disable-next=redefined-outer-name
 def characterz(R, G, L, C, freq=60):
     r"""
     Characteristic Impedance Calculator.
 
     Function to evaluate the characteristic
-    impedance of a system with specefied
+    impedance of a system with specified
     line parameters as defined. System uses
     the standard characteristic impedance
     equation :eq:`Zc`.
@@ -2591,7 +2579,7 @@ def characterz(R, G, L, C, freq=60):
     Returns
     -------
     Zc:         complex
-                Charcteristic Impedance of specified line.
+                Characteristic Impedance of specified line.
     """
     # Evaluate omega
     w = 2 * _np.pi * freq
@@ -2613,9 +2601,9 @@ def propagation_constants(z, y, length):
     From the above equation, the following formulas are derived to evaluate the
     desired constants.
 
-    .. math:: \gamma = \sqrt( z * y )
+    .. math:: \gamma = \sqrt{ z * y }
 
-    .. math:: Z_{\text{surge}} = \sqrt( z / y )
+    .. math:: Z_{\text{surge}} = \sqrt{ z / y }
 
     .. math:: \alpha = \Re{ \gamma }
 
@@ -2624,9 +2612,9 @@ def propagation_constants(z, y, length):
     Parameters
     ----------
     z:              complex
-                    Impedence of the transmission line: R+j*2*pi*f*L
+                    Impedance of the transmission line: R+j*2*pi*f*L
     y:              complex
-                    Admitance of the transmission line g+j*2*pi*f*C
+                    Admittance of the transmission line g+j*2*pi*f*C
 
     Returns
     -------
@@ -2641,7 +2629,7 @@ def propagation_constants(z, y, length):
     # Validate the line length is substantial enough for calculation
     if not (length > 500):
         raise ValueError(
-            "Long transmission line length should be grater than 500km"
+            "Long transmission line length should be greater than 500km"
         )
     gamma = _np.sqrt(z * y)
     alpha = gamma.real
@@ -2681,9 +2669,12 @@ def de_calc(rho, freq=60):
         rho = rho.upper()
         try:
             rho = RHO_VALUES[rho]
-        except KeyError:
-            raise ValueError("Invalid Earth Resistivity string try to select \
-            from set of (SEA, SWAMP, AVG, AVERAGE, DAMP, DRY, SAND, SANDSTONE")
+        except KeyError as exc:
+            raise ValueError(
+                "Invalid Earth Resistivity string try to select "
+                "from set of (SEA, SWAMP, AVG, AVERAGE, DAMP, DRY, SAND, "
+                "SANDSTONE)"
+            ) from exc
     # Calculate De
     De = De0 * _np.sqrt(rho / freq)
     return De
@@ -3116,8 +3107,6 @@ def wireresistance(length=None, diameter=None, rho=16.8 * 10 ** -9, R=None):
     R:          [float], optional
                 Wire resistance, unitless.
     """
-    if R == length == diameter is None:
-        raise ValueError("To few arguments.")
     # Given length and diameter
     if length is not None and diameter is not None:
         # calculating the area
@@ -3132,6 +3121,7 @@ def wireresistance(length=None, diameter=None, rho=16.8 * 10 ** -9, R=None):
     if R is not None and length is not None:
         A = rho * length / R
         return _np.sqrt(4 * A / pi)
+    raise ValueError("Too few arguments.")
 
 
 def parallel_plate_capacitance(A=None, d=None, e=e0, C=None):
@@ -3167,8 +3157,6 @@ def parallel_plate_capacitance(A=None, d=None, e=e0, C=None):
     C:  float, optional
         Capacitance, unitless.
     """
-    if C == A == d is None:
-        raise ValueError("To few arguments.")
     # Given area and distance
     if A is not None and d is not None:
         return e * A / d
@@ -3178,8 +3166,10 @@ def parallel_plate_capacitance(A=None, d=None, e=e0, C=None):
     # Given capacitance and area
     if C is not None and A is not None:
         return e * A / C
+    raise ValueError("Too few arguments.")
 
 
+# pylint: disable-next=redefined-outer-name
 def solenoid_inductance(A=None, l=None, N=None, u=u0, L=None):
     r"""
     Solenoid Inductance Calculator.
@@ -3217,8 +3207,6 @@ def solenoid_inductance(A=None, l=None, N=None, u=u0, L=None):
     L:  float, optional
         Inductance, unitless.
     """
-    if L == A == l == N is None:
-        raise ValueError("To few arguments.")
     # Given area, length and number of turns
     if A is not None and l is not None and N is not None:
         return N ** 2 * u * A / l
@@ -3231,6 +3219,7 @@ def solenoid_inductance(A=None, l=None, N=None, u=u0, L=None):
     # Given inductance, area and length
     if L is not None and A is not None and l is not None:
         return _np.sqrt(L * l / (u * A))
+    raise ValueError("Too few arguments.")
 
 
 def ic_555_astable(R=None, C=None, freq=None, t_high=None, t_low=None):
@@ -3289,11 +3278,11 @@ def ic_555_astable(R=None, C=None, freq=None, t_high=None, t_low=None):
 
     if t_high is not None and t_low is not None and C is not None:
 
-        x2 = t_low / C * _np.log(2)
-        x1 = t_high / C * _np.log(2)
+        x2 = t_low / (_np.log(2) * C)
+        x1 = t_high / (_np.log(2) * C)
         T = t_high + t_low
         freq = 1 / (T)
-        duty_cycle = t_high / (T)
+        duty_cycle = t_high * 100 / T
 
         return {
             'time_period': T,
@@ -3302,10 +3291,16 @@ def ic_555_astable(R=None, C=None, freq=None, t_high=None, t_low=None):
             'R1': x1 - x2,
             'R2': x2
         }
-    raise TypeError("Not enough parqmeters are passed")
+
+    if freq is not None and C is not None:
+        T = 1 / freq
+        R1_plus_2R2 = T / (_np.log(2) * C)
+        return {'R1_plus_2R2': R1_plus_2R2}
+
+    raise TypeError("Not enough parameters are passed")
 
 
-def ic_555_monostable(R=None, C=None, freq=None, t_high=None, t_low=None):
+def ic_555_monostable(R=None, C=None, t_high=None, t_low=None):
     """
     555 Integrated Circuit Calculator.
 
@@ -3317,26 +3312,21 @@ def ic_555_monostable(R=None, C=None, freq=None, t_high=None, t_low=None):
 
     Parameters
     ----------
-    R:      list[float, float] or tuple(float, float), optional
-            List of 2 resistor which are need in configuring IC 555.
+    R:      float, optional
+            Resistance used in configuring IC 555.
     C:      float, optional
             Capacitance between Threshold Pin and ground
-    f:      float, optional
-            Electrical system frequency in Hertz.
     t_high: float, optional
-            ON time of IC 555
+            Pulse width (ON time) of IC 555
     t_low:  float, optional
-            OFF time of IC 555
+            OFF time (not used in monostable mode)
 
     Returns
     -------
-    dict:   "time_period": Time period of oscillating IC 555
-            "frequency": frequency of oscilation of IC 555
-            "duty_cycle": ration between ON time and total time
-            "t_low": ON time of IC 555
-            "t_high": OFF time of IC 555
+    float:  The solved parameter (R, C, or T=R*C*log(3)) depending on which
+            argument is None.
     """
-    T = t_high + t_low
+    T = t_high
     if R is None:
         if not (C is not None and T is not None):
             raise ValueError(
@@ -3351,14 +3341,7 @@ def ic_555_monostable(R=None, C=None, freq=None, t_high=None, t_low=None):
                 "provided"
             )
         return T / (_np.log(3) * R)
-
-    if T is None:
-        if not (R is not None and T is not None):
-            raise ValueError(
-                "To find Time delay , Resistance and Capacitance should be "
-                "provided"
-            )
-        return R * C * _np.log(3)
+    return R * C * _np.log(3)
 
 
 def t_attenuator(Adb, Z0):

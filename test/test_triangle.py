@@ -9,6 +9,7 @@ from test import compare_points
 class TestCentroid():
 
     def test_0(self):
+        """Validate centroid scenario 0."""
         p1 = Point(0, 1)
         p2 = Point(1, 0)
         p3 = Point(0, 0)
@@ -16,6 +17,7 @@ class TestCentroid():
         assert t.centroid() == Point(1/3, 1/3)
 
     def test_1(self):
+        """Validate centroid scenario 1."""
         p1 = Point(1.1, 2.2)
         p2 = Point(3.1, 4.2)
         p3 = Point(5.1, 6.7)
@@ -26,6 +28,7 @@ class TestCentroid():
 class TestInCenter():
 
     def test_0(self):
+        """Validate in center scenario 0."""
         p1 = Point(0, 1)
         p2 = Point(1, 0)
         p3 = Point(0, 0)
@@ -33,6 +36,7 @@ class TestInCenter():
         assert compare_points(t.in_center(), Point(1/(2 + cmath.sqrt(2)), 1/(2 + cmath.sqrt(2))))
 
     def test_1(self):
+        """Validate in center scenario 1."""
         p1 = Point(0, 0)
         p2 = Point(1, 0)
         p3 = Point(1*cmath.cos(cmath.pi/3), 1*cmath.sin(cmath.pi/3))
@@ -42,6 +46,7 @@ class TestInCenter():
 class TestOrthoCenter():
 
     def test_0(self):
+        """Validate ortho center scenario 0."""
         p1 = Point(0, 1)
         p2 = Point(1, 0)
         p3 = Point(0, 0)
@@ -49,6 +54,7 @@ class TestOrthoCenter():
         assert compare_points(t.ortho_center(), Point(0, 0))
 
     def test_1(self):
+        """Validate ortho center scenario 1."""
         p1 = Point(0, 0)
         p2 = Point(1, 0)
         p3 = Point(1*cmath.cos(cmath.pi/3), 1*cmath.sin(cmath.pi/3))
@@ -58,6 +64,7 @@ class TestOrthoCenter():
 
 class TestCircumCenter():
     def test_0(self):
+        """Validate circum center scenario 0."""
         p1 = Point(0, 1)
         p2 = Point(1, 0)
         p3 = Point(0, 0)
@@ -65,6 +72,7 @@ class TestCircumCenter():
         assert compare_points(t.circum_center(), Point(0.5, 0.5))
 
     def test_1(self):
+        """Validate circum center scenario 1."""
         p1 = Point(0, 0)
         p2 = Point(1, 0)
         p3 = Point(1*cmath.cos(cmath.pi/3), 1*cmath.sin(cmath.pi/3))
@@ -73,6 +81,7 @@ class TestCircumCenter():
 
 
 def test_triangle_perimeter_and_area():
+    """Validate triangle perimeter and area behavior."""
     p1 = Point(0, 0)
     p2 = Point(3, 0)
     p3 = Point(0, 4)
@@ -83,6 +92,7 @@ def test_triangle_perimeter_and_area():
 
 
 def test_triangle_radii():
+    """Validate triangle radii behavior."""
     p1 = Point(0, 0)
     p2 = Point(3, 0)
     p3 = Point(0, 4)
@@ -92,6 +102,7 @@ def test_triangle_radii():
 
 
 def test_triangle_invalid_points():
+    """Validate error handling for triangle invalid points."""
     p1 = Point(0, 0)
     p2 = Point(1, 1)
     p3 = Point(2, 2)
@@ -100,6 +111,7 @@ def test_triangle_invalid_points():
 
 
 def test_triangle_init_validation_and_helpers():
+    """Validate error handling for triangle init validation and helpers."""
     with pytest.raises(ValueError):
         triangle.Triangle(Point(0, 0), Point(1, 0))
 
@@ -124,6 +136,7 @@ def test_triangle_init_validation_and_helpers():
 
 
 def test_triangle_area_and_centers_errors():
+    """Validate error handling for triangle area and centers errors."""
     tri = object.__new__(triangle.Triangle)
     tri.points = (Point(0, 0), Point(1, 0), Point(0, 1))
     tri._tol = 1e-12
@@ -167,6 +180,7 @@ def test_triangle_area_and_centers_errors():
 
 
 def test_triangle_validation_helper():
+    """Validate error handling for triangle validation helper."""
     tri = object.__new__(triangle.Triangle)
     tri.points = (Point(0, 0), Point(1, 0), Point(2, 0))
     tri._tol = 1e-12

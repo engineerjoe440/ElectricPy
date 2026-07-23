@@ -14,7 +14,7 @@ sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 print(parent_dir)
 
 # Generate all Documentation Images
-from render_images import main as render_images
+from render_images import main as render_images  # noqa: E402
 render_images()
 
 # Gather Version Information from Python File
@@ -26,19 +26,10 @@ with open(initfile) as fh:
     # MAJOR CHANGE . MINOR CHANGE . MICRO CHANGE
     print("Sphinx HTML Build For:", name,"   Version:", ver)
 
-
-# Verify Import
-try:
-    import electricpy
-except:
-    print("Couldn't import `electricpy` module!")
-    sys.exit(9)
-
-
 # -- Project information -----------------------------------------------------
 
 project = 'electricpy'
-copyright = '2022, Joe Stanley'
+copyright = '2026, Joe Stanley'
 author = 'Joe Stanley'
 
 # The full version, including alpha/beta/rc tags
@@ -56,8 +47,6 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.autosummary',
     'sphinx.ext.viewcode',
-    'numpydoc',
-    'sphinx_git',
     'myst_parser',
     'sphinx_immaterial',
 ]

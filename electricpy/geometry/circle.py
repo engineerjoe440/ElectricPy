@@ -1,7 +1,6 @@
 ################################################################################
 """
-electricpy.geometry.circle - Collection of methods which operate on Cartesian
-circles.
+electricpy.geometry.circle - Collection of methods for Cartesian circles.
 
 >>> import electricpy.geometry.circle as circle
 
@@ -13,7 +12,7 @@ which are required for plotting various graphs in electrical engineering.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Generator, Iterable, Optional, Tuple, Union, overload
+from typing import Generator, Tuple, Union
 import math
 
 from electricpy import geometry
@@ -52,6 +51,7 @@ class Circle:
     radius : float
         The radius of the circle (must be >= 0)
     """
+
     center: Point
     radius: float
 
@@ -132,16 +132,16 @@ class Circle:
         """
         return Line.construct(p, self.center)
 
-    def is_tangent(self, l: Line, *, tol: float = 1e-9) -> bool:
+    def is_tangent(self, l: Line, *, tol: float = 1e-9) -> bool:  # noqa: E741
         """Return True if the line is tangent to the circle (within tolerance)."""
         d = l.distance(self.center)
         return _is_close(d, self.radius, rel_tol=tol, abs_tol=tol)
 
-    def is_normal(self, l: Line, *, tol: float = 1e-9) -> bool:
+    def is_normal(self, l: Line, *, tol: float = 1e-9) -> bool:  # noqa: E741
         """
-        Return True if the line passes through the circle's center (within tolerance).
+        Line passes through the circle's center (within tolerance).
 
-        IMPORTANT
+        Important
         ---------
         A line being a "normal to the circle" is only well-defined at a specific
         point of contact. This method keeps backward compatibility with the
@@ -175,11 +175,11 @@ class Circle:
         B = -2.0 * k
         C = const
 
-        def _term(coeff: float, var: str) -> str:
-            if _is_close(coeff, 0.0):
+        def _term(coef: float, var: str) -> str:
+            if _is_close(coef, 0.0):
                 return ""
-            sign = " + " if coeff > 0 else " - "
-            mag = abs(coeff)
+            sign = " + " if coef > 0 else " - "
+            mag = abs(coef)
             # Prefer integer-like display when possible
             if _is_close(mag, round(mag)):
                 mag_str = str(int(round(mag)))
@@ -311,7 +311,7 @@ class Circle:
 
         # h = half-chord length
         h2 = r1 * r1 - a * a
-        if h2 < 0 and h2 > -tol:
+        if -tol < h2 < 0:
             h2 = 0.0  # clamp tiny negatives due to numeric error
         if h2 < -tol:
             return None  # numeric safety; should not happen if cases above handled
@@ -343,21 +343,26 @@ class Circle:
     # Dunder methods
     # -------------------------------------------------------------------------
     def __repr__(self) -> str:
+        """Representation of the Circle."""
         return f"Circle(center={self.center}, radius={self.radius})"
 
     def __str__(self) -> str:
+        """Form of the Circle."""
         return f"Circle(center={self.center}, radius={self.radius})"
 
     def __eq__(self, other: object) -> bool:
+        """Equality comparison for Circle."""
         if isinstance(other, Circle):
             return self.center == other.center and self.radius == other.radius
         return False
 
     def __ne__(self, other: object) -> bool:
+        """Inequality comparison for Circle."""
         return not self == other
 
     def __hash__(self) -> int:
-        return hash((self.center, self.radius))
+        """Hash for Circle."""
+        return hash((self.center.x, self.center.y, self.radius))
 
 
 def construct(p0: Point, p1: Point, p2: Point) -> Circle:
