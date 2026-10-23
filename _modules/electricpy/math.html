@@ -38,7 +38,7 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.74c816e3f9967dd6e.min.css?v=6cfe2491" />
+        <link rel="stylesheet" type="text/css" href="../../_static/sphinx_immaterial_theme.6efbe22605a23fcd6.min.css?v=b2ceb110" />
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -376,7 +376,7 @@
 
 <h1>Source code for electricpy.math</h1><div class="highlight"><pre>
 <span></span><code><span class="c1">################################################################################</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">Common Mathematic Functions for Electrical Engineering.</span>
 
 <span class="sd">&gt;&gt;&gt; from electricpy import math as epmath</span>
@@ -387,7 +387,7 @@
 
 <span class="sd">Built to support operations similar to Numpy and Scipy, this package is designed</span>
 <span class="sd">to aid in scientific calculations.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="c1">################################################################################</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_np</span>
@@ -399,7 +399,7 @@
 <div class="viewcode-block" id="convolve">
 <a class="viewcode-back" href="../../api/electricpy.math.convolve.html#electricpy.math.convolve">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">convolve</span><span class="p">(</span><span class="nb">tuple</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Filter Convolution Function.</span>
 
 <span class="sd">    Given a tuple of terms, convolves all terms in tuple to</span>
@@ -414,7 +414,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    c:          The convolved set of the individual terms.</span>
 <span class="sd">                i.e. numpy.ndarray([ x1, x2, x3, ..., xn ])</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">_sig</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="nb">tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">tuple</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">):</span>
         <span class="c1"># Iterate starting with second element and continuing</span>
@@ -428,7 +428,7 @@
 <div class="viewcode-block" id="step">
 <a class="viewcode-back" href="../../api/electricpy.math.step.html#electricpy.math.step">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Step Function [ u(t) ].</span>
 
 <span class="sd">    Simple implementation of numpy.heaviside function to provide standard</span>
@@ -447,7 +447,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    t:  arraylike</span>
 <span class="sd">        Time samples for which the step response should be generated.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">_np</span><span class="o">.</span><span class="n">heaviside</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></div>
 
 
@@ -456,11 +456,11 @@
 <div class="viewcode-block" id="funcrms">
 <a class="viewcode-back" href="../../api/electricpy.math.funcrms.html#electricpy.math.funcrms">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">funcrms</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Root-Mean-Square (RMS) Evaluator for Callable Functions.</span>
 
 <span class="sd">    Integral-based RMS calculator, evaluates the RMS value</span>
-<span class="sd">    of a repetitive signal (f) given the signal&#39;s specific</span>
+<span class="sd">    of a repetitive signal (f) given the signal's specific</span>
 <span class="sd">    period (T)</span>
 
 <span class="sd">    Parameters</span>
@@ -473,9 +473,9 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    RMS:    The RMS value of the function (f) over the interval ( 0, T )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">T</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;T must be greater than zero&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"T must be greater than zero"</span><span class="p">)</span>
     <span class="n">integral</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">T</span> <span class="o">*</span> <span class="n">integral</span><span class="p">)</span></div>
 
@@ -485,7 +485,7 @@
 <div class="viewcode-block" id="gaussian">
 <a class="viewcode-back" href="../../api/electricpy.math.gaussian.html#electricpy.math.gaussian">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">gaussian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Gaussian Function.</span>
 
 <span class="sd">    This function is designed to generate the gaussian</span>
@@ -503,9 +503,9 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    Computed gaussian (numpy.ndarray) of the input x</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">sigma</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;sigma must be non-zero&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"sigma must be non-zero"</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span> <span class="o">*</span>
             <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)))</span></div>
 
@@ -515,7 +515,7 @@
 <div class="viewcode-block" id="gausdist">
 <a class="viewcode-back" href="../../api/electricpy.math.gausdist.html#electricpy.math.gausdist">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">gausdist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Gaussian Distribution Function.</span>
 
 <span class="sd">    This function is designed to calculate the generic</span>
@@ -536,7 +536,7 @@
 <span class="sd">    F:      numpy.ndarray</span>
 <span class="sd">            Computed distribution of the gaussian function at the</span>
 <span class="sd">            points specified by (array) x</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Define Integrand</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">integrand</span><span class="p">(</span><span class="n">sq</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">sq</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
@@ -554,7 +554,7 @@
         <span class="n">integral</span> <span class="o">=</span> <span class="n">integrate</span><span class="p">(</span><span class="n">integrand</span><span class="p">,</span> <span class="o">-</span><span class="n">_np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>  <span class="c1"># Integrate</span>
         <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">_np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">integral</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Evaluate Result</span>
         <span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
-    <span class="c1"># Return only the 0-th value if there&#39;s only 1 value available</span>
+    <span class="c1"># Return only the 0-th value if there's only 1 value available</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">F</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">F</span> <span class="o">=</span> <span class="n">F</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">F</span></div>
@@ -565,7 +565,7 @@
 <div class="viewcode-block" id="probdensity">
 <a class="viewcode-back" href="../../api/electricpy.math.probdensity.html#electricpy.math.probdensity">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">probdensity</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Probability Density Function.</span>
 
 <span class="sd">    This function uses an integral to compute the probability</span>
@@ -590,7 +590,7 @@
 <span class="sd">    sumx:   numpy.ndarray</span>
 <span class="sd">            The (array of) value(s) computed as the PDF at</span>
 <span class="sd">            point(s) x</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">sumx</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">lx</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># Find length of Input</span>
@@ -600,7 +600,7 @@
     <span class="c1"># Recursively Find Probability Density</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lx</span><span class="p">):</span>
         <span class="n">sumx</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sumx</span><span class="p">,</span> <span class="n">integrate</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="c1"># Return only the 0-th value if there&#39;s only 1 value available</span>
+    <span class="c1"># Return only the 0-th value if there's only 1 value available</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sumx</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">sumx</span> <span class="o">=</span> <span class="n">sumx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
@@ -617,7 +617,7 @@
 <div class="viewcode-block" id="rfft">
 <a class="viewcode-back" href="../../api/electricpy.math.rfft.html#electricpy.math.rfft">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">rfft</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">resample</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    RFFT Function.</span>
 
 <span class="sd">    This function is designed to evaluate the real FFT</span>
@@ -642,7 +642,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    FFT Array</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Calculate with Absolute Values</span>
     <span class="k">if</span> <span class="n">absolute</span><span class="p">:</span>
         <span class="n">fourier</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">arr</span><span class="p">))</span>
@@ -703,7 +703,7 @@
   
     Created using
     <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
-    9.1.0.
+    9.2.0.
      and
     <a href="https://github.com/jbms/sphinx-immaterial/" target="_blank" rel="noopener">Sphinx-Immaterial</a>
   
