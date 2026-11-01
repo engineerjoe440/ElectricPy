@@ -6,7 +6,7 @@ Functions for Operational Amplifiers (OpAmps).
 """
 
 ################################################################################
-# TODO: Add gain equations?, update docstring for inverting_summing, replace repeated operations with variables
+# TODO: Add gain equations?
 
 def non_inverting(Vin=None, Vout=None, Rg=None, Rf=None):
     """
@@ -293,8 +293,8 @@ def inverting_summing(*inputs, Vout=None, Rf=None):
 
     Parameters
     ----------
-    Vin:    [int, float]
-            Input voltage, in volts. Default is None.
+    Vout:    [int, float]
+            Output voltage, in volts. Default is None.
     Rf:     [int, float]
             Feedback resistor value, in ohms. Default is None.
     *inputs [int, float]
@@ -304,12 +304,13 @@ def inverting_summing(*inputs, Vout=None, Rf=None):
     -------
     float:  This function will return the unknown variable from the previously described set of variables.   
     """
-    
+
     if len(inputs) < 2:
         raise ValueError("At least one input voltage and one input resistance must be provided")
+    input_list = list(inputs)
 
     #Check if exactly one input is None
-    if ([Vout,Rf] + list(inputs)).count(None) != 1:
+    if ([Vout,Rf] + input_list).count(None) != 1:
         raise ValueError("Exactly one input should be None")
 
     #Check that each input has 2 values
@@ -326,7 +327,7 @@ def inverting_summing(*inputs, Vout=None, Rf=None):
     if Vout == None:
         try: 
             Vout = 0
-            for i in range(0,len(list(inputs)),2):
+            for i in range(0,len(input_list),2):
                 Vout += inputs[i]/inputs[i+1]
             Vout = Vout*-Rf
         except ZeroDivisionError:
@@ -336,41 +337,50 @@ def inverting_summing(*inputs, Vout=None, Rf=None):
     if Rf == None:
         try: 
             Rf = 0
-            for i in range(0,len(list(inputs)),2):
+            for i in range(0,len(input_list),2):
                 Rf += inputs[i]/inputs[i+1]
             Rf = -Vout/Rf
         except ZeroDivisionError:
             raise ValueError("Invalid arguments, results in division by zero error")
         return Rf
 
-    if list(inputs).index(None) % 2 == 0:
-        none_index = list(inputs).index(None)
-        R1 = inputs[list(inputs).index(None)+1]
+    none_index = input_list.index(None)
+
+    if none_index % 2 == 0:
+        #R1 is the corresponding resistance of the missing voltage
+        R1 = inputs[none_index+1]
         try:
             #Vn_over_Rn refers to all Vn/Rn except the pair that has a None value
             Vn_over_Rn = 0
-            for i in range(0,len(list(inputs)),2):
+            for i in range(0,len(input_list),2):
                 if i != none_index and i != none_index+1:
-                    print(list(inputs)[i],"/",list(inputs)[i+1])
-                    Vn_over_Rn += list(inputs)[i]/list(inputs)[i+1]
-                    print(Vn_over_Rn)
+                    Vn_over_Rn += input_list[i]/input_list[i+1]
             V1 = R1*(-(Vout/Rf)-Vn_over_Rn)
         except ZeroDivisionError:
             raise ValueError("Invalid arguments, results in division by zero error")
         return V1
 
-    if list(inputs).index(None) % 2 == 1:
-        none_index = list(inputs).index(None)
+    if none_index % 2 == 1:
         #V1 is the corresponding voltage of the missing resistance
-        V1 = inputs[list(inputs).index(None)-1]
+        V1 = inputs[none_index-1]
         try:
             #Vn_over_Rn refers to all Vn/Rn except the pair that has a None value
             Vn_over_Rn = 0
-            for i in range(0,len(list(inputs)),2):
+            for i in range(0,len(input_list),2):
                 if i != none_index and i != none_index-1:
-                    Vn_over_Rn += list(inputs)[i]/list(inputs)[i+1]
+                    Vn_over_Rn += input_list[i]/input_list[i+1]
             R1 = V1/((-Vout/Rf)-Vn_over_Rn)
         except ZeroDivisionError:
             raise ValueError("Invalid arguments, results in division by zero error")
         return R1
 
+def main():
+    print( inverting_summing(10, 6.3, 12, 33, 20, 63, Rf=10))
+    #-22.68398
+    print(inverting_summing(10, 6.3, 12, None , 20, 63, Vout=-22.68398, Rf=10))
+    #33.0
+    print(inverting_summing(10, 6.3, None, 33, 20, 63, Vout=-22.68398, Rf=10))
+    #11.9999
+
+if __name__ == '__main__':
+    main()
