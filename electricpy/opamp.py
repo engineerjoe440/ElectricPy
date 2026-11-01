@@ -375,12 +375,33 @@ def inverting_summing(*inputs, Vout=None, Rf=None):
         return R1
 
 def main():
-    print( inverting_summing(10, 6.3, 12, 33, 20, 63, Rf=10))
-    #-22.68398
-    print(inverting_summing(10, 6.3, 12, None , 20, 63, Vout=-22.68398, Rf=10))
-    #33.0
-    print(inverting_summing(10, 6.3, None, 33, 20, 63, Vout=-22.68398, Rf=10))
-    #11.9999
+
+    print(non_inverting(Vin=None,Vout=10,Rg=5,Rf=15)) #2.5
+    print(non_inverting(Vin=2.5,Vout=None,Rg=5,Rf=15)) #10
+    print(non_inverting(Vin=2.5,Vout=10,Rg=None,Rf=15)) #5
+    print(non_inverting(Vin=2.5,Vout=10,Rg=5,Rf=None)) #15
+    print()
+    print(inverting(Vin=None,Vout=10,Rin=5,Rf=15)) #-3.33
+    print(inverting(Vin=-3.33,Vout=None,Rin=5,Rf=15)) #9.99
+    print(inverting(Vin=-3.33,Vout=10,Rin=None,Rf=15)) #5
+    print(inverting(Vin=-3.33,Vout=10,Rin=5,Rf=None)) #15
+    print()
+    print(differential(V1=None,V2=1,Vout=-10,R1=1,R2=1,R3=10,R4=10)) #2.0
+    print(differential(V1=2,V2=None,Vout=-10,R1=1,R2=1,R3=10,R4=10)) #1.0
+    print(differential(V1=2,V2=1,Vout=None,R1=1,R2=1,R3=10,R4=10)) #-10.0
+    print(differential(V1=2,V2=1,Vout=-10,R1=None,R2=1,R3=10,R4=10)) #1.0
+    print(differential(V1=2,V2=1,Vout=-10,R1=1,R2=None,R3=10,R4=10)) #1.0
+    print(differential(V1=2,V2=1,Vout=-10,R1=1,R2=1,R3=None,R4=10)) #10.0
+    print(differential(V1=2,V2=1,Vout=-10,R1=1,R2=1,R3=10,R4=None)) #10.0
+    print()
+    print(inverting_summing(None,10,3,10,1,10,Vout=-6,Rf=10)) #2.0
+    print(inverting_summing(2,None,3,10,1,10,Vout=-6,Rf=10)) #10.0
+    print(inverting_summing(2,10,None,10,1,10,Vout=-6,Rf=10)) #3.0
+    print(inverting_summing(2,10,3,None,1,10,Vout=-6,Rf=10)) #10.0
+    print(inverting_summing(2,10,3,10,None,10,Vout=-6,Rf=10)) #1.0
+    print(inverting_summing(2,10,3,10,1,None,Vout=-6,Rf=10)) #10.0
+    print(inverting_summing(2,10,3,10,1,10,Vout=None,Rf=10)) #-6.0
+    print(inverting_summing(2,10,3,10,1,10,Vout=-6,Rf=None)) #10.0
 
 if __name__ == '__main__':
     main()
