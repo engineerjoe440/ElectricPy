@@ -12,20 +12,22 @@ def non_inverting(Vin=None, Vout=None, Rg=None, Rf=None):
     """
     Non-Inverting Op-Amp Solver
 
-    This function will accept three inputs for the common operational amplifier
-    formulas related to a non-inverting operational amplifier (op-amp) and will
-    solve for the fourth value. All inputs default to `None`, to solve for any
-    value, do not declare it as an argument and set all other inputs.
+    This function will accept three variables for the non-inverting operational
+    amplifier (op-amp) circuit output voltage formula and will solve for the
+    fourth value. All inputs default to `None`, to solve for any value, do not
+    declare it as an argument and set all other inputs.
+
+    .. math:: V_{out} = \\frac{V_{in}(R_g+R_f)}{Rg}
 
     .. image:: https://www.basictables.com/media/non-inverting-opamp-circuit.png
 
     Examples
     --------
     >>> from electricpy.opamp import non_inverting
-    >>> non_inverting(Vin=10, Rg=10, Rf=10) # Solve for Vout
-    {...}
-    >>> non_inverting(Vin=10, Vout=10, Rg=10) # Solve for Rf
-    {...}
+    >>> non_inverting(Vin=5, Rg=15, Rf=10) # Solve for Vout
+    8.333
+    >>> non_inverting(Vin=5, Vout=8.333, Rg=15) # Solve for Rf
+    10
 
     Parameters
     ----------
@@ -40,8 +42,7 @@ def non_inverting(Vin=None, Vout=None, Rg=None, Rf=None):
 
     Returns
     -------
-    int, float:  This function will return the unknown variable from the 
-                 previously described set of variables.   
+    float:  This function will return the unknown variable from the previously described set of variables.   
     """
 
     # Check if exactly one input is None
@@ -87,20 +88,22 @@ def inverting(Vin=None, Vout=None, Rin=None, Rf=None):
     """
     Inverting Op-Amp Solver
 
-    This function will accept three inputs for the common operational amplifier
-    formulas related to an inverting operational amplifier (op-amp) and will
-    solve for the fourth value. All inputs default to `None`, to solve for any
-    value, do not declare it as an argument and set all other inputs.
+    This function will accept three variables for the inverting operational
+    amplifier (op-amp) circuit output voltage formula and will solve for the
+    fourth value. All inputs default to `None`, to solve for any value, do not
+    declare it as an argument and set all other inputs.
+
+    .. math:: V_{out} = -\\frac{V_{in}\\cdot R_f}{R_{in}}
 
     .. image:: https://www.basictables.com/media/inverting-opamp-circuit.png
 
     Examples
     --------
     >>> from electricpy.opamp import inverting
-    >>> inverting(Vin=10, Rin=10, Rf=10) # Solve for Vout
-    {...}
-    >>> inverting(Vin=10, Vout=10, Rin=10) # Solve for Rf
-    {...}
+    >>> inverting(Vin=5, Rin=10, Rf=15) # Solve for Vout
+    -7.5
+    >>> inverting(Vin=5, Vout=-7.5, Rin=10) # Solve for Rf
+    15.0
 
     Parameters
     ----------
@@ -115,8 +118,7 @@ def inverting(Vin=None, Vout=None, Rin=None, Rf=None):
 
     Returns
     -------
-    int, float:  This function will return the unknown variable from the 
-                 previously described set of variables.   
+    float:  This function will return the unknown variable from the previously described set of variables.   
     """
 
     # Check if exactly one input is None
@@ -161,10 +163,12 @@ def differential(V1=None, V2=None, Vout=None, R1=None, R2=None, R3=None, R4=None
     """
     Differential Op-Amp Solver
 
-    This function will accept six inputs for the common operational amplifier
-    formulas related to a differential operational amplifier (op-amp) and will
-    solve for the seventh value. All inputs default to `None`, to solve for any
-    value, do not declare it as an argument and set all other inputs.
+    This function will accept six variables for the differential operational
+    amplifier (op-amp) circuit output voltage formula and will solve for the
+    seventh value. All inputs default to `None`, to solve for any value, do not
+    declare it as an argument and set all other inputs.
+
+    .. math:: V_{out} =-V_1 \\frac{R_3}{R_1}+V_2\\frac{R_4}{R_2+R_4}\\cdot \\frac{R_1+R_3}{R_1}
 
     .. image:: https://www.basictables.com/media/differential-opamp-circuit.png
 
@@ -172,9 +176,9 @@ def differential(V1=None, V2=None, Vout=None, R1=None, R2=None, R3=None, R4=None
     --------
     >>> from electricpy.opamp import differential
     >>> differential(V1=10, V2=15, R1=10, R2=10, R3=20 , R4=3) # Solve for Vout
-    {...}
-    >>> differential(V1=10,z V2=20, Vout=12, R1=10, R2=10, R4=3) # Solve for R3
-    {...}
+    -9.615
+    >>> differential(V1=10,z V2=15, Vout=-9.615, R1=10, R2=10, R4=3) # Solve for R3
+    19.9994
 
     Parameters
     ----------
@@ -195,8 +199,7 @@ def differential(V1=None, V2=None, Vout=None, R1=None, R2=None, R3=None, R4=None
 
     Returns
     -------
-    int, float:  This function will return the unknown variable from the 
-                 previously described set of variables.   
+    float:  This function will return the unknown variable from the previously described set of variables.   
     """
 
     # Check if exactly one input is None
@@ -264,23 +267,29 @@ def differential(V1=None, V2=None, Vout=None, R1=None, R2=None, R3=None, R4=None
             raise ValueError("Invalid arguments, results in division by zero error")
         return R4
 
-def inverting_summing(Vout=None, Rf=None, *inputs):
+def inverting_summing(*inputs, Vout=None, Rf=None):
     """
     Inverting Summing Op-Amp Solver
 
-    This function will accept  for the common operational amplifier
-    formulas related to an inverting operational amplifier (op-amp) and will
-    solve for the fourth value. All inputs default to `None`, to solve for any
-    value, do not declare it as an argument and set all other inputs.
+    This function will accept any even number of variables for the differential operational
+    amplifier (op-amp) circuit output voltage formula and will solve for the
+    'None' value. Vout and Rf default to `None`, to solve for either value, do not
+    declare it as an argument and set all other inputs. To solve for any input
+    voltage or resistance, explicitly set it to 'None'. Input voltages and
+    resistance arguments are positional.
+
+    .. math:: V_{out}=-R_f(\\frac{V_1}{R_1}+\\frac{V_2}{R_2}\\ldots \\frac{V_n}{R_n})
 
     .. image:: https://www.basictables.com/media/inverting-summing-opamp-circuit.png
     Examples
     --------
     >>> from electricpy.opamp import inverting
-    >>> inverting(Vin=10, Rin=10, Rf=10) # Solve for Vout
-    {...}
-    >>> inverting(Vin=10, Vout=10, Rin=10) # Solve for Rf
-    {...}
+    >>> inverting_summing(10, 6.3, 12, 33, 20, 63, Rf=10) # Solve for Vout
+    -22.68398
+    >>> inverting_summing(10, 6.3, 12, None , 20, 63, Vout=-22.68398, Rf=10) # Solve for R2
+    33.0
+    >>> inverting_summing(10, 6.3, None, 33, 20, 63, Vout=-22.68398, Rf=10) #Solve for V2
+    11.9999
 
     Parameters
     ----------
@@ -293,8 +302,7 @@ def inverting_summing(Vout=None, Rf=None, *inputs):
 
     Returns
     -------
-    int, float:  This function will return the unknown variable from the 
-                 previously described set of variables.   
+    float:  This function will return the unknown variable from the previously described set of variables.   
     """
     
     if len(inputs) < 2:
@@ -337,52 +345,32 @@ def inverting_summing(Vout=None, Rf=None, *inputs):
 
     if list(inputs).index(None) % 2 == 0:
         none_index = list(inputs).index(None)
-        Rn = inputs[list(inputs).index(None)+1]
+        R1 = inputs[list(inputs).index(None)+1]
         try:
             #Vn_over_Rn refers to all Vn/Rn except the pair that has a None value
             Vn_over_Rn = 0
             for i in range(0,len(list(inputs)),2):
                 if i != none_index and i != none_index+1:
+                    print(list(inputs)[i],"/",list(inputs)[i+1])
                     Vn_over_Rn += list(inputs)[i]/list(inputs)[i+1]
-                    print()
-            Vn = Rn*(-(Vout/Rf)-Vn_over_Rn)
+                    print(Vn_over_Rn)
+            V1 = R1*(-(Vout/Rf)-Vn_over_Rn)
         except ZeroDivisionError:
             raise ValueError("Invalid arguments, results in division by zero error")
-        return Vn
+        return V1
 
     if list(inputs).index(None) % 2 == 1:
         none_index = list(inputs).index(None)
-        #Vn is the corresponding voltage of the missing resistance
-        Vn = inputs[list(inputs).index(None)-1]
+        #V1 is the corresponding voltage of the missing resistance
+        V1 = inputs[list(inputs).index(None)-1]
         try:
             #Vn_over_Rn refers to all Vn/Rn except the pair that has a None value
             Vn_over_Rn = 0
             for i in range(0,len(list(inputs)),2):
                 if i != none_index and i != none_index-1:
                     Vn_over_Rn += list(inputs)[i]/list(inputs)[i+1]
-            Rn = (-(Vout/Rf)-(Vn_over_Rn))/Vn
+            R1 = V1/((-Vout/Rf)-Vn_over_Rn)
         except ZeroDivisionError:
             raise ValueError("Invalid arguments, results in division by zero error")
-        return Rn
+        return R1
 
-
-
-
-# print(inverting_summing(None,1,6,1,6,1,6,1))
-# print(inverting_summing(-18,None,6,1,6,1,6,1))
-# print(inverting_summing(-18,1,6,1,6,1,None,1))
-print(inverting_summing(-18,1,6,1,6,1,6,None))
-print(inverting_summing(-18,1,1,None))
-# inverting_summing(10,300,None,100,12,10)
-# print(non_inverting(3,5, 5,None))
-# print(inverting(5,None,10,12))
-# print("Balanced vout: ",  differential(3,3,None,10,10,10,10))
-# print("R1 should be 10: ",  differential(3,3,0,None,10,10,10))
-# print("R2 should be 10: ",  differential(3,3,0,10,None,10,10))
-# print("R3 should be 10: ",  differential(3,3,0,10,10,None,10))
-# print("R4 should be 10: ",  differential(3,3,0,10,10,10,None))
-# print("vout: ",  differential(5,8,None,12,15,17,18))
-# print("R1 should be 12: ",  differential(5,8,3.46212,None,15,17,18))
-# print("R2 should be 15: ",  differential(5,8,3.46212,12,None,17,18))
-# print("R3 should be 17: ",  differential(5,8,3.46212,12,15,None,18))
-# print("R4 should be 18: ",  differential(5,8,3.46212,12,15,17,None))
