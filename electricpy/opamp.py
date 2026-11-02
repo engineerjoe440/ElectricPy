@@ -283,7 +283,7 @@ def inverting_summing(*inputs, Vout=None, Rf=None):
     .. image:: https://www.basictables.com/media/inverting-summing-opamp-circuit.png
     Examples
     --------
-    >>> from electricpy.opamp import inverting
+    >>> from electricpy.opamp import inverting_summing
     >>> inverting_summing(10, 6.3, 12, 33, 20, 63, Rf=10) # Solve for Vout
     -22.68398
     >>> inverting_summing(10, 6.3, 12, None , 20, 63, Vout=-22.68398, Rf=10) # Solve for R2

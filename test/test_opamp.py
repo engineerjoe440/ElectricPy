@@ -10,7 +10,7 @@ def test_non_inverting():
     assert opamp.non_inverting(Vin=2.5,Vout=10,Rg=5,Rf=None)==pytest.approx(15,abs=0.1)
 
 def test_inverting():
-    """Validate non_inverting op-amp functionality"""
+    """Validate inverting op-amp functionality"""
     
     assert opamp.inverting(Vin=None,Vout=10,Rin=5,Rf=15)==pytest.approx(-3.3333, abs=0.1)
     assert opamp.inverting(Vin=-3.33,Vout=None,Rin=5,Rf=15)==pytest.approx(9.99)
@@ -18,7 +18,7 @@ def test_inverting():
     assert opamp.inverting(Vin=-3.33,Vout=10,Rin=5,Rf=None)==pytest.approx(15,abs=0.1)
 
 def test_differential():
-    """Validate non_inverting op-amp functionality"""
+    """Validate differential op-amp functionality"""
 
     assert opamp.differential(V1=None,V2=1,Vout=-10,R1=1,R2=1,R3=10,R4=10)==pytest.approx(2.0,abs=0.1)
     assert opamp.differential(V1=2,V2=None,Vout=-10,R1=1,R2=1,R3=10,R4=10)==pytest.approx(1.0,abs=0.1)
@@ -29,7 +29,7 @@ def test_differential():
     assert opamp.differential(V1=2,V2=1,Vout=-10,R1=1,R2=1,R3=10,R4=None)==pytest.approx(10.0,abs=0.1)
 
 def test_inverting_summing():
-    """Validate non_inverting op-amp functionality"""
+    """Validate inverting_summing op-amp functionality"""
 
     assert opamp.inverting_summing(None,10,3,10,1,10,Vout=-6,Rf=10)==pytest.approx(2.0,abs=0.1)
     assert opamp.inverting_summing(2,None,3,10,1,10,Vout=-6,Rf=10)==pytest.approx(10.0,abs=0.1)
