@@ -6,8 +6,11 @@ Functions for Operational Amplifiers (OpAmps).
 """
 
 ################################################################################
-# TODO: Add gain equations?
-
+# TODO: 
+#Add gain equations? 
+#In differential(), change R3/R4 to Rg and Rf. Change test document accordingly
+#In inverting_summing(), change the intermediate variable in the loop to Vn_over_Rn
+#In inverting_summing(), consolidate the loops into one variable
 
 def non_inverting(Vin=None, Vout=None, Rg=None, Rf=None):
     """
