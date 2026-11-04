@@ -8,6 +8,7 @@ Functions for Operational Amplifiers (OpAmps).
 ################################################################################
 # TODO: Add gain equations?
 
+
 def non_inverting(Vin=None, Vout=None, Rg=None, Rf=None):
     """
     Non-Inverting Op-Amp Solver
@@ -42,7 +43,7 @@ def non_inverting(Vin=None, Vout=None, Rg=None, Rf=None):
 
     Returns
     -------
-    float:  This function will return the unknown variable from the previously described set of variables.   
+    float:  This function will return the unknown variable from the previously described set of variables.
     """
 
     # Check if exactly one input is None
@@ -51,34 +52,34 @@ def non_inverting(Vin=None, Vout=None, Rg=None, Rf=None):
 
     if Rg != None and Rg < 0:
         raise ValueError("Rg must be positive")
-    
+
     if Rf != None and Rf < 0:
         raise ValueError("Rf must be positive")
 
     if Vin == None:
-        try: 
-            Vin = (Vout*Rg)/(Rg+Rf)
+        try:
+            Vin = (Vout * Rg) / (Rg + Rf)
         except ZeroDivisionError:
             raise ValueError("Rg+Rf should be non-zero")
         return Vin
 
     if Vout == None:
-        try: 
-            Vout = Vin*(Rg+Rf)/Rg
+        try:
+            Vout = Vin * (Rg + Rf) / Rg
         except ZeroDivisionError:
             raise ValueError("Rg should be non-zero")
         return Vout
 
     if Rg == None:
-        try: 
-            Rg = (Vin*Rf)/(Vout-Vin)
+        try:
+            Rg = (Vin * Rf) / (Vout - Vin)
         except ZeroDivisionError:
             raise ValueError("Vout should not equal Vin")
         return Rg
 
     if Rf == None:
-        try: 
-            Rf = ((Vout*Rg)/Vin)-Rg
+        try:
+            Rf = ((Vout * Rg) / Vin) - Rg
         except ZeroDivisionError:
             raise ValueError("Vin should be non-zero")
         return Rf
@@ -118,7 +119,7 @@ def inverting(Vin=None, Vout=None, Rin=None, Rf=None):
 
     Returns
     -------
-    float:  This function will return the unknown variable from the previously described set of variables.   
+    float:  This function will return the unknown variable from the previously described set of variables.
     """
 
     # Check if exactly one input is None
@@ -127,39 +128,48 @@ def inverting(Vin=None, Vout=None, Rin=None, Rf=None):
 
     if Rin != None and Rin < 0:
         raise ValueError("Rin must be positive")
-    
+
     if Rf != None and Rf < 0:
         raise ValueError("Rf must be positive")
 
     if Vin == None:
-        try: 
-            Vin = -(Vout*Rin)/Rf
+        try:
+            Vin = -(Vout * Rin) / Rf
         except ZeroDivisionError:
             raise ValueError("Rf should be non-zero")
         return Vin
 
     if Vout == None:
-        try: 
-            Vout = -(Vin*Rf)/Rin
+        try:
+            Vout = -(Vin * Rf) / Rin
         except ZeroDivisionError:
             raise ValueError("Rin should be non-zero")
         return Vout
 
     if Rin == None:
-        try: 
-            Rin = -(Vin*Rf)/Vout
+        try:
+            Rin = -(Vin * Rf) / Vout
         except ZeroDivisionError:
             raise ValueError("Vout should be non-zero")
         return Rin
 
     if Rf == None:
-        try: 
-            Rf = -(Vout*Rin)/Vin
+        try:
+            Rf = -(Vout * Rin) / Vin
         except ZeroDivisionError:
             raise ValueError("Vin should be non-zero")
         return Rf
 
-def differential(V1=None, V2=None, Vout=None, R1=None, R2=None, R3=None, R4=None, ):
+
+def differential(
+    V1=None,
+    V2=None,
+    Vout=None,
+    R1=None,
+    R2=None,
+    R3=None,
+    R4=None,
+):
     """
     Differential Op-Amp Solver
 
@@ -199,7 +209,7 @@ def differential(V1=None, V2=None, Vout=None, R1=None, R2=None, R3=None, R4=None
 
     Returns
     -------
-    float:  This function will return the unknown variable from the previously described set of variables.   
+    float:  This function will return the unknown variable from the previously described set of variables.
     """
 
     # Check if exactly one input is None
@@ -208,10 +218,10 @@ def differential(V1=None, V2=None, Vout=None, R1=None, R2=None, R3=None, R4=None
 
     if R1 != None and R1 < 0:
         raise ValueError("R1 must be positive")
-    
+
     if R2 != None and R2 < 0:
         raise ValueError("R2 must be positive")
-    
+
     if R3 != None and R3 < 0:
         raise ValueError("R3 must be positive")
 
@@ -219,53 +229,54 @@ def differential(V1=None, V2=None, Vout=None, R1=None, R2=None, R3=None, R4=None
         raise ValueError("R4 must be positive")
 
     if V1 == None:
-        try: 
-            V1 = -Vout*(R1/R3)+V2*(R4/(R2+R4))*((R1+R3)/R3)
+        try:
+            V1 = -Vout * (R1 / R3) + V2 * (R4 / (R2 + R4)) * ((R1 + R3) / R3)
         except ZeroDivisionError:
             raise ValueError("R2, R3, R4 should be non-zero")
         return V1
 
     if V2 == None:
-        try: 
-            V2 = (Vout+V1*(R3/R1))*(((R2+R4)/R4)*(R1/(R1+R3)))
+        try:
+            V2 = (Vout + V1 * (R3 / R1)) * (((R2 + R4) / R4) * (R1 / (R1 + R3)))
         except ZeroDivisionError:
             raise ValueError("Rf should be non-zero")
         return V2
 
     if Vout == None:
-        try: 
-            Vout = -V1*(R3/R1)+V2*(R4/(R2+R4))*((R1+R3)/R1)
+        try:
+            Vout = -V1 * (R3 / R1) + V2 * (R4 / (R2 + R4)) * ((R1 + R3) / R1)
         except ZeroDivisionError:
             raise ValueError("R1, R3, R4 should be non-zero")
         return Vout
 
     if R1 == None:
-        try: 
-            R1 = (R3*((V2*R4)/(R2+R4)-V1))/(Vout-(V2*R4)/(R2+R4))
+        try:
+            R1 = (R3 * ((V2 * R4) / (R2 + R4) - V1)) / (Vout - (V2 * R4) / (R2 + R4))
         except ZeroDivisionError:
             raise ValueError("Invalid arguments, results in division by zero error")
         return R1
 
     if R2 == None:
-        try: 
-            R2 = (V2*R4*(R1+R3))/(R1*(Vout+V1*(R3/R1)))-R4
+        try:
+            R2 = (V2 * R4 * (R1 + R3)) / (R1 * (Vout + V1 * (R3 / R1))) - R4
         except ZeroDivisionError:
             raise ValueError("Invalid arguments, results in division by zero error")
         return R2
 
     if R3 == None:
-        try: 
-            R3 = (R1*(Vout-(R4*V2)/(R2+R4)))/((R4*V2)/(R2+R4)-V1)
+        try:
+            R3 = (R1 * (Vout - (R4 * V2) / (R2 + R4))) / ((R4 * V2) / (R2 + R4) - V1)
         except ZeroDivisionError:
             raise ValueError("Invalid arguments, results in division by zero error")
         return R3
 
     if R4 == None:
-        try: 
-            R4 = (R2*(R1*Vout+V1*R3))/(V2*(R1+R3)-Vout*R1-V1*R3)
+        try:
+            R4 = (R2 * (R1 * Vout + V1 * R3)) / (V2 * (R1 + R3) - Vout * R1 - V1 * R3)
         except ZeroDivisionError:
             raise ValueError("Invalid arguments, results in division by zero error")
         return R4
+
 
 def inverting_summing(*inputs, Vout=None, Rf=None):
     """
@@ -302,44 +313,46 @@ def inverting_summing(*inputs, Vout=None, Rf=None):
 
     Returns
     -------
-    float:  This function will return the unknown variable from the previously described set of variables.   
+    float:  This function will return the unknown variable from the previously described set of variables.
     """
 
     if len(inputs) < 2:
-        raise ValueError("At least one input voltage and one input resistance must be provided")
+        raise ValueError(
+            "At least one input voltage and one input resistance must be provided"
+        )
     input_list = list(inputs)
 
-    #Check if exactly one input is None
-    if ([Vout,Rf] + input_list).count(None) != 1:
+    # Check if exactly one input is None
+    if ([Vout, Rf] + input_list).count(None) != 1:
         raise ValueError("Exactly one input should be None")
 
-    #Check that each input has 2 values
+    # Check that each input has 2 values
     if len(inputs) % 2 != 0:
         raise ValueError("Each input must have a voltage and a resistance")
 
     if Rf != None and Rf < 0:
         raise ValueError("Rf must be positive")
-    
-    #Gets all odd *inputs (resistances) with list(inputs[0::2]), removes any None values with list comprehension, then checks for negatives with any() function.
+
+    # Gets all odd *inputs (resistances) with list(inputs[0::2]), removes any None values with list comprehension, then checks for negatives with any() function.
     if any(x < 0 for x in [x for x in list(inputs[0::2]) if x is not None]):
         raise ValueError("Input resistances must be positive")
 
     if Vout == None:
-        try: 
+        try:
             Vout = 0
-            for i in range(0,len(input_list),2):
-                Vout += inputs[i]/inputs[i+1]
-            Vout = Vout*-Rf
+            for i in range(0, len(input_list), 2):
+                Vout += inputs[i] / inputs[i + 1]
+            Vout = Vout * -Rf
         except ZeroDivisionError:
             raise ValueError("Input resistances should be non-zero")
         return Vout
 
     if Rf == None:
-        try: 
+        try:
             Rf = 0
-            for i in range(0,len(input_list),2):
-                Rf += inputs[i]/inputs[i+1]
-            Rf = -Vout/Rf
+            for i in range(0, len(input_list), 2):
+                Rf += inputs[i] / inputs[i + 1]
+            Rf = -Vout / Rf
         except ZeroDivisionError:
             raise ValueError("Invalid arguments, results in division by zero error")
         return Rf
@@ -347,30 +360,29 @@ def inverting_summing(*inputs, Vout=None, Rf=None):
     none_index = input_list.index(None)
 
     if none_index % 2 == 0:
-        #R1 is the corresponding resistance of the missing voltage
-        R1 = inputs[none_index+1]
+        # R1 is the corresponding resistance of the missing voltage
+        R1 = inputs[none_index + 1]
         try:
-            #Vn_over_Rn refers to all Vn/Rn except the pair that has a None value
+            # Vn_over_Rn refers to all Vn/Rn except the pair that has a None value
             Vn_over_Rn = 0
-            for i in range(0,len(input_list),2):
-                if i != none_index and i != none_index+1:
-                    Vn_over_Rn += input_list[i]/input_list[i+1]
-            V1 = R1*(-(Vout/Rf)-Vn_over_Rn)
+            for i in range(0, len(input_list), 2):
+                if i != none_index and i != none_index + 1:
+                    Vn_over_Rn += input_list[i] / input_list[i + 1]
+            V1 = R1 * (-(Vout / Rf) - Vn_over_Rn)
         except ZeroDivisionError:
             raise ValueError("Invalid arguments, results in division by zero error")
         return V1
 
     if none_index % 2 == 1:
-        #V1 is the corresponding voltage of the missing resistance
-        V1 = inputs[none_index-1]
+        # V1 is the corresponding voltage of the missing resistance
+        V1 = inputs[none_index - 1]
         try:
-            #Vn_over_Rn refers to all Vn/Rn except the pair that has a None value
+            # Vn_over_Rn refers to all Vn/Rn except the pair that has a None value
             Vn_over_Rn = 0
-            for i in range(0,len(input_list),2):
-                if i != none_index and i != none_index-1:
-                    Vn_over_Rn += input_list[i]/input_list[i+1]
-            R1 = V1/((-Vout/Rf)-Vn_over_Rn)
+            for i in range(0, len(input_list), 2):
+                if i != none_index and i != none_index - 1:
+                    Vn_over_Rn += input_list[i] / input_list[i + 1]
+            R1 = V1 / ((-Vout / Rf) - Vn_over_Rn)
         except ZeroDivisionError:
             raise ValueError("Invalid arguments, results in division by zero error")
         return R1
-
