@@ -26,8 +26,8 @@ def test_point_protocols_and_comparison():
     assert list(iter(p1)) == [1.0, 2.0]
     assert p1() == (1.0, 2.0)
     assert p1 == p2
-    assert not (p1 == p3)
-    assert not (p1 == (1.0, 2.0))
+    assert p1 != p3
+    assert p1 != (1.0, 2.0)
     assert p1.is_close(p3)
     assert not p1.is_close((1.0, 2.0))
     assert repr(p1) == "Point(1.0, 2.0)"
@@ -58,7 +58,7 @@ def test_line_basic_operations():
     assert line.is_close(scaled)
     assert line == scaled
     assert not line.is_close("not-a-line")
-    assert not (line == "not-a-line")
+    assert line != "not-a-line"
     assert "x +" in str(line)
     assert repr(line).startswith("Line(")
 

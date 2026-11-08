@@ -538,17 +538,16 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
         mF = "NA"  # Can't handle function type
 
     # Test for x input
-    if not isinstance(x, typetest):
-        if x is None:  # No specified initial conditions
-            rA = A.shape[0]
-            x = _np.asmatrix(_np.zeros(rA)).T
+    if not isinstance(x, typetest) and x is None:  # No specified initial conditions
+        rA = A.shape[0]
+        x = _np.asmatrix(_np.zeros(rA)).T
     # Condition x
     x = _np.asmatrix(x)
 
     # Gather dimensions of inputs
     rA, cA = A.shape
     rB, cB = B.shape
-    rx, cx = x.shape
+    rx, _cx = x.shape
     rC, cC = C.shape
     rD, cD = D.shape
     rF, cF = 1, 1  # Defualt for a function returning one value
@@ -1212,7 +1211,7 @@ def mbuspowerflow(Ybus, Vknown, Pknown, Qknown, X0='flatstart', eps=1e-4,
     if slackbus != 0:
         # Ybus
         Ybus = _np.asarray(Ybus)
-        row, col = Ybus.shape
+        _row, col = Ybus.shape
         Ybus = _np.roll(Ybus, (col - slackbus), (0, 1))
         # Vknown, Pknown, and Qknown
         Vknown = _np.roll(Vknown, (len(Vknown) - slackbus), 0).tolist()

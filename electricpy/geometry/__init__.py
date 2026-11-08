@@ -64,7 +64,7 @@ class Point:
         yield self.x
         yield self.y
 
-    def __call__(self) -> Tuple[float, float]:
+    def __call__(self) -> tuple[float, float]:
         """Return (x, y)."""
         return (self.x, self.y)
 
@@ -150,7 +150,7 @@ class Line:
         """Intersection point with another line (raises if parallel)."""
         return line_intersection(self, other)
 
-    def normalized(self) -> Tuple[float, float, float]:
+    def normalized(self) -> tuple[float, float, float]:
         """
         Normalize the geometry coefficients.
 
@@ -262,7 +262,7 @@ def distance(p1: Point, p2: Point) -> float:
     return math.hypot(p1.x - p2.x, p1.y - p2.y)
 
 
-def section(p1: Point, p2: Point, ratio: Union[Tuple[Number, Number], float]) -> Point:
+def section(p1: Point, p2: Point, ratio: tuple[Number, Number] | float) -> Point:
     """
     Calculate the point dividing segment p1->p2.
 

@@ -224,7 +224,7 @@ def three_phase_fault(Vth, Zseq, Rf=0, sequence=True, reference='A'):
                 The Fault Current, equal for 0, pos., and neg. seq.
     """
     # Decompose Reactance Tuple
-    X0, X1, X2 = Zseq
+    _X0, X1, _X2 = Zseq
     # Ensure that X-components are imaginary
     if not isinstance(X1, complex):
         X1 *= 1j

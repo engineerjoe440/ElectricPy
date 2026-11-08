@@ -12,7 +12,7 @@ which are required for plotting various graphs in electrical engineering.
 from __future__ import annotations
 
 import math
-from typing import Tuple, Union
+from typing import Union
 
 from electricpy import geometry
 from electricpy.geometry import Line, Point
@@ -82,7 +82,7 @@ class Triangle:
         if not all(isinstance(p, Point) for p in points):
             raise TypeError("All inputs must be electricpy.geometry.Point")
 
-        self.points: Tuple[Point, Point, Point] = (points[0], points[1], points[2])
+        self.points: tuple[Point, Point, Point] = (points[0], points[1], points[2])
         self._tol = float(tol)
 
         # Side lengths:
@@ -241,7 +241,4 @@ class Triangle:
 
         # Non-collinear check (area not ~ 0)
         twoA = _triangle_twice_area(self.points[0], self.points[1], self.points[2])
-        if _is_close(twoA, 0.0, abs_tol=self._tol):
-            return False
-
-        return True
+        return not _is_close(twoA, 0.0, abs_tol=self._tol)

@@ -1768,7 +1768,7 @@ def funcfft(func, minfreq=60, maxmult=15, complex=False):
     # Determine Time from Fundamental Frequency
     T = 1 / minfreq
     # Generate time range to apply for FFT
-    t, dt = _np.linspace(0, T, NN, endpoint=False, retstep=True)
+    t, _dt = _np.linspace(0, T, NN, endpoint=False, retstep=True)
     # Evaluate FFT
     y = _np.fft.rfft(func(t)) / t.size
     # Return Complex Values
