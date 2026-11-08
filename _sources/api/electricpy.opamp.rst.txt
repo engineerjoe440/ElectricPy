@@ -1,0 +1,30 @@
+﻿electricpy.opamp
+================
+
+.. rubric:: Description
+
+.. automodule:: electricpy.opamp
+
+.. currentmodule:: electricpy.opamp
+
+
+
+
+
+
+
+
+.. rubric:: Functions
+
+.. autosummary::
+    :toctree: .
+    
+    differential
+    
+    inverting
+    
+    inverting_summing
+    
+    non_inverting
+    
+

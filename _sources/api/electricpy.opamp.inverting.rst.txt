@@ -1,0 +1,6 @@
+electricpy.opamp.inverting
+==========================
+
+.. currentmodule:: electricpy.opamp
+
+.. autofunction:: inverting

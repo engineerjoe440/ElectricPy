@@ -1,0 +1,6 @@
+electricpy.opamp.differential
+=============================
+
+.. currentmodule:: electricpy.opamp
+
+.. autofunction:: differential

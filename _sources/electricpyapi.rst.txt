@@ -34,6 +34,7 @@ to aid in scientific calculations.
    electricpy.fault
    electricpy.latex
    electricpy.math
+   electricpy.opamp
    electricpy.passive
    electricpy.phasor
    electricpy.sim
