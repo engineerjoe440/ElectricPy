@@ -6,11 +6,9 @@ Functions for Operational Amplifiers (OpAmps).
 """
 
 ################################################################################
-# TODO: 
-#Add gain equations? 
-#In differential(), change R3/R4 to Rg and Rf. Change test document accordingly
-#In inverting_summing(), change the intermediate variable in the loop to Vn_over_Rn
-#In inverting_summing(), consolidate the loops into one variable
+# TODO:
+# Add gain equations?
+
 
 def non_inverting(Vin=None, Vout=None, Rg=None, Rf=None):
     """
@@ -53,34 +51,34 @@ def non_inverting(Vin=None, Vout=None, Rg=None, Rf=None):
     if [Vin, Vout, Rg, Rf].count(None) != 1:
         raise ValueError("Exactly one input should be None")
 
-    if Rg != None and Rg < 0:
+    if Rg is not None and Rg < 0:
         raise ValueError("Rg must be positive")
 
-    if Rf != None and Rf < 0:
+    if Rf is not None and Rf < 0:
         raise ValueError("Rf must be positive")
 
-    if Vin == None:
+    if Vin is None:
         try:
             Vin = (Vout * Rg) / (Rg + Rf)
         except ZeroDivisionError:
             raise ValueError("Rg+Rf should be non-zero")
         return Vin
 
-    if Vout == None:
+    if Vout is None:
         try:
             Vout = Vin * (Rg + Rf) / Rg
         except ZeroDivisionError:
             raise ValueError("Rg should be non-zero")
         return Vout
 
-    if Rg == None:
+    if Rg is None:
         try:
             Rg = (Vin * Rf) / (Vout - Vin)
         except ZeroDivisionError:
             raise ValueError("Vout should not equal Vin")
         return Rg
 
-    if Rf == None:
+    if Rf is None:
         try:
             Rf = ((Vout * Rg) / Vin) - Rg
         except ZeroDivisionError:
@@ -129,34 +127,34 @@ def inverting(Vin=None, Vout=None, Rin=None, Rf=None):
     if [Vin, Vout, Rin, Rf].count(None) != 1:
         raise ValueError("Exactly one input should be None")
 
-    if Rin != None and Rin < 0:
+    if Rin is not None and Rin < 0:
         raise ValueError("Rin must be positive")
 
-    if Rf != None and Rf < 0:
+    if Rf is not None and Rf < 0:
         raise ValueError("Rf must be positive")
 
-    if Vin == None:
+    if Vin is None:
         try:
             Vin = -(Vout * Rin) / Rf
         except ZeroDivisionError:
             raise ValueError("Rf should be non-zero")
         return Vin
 
-    if Vout == None:
+    if Vout is None:
         try:
             Vout = -(Vin * Rf) / Rin
         except ZeroDivisionError:
             raise ValueError("Rin should be non-zero")
         return Vout
 
-    if Rin == None:
+    if Rin is None:
         try:
             Rin = -(Vin * Rf) / Vout
         except ZeroDivisionError:
             raise ValueError("Vout should be non-zero")
         return Rin
 
-    if Rf == None:
+    if Rf is None:
         try:
             Rf = -(Vout * Rin) / Vin
         except ZeroDivisionError:
@@ -170,8 +168,8 @@ def differential(
     Vout=None,
     R1=None,
     R2=None,
-    R3=None,
-    R4=None,
+    Rf=None,
+    Rg=None,
 ):
     """
     Differential Op-Amp Solver
@@ -181,16 +179,16 @@ def differential(
     seventh value. All inputs default to `None`, to solve for any value, do not
     declare it as an argument and set all other inputs.
 
-    .. math:: V_{out} =-V_1 \\frac{R_3}{R_1}+V_2\\frac{R_4}{R_2+R_4}\\cdot \\frac{R_1+R_3}{R_1}
+    .. math:: V_{out} =-V_1 \\frac{R_f}{R_1}+V_2\\frac{R_g}{R_2+R_g}\\cdot \\frac{R_1+R_f}{R_1}
 
     .. image:: https://www.basictables.com/media/differential-opamp-circuit.png
 
     Examples
     --------
     >>> from electricpy.opamp import differential
-    >>> differential(V1=10, V2=15, R1=10, R2=10, R3=20 , R4=3) # Solve for Vout
+    >>> differential(V1=10, V2=15, R1=10, R2=10, Rf=20 , Rg=3) # Solve for Vout
     -9.615
-    >>> differential(V1=10,z V2=15, Vout=-9.615, R1=10, R2=10, R4=3) # Solve for R3
+    >>> differential(V1=10, V2=15, Vout=-9.615, R1=10, R2=10, Rg=3) # Solve for Rf
     19.9994
 
     Parameters
@@ -205,9 +203,9 @@ def differential(
             V1 Input resistor value, in ohms. Default is None.
     R2:     [int, float]
             V2 input resistor value, in ohms. Default is None.
-    R3:     [int, float]
+    Rf:     [int, float]
             Feedback resistor value, in ohms. Default is None.
-    R4:     [int, float]
+    Rg:     [int, float]
             Ground resistor value, in ohms. Default is None.
 
     Returns
@@ -216,69 +214,69 @@ def differential(
     """
 
     # Check if exactly one input is None
-    if [V1, V2, Vout, R1, R2, R3, R4].count(None) != 1:
+    if [V1, V2, Vout, R1, R2, Rf, Rg].count(None) != 1:
         raise ValueError("Exactly one input should be None")
 
-    if R1 != None and R1 < 0:
+    if R1 is not None and R1 < 0:
         raise ValueError("R1 must be positive")
 
-    if R2 != None and R2 < 0:
+    if R2 is not None and R2 < 0:
         raise ValueError("R2 must be positive")
 
-    if R3 != None and R3 < 0:
-        raise ValueError("R3 must be positive")
+    if Rf is not None and Rf < 0:
+        raise ValueError("Rf must be positive")
 
-    if R4 != None and R4 < 0:
-        raise ValueError("R4 must be positive")
+    if Rg is not None and Rg < 0:
+        raise ValueError("Rg must be positive")
 
-    if V1 == None:
+    if V1 is None:
         try:
-            V1 = -Vout * (R1 / R3) + V2 * (R4 / (R2 + R4)) * ((R1 + R3) / R3)
+            V1 = -Vout * (R1 / Rf) + V2 * (Rg / (R2 + Rg)) * ((R1 + Rf) / Rf)
         except ZeroDivisionError:
-            raise ValueError("R2, R3, R4 should be non-zero")
+            raise ValueError("R2, Rf, Rg should be non-zero")
         return V1
 
-    if V2 == None:
+    if V2 is None:
         try:
-            V2 = (Vout + V1 * (R3 / R1)) * (((R2 + R4) / R4) * (R1 / (R1 + R3)))
+            V2 = (Vout + V1 * (Rf / R1)) * (((R2 + Rg) / Rg) * (R1 / (R1 + Rf)))
         except ZeroDivisionError:
             raise ValueError("Rf should be non-zero")
         return V2
 
-    if Vout == None:
+    if Vout is None:
         try:
-            Vout = -V1 * (R3 / R1) + V2 * (R4 / (R2 + R4)) * ((R1 + R3) / R1)
+            Vout = -V1 * (Rf / R1) + V2 * (Rg / (R2 + Rg)) * ((R1 + Rf) / R1)
         except ZeroDivisionError:
-            raise ValueError("R1, R3, R4 should be non-zero")
+            raise ValueError("R1, Rf, Rg should be non-zero")
         return Vout
 
-    if R1 == None:
+    if R1 is None:
         try:
-            R1 = (R3 * ((V2 * R4) / (R2 + R4) - V1)) / (Vout - (V2 * R4) / (R2 + R4))
+            R1 = (Rf * ((V2 * Rg) / (R2 + Rg) - V1)) / (Vout - (V2 * Rg) / (R2 + Rg))
         except ZeroDivisionError:
             raise ValueError("Invalid arguments, results in division by zero error")
         return R1
 
-    if R2 == None:
+    if R2 is None:
         try:
-            R2 = (V2 * R4 * (R1 + R3)) / (R1 * (Vout + V1 * (R3 / R1))) - R4
+            R2 = (V2 * Rg * (R1 + Rf)) / (R1 * (Vout + V1 * (Rf / R1))) - Rg
         except ZeroDivisionError:
             raise ValueError("Invalid arguments, results in division by zero error")
         return R2
 
-    if R3 == None:
+    if Rf is None:
         try:
-            R3 = (R1 * (Vout - (R4 * V2) / (R2 + R4))) / ((R4 * V2) / (R2 + R4) - V1)
+            Rf = (R1 * (Vout - (Rg * V2) / (R2 + Rg))) / ((Rg * V2) / (R2 + Rg) - V1)
         except ZeroDivisionError:
             raise ValueError("Invalid arguments, results in division by zero error")
-        return R3
+        return Rf
 
-    if R4 == None:
+    if Rg is None:
         try:
-            R4 = (R2 * (R1 * Vout + V1 * R3)) / (V2 * (R1 + R3) - Vout * R1 - V1 * R3)
+            Rg = (R2 * (R1 * Vout + V1 * Rf)) / (V2 * (R1 + Rf) - Vout * R1 - V1 * Rf)
         except ZeroDivisionError:
             raise ValueError("Invalid arguments, results in division by zero error")
-        return R4
+        return Rg
 
 
 def inverting_summing(*inputs, Vout=None, Rf=None):
@@ -333,29 +331,29 @@ def inverting_summing(*inputs, Vout=None, Rf=None):
     if len(inputs) % 2 != 0:
         raise ValueError("Each input must have a voltage and a resistance")
 
-    if Rf != None and Rf < 0:
+    if Rf is not None and Rf < 0:
         raise ValueError("Rf must be positive")
 
     # Gets all odd *inputs (resistances) with list(inputs[0::2]), removes any None values with list comprehension, then checks for negatives with any() function.
     if any(x < 0 for x in [x for x in list(inputs[0::2]) if x is not None]):
         raise ValueError("Input resistances must be positive")
 
-    if Vout == None:
+    if Vout is None:
         try:
-            Vout = 0
+            Vn_over_Rn = 0
             for i in range(0, len(input_list), 2):
-                Vout += inputs[i] / inputs[i + 1]
-            Vout = Vout * -Rf
+                Vn_over_Rn += inputs[i] / inputs[i + 1]
+            Vout = Vn_over_Rn * -Rf
         except ZeroDivisionError:
             raise ValueError("Input resistances should be non-zero")
         return Vout
 
-    if Rf == None:
+    if Rf is None:
         try:
-            Rf = 0
+            Vn_over_Rn = 0
             for i in range(0, len(input_list), 2):
-                Rf += inputs[i] / inputs[i + 1]
-            Rf = -Vout / Rf
+                Vn_over_Rn += inputs[i] / inputs[i + 1]
+            Rf = -Vout / Vn_over_Rn
         except ZeroDivisionError:
             raise ValueError("Invalid arguments, results in division by zero error")
         return Rf

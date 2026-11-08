@@ -38,25 +38,25 @@ def test_differential():
     """Validate differential op-amp functionality"""
 
     assert opamp.differential(
-        V1=None, V2=1, Vout=-10, R1=1, R2=1, R3=10, R4=10
+        V1=None, V2=1, Vout=-10, R1=1, R2=1, Rf=10, Rg=10
     ) == pytest.approx(2.0, abs=0.1)
     assert opamp.differential(
-        V1=2, V2=None, Vout=-10, R1=1, R2=1, R3=10, R4=10
+        V1=2, V2=None, Vout=-10, R1=1, R2=1, Rf=10, Rg=10
     ) == pytest.approx(1.0, abs=0.1)
     assert opamp.differential(
-        V1=2, V2=1, Vout=None, R1=1, R2=1, R3=10, R4=10
+        V1=2, V2=1, Vout=None, R1=1, R2=1, Rf=10, Rg=10
     ) == pytest.approx(-10.0, abs=0.1)
     assert opamp.differential(
-        V1=2, V2=1, Vout=-10, R1=None, R2=1, R3=10, R4=10
+        V1=2, V2=1, Vout=-10, R1=None, R2=1, Rf=10, Rg=10
     ) == pytest.approx(1.0, abs=0.1)
     assert opamp.differential(
-        V1=2, V2=1, Vout=-10, R1=1, R2=None, R3=10, R4=10
+        V1=2, V2=1, Vout=-10, R1=1, R2=None, Rf=10, Rg=10
     ) == pytest.approx(1.0, abs=0.1)
     assert opamp.differential(
-        V1=2, V2=1, Vout=-10, R1=1, R2=1, R3=None, R4=10
+        V1=2, V2=1, Vout=-10, R1=1, R2=1, Rf=None, Rg=10
     ) == pytest.approx(10.0, abs=0.1)
     assert opamp.differential(
-        V1=2, V2=1, Vout=-10, R1=1, R2=1, R3=10, R4=None
+        V1=2, V2=1, Vout=-10, R1=1, R2=1, Rf=10, Rg=None
     ) == pytest.approx(10.0, abs=0.1)
 
 
