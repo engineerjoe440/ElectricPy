@@ -383,11 +383,11 @@
 <span class="sd">"""</span>
 <span class="c1">################################################################################</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">fsolve</span> <span class="k">as</span> <span class="n">_fsolve</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">electricpy.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">XFMD1</span><span class="p">,</span> <span class="n">XFMD11</span><span class="p">,</span> <span class="n">XFM12</span><span class="p">,</span> <span class="n">XFMY0</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">electricpy.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">XFM12</span><span class="p">,</span> <span class="n">XFMD1</span><span class="p">,</span> <span class="n">XFMD11</span><span class="p">,</span> <span class="n">XFMY0</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">electricpy.conversions</span><span class="w"> </span><span class="kn">import</span> <span class="n">seq_to_abc</span>
 
 
@@ -612,7 +612,7 @@
 <span class="sd">                The Fault Current, equal for 0, pos., and neg. seq.</span>
 <span class="sd">    """</span>
     <span class="c1"># Decompose Reactance Tuple</span>
-    <span class="n">X0</span><span class="p">,</span> <span class="n">X1</span><span class="p">,</span> <span class="n">X2</span> <span class="o">=</span> <span class="n">Zseq</span>
+    <span class="n">_X0</span><span class="p">,</span> <span class="n">X1</span><span class="p">,</span> <span class="n">_X2</span> <span class="o">=</span> <span class="n">Zseq</span>
     <span class="c1"># Ensure that X-components are imaginary</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">X1</span><span class="p">,</span> <span class="nb">complex</span><span class="p">):</span>
         <span class="n">X1</span> <span class="o">*=</span> <span class="mi">1</span><span class="n">j</span>
@@ -1352,7 +1352,7 @@
 <span class="c1"># Define Time-Overcurrent Trip Time Function</span>
 <div class="viewcode-block" id="toctriptime">
 <a class="viewcode-back" href="../../api/electricpy.fault.toctriptime.html#electricpy.fault.toctriptime">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">toctriptime</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">Ipickup</span><span class="p">,</span> <span class="n">TD</span><span class="p">,</span> <span class="n">curve</span><span class="o">=</span><span class="s2">"U1"</span><span class="p">,</span> <span class="n">CTR</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>  <span class="c1"># noqa: E741</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">toctriptime</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">Ipickup</span><span class="p">,</span> <span class="n">TD</span><span class="p">,</span> <span class="n">curve</span><span class="o">=</span><span class="s2">"U1"</span><span class="p">,</span> <span class="n">CTR</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Time OverCurrent Trip Time Function.</span>
 
@@ -1407,7 +1407,7 @@
 <span class="c1"># Define Time Overcurrent Reset Time Function</span>
 <div class="viewcode-block" id="tocreset">
 <a class="viewcode-back" href="../../api/electricpy.fault.tocreset.html#electricpy.fault.tocreset">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">tocreset</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">Ipickup</span><span class="p">,</span> <span class="n">TD</span><span class="p">,</span> <span class="n">curve</span><span class="o">=</span><span class="s2">"U1"</span><span class="p">,</span> <span class="n">CTR</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>  <span class="c1"># noqa: E741</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">tocreset</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">Ipickup</span><span class="p">,</span> <span class="n">TD</span><span class="p">,</span> <span class="n">curve</span><span class="o">=</span><span class="s2">"U1"</span><span class="p">,</span> <span class="n">CTR</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Time OverCurrent Reset Time Function.</span>
 
@@ -1500,8 +1500,8 @@
 <span class="c1"># Define Time-Dial Coordination Function</span>
 <div class="viewcode-block" id="tdradial">
 <a class="viewcode-back" href="../../api/electricpy.fault.tdradial.html#electricpy.fault.tdradial">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">tdradial</span><span class="p">(</span>  <span class="c1"># noqa: E741</span>
-    <span class="n">I</span><span class="p">,</span> <span class="n">CTI</span><span class="p">,</span> <span class="n">Ipu_up</span><span class="p">,</span> <span class="n">Ipu_dn</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">TDdn</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">curve</span><span class="o">=</span><span class="s2">"U1"</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>  <span class="c1"># noqa: E741</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">tdradial</span><span class="p">(</span>
+    <span class="n">I</span><span class="p">,</span> <span class="n">CTI</span><span class="p">,</span> <span class="n">Ipu_up</span><span class="p">,</span> <span class="n">Ipu_dn</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">TDdn</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">curve</span><span class="o">=</span><span class="s2">"U1"</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
     <span class="n">CTR_up</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">CTR_dn</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tfixed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Radial Time Dial Coordination Function.</span>
@@ -1662,6 +1662,12 @@
 <span class="sd">    Isec_corr:  list of complex</span>
 <span class="sd">                The corrected currents to perform operate/restraint</span>
 <span class="sd">                calculations with.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If the correction parameter is not a string, list of strings, or numpy</span>
+<span class="sd">        array.</span>
 <span class="sd">    """</span>
     <span class="c1"># Define Matrix Lookup</span>
     <span class="n">MAT</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"Y"</span><span class="p">:</span> <span class="n">XFMY0</span><span class="p">,</span>
@@ -1679,7 +1685,7 @@
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">correction</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
         <span class="n">mult</span> <span class="o">=</span> <span class="n">correction</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Correction must be string or list of strings."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Correction must be string or list of strings."</span><span class="p">)</span>
     <span class="c1"># Evaluate Corrected Current</span>
     <span class="n">Isec_corr</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">TAP</span> <span class="o">*</span> <span class="n">mult</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Ipri</span> <span class="o">/</span> <span class="n">CTR</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">Isec_corr</span></div>
@@ -1801,7 +1807,7 @@
 <span class="c1"># Define Relay M Formula</span>
 <div class="viewcode-block" id="faultratio">
 <a class="viewcode-back" href="../../api/electricpy.fault.faultratio.html#electricpy.fault.faultratio">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">faultratio</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">Ipickup</span><span class="p">,</span> <span class="n">CTR</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>  <span class="c1"># noqa: E741</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">faultratio</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">Ipickup</span><span class="p">,</span> <span class="n">CTR</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Fault Multiple of Pickup (Ratio) Calculator.</span>
 
@@ -1976,8 +1982,8 @@
 <span class="c1"># Define High-Impedance Bus Protection Pickup Function</span>
 <div class="viewcode-block" id="highzvpickup">
 <a class="viewcode-back" href="../../api/electricpy.fault.highzvpickup.html#electricpy.fault.highzvpickup">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">highzvpickup</span><span class="p">(</span>  <span class="c1"># noqa: E741</span>
-    <span class="n">I</span><span class="p">,</span> <span class="n">RL</span><span class="p">,</span> <span class="n">Rct</span><span class="p">,</span> <span class="n">CTR</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">threephase</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Ks</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>  <span class="c1"># noqa: E741</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">highzvpickup</span><span class="p">(</span>
+    <span class="n">I</span><span class="p">,</span> <span class="n">RL</span><span class="p">,</span> <span class="n">Rct</span><span class="p">,</span> <span class="n">CTR</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">threephase</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Ks</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
     <span class="n">Vstd</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">Kd</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    High Impedance Pickup Setting Function.</span>
@@ -2496,9 +2502,7 @@
 <div class="viewcode-block" id="synmach_ifault">
 <a class="viewcode-back" href="../../api/electricpy.fault.synmach_ifault.html#electricpy.fault.synmach_ifault">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">synmach_ifault</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Ea</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">Xd</span><span class="p">,</span> <span class="n">Xdp</span><span class="p">,</span> <span class="n">Xdpp</span><span class="p">,</span> <span class="n">Xqpp</span><span class="p">,</span> <span class="n">Tdp</span><span class="p">,</span> <span class="n">Tdpp</span><span class="p">,</span> <span class="n">Ta</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
-    <span class="c1"># noqa: D401   "Synchronous" is intentional descriptor</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Synchronous Machine Fault Current Calculator.</span>
+<span class="w">    </span><span class="sd">"""Calculate the fault current of an electrical synchronous machine.</span>
 
 <span class="sd">    Given machine parameters, fault inception angle, and time at</span>
 <span class="sd">    which to calculate fault current, this function will identify</span>

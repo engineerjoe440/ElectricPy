@@ -383,13 +383,16 @@
 <span class="sd">"""</span>
 <span class="c1">################################################################################</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Sequence</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn</span> <span class="k">as</span> <span class="n">_warn</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_plt</span>
+
 <span class="c1"># Import Required External Dependencies</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_sig</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">newton</span>
+
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">numdifftools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Jacobian</span> <span class="k">as</span> <span class="n">jacobian</span>
     <span class="n">__NUMDIFFTOOL_SUPPORT__</span> <span class="o">=</span> <span class="kc">True</span>
@@ -927,17 +930,16 @@
         <span class="n">mF</span> <span class="o">=</span> <span class="s2">"NA"</span>  <span class="c1"># Can't handle function type</span>
 
     <span class="c1"># Test for x input</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">typetest</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># No specified initial conditions</span>
-            <span class="n">rA</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">asmatrix</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">rA</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">typetest</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># No specified initial conditions</span>
+        <span class="n">rA</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">asmatrix</span><span class="p">(</span><span class="n">_np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">rA</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
     <span class="c1"># Condition x</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">asmatrix</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Gather dimensions of inputs</span>
     <span class="n">rA</span><span class="p">,</span> <span class="n">cA</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">rB</span><span class="p">,</span> <span class="n">cB</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">shape</span>
-    <span class="n">rx</span><span class="p">,</span> <span class="n">cx</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">rx</span><span class="p">,</span> <span class="n">_cx</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">rC</span><span class="p">,</span> <span class="n">cC</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">rD</span><span class="p">,</span> <span class="n">cD</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">rF</span><span class="p">,</span> <span class="n">cF</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>  <span class="c1"># Defualt for a function returning one value</span>
@@ -1032,7 +1034,7 @@
             <span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Set each value to zero</span>
 
     <span class="c1"># Finite-Difference Simulation</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">simpts</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">simpts</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">xtim_len</span><span class="p">):</span>
             <span class="n">xtim</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>  <span class="c1"># xtim[state-variable][domain] = x[state-variable]</span>
         <span class="c1"># Create Forcing Function output</span>
@@ -1188,7 +1190,7 @@
     <span class="c1"># Test for one-variable inputs</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">F</span><span class="p">(</span><span class="n">X0</span><span class="p">),</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">float64</span><span class="p">)):</span>  <span class="c1"># System is size-1</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">J</span><span class="p">(</span><span class="n">X0</span><span class="p">),</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">float64</span><span class="p">)):</span>  <span class="c1"># Jacobian isn't size-1</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"ERROR: The Jacobian isn't size-1."</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"ERROR: The Jacobian isn't size-1."</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">newton</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">X0</span><span class="p">,</span> <span class="n">J</span><span class="p">)</span>
 
     <span class="c1"># Test for valid argument sizes</span>
@@ -1247,7 +1249,9 @@
 <span class="sd">    Newton Raphson Real/Reactive Power Function Generator.</span>
 
 <span class="sd">    Given specified parameters, will generate the necessary real and reactive</span>
-<span class="sd">    power functions necessary to compute the system's power flow.</span>
+<span class="sd">    power functions necessary to compute the system's power flow. Each function</span>
+<span class="sd">    uses a snapshot of the supplied network and computes calculated power minus</span>
+<span class="sd">    specified power, including the diagonal Y-bus terms.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -1258,7 +1262,7 @@
 <span class="sd">                Known voltages should be provided as</span>
 <span class="sd">                a list of floating values in the form of:</span>
 <span class="sd">                [mag, ang], unknown voltages should</span>
-<span class="sd">                be provided as None.</span>
+<span class="sd">                be provided as None. Angles are in radians.</span>
 <span class="sd">    P_set:      list of float</span>
 <span class="sd">                List of known and unknown real powers.</span>
 <span class="sd">                Known powers should be provided as</span>
@@ -1289,10 +1293,10 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    retset:     array_like</span>
-<span class="sd">                An array of function handles corresponding to</span>
-<span class="sd">                the appropriate voltage magnitude and angle</span>
-<span class="sd">                calculation functions based on the real and</span>
-<span class="sd">                reactive power values. Function(s) will accept</span>
+<span class="sd">                By default, a function returning real-power mismatches</span>
+<span class="sd">                followed by reactive-power mismatches, each in bus order.</span>
+<span class="sd">                With extend=False, a pair of lists of scalar functions for</span>
+<span class="sd">                real and reactive power, respectively. Function(s) accept</span>
 <span class="sd">                an argument of the form:</span>
 <span class="sd">                [Θ1, Θ2,..., Θn, V1, V2,..., Vm]</span>
 <span class="sd">                where n is the number of busses with unknown</span>
@@ -1342,151 +1346,48 @@
         <span class="k">if</span> <span class="nb">all</span><span class="p">((</span><span class="n">P_set</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">Q_set</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">V_set</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Over-Constrained System"</span><span class="p">)</span>
 
-    <span class="c1"># Define Function Concatinator Class</span>
-    <span class="k">class</span><span class="w"> </span><span class="nc">c_func_concat</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">"""Concatenate multiple scalar forcing functions into one vector output."""</span>
+    <span class="n">ybus</span> <span class="o">=</span> <span class="n">Ybus</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">voltages</span> <span class="o">=</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">voltage</span><span class="p">)</span> <span class="k">for</span> <span class="n">voltage</span> <span class="ow">in</span> <span class="n">V_set</span><span class="p">]</span>
+    <span class="n">angle_buses</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">voltage</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">voltages</span><span class="p">)</span> <span class="k">if</span> <span class="n">voltage</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">magnitude_buses</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">voltage</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">voltages</span><span class="p">)</span> <span class="k">if</span> <span class="n">voltage</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">p_buses</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">power</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">P_set</span><span class="p">)</span> <span class="k">if</span> <span class="n">power</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">q_buses</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">power</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">Q_set</span><span class="p">)</span> <span class="k">if</span> <span class="n">power</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">p_specified</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">P_set</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">p_buses</span><span class="p">])</span>
+    <span class="n">q_specified</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">Q_set</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">q_buses</span><span class="p">])</span>
+    <span class="n">ang_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">angle_buses</span><span class="p">)</span>
+    <span class="n">mag_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">magnitude_buses</span><span class="p">)</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">funcs</span><span class="p">):</span>  <span class="c1"># Initialize class with tupple of functions</span>
-<span class="w">            </span><span class="sd">"""Store the supplied callables in index order for later evaluation."""</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">nfuncs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span>  <span class="c1"># Determine how many functions are in tuple</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">func_reg</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Create empty keyed list of function handles</span>
-            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nfuncs</span><span class="p">):</span>  <span class="c1"># Iterate adding to key</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">func_reg</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">funcs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>  <span class="c1"># Fill keyed list with functions</span>
-
-        <span class="k">def</span><span class="w"> </span><span class="nf">func_c</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>  <span class="c1"># Concatenated Function</span>
-<span class="w">            </span><span class="sd">"""Evaluate each stored function at ``x`` and return a flat array."""</span>
-            <span class="n">rets</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>  <span class="c1"># Create blank numpy array to store function outputs</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nfuncs</span><span class="p">):</span>
-                <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_reg</span><span class="p">[</span><span class="n">i</span><span class="p">](</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># Calculate each function at value x</span>
-                <span class="n">rets</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rets</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  <span class="c1"># Add value to return array</span>
-            <span class="k">return</span> <span class="n">rets</span>
-
-    <span class="c1"># Impliment Global Lists</span>
-    <span class="k">global</span> <span class="n">P_funcs</span><span class="p">,</span> <span class="n">Q_funcs</span><span class="p">,</span> <span class="n">P_strgs</span><span class="p">,</span> <span class="n">Q_strgs</span>
-    <span class="k">global</span> <span class="n">V_list</span><span class="p">,</span> <span class="n">YBUS</span><span class="p">,</span> <span class="n">P_list</span><span class="p">,</span> <span class="n">Q_list</span>
-    <span class="k">global</span> <span class="n">d_list</span><span class="p">,</span> <span class="n">x_list</span>
-    <span class="n">P_funcs</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">Q_funcs</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">P_strgs</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">Q_strgs</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">lists</span> <span class="o">=</span> <span class="p">[</span><span class="n">P_strgs</span><span class="p">,</span> <span class="n">Q_strgs</span><span class="p">]</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Index</span>
-    <span class="n">ii</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># String Index</span>
-    <span class="c1"># Load Global Lists</span>
-    <span class="n">V_list</span> <span class="o">=</span> <span class="n">V_set</span>
-    <span class="n">YBUS</span> <span class="o">=</span> <span class="n">Ybus</span>
-    <span class="n">P_list</span> <span class="o">=</span> <span class="n">P_set</span>
-    <span class="n">Q_list</span> <span class="o">=</span> <span class="n">Q_set</span>
-    <span class="c1"># Define Calculation Strings</span>
-    <span class="c1">## 0:  Vk magnitude</span>
-    <span class="c1">## 1:  Vk angle</span>
-    <span class="c1">## 2:  Vj magnitude</span>
-    <span class="c1">## 3:  Vj angle</span>
-    <span class="c1">## 4:  [k][j] (for Y-Bus)</span>
-    <span class="c1">## 5:  Qgen Term</span>
-    <span class="n">Pstr</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"</span><span class="si">{0}</span><span class="s2">*</span><span class="si">{2}</span><span class="s2">*(YBUS</span><span class="si">{4}</span><span class="s2">.real*_np.cos(</span><span class="si">{1}</span><span class="s2">-</span><span class="si">{3}</span><span class="s2">)+YBUS</span><span class="si">{4}</span><span class="s2">.imag*_np.sin(</span><span class="si">{1}</span><span class="s2">-</span><span class="si">{3}</span><span class="s2">))"</span><span class="p">)</span>
-    <span class="n">Qstr</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"</span><span class="si">{0}</span><span class="s2">*</span><span class="si">{2}</span><span class="s2">*(YBUS</span><span class="si">{4}</span><span class="s2">.real*_np.sin(</span><span class="si">{1}</span><span class="s2">-</span><span class="si">{3}</span><span class="s2">)-YBUS</span><span class="si">{4}</span><span class="s2">.imag*_np.cos(</span><span class="si">{1}</span><span class="s2">-</span><span class="si">{3}</span><span class="s2">))</span><span class="si">{5}</span><span class="s2">"</span><span class="p">)</span>
-    <span class="c1"># Iteratively Identify Vector Length Terms</span>
-    <span class="n">ang_len</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">mag_len</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="c1"># Set Offset Factors</span>
-    <span class="n">magoff</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">angoff</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">for</span> <span class="n">_k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="n">Padd</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">Qadd</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">for</span> <span class="n">_j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">P_list</span><span class="p">[</span><span class="n">_k</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">continue</span>  <span class="c1"># Don't Generate Requirements for Slack Bus</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">_k</span> <span class="o">!=</span> <span class="n">_j</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">Padd</span><span class="p">:</span>  <span class="c1"># Skip i,i Terms</span>
-                <span class="n">ang_len</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="n">Padd</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">_k</span> <span class="o">!=</span> <span class="n">_j</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">Q_list</span><span class="p">[</span><span class="n">_k</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">Qadd</span><span class="p">:</span>
-                <span class="n">mag_len</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="n">Qadd</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">Vxdim</span> <span class="o">=</span> <span class="n">ang_len</span> <span class="o">+</span> <span class="n">mag_len</span>
     <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Angle EQ's (P):"</span><span class="p">,</span> <span class="n">ang_len</span><span class="p">,</span> <span class="s2">"</span><span class="se">\t</span><span class="s2">Magnitude EQ's (Q):"</span><span class="p">,</span> <span class="n">mag_len</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">"Vx Dimension:"</span><span class="p">,</span> <span class="n">Vxdim</span><span class="p">)</span>
-    <span class="c1"># Iteratively Generate P and Q Requirements</span>
-    <span class="k">for</span> <span class="n">_k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="c1"># Set for New Entry</span>
-        <span class="n">newentry</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">for</span> <span class="n">_j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-            <span class="c1"># Add New Entry To Lists</span>
-            <span class="k">for</span> <span class="n">LST</span> <span class="ow">in</span> <span class="n">lists</span><span class="p">:</span>
-                <span class="n">LST</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">P_list</span><span class="p">[</span><span class="n">_k</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">continue</span>  <span class="c1"># Don't Generate Requirements for Slack Bus</span>
-            <span class="c1"># Collect Other Terms</span>
-            <span class="n">Yind</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">_k</span><span class="si">}</span><span class="s2">][</span><span class="si">{</span><span class="n">_j</span><span class="si">}</span><span class="s2">]"</span>
-            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">"K:"</span><span class="p">,</span> <span class="n">_k</span><span class="p">,</span> <span class="s2">"</span><span class="se">\t</span><span class="s2">J:"</span><span class="p">,</span> <span class="n">_j</span><span class="p">)</span>
-            <span class="c1"># Generate Voltage-Related Strings</span>
-            <span class="k">if</span> <span class="n">_k</span> <span class="o">!=</span> <span class="n">_j</span><span class="p">:</span>  <span class="c1"># Skip i,i Terms</span>
-                <span class="c1"># Generate K-Related Strings</span>
-                <span class="k">if</span> <span class="n">V_list</span><span class="p">[</span><span class="n">_k</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># The Vk magnitude is unknown</span>
-                    <span class="n">Vkm</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Vx[</span><span class="si">{</span><span class="n">_k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ang_len</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">magoff</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_k</span><span class="si">}</span><span class="s2">]"</span>  <span class="c1"># Use Variable Magnitude</span>
-                    <span class="n">Vka</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Vx[</span><span class="si">{</span><span class="n">_k</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">angoff</span><span class="si">}</span><span class="s2">]"</span>  <span class="c1"># Use Variable Angle</span>
-                <span class="k">else</span><span class="p">:</span>  <span class="c1"># The Vk magnitude is known</span>
-                    <span class="n">Vkm</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"V_list[</span><span class="si">{</span><span class="n">_k</span><span class="si">}</span><span class="s2">][0]"</span>  <span class="c1"># Load Magnitude</span>
-                    <span class="k">if</span> <span class="n">V_list</span><span class="p">[</span><span class="n">_k</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># The Vj angle is unknown</span>
-                        <span class="n">Vka</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Vx[</span><span class="si">{</span><span class="n">_k</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">angoff</span><span class="si">}</span><span class="s2">]"</span>  <span class="c1"># Use Variable Angle</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">Vka</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"V_list[</span><span class="si">{</span><span class="n">_k</span><span class="si">}</span><span class="s2">][1]"</span>  <span class="c1"># Load Angle</span>
-                <span class="c1"># Generate J-Related Strings</span>
-                <span class="k">if</span> <span class="n">V_list</span><span class="p">[</span><span class="n">_j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># The Vj magnitude is unknown</span>
-                    <span class="n">Vjm</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Vx[</span><span class="si">{</span><span class="n">_j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ang_len</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">magoff</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">_j</span><span class="si">}</span><span class="s2">]"</span>  <span class="c1"># Use Variable Magnitude</span>
-                    <span class="n">Vja</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Vx[</span><span class="si">{</span><span class="n">_j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">angoff</span><span class="si">}</span><span class="s2">]"</span>  <span class="c1"># Use Variable Angle</span>
-                <span class="k">else</span><span class="p">:</span>  <span class="c1"># The Vj magnitude is known</span>
-                    <span class="n">Vjm</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"V_list[</span><span class="si">{</span><span class="n">_j</span><span class="si">}</span><span class="s2">][0]"</span>  <span class="c1"># Load Magnitude</span>
-                    <span class="k">if</span> <span class="n">V_list</span><span class="p">[</span><span class="n">_j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># The Vj angle is unknown</span>
-                        <span class="n">Vja</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Vx[</span><span class="si">{</span><span class="n">_j</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">angoff</span><span class="si">}</span><span class="s2">]"</span>  <span class="c1"># Use Variable Angle</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">Vja</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"V_list[</span><span class="si">{</span><span class="n">_j</span><span class="si">}</span><span class="s2">][1]"</span>  <span class="c1"># Load Angle</span>
-                <span class="c1"># Generate String and Append to List of Functions</span>
-                <span class="n">P_strgs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">Pstr</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Vkm</span><span class="p">,</span> <span class="n">Vka</span><span class="p">,</span> <span class="n">Vjm</span><span class="p">,</span> <span class="n">Vja</span><span class="p">,</span> <span class="n">Yind</span><span class="p">))</span>
-                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">"New P-String:"</span><span class="p">,</span> <span class="n">P_strgs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                <span class="c1"># Generate Q Requirement</span>
-                <span class="k">if</span> <span class="n">Q_list</span><span class="p">[</span><span class="n">_k</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="c1"># Generate String and Append to List of Functions</span>
-                    <span class="k">if</span> <span class="n">newentry</span><span class="p">:</span>
-                        <span class="n">newentry</span> <span class="o">=</span> <span class="kc">False</span>
-                        <span class="n">Qgen</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"-Vx[</span><span class="si">{</span><span class="n">_k</span><span class="si">}</span><span class="s2">]**2*YBUS[</span><span class="si">{</span><span class="n">_k</span><span class="si">}</span><span class="s2">][</span><span class="si">{</span><span class="n">_k</span><span class="si">}</span><span class="s2">].imag"</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">Qgen</span> <span class="o">=</span> <span class="s2">""</span>
-                    <span class="n">Q_strgs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">Qstr</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Vkm</span><span class="p">,</span> <span class="n">Vka</span><span class="p">,</span> <span class="n">Vjm</span><span class="p">,</span> <span class="n">Vja</span><span class="p">,</span> <span class="n">Yind</span><span class="p">,</span> <span class="n">Qgen</span><span class="p">))</span>
-                    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="s2">"New Q-String:"</span><span class="p">,</span> <span class="n">Q_strgs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="c1"># Increment Index at Each Interior Level</span>
-            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">tempPstr</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"P_funcs.append(lambda Vx: -P_list[</span><span class="si">{</span><span class="n">_k</span><span class="si">}</span><span class="s2">]"</span>
-        <span class="n">tempQstr</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Q_funcs.append(lambda Vx: -Q_list[</span><span class="si">{</span><span class="n">_k</span><span class="si">}</span><span class="s2">]"</span>
-        <span class="k">for</span> <span class="n">_i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ii</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-            <span class="n">P</span> <span class="o">=</span> <span class="n">P_strgs</span><span class="p">[</span><span class="n">_i</span><span class="p">]</span>
-            <span class="n">Q</span> <span class="o">=</span> <span class="n">Q_strgs</span><span class="p">[</span><span class="n">_i</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">P</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">tempPstr</span> <span class="o">+=</span> <span class="s2">"+"</span> <span class="o">+</span> <span class="n">P</span>
-            <span class="k">if</span> <span class="n">Q</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">tempQstr</span> <span class="o">+=</span> <span class="s2">"+"</span> <span class="o">+</span> <span class="n">Q</span>
-        <span class="n">tempPstr</span> <span class="o">+=</span> <span class="s2">")"</span>
-        <span class="n">tempQstr</span> <span class="o">+=</span> <span class="s2">")"</span>
-        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">P_strgs</span><span class="p">[</span><span class="n">ii</span><span class="p">:</span><span class="n">i</span><span class="p">]):</span>
-            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">"Full P-Func Str:"</span><span class="p">,</span> <span class="n">tempPstr</span><span class="p">)</span>
-            <span class="n">exec</span><span class="p">(</span><span class="n">tempPstr</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">Q_strgs</span><span class="p">[</span><span class="n">ii</span><span class="p">:</span><span class="n">i</span><span class="p">]):</span>
-            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">"Full Q-Func Str:"</span><span class="p">,</span> <span class="n">tempQstr</span><span class="p">)</span>
-            <span class="n">exec</span><span class="p">(</span><span class="n">tempQstr</span><span class="p">)</span>
-        <span class="n">ii</span> <span class="o">=</span> <span class="n">i</span>  <span class="c1"># Increase Lower Index</span>
-    <span class="n">retset</span> <span class="o">=</span> <span class="p">(</span><span class="n">P_funcs</span><span class="p">,</span> <span class="n">Q_funcs</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Angle EQ's (P):"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_buses</span><span class="p">),</span> <span class="s2">"</span><span class="se">\t</span><span class="s2">Magnitude EQ's (Q):"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">q_buses</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Vx Dimension:"</span><span class="p">,</span> <span class="n">ang_len</span> <span class="o">+</span> <span class="n">mag_len</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">residual</span><span class="p">(</span><span class="n">Vx</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">_np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Calculate real and reactive power mismatches for the network."""</span>
+        <span class="n">angles</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">voltage</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">voltage</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mf">0.0</span>
+                              <span class="k">for</span> <span class="n">voltage</span> <span class="ow">in</span> <span class="n">voltages</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">magnitudes</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">voltage</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">voltage</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mf">0.0</span>
+                                  <span class="k">for</span> <span class="n">voltage</span> <span class="ow">in</span> <span class="n">voltages</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">angles</span><span class="p">[</span><span class="n">angle_buses</span><span class="p">]</span> <span class="o">=</span> <span class="n">Vx</span><span class="p">[:</span><span class="n">ang_len</span><span class="p">]</span>
+        <span class="n">magnitudes</span><span class="p">[</span><span class="n">magnitude_buses</span><span class="p">]</span> <span class="o">=</span> <span class="n">Vx</span><span class="p">[</span><span class="n">ang_len</span><span class="p">:]</span>
+        <span class="n">phasors</span> <span class="o">=</span> <span class="n">magnitudes</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">angles</span><span class="p">)</span>
+        <span class="n">power</span> <span class="o">=</span> <span class="n">phasors</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">ybus</span> <span class="o">@</span> <span class="n">phasors</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">power</span><span class="o">.</span><span class="n">real</span><span class="p">[</span><span class="n">p_buses</span><span class="p">]</span> <span class="o">-</span> <span class="n">p_specified</span><span class="p">,</span>
+                                <span class="n">power</span><span class="o">.</span><span class="n">imag</span><span class="p">[</span><span class="n">q_buses</span><span class="p">]</span> <span class="o">-</span> <span class="n">q_specified</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">component</span><span class="p">(</span><span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Create a scalar mismatch function for one residual component."""</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="n">Vx</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">"""Evaluate the selected mismatch."""</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">residual</span><span class="p">(</span><span class="n">Vx</span><span class="p">)[</span><span class="n">index</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">evaluate</span>
+
     <span class="k">if</span> <span class="n">extend</span><span class="p">:</span>
-        <span class="n">funcset</span> <span class="o">=</span> <span class="n">P_funcs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="n">funcset</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">Q_funcs</span><span class="p">)</span>
-        <span class="n">funcgroup</span> <span class="o">=</span> <span class="n">c_func_concat</span><span class="p">(</span><span class="n">funcset</span><span class="p">)</span>
-        <span class="n">retset</span> <span class="o">=</span> <span class="n">funcgroup</span><span class="o">.</span><span class="n">func_c</span>
+        <span class="n">retset</span> <span class="o">=</span> <span class="n">residual</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">p_funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">component</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p_buses</span><span class="p">))]</span>
+        <span class="n">q_funcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">component</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_buses</span><span class="p">))</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">q_buses</span><span class="p">))]</span>
+        <span class="n">retset</span> <span class="o">=</span> <span class="p">(</span><span class="n">p_funcs</span><span class="p">,</span> <span class="n">q_funcs</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">argshape</span><span class="p">:</span>
         <span class="n">retset</span> <span class="o">=</span> <span class="p">(</span><span class="n">retset</span><span class="p">,</span> <span class="p">(</span><span class="n">ang_len</span><span class="p">,</span> <span class="n">mag_len</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">retset</span></div>
@@ -1610,7 +1511,7 @@
     <span class="k">if</span> <span class="n">slackbus</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="c1"># Ybus</span>
         <span class="n">Ybus</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Ybus</span><span class="p">)</span>
-        <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">Ybus</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">_row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">Ybus</span><span class="o">.</span><span class="n">shape</span>
         <span class="n">Ybus</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">Ybus</span><span class="p">,</span> <span class="p">(</span><span class="n">col</span> <span class="o">-</span> <span class="n">slackbus</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
         <span class="c1"># Vknown, Pknown, and Qknown</span>
         <span class="n">Vknown</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">Vknown</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Vknown</span><span class="p">)</span> <span class="o">-</span> <span class="n">slackbus</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>

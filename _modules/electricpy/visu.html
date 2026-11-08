@@ -384,13 +384,15 @@
 <span class="sd">"""</span>
 <span class="c1">################################################################################</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
 <span class="kn">import</span><span class="w"> </span><span class="nn">cmath</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_c</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_matplotlib</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_np</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">electricpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">powerset</span><span class="p">,</span> <span class="n">geometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">electricpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">geometry</span><span class="p">,</span> <span class="n">powerset</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">electricpy.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Point</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">electricpy.geometry.circle</span><span class="w"> </span><span class="kn">import</span> <span class="n">Circle</span>
 
@@ -1172,19 +1174,19 @@
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">power_circle_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">Pr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">Qr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">Sr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">Ps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">Qs</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">Ss</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">A</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">C</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">D</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Pr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Qr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Sr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Ps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Qs</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Ss</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">A</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">C</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">D</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">"""Initialize the class."""</span>
         <span class="k">if</span> <span class="n">C</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -1393,14 +1395,14 @@
 <div class="viewcode-block" id="receiving_end_power_circle">
 <a class="viewcode-back" href="../../api/electricpy.visu.receiving_end_power_circle.html#electricpy.visu.receiving_end_power_circle">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">receiving_end_power_circle</span><span class="p">(</span>
-    <span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">A</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">Pr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">Qr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">Sr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">A</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Pr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Qr</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Sr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PowerCircle</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Construct Receiving End Power Circle.</span>
@@ -1471,16 +1473,7 @@
 
     <span class="k">return</span> <span class="n">PowerCircle</span><span class="p">(</span>
         <span class="s2">"receiving"</span><span class="p">,</span>
-        <span class="o">**</span><span class="p">{</span>
-            <span class="s2">"Vr"</span><span class="p">:</span> <span class="n">Vr</span><span class="p">,</span>
-            <span class="s2">"A"</span><span class="p">:</span> <span class="n">A</span><span class="p">,</span>
-            <span class="s2">"B"</span><span class="p">:</span> <span class="n">B</span><span class="p">,</span>
-            <span class="s2">"Pr"</span><span class="p">:</span> <span class="n">Pr</span><span class="p">,</span>
-            <span class="s2">"Qr"</span><span class="p">:</span> <span class="n">Qr</span><span class="p">,</span>
-            <span class="s2">"Sr"</span><span class="p">:</span> <span class="n">Sr</span><span class="p">,</span>
-            <span class="s2">"Vs"</span><span class="p">:</span> <span class="n">Vs</span><span class="p">,</span>
-            <span class="s2">"power_factor"</span><span class="p">:</span> <span class="n">power_factor</span><span class="p">,</span>
-        <span class="p">},</span>
+        <span class="n">Vr</span><span class="o">=</span><span class="n">Vr</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="n">B</span><span class="p">,</span> <span class="n">Pr</span><span class="o">=</span><span class="n">Pr</span><span class="p">,</span> <span class="n">Qr</span><span class="o">=</span><span class="n">Qr</span><span class="p">,</span> <span class="n">Sr</span><span class="o">=</span><span class="n">Sr</span><span class="p">,</span> <span class="n">Vs</span><span class="o">=</span><span class="n">Vs</span><span class="p">,</span> <span class="n">power_factor</span><span class="o">=</span><span class="n">power_factor</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -1488,14 +1481,14 @@
 <div class="viewcode-block" id="sending_end_power_circle">
 <a class="viewcode-back" href="../../api/electricpy.visu.sending_end_power_circle.html#electricpy.visu.sending_end_power_circle">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">sending_end_power_circle</span><span class="p">(</span>
-    <span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">D</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">Ps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">Qs</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">Ss</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Vs</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">B</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">D</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Ps</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Qs</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Ss</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">power_factor</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Vr</span><span class="p">:</span> <span class="nb">complex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PowerCircle</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Construct Receiving End Power Circle.</span>
@@ -1543,23 +1536,14 @@
 
     <span class="k">return</span> <span class="n">PowerCircle</span><span class="p">(</span>
         <span class="s2">"sending"</span><span class="p">,</span>
-        <span class="o">**</span><span class="p">{</span>
-            <span class="s2">"Vr"</span><span class="p">:</span> <span class="n">Vr</span><span class="p">,</span>
-            <span class="s2">"B"</span><span class="p">:</span> <span class="n">B</span><span class="p">,</span>
-            <span class="s2">"D"</span><span class="p">:</span> <span class="n">D</span><span class="p">,</span>
-            <span class="s2">"Ps"</span><span class="p">:</span> <span class="n">Ps</span><span class="p">,</span>
-            <span class="s2">"Qs"</span><span class="p">:</span> <span class="n">Qs</span><span class="p">,</span>
-            <span class="s2">"Ss"</span><span class="p">:</span> <span class="n">Ss</span><span class="p">,</span>
-            <span class="s2">"Vs"</span><span class="p">:</span> <span class="n">Vs</span><span class="p">,</span>
-            <span class="s2">"power_factor"</span><span class="p">:</span> <span class="n">power_factor</span><span class="p">,</span>
-        <span class="p">},</span>
+        <span class="n">Vr</span><span class="o">=</span><span class="n">Vr</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="n">B</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="n">D</span><span class="p">,</span> <span class="n">Ps</span><span class="o">=</span><span class="n">Ps</span><span class="p">,</span> <span class="n">Qs</span><span class="o">=</span><span class="n">Qs</span><span class="p">,</span> <span class="n">Ss</span><span class="o">=</span><span class="n">Ss</span><span class="p">,</span> <span class="n">Vs</span><span class="o">=</span><span class="n">Vs</span><span class="p">,</span> <span class="n">power_factor</span><span class="o">=</span><span class="n">power_factor</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="SeriesRLC">
 <a class="viewcode-back" href="../../api/electricpy.visu.SeriesRLC.html#electricpy.visu.SeriesRLC">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">SeriesRLC</span><span class="p">():</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SeriesRLC</span><span class="p">:</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Frequency Response for an RLC (Resistive, Inductive, Capacitive) Load.</span>
 

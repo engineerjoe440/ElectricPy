@@ -434,6 +434,11 @@
 <span class="sd">    -------</span>
 <span class="sd">    latex:      str</span>
 <span class="sd">                LaTeX string for the complex value.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If the input value is not a complex number, list, or numpy array.</span>
 <span class="sd">    """</span>
     <span class="c1"># Define Interpretation Functions</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">polarstring</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">round</span><span class="p">):</span>
@@ -495,7 +500,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">latex</span> <span class="o">=</span> <span class="n">rectstring</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">round</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid Input Type"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Invalid Input Type"</span><span class="p">)</span>
     <span class="c1"># Add Dollar Sign pre-post</span>
     <span class="k">if</span> <span class="n">double</span><span class="p">:</span>
         <span class="n">dollar</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">'$$'</span>

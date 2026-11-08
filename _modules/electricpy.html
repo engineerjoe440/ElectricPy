@@ -399,10 +399,10 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">quad</span> <span class="k">as</span> <span class="n">integrate</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">RHO_VALUES</span><span class="p">,</span> <span class="n">De0</span><span class="p">,</span> <span class="n">ILcIP</span><span class="p">,</span> <span class="n">VLLcVLN</span><span class="p">,</span> <span class="n">carson_r</span><span class="p">,</span> <span class="n">e0</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">u0</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.phasors</span><span class="w"> </span><span class="kn">import</span> <span class="n">parallelz</span><span class="p">,</span> <span class="n">phasor</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.version</span><span class="w"> </span><span class="kn">import</span> <span class="n">NAME</span><span class="p">,</span> <span class="n">VERSION</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>  <span class="c1"># noqa: F403, F401</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">RHO_VALUES</span><span class="p">,</span> <span class="n">De0</span><span class="p">,</span> <span class="n">VLLcVLN</span><span class="p">,</span> <span class="n">ILcIP</span><span class="p">,</span> <span class="n">carson_r</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">e0</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.phasors</span><span class="w"> </span><span class="kn">import</span> <span class="n">phasor</span><span class="p">,</span> <span class="n">parallelz</span>
 
 <span class="n">__version__</span> <span class="o">=</span> <span class="n">VERSION</span>
 
@@ -443,9 +443,12 @@
         <span class="k">if</span> <span class="n">ncycles</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">freq</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"ncycles and freq must be the same shape"</span><span class="p">)</span>
 
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ncycles</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ncycles</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">freq</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"ncycles and freq must be the same length"</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="p">(</span>
+        <span class="nb">isinstance</span><span class="p">(</span><span class="n">ncycles</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+        <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+        <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">ncycles</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span>
+    <span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"ncycles and freq must be the same length"</span><span class="p">)</span>
 
     <span class="n">ncycles</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ncycles</span><span class="p">)</span>
     <span class="n">freq</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span>
@@ -598,6 +601,11 @@
 <span class="sd">                The array of values corresponding to the magnitude and angle,</span>
 <span class="sd">                values are returned in the form: [[ mag, ang ],...,[ mag, ang ]]</span>
 <span class="sd">                where the angles are evaluated in degrees.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If the input value is not a complex number, list, or numpy array.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -755,7 +763,7 @@
         <span class="k">if</span> <span class="n">ret</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">([</span><span class="n">mag</span><span class="p">,</span> <span class="n">ang</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid Input Type"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Invalid Input Type"</span><span class="p">)</span>
     <span class="k">return</span> <span class="kc">None</span></div>
 
 
@@ -2243,7 +2251,7 @@
     <span class="c1"># Determine Time from Fundamental Frequency</span>
     <span class="n">T</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">minfreq</span>
     <span class="c1"># Generate time range to apply for FFT</span>
-    <span class="n">t</span><span class="p">,</span> <span class="n">dt</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">NN</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">retstep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">t</span><span class="p">,</span> <span class="n">_dt</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">NN</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">retstep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="c1"># Evaluate FFT</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">_np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">t</span><span class="p">))</span> <span class="o">/</span> <span class="n">t</span><span class="o">.</span><span class="n">size</span>
     <span class="c1"># Return Complex Values</span>
@@ -2473,12 +2481,17 @@
 <span class="sd">                Function object handle which can be used to</span>
 <span class="sd">                call the function to evaluate the harmonic</span>
 <span class="sd">                system at specified times.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If the real or imaginary components are not array-like.</span>
 <span class="sd">    """</span>
     <span class="c1"># Validate Inputs</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">real</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Argument *real* must be array-like."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Argument *real* must be array-like."</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">imag</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">imag</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Argument *imag* must be array-like."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Argument *imag* must be array-like."</span><span class="p">)</span>
     <span class="c1"># Calculate Omega</span>
     <span class="n">w</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">_np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">freq</span>
 
@@ -3001,7 +3014,7 @@
     <span class="n">const</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">Srate</span>
     <span class="c1"># Iteratively Calculate</span>
     <span class="n">cosf</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">_k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Srate</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">_k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Srate</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">slc</span> <span class="o">=</span> <span class="p">(</span><span class="n">ind</span> <span class="o">-</span> <span class="p">(</span><span class="n">Srate</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="n">_k</span>
         <span class="n">cosf</span> <span class="o">+=</span> <span class="n">cos</span><span class="p">(</span><span class="n">_k</span><span class="p">,</span> <span class="n">Srate</span><span class="p">)</span> <span class="o">*</span> <span class="n">arr</span><span class="p">[</span><span class="n">slc</span><span class="p">]</span>
     <span class="c1"># Scale</span>
@@ -3055,7 +3068,7 @@
     <span class="n">const</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">Srate</span>
     <span class="c1"># Iteratively Calculate</span>
     <span class="n">sinf</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">_k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Srate</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">_k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Srate</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">slc</span> <span class="o">=</span> <span class="p">(</span><span class="n">ind</span> <span class="o">-</span> <span class="p">(</span><span class="n">Srate</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="n">_k</span>
         <span class="n">sinf</span> <span class="o">+=</span> <span class="n">sin</span><span class="p">(</span><span class="n">_k</span><span class="p">,</span> <span class="n">Srate</span><span class="p">)</span> <span class="o">*</span> <span class="n">arr</span><span class="p">[</span><span class="n">slc</span><span class="p">]</span>
     <span class="c1"># Scale</span>
@@ -3510,9 +3523,7 @@
 <div class="viewcode-block" id="syncspeed">
 <a class="viewcode-back" href="../api/electricpy.syncspeed.html#electricpy.syncspeed">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">syncspeed</span><span class="p">(</span><span class="n">Npol</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">Hz</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rpm</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="c1"># noqa: D401   "Synchronous" is an intentional descriptor</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
-<span class="sd">    Synchronous Speed Calculator Function.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Calculate the synchronous speed of an electrical machine.</span>
 
 <span class="sd">    Simple method of calculating the synchronous speed of an induction machine</span>
 <span class="sd">    given the number of poles in the machine's construction, and</span>
@@ -3865,7 +3876,13 @@
 
 <div class="viewcode-block" id="ic_555_monostable">
 <a class="viewcode-back" href="../api/electricpy.ic_555_monostable.html#electricpy.ic_555_monostable">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">ic_555_monostable</span><span class="p">(</span><span class="n">R</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">t_high</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">t_low</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ic_555_monostable</span><span class="p">(</span>
+    <span class="n">R</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">C</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">t_high</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="c1"># pylint: disable-next=unused-argument</span>
+    <span class="n">t_low</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    555 Integrated Circuit Calculator.</span>
 
