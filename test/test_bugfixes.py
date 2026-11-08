@@ -2,8 +2,7 @@ import numpy as np
 import pytest
 
 import electricpy as ep
-from electricpy import conversions
-from electricpy import thermal
+from electricpy import conversions, thermal
 
 
 def test_thermocouple_cjt_units_match_equivalent_voltage():

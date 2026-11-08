@@ -7,6 +7,7 @@ Electrical machines formulas for transformers, motors, generators, etc.
 ################################################################################
 
 import cmath as _c
+
 import numpy as _np
 from scipy.optimize import fsolve as _fsolve
 
@@ -1146,7 +1147,7 @@ def imfoc_control(Tem_cmd, LAMdr_cmd, wr_cmd, Rr, Rs, Lm,
 
 # Define Synch. Machine Eq Calculator
 def synmach_Eq(Vt_pu, Itmag, PF, Ra, Xd, Xq):
-    # noqa: D401   "Synchronous" is an intentional descriptor
+
     r"""
     Synchronous Machine Eq Calculator.
 

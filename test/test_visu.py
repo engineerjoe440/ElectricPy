@@ -1,6 +1,8 @@
-import math
 import cmath
+import math
+
 from numpy.testing import assert_almost_equal
+
 
 class Test_visualization:
 

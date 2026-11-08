@@ -1,10 +1,12 @@
 import cmath
-from electricpy import geometry as Geometry
-from electricpy.geometry import Point
-from electricpy.geometry import Line
+
 from numpy.testing import assert_array_almost_equal
 
-class TestDistance():
+from electricpy import geometry as Geometry
+from electricpy.geometry import Line, Point
+
+
+class TestDistance:
 
     def test_0(self):
         """Validate distance scenario 0."""
@@ -34,7 +36,7 @@ class TestDistance():
         p2 = Point(3.0, 1)
         assert Geometry.distance(p1, p2) == 1
 
-class Testslope():
+class Testslope:
 
     def test_0(self):
         """Validate slope scenario 0."""
@@ -61,7 +63,7 @@ class Testslope():
         except ZeroDivisionError:
             assert True
 
-class Testsection():
+class Testsection:
 
     def test_0(self):
         """Validate section scenario 0."""
@@ -81,7 +83,7 @@ class Testsection():
 
         assert_array_almost_equal(p_computed(), p_actual(), decimal=6)
 
-class Testline_equaltion():
+class Testline_equaltion:
 
     def test_0(self):
         """Validate line equaltion scenario 0."""
@@ -109,7 +111,7 @@ class Testline_equaltion():
         assert Line(1, -1, 0) == Line(3, -3, 0)
         assert Line(1, 0, -1) == Line(3, 0, -3)
 
-class Testline_distance():
+class Testline_distance:
 
     def test_0(self):
         """Validate line distance scenario 0."""
@@ -131,7 +133,7 @@ class Testline_distance():
         line = Line(0, 1, -3)
         assert line.distance(p) == 3
 
-class Testfoot_perpendicular():
+class Testfoot_perpendicular:
 
     def test_0(self):
         """Validate foot perpendicular scenario 0."""
@@ -157,7 +159,7 @@ class Testfoot_perpendicular():
         assert_array_almost_equal(p_actual(), p_desired(), decimal=6)
         assert Geometry.midpoint(p, p_image) == p_actual
 
-class TestPerpendicularBisector():
+class TestPerpendicularBisector:
 
     def test_0(self):
         """Validate perpendicular bisector scenario 0."""
@@ -187,7 +189,7 @@ class TestPerpendicularBisector():
         line = Geometry.perpendicular_bisector(p1, p2)
         assert line == Line(0, 1, -4)
 
-class Testcolinear():
+class Testcolinear:
 
     def test_0(self):
         """Validate colinear scenario 0."""
@@ -210,7 +212,7 @@ class Testcolinear():
         p3 = Point(3, 0)
         assert Geometry.colinear(p1, p2, p3)
 
-class TestAngleBtwLines():
+class TestAngleBtwLines:
 
     def test_0(self):
         """Validate angle btw lines scenario 0."""

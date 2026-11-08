@@ -1,8 +1,8 @@
 import numpy as np
-from electricpy.phasors import phs
-from electricpy.phasors import phasor
-from electricpy.phasors import vectarray
 from numpy.testing import assert_almost_equal
+
+from electricpy.phasors import phasor, phs, vectarray
+
 
 def test_phasor():
     """Validate phasor behavior."""
@@ -34,7 +34,7 @@ def test_phasor():
     z1 = phasor(magnitude, 180 + theta)
     assert_almost_equal(z0, -1 * z1)
 
-class TestPhs():
+class TestPhs:
 
     def test_0(self):
         """Validate phs scenario 0."""
@@ -56,7 +56,7 @@ class TestPhs():
         for x,y in zip(outputs, actual_outputs):
             assert_almost_equal(x, y, decimal = 3)
 
-class TestVectarray():
+class TestVectarray:
 
     def test_0(self):
         """Validate vectarray scenario 0."""

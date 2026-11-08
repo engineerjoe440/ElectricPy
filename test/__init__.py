@@ -1,8 +1,9 @@
 """Shared test helper utilities."""
 
-from electricpy.geometry import Point
-from electricpy.geometry import Line
 from numpy.testing import assert_almost_equal
+
+from electricpy.geometry import Line, Point
+
 
 def compare_points(p1: Point, p2: Point) -> bool:
     """Return True when two points are approximately equal."""

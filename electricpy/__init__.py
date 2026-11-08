@@ -22,10 +22,10 @@ import matplotlib.pyplot as _plt
 import numpy as _np
 from scipy.integrate import quad as integrate
 
+from .constants import *
+from .constants import RHO_VALUES, De0, ILcIP, VLLcVLN, carson_r, e0, pi, u0
+from .phasors import parallelz, phasor
 from .version import NAME, VERSION
-from .constants import *  # noqa: F403, F401
-from .constants import RHO_VALUES, De0, VLLcVLN, ILcIP, carson_r, u0, pi, e0
-from .phasors import phasor, parallelz
 
 __version__ = VERSION
 
@@ -2484,7 +2484,7 @@ def cosfilt(arr, Srate, domain=False):
     const = 2 / Srate
     # Iteratively Calculate
     cosf = 0
-    for _k in range(0, Srate - 1):
+    for _k in range(Srate - 1):
         slc = (ind - (Srate - 1)) + _k
         cosf += cos(_k, Srate) * arr[slc]
     # Scale
@@ -2535,7 +2535,7 @@ def sinfilt(arr, Srate, domain=False):
     const = 2 / Srate
     # Iteratively Calculate
     sinf = 0
-    for _k in range(0, Srate - 1):
+    for _k in range(Srate - 1):
         slc = (ind - (Srate - 1)) + _k
         sinf += sin(_k, Srate) * arr[slc]
     # Scale
@@ -2966,7 +2966,7 @@ def vipf(V=None, I=None, PF=1, find=''):
 
 # Define Synchronous Speed Calculator
 def syncspeed(Npol, freq=60, Hz=False, rpm=False):
-    # noqa: D401   "Synchronous" is an intentional descriptor
+
     r"""
     Synchronous Speed Calculator Function.
 

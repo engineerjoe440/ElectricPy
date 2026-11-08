@@ -1,7 +1,8 @@
 # Pytest configuration
 
-import pytest
 import numpy as np
+import pytest
+
 
 @pytest.fixture(scope="session", autouse=True)
 def setup_environment():

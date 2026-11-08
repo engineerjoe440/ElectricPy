@@ -6,11 +6,11 @@ Electrical Power Engineering Faults Calculations.
 """
 ################################################################################
 
-import numpy as _np
 import matplotlib.pyplot as _plt
+import numpy as _np
 from scipy.optimize import fsolve as _fsolve
 
-from electricpy.constants import XFMD1, XFMD11, XFM12, XFMY0
+from electricpy.constants import XFM12, XFMD1, XFMD11, XFMY0
 from electricpy.conversions import seq_to_abc
 
 
@@ -922,7 +922,7 @@ def trvresistor(C, L, reduction, Rd0=500, wd0=260e3, tpk0=10e-6):
 
 
 # Define Time-Overcurrent Trip Time Function
-def toctriptime(I, Ipickup, TD, curve="U1", CTR=1):  # noqa: E741
+def toctriptime(I, Ipickup, TD, curve="U1", CTR=1):
     """
     Time OverCurrent Trip Time Function.
 
@@ -974,7 +974,7 @@ def toctriptime(I, Ipickup, TD, curve="U1", CTR=1):  # noqa: E741
 
 
 # Define Time Overcurrent Reset Time Function
-def tocreset(I, Ipickup, TD, curve="U1", CTR=1):  # noqa: E741
+def tocreset(I, Ipickup, TD, curve="U1", CTR=1):
     """
     Time OverCurrent Reset Time Function.
 
@@ -1061,8 +1061,8 @@ def pickup(Iloadmax, Ifaultmin, scale=0, printout=False, units="A"):
 
 
 # Define Time-Dial Coordination Function
-def tdradial(  # noqa: E741
-    I, CTI, Ipu_up, Ipu_dn=0, TDdn=0, curve="U1", scale=2, freq=60,  # noqa: E741
+def tdradial(
+    I, CTI, Ipu_up, Ipu_dn=0, TDdn=0, curve="U1", scale=2, freq=60,
     CTR_up=1, CTR_dn=1, tfixed=None):
     """
     Radial Time Dial Coordination Function.
@@ -1347,7 +1347,7 @@ def symrmsfaultcur(V, R, X, t=1 / 60, freq=60):
 
 
 # Define Relay M Formula
-def faultratio(I, Ipickup, CTR=1):  # noqa: E741
+def faultratio(I, Ipickup, CTR=1):
     """
     Fault Multiple of Pickup (Ratio) Calculator.
 
@@ -1510,8 +1510,8 @@ def transmismatch(I1, I2, tap1, tap2):
 
 
 # Define High-Impedance Bus Protection Pickup Function
-def highzvpickup(  # noqa: E741
-    I, RL, Rct, CTR=1, threephase=False, Ks=1.5,  # noqa: E741
+def highzvpickup(
+    I, RL, Rct, CTR=1, threephase=False, Ks=1.5,
     Vstd=400, Kd=0.5):
     """
     High Impedance Pickup Setting Function.
@@ -2000,7 +2000,7 @@ def indmachphs3torq(t, Is0, Lr, Ls, Lm, Rr, Rs, wrf=0, freq=60):
 
 # Define Complete Sync. Mach. Fault Current Function
 def synmach_ifault(t, Ea, alpha, Xd, Xdp, Xdpp, Xqpp, Tdp, Tdpp, Ta, freq=60):
-    # noqa: D401   "Synchronous" is intentional descriptor
+
     """
     Synchronous Machine Fault Current Calculator.
 

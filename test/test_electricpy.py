@@ -1,13 +1,11 @@
-import pytest
 import numpy as np
+import pytest
 from numpy.testing import assert_almost_equal
 
 # Electricpy Imports
-from electricpy import powerflow
-from electricpy import phasor
-from electricpy import reactance
-from electricpy import tcycle
+from electricpy import phasor, powerflow, reactance, tcycle
 from electricpy.passive import air_core_inductance
+
 
 def test_bridge_impedance():
     """Validate bridge impedance behavior."""
@@ -390,8 +388,9 @@ def test_tcycle_repeated():
 
 def test_nr_pqd():
     """Validate nr pqd behavior."""
-    from electricpy import sim
     from numpy.testing import assert_array_almost_equal
+
+    from electricpy import sim
     ybustest = [[-10j,10j],
         [10j,-10j]]
     Vlist = [[1,0],[None,None]]
@@ -436,7 +435,7 @@ def test_tcycle():
     with pytest.raises(ValueError, match = "Frequency must be postive value"):
         tcycle(ncycles=[1, 2, 3, 4], freq = [-2, -3, 4, 5])
 
-class TestPowerflow():
+class TestPowerflow:
 
     def test_0(self):
         """Validate powerflow scenario 0."""

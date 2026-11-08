@@ -1,10 +1,11 @@
 import cmath
 import math
+
 import pytest
 
 import electricpy.geometry.circle as circle_mod
-from electricpy.geometry.circle import Circle, construct
 from electricpy.geometry import Line, Point
+from electricpy.geometry.circle import Circle, construct
 
 
 class TestArea:

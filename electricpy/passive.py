@@ -217,7 +217,7 @@ def capenergy(C, V):
 
 # Define Capacitor Voltage Discharge Function
 def loadedvcapdischarge(t, vo, C, P):
-    # noqa: D401    "Loaded" is a valid word for this docstring
+
     r"""
     Loaded Capacitor Discharge Formula.
 
@@ -323,7 +323,7 @@ def rectifiercap(Iload, fswitch, dVout):
 
 
 # Define Inductor Energy Formula
-def inductorenergy(L, I):  # noqa: E741
+def inductorenergy(L, I):
     r"""
     Energy Stored in Inductor Formula.
 

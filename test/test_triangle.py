@@ -1,12 +1,13 @@
 import cmath
 import math
+
 import pytest
 
-from electricpy.geometry import triangle
-from electricpy.geometry import Point
+from electricpy.geometry import Point, triangle
 from test import compare_points
 
-class TestCentroid():
+
+class TestCentroid:
 
     def test_0(self):
         """Validate centroid scenario 0."""
@@ -25,7 +26,7 @@ class TestCentroid():
         assert compare_points(t.centroid(), Point(3.1, 131/30))
 
 
-class TestInCenter():
+class TestInCenter:
 
     def test_0(self):
         """Validate in center scenario 0."""
@@ -43,7 +44,7 @@ class TestInCenter():
         t = triangle.Triangle(p1, p2, p3)
         assert compare_points(t.in_center(), Point(0.5, cmath.sqrt(3)/6))
 
-class TestOrthoCenter():
+class TestOrthoCenter:
 
     def test_0(self):
         """Validate ortho center scenario 0."""
@@ -62,7 +63,7 @@ class TestOrthoCenter():
         assert compare_points(t.ortho_center(), Point(0.5, cmath.sqrt(3)/6))
 
 
-class TestCircumCenter():
+class TestCircumCenter:
     def test_0(self):
         """Validate circum center scenario 0."""
         p1 = Point(0, 1)

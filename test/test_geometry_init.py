@@ -1,7 +1,8 @@
 import math
+
 import pytest
 
-import electricpy.geometry as geometry
+from electricpy import geometry
 
 
 def test_as_float_and_is_close():

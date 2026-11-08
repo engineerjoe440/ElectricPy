@@ -2,13 +2,15 @@
 """Render images as needed using the various ElectricPy functions for docs."""
 ################################################################################
 
-import os
-import math
 import cmath
+import math
+import os
+
 import numpy as np
+from matplotlib import pyplot
+
 import electricpy as ep
 from electricpy import visu
-from matplotlib import pyplot
 
 FIGURE_DIRECTORY = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "static"

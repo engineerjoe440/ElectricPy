@@ -11,13 +11,12 @@ which are required for plotting various graphs in electrical engineering.
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
 from typing import Generator, Tuple, Union
-import math
 
 from electricpy import geometry
 from electricpy.geometry import Line, Point
-
 
 Number = Union[int, float]
 PointLike = Union[Point, Tuple[Number, Number], list]
@@ -132,12 +131,12 @@ class Circle:
         """
         return Line.construct(p, self.center)
 
-    def is_tangent(self, l: Line, *, tol: float = 1e-9) -> bool:  # noqa: E741
+    def is_tangent(self, l: Line, *, tol: float = 1e-9) -> bool:
         """Return True if the line is tangent to the circle (within tolerance)."""
         d = l.distance(self.center)
         return _is_close(d, self.radius, rel_tol=tol, abs_tol=tol)
 
-    def is_normal(self, l: Line, *, tol: float = 1e-9) -> bool:  # noqa: E741
+    def is_normal(self, l: Line, *, tol: float = 1e-9) -> bool:
         """
         Line passes through the circle's center (within tolerance).
 
@@ -253,7 +252,7 @@ class Circle:
     # -------------------------------------------------------------------------
     def intersection(
         self,
-        other: "Circle",
+        other: Circle,
         *,
         tol: float = 1e-9
     ) -> Union[None, Point, Tuple[Point, Point], str]:

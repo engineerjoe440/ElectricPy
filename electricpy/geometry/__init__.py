@@ -18,7 +18,6 @@ import math
 from dataclasses import dataclass
 from typing import Iterator, Tuple, Union
 
-
 Number = Union[int, float]
 
 
@@ -75,7 +74,7 @@ class Point:
             return self.x == other.x and self.y == other.y
         return False
 
-    def is_close(self, other: "Point", *, tol: float = 1e-9) -> bool:
+    def is_close(self, other: Point, *, tol: float = 1e-9) -> bool:
         """Tolerance-based point comparison."""
         if not isinstance(other, Point):
             return False
@@ -107,7 +106,7 @@ class Line:
             raise AssertionError("Line cannot have both a and b equal to zero.")
 
     @staticmethod
-    def construct(p1: Point, p2: Point) -> "Line":
+    def construct(p1: Point, p2: Point) -> Line:
         """Construct a line from two points."""
         return line_equation(p1, p2)
 
@@ -170,7 +169,7 @@ class Line:
             a, b, c = -a, -b, -c
         return (a, b, c)
 
-    def is_close(self, other: "Line", *, tol: float = 1e-9) -> bool:
+    def is_close(self, other: Line, *, tol: float = 1e-9) -> bool:
         """Tolerance-based equality: normalized coefficients are close."""
         if not isinstance(other, Line):
             return False

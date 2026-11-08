@@ -1,5 +1,6 @@
-import electricpy.thermal as thermal
 import pytest
+
+from electricpy import thermal
 
 
 def test_rtdtemp_allows_no_rounding():

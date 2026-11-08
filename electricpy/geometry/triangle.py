@@ -11,12 +11,11 @@ which are required for plotting various graphs in electrical engineering.
 
 from __future__ import annotations
 
-from typing import Tuple, Union
 import math
+from typing import Tuple, Union
 
-from electricpy.geometry import Point, Line
 from electricpy import geometry
-
+from electricpy.geometry import Line, Point
 
 Number = Union[int, float]
 

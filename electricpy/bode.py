@@ -8,13 +8,13 @@ Bode Plotting Functionality for ElectricPy Package.
 
 from cmath import exp as _exp
 
-
 import matplotlib.pyplot as _plt
 import numpy as _np
 import scipy.signal as _sig
 from numpy import pi as _pi
 
 from electricpy.math import convolve
+
 
 # Define System Conditioning Function
 def _sys_condition(system, feedback):
@@ -219,7 +219,7 @@ def sbode(f, NN=1000, title="", xlim=False, ylim=False, mn=0, mx=1000,
     W = _np.linspace(mn_plot, mx, NN)
     H = _np.zeros(NN, dtype=complex)
 
-    for n in range(0, NN):
+    for n in range(NN):
         s = 1j * W[n]
         H[n] = f(s)
     if magnitude:
@@ -303,7 +303,7 @@ def zbode(f, dt=0.01, NN=1000, title="", mn=0, mx=2 * _pi, xlim=False, ylim=Fals
     phi = _np.linspace(mn_plot, mx, NN)
 
     H = _np.zeros(NN, dtype=complex)
-    for n in range(0, NN):
+    for n in range(NN):
         z = _exp(1j * phi[n])
         if approx is not False and callable(approx):
             # Approximated Z-Domain

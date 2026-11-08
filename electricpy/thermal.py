@@ -19,6 +19,7 @@ from electricpy.constants import (
     m,
 )
 
+
 # Define Cold-Junction-Voltage Calculator
 def coldjunction(Tcj, coupletype="K", To=None, Vo=None, P1=None, P2=None,
                  P3=None, P4=None, Q1=None, Q2=None, round=None):

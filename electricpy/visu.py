@@ -9,11 +9,11 @@ this module is designed to assist engineers visualize their designs.
 
 import cmath as _c
 
-import numpy as _np
 import matplotlib as _matplotlib
 import matplotlib.pyplot as _plt
+import numpy as _np
 
-from electricpy import powerset, geometry
+from electricpy import geometry, powerset
 from electricpy.geometry import Point
 from electricpy.geometry.circle import Circle
 
@@ -1071,16 +1071,7 @@ def receiving_end_power_circle(
 
     return PowerCircle(
         "receiving",
-        **{
-            "Vr": Vr,
-            "A": A,
-            "B": B,
-            "Pr": Pr,
-            "Qr": Qr,
-            "Sr": Sr,
-            "Vs": Vs,
-            "power_factor": power_factor,
-        },
+        Vr=Vr, A=A, B=B, Pr=Pr, Qr=Qr, Sr=Sr, Vs=Vs, power_factor=power_factor,
     )
 
 
@@ -1140,20 +1131,11 @@ def sending_end_power_circle(
 
     return PowerCircle(
         "sending",
-        **{
-            "Vr": Vr,
-            "B": B,
-            "D": D,
-            "Ps": Ps,
-            "Qs": Qs,
-            "Ss": Ss,
-            "Vs": Vs,
-            "power_factor": power_factor,
-        },
+        Vr=Vr, B=B, D=D, Ps=Ps, Qs=Qs, Ss=Ss, Vs=Vs, power_factor=power_factor,
     )
 
 
-class SeriesRLC():
+class SeriesRLC:
     r"""
     Frequency Response for an RLC (Resistive, Inductive, Capacitive) Load.
 

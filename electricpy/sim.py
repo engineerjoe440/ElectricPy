@@ -9,10 +9,12 @@ Simulation Module for Filter and System Simulation for Electrical Engineering.
 from warnings import warn as _warn
 
 import matplotlib.pyplot as _plt
+
 # Import Required External Dependencies
 import numpy as _np
 import scipy.signal as _sig
 from scipy.optimize import newton
+
 try:
     from numdifftools import Jacobian as jacobian
     __NUMDIFFTOOL_SUPPORT__ = True
@@ -641,7 +643,7 @@ def statespace(A, B, x=None, func=None, C=None, D=None, simpts=9999, NN=10000, d
             x[n] = 0  # Set each value to zero
 
     # Finite-Difference Simulation
-    for i in range(0, simpts):
+    for i in range(simpts):
         for n in range(xtim_len):
             xtim[n][i] = x[n]  # xtim[state-variable][domain] = x[state-variable]
         # Create Forcing Function output

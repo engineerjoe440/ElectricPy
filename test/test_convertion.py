@@ -1,5 +1,7 @@
 import cmath
+
 import numpy as np
+
 
 def test_abc_to_seq():
     """Validate abc to seq behavior."""

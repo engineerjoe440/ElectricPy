@@ -248,7 +248,7 @@ def crcremainder(data, key):
 
 # Define String to Bits Function
 def string_to_bits(str):
-    # noqa: D401   "String" is an intended leading word.
+
     """
     String to Bits Converter.
 

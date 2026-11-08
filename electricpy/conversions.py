@@ -13,7 +13,8 @@ to aid in scientific calculations.
 ################################################################################
 
 import numpy as _np
-from electricpy.constants import A012, Aabc, KWH_PER_BTU, WATTS_PER_HP
+
+from electricpy.constants import A012, KWH_PER_BTU, WATTS_PER_HP, Aabc
 
 
 # Define HP to Watts Calculation
