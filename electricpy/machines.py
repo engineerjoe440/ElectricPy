@@ -1147,9 +1147,7 @@ def imfoc_control(Tem_cmd, LAMdr_cmd, wr_cmd, Rr, Rs, Lm,
 
 # Define Synch. Machine Eq Calculator
 def synmach_Eq(Vt_pu, Itmag, PF, Ra, Xd, Xq):
-
-    r"""
-    Synchronous Machine Eq Calculator.
+    r"""Calculate the q-axis internal voltage of a synchronous machine.
 
     Given specified parameter set, will calculate
     the internal voltage on the q-axis (Eq).

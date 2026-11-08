@@ -2006,9 +2006,7 @@ def indmachphs3torq(t, Is0, Lr, Ls, Lm, Rr, Rs, wrf=0, freq=60):
 
 # Define Complete Sync. Mach. Fault Current Function
 def synmach_ifault(t, Ea, alpha, Xd, Xdp, Xdpp, Xqpp, Tdp, Tdpp, Ta, freq=60):
-
-    """
-    Synchronous Machine Fault Current Calculator.
+    """Calculate the fault current of an electrical synchronous machine.
 
     Given machine parameters, fault inception angle, and time at
     which to calculate fault current, this function will identify

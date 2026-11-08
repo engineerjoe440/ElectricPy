@@ -248,9 +248,7 @@ def crcremainder(data, key):
 
 # Define String to Bits Function
 def string_to_bits(str):
-
-    """
-    String to Bits Converter.
+    """Convert a string to its binary representation.
 
     Converts a Pythonic string to the string's binary representation.
 

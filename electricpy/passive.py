@@ -217,9 +217,7 @@ def capenergy(C, V):
 
 # Define Capacitor Voltage Discharge Function
 def loadedvcapdischarge(t, vo, C, P):
-
-    r"""
-    Loaded Capacitor Discharge Formula.
+    r"""Calculate the voltage of a loaded discharging capacitor.
 
     Returns the voltage of a discharging capacitor after time (t -
     seconds) given initial voltage (vo - volts), capacitor size

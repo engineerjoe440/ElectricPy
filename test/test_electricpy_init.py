@@ -41,7 +41,7 @@ def test_cprint_and_phaseline():
         ep.cprint(1 + 1j, unit=123)
     with pytest.raises(ValueError):
         ep.cprint(1 + 1j, label=123)
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         ep.cprint(object())
 
     with pytest.raises(ValueError):

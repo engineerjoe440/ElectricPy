@@ -2979,9 +2979,7 @@ def vipf(V=None, I=None, PF=1, find=''):
 
 # Define Synchronous Speed Calculator
 def syncspeed(Npol, freq=60, Hz=False, rpm=False):
-
-    r"""
-    Synchronous Speed Calculator Function.
+    r"""Calculate the synchronous speed of an electrical machine.
 
     Simple method of calculating the synchronous speed of an induction machine
     given the number of poles in the machine's construction, and
