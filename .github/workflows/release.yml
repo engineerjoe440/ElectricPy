@@ -35,7 +35,6 @@ jobs:
         with:
           tag: ${{ steps.version.outputs.version }}
           name: Release ${{ steps.version.outputs.version }}
-          body: ${{ steps.tag_version.outputs.changelog }}
           artifacts: "dist/*"
       - name: Publish distribution 📦 to PyPI
         if: success()
