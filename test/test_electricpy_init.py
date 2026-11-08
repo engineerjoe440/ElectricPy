@@ -62,7 +62,8 @@ def test_cprint_and_phaseline():
     out = ep.phaseline(VLL=ep.phasor(1, 0), realonly=True)
     assert isinstance(out, float)
 
-    out = ep.phaseline(VLL=1, complex=True)
+    with pytest.warns(DeprecationWarning):
+        out = ep.phaseline(VLL=1, complex=True)
     assert out == pytest.approx(1 / ep.VLLcVLN)
 
 
