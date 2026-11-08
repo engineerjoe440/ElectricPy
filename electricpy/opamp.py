@@ -11,8 +11,8 @@ Functions for Operational Amplifiers (OpAmps).
 
 
 def non_inverting(Vin=None, Vout=None, Rg=None, Rf=None):
-    """
-    Non-Inverting Op-Amp Solver
+    r"""
+    Non-Inverting Op-Amp Solver.
 
     This function will accept three variables for the non-inverting operational
     amplifier (op-amp) circuit output voltage formula and will solve for the
@@ -27,9 +27,9 @@ def non_inverting(Vin=None, Vout=None, Rg=None, Rf=None):
     --------
     >>> from electricpy.opamp import non_inverting
     >>> non_inverting(Vin=5, Rg=15, Rf=10) # Solve for Vout
-    8.333
+    8.333333333333334
     >>> non_inverting(Vin=5, Vout=8.333, Rg=15) # Solve for Rf
-    10
+    9.999000000000002
 
     Parameters
     ----------
@@ -46,7 +46,6 @@ def non_inverting(Vin=None, Vout=None, Rg=None, Rf=None):
     -------
     float:  This function will return the unknown variable from the previously described set of variables.
     """
-
     # Check if exactly one input is None
     if [Vin, Vout, Rg, Rf].count(None) != 1:
         raise ValueError("Exactly one input should be None")
@@ -87,8 +86,8 @@ def non_inverting(Vin=None, Vout=None, Rg=None, Rf=None):
 
 
 def inverting(Vin=None, Vout=None, Rin=None, Rf=None):
-    """
-    Inverting Op-Amp Solver
+    r"""
+    Inverting Op-Amp Solver.
 
     This function will accept three variables for the inverting operational
     amplifier (op-amp) circuit output voltage formula and will solve for the
@@ -122,7 +121,6 @@ def inverting(Vin=None, Vout=None, Rin=None, Rf=None):
     -------
     float:  This function will return the unknown variable from the previously described set of variables.
     """
-
     # Check if exactly one input is None
     if [Vin, Vout, Rin, Rf].count(None) != 1:
         raise ValueError("Exactly one input should be None")
@@ -171,8 +169,8 @@ def differential(
     Rf=None,
     Rg=None,
 ):
-    """
-    Differential Op-Amp Solver
+    r"""
+    Differential Op-Amp Solver.
 
     This function will accept six variables for the differential operational
     amplifier (op-amp) circuit output voltage formula and will solve for the
@@ -187,9 +185,9 @@ def differential(
     --------
     >>> from electricpy.opamp import differential
     >>> differential(V1=10, V2=15, R1=10, R2=10, Rf=20 , Rg=3) # Solve for Vout
-    -9.615
+    -9.615384615384615
     >>> differential(V1=10, V2=15, Vout=-9.615, R1=10, R2=10, Rg=3) # Solve for Rf
-    19.9994
+    19.999411764705883
 
     Parameters
     ----------
@@ -212,7 +210,6 @@ def differential(
     -------
     float:  This function will return the unknown variable from the previously described set of variables.
     """
-
     # Check if exactly one input is None
     if [V1, V2, Vout, R1, R2, Rf, Rg].count(None) != 1:
         raise ValueError("Exactly one input should be None")
@@ -280,8 +277,8 @@ def differential(
 
 
 def inverting_summing(*inputs, Vout=None, Rf=None):
-    """
-    Inverting Summing Op-Amp Solver
+    r"""
+    Inverting Summing Op-Amp Solver.
 
     This function will accept any even number of variables for the differential operational
     amplifier (op-amp) circuit output voltage formula and will solve for the
@@ -297,11 +294,11 @@ def inverting_summing(*inputs, Vout=None, Rf=None):
     --------
     >>> from electricpy.opamp import inverting_summing
     >>> inverting_summing(10, 6.3, 12, 33, 20, 63, Rf=10) # Solve for Vout
-    -22.68398
-    >>> inverting_summing(10, 6.3, 12, None , 20, 63, Vout=-22.68398, Rf=10) # Solve for R2
-    33.0
-    >>> inverting_summing(10, 6.3, None, 33, 20, 63, Vout=-22.68398, Rf=10) #Solve for V2
-    11.9999
+    -22.683982683982684
+    >>> inverting_summing(10, 6.3, 12, None , 20, 63, Vout=-22.683982683982684, Rf=10) # Solve for R2
+    33.00000000000001
+    >>> inverting_summing(10, 6.3, None, 33, 20, 63, Vout=-22.683982683982684, Rf=10) #Solve for V2
+    11.999999999999996
 
     Parameters
     ----------
@@ -316,7 +313,6 @@ def inverting_summing(*inputs, Vout=None, Rf=None):
     -------
     float:  This function will return the unknown variable from the previously described set of variables.
     """
-
     if len(inputs) < 2:
         raise ValueError(
             "At least one input voltage and one input resistance must be provided"
