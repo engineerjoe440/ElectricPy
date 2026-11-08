@@ -6,6 +6,7 @@ Simulation Module for Filter and System Simulation for Electrical Engineering.
 """
 ################################################################################
 
+from typing import Callable, Sequence
 from warnings import warn as _warn
 
 import matplotlib.pyplot as _plt
@@ -795,7 +796,7 @@ def NewtonRaphson(F, J, X0, eps=1e-4, mxiter=100, lsq_eps=0.25):
     # Test for one-variable inputs
     if isinstance(F(X0), (int, float, _np.float64)):  # System is size-1
         if not isinstance(J(X0), (int, float, _np.float64)):  # Jacobian isn't size-1
-            raise ValueError("ERROR: The Jacobian isn't size-1.")
+            raise TypeError("ERROR: The Jacobian isn't size-1.")
         return newton(F, X0, J)
 
     # Test for valid argument sizes
@@ -851,7 +852,9 @@ def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False)
     Newton Raphson Real/Reactive Power Function Generator.
 
     Given specified parameters, will generate the necessary real and reactive
-    power functions necessary to compute the system's power flow.
+    power functions necessary to compute the system's power flow. Each function
+    uses a snapshot of the supplied network and computes calculated power minus
+    specified power, including the diagonal Y-bus terms.
 
     Parameters
     ----------
@@ -862,7 +865,7 @@ def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False)
                 Known voltages should be provided as
                 a list of floating values in the form of:
                 [mag, ang], unknown voltages should
-                be provided as None.
+                be provided as None. Angles are in radians.
     P_set:      list of float
                 List of known and unknown real powers.
                 Known powers should be provided as
@@ -893,10 +896,10 @@ def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False)
     Returns
     -------
     retset:     array_like
-                An array of function handles corresponding to
-                the appropriate voltage magnitude and angle
-                calculation functions based on the real and
-                reactive power values. Function(s) will accept
+                By default, a function returning real-power mismatches
+                followed by reactive-power mismatches, each in bus order.
+                With extend=False, a pair of lists of scalar functions for
+                real and reactive power, respectively. Function(s) accept
                 an argument of the form:
                 [Θ1, Θ2,..., Θn, V1, V2,..., Vm]
                 where n is the number of busses with unknown
@@ -946,151 +949,48 @@ def nr_pq(Ybus, V_set, P_set, Q_set, extend=True, argshape=False, verbose=False)
         if all((P_set[i], Q_set[i], V_set[i][0])):
             raise ValueError("Over-Constrained System")
 
-    # Define Function Concatinator Class
-    class c_func_concat:
-        """Concatenate multiple scalar forcing functions into one vector output."""
+    ybus = Ybus.copy()
+    voltages = [tuple(voltage) for voltage in V_set]
+    angle_buses = [index for index, voltage in enumerate(voltages) if voltage[1] is None]
+    magnitude_buses = [index for index, voltage in enumerate(voltages) if voltage[0] is None]
+    p_buses = [index for index, power in enumerate(P_set) if power is not None]
+    q_buses = [index for index, power in enumerate(Q_set) if power is not None]
+    p_specified = _np.asarray([P_set[index] for index in p_buses])
+    q_specified = _np.asarray([Q_set[index] for index in q_buses])
+    ang_len = len(angle_buses)
+    mag_len = len(magnitude_buses)
 
-        def __init__(self, funcs):  # Initialize class with tupple of functions
-            """Store the supplied callables in index order for later evaluation."""
-            self.nfuncs = len(funcs)  # Determine how many functions are in tuple
-            self.func_reg = {}  # Create empty keyed list of function handles
-            for key in range(self.nfuncs):  # Iterate adding to key
-                self.func_reg[key] = funcs[key]  # Fill keyed list with functions
-
-        def func_c(self, x):  # Concatenated Function
-            """Evaluate each stored function at ``x`` and return a flat array."""
-            rets = _np.array([])  # Create blank numpy array to store function outputs
-            for i in range(self.nfuncs):
-                y = self.func_reg[i](x)  # Calculate each function at value x
-                rets = _np.append(rets, y)  # Add value to return array
-            return rets
-
-    # Impliment Global Lists
-    global P_funcs, Q_funcs, P_strgs, Q_strgs
-    global V_list, YBUS, P_list, Q_list
-    global d_list, x_list
-    P_funcs = []
-    Q_funcs = []
-    P_strgs = []
-    Q_strgs = []
-    lists = [P_strgs, Q_strgs]
-    i = 0  # Index
-    ii = 0  # String Index
-    # Load Global Lists
-    V_list = V_set
-    YBUS = Ybus
-    P_list = P_set
-    Q_list = Q_set
-    # Define Calculation Strings
-    ## 0:  Vk magnitude
-    ## 1:  Vk angle
-    ## 2:  Vj magnitude
-    ## 3:  Vj angle
-    ## 4:  [k][j] (for Y-Bus)
-    ## 5:  Qgen Term
-    Pstr = ("{0}*{2}*(YBUS{4}.real*_np.cos({1}-{3})+YBUS{4}.imag*_np.sin({1}-{3}))")
-    Qstr = ("{0}*{2}*(YBUS{4}.real*_np.sin({1}-{3})-YBUS{4}.imag*_np.cos({1}-{3})){5}")
-    # Iteratively Identify Vector Length Terms
-    ang_len = 0
-    mag_len = 0
-    # Set Offset Factors
-    magoff = 1
-    angoff = 1
-    for _k in range(N):
-        Padd = False
-        Qadd = False
-        for _j in range(N):
-            if P_list[_k] is None:
-                continue  # Don't Generate Requirements for Slack Bus
-            if (_k != _j) and not Padd:  # Skip i,i Terms
-                ang_len += 1
-                Padd = True
-            if (_k != _j) and (Q_list[_k] is not None) and not Qadd:
-                mag_len += 1
-                Qadd = True
-    Vxdim = ang_len + mag_len
     if verbose:
-        print("Angle EQ's (P):", ang_len, "\tMagnitude EQ's (Q):", mag_len)
-        print("Vx Dimension:", Vxdim)
-    # Iteratively Generate P and Q Requirements
-    for _k in range(N):
-        # Set for New Entry
-        newentry = True
-        for _j in range(N):
-            # Add New Entry To Lists
-            for LST in lists:
-                LST.append(None)
-            if P_list[_k] is None:
-                continue  # Don't Generate Requirements for Slack Bus
-            # Collect Other Terms
-            Yind = f"[{_k}][{_j}]"
-            if verbose:
-                print("K:", _k, "\tJ:", _j)
-            # Generate Voltage-Related Strings
-            if _k != _j:  # Skip i,i Terms
-                # Generate K-Related Strings
-                if V_list[_k][0] is None:  # The Vk magnitude is unknown
-                    Vkm = f"Vx[{_k + ang_len - magoff * _k}]"  # Use Variable Magnitude
-                    Vka = f"Vx[{_k - angoff}]"  # Use Variable Angle
-                else:  # The Vk magnitude is known
-                    Vkm = f"V_list[{_k}][0]"  # Load Magnitude
-                    if V_list[_k][1] is None:  # The Vj angle is unknown
-                        Vka = f"Vx[{_k - angoff}]"  # Use Variable Angle
-                    else:
-                        Vka = f"V_list[{_k}][1]"  # Load Angle
-                # Generate J-Related Strings
-                if V_list[_j][0] is None:  # The Vj magnitude is unknown
-                    Vjm = f"Vx[{_j + ang_len - magoff * _j}]"  # Use Variable Magnitude
-                    Vja = f"Vx[{_j - angoff}]"  # Use Variable Angle
-                else:  # The Vj magnitude is known
-                    Vjm = f"V_list[{_j}][0]"  # Load Magnitude
-                    if V_list[_j][1] is None:  # The Vj angle is unknown
-                        Vja = f"Vx[{_j - angoff}]"  # Use Variable Angle
-                    else:
-                        Vja = f"V_list[{_j}][1]"  # Load Angle
-                # Generate String and Append to List of Functions
-                P_strgs[i] = (Pstr.format(Vkm, Vka, Vjm, Vja, Yind))
-                if verbose:
-                    print("New P-String:", P_strgs[i])
-                # Generate Q Requirement
-                if Q_list[_k] is not None:
-                    # Generate String and Append to List of Functions
-                    if newentry:
-                        newentry = False
-                        Qgen = f"-Vx[{_k}]**2*YBUS[{_k}][{_k}].imag"
-                    else:
-                        Qgen = ""
-                    Q_strgs[i] = (Qstr.format(Vkm, Vka, Vjm, Vja, Yind, Qgen))
-                    if verbose:
-                        print("New Q-String:", Q_strgs[i])
-            # Increment Index at Each Interior Level
-            i += 1
-        tempPstr = f"P_funcs.append(lambda Vx: -P_list[{_k}]"
-        tempQstr = f"Q_funcs.append(lambda Vx: -Q_list[{_k}]"
-        for _i in range(ii, i):
-            P = P_strgs[_i]
-            Q = Q_strgs[_i]
-            if P is not None:
-                tempPstr += "+" + P
-            if Q is not None:
-                tempQstr += "+" + Q
-        tempPstr += ")"
-        tempQstr += ")"
-        if any(P_strgs[ii:i]):
-            if verbose:
-                print("Full P-Func Str:", tempPstr)
-            exec(tempPstr)
-        if any(Q_strgs[ii:i]):
-            if verbose:
-                print("Full Q-Func Str:", tempQstr)
-            exec(tempQstr)
-        ii = i  # Increase Lower Index
-    retset = (P_funcs, Q_funcs)
+        print("Angle EQ's (P):", len(p_buses), "\tMagnitude EQ's (Q):", len(q_buses))
+        print("Vx Dimension:", ang_len + mag_len)
+
+    def residual(Vx: Sequence[float]) -> _np.ndarray:
+        """Calculate real and reactive power mismatches for the network."""
+        angles = _np.asarray([voltage[1] if voltage[1] is not None else 0.0
+                              for voltage in voltages], dtype=float)
+        magnitudes = _np.asarray([voltage[0] if voltage[0] is not None else 0.0
+                                  for voltage in voltages], dtype=float)
+        angles[angle_buses] = Vx[:ang_len]
+        magnitudes[magnitude_buses] = Vx[ang_len:]
+        phasors = magnitudes * _np.exp(1j * angles)
+        power = phasors * _np.conj(ybus @ phasors)
+        return _np.concatenate((power.real[p_buses] - p_specified,
+                                power.imag[q_buses] - q_specified))
+
+    def component(index: int) -> Callable[[Sequence[float]], float]:
+        """Create a scalar mismatch function for one residual component."""
+        def evaluate(Vx: Sequence[float]) -> float:
+            """Evaluate the selected mismatch."""
+            return float(residual(Vx)[index])
+
+        return evaluate
+
     if extend:
-        funcset = P_funcs.copy()
-        funcset.extend(Q_funcs)
-        funcgroup = c_func_concat(funcset)
-        retset = funcgroup.func_c
+        retset = residual
+    else:
+        p_funcs = [component(index) for index in range(len(p_buses))]
+        q_funcs = [component(index + len(p_buses)) for index in range(len(q_buses))]
+        retset = (p_funcs, q_funcs)
     if argshape:
         retset = (retset, (ang_len, mag_len))
     return retset

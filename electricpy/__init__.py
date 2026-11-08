@@ -64,9 +64,12 @@ def tcycle(ncycles=1, freq=60):
         if ncycles.shape != freq.shape:
             raise ValueError("ncycles and freq must be the same shape")
 
-    elif isinstance(ncycles, list) and isinstance(freq, list):
-        if len(ncycles) != len(freq):
-            raise ValueError("ncycles and freq must be the same length")
+    elif (
+        isinstance(ncycles, list)
+        and isinstance(freq, list)
+        and len(ncycles) != len(freq)
+    ):
+        raise ValueError("ncycles and freq must be the same length")
 
     ncycles = _np.asarray(ncycles)
     freq = _np.asarray(freq)
@@ -213,6 +216,11 @@ def cprint(val, unit=None, label=None, title=None,
                 The array of values corresponding to the magnitude and angle,
                 values are returned in the form: [[ mag, ang ],...,[ mag, ang ]]
                 where the angles are evaluated in degrees.
+
+    Raises
+    ------
+    TypeError
+        If the input value is not a complex number, list, or numpy array.
 
     Examples
     --------
@@ -370,7 +378,7 @@ def cprint(val, unit=None, label=None, title=None,
         if ret:
             return ([mag, ang])
     else:
-        raise ValueError("Invalid Input Type")
+        raise TypeError("Invalid Input Type")
     return None
 
 
@@ -1986,12 +1994,17 @@ def harmonics(real, imag=None, dc=0, freq=60, domain=None):
                 Function object handle which can be used to
                 call the function to evaluate the harmonic
                 system at specified times.
+
+    Raises
+    ------
+    TypeError
+        If the real or imaginary components are not array-like.
     """
     # Validate Inputs
     if not isinstance(real, (list, _np.ndarray)):
-        raise ValueError("Argument *real* must be array-like.")
+        raise TypeError("Argument *real* must be array-like.")
     if imag is not None and not isinstance(imag, (list, _np.ndarray)):
-        raise ValueError("Argument *imag* must be array-like.")
+        raise TypeError("Argument *imag* must be array-like.")
     # Calculate Omega
     w = 2 * _np.pi * freq
 
@@ -3300,7 +3313,13 @@ def ic_555_astable(R=None, C=None, freq=None, t_high=None, t_low=None):
     raise TypeError("Not enough parameters are passed")
 
 
-def ic_555_monostable(R=None, C=None, t_high=None, t_low=None):
+def ic_555_monostable(
+    R=None,
+    C=None,
+    t_high=None,
+    # pylint: disable-next=unused-argument
+    t_low=None,
+):
     """
     555 Integrated Circuit Calculator.
 

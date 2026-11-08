@@ -1217,6 +1217,12 @@ def correctedcurrents(Ipri, TAP, correction="Y", CTR=1):
     Isec_corr:  list of complex
                 The corrected currents to perform operate/restraint
                 calculations with.
+
+    Raises
+    ------
+    TypeError
+        If the correction parameter is not a string, list of strings, or numpy
+        array.
     """
     # Define Matrix Lookup
     MAT = {"Y": XFMY0,
@@ -1234,7 +1240,7 @@ def correctedcurrents(Ipri, TAP, correction="Y", CTR=1):
     elif isinstance(correction, _np.ndarray):
         mult = correction
     else:
-        raise ValueError("Correction must be string or list of strings.")
+        raise TypeError("Correction must be string or list of strings.")
     # Evaluate Corrected Current
     Isec_corr = 1 / TAP * mult.dot(Ipri / CTR)
     return Isec_corr

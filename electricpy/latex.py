@@ -55,6 +55,11 @@ def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
     -------
     latex:      str
                 LaTeX string for the complex value.
+
+    Raises
+    ------
+    TypeError
+        If the input value is not a complex number, list, or numpy array.
     """
     # Define Interpretation Functions
     def polarstring(val, round):
@@ -116,7 +121,7 @@ def clatex(val, round=3, polar=True, predollar=True, postdollar=True,
         else:
             latex = rectstring(val, round)
     else:
-        raise ValueError("Invalid Input Type")
+        raise TypeError("Invalid Input Type")
     # Add Dollar Sign pre-post
     if double:
         dollar = r'$$'

@@ -4,6 +4,7 @@
 import re
 
 import requests
+from requests.exceptions import RequestException
 
 USERNAME = 'engineerjoe440'
 REPO = 'electricpy'
@@ -17,11 +18,14 @@ except ImportError:
     import electricpy as ep
 
 
-response = requests.get(f"https://api.github.com/repos/{USERNAME}/{REPO}/releases/latest")
+response = requests.get(
+    f"https://api.github.com/repos/{USERNAME}/{REPO}/releases/latest"
+)
+
 try:
     latest = response.json()["name"]
     latest = re.findall(r'v\d\.\d\.\d', latest)[0]
-except Exception:
+except (RequestException, KeyError, IndexError):
     latest = '0.0.0'
 
 # Verify Version is Newer
